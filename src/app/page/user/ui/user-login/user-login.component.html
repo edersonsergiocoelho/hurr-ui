@@ -71,10 +71,11 @@
                                 class="pi pi-facebook text-indigo-500 mr-2"></i><span>Sign in With Facebook</span><span
                                 class="p-ink"></span></button>
                         <button pripple=""
-                            class="p-ripple p-element ml-2 w-6 font-medium border-1 surface-border surface-100 py-3 px-2 p-component hover:surface-200 active:surface-300 text-900 cursor-pointer transition-colors transition-duration-150 inline-flex align-items-center justify-content-center">
-                            <i (click)="loginGoogle()"
-                                class="pi pi-google text-red-500 mr-2"></i><span>Sign in With Google</span><span
-                                class="p-ink"></span></button>
+                                class="p-ripple p-element ml-2 w-6 font-medium border-1 surface-border surface-100 py-3 px-2 p-component hover:surface-200 active:surface-300 text-900 cursor-pointer transition-colors transition-duration-150 inline-flex align-items-center justify-content-center"
+                                (click)="loginGoogle()">
+                                <i class="pi pi-google text-red-500 mr-2"></i><span>Sign in With Google</span><span
+                                    class="p-ink"></span>
+                        </button>
                     </div>
                     <p-divider align="center" styleclass="my-4"
                         class="p-element">

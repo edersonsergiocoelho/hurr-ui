@@ -7,8 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+
+import { GlobalPageModule } from './global/page/module/global-page.module';
 import { GlobalTemplateModule } from './global/template/module/global-template.module';
 import { PageModule } from './page/module/page.module';
+
+import { authInterceptorProviders } from './core/auth/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,10 +27,12 @@ import { PageModule } from './page/module/page.module';
     AppRoutingModule,
     HttpClientModule,
 
+    GlobalPageModule,
     GlobalTemplateModule,
+
     PageModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

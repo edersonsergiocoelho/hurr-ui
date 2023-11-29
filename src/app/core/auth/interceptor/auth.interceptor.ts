@@ -1,31 +1,42 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
+import { Router } from "@angular/router";
+import { SessionStorageService } from "../../session-storage/service/session-storage.service";
+
+const TOKEN_HEADER_KEY = 'Authorization';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private router: Router,
+    private token: SessionStorageService) {
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  }
 
-    debugger;
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    let token = localStorage.getItem("token");
+    let authReq = req;
+    const loginPath = '/user/login';
+    const token = this.token.getToken();
 
-    if (token) {
-
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`,
-        }
-      });
+    if (token != null) {
+      authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
     }
-
-    return next.handle(request);
+    return next.handle(authReq).pipe(tap(() => { },
+      (err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status !== 401 || window.location.pathname === loginPath) {
+            return;
+          }
+          this.token.signOut();
+          window.location.href = loginPath;
+        }
+      }
+    ));
   }
 }
 
-export const httpInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+export const authInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
 ];
