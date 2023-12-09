@@ -1,3 +1,17 @@
-.custom-calendar .ui-calendar {
-  width: 300px; /* Ajuste o tamanho conforme necessário */
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px; /* Ajuste conforme necessário */
+}
+
+label {
+  margin-bottom: 5px; /* Espaçamento entre os rótulos e os campos */
+}
+
+.rounded-container {
+  border-radius: 20px;
+  overflow: visible;
+  padding: 10px;
+  background-color: white;
 }

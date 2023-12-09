@@ -13,6 +13,7 @@ import { GlobalTemplateModule } from './global/template/module/global-template.m
 import { PageModule } from './page/module/page.module';
 
 import { authInterceptorProviders } from './core/auth/interceptor/auth.interceptor';
+import { PageAdminModule } from './page/admin/module/page-admin.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { authInterceptorProviders } from './core/auth/interceptor/auth.intercept
     GlobalPageModule,
     GlobalTemplateModule,
 
-    PageModule
+    PageModule,
+    PageAdminModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

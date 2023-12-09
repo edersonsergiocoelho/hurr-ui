@@ -1,14 +1,25 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { UiHomeService } from '../../service/ui-home/ui-home.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   showMenuUser: boolean = false;
   showSubMenu: boolean = false;
+
+  divHomeVisible = true;
+
+  constructor(private divVisibilityService: UiHomeService) {}
+
+  ngOnInit() {
+    this.divVisibilityService.divHomeVisible$.subscribe((value) => {
+      this.divHomeVisible = value;
+    });
+  }
 
   toggleSubMenu(): void {
     this.showSubMenu = !this.showSubMenu;

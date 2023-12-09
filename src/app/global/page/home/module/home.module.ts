@@ -7,18 +7,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from '../ui/home/home.component';
 import { HomeSearchCarsComponent } from '../ui/home-search-cars/home-search-cars.component';
+import { HomeSearchCarsDetailComponent } from '../ui/home-search-cars-detail/home-search-cars-detail.component';
 
+import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
+import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
-import { MegaMenuModule } from 'primeng/megamenu';
-
+import { MultiSelectModule } from 'primeng/multiselect';
+import { RatingModule } from 'primeng/rating';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 
 @NgModule({
-  declarations: [HomeComponent, HomeSearchCarsComponent],
+  declarations: [HomeComponent, HomeSearchCarsComponent, HomeSearchCarsDetailComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -27,16 +31,21 @@ import { MegaMenuModule } from 'primeng/megamenu';
     ReactiveFormsModule,
     HomeRoutingModule,
 
+    BadgeModule,
     ButtonModule,
     CalendarModule,
+    DividerModule,
     DropdownModule,
     InputTextModule,
     MenuModule,
-    MegaMenuModule
+    MultiSelectModule,
+    RatingModule,
+    ToggleButtonModule
   ],
   exports: [
     HomeComponent,
-    HomeSearchCarsComponent
+    HomeSearchCarsComponent,
+    HomeSearchCarsDetailComponent
   ]
 })
 export class HomeModule { }
