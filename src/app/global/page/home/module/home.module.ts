@@ -19,6 +19,7 @@ import { MenuModule } from 'primeng/menu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RatingModule } from 'primeng/rating';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 @NgModule({
@@ -30,6 +31,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     FormsModule,
     ReactiveFormsModule,
     HomeRoutingModule,
+
+    GoogleMapsModule,
 
     BadgeModule,
     ButtonModule,
