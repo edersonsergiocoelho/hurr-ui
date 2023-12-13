@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -49,6 +49,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
     HomeComponent,
     HomeSearchCarsComponent,
     HomeSearchCarsDetailComponent
+  ],
+  providers: [
+    DecimalPipe
   ]
 })
 export class HomeModule { }

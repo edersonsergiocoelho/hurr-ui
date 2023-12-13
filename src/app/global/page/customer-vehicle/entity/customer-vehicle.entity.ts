@@ -11,11 +11,22 @@ export interface CustomerVehicle {
   vehicleModel: VehicleModel;
   vehicleColor: VehicleColor;
   vehicleFuelType: VehicleFuelType;
+  description: string;
   licensePlate: string;
   renavam: string;
   chassis: string;
   yearOfManufacture: number;
-  createdDate: Date;
-  modifiedDate: Date;
+  yearOfTheCar: number;
+  dailyRate: number;
+  cleaningFee: number;
+  unlimitedMileage: boolean;
+  limitedMileage: boolean;
+  limitedMileageIncluded?: number;
+  limitedMileageValue?: number;
+  deliverToAddress: boolean;
+  pickUpAtAddress: boolean;
+  mileageFeeDelivery?: number;
+  createdDate: string;
+  modifiedDate?: string;
   enabled: boolean;
 }

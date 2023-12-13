@@ -1,3 +1,12 @@
 .p-divider.p-divider-horizontal:before {
   border-top: 1px solid #000000 !important;
 }
+
+  /* CSS para a classe de sobreposição */
+  .elemento-sobreposicao {
+    transition: transform 0.3s ease-in-out; /* Adiciona uma transição suave */
+  }
+
+  .elemento-sobreposicao:hover {
+    transform: scale(1.1); /* Aumenta o tamanho do elemento ao passar o mouse */
+  }

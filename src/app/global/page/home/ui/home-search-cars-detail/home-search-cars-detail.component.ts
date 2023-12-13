@@ -7,6 +7,7 @@ import { CustomerVehicleService } from '../../../customer-vehicle/service/custom
 import { SearchCustomerVehicle } from '../../../customer-vehicle/dto/search-customer-vehicle.dto';
 import { Observable, catchError, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-search-cars-detail',
@@ -30,7 +31,9 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit {
     return `${hour.toString().padStart(2, '0')}:${minute}`;
   });
 
-  brands?: any[];
+  place: any;
+
+  vehiclesBrands?: any[];
   selectedVehicleBrand: any;
   vehicles?: any[];
   selectedVehicle: any;
@@ -44,11 +47,13 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit {
   zoom = 14;
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
+  markers: google.maps.Marker[] = [];
 
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef<HTMLInputElement>;
 
   constructor(private httpClient: HttpClient,
               private ngZone: NgZone,
+              private decimalPipe: DecimalPipe,
               private customerVehicleService: CustomerVehicleService,
               private vehicleBrandService: VehicleBrandService,
               private vehicleService: VehicleService,
@@ -65,64 +70,28 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit {
     const autocomplete = new google.maps.places.Autocomplete(this.searchInput.nativeElement);
     autocomplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
-        const place = autocomplete.getPlace();
+        this.place = autocomplete.getPlace();
       });
     });
-
-    const carrosMock = [
-      { endereco: 'Rua Utinga, 37, Itapecerica da Serra, São Paulo, Brasil', preco: 'R$ 50.000,00' },
-      { endereco: 'Avenida XV De Novembro, 456, Itapecerica da Serra, São Paulo, Brasil', preco: 'R$ 70.000,00' },
-      { endereco: 'Itapecerica Shooping, Itapecerica da Serra, São Paulo, Brasil', preco: 'R$ 70.000,00' },
-      // Adicione mais endereços e preços, se necessário
-    ];
-  
-    // Simulação da chamada do serviço de geocodificação para os endereços mockados
-    carrosMock.forEach((carro) => {
-      this.geocodeAddress(carro.endereco, carro.preco); // Passa o endereço e o preço para a função geocodeAddress
-    });
-
-    /*
-    this.customerVehicleService.obterEnderecos().subscribe((enderecos: string[]) => {
-      enderecos.forEach((endereco: string) => {
-        // Aqui você faria a geocodificação para obter as coordenadas (latitude e longitude) do endereço
-        this.geocodeAddress(endereco);
-      });
-    });
-    */
   }
 
   ngAfterViewInit(): void {
     this.map = document.getElementById("map");
-    debugger;
     this.initializeMap();
   }
-  
+
   initializeMap() {
     const mapOptions = {
       center: this.center,
       zoom: this.zoom,
     };
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    this.addMarkers();
-  }
 
-  addMarkers() {
-    const carrosMock = [
-      { endereco: 'Rua Utinga, 37, Itapecerica da Serra, São Paulo, Brasil', preco: 'R$ 50.000,00' },
-      { endereco: 'Avenida XV De Novembro, 456, Itapecerica da Serra, São Paulo, Brasil', preco: 'R$ 70.000,00' },
-      { endereco: 'Itapecerica Shooping, Itapecerica da Serra, São Paulo, Brasil', preco: 'R$ 70.000,00' },
-      // Adicione mais endereços e preços, se necessário
-    ];
-  
-    // Simulação da chamada do serviço de geocodificação para os endereços mockados
-    carrosMock.forEach((carro) => {
-      this.geocodeAddress(carro.endereco, carro.preco); // Passa o endereço e o preço para a função geocodeAddress
-    });
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   }
 
   getAllBrands(): void {
     this.vehicleBrandService.getAllVehicleBrands().subscribe((response) => {
-      this.brands = response.body || [];
+      this.vehiclesBrands = response.body || [];
     });
   }
 
@@ -155,18 +124,6 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit {
     );
   }
 
-  @ViewChild('menu') menu!: Menu;
-  displayMenu = false;
-  appendTo: any;
-
-  toggleMenu(event: Event) {
-    this.appendTo = event.currentTarget;
-    this.displayMenu = !this.displayMenu;
-    if (this.displayMenu) {
-      this.menu.toggle(event);
-    }
-  }
-
   search() {
     
     let searchCustomerVehicle: SearchCustomerVehicle = new SearchCustomerVehicle();
@@ -179,9 +136,33 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit {
       searchCustomerVehicle.vehicleModelId = this.selectedVehicleModel.vehicleModelId;
     }
 
+    // Extrair o país
+    const country = this.place.address_components.find(component => component.types.includes('country'));
+    const countryName = country ? country.long_name : '';
+    searchCustomerVehicle.countryName = countryName;
+
+    // Extrair o estado (administrative_area_level_1)
+    const state = this.place.address_components.find(component => component.types.includes('administrative_area_level_1'));
+    const stateName = state ? state.long_name : '';
+    searchCustomerVehicle.stateName = stateName;
+
+    // Extrair a cidade (administrative_area_level_2)
+    const city = this.place.address_components.find(component => component.types.includes('administrative_area_level_2'));
+    const cityName = city ? city.long_name : '';
+    searchCustomerVehicle.cityName = cityName;
+
     this.customerVehicleService.searchCustomerVehicles(searchCustomerVehicle).subscribe(
       (response) => {
         this.customerVehicles = response.body || [];
+
+        this.customerVehicles.forEach((vehicle) => {
+
+          const address = `${vehicle?.addresses[0]?.address?.streetAddress}, ${vehicle?.addresses[0]?.address?.city?.cityName}, ${vehicle?.addresses[0]?.address?.state?.stateName}`;
+    
+          const price = `Preço: R$ ${vehicle.dailyRate}`;
+    
+          this.geocodeAddress(address, price, vehicle);
+        });
       },
       (error) => {
         console.error(error);
@@ -189,7 +170,10 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit {
     );
   }
 
-  geocodeAddress(address: string, price: string) {
+  geocodeAddress(address: string, price: string, vehicleDetails: any) {
+
+    this.initializeMap();
+
     const geocoder = new google.maps.Geocoder();
   
     geocoder.geocode({ address: address }, (results, status) => {
@@ -197,29 +181,119 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit {
         const latLng = results[0].geometry.location;
         const position: google.maps.LatLngLiteral = { lat: latLng.lat(), lng: latLng.lng() };
 
-        // Criar um novo marcador com as opções personalizadas (incluindo o preço)
-        const marker = new google.maps.Marker({
-          position: position,
-          map: this.map,
-          //icon: PrimeIcons.AMAZON, // URL do ícone do marcador
-        });
+        const defaultIcon = {
+          url: `data:image/svg+xml;charset=UTF-8,
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="40">
+                  <rect width="100%" height="100%" fill="white" rx="10" ry="10"/>
+                  <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="black">${price}</text>
+                </svg>`,
+        };
+  
+        const highlightedIcon = {
+          url: `data:image/svg+xml;charset=UTF-8,
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="40">
+                  <rect width="100%" height="100%" fill="black" rx="10" ry="10"/>
+                  <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="white">${price}</text>
+                </svg>`,
+        };
 
         debugger;
+
+        const marker: google.maps.Marker = new google.maps.Marker({
+          position: position,
+          map: this.map,
+          icon: defaultIcon,
+
+        });
+
+        // Associando o veículo ao marcador usando a classe Map do JavaScript
+        marker.set('customerVehicleId', vehicleDetails.customerVehicleId);
+ 
+        marker.addListener('mouseover', () => {
+          marker.setIcon(highlightedIcon);
+        });
   
-        // Infowindow para exibir o preço quando o marcador é clicado
+        marker.addListener('mouseout', () => {
+          marker.setIcon(defaultIcon);
+        });
+  
         const infoWindow = new google.maps.InfoWindow({
-          content: price, // Conteúdo da infowindow (preço do carro)
+          content: price,
         });
   
         marker.addListener('click', () => {
-          debugger;
-          infoWindow.open(this.map, marker); // Abre a infowindow quando o marcador é clicado
+          infoWindow.open(this.map, marker);
         });
 
-        this.markerPositions.push(position); // Adiciona a posição aos marcadores
+        // Adicione o marcador à lista de marcadores
+        this.markers.push(marker);
+
+        this.markerPositions.push(position);
       } else {
         console.error('Geocodificação falhou:', status);
       }
     });
+  }
+
+  changeMarkerIcon(marker: google.maps.Marker, highlightedIcon: google.maps.Icon) {
+    marker.setIcon(highlightedIcon);
+  }
+  
+  // Função para restaurar o ícone padrão do marcador (simulando o mouseout)
+  restoreDefaultMarkerIcon(marker: google.maps.Marker, defaultIcon: google.maps.Icon) {
+    marker.setIcon(defaultIcon);
+  }
+
+  exibirMapa(customerVehicle) {
+    const customerVehicleId = customerVehicle.customerVehicleId;
+
+    const price = `Preço: R$ ${customerVehicle.dailyRate}`;
+  
+    // Percorra todos os marcadores no mapa e encontre o marcador com base no ID do veículo
+    this.markers.forEach((marker: google.maps.Marker) => {
+      const markerCustomerId = marker.get('customerVehicleId');
+      if (markerCustomerId === customerVehicleId) {
+  
+        const highlightedIcon = {
+          url: `data:image/svg+xml;charset=UTF-8,
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="40">
+                  <rect width="100%" height="100%" fill="black" rx="10" ry="10"/>
+                  <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="white">${price}</text>
+                </svg>`,
+        };
+  
+        // Altere o ícone do marcador para simular o efeito de mouseover
+        this.changeMarkerIcon(marker, highlightedIcon);
+  
+      }
+    });
+  }
+
+  desibirMapa(customerVehicle) {
+    const customerVehicleId = customerVehicle.customerVehicleId;
+
+    const price = `Preço: R$ ${customerVehicle.dailyRate}`;
+  
+    // Percorra todos os marcadores no mapa e encontre o marcador com base no ID do veículo
+    this.markers.forEach((marker: google.maps.Marker) => {
+      const markerCustomerId = marker.get('customerVehicleId');
+      if (markerCustomerId === customerVehicleId) {
+
+        const defaultIcon = {
+          url: `data:image/svg+xml;charset=UTF-8,
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="40">
+                  <rect width="100%" height="100%" fill="white" rx="10" ry="10"/>
+                  <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="black">${price}</text>
+                </svg>`,
+        };
+  
+        // Altere o ícone do marcador para simular o efeito de mouseover
+        this.changeMarkerIcon(marker, defaultIcon);
+      }
+    });
+  }
+
+  formatDailyRateWithComma(dailyRate: number): string {
+    return this.decimalPipe?.transform(dailyRate, '1.2-2')?.replace('.', ',') ?? '';
   }
 }

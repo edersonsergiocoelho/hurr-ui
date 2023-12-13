@@ -4,4 +4,9 @@ export class SearchCustomerVehicle {
   vehicleModelId?: string;
   vehicleColorId?: string;
   vehicleFuelTypeId?: string;
+  vehicleTransmissionId?: string;
+
+  countryName?: string;
+  stateName?: string;
+  cityName?: string;
 }
