@@ -1,0 +1,281 @@
+<div class="block-content">
+  <div class="ng-star-inserted">
+    <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+
+      <div class="flex justify-content-between flex-wrap">
+        <div class="flex align-items-center mb-3 md:mb-0">
+
+          <div class="text-900 font-bold text-3xl">Descubra a liberdade sobre quatro rodas </div>
+
+        </div>
+
+      </div>
+
+      <p class="text-600 text-xl">Encontre o carro ideal para transformar seus planos de viagem em realidade. Qualidade,
+        conforto e aventura aguardam por você. Vamos encontrar juntos o veículo perfeito para sua jornada inesquecível.
+      </p>
+
+      <div style="width: 100%; padding-top: 10px;">
+        <hr style="border: none; height: 4px; background-color: #6610f2;">
+      </div>
+
+      <div class="flex flex-column lg:flex-row lg:align-items-center mx-auto">
+
+        <div class="mt-3 lg:mt-0 flex align-items-center flex-column md:flex-row">
+
+          <div class="field">
+
+            <label for="searchInput" style="padding-top: 18px;"><strong>Onde:</strong></label>
+
+            <div class="field">
+              <span class="p-input-icon-left mr-3">
+                <i class="pi pi-search">
+                </i>
+                <input #searchInput type="text" pinputtext="" placeholder="City, Airport, Address Or Hotel"
+                  class="p-inputtext p-component p-element" style="border-radius: 20px; width: 800px;">
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="dateInit" style="padding-left: 10px;"><strong>De:</strong></label>
+            <div style="padding-left: 10px;">
+              <p-calendar id="dateInit" [(ngModel)]="customerVehicleDetailUUIDTO.dateInit" [showIcon]="true"
+                [minDate]="customerVehicleDetailUUIDTO.today"
+                [dateFormat]="customerVehicleDetailUUIDTO.dateFormat"></p-calendar>
+            </div>
+          </div>
+
+          <div class="field">
+            <div style="padding-top: 26px; padding-left: 10px;">
+              <p-dropdown id="selectedHourInit" [options]="customerVehicleDetailUUIDTO.hours"
+                [(ngModel)]="customerVehicleDetailUUIDTO.selectedHourInit"></p-dropdown>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="dateEnd" style="padding-left: 10px;"><strong>Até:</strong></label>
+            <div style="padding-left: 10px;">
+              <p-calendar id="dateEnd" [(ngModel)]="customerVehicleDetailUUIDTO.dateEnd" [showIcon]="true"
+                [minDate]="customerVehicleDetailUUIDTO.today"
+                [dateFormat]="customerVehicleDetailUUIDTO.dateFormat"></p-calendar>
+            </div>
+          </div>
+
+          <div class="field">
+            <div style="padding-top: 26px; padding-left: 10px;">
+              <p-dropdown id="selectedHourEnd" [options]="customerVehicleDetailUUIDTO.hours"
+                [(ngModel)]="customerVehicleDetailUUIDTO.selectedHourEnd"></p-dropdown>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="grid grid-nogutter align-items-center">
+
+        <div>
+          <p-dropdown [options]="customerVehicleDetailUUIDTO.vehiclesBrands"
+            [(ngModel)]="customerVehicleDetailUUIDTO.selectedVehicleBrand" optionLabel="vehicleBrandName"
+            [filter]="true" filterBy="vehicleBrandName" [showClear]="true" placeholder="Select Vehicle Brand"
+            (onChange)="changeBrand($event.value)">
+
+            <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUUIDTO.selectedVehicleBrand">
+                <!--
+                <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + selectedBrand.brandCode.toLowerCase()" style="width: 18px"/>
+                -->
+                <div>{{ customerVehicleDetailUUIDTO.selectedVehicleBrand.vehicleBrandName }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-vehicleBrand pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <!--
+                <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + brand.brandCode.toLowerCase()" style="width: 18px"/>
+                -->
+                <div>{{ vehicleBrand.vehicleBrandName }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+
+        <div style="padding-left: 10px;">
+          <p-dropdown [options]="customerVehicleDetailUUIDTO.vehicles"
+            [(ngModel)]="customerVehicleDetailUUIDTO.selectedVehicle" optionLabel="vehicleName" [showClear]="true"
+            placeholder="Select Vehicle" (onChange)="changeVehicle($event.value)">
+          </p-dropdown>
+        </div>
+
+        <div style="padding-left: 10px;">
+          <p-dropdown [options]="customerVehicleDetailUUIDTO.vehiclesModels"
+            [(ngModel)]="customerVehicleDetailUUIDTO.selectedVehicleModel" optionLabel="vehicleModelName"
+            [showClear]="true" placeholder="Select Vehicle Model">
+          </p-dropdown>
+        </div>
+
+        <div style="padding-left: 10px;">
+          <p-dropdown [options]="customerVehicleDetailUUIDTO.vehiclesCategorys"
+            [(ngModel)]="customerVehicleDetailUUIDTO.selectedVehicleCategory" optionLabel="vehicleCategoryName"
+            [showClear]="true" placeholder="Select Vehicle Category">
+          </p-dropdown>
+        </div>
+
+        <div style="padding-left: 10px;">
+          <p-button icon="pi pi-search" (onClick)="search()"></p-button>
+        </div>
+
+      </div>
+
+      <div style="width: 100%; padding-top: 30px;">
+        <hr style="border: none; height: 4px; background-color: #6610f2;">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<p-galleria [value]="images" [showItemNavigators]="true" [responsiveOptions]="responsiveOptions" [circular]="true"
+  [numVisible]="5" [containerStyle]="{ 'max-width': '100%', 'margin': '0 auto' }">
+  <ng-template pTemplate="item" let-item>
+    <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+  </ng-template>
+  <ng-template pTemplate="thumbnail" let-item>
+    <div class="grid grid-nogutter justify-content-center">
+      <img [src]="item.thumbnailImageSrc" style="display: block; max-width: 80px; height: auto;" />
+    </div>
+  </ng-template>
+  <!--
+  <ng-template pTemplate="footer" let-item>
+    <div class="custom-galleria-footer">
+        <span *ngIf="images" class="title-container">
+            <span>{{ activeIndex + 1 }}/{{ images.length }}</span>
+            <span class="title">{{ images[activeIndex].title }}</span>
+            <span>{{ images[activeIndex].alt }}</span>
+        </span>
+    </div>
+  </ng-template>
+  -->
+</p-galleria>
+
+<div class="block-content">
+  <div class="ng-star-inserted">
+    <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+      <div class="grid">
+        <div class="col-12 lg:col-4">
+          <div class="font-medium text-xl text-900 mb-3">Share your experience</div>
+          <p class="text-600 p-0 mt-0 mb-3 line-height-3">Orci a scelerisque purus semper eget duis at tellus at. Ut
+            diam quam nulla porttitor.</p><button pbutton="" pripple="" label="Write a review"
+            class="p-element p-ripple p-button-rounded p-button p-component"><span class="p-button-label">Write a
+              review</span><span class="p-ink"></span></button>
+        </div>
+        <div class="col-12 lg:col-4 flex align-items-start justify-content-center py-5 lg:py-0">
+          <div><span class="text-5xl text-900 font-bold mr-2">190</span><span class="text-5xl text-600">Reviews</span>
+            <div class="mt-3 text-center"><i class="pi pi-star-fill text-yellow-500 text-2xl mr-1"></i><i
+                class="pi pi-star-fill text-yellow-500 text-2xl mr-1"></i><i
+                class="pi pi-star-fill text-yellow-500 text-2xl mr-1"></i><i
+                class="pi pi-star-fill text-yellow-500 text-2xl mr-1"></i><i
+                class="pi pi-star-fill text-300 text-2xl"></i></div>
+          </div>
+        </div>
+        <div class="col-12 lg:col-4">
+          <ul class="list-none p-0 m-0">
+            <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-1 w-1rem">5</span><i
+                class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+                <div class="h-full bg-yellow-500 w-9 border-round"></div>
+              </div><span class="text-500 font-medium ml-2">75%</span>
+            </li>
+            <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-1 w-1rem">4</span><i
+                class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+                <div class="h-full bg-yellow-500 w-6 border-round"></div>
+              </div><span class="text-500 font-medium ml-2">50%</span>
+            </li>
+            <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-1 w-1rem">3</span><i
+                class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+                <div class="h-full bg-yellow-500 w-2 border-round"></div>
+              </div><span class="text-500 font-medium ml-2">20%</span>
+            </li>
+            <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-1 w-1rem">2</span><i
+                class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+                <div class="h-full bg-yellow-500 w-4 border-round"></div>
+              </div><span class="text-500 font-medium ml-2">40%</span>
+            </li>
+            <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-1 w-1rem">1</span><i
+                class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+                <div class="h-full bg-yellow-500 w-3 border-round"></div>
+              </div><span class="text-500 font-medium ml-2">30%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-5">
+        <ul class="list-none m-0 p-0">
+          <li class="py-5 border-top-1 surface-border">
+            <div class="flex align-items-center justify-content-between mb-3">
+              <div class="flex align-items-center"><img src="assets/images/blocks/avatars/circle/avatar-m-1.png"
+                  class="w-3rem h-3rem flex-shrink-0 mr-3">
+                <div class="flex flex-column"><span class="text-900 font-medium mb-1">Robert Fox</span><span
+                    class="text-500 font-medium text-sm">February 3, 2022</span></div>
+              </div>
+              <div class="flex align-items-center"><span class="mr-2"><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500"></i></span><span class="font-medium">5</span></div>
+            </div>
+            <p class="text-600 p-0 m-0 line-height-3">Scelerisque varius morbi enim nunc. Arcu bibendum at varius vel
+              pharetra vel turpis nunc eget. Elit ut aliquam purus sit amet luctus. Aliquam etiam erat velit scelerisque
+              in.</p>
+            
+            <button pbutton="" pripple="" icon="pi pi-exclamation-circle" label="Report"
+              class="p-element p-ripple p-button-text p-button p-component"><span
+                class="p-button-icon p-button-icon-left pi pi-exclamation-circle" aria-hidden="true"></span><span
+                class="p-button-label">Report</span><span class="p-ink"
+                style="height: 117px; width: 117px; top: -36.3594px; left: -0.03125px;"></span></button>
+
+          </li>
+          <li class="py-5 border-top-1 surface-border">
+            <div class="flex align-items-center justify-content-between mb-3">
+              <div class="flex align-items-center"><img src="assets/images/blocks/avatars/circle/avatar-f-3.png"
+                  class="w-3rem h-3rem flex-shrink-0 mr-3">
+                <div class="flex flex-column"><span class="text-900 font-medium mb-1">Savannah Williams</span><span
+                    class="text-500 font-medium text-sm">February 4, 2022</span></div>
+              </div>
+              <div class="flex align-items-center"><span class="mr-2"><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500"></i></span><span class="font-medium">5</span></div>
+            </div>
+            <p class="text-600 p-0 m-0 line-height-3">Orci porta non pulvinar neque laoreet suspendisse interdum
+              consectetur. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut.</p>
+          </li>
+          <li class="py-5 border-top-1 surface-border">
+            <div class="flex align-items-center justify-content-between mb-3">
+              <div class="flex align-items-center"><img src="assets/images/blocks/avatars/circle/avatar-f-2.png"
+                  class="w-3rem h-3rem flex-shrink-0 mr-3">
+                <div class="flex flex-column"><span class="text-900 font-medium mb-1">Kathryn Murphy</span><span
+                    class="text-500 font-medium text-sm">February 5, 2022</span></div>
+              </div>
+              <div class="flex align-items-center"><span class="mr-2"><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500 mr-1"></i><i
+                    class="pi pi-star-fill text-yellow-500"></i></span><span class="font-medium">5</span></div>
+            </div>
+            <p class="text-600 p-0 m-0 line-height-3">Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula.
+              Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam quis. </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div><!----><!---->
+</div>

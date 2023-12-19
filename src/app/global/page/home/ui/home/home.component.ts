@@ -1,14 +1,27 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { HomeUIService } from '../../service/home-ui/home-ui.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   showMenuUser: boolean = false;
   showSubMenu: boolean = false;
+
+  divHomeVisible = true;
+
+  constructor(private router: Router,
+              private homeUIService: HomeUIService) {}
+
+  ngOnInit() {
+    this.homeUIService.divHomeVisible$.subscribe((value) => {
+      this.divHomeVisible = value;
+    });
+  }
 
   toggleSubMenu(): void {
     this.showSubMenu = !this.showSubMenu;
@@ -32,5 +45,10 @@ export class HomeComponent {
     // Lógica para lidar com a submissão do formulário de pesquisa
     console.log('Search Query:', this.searchQuery);
     // Aqui você pode chamar uma função para executar a pesquisa com this.searchQuery
+  }
+
+  onClickHome() {
+    this.homeUIService.updateDivVisibility(true);
+    this.router.navigate(['/']);
   }
 }

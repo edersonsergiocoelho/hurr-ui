@@ -1,18 +1,39 @@
 <div class="block-content">
   <div class="ng-star-inserted">
+    <div
+      class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
+      <div class="font-bold mr-8">🔥 Hot Deals!</div>
+      <div class="align-items-center hidden lg:flex"><span class="line-height-3">Libero voluptatum atque exercitationem
+          praesentium provident odit.</span></div><a class="flex align-items-center ml-2 mr-8"><span
+          class="underline font-bold">Learn More</span></a><a
+        class="flex align-items-center no-underline justify-content-center border-circle text-gray-100 hover:bg-bluegray-700 cursor-pointer transition-colors transition-duration-150"
+        style="width: 2rem; height: 2rem;"><i class="pi pi-times"></i></a>
+    </div>
     <div class="min-h-screen flex flex-column">
       <div class="bg-indigo-500" style="height: 400px;">
         <div class="py-3 px-5 flex align-items-center justify-content-between relative lg:static"
-          style="min-height: 80px;"><img src="assets/images/logo/HURR.png" alt="Image" height="120"
-            class="mr-0 lg:mr-6"><a pripple="" pstyleclass="@next" enterclass="hidden" leavetoclass="hidden"
-            class="p-element p-ripple cursor-pointer block lg:hidden text-indigo-50"><i
-              class="pi pi-bars text-4xl"></i><span class="p-ink"></span></a>
+          style="min-height: 80px;">
+          <img src="assets/images/logo/HURR.png" alt="Image" height="120"
+            class="mr-0 lg:mr-6">
+            <a pripple="" pstyleclass="@next" enterclass="hidden" leavetoclass="hidden"
+              class="p-element p-ripple cursor-pointer block lg:hidden text-indigo-50">
+              <i class="pi pi-bars text-4xl"></i>
+              <span class="p-ink"></span>
+            </a>
           <div
             class="align-items-center flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full bg-indigo-500 left-0 top-100 z-1">
             <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row">
-              <li><a pripple=""
-                  class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150"><i
-                    class="pi pi-home mr-2"></i><span>Home</span><span class="p-ink"></span></a></li>
+              <li>
+                <a pripple=""
+                  class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150"
+                  (click)="onClickHome()">
+                  <i
+                    class="pi pi-home mr-2">
+                  </i>
+                  <span>Home</span>
+                  <span class="p-ink"></span>
+                </a>
+              </li>
               <li>
                 <a pripple="" pstyleclass="@next" enterclass="hidden" enteractiveclass="scalein" leavetoclass="hidden"
                   leaveactiveclass="fadeout"
@@ -109,6 +130,7 @@
               </li>
               <!-- Menu -->
               <li class="border-top-1 border-indigo-400 lg:border-top-none">
+                
                 <a pripple=""
                   class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
                   
@@ -172,13 +194,27 @@
           <li class="px-2"><a class="cursor-pointer text-indigo-100 white-space-nowrap">Level 1</a></li>
         </ul>
       </div>
-      <div class="p-5 flex flex-column flex-auto" style="margin-top: -8rem;">
-        <div class="border-2 border-dashed surface-border border-round surface-section flex-auto">
-          
-          <app-home-search-cars></app-home-search-cars>
 
+      <div *ngIf="divHomeVisible">
+        <div class="p-5 flex flex-column flex-auto" style="margin-top: -8rem;">
+          <div class="border-2 border-dashed surface-border border-round surface-section flex-auto">
+            
+            <app-home-search-cars [divHomeVisible]="divHomeVisible" (divHomeVisibleChange)="divHomeVisible = $event"></app-home-search-cars>
+
+          </div>
         </div>
       </div>
+
+      <div *ngIf="! divHomeVisible">
+        <div class="p-5 flex flex-column flex-auto" style="margin-top: -8rem;">
+          <div class="border-2 border-dashed surface-border border-round surface-section flex-auto">
+      
+            <router-outlet></router-outlet>
+
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

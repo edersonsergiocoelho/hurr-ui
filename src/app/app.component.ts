@@ -14,10 +14,6 @@ export class AppComponent {
   constructor (private router: Router,
                private themeService: ThemeService) {
 
-    this.themeService.switchTheme("saga-blue");
-  }
-
-  onClickLevel1() {
-    this.router.navigate(['user/login']);
+    this.themeService.switchTheme("bootstrap4-light-blue");
   }
 }

@@ -4,42 +4,59 @@
     <div class="surface-section h-30rem bg-no-repeat bg-cover bg-center flex align-items-center"
       style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(assets/images/home/rentacar.jpeg);">
 
-      <div class="flex flex-column lg:flex-row lg:align-items-center mx-auto">
-        
-        <span class="p-input-icon-left mr-3">
-          <i 
-            class="pi pi-search">
-          </i>
-          <input #searchInput type="text" pinputtext="" placeholder="City, Airport, Address Or Hotel" 
-            class="p-inputtext p-component p-element"
-            style="border-radius: 20px; width: 300px;">
-        </span>
-        <div class="mt-3 lg:mt-0 flex align-items-center flex-column md:flex-row">
+      <div class="rounded-container flex flex-column lg:flex-row lg:align-items-center mx-auto">
 
-          <div style="padding-left: 10px;">
-            <p-calendar [(ngModel)]="dateInit" [showIcon]="true" [minDate]="today"
-              [dateFormat]="dateFormat"></p-calendar>
+        <div class="flex flex-column lg:flex-row lg:align-items-center mx-auto">
+          
+          <div class="mt-3 lg:mt-0 flex align-items-center flex-column md:flex-row">
+
+            <div class="field">
+              <label for="searchInput"><strong>Onde:</strong></label>
+              <span class="p-input-icon-left mr-3">
+                <i 
+                  class="pi pi-search">
+                </i>
+                <input #searchInput type="text" pinputtext="" placeholder="City, Airport, Address Or Hotel" 
+                  class="p-inputtext p-component p-element"
+                  style="border-radius: 20px; width: 300px;">
+              </span>
+            </div>
+
+            <div class="field">
+              <label for="dateInit"><strong>De:</strong></label>
+              <div style="padding-left: 10px;">
+                <p-calendar id="dateInit" [(ngModel)]="homeSearchCarsUIDTO.dateInit" [showIcon]="true" [minDate]="homeSearchCarsUIDTO.today" [dateFormat]="homeSearchCarsUIDTO.dateFormat"></p-calendar>
+              </div>
+            </div>
+          
+            <div class="field">
+              <div style="padding-top: 22px; padding-left: 10px;">
+                <p-dropdown id="selectedHourInit" [options]="homeSearchCarsUIDTO.hours" [(ngModel)]="homeSearchCarsUIDTO.selectedHourInit"></p-dropdown>
+              </div>
+            </div>
+          
+            <div class="field">
+              <label for="dateEnd"><strong>Até:</strong></label>
+              <div style="padding-left: 10px;">
+                <p-calendar id="dateEnd" [(ngModel)]="homeSearchCarsUIDTO.dateEnd" [showIcon]="true" [minDate]="homeSearchCarsUIDTO.today" [dateFormat]="homeSearchCarsUIDTO.dateFormat"></p-calendar>
+              </div>
+            </div>
+          
+            <div class="field">
+              <div style="padding-top: 22px; padding-left: 10px;">
+                <p-dropdown id="selectedHourEnd" [options]="homeSearchCarsUIDTO.hours" [(ngModel)]="homeSearchCarsUIDTO.selectedHourEnd"></p-dropdown>
+              </div>
+            </div>
+          
+            <div style="padding-left: 10px; padding-top: 16px;">
+              <p-button icon="pi pi-search" (onClick)="search()"></p-button>
+            </div>
+
           </div>
-
-          <div style="padding-left: 10px;">
-            <p-dropdown [options]="hours" [(ngModel)]="selectedHourInit"></p-dropdown>
-          </div>
-
-          <div style="padding-left: 10px;">
-            <p-calendar [(ngModel)]="dateEnd" [showIcon]="true" [minDate]="today"
-              [dateFormat]="dateFormat"></p-calendar>
-          </div>
-
-          <div style="padding-left: 10px;">
-            <p-dropdown [options]="hours" [(ngModel)]="selectedHourEnd"></p-dropdown>
-          </div>
-
-          <div style="padding-left: 10px;">
-            <p-button icon="pi pi-search"></p-button>
-          </div>
-
+          
         </div>
       </div>
+
     </div>
   </div>
 </div>

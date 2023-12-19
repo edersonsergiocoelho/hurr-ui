@@ -6,13 +6,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 import { GlobalPageModule } from './global/page/module/global-page.module';
 import { GlobalTemplateModule } from './global/template/module/global-template.module';
 import { PageModule } from './page/module/page.module';
 
 import { authInterceptorProviders } from './core/auth/interceptor/auth.interceptor';
+import { PageAdminModule } from './page/admin/module/page-admin.module';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -26,11 +28,15 @@ import { authInterceptorProviders } from './core/auth/interceptor/auth.intercept
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpClientJsonpModule,
+
+    GoogleMapsModule,
 
     GlobalPageModule,
     GlobalTemplateModule,
 
-    PageModule
+    PageModule,
+    PageAdminModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
