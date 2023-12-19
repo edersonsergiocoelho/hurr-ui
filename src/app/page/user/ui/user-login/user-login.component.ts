@@ -70,7 +70,7 @@ export class UserLoginComponent {
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.currentUser = this.sessionStorageService.getUser();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   loginGoogle() {

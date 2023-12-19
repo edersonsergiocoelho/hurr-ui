@@ -9,7 +9,6 @@ import { HomeComponent } from '../ui/home/home.component';
 import { HomeSearchCarsComponent } from '../ui/home-search-cars/home-search-cars.component';
 import { HomeSearchCarsDetailComponent } from '../ui/home-search-cars-detail/home-search-cars-detail.component';
 
-import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { DividerModule } from 'primeng/divider';
@@ -34,7 +33,6 @@ import { GoogleMapsModule } from '@angular/google-maps';
 
     GoogleMapsModule,
 
-    BadgeModule,
     ButtonModule,
     CalendarModule,
     DividerModule,

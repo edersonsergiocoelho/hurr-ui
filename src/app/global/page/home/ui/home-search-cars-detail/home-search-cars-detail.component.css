@@ -1,12 +1,31 @@
-.p-divider.p-divider-horizontal:before {
-  border-top: 1px solid #000000 !important;
+/* Reduz o tamanho da fonte para 0.85em */
+.smaller-font {
+  font-size: 0.85em; /* Ajuste o tamanho da fonte conforme necessário */
 }
 
-  /* CSS para a classe de sobreposição */
-  .elemento-sobreposicao {
-    transition: transform 0.3s ease-in-out; /* Adiciona uma transição suave */
-  }
+/* Adiciona sublinhado ao texto */
+.underline-text {
+  text-decoration: underline;
+}
 
-  .elemento-sobreposicao:hover {
-    transform: scale(1.1); /* Aumenta o tamanho do elemento ao passar o mouse */
-  }
+.full-width-divider {
+  width: 100%;
+}
+
+/* Define a aparência de uma linha divisória horizontal */
+.p-divider.p-divider-horizontal:before {
+  border-top: 1px solid #000000 !important; /* Cria uma linha horizontal com cor preta */
+}
+
+/* CSS para a classe de sobreposição */
+.elemento-sobreposicao {
+  transition: transform 0.3s ease-in-out; /* Adiciona uma transição suave ao transformar */
+  position: relative; /* Define o posicionamento do elemento como relativo */
+  z-index: 1; /* Define a ordem de empilhamento do elemento */
+}
+
+/* Quando o mouse estiver sobre o elemento */
+.elemento-sobreposicao:hover {
+  transform: scale(1.1); /* Aumenta o tamanho do elemento ao passar o mouse */
+  z-index: 2; /* Altera a ordem de empilhamento para sobrepor outros elementos */
+}

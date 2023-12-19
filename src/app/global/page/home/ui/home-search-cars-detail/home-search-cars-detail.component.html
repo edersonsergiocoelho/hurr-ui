@@ -1,31 +1,21 @@
 <div class="block-content">
   <div class="ng-star-inserted">
     <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+      
       <div class="flex justify-content-between flex-wrap">
         <div class="flex align-items-center mb-3 md:mb-0">
 
-          <!--
-          <div class="text-900 font-bold text-3xl">Category Title </div>
-          <p-badge
-            styleclass="ml-3 bg-gray-200 text-gray-900 p-0 border-circle" class="p-element">
-            <span
-              class="ml-3 bg-gray-200 text-gray-900 p-0 border-circle p-badge p-component ng-star-inserted">76
-            </span>
-          </p-badge>
-          -->
+          <div class="text-900 font-bold text-3xl">Descubra a liberdade sobre quatro rodas </div>
+          
         </div>
 
       </div>
-      <!--
-      <p class="text-600 text-xl">Nullam faucibus, sem et bibendum finibus, sapien ipsum congue felis, sit amet pretium
-        ex nisl ut eros.
-      </p>
-      -->
-      <p-divider class="p-element w-full">
-        <div role="separator" class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left">
-          <div class="p-divider-content"></div>
-        </div>
-      </p-divider>
+      
+      <p class="text-600 text-xl">Encontre o carro ideal para transformar seus planos de viagem em realidade. Qualidade, conforto e aventura aguardam por você. Vamos encontrar juntos o veículo perfeito para sua jornada inesquecível.</p>
+
+      <div style="width: 100%; padding-top: 10px;">
+        <hr style="border: none; height: 4px; background-color: #6610f2;">
+      </div>
 
       <div class="flex flex-column lg:flex-row lg:align-items-center mx-auto">
         
@@ -42,7 +32,7 @@
                 </i>
                 <input #searchInput type="text" pinputtext="" placeholder="City, Airport, Address Or Hotel" 
                   class="p-inputtext p-component p-element"
-                  style="border-radius: 20px; width: 300px;">
+                  style="border-radius: 20px; width: 800px;">
               </span>
             </div>
           </div>
@@ -72,33 +62,23 @@
               <p-dropdown id="selectedHourEnd" [options]="hours" [(ngModel)]="selectedHourEnd"></p-dropdown>
             </div>
           </div>
-        
-          <div style="padding-left: 10px; padding-top: 12px;">
-            <p-button icon="pi pi-search" (onClick)="search()"></p-button>
-          </div>
 
         </div>
         
       </div>
 
-      <p-divider class="p-element w-full">
-        <div role="separator" class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left">
-          <div class="p-divider-content"></div>
-        </div>
-      </p-divider>
-
       <div class="grid grid-nogutter align-items-center">
 
         <div>
-          <p-dropdown [options]="vehiclesBrands" [(ngModel)]="selectedVehicleBrand" optionLabel="vehicleBrandName" [filter]="true"
+          <p-dropdown [options]="homeSearchCarsDetailUIDTO.vehiclesBrands" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicleBrand" optionLabel="vehicleBrandName" [filter]="true"
             filterBy="vehicleBrandName" [showClear]="true" placeholder="Select Vehicle Brand" (onChange)="changeBrand($event.value)">
 
             <ng-template pTemplate="selectedItem">
-              <div class="flex align-items-center gap-2" *ngIf="selectedVehicleBrand">
+              <div class="flex align-items-center gap-2" *ngIf="homeSearchCarsDetailUIDTO.selectedVehicleBrand">
                 <!--
                 <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + selectedBrand.brandCode.toLowerCase()" style="width: 18px"/>
                 -->
-                <div>{{ selectedVehicleBrand.vehicleBrandName }}</div>
+                <div>{{ homeSearchCarsDetailUIDTO.selectedVehicleBrand.vehicleBrandName }}</div>
               </div>
             </ng-template>
             <ng-template let-vehicleBrand pTemplate="item">
@@ -113,18 +93,33 @@
         </div>
 
         <div style="padding-left: 10px;">
-          <p-dropdown [options]="vehicles" [(ngModel)]="selectedVehicle" optionLabel="vehicleName" [showClear]="true"
+          <p-dropdown [options]="homeSearchCarsDetailUIDTO.vehicles" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicle" optionLabel="vehicleName" [showClear]="true"
             placeholder="Select Vehicle" (onChange)="changeVehicle($event.value)">
           </p-dropdown>
         </div>
 
         <div style="padding-left: 10px;">
-          <p-dropdown [options]="vehiclesModels" [(ngModel)]="selectedVehicleModel" optionLabel="vehicleModelName"
+          <p-dropdown [options]="homeSearchCarsDetailUIDTO.vehiclesModels" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicleModel" optionLabel="vehicleModelName"
             [showClear]="true" placeholder="Select Vehicle Model">
           </p-dropdown>
         </div>
 
+        <div style="padding-left: 10px;">
+          <p-dropdown [options]="homeSearchCarsDetailUIDTO.vehiclesCategorys" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicleCategory" optionLabel="vehicleCategoryName"
+            [showClear]="true" placeholder="Select Vehicle Category">
+          </p-dropdown>
+        </div>
+
+        <div style="padding-left: 10px;">
+          <p-button icon="pi pi-search" (onClick)="search()"></p-button>
+        </div>
+
       </div>
+
+      <div style="width: 100%; padding-top: 30px;">
+        <hr style="border: none; height: 4px; background-color: #6610f2;">
+      </div>
+
     </div>
   </div>
 </div>
@@ -135,7 +130,18 @@
     <div class="block-content">
       <div class="lg:px-12 md:px-12 px-4 py-8 surface-ground ng-star-inserted">
         <section class="grid">
-          <div class="col-12 xl:col-12" *ngFor="let customerVehicle of customerVehicles" (mouseover)="exibirMapa(customerVehicle)" (mouseout)="desibirMapa(customerVehicle)">
+
+          <div *ngIf="homeSearchCarsDetailUIDTO.customerVehicles != null && homeSearchCarsDetailUIDTO.customerVehicles.length == 1">
+            <div class="text-900 font-bold text-3xl" style="padding-left: 10px; padding-bottom: 10px;">{{homeSearchCarsDetailUIDTO.customerVehicles.length}} carro disponível</div>
+            <div class="text-900 font-normal text-1xl" style="padding-left: 10px; padding-bottom: 10px;">Esse carro pode ser retirado nesta cidade.</div>
+          </div>
+
+          <div *ngIf="homeSearchCarsDetailUIDTO.customerVehicles != null && homeSearchCarsDetailUIDTO.customerVehicles.length > 1">
+            <div class="text-900 font-bold text-3xl" style="padding-left: 10px; padding-bottom: 10px;">{{homeSearchCarsDetailUIDTO.customerVehicles.length}} carros disponíveis</div>
+            <div class="text-900 font-normal text-1xl" style="padding-left: 10px; padding-bottom: 10px;">Esses carros podem ser retirados nesta cidade.</div>
+          </div>
+
+          <div class="col-12 xl:col-12" *ngFor="let customerVehicle of homeSearchCarsDetailUIDTO.customerVehicles" (mouseover)="exibirMapa(customerVehicle)" (mouseout)="desibirMapa(customerVehicle)" (click)="clickCustomerVehicle(customerVehicle)">
             <article class="flex flex-column md:flex-row w-full gap-3 p-3 border-round border-1 surface-border surface-card elemento-sobreposicao">
           
               <div class="relative">
@@ -149,10 +155,13 @@
                   style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); top: 3%; left: 3%; color: red;">
                   Quilometragem Limitada
                 </p>
+                <img src="assets/images/vehicle-brand/Toyota.jpg" alt="Brand Image"
+                  class="absolute border-round-lg mt-0 mb-0 px-2 py-1 md:w-5rem md:h-4rem" style="left: 80%;">
               </div>
               
               <div class="flex flex-column w-full gap-3">
                 <div class="flex w-full justify-content-between align-items-center flex-wrap gap-3">
+
                   <p class="font-semibold text-3xl mt-0 mb-0">
                     {{customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + customerVehicle.vehicle.vehicleName + ' ' + customerVehicle.yearOfTheCar}}
                   </p>
@@ -241,9 +250,35 @@
                       </span><!----><!----><!----><!----></div>
                   </p-rating>
                 </div>
-                <p class="font-normal text-sm text-600 mt-0 mb-0">Modelo: {{customerVehicle.vehicleModel.vehicleModelName}}</p>
-                <p class="font-normal text-sm text-600 mt-0 mb-0">Combustível: {{customerVehicle.vehicleFuelType.vehicleFuelTypeName}}</p>
-                <p class="font-normal text-sm text-600 mt-0 mb-0">Transmissão: {{customerVehicle.vehicleTransmission.vehicleTransmissionName}}</p>
+
+                <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
+                  <i class="pi pi-car mr-2" style="color: blue;"></i>
+                  <p style="margin: 0;">Modelo: {{customerVehicle.vehicleModel.vehicleModelName}}</p>
+                </div>
+
+                <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
+                  <div style="display: flex; align-items: center;">
+                    <img src="assets/images/icon/fuel.png" alt="Icon Fuel" class="border-round w-full h-full md:w-2rem md:h-2rem">
+                    <p style="margin: 0; margin-left: 5px;">Combustível: {{ customerVehicle.vehicleFuelType.vehicleFuelTypeName }}</p>
+                  </div>
+                  <div style="margin-left: auto; display: flex; align-items: center;">
+                    <ng-container *ngIf="customerVehicle.vehicleTransmission.vehicleTransmissionName == 'Manual'">
+                      <img src="assets/images/icon/manual-transmission.png" alt="Icon Manual Transmission" class="border-round w-full h-full md:w-2rem md:h-2rem">
+                    </ng-container>
+                    <ng-container *ngIf="customerVehicle.vehicleTransmission.vehicleTransmissionName == 'Automática'">
+                      <img src="assets/images/icon/automatic-transmission.png" alt="Icon Automatic Transmission" class="border-round w-full h-full md:w-2rem md:h-2rem">
+                    </ng-container>
+                    <p style="margin: 0; margin-left: 5px;">Transmissão: {{ customerVehicle.vehicleTransmission.vehicleTransmissionName }}</p>
+                  </div>
+                </div>
+
+                <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
+                  <p class="text-base flex align-items-center text-900 mt-0 mb-1">
+                    <i class="pi pi-map mr-2" style="color: red;"></i>
+                    <span class="font-medium">{{customerVehicle.distance}}</span>
+                  </p>
+                </div>
+
                 <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
                   <p class="text-base flex align-items-center text-900 mt-0 mb-1"><i class="pi pi-users mr-2"></i><span
                       class="font-medium">2 Guests</span></p>
@@ -252,10 +287,25 @@
                   <p class="text-base flex align-items-center text-900 mt-0 mb-1"><i
                       class="pi pi-check-circle mr-2"></i><span class="font-medium">Verified</span></p>
                 </div>
-                <p class="font-semibold text-sm text-900 mt-0 mb-2">R$ {{ formatDailyRateWithComma(customerVehicle.dailyRate) }} / Dia</p>
+                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                  <p class="font-semibold text-sm text-900 mt-0 mb-2" style="margin: 0;">R$ {{ formatDailyRateWithComma(customerVehicle.dailyRate) }} / Dia</p>
+                  <p class="font-normal smaller-font text-sm mt-0 mb-2 underline-text" style="margin: 0; text-align: right;">R$ {{ formatDailyRateWithComma(customerVehicle.dailyRate) }} / Sem Incluir Impostos E Taxas</p>
+                </div>
               </div>
             </article>
           </div>
+
+          <div class="col-12 xl:col-12 flex justify-center items-center" *ngIf="homeSearchCarsDetailUIDTO.customerVehicles == null || homeSearchCarsDetailUIDTO.customerVehicles.length == 0">
+            <article class="w-full gap-3 p-3 border-round border-1 surface-border surface-card">
+              <div class="text-center">
+                <p class="font-semibold text-3xl mt-0 mb-2">Nenhum carro encontrado</p>
+              </div>
+              <div class="text-center">
+                <p class="text-base text-900 mt-0 mb-1">Tente alterar seus filtros, ajustar suas datas ou explorar o mapa</p>
+              </div>
+            </article>
+          </div>
+
         </section>
       </div>
     </div>

@@ -25,26 +25,26 @@
             <div class="field">
               <label for="dateInit"><strong>De:</strong></label>
               <div style="padding-left: 10px;">
-                <p-calendar id="dateInit" [(ngModel)]="dateInit" [showIcon]="true" [minDate]="today" [dateFormat]="dateFormat"></p-calendar>
+                <p-calendar id="dateInit" [(ngModel)]="homeSearchCarsUIDTO.dateInit" [showIcon]="true" [minDate]="homeSearchCarsUIDTO.today" [dateFormat]="homeSearchCarsUIDTO.dateFormat"></p-calendar>
               </div>
             </div>
           
             <div class="field">
               <div style="padding-top: 22px; padding-left: 10px;">
-                <p-dropdown id="selectedHourInit" [options]="hours" [(ngModel)]="selectedHourInit"></p-dropdown>
+                <p-dropdown id="selectedHourInit" [options]="homeSearchCarsUIDTO.hours" [(ngModel)]="homeSearchCarsUIDTO.selectedHourInit"></p-dropdown>
               </div>
             </div>
           
             <div class="field">
               <label for="dateEnd"><strong>Até:</strong></label>
               <div style="padding-left: 10px;">
-                <p-calendar id="dateEnd" [(ngModel)]="dateEnd" [showIcon]="true" [minDate]="today" [dateFormat]="dateFormat"></p-calendar>
+                <p-calendar id="dateEnd" [(ngModel)]="homeSearchCarsUIDTO.dateEnd" [showIcon]="true" [minDate]="homeSearchCarsUIDTO.today" [dateFormat]="homeSearchCarsUIDTO.dateFormat"></p-calendar>
               </div>
             </div>
           
             <div class="field">
               <div style="padding-top: 22px; padding-left: 10px;">
-                <p-dropdown id="selectedHourEnd" [options]="hours" [(ngModel)]="selectedHourEnd"></p-dropdown>
+                <p-dropdown id="selectedHourEnd" [options]="homeSearchCarsUIDTO.hours" [(ngModel)]="homeSearchCarsUIDTO.selectedHourEnd"></p-dropdown>
               </div>
             </div>
           

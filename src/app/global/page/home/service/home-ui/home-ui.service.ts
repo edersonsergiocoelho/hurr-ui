@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UiHomeService {
+export class HomeUIService {
 
   private divHomeVisibleSource = new BehaviorSubject<boolean>(true);
   divHomeVisible$ = this.divHomeVisibleSource.asObservable();
