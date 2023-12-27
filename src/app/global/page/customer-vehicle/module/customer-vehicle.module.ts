@@ -3,19 +3,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { GalleriaModule } from 'primeng/galleria';
-
 import { CustomerVehicleRoutingModule } from './customer-vehicle-routing.module';
-import { CustomerVehicleDetailComponent } from '../ui/customer-vehicle-detail/customer-vehicle-detail.component';
-import { HomeModule } from '../../home/module/home.module';
-import { DropdownModule } from 'primeng/dropdown';
-import { CalendarModule } from 'primeng/calendar';
-import { ButtonModule } from 'primeng/button';
 
+import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
+import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
+import { GalleriaModule } from 'primeng/galleria';
+import { RatingModule } from 'primeng/rating';
+import { ToastModule } from 'primeng/toast';
+
+import { CustomerVehicleDetailComponent } from '../ui/customer-vehicle-detail/customer-vehicle-detail.component';
+
+import { DateFormatDDMMMMYYYYBR } from 'src/app/utils/pipe/date/date-format-dd-mmmm-yyyy-br';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
-  declarations: [CustomerVehicleDetailComponent],
+  declarations: [CustomerVehicleDetailComponent, DateFormatDDMMMMYYYYBR],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -27,7 +31,10 @@ import { ButtonModule } from 'primeng/button';
     ButtonModule,
     CalendarModule,
     DropdownModule,
-    GalleriaModule
+    DividerModule,
+    GalleriaModule,
+    RatingModule,
+    ToastModule
   ],
   exports: [
     CustomerVehicleDetailComponent

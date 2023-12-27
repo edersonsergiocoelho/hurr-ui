@@ -19,6 +19,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { RatingModule } from 'primeng/rating';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MenuModule,
     MultiSelectModule,
     RatingModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    ToastModule
   ],
   exports: [
     HomeComponent,
@@ -49,7 +52,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     HomeSearchCarsDetailComponent
   ],
   providers: [
-    DecimalPipe
+    DecimalPipe, 
+    MessageService
   ]
 })
 export class HomeModule { }

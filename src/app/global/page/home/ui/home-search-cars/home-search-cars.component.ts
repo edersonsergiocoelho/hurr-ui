@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { HomeUIService } from '../../service/home-ui/home-ui.service';
 import { HomeSearchCarsUIDTO } from './dto/home-search-cars-ui.dto';
 
@@ -16,11 +16,14 @@ export class HomeSearchCarsComponent implements OnInit {
   @Output() divHomeVisibleChange = new EventEmitter<boolean>();
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private ngZone: NgZone,
+  constructor(private activatedRoute: ActivatedRoute,
+              private ngZone: NgZone,
               private router: Router,
               private homeUIService: HomeUIService) { }
 
   ngOnInit() {
+
+    debugger;
 
     this.resetRegisterForm();
 

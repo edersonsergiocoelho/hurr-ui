@@ -15,6 +15,7 @@ export class SessionStorageService {
   }
 
   public saveToken(token: string): void {
+    debugger;
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }

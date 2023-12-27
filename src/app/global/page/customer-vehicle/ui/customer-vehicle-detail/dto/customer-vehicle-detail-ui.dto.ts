@@ -1,7 +1,21 @@
+import { CustomerVehicleAddress } from "src/app/global/page/customer-vehicle-address/entity/customer-vehicle-address.entity";
+
 export class CustomerVehicleDetailUUIDTO {
+
+  customerVehicleId: any;
+  customerVehicle: any;
+
+  listCustomerVehicleAddressVehicle: Array<CustomerVehicleAddress>;
+  listCustomerVehicleAddressDelivery: Array<CustomerVehicleAddress>;
+  listCustomerVehicleAddressPickup: Array<CustomerVehicleAddress>;
+
+  selectedCustomerVehicleAddressVehicle: CustomerVehicleAddress;
+  selectedCustomerVehicleAddressDelivery: CustomerVehicleAddress;
+  selectedCustomerVehicleAddressPickup: CustomerVehicleAddress;
 
   dateInit: Date;
   dateEnd: Date;
+  dateCancelFree: Date;
   today: Date;
 
   dateFormat = 'dd/mm/yy';
@@ -24,6 +38,8 @@ export class CustomerVehicleDetailUUIDTO {
   customerVehicles?: any[];
   vehiclesCategorys: any[];
   selectedVehicleCategory: any;
+
+  customersVehiclesReviews: any[];
 
   place: any;
 }
