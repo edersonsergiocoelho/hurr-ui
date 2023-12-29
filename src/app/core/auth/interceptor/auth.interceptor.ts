@@ -10,12 +10,13 @@ const TOKEN_HEADER_KEY = 'Authorization';
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private router: Router,
-    private token: SessionStorageService) {
+              private token: SessionStorageService) {
 
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    
     let authReq = req;
     const loginPath = '/user/login';
     const token = this.token.getToken();

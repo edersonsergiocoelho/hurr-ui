@@ -4,6 +4,7 @@ import { AppConstants } from 'src/app/commom/app.constants';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { UserService } from '../../service/user.service';
+import { HomeUIService } from 'src/app/global/page/home/service/home-ui/home-ui.service';
 
 @Component({
   selector: 'app-user-login',
@@ -24,11 +25,13 @@ export class UserLoginComponent {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
+              private homeUIService: HomeUIService,
               private authService: AuthService,
               private sessionStorageService: SessionStorageService,
               private userService: UserService) { }
 
   ngOnInit(): void {
+    debugger;
     const token: string = this.activatedRoute.snapshot.queryParamMap.get('token') as string;
     const error: string = this.activatedRoute.snapshot.queryParamMap.get('error') as string;
 
@@ -39,22 +42,27 @@ export class UserLoginComponent {
       this.sessionStorageService.saveToken(token);
       this.userService.getCurrentUser().subscribe(
         data => {
+          debugger;
           this.login(data);
         },
         err => {
+          debugger;
           this.errorMessage = err.error.message;
           this.isLoginFailed = true;
         }
       );
     } else if (error) {
+      debugger;
       this.errorMessage = error;
       this.isLoginFailed = true;
     }
   }
 
   onSubmit(): void {
+    debugger;
     this.authService.signin(this.form).subscribe(
       (data: any) => {
+        debugger;
         this.sessionStorageService.saveToken(data.accessToken);
         this.login(data.user);
       },
@@ -66,14 +74,18 @@ export class UserLoginComponent {
   }
 
   login(user: any): void {
+    console.log("Passou No Login")
+    debugger;
     this.sessionStorageService.saveUser(user);
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.currentUser = this.sessionStorageService.getUser();
-    this.router.navigate(['/']);
+    this.router.navigate(['user/login']);
   }
 
   loginGoogle() {
+    debugger;
+    this.homeUIService.updateDivVisibility(false);
     window.location.href = this.googleURL;
   }
 }

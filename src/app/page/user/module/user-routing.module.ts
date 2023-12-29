@@ -4,6 +4,7 @@ import { UserLoginComponent } from '../ui/user-login/user-login.component';
 
 const routes: Routes = [
   {path: 'user/login', component: UserLoginComponent},
+  {path: 'user/login/:token', component: UserLoginComponent }
 ];
 
 @NgModule({

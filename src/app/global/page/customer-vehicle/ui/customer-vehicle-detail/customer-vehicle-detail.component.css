@@ -1,0 +1,10 @@
+/* Adicione esses estilos no seu arquivo CSS */
+.address-box {
+  border: 1px solid #000; /* Cor e espessura da borda */
+  padding: 8px; /* Espaçamento interno */
+  border-radius: 5px; /* Borda arredondada */
+}
+
+.col-4 .p-button {
+  width: 100%;
+}

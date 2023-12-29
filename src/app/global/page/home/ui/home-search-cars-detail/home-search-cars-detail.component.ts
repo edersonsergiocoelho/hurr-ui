@@ -244,7 +244,7 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
 
         this.homeSearchCarsDetailUIDTO.customerVehicles.forEach((customerVehicle) => {
 
-          const address = `${customerVehicle?.addresses[0]?.address?.streetAddress}, ${customerVehicle?.addresses[0]?.address?.city?.cityName}, ${customerVehicle?.addresses[0]?.address?.state?.stateName}`;
+          const address = `${customerVehicle?.addresses[0]?.address?.streetAddress}, ${customerVehicle?.addresses[0]?.address?.number}, ${customerVehicle?.addresses[0]?.address?.city?.cityName}, ${customerVehicle?.addresses[0]?.address?.state?.stateName}`;
     
           this.geocodeAddress(address, customerVehicle);
         });
@@ -300,39 +300,23 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
           );
         }
 
-        const price = `Preço: R$ ${customerVehicle.dailyRate}`;
-
-        const defaultIcon = {
-          url: `data:image/svg+xml;charset=UTF-8,
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="40">
-                  <rect width="100%" height="100%" fill="white" rx="10" ry="10"/>
-                  <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="black">${price}</text>
-                </svg>`,
-        };
-  
-        const highlightedIcon = {
-          url: `data:image/svg+xml;charset=UTF-8,
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="40">
-                  <rect width="100%" height="100%" fill="black" rx="10" ry="10"/>
-                  <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="white">${price}</text>
-                </svg>`,
-        };
+        const price = `R$ ${customerVehicle.dailyRate}`;
 
         const marker: google.maps.Marker = new google.maps.Marker({
           position: position,
           map: this.map,
-          icon: defaultIcon,
+          icon: this.homeSearchCarsDetailUIDTO.getDefaultIcon(price),
         });
 
         // Associando o veículo ao marcador usando a classe Map do JavaScript
         marker.set('customerVehicleId', customerVehicle.customerVehicleId);
  
         marker.addListener('mouseover', () => {
-          marker.setIcon(highlightedIcon);
+          marker.setIcon(this.homeSearchCarsDetailUIDTO.getHighlightedIcon(price));
         });
   
         marker.addListener('mouseout', () => {
-          marker.setIcon(defaultIcon);
+          marker.setIcon(this.homeSearchCarsDetailUIDTO.getDefaultIcon(price));
         });
 
         const content = `<img src="assets/images/vehicle/Corolla.png" alt="Image" class="border-round w-full h-full md:w-16rem md:h-10rem"><br>
@@ -363,36 +347,16 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
     });
   }
 
-  changeMarkerIcon(marker: google.maps.Marker, highlightedIcon: google.maps.Icon) {
-    marker.setIcon(highlightedIcon);
-  }
-  
-  // Função para restaurar o ícone padrão do marcador (simulando o mouseout)
-  restoreDefaultMarkerIcon(marker: google.maps.Marker, defaultIcon: google.maps.Icon) {
-    marker.setIcon(defaultIcon);
-  }
-
   exibirMapa(customerVehicle) {
     const customerVehicleId = customerVehicle.customerVehicleId;
 
-    const price = `Preço: R$ ${customerVehicle.dailyRate}`;
+    const price = `R$ ${customerVehicle.dailyRate}`;
   
-    // Percorra todos os marcadores no mapa e encontre o marcador com base no ID do veículo
     this.markers.forEach((marker: google.maps.Marker) => {
       const markerCustomerId = marker.get('customerVehicleId');
       if (markerCustomerId === customerVehicleId) {
   
-        const highlightedIcon = {
-          url: `data:image/svg+xml;charset=UTF-8,
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="40">
-                  <rect width="100%" height="100%" fill="black" rx="10" ry="10"/>
-                  <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="white">${price}</text>
-                </svg>`,
-        };
-  
-        // Altere o ícone do marcador para simular o efeito de mouseover
-        this.changeMarkerIcon(marker, highlightedIcon);
-  
+        marker.setIcon(this.homeSearchCarsDetailUIDTO.getHighlightedIcon(price));
       }
     });
   }
@@ -400,23 +364,13 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
   desibirMapa(customerVehicle) {
     const customerVehicleId = customerVehicle.customerVehicleId;
 
-    const price = `Preço: R$ ${customerVehicle.dailyRate}`;
+    const price = `R$ ${customerVehicle.dailyRate}`;
   
-    // Percorra todos os marcadores no mapa e encontre o marcador com base no ID do veículo
     this.markers.forEach((marker: google.maps.Marker) => {
       const markerCustomerId = marker.get('customerVehicleId');
       if (markerCustomerId === customerVehicleId) {
-
-        const defaultIcon = {
-          url: `data:image/svg+xml;charset=UTF-8,
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="40">
-                  <rect width="100%" height="100%" fill="white" rx="10" ry="10"/>
-                  <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="black">${price}</text>
-                </svg>`,
-        };
   
-        // Altere o ícone do marcador para simular o efeito de mouseover
-        this.changeMarkerIcon(marker, defaultIcon);
+        marker.setIcon(this.homeSearchCarsDetailUIDTO.getDefaultIcon(price));
       }
     });
   }
