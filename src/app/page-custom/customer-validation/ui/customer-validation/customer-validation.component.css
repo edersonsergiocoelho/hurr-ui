@@ -1,0 +1,4 @@
+/* Define a largura do campo de entrada com o ID 'email' */
+#email {
+  width: 300px;
+}

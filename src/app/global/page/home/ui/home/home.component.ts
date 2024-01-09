@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { HomeUIService } from '../../service/home-ui/home-ui.service';
 import { Router } from '@angular/router';
+import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -9,18 +10,23 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  currentUser: any;
   showMenuUser: boolean = false;
   showSubMenu: boolean = false;
 
-  divHomeVisible = true;
-
   constructor(private router: Router,
-              private homeUIService: HomeUIService) {}
+              private homeUIService: HomeUIService,
+              private sessionStorageService: SessionStorageService) {}
 
   ngOnInit() {
-    this.homeUIService.divHomeVisible$.subscribe((value) => {
-      this.divHomeVisible = value;
+    this.homeUIService.currentUser$.subscribe(user => {
+      this.currentUser = user;
     });
+
+    if (this.sessionStorageService.getToken()) {
+      this.currentUser = this.sessionStorageService.getUser();
+      this.homeUIService.setCurrentUser(this.currentUser);
+    }
   }
 
   toggleSubMenu(): void {
@@ -39,16 +45,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  searchQuery: string = '';
-
-  onSubmit() {
-    // Lógica para lidar com a submissão do formulário de pesquisa
-    console.log('Search Query:', this.searchQuery);
-    // Aqui você pode chamar uma função para executar a pesquisa com this.searchQuery
+  signOut() {
+    this.sessionStorageService.signOut();
   }
 
   onClickHome() {
-    this.homeUIService.updateDivVisibility(true);
     this.router.navigate(['/']);
   }
 }

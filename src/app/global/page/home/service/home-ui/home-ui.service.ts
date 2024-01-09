@@ -6,10 +6,16 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HomeUIService {
 
-  private divHomeVisibleSource = new BehaviorSubject<boolean>(true);
-  divHomeVisible$ = this.divHomeVisibleSource.asObservable();
+  private currentUserSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
 
-  updateDivVisibility(visible: boolean) {
-    this.divHomeVisibleSource.next(visible);
+  constructor() { }
+
+  setCurrentUser(user: any): void {
+    this.currentUserSubject.next(user);
+  }
+
+  getCurrentUser(): any {
+    return this.currentUserSubject.value;
   }
 }

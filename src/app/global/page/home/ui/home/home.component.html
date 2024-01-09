@@ -96,7 +96,7 @@
             <!-- Inbox -->
             <ul
               class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row border-top-1 border-indigo-400 lg:border-top-none">
-              <li>
+              <li *ngIf="currentUser != null">
                 <a pripple=""
                   class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
                   <i
@@ -107,7 +107,7 @@
                 </a>
               </li>
               <!-- Notifications -->
-              <li>
+              <li *ngIf="currentUser != null">
                 <a pripple=""
                   class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
                   <i
@@ -117,47 +117,48 @@
                   <span class="p-ink"></span>
                 </a>
               </li>
-              <!-- User -->
-              <li>
-                <a pripple=""
-                  class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
-                  <i
-                    class="pi pi-user text-base lg:text-2xl mr-2 lg:mr-0">
-                  </i>
-                  <span class="block lg:hidden font-medium">User</span>
-                  <span class="p-ink"></span>
-                </a>
-              </li>
-              <!-- Menu -->
+
+              <!-- Menu - User -->
               <li class="border-top-1 border-indigo-400 lg:border-top-none">
                 
                 <a pripple=""
-                  class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
+                  class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
                   
-                  <img 
-                    src="assets/images/blocks/avatars/circle/avatar-f-1.png" class="mr-3 lg:mr-0"
-                    style="width: 32px; height: 32px;" (click)="toggleMenuUser()">
+                  <img *ngIf="currentUser != null && currentUser.urlImage != null" 
+                    [src]="currentUser.urlImage"
+                    class="mr-3 lg:mr-0"
+                    style="width: 62px; height: 62px; border-radius: 50%;" 
+                    (click)="toggleMenuUser()">
+
+                  <i *ngIf="currentUser == null" class="pi pi-user text-base lg:text-2xl mr-2 lg:mr-0" (click)="toggleMenuUser()"></i>
                   
-                  <div class="block lg:hidden">
-                    <div class="text-indigo-50 font-medium">Josephine Lillard</div>
-                    <span class="text-indigo-100 font-medium text-sm">Marketing Specialist</span>
+                  <div *ngIf="currentUser != null" style="padding-left: 10px;">
+                    <div class="text-indigo-50 font-medium" (click)="toggleMenuUser()">{{currentUser.displayName}}</div>
+                    <span class="text-indigo-100 font-medium text-sm" (click)="toggleMenuUser()">{{currentUser.email}}</span>
                   </div>
                   <span class="p-ink"></span>
                 </a>
 
                 <ul *ngIf="showMenuUser"
                   class="list-none py-3 px-6 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:border-1 border-50 lg:shadow-2 lg:absolute surface-overlay origin-top w-full lg:w-15rem cursor-pointer left-0 lg:left-auto right-0">
-                  <li><a pripple=""
+                  
+                  <li *ngIf="currentUser == null">
+                    <a pripple=""
                       class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"
-                      [routerLink]="['/user/login']"><i
-                        class="pi pi-user mr-2"></i><span class="font-medium">LogIn</span><span
-                        class="p-ink"></span></a>
+                      [routerLink]="['/user/login']">
+                      <i class="pi pi-user mr-2"></i>
+                      <span class="font-medium">LogIn</span>
+                      <span class="p-ink"></span>
+                    </a>
                   </li>
 
-                  <li><a pripple=""
-                    class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"><i
-                      class="pi pi-sign-in mr-2"></i><span class="font-medium">SignUp</span><span
-                      class="p-ink"></span></a>
+                  <li *ngIf="currentUser != null">
+                    <a pripple=""
+                      class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
+                      <i class="pi pi-sign-in mr-2"></i>
+                      <span class="font-medium" (click)="signOut()">Sign Out</span>
+                      <span class="p-ink"></span>
+                    </a>
                   </li>
 
                   <li class="relative"><a pripple="" pstyleclass="@next" enterclass="hidden" enteractiveclass="scalein"
@@ -194,29 +195,6 @@
           <li class="px-2"><a class="cursor-pointer text-indigo-100 white-space-nowrap">Level 1</a></li>
         </ul>
       </div>
-
-      <!--
-      <div *ngIf="divHomeVisible">
-        <div class="p-5 flex flex-column flex-auto" style="margin-top: -8rem;">
-          <div class="border-2 border-dashed surface-border border-round surface-section flex-auto">
-            
-            <app-home-search-cars [divHomeVisible]="divHomeVisible" (divHomeVisibleChange)="divHomeVisible = $event"></app-home-search-cars>
-
-          </div>
-        </div>
-      </div>
-
-      <div *ngIf="! divHomeVisible">
-        <div class="p-5 flex flex-column flex-auto" style="margin-top: -8rem;">
-          <div class="border-2 border-dashed surface-border border-round surface-section flex-auto">
-      
-            <router-outlet></router-outlet>
-            <p-toast></p-toast>
-
-          </div>
-        </div>
-      </div>
-      -->
 
       <div>
         <div class="p-5 flex flex-column flex-auto" style="margin-top: -8rem;">

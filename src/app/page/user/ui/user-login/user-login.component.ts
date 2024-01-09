@@ -31,38 +31,40 @@ export class UserLoginComponent {
               private userService: UserService) { }
 
   ngOnInit(): void {
-    debugger;
     const token: string = this.activatedRoute.snapshot.queryParamMap.get('token') as string;
     const error: string = this.activatedRoute.snapshot.queryParamMap.get('error') as string;
 
     if (this.sessionStorageService.getToken()) {
+
       this.isLoggedIn = true;
       this.currentUser = this.sessionStorageService.getUser();
+      this.homeUIService.setCurrentUser(this.currentUser);
+
     } else if (token) {
+
       this.sessionStorageService.saveToken(token);
       this.userService.getCurrentUser().subscribe(
         data => {
-          debugger;
           this.login(data);
         },
         err => {
-          debugger;
           this.errorMessage = err.error.message;
           this.isLoginFailed = true;
         }
       );
+
     } else if (error) {
-      debugger;
+
       this.errorMessage = error;
       this.isLoginFailed = true;
     }
   }
 
   onSubmit(): void {
-    debugger;
+
     this.authService.signin(this.form).subscribe(
       (data: any) => {
-        debugger;
+
         this.sessionStorageService.saveToken(data.accessToken);
         this.login(data.user);
       },
@@ -74,18 +76,15 @@ export class UserLoginComponent {
   }
 
   login(user: any): void {
-    console.log("Passou No Login")
-    debugger;
     this.sessionStorageService.saveUser(user);
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.currentUser = this.sessionStorageService.getUser();
-    this.router.navigate(['user/login']);
+    this.homeUIService.setCurrentUser(this.currentUser);
+    this.router.navigate(['']);
   }
 
   loginGoogle() {
-    debugger;
-    this.homeUIService.updateDivVisibility(false);
     window.location.href = this.googleURL;
   }
 }

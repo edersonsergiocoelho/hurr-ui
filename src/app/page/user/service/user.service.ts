@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -26,8 +26,9 @@ export class UserService {
   }
 
   getCurrentUser(): Observable<any> {
-    return this.httpClient.get<any>(`${environment.api}/api/user/me`,
+    return this.httpClient.get<any>(`${environment.api}/api/user/me`, 
     {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       observe: 'response',
     });
   }
