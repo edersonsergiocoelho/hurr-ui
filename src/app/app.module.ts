@@ -15,6 +15,7 @@ import { PageModule } from './page/module/page.module';
 import { authInterceptorProviders } from './core/auth/interceptor/auth.interceptor';
 import { PageAdminModule } from './page/admin/module/page-admin.module';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { PageCustomModule } from './page-custom/module/page-custom.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     GlobalTemplateModule,
 
     PageModule,
+    PageCustomModule,
     PageAdminModule
   ],
   providers: [authInterceptorProviders],

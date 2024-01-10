@@ -1,0 +1,97 @@
+<div class="block-content">
+  <div class="lg:px-8 md:px-6 px-3 py-8 ng-star-inserted">
+    <div class="flex flex-column lg:flex-row surface-card shadow-2 border-round">
+
+      <!-- Email -->
+      <div
+        *ngIf="customerValidationUIDTO.customer == null || customerValidationUIDTO.customer.emailValidated == null || customerValidationUIDTO.customer.emailValidated == false"
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-at text-900 mr-3"></i>
+          <div class="flex flex-column"><span class="text-900 font-medium text-xl mb-1 line-height-1">Email</span><span
+              class="text-600 line-height-3">Verificar o email</span></div>
+        </div>
+      </div>
+
+      <div *ngIf="customerValidationUIDTO.customer != null && customerValidationUIDTO.customer.emailValidated == true"
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-at text-900 mr-3"></i>
+          <div class="flex flex-column"><span class="text-900 font-medium text-xl mb-1 line-height-1">Email</span><span
+              class="text-600 line-height-3">Verificar o email</span></div>
+        </div>
+      </div>
+
+      <div class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-image text-900 mr-3"></i>
+          <div class="flex flex-column"><span class="text-900 font-medium text-xl mb-1 line-height-1">Foto</span><span
+              class="text-600 line-height-3">Foto do perfil</span></div>
+        </div>
+      </div>
+
+      <div class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Celular</span><span
+              class="text-600 line-height-3">Número do Celular</span></div>
+        </div>
+      </div>
+
+      <div class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4">
+          <i class="text-2xl pi pi-id-card text-900 mr-3"></i>
+          <div class="flex flex-column"><span class="text-900 font-medium text-xl mb-1 line-height-1">CNH</span><span
+              class="text-600 line-height-3">Carteira de motorista</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="flex align-items-center justify-content-center">
+
+  <!-- Email -->
+  <div
+    *ngIf="customerValidationUIDTO.customer == null || customerValidationUIDTO.customer.emailValidated == null || customerValidationUIDTO.customer.emailValidated == false"
+    class="surface-section px-4 py-2 md:px-6 lg:px-8">
+
+    <div class="grid">
+      <div class="col-12 lg:col-12">
+
+        <div class="grid formgrid p-fluid">
+
+          <div class="field mb-4 col-12 md:col-12">
+            <label for="email" class="font-medium text-2xl">Email</label>
+
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">
+                <i class="pi pi-at"></i>
+              </span>
+              <input class="p-inputtext p-component p-element" 
+                [(ngModel)]="customerValidationUIDTO.customer.email"
+                id="email" 
+                type="text" 
+                pInputText placeholder="Informe o email para verificação" 
+                width="300px">
+            </div>
+
+            <button pbutton="" pripple="" label="Enviar código"
+              class="p-element p-ripple w-auto mt-3 p-button p-component" (click)="clickSendCode()">
+              <span class="p-button-label">Enviar código</span>
+              <span class="p-ink"></span>
+            </button>
+
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

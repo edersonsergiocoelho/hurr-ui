@@ -12,8 +12,6 @@ export class HomeSearchCarsComponent implements OnInit {
 
   homeSearchCarsUIDTO: HomeSearchCarsUIDTO;
 
-  @Input() divHomeVisible: boolean = true;
-  @Output() divHomeVisibleChange = new EventEmitter<boolean>();
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef<HTMLInputElement>;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -22,8 +20,6 @@ export class HomeSearchCarsComponent implements OnInit {
               private homeUIService: HomeUIService) { }
 
   ngOnInit() {
-
-    debugger;
 
     this.resetRegisterForm();
 
@@ -60,8 +56,6 @@ export class HomeSearchCarsComponent implements OnInit {
           if (status === 'OK' && results && results.length > 0) {
             this.homeSearchCarsUIDTO.place = results[0];
 
-            this.homeUIService.updateDivVisibility(false);
-
             const navigationExtras: NavigationExtras = {
               state: {
                 place: JSON.stringify(results[0]),
@@ -90,8 +84,6 @@ export class HomeSearchCarsComponent implements OnInit {
     if (this.homeSearchCarsUIDTO.place == null) {
       this.getCurrentLocation();
     } else {
-
-      this.homeUIService.updateDivVisibility(false);
 
       const navigationExtras: NavigationExtras = {
         state: {

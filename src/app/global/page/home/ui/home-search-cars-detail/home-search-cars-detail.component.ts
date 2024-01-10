@@ -13,6 +13,9 @@ import { VehicleBrandService } from 'src/app/page/admin/vehicle-brand/service/ve
 import { VehicleCategoryService } from 'src/app/page/admin/vehicle-category/service/vehicle-category.service';
 import { VehicleModelService } from 'src/app/page/admin/vehicle-model/service/vehicle-model.service';
 import { HomeUIService } from '../../service/home-ui/home-ui.service';
+import { MessageService } from 'primeng/api';
+import { CustomerVehicleReview } from '../../../customer-vehicle-review/entity/customer-vehicle-review.entity';
+import { CustomerVehicleReviewService } from '../../../customer-vehicle-review/service/customer-vehicle-review.service';
 
 const directionsService = new google.maps.DirectionsService();
 
@@ -59,7 +62,11 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
               private ngZone: NgZone,
               private decimalPipe: DecimalPipe,
               private homeUIService: HomeUIService,
+
+              private messageService: MessageService,
+
               private customerVehicleService: CustomerVehicleService,
+              private customerVehicleReviewService: CustomerVehicleReviewService,
               private vehicleBrandService: VehicleBrandService,
               private vehicleCategoryService: VehicleCategoryService,
               private vehicleService: VehicleService,
@@ -70,7 +77,6 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
     if (state != null) {
 
       if (state.place == null) {
-        this.homeUIService.updateDivVisibility(false);
         this.router.navigate(['']);
       }
 
@@ -130,8 +136,8 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
         }
       }
 
-    } catch (error) {
-      //this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+    } catch (error: any) {
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
     }
 
     try {
@@ -145,8 +151,8 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
         }
       }
 
-    } catch (error) {
-      //this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+    } catch (error: any) {
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
     }
 
     if (this.place && this.place.formatted_address) {
@@ -159,8 +165,8 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
           this.homeSearchCarsDetailUIDTO.placeLocationLatitude = location.lat;
           this.homeSearchCarsDetailUIDTO.placeLocationLongitude = location.lng;
         }
-      } catch (error) {
-        console.error('Erro:', error);
+      } catch (error: any) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
       }
 
       this.search();
@@ -205,7 +211,7 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
     );
   }
 
-  search() {
+  async search() {
 
     this.initializeMap();
     
@@ -239,20 +245,52 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
     searchCustomerVehicle.cityName = cityName;
 
     this.customerVehicleService.searchCustomerVehicles(searchCustomerVehicle).subscribe(
-      (response) => {
+      async (response) => {
         this.homeSearchCarsDetailUIDTO.customerVehicles = response.body || [];
+    
+        for (const customerVehicle of this.homeSearchCarsDetailUIDTO.customerVehicles) {
+          try {
+            const resultCVRFindAllByCustomerVehicleId = await firstValueFrom(this.customerVehicleReviewService.findAllByCustomerVehicleId(customerVehicle.customerVehicleId).pipe(first()));
+    
+            if (resultCVRFindAllByCustomerVehicleId.status == 200) {
+              if (resultCVRFindAllByCustomerVehicleId.body != null) {
+                customerVehicle.customersVehiclesReviews = resultCVRFindAllByCustomerVehicleId.body;
 
-        this.homeSearchCarsDetailUIDTO.customerVehicles.forEach((customerVehicle) => {
-
+                if (customerVehicle.customersVehiclesReviews.length > 0) {
+                  let totalRating = 0;
+                  for (const review of customerVehicle.customersVehiclesReviews) {
+                    totalRating += review.rating;
+                  }
+                  const averageRating = totalRating / customerVehicle.customersVehiclesReviews.length;
+        
+                  customerVehicle.averageRating = averageRating;
+                } else {
+                  customerVehicle.averageRating = null;
+                }
+              }
+            }
+          } catch (error: any) {
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+          }
+    
           const address = `${customerVehicle?.addresses[0]?.address?.streetAddress}, ${customerVehicle?.addresses[0]?.address?.number}, ${customerVehicle?.addresses[0]?.address?.city?.cityName}, ${customerVehicle?.addresses[0]?.address?.state?.stateName}`;
     
-          this.geocodeAddress(address, customerVehicle);
-        });
+          await this.geocodeAddress(address, customerVehicle);
+        }
       },
       (error) => {
         console.error(error);
       }
     );
+  }
+
+  getFilledStarsArray(rating: number): number[] {
+    return Array(rating).fill(0);
+  }
+
+  getEmptyStarsArray(rating: number): number[] {
+    const emptyStars = 5 - rating;
+    return Array(emptyStars).fill(0);
   }
 
   geocodeAddress(address: string, customerVehicle: any) {

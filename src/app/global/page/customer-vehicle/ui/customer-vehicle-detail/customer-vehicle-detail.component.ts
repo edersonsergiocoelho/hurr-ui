@@ -226,8 +226,6 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
   onClickContinue() {
 
-    debugger;
-
     const token = this.sessionStorageService.getToken();
     
     if (token == null) {
@@ -244,8 +242,21 @@ export class CustomerVehicleDetailComponent implements OnInit {
       };
   
       this.router.navigate(['user/login'], navigationExtras);
-    } else{
+      
+    } else {
 
+      const navigationExtras: NavigationExtras = {
+        state: {
+          //customerVehicleId: customerVehicle.customerVehicleId,
+          //place: JSON.stringify(this.place),
+          //dateInit: this.dateInit,
+          //selectedHourInit: this.selectedHourInit,
+          //dateEnd: this.dateEnd,
+          //selectedHourEnd: this.selectedHourEnd,
+        }
+      };
+
+      this.router.navigate(['customer/customer-validation'], navigationExtras);
     }
   }
 }

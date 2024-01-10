@@ -12,10 +12,10 @@ export class SessionStorageService {
 
   signOut(): void {
     window.sessionStorage.clear();
+    window.location.reload();
   }
 
   public saveToken(token: string): void {
-    debugger;
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
@@ -26,7 +26,7 @@ export class SessionStorageService {
 
   public saveUser(user): void {
     window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user.body));
   }
 
   public getUser(): any {
