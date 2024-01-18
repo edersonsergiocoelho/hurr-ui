@@ -22,15 +22,9 @@
         </div>
       </div>
 
-      <div class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
-        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
-          <i class="text-2xl pi pi-image text-900 mr-3"></i>
-          <div class="flex flex-column"><span class="text-900 font-medium text-xl mb-1 line-height-1">Foto</span><span
-              class="text-600 line-height-3">Foto do perfil</span></div>
-        </div>
-      </div>
-
-      <div class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent">
+      <!-- Celular -->
+      <div *ngIf="customerValidationUIDTO.customer == null || customerValidationUIDTO.customer.phoneValidated == null || customerValidationUIDTO.customer.phoneValidated == false" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
         <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
           <i class="text-2xl pi pi-phone text-900 mr-3"></i>
           <div class="flex flex-column"><span
@@ -39,11 +33,65 @@
         </div>
       </div>
 
-      <div class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
-        <div class="flex align-items-start p-4">
-          <i class="text-2xl pi pi-id-card text-900 mr-3"></i>
-          <div class="flex flex-column"><span class="text-900 font-medium text-xl mb-1 line-height-1">CNH</span><span
+      <div *ngIf="customerValidationUIDTO.customer != null && customerValidationUIDTO.customer.phoneValidated == true" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Celular</span><span
+              class="text-600 line-height-3">Número do Celular</span></div>
+        </div>
+      </div>
+
+      <!-- Carteira de motorista -->
+      <div *ngIf="customerValidationUIDTO.customer == null || customerValidationUIDTO.customer.driverLicenseValidated == null || customerValidationUIDTO.customer.driverLicenseValidated == false" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">CNH</span><span
               class="text-600 line-height-3">Carteira de motorista</span></div>
+        </div>
+      </div>
+
+      <div *ngIf="customerValidationUIDTO.customer != null && customerValidationUIDTO.customer.driverLicenseValidated == true" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">CNH</span><span
+              class="text-600 line-height-3">Carteira de motorista</span></div>
+        </div>
+      </div>
+
+      <!-- Foto do perfil -->
+      <div *ngIf="customerValidationUIDTO.user == null || customerValidationUIDTO.user.photoValidated == null || customerValidationUIDTO.user.photoValidated == false && customerValidationUIDTO.fileApproved == null" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Foto</span><span
+              class="text-600 line-height-3">Foto do perfil</span></div>
+        </div>
+      </div>
+
+      <div *ngIf="customerValidationUIDTO.user == null || customerValidationUIDTO.user.photoValidated == null || customerValidationUIDTO.user.photoValidated == false && customerValidationUIDTO.fileApproved.approvedBy == null" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-yellow-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Foto</span><span
+              class="text-600 line-height-3">Foto do perfil</span></div>
+        </div>
+      </div>
+
+      <div *ngIf="customerValidationUIDTO.user != null && customerValidationUIDTO.user.photoValidated == true" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Foto</span><span
+              class="text-600 line-height-3">Foto do perfil</span></div>
         </div>
       </div>
 
@@ -71,25 +119,193 @@
                 <i class="pi pi-at"></i>
               </span>
               <input class="p-inputtext p-component p-element" 
-                [(ngModel)]="customerValidationUIDTO.customer.email"
+                [(ngModel)]="customerValidationUIDTO.email"
                 id="email" 
                 type="text" 
                 pInputText placeholder="Informe o email para verificação" 
-                width="300px">
+                width="300px"
+                [disabled]="customerValidationUIDTO.sendEmailVerificationCode">
             </div>
 
             <button pbutton="" pripple="" label="Enviar código"
-              class="p-element p-ripple w-auto mt-3 p-button p-component" (click)="clickSendCode()">
+              class="p-element p-ripple w-auto mt-3 p-button p-component" (click)="clickEmailVerificationCode()">
               <span class="p-button-label">Enviar código</span>
               <span class="p-ink"></span>
             </button>
 
           </div>
+
+          <div *ngIf="customerValidationUIDTO.sendEmailVerificationCode == true" class="field mb-4 col-12 md:col-12">
+            <label for="emailVerificationCode" class="font-medium text-2xl">Informe o código enviado no email</label>
+
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">
+                <i class="pi pi-at"></i>
+              </span>
+              <input class="p-inputtext p-component p-element" 
+                [(ngModel)]="customerValidationUIDTO.emailVerificationCode"
+                id="emailVerificationCode" 
+                type="text" 
+                pInputText placeholder="Informe o código para verificação" 
+                width="300px">
+            </div>
+
+            <button pbutton="" pripple="" label="Validar código"
+              class="p-element p-ripple w-auto mt-3 p-button p-component" (click)="clickEmailValidateCode()">
+              <span class="p-button-label">Validar código</span>
+              <span class="p-ink"></span>
+            </button>
+
+          </div>
+
         </div>
 
 
       </div>
 
+    </div>
+
+  </div>
+
+  <!-- Celular -->
+  <div
+    *ngIf="customerValidationUIDTO.customer == null || customerValidationUIDTO.customer.phoneValidated == null || customerValidationUIDTO.customer.phoneValidated == false"
+    class="surface-section px-4 py-2 md:px-6 lg:px-8">
+
+    <div class="formgrid grid">
+
+      <div class="field col">
+
+        <label for="ddi" class="font-medium text-2xl">DDI</label>
+
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-at"></i>
+          </span>
+          <input class="p-inputtext p-component p-element"
+                  [(ngModel)]="customerValidationUIDTO.ddi"
+                  id="ddi"
+                  type="text"
+                  pInputText placeholder="Informe o DDI"
+                  pTooltip="Insira o DDI do número do celular para verificação, colocar o DDI com o + por exemplo se tiver no Brasil +55" tooltipPosition="top"
+                  [maxLength]="4"
+                  [disabled]="customerValidationUIDTO.sendPhoneVerificationCode"
+                  style="width: 10px;">
+        </div>
+
+      </div>
+
+      <div class="field col">
+
+        <label for="phone" class="font-medium text-2xl">Celular</label>
+
+        <div class="p-inputgroup">
+
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-at"></i>
+          </span>
+          <input class="p-inputtext p-component p-element" 
+            [(ngModel)]="customerValidationUIDTO.phone"
+            id="phone" 
+            type="text" 
+            pInputText placeholder="Informe o celular para verificação" 
+            pTooltip="Insira o número do celular para verificação, colocar o número com o DDD + Celular, por exemplo: 11999999999" tooltipPosition="top"
+            maxlength="11"
+            style="width: 260px;"
+            [disabled]="customerValidationUIDTO.sendPhoneVerificationCode">
+
+        </div>
+
+      </div>
+
+      <div class="field mb-4 col-12 md:col-12">
+
+        <div class="p-inputgroup">
+          <button pbutton="" pripple="" label="Enviar código SMS"
+            class="p-element p-ripple w-auto mt-3 p-button p-component p-button-info" (click)="clickPhoneVerificationCodeSMS()">
+            <span class="p-button-label">Enviar código SMS</span>
+            <span class="pi pi-phone" style="padding-left: 10px;"></span>
+          </button>
+        </div>
+
+        <!--
+        <div class="p-inputgroup">
+          <button pbutton="" pripple="" label="Enviar código Telegram"
+            class="p-element p-ripple w-auto mt-3 p-button p-component" (click)="clickSendCodeTelegram()">
+            <span class="p-button-label">Enviar código Telegram</span>
+            <span class="pi pi-telegram" style="padding-left: 10px;"></span>
+          </button>
+        </div>
+        -->
+
+        <div class="p-inputgroup">
+          <button pbutton="" pripple="" label="Enviar código WhatsApp"
+            class="p-element p-ripple w-auto mt-3 p-button p-component p-button-success" (click)="clickPhoneVerificationCodeWhatsApp()">
+            <span class="p-button-label">Enviar código WhatsApp</span>
+            <span class="pi pi-whatsapp" style="padding-left: 10px;"></span>
+          </button>
+        </div>
+
+      </div>
+
+      <div *ngIf="customerValidationUIDTO.sendPhoneVerificationCode == true" class="field mb-4 col-12 md:col-12">
+        <label for="phoneVerificationCode" class="font-medium text-2xl">Informe o código enviado no celular</label>
+
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-at"></i>
+          </span>
+          <input class="p-inputtext p-component p-element" 
+            [(ngModel)]="customerValidationUIDTO.phoneVerificationCode"
+            id="phoneVerificationCode" 
+            type="text" 
+            pInputText placeholder="Informe o código para verificação" 
+            width="300px">
+        </div>
+
+        <button pbutton="" pripple="" label="Validar código"
+          class="p-element p-ripple w-auto mt-3 p-button p-component" (click)="clickPhoneValidateCode()">
+          <span class="p-button-label">Validar código</span>
+          <span class="p-ink"></span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Foto do perfil -->
+  <div
+    *ngIf="customerValidationUIDTO.user == null || customerValidationUIDTO.user.photoValidated == null || customerValidationUIDTO.user.photoValidated == false && customerValidationUIDTO.fileApproved == null"
+    class="surface-section px-4 py-2 md:px-6 lg:px-8">
+
+    <div class="formgrid grid">
+      <div class="field col">
+
+        <p-fileUpload #fileUpload name="file" [customUpload]="true" (uploadHandler)="uploadHandler($event)" [multiple]="false" accept="image/*" [maxFileSize]="2000000">
+          <ng-template pTemplate="content">
+            <ul *ngIf="customerValidationUIDTO.uploadedFiles != null && customerValidationUIDTO.uploadedFiles.length">
+              <li *ngFor="let file of customerValidationUIDTO.uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="customerValidationUIDTO.fileApproved.approvedBy == null"
+    class="surface-section px-4 py-2 md:px-6 lg:px-8">
+
+    <div class="formgrid grid">
+      <div class="field col">
+
+        <h1>Aguardando aprovação...</h1>
+        <label>O processo ainda está em aprovação aguarde até 3 dias úteis.</label>
+
+      </div>
     </div>
 
   </div>

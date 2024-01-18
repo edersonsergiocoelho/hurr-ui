@@ -21,6 +21,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     HomeRoutingModule,
 
+    NgxSpinnerModule,
     GoogleMapsModule,
 
     ButtonModule,
