@@ -39,8 +39,48 @@ export class CustomerService {
     );
   }
 
-  sendCode(customer: Customer): Observable<HttpResponse<Customer>> {
-    return this.http.post<Customer>(`${this.apiUrl}/sendCode`, customer, { observe: 'response' }).pipe(
+  emailVerificationCode(customer: Customer): Observable<HttpResponse<Customer>> {
+    return this.http.post<Customer>(`${this.apiUrl}/emailVerificationCode`, customer, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Customer>) => {
+        return response;
+      })
+    );
+  }
+
+  emailValidateCode(customer: Customer): Observable<HttpResponse<Customer>> {
+    return this.http.post<Customer>(`${this.apiUrl}/emailValidateCode`, customer, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Customer>) => {
+        return response;
+      })
+    );
+  }
+
+  phoneVerificationCodeSMS(customer: Customer): Observable<HttpResponse<Customer>> {
+    return this.http.post<Customer>(`${this.apiUrl}/phoneVerificationCodeSMS`, customer, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Customer>) => {
+        return response;
+      })
+    );
+  }
+
+  phoneVerificationCodeTelegram(customer: Customer): Observable<HttpResponse<Customer>> {
+    return this.http.post<Customer>(`${this.apiUrl}/phoneVerificationCodeTelegram`, customer, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Customer>) => {
+        return response;
+      })
+    );
+  }
+
+  phoneVerificationCodeWhatsApp(customer: Customer): Observable<HttpResponse<Customer>> {
+    return this.http.post<Customer>(`${this.apiUrl}/phoneVerificationCodeWhatsApp`, customer, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Customer>) => {
+        return response;
+      })
+    );
+  }
+
+  phoneValidateCode(customer: Customer): Observable<HttpResponse<Customer>> {
+    return this.http.post<Customer>(`${this.apiUrl}/phoneValidateCode`, customer, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })

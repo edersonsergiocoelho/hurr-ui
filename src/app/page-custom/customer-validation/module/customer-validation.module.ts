@@ -8,7 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerValidationComponent } from '../ui/customer-validation/customer-validation.component';
 
 import { ButtonModule } from 'primeng/button';
+import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { InputTextModule } from 'primeng/inputtext';
 
     // PrimeNG
     ButtonModule,
+    FileUploadModule, 
     InputTextModule,
+    TooltipModule,
   ]
 })
 export class CustomerValidationModule { }

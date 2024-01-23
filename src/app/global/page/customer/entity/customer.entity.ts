@@ -14,7 +14,9 @@ export class Customer {
   driverLicenseExpirationDate: Date;
   customerType: string;
   emailValidated: boolean;
+  emailVerificationCode: string;
   phoneValidated: boolean;
+  phoneVerificationCode: string;
   driverLicenseValidated: boolean;
   createdDate: string;
   modifiedDate: string;

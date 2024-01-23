@@ -32,4 +32,13 @@ export class UserService {
       observe: 'response',
     });
   }
+
+  uploadFile(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.httpClient.post<any>(`${environment.api}/api/user/upload`, formData, {
+      observe: 'response',
+    });
+  }
 }

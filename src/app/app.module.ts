@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
@@ -16,6 +16,7 @@ import { authInterceptorProviders } from './core/auth/interceptor/auth.intercept
 import { PageAdminModule } from './page/admin/module/page-admin.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { PageCustomModule } from './page-custom/module/page-custom.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PageCustomModule } from './page-custom/module/page-custom.module';
     HttpClientJsonpModule,
 
     GoogleMapsModule,
+    NgxSpinnerModule,
 
     GlobalPageModule,
     GlobalTemplateModule,
@@ -41,6 +43,7 @@ import { PageCustomModule } from './page-custom/module/page-custom.module';
     PageAdminModule
   ],
   providers: [authInterceptorProviders],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
