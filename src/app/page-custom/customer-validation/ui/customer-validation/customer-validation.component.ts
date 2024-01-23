@@ -20,6 +20,7 @@ export class CustomerValidationComponent implements OnInit {
 
   customerValidationUIDTO: CustomerValidationUUIDTO;
 
+  @ViewChild(FileUpload) fileUploadDriverLicense: FileUpload;
   @ViewChild(FileUpload) fileUpload: FileUpload;
 
   constructor(private messageService: MessageService,
@@ -109,6 +110,38 @@ export class CustomerValidationComponent implements OnInit {
       }
     }
 
+    // Carteira de motorista
+    if (this.customerValidationUIDTO.customer.driverLicenseFileId != null) {
+
+      try {
+
+        const resultFileApprovedFindByFileId = await firstValueFrom(this.fileApprovedService.findByFileId(this.customerValidationUIDTO.customer.driverLicenseFileId).pipe(first()));
+
+        if (resultFileApprovedFindByFileId.status == 200) {
+
+          if (resultFileApprovedFindByFileId.body != null) {
+            this.customerValidationUIDTO.fileApprovedDriverLicense = resultFileApprovedFindByFileId.body;
+          }
+        }
+
+      } catch (error: any) {
+
+        if (error.status == 404) {
+
+          this.messageService.add({ severity: 'warn', 
+                                    summary: 'Não encontrado dados da carteira de motorista.', 
+                                    detail: 'Não encontrado dados da carteira de motorista, favor seguir os passos para a validação.',
+                                    life: 5000 
+                                  });
+        }
+
+        if (error.status == 500) {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+        }
+      }
+    }
+
+    // Foto do perfil
     if (this.customerValidationUIDTO.user.fileId != null) {
 
       try {
@@ -118,7 +151,7 @@ export class CustomerValidationComponent implements OnInit {
         if (resultFileApprovedFindByFileId.status == 200) {
 
           if (resultFileApprovedFindByFileId.body != null) {
-            this.customerValidationUIDTO.fileApproved = resultFileApprovedFindByFileId.body;
+            this.customerValidationUIDTO.fileApprovedProfilePicture = resultFileApprovedFindByFileId.body;
           }
         }
 
@@ -127,8 +160,8 @@ export class CustomerValidationComponent implements OnInit {
         if (error.status == 404) {
 
           this.messageService.add({ severity: 'warn', 
-                                    summary: 'Não encontrado dados do cliente.', 
-                                    detail: 'Não encontrado dados do cliente, favor seguir os passos para a validação.',
+                                    summary: 'Não encontrado dados da foto do perfil.', 
+                                    detail: 'Não encontrado dados da foto do perfil, favor seguir os passos para a validação.',
                                     life: 5000 
                                   });
         }
@@ -315,7 +348,39 @@ export class CustomerValidationComponent implements OnInit {
     });
   }
 
-  uploadHandler(event: any) {
+  uploadHandlerDriverLicense(event: any) {
+
+    this.fileUpload.disabled = true;
+
+    this.customerService.uploadFile(event.files[0]).pipe(first()).subscribe({
+      next: (data: any) => {
+
+        this.messageService.add({ severity: 'info', 
+                                  summary: 'Carteira de motorista enviada com sucesso.', 
+                                  detail: 'Carteira de motorista enviada com sucesso, aguarde a aprovação por parte de nossa equipe.',
+                                  life: 10000 });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 10000);
+
+      },
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao enviar Carteira de motorista, tente novamente mais tarde.' });
+
+        this.ngxSpinnerService.hide();
+      },
+      complete: () => {
+        this.ngxSpinnerService.hide();
+      }
+    });
+  }
+
+  toggleApprovalMessageDriverLicense() {
+    this.customerValidationUIDTO.showApprovalMessageDriverLicense = !this.customerValidationUIDTO.showApprovalMessageDriverLicense;
+  }
+
+  uploadHandlerProfilePicture(event: any) {
 
     this.fileUpload.disabled = true;
 
@@ -341,5 +406,9 @@ export class CustomerValidationComponent implements OnInit {
         this.ngxSpinnerService.hide();
       }
     });
+  }
+
+  toggleApprovalMessageProfilePicture() {
+    this.customerValidationUIDTO.showApprovalMessageProfilePicture = !this.customerValidationUIDTO.showApprovalMessageProfilePicture;
   }
 }

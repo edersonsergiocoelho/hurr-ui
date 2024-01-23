@@ -1,0 +1,12 @@
+{
+  "button_clean_Generic": "Limpar",
+  "button_search_Generic": "Pesquisar",
+
+  "span_button_label_clean_Generic": "Limpar",
+  "span_button_label_search_Generic": "Pesquisar",
+
+  "span_button_label_new_Generic": "Novo",
+  "span_button_label_save_Generic": "Salvar",
+  "span_button_label_update_Generic": "Editar",
+  "span_button_label_delete_Generic": "Deletar"
+}

@@ -6,17 +6,28 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
+import { HttpBackend, HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+
+import { authInterceptorProviders } from './core/auth/interceptor/auth.interceptor';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
+
+// Page
 import { GlobalPageModule } from './global/page/module/global-page.module';
 import { GlobalTemplateModule } from './global/template/module/global-template.module';
 import { PageModule } from './page/module/page.module';
-
-import { authInterceptorProviders } from './core/auth/interceptor/auth.interceptor';
 import { PageAdminModule } from './page/admin/module/page-admin.module';
-import { GoogleMapsModule } from '@angular/google-maps';
 import { PageCustomModule } from './page-custom/module/page-custom.module';
-import { NgxSpinnerModule } from 'ngx-spinner';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(_httpBackend: HttpBackend) {
+  return new MultiTranslateHttpLoader(_httpBackend,
+  ['/assets/i18n/generic/button/',
+  '/assets/i18n/role/']);
+}
 
 @NgModule({
   declarations: [
@@ -32,6 +43,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     HttpClientJsonpModule,
 
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpBackend]
+      }
+    }),
+
     GoogleMapsModule,
     NgxSpinnerModule,
 
@@ -39,8 +58,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     GlobalTemplateModule,
 
     PageModule,
-    PageCustomModule,
-    PageAdminModule
+    PageAdminModule,
+    PageCustomModule
   ],
   providers: [authInterceptorProviders],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

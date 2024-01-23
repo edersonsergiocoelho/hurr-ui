@@ -18,6 +18,7 @@ export class Customer {
   phoneValidated: boolean;
   phoneVerificationCode: string;
   driverLicenseValidated: boolean;
+  driverLicenseFileId: string;
   createdDate: string;
   modifiedDate: string;
   enabled: boolean;

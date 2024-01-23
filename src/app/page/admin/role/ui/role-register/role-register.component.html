@@ -1,0 +1,90 @@
+<form novalidate #roleRegisterForm="ngForm" (ngSubmit)="saveRole()">
+  <h3>{{'title_RoleRegister' | translate}}</h3>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-12 md:col-6 field">
+      <label for="roleId" class="formTitle">{{'label_role_id_RoleRegister' | translate}}</label>
+      <input id="roleId" type="text" pInputText 
+        placeholder="{{'placeholder_role_id_RoleRegister' | translate}}" 
+        [(ngModel)]="roleRegisterUIDTO.roleDTO.roleId" name="roleId" autocomplete="off" disabled />
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="name" class="formTitle">{{'label_role_name_RoleRegister' | translate}}</label>
+      <input id="name" type="text" pInputText 
+        placeholder="{{'placeholder_role_name_RoleRegister' | translate}}"
+        [(ngModel)]="roleRegisterUIDTO.roleDTO.roleName" name="roleName" autocomplete="off" required />
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="createdDate" class="formTitle">{{'label_created_date_RoleRegister' | translate}}</label>
+      <p-calendar [(ngModel)]="roleRegisterUIDTO.roleDTO.createdDate" 
+        placeholder="{{'placeholder_created_date_RoleRegister' | translate}}"
+        name="createdDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="modifiedDate" class="formTitle">{{'label_modified_date_RoleRegister' | translate}}</label>
+      <p-calendar 
+        placeholder="{{'placeholder_modified_date_RoleRegister' | translate}}"
+        [(ngModel)]="roleRegisterUIDTO.roleDTO.modifiedDate" name="modifiedDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" style="display: flex; flex-direction: column;">
+      <label for="enabled" class="formTitle">{{'label_enabled_RoleRegister' | translate}}</label>
+      <p-inputSwitch [(ngModel)]="roleRegisterUIDTO.roleDTO.enabled" name="enabled"></p-inputSwitch>
+    </div>
+
+    <div class="col-12 flex flex-row justify-content-left py-0">
+
+      <div *ngIf="roleRegisterUIDTO?.roleDTO?.roleId" class="md:col-3 mt-4 pt-1 field" >
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-secondary md:w-10rem"
+          type="button"
+          (click)="resetRegisterForm()">
+          <span class="p-button-label">
+            {{'span_button_label_new_Generic' | translate}}
+          </span>
+          <i class="pi pi-file"></i>
+        </button>
+      </div>
+
+      <div *ngIf="roleRegisterUIDTO?.roleDTO?.roleId == null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton  type="submit" class="p-ripple p-element w-auto p-button p-component md:w-10rem"
+          [disabled]="roleRegisterForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_save_Generic' | translate}}
+          </span>
+          <i class="pi pi-save"></i>
+        </button>
+      </div>
+
+      <div *ngIf="roleRegisterUIDTO?.roleDTO?.roleId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-info md:w-10rem"
+          type="button"
+          severity="info"
+          (click)="updateRole()"
+          [disabled]="roleRegisterForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_update_Generic' | translate}}
+          </span>
+          <i class="pi pi-file-edit"></i>
+        </button>
+      </div>
+
+      <div *ngIf="roleRegisterUIDTO?.roleDTO?.roleId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-danger md:w-10rem"
+          type="button"
+          (click)="deleteRole()"
+          [disabled]="roleRegisterForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_delete_Generic' | translate}}
+          </span>
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</form>
