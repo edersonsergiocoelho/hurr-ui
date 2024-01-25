@@ -11,11 +11,11 @@ export class CustomerService {
 
   private readonly apiUrl = `${environment.api}/customer`;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) {}
 
   findById(id: string): Observable<HttpResponse<Customer>> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Customer>(url, { observe: 'response' }).pipe(
+    return this.httpClient.get<Customer>(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -24,7 +24,7 @@ export class CustomerService {
 
   findByEmail(email: string): Observable<HttpResponse<Customer>> {
     const url = `${this.apiUrl}/by/email/${email}`;
-    return this.http.get<Customer>(url, { observe: 'response' }).pipe(
+    return this.httpClient.get<Customer>(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -32,7 +32,7 @@ export class CustomerService {
   }
 
   findAll(): Observable<HttpResponse<Customer[]>> {
-    return this.http.get<Customer[]>(this.apiUrl, { observe: 'response' }).pipe(
+    return this.httpClient.get<Customer[]>(this.apiUrl, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer[]>) => {
         return response;
       })
@@ -40,7 +40,7 @@ export class CustomerService {
   }
 
   emailVerificationCode(customer: Customer): Observable<HttpResponse<Customer>> {
-    return this.http.post<Customer>(`${this.apiUrl}/emailVerificationCode`, customer, { observe: 'response' }).pipe(
+    return this.httpClient.post<Customer>(`${this.apiUrl}/emailVerificationCode`, customer, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -48,7 +48,7 @@ export class CustomerService {
   }
 
   emailValidateCode(customer: Customer): Observable<HttpResponse<Customer>> {
-    return this.http.post<Customer>(`${this.apiUrl}/emailValidateCode`, customer, { observe: 'response' }).pipe(
+    return this.httpClient.post<Customer>(`${this.apiUrl}/emailValidateCode`, customer, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -56,7 +56,7 @@ export class CustomerService {
   }
 
   phoneVerificationCodeSMS(customer: Customer): Observable<HttpResponse<Customer>> {
-    return this.http.post<Customer>(`${this.apiUrl}/phoneVerificationCodeSMS`, customer, { observe: 'response' }).pipe(
+    return this.httpClient.post<Customer>(`${this.apiUrl}/phoneVerificationCodeSMS`, customer, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -64,7 +64,7 @@ export class CustomerService {
   }
 
   phoneVerificationCodeTelegram(customer: Customer): Observable<HttpResponse<Customer>> {
-    return this.http.post<Customer>(`${this.apiUrl}/phoneVerificationCodeTelegram`, customer, { observe: 'response' }).pipe(
+    return this.httpClient.post<Customer>(`${this.apiUrl}/phoneVerificationCodeTelegram`, customer, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -72,7 +72,7 @@ export class CustomerService {
   }
 
   phoneVerificationCodeWhatsApp(customer: Customer): Observable<HttpResponse<Customer>> {
-    return this.http.post<Customer>(`${this.apiUrl}/phoneVerificationCodeWhatsApp`, customer, { observe: 'response' }).pipe(
+    return this.httpClient.post<Customer>(`${this.apiUrl}/phoneVerificationCodeWhatsApp`, customer, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -80,7 +80,18 @@ export class CustomerService {
   }
 
   phoneValidateCode(customer: Customer): Observable<HttpResponse<Customer>> {
-    return this.http.post<Customer>(`${this.apiUrl}/phoneValidateCode`, customer, { observe: 'response' }).pipe(
+    return this.httpClient.post<Customer>(`${this.apiUrl}/phoneValidateCode`, customer, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Customer>) => {
+        return response;
+      })
+    );
+  }
+
+  uploadFile(file: File): Observable<HttpResponse<Customer>> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.httpClient.post<Customer>(`${this.apiUrl}/upload`, formData, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -88,7 +99,7 @@ export class CustomerService {
   }
 
   save(customer: Customer): Observable<HttpResponse<Customer>> {
-    return this.http.post<Customer>(this.apiUrl, customer, { observe: 'response' }).pipe(
+    return this.httpClient.post<Customer>(this.apiUrl, customer, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -97,7 +108,7 @@ export class CustomerService {
 
   update(customer: Customer): Observable<HttpResponse<Customer>> {
     const url = `${this.apiUrl}/${customer.customerId}`;
-    return this.http.put<Customer>(url, customer, { observe: 'response' }).pipe(
+    return this.httpClient.put<Customer>(url, customer, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
@@ -106,7 +117,7 @@ export class CustomerService {
 
   delete(id: string): Observable<HttpResponse<void> | null> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<void>(url, { observe: 'response' }).pipe(
+    return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(
       catchError((error: any) => {
         if (error.status === 404) {
           return of(null);

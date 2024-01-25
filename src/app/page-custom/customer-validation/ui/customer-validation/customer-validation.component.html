@@ -44,8 +44,18 @@
       </div>
 
       <!-- Carteira de motorista -->
-      <div *ngIf="customerValidationUIDTO.customer == null || customerValidationUIDTO.customer.driverLicenseValidated == null || customerValidationUIDTO.customer.driverLicenseValidated == false" 
+      <div *ngIf="customerValidationUIDTO.customer == null || customerValidationUIDTO.customer.driverLicenseValidated == null || customerValidationUIDTO.customer.driverLicenseValidated == false && customerValidationUIDTO.fileApprovedDriverLicense == null" 
         class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">CNH</span><span
+              class="text-600 line-height-3">Carteira de motorista</span></div>
+        </div>
+      </div>
+
+      <div (click)="toggleApprovalMessageDriverLicense()" *ngIf="customerValidationUIDTO.customer == null || customerValidationUIDTO.customer.driverLicenseValidated == null || customerValidationUIDTO.customer.driverLicenseValidated == false && customerValidationUIDTO.fileApprovedDriverLicense != null && customerValidationUIDTO.fileApprovedDriverLicense.approvedBy == null" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-yellow-500">
         <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
           <i class="text-2xl pi pi-phone text-900 mr-3"></i>
           <div class="flex flex-column"><span
@@ -65,7 +75,7 @@
       </div>
 
       <!-- Foto do perfil -->
-      <div *ngIf="customerValidationUIDTO.user == null || customerValidationUIDTO.user.photoValidated == null || customerValidationUIDTO.user.photoValidated == false && customerValidationUIDTO.fileApproved == null" 
+      <div *ngIf="customerValidationUIDTO.user == null || customerValidationUIDTO.user.photoValidated == null || customerValidationUIDTO.user.photoValidated == false && customerValidationUIDTO.fileApprovedProfilePicture == null" 
         class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
         <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
           <i class="text-2xl pi pi-phone text-900 mr-3"></i>
@@ -75,7 +85,7 @@
         </div>
       </div>
 
-      <div *ngIf="customerValidationUIDTO.user == null || customerValidationUIDTO.user.photoValidated == null || customerValidationUIDTO.user.photoValidated == false && customerValidationUIDTO.fileApproved.approvedBy == null" 
+      <div (click)="toggleApprovalMessageProfilePicture()" *ngIf="customerValidationUIDTO.user == null || customerValidationUIDTO.user.photoValidated == null || customerValidationUIDTO.user.photoValidated == false && customerValidationUIDTO.fileApprovedProfilePicture != null && customerValidationUIDTO.fileApprovedProfilePicture.approvedBy == null" 
         class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-yellow-500">
         <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
           <i class="text-2xl pi pi-phone text-900 mr-3"></i>
@@ -275,15 +285,15 @@
 
   </div>
 
-  <!-- Foto do perfil -->
-  <div
-    *ngIf="customerValidationUIDTO.user == null || customerValidationUIDTO.user.photoValidated == null || customerValidationUIDTO.user.photoValidated == false && customerValidationUIDTO.fileApproved == null"
+    <!-- Carteira de motorista -->
+    <div
+    *ngIf="customerValidationUIDTO.customer == null || customerValidationUIDTO.customer.driverLicenseValidated == null || customerValidationUIDTO.customer.driverLicenseValidated == false && customerValidationUIDTO.fileApprovedDriverLicense == null"
     class="surface-section px-4 py-2 md:px-6 lg:px-8">
 
     <div class="formgrid grid">
       <div class="field col">
 
-        <p-fileUpload #fileUpload name="file" [customUpload]="true" (uploadHandler)="uploadHandler($event)" [multiple]="false" accept="image/*" [maxFileSize]="2000000">
+        <p-fileUpload #fileUploadDriverLicense name="file" [customUpload]="true" (uploadHandler)="uploadHandlerDriverLicense($event)" [multiple]="false" accept="image/*" [maxFileSize]="2000000">
           <ng-template pTemplate="content">
             <ul *ngIf="customerValidationUIDTO.uploadedFiles != null && customerValidationUIDTO.uploadedFiles.length">
               <li *ngFor="let file of customerValidationUIDTO.uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
@@ -296,7 +306,48 @@
 
   </div>
 
-  <div *ngIf="customerValidationUIDTO.fileApproved.approvedBy == null"
+  <!--
+  <div *ngIf="customerValidationUIDTO.fileApprovedDriverLicense != null && customerValidationUIDTO.fileApprovedDriverLicense.approvedBy == null"
+  -->
+  <div *ngIf="customerValidationUIDTO.showApprovalMessageDriverLicense" 
+    class="surface-section px-4 py-2 md:px-6 lg:px-8">
+
+    <div class="formgrid grid">
+      <div class="field col">
+
+        <h1>Aguardando aprovação...</h1>
+        <label>O processo ainda está em aprovação aguarde até 3 dias úteis.</label>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Foto do perfil -->
+  <div
+    *ngIf="customerValidationUIDTO.user == null || customerValidationUIDTO.user.photoValidated == null || customerValidationUIDTO.user.photoValidated == false && customerValidationUIDTO.fileApprovedProfilePicture == null"
+    class="surface-section px-4 py-2 md:px-6 lg:px-8">
+
+    <div class="formgrid grid">
+      <div class="field col">
+
+        <p-fileUpload #fileUploadProfilePicture name="file" [customUpload]="true" (uploadHandler)="uploadHandlerProfilePicture($event)" [multiple]="false" accept="image/*" [maxFileSize]="2000000">
+          <ng-template pTemplate="content">
+            <ul *ngIf="customerValidationUIDTO.uploadedFiles != null && customerValidationUIDTO.uploadedFiles.length">
+              <li *ngFor="let file of customerValidationUIDTO.uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!--
+  <div *ngIf="customerValidationUIDTO.fileApprovedProfilePicture != null && customerValidationUIDTO.fileApprovedProfilePicture.approvedBy == null"
+  -->
+  <div *ngIf="customerValidationUIDTO.showApprovalMessageProfilePicture" 
     class="surface-section px-4 py-2 md:px-6 lg:px-8">
 
     <div class="formgrid grid">

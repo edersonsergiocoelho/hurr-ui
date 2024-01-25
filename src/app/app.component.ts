@@ -14,6 +14,6 @@ export class AppComponent {
   constructor (private router: Router,
                private themeService: ThemeService) {
 
-    this.themeService.switchTheme("bootstrap4-light-blue");
+    this.themeService.switchTheme("lara-light-purple");
   }
 }

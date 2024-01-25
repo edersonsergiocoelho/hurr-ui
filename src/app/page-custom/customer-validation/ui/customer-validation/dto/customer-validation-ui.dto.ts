@@ -4,6 +4,9 @@ import { User } from "src/app/page/user/entity/user.entity";
 
 export class CustomerValidationUUIDTO {
 
+  showApprovalMessageDriverLicense: boolean = false;
+  showApprovalMessageProfilePicture: boolean = false;
+
   email: string;
   emailVerificationCode: string;
   phoneVerificationCode: string;
@@ -17,6 +20,7 @@ export class CustomerValidationUUIDTO {
   uploadedFiles: any[] = [];
 
   customer: Customer;
-  fileApproved: FileApproved;
+  fileApprovedProfilePicture: FileApproved;
+  fileApprovedDriverLicense: FileApproved;
   user: User;
 }
