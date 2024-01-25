@@ -18,8 +18,6 @@ import { MessageService } from 'primeng/api';
 })
 export class RoleSearchComponent implements OnInit {
 
-  value: any;
-
   roleSearchUIDTO: RoleSearchUIDTO;
   roleSearchForm: NgForm;
 
@@ -91,8 +89,6 @@ export class RoleSearchComponent implements OnInit {
 
     let enabled: boolean | null = null;
 
-    debugger;
-    console.log(this.value)
     if (this.roleSearchUIDTO.enabledValue != null) {
       if (this.roleSearchUIDTO.enabledValue == 'ON') {
         enabled = true;

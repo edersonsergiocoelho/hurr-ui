@@ -12,3 +12,10 @@
   border-radius: 10px; /* Adiciona um raio de borda de 8px, criando cantos arredondados */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave para dar uma aparência de elevação */
 }
+
+#divH3 {
+  padding: 10px; /* Espaçamento interno (opcional) */
+  border-radius: 10px; /* Raio da borda para criar um efeito arredondado */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra (opcional) */
+  text-align: center;
+}
