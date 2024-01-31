@@ -1,0 +1,10 @@
+{
+  "no_connection_to_the_api_message_service_Generic": "Ops! Parece que estamos com dificuldades de conexão. Por favor, tente novamente mais tarde.",
+
+  "warn_message_service_Generic": "Alerta",
+  "error_message_service_Generic": "Erro",
+
+  "save_message_service_Generic": "Salvo Com Sucesso.",
+  "update_message_service_Generic": "Alterado Com Sucesso.",
+  "delete_message_service_Generic": "Deletado Com Sucesso."
+}

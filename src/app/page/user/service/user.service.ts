@@ -1,14 +1,24 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../entity/user.entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private httpClient: HttpClient) { 
+  private readonly apiUrl = `${environment.api}/api/user/me/all`;
+
+  constructor(private readonly httpClient: HttpClient) {}
+
+  findAll(): Observable<HttpResponse<User[]>> {
+    return this.httpClient.get<User[]>(this.apiUrl, { observe: 'response' }).pipe(
+      map((response: HttpResponse<User[]>) => {
+        return response;
+      })
+    );
   }
 
   signin(user: any) {

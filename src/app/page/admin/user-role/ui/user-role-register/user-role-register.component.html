@@ -1,0 +1,113 @@
+<form novalidate #userRoleRegisterForm="ngForm" (ngSubmit)="save()">
+  <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_UserRoleRegister' | translate}}</h3>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-12 md:col-6 field">
+      <label for="user" class="formTitle">{{'label_user_UserRoleRegister' | translate}}</label>
+      <p-dropdown [options]="userRoleRegisterUIDTO.users" [(ngModel)]="userRoleRegisterUIDTO.selectedUser" optionLabel="email" 
+        [filter]="true" filterBy="email" [showClear]="true" name="user"
+        placeholder="{{'placeholder_user_UserRoleRegister' | translate}}"
+        [required]="true">
+        <ng-template pTemplate="selectedItem">
+          <div class="flex align-items-center gap-2" *ngIf="userRoleRegisterUIDTO.selectedUser">
+            <div>{{ userRoleRegisterUIDTO.selectedUser.email }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-user pTemplate="item">
+          <div class="flex align-items-center gap-2">
+            <div>{{ user.email }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="role" class="formTitle">{{'label_role_UserRoleRegister' | translate}}</label>
+      <p-dropdown [options]="userRoleRegisterUIDTO.roles" [(ngModel)]="userRoleRegisterUIDTO.selectedRole" optionLabel="roleName" 
+        [filter]="true" filterBy="roleName" [showClear]="true" name="role"
+        placeholder="{{'placeholder_role_UserRoleRegister' | translate}}"
+        [required]="true">
+        <ng-template pTemplate="selectedItem">
+          <div class="flex align-items-center gap-2" *ngIf="userRoleRegisterUIDTO.selectedRole">
+            <div>{{ userRoleRegisterUIDTO.selectedRole.roleName }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-role pTemplate="item">
+          <div class="flex align-items-center gap-2">
+            <div>{{ role.roleName }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="createdDate" class="formTitle">{{'label_created_date_UserRoleRegister' | translate}}</label>
+      <p-calendar [(ngModel)]="userRoleRegisterUIDTO.userRoleDTO.createdDate" 
+        placeholder="{{'placeholder_created_date_UserRoleRegister' | translate}}"
+        name="createdDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="modifiedDate" class="formTitle">{{'label_modified_date_UserRoleRegister' | translate}}</label>
+      <p-calendar 
+        placeholder="{{'placeholder_modified_date_UserRoleRegister' | translate}}"
+        [(ngModel)]="userRoleRegisterUIDTO.userRoleDTO.modifiedDate" name="modifiedDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" style="display: flex; flex-direction: column;">
+      <label for="enabled" class="formTitle">{{'label_enabled_UserRoleRegister' | translate}}</label>
+      <p-inputSwitch [(ngModel)]="userRoleRegisterUIDTO.userRoleDTO.enabled" name="enabled"></p-inputSwitch>
+    </div>
+
+    <div class="col-12 flex flex-row justify-content-left py-0">
+
+      <div *ngIf="userRoleRegisterUIDTO?.userRoleDTO?.userRoleId" class="md:col-3 mt-4 pt-1 field" >
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-secondary md:w-10rem"
+          type="button"
+          (click)="resetRegisterForm()">
+          <span class="p-button-label">
+            {{'span_button_label_new_Generic' | translate}}
+          </span>
+          <i class="pi pi-file"></i>
+        </button>
+      </div>
+
+      <div *ngIf="userRoleRegisterUIDTO?.userRoleDTO?.userRoleId?.userId == null && userRoleRegisterUIDTO?.userRoleDTO?.userRoleId?.roleId == null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton type="submit" class="p-ripple p-element w-auto p-button p-component md:w-10rem"
+          [disabled]="userRoleRegisterForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_save_Generic' | translate}}
+          </span>
+          <i class="pi pi-save"></i>
+        </button>
+      </div>
+
+      <div *ngIf="userRoleRegisterUIDTO?.userRoleDTO?.userRoleId?.userId != null && userRoleRegisterUIDTO?.userRoleDTO?.userRoleId?.roleId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-info md:w-10rem"
+          type="button"
+          severity="info"
+          (click)="update()"
+          [disabled]="userRoleRegisterForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_update_Generic' | translate}}
+          </span>
+          <i class="pi pi-file-edit"></i>
+        </button>
+      </div>
+
+      <div *ngIf="userRoleRegisterUIDTO?.userRoleDTO?.userRoleId?.userId != null && userRoleRegisterUIDTO?.userRoleDTO?.userRoleId?.roleId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-danger md:w-10rem"
+          type="button"
+          (click)="delete()">
+          <span class="p-button-label">
+            {{'span_button_label_delete_Generic' | translate}}
+          </span>
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</form>

@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpBackend, HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { HttpBackend, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 import { authInterceptorProviders } from './core/auth/interceptor/auth.interceptor';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -25,8 +25,13 @@ import { PageCustomModule } from './page-custom/module/page-custom.module';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   return new MultiTranslateHttpLoader(_httpBackend,
-  ['/assets/i18n/generic/button/',
-  '/assets/i18n/role/']);
+  [
+  '/assets/i18n/generic/button/',
+  '/assets/i18n/generic/table/',
+  '/assets/i18n/generic/message/',
+  '/assets/i18n/role/',
+  '/assets/i18n/user-role/'
+  ]);
 }
 
 @NgModule({
