@@ -1,0 +1,29 @@
+{
+  "title_UserRoleSearch": "Pesquisa De User / Role",
+  "label_display_name_UserRoleSearch": "Nome",
+  "placeholder_display_name_UserRoleSearch": "Informe O Nome Do Usuário",
+  "label_email_UserRoleSearch": "Email",
+  "placeholder_email_UserRoleSearch": "Informe O Email Do Usuário",
+  "label_role_UserRoleSearch": "Role ID",
+  "placeholder_role_UserRoleSearch": "Informe A Role",
+
+  "table_header_display_name_UserRoleSearch": "Nome",
+  "table_header_email_UserRoleSearch": "Email",
+  "table_header_role_name_UserRoleSearch": "Role",
+  "table_header_enabled_UserRoleSearch": "Habilitado?",
+  
+  "title_UserRoleRegister": "Cadastro De User / Role",
+  "label_user_UserRoleRegister": "User ID",
+  "placeholder_user_UserRoleRegister": "Informe O Usuário",
+  "label_role_UserRoleRegister": "Role ID",
+  "placeholder_role_UserRoleRegister": "Informe A Role Do Usuário",
+  "label_created_date_UserRoleRegister": "Data De Criação",
+  "placeholder_created_date_UserRoleRegister": "Data De Criação Do Registro",
+  "label_modified_date_UserRoleRegister": "Data De Modificação",
+  "placeholder_modified_date_UserRoleRegister": "Data De Modificação Do Registro",
+  "label_enabled_UserRoleRegister": "Habilitado?",
+
+  "save_success_message_service_UserRoleRegister": "Registro User / Role Salvo Com Sucesso.",
+  "update_success_message_service_UserRoleRegister": "Registro User / Role Alterado Com Sucesso.",
+  "delete_success_message_service_UserRoleRegister": "Registro User / Role Deletado Com Sucesso."
+}
