@@ -1,8 +1,9 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FileApproved } from '../entity/file-approved.entity';
+import { FileApprovedSearchDTO } from '../dto/file-approved-search-dto.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,23 @@ export class FileApprovedService {
         return response;
       })
     );
+  }
+
+  searchPage(fileApprovedSearchDTO: FileApprovedSearchDTO, page: number = 0, size: number = 10, sortDir: string, sortBy: string | string[]): Observable<HttpResponse<any>> {
+    const url = `${this.apiUrl}/search/page`;
+
+    let params = new HttpParams()
+    .set('page', page.toString())
+    .set('size', size.toString())
+    .set('sortDir', sortDir);
+
+    if (typeof sortBy === 'string') {
+      params = params.set('sortBy', sortBy);
+    } else if (Array.isArray(sortBy) && sortBy.length > 0) {
+      params = params.set('sortBy', sortBy.join(','));
+    }
+
+    return this.http.post<any>(url, fileApprovedSearchDTO, { params, observe: 'response' });
   }
 
   save(fileApproved: FileApproved): Observable<HttpResponse<FileApproved>> {

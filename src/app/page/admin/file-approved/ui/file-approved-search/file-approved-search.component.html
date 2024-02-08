@@ -1,0 +1,194 @@
+<!-- Tela De Pesquisa -->
+<div class="md:col-12 mb-2">
+  <div class="card no-margin bordered-card" style="width: 1800px;">
+
+    <!-- Formulário De Pesquisa -->
+    <form #fileApprovedSearchForm="ngForm" (ngSubmit)="search($event)">
+      <!-- Seção De Pesquisa -->
+      <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_FileApprovedSearch' | translate}}</h3>
+
+      <div class="grid p-fluid form-group">
+
+        <!-- Campo - File Table -->
+        <div class="col-6 md:col-6 field">
+          <label class="formTitle">{{'label_file_table_FileApprovedSearch' | translate}}</label>
+          <p-dropdown [options]="fileApprovedSearchUIDTO.fileTables" 
+            [(ngModel)]="fileApprovedSearchUIDTO.selectedFileTable" 
+            optionLabel="name" [showClear]="true" name="fileTable"
+            placeholder="{{ 'placeholder_file_table_FileApprovedSearch' | translate }}?">
+          </p-dropdown>
+        </div>
+
+        <!-- Campo - File Type -->
+        <div class="col-6 md:col-6 field">
+          <label class="formTitle">{{'label_file_type_FileApprovedSearch' | translate}}</label>
+          <p-dropdown [options]="fileApprovedSearchUIDTO.fileTypes" 
+            [(ngModel)]="fileApprovedSearchUIDTO.selectedFileType" 
+            optionLabel="name" [showClear]="true" name="fileType"
+            placeholder="{{'placeholder_file_type_FileApprovedSearch' | translate}}?"></p-dropdown>
+        </div>
+
+        <div class="col-12 md:col-6 field">
+          <label for="approved_by_user" class="formTitle">{{'label_approved_by_user_FileApprovedRegister' | translate}}</label>
+          <p-dropdown [options]="fileApprovedSearchUIDTO.approvedByUsers" [(ngModel)]="fileApprovedSearchUIDTO.selectedApprovedByUser" optionLabel="email" 
+            [filter]="true" filterBy="email" [showClear]="true" name="user"
+            placeholder="{{'placeholder_approved_by_user_FileApprovedRegister' | translate}}"
+            [required]="true">
+            <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2" *ngIf="fileApprovedSearchUIDTO.selectedApprovedByUser">
+                <div>{{ fileApprovedSearchUIDTO.selectedApprovedByUser.email }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-user pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <div>{{ user.email }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+
+        <div class="col-12 md:col-6 field">
+          <label for="reproved_by_user" class="formTitle">{{'label_reproved_by_user_FileApprovedRegister' | translate}}</label>
+          <p-dropdown [options]="fileApprovedSearchUIDTO.reprovedByUsers" [(ngModel)]="fileApprovedSearchUIDTO.selectedReprovedByUser" optionLabel="email" 
+            [filter]="true" filterBy="email" [showClear]="true" name="user"
+            placeholder="{{'placeholder_reproved_by_user_FileApprovedRegister' | translate}}"
+            [required]="true">
+            <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2" *ngIf="fileApprovedSearchUIDTO.selectedReprovedByUser">
+                <div>{{ fileApprovedSearchUIDTO.selectedReprovedByUser.email }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-user pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <div>{{ user.email }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="card flex justify-content-end">
+            <p-selectButton 
+              [options]="fileApprovedSearchUIDTO.enabledOptions" 
+              (onChange)="onChangeEnabled($event)" 
+              [(ngModel)]="fileApprovedSearchUIDTO.enabledValue" 
+              optionLabel="label" optionValue="value" name="enabled">
+            </p-selectButton>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="card flex justify-content-end">
+            <p-selectButton
+              [options]="fileApprovedSearchUIDTO.filterOptions" 
+              (onChange)="onChangeFilter($event)" 
+              [(ngModel)]="fileApprovedSearchUIDTO.filterValue" 
+              optionLabel="label" optionValue="value" name="filter">
+            </p-selectButton>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-4 md:col-4 field"></div>
+      <div class="col-4 md:col-4 field"></div>
+
+      <div id="div-button" class="grid p-fluid form-group">
+
+        <div class="col-12 flex flex-row justify-content-end py-0">
+          <button type="button" class="p-button-outlined p-button-secondary mr-3 md:w-10rem"
+            (click)="resetSearchForm()" pButton>
+            <span class="p-button-label">
+              {{'span_button_label_clean_Generic' | translate}}
+            </span>
+            <i class="pi pi-eraser"></i>
+          </button>
+
+          <button type="submit" class="p-element p-button p-component mr-3 md:w-10rem" pButton>
+            <span class="p-button-label">
+              {{'span_button_label_search_Generic' | translate}}
+            </span>
+            <i class="pi pi-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="md:col-12 mb-2"></div>
+
+      <div class="custom-bordered-table">
+        <p-table [columns]="fileApprovedSearchUIDTO.columns" [value]="fileApprovedSearchUIDTO.fileApproveds" dataKey="fileApprovedId" [style]="{'margin-bottom':'20px'}"
+          [responsive]="true" selectionMode="single"
+          [resizableColumns]="true" sortField="createdDate" [sortOrder]="-1"
+          [rows]="10" [showCurrentPageReport]="true" 
+          [paginator]="true" [scrollable]="true"
+          [totalRecords]="fileApprovedSearchUIDTO.totalRecords" [lazy]="true" 
+          [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+          (onLazyLoad)="search($event)" 
+          (onPage)="paginate($event)">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let column of fileApprovedSearchUIDTO.columns" [pSortableColumn]="column.sortField" [ngStyle]="{'width': column.width, 'text-align': 'left'}">
+                {{column.header}}
+                <p-sortIcon *ngIf="column.sortField" [field]="column.sortField"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td class="text-left">
+                {{rowData.fileApprovedId}}
+              </td>
+              <td class="text-left">
+                {{rowData.fileTable}}
+              </td>
+              <td class="text-left">
+                {{rowData.fileType}}
+              </td>
+
+              <ng-container *ngIf="rowData.fileTable === 'CUSTOMER'">
+                <td class="text-left">
+                  {{rowData.customer?.email}}
+                </td>
+              </ng-container>
+
+              <ng-container *ngIf="rowData.fileTable === 'USER'">
+                <td class="text-left">
+                  {{rowData.user?.email}}
+                </td>
+              </ng-container>
+
+              <td class="text-left">
+                {{rowData.enabled}}
+              </td>
+
+              <td class="text-left">
+                <button type="button" class="p-element p-button p-component mr-3 md:w-10rem" *ngIf="rowData.approvedBy == null && rowData.reprovedBy == null"
+                  (click)="onClickFileApprovedDetail(rowData)" pButton>
+                  <span class="p-button-label">
+                    {{'span_button_label_approve_Generic' | translate}}
+                  </span>
+                  <i class="pi pi-check"></i>
+                </button>
+
+                <button type="button" class="p-element p-button p-component p-button-info mr-3 md:w-12rem" *ngIf="rowData.approvedBy != null || rowData.reprovedBy != null"
+                  (click)="onClickFileApprovedDetail(rowData)" pButton>
+                  <span class="p-button-label">
+                    {{'span_button_label_see_details_Generic' | translate}}
+                  </span>
+                  <i class="pi pi-window-maximize"></i>
+                </button>
+              </td>
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8" class="justify-content-left">{{'table_no_records_found_Generic' | translate}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </form>
+
+  </div>
+</div>
