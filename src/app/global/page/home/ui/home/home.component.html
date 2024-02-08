@@ -203,7 +203,7 @@
             <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="cog" [fullScreen]="true">
               <h1>Carregando...</h1>
             </ngx-spinner>
-            <p-toast></p-toast>
+            <p-toast [life]="15000"></p-toast>
             <router-outlet></router-outlet>
 
           </div>

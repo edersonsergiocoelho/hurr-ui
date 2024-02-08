@@ -1,6 +1,12 @@
 {
   "span_button_label_clean_Generic": "Limpar",
   "span_button_label_search_Generic": "Pesquisar",
+  "span_button_label_to_go_back_Generic": "Voltar",
+  "span_button_label_approve_Generic": "Aprovar",
+  "span_button_label_disapprove_Generic": "Reprovar",
+  "span_button_label_see_details_Generic": "Ver Detalhes",
+  "span_button_label_send_code_Generic": "Enviar Código",
+  "span_button_label_send_information_Generic": "Enviar Informações",
 
   "span_button_label_new_Generic": "Novo",
   "span_button_label_save_Generic": "Salvar",

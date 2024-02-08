@@ -1,0 +1,32 @@
+{
+  "label_email_CustomerValidation": "Email",
+  "placeholder_email_CustomerValidation": "Informe O Email",
+
+  "label_first_name_CustomerValidation": "Primeiro Nome",
+  "placeholder_first_name_CustomerValidation": "Informe O Primeiro Nome",
+  "label_last_name_CustomerValidation": "Último Nome",
+  "placeholder_last_name_CustomerValidation": "Informe O Último Nome",
+  "label_cpf_CustomerValidation": "CPF",
+  "placeholder_cpf_CustomerValidation": "Informe Número Do CPF",
+  "label_identity_number_CustomerValidation": "Identidade",
+  "placeholder_identity_number_CustomerValidation": "Informe O Número Da Identidade",
+  "label_identity_number_issuing_body_CustomerValidation": "Orgão Emissor",
+  "placeholder_identity_number_issuing_body_CustomerValidation": "Informe O Orgão Emissor",
+  "label_identity_number_issuing_body_uf_CustomerValidation": "UF",
+  "placeholder_identity_number_issuing_body_uf_CustomerValidation": "Informe O UF",
+  "label_date_of_birth_CustomerValidation": "Data De Aniversário ",
+  "placeholder_date_of_birth_CustomerValidation": "Informe A Data De Aniversário",
+
+  "label_driver_license_registration_number_CustomerValidation": "Número Da CNH",
+  "placeholder_driver_license_registration_number_CustomerValidation": "Informe O Número Da CNH",
+  "label_driver_license_category_CustomerValidation": "Categoria Da CNH",
+  "label_driver_license_first_license_date_CustomerValidation": "1º Habilitação",
+  "placeholder_driver_license_first_license_date_CustomerValidation": "Informe A Data Da Primeira Habilitação",
+  "placeholder_driver_license_category_CustomerValidation": "Informe A Categoria Da CNH",
+  "label_driver_license_expiration_date_CustomerValidation": "Data De Expiração CNH",
+  "placeholder_driver_license_expiration_date_CustomerValidation": "Informe A Data De Expiração Da CNH",
+  "label_driver_license_issue_date_CustomerValidation": "Data De Emissão CNH",
+  "placeholder_driver_license_issue_date_CustomerValidation": "Informe A Data De Emissão Da CNH",
+  "label_driver_license_issue_uf_CustomerValidation": "UF De Emissão",
+  "placeholder_driver_license_issue_uf_CustomerValidation": "Informe A UF De Emissão, Por Exemplo: SP"
+}

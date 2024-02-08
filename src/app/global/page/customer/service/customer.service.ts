@@ -87,11 +87,22 @@ export class CustomerService {
     );
   }
 
-  uploadFile(file: File): Observable<HttpResponse<Customer>> {
+  uploadIdentityNumber(file: File): Observable<HttpResponse<Customer>> {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.httpClient.post<Customer>(`${this.apiUrl}/upload`, formData, { observe: 'response' }).pipe(
+    return this.httpClient.post<Customer>(`${this.apiUrl}/uploadIdentityNumber`, formData, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Customer>) => {
+        return response;
+      })
+    );
+  }
+
+  uploadDriverLicense(file: File): Observable<HttpResponse<Customer>> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.httpClient.post<Customer>(`${this.apiUrl}/uploadDriverLicense`, formData, { observe: 'response' }).pipe(
       map((response: HttpResponse<Customer>) => {
         return response;
       })
