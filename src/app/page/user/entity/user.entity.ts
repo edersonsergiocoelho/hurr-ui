@@ -12,4 +12,6 @@ export class User {
   createdDate: Date;
   modifiedDate: Date;
   enabled: boolean;
+
+  roles: any;
 }

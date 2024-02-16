@@ -25,6 +25,9 @@ export class CustomerValidationComponent implements OnInit {
   customerValidationUIDTO: CustomerValidationUIDTO;
 
   emailForm: NgForm;
+  emailVerificationCodeForm: NgForm;
+  phoneForm: NgForm;
+  phoneVerificationCodeForm: NgForm;
   identityNumberForm: NgForm;
   driverLicenseForm: NgForm;
 
@@ -65,6 +68,34 @@ export class CustomerValidationComponent implements OnInit {
 
     this.customerValidationUIDTO.user = currentUser;
 
+    // User
+    try {
+
+      const resultUserServiceFindByEmail = await firstValueFrom(this.userService.getCurrentUser().pipe(first()));
+
+      if (resultUserServiceFindByEmail.status == 200) {
+
+        if (resultUserServiceFindByEmail.body != null) {
+          this.customerValidationUIDTO.user = resultUserServiceFindByEmail.body;
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 404) {;
+
+        this.messageService.add({ severity: 'warn', 
+                                  summary: 'Não encontrado dados do cliente.', 
+                                  detail: 'Não encontrado dados do cliente, favor seguir os passos para a validação.'
+                                });
+      }
+
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
+    }
+
+    // Customer
     try {
 
       const resultCustomerFindByEmail = await firstValueFrom(this.customerService.findByEmail(currentUser.email).pipe(first()));
@@ -76,6 +107,18 @@ export class CustomerValidationComponent implements OnInit {
 
           if (this.customerValidationUIDTO.customer.dateOfBirth != null) {
             this.customerValidationUIDTO.customer.dateOfBirth = moment(this.customerValidationUIDTO.customer.dateOfBirth).toDate();
+          }
+
+          if (this.customerValidationUIDTO.customer.driverLicenseFirstLicenseDate != null) {
+            this.customerValidationUIDTO.customer.driverLicenseFirstLicenseDate = moment(this.customerValidationUIDTO.customer.driverLicenseFirstLicenseDate).toDate();
+          }
+
+          if (this.customerValidationUIDTO.customer.driverLicenseExpirationDate != null) {
+            this.customerValidationUIDTO.customer.driverLicenseExpirationDate = moment(this.customerValidationUIDTO.customer.driverLicenseExpirationDate).toDate();
+          }
+
+          if (this.customerValidationUIDTO.customer.driverLicenseIssueDate != null) {
+            this.customerValidationUIDTO.customer.driverLicenseIssueDate = moment(this.customerValidationUIDTO.customer.driverLicenseIssueDate).toDate();
           }
         }
       }
@@ -192,6 +235,8 @@ export class CustomerValidationComponent implements OnInit {
 
     this.ngxSpinnerService.show();
 
+    this.customerValidationUIDTO.customer.email = this.customerValidationUIDTO.email;
+
     this.customerService.emailVerificationCode(this.customerValidationUIDTO.customer).pipe(first()).subscribe({
       next: (data: any) => {
 
@@ -227,7 +272,7 @@ export class CustomerValidationComponent implements OnInit {
         this.messageService.add({ 
           severity: 'info', 
           summary: 'Email validado com sucesso.', 
-          detail: 'Email validado com sucesso, seu email foi confirmado, aguarde recarregar a página.'
+          detail: 'Email validado com sucesso, seu email foi confirmado. Aguarde 10 segundos para carregar o próximo passo.'
         });
 
         setTimeout(() => {
@@ -348,7 +393,7 @@ export class CustomerValidationComponent implements OnInit {
         this.messageService.add({ 
           severity: 'info', 
           summary: 'Celular validado com sucesso.', 
-          detail: 'Celular validado com sucesso, seu celular foi confirmado, aguarde recarregar a página.'
+          detail: 'Celular validado com sucesso, seu celular foi confirmado. Aguarde 10 segundos para carregar o próximo passo.'
         });
 
         setTimeout(() => {
@@ -375,6 +420,10 @@ export class CustomerValidationComponent implements OnInit {
     this.customerService.uploadIdentityNumber(event.files[0]).pipe(first()).subscribe({
       next: (data: any) => {
 
+        if (data.body != null) {
+          this.customerValidationUIDTO.identityNumberFileId = data.body.fileId;
+        }
+
         this.messageService.add({
           severity: 'info',
           summary: 'Upload da Carteira de Identidade concluído',
@@ -400,6 +449,8 @@ export class CustomerValidationComponent implements OnInit {
   }
 
   clickIdentityNumberSendInformation() {
+
+    this.customerValidationUIDTO.customer.identityNumberFileId = this.customerValidationUIDTO.identityNumberFileId;
 
     this.customerService.update(this.customerValidationUIDTO.customer).pipe(first()).subscribe({
       next: (data: any) => {
@@ -443,10 +494,14 @@ export class CustomerValidationComponent implements OnInit {
     this.customerService.uploadDriverLicense(event.files[0]).pipe(first()).subscribe({
       next: (data: any) => {
 
+        if (data.body != null) {
+          this.customerValidationUIDTO.driverLicenseFileId = data.body.fileId;
+        }
+
         this.messageService.add({ 
           severity: 'info', 
-          summary: 'Carteira de motorista enviada com sucesso.', 
-          detail: 'Carteira de motorista enviada com sucesso, aguarde a aprovação por parte de nossa equipe.'
+          summary: 'Upload da Carteira de Motorista concluído', 
+          detail: 'O upload da Carteira de Motorista foi realizado com sucesso.'
         });
 
         this.customerValidationUIDTO.divButtonDriverLicense = true;
@@ -464,6 +519,8 @@ export class CustomerValidationComponent implements OnInit {
   }
 
   clickDriverLicenseSendInformation() {
+
+    this.customerValidationUIDTO.customer.driverLicenseFileId = this.customerValidationUIDTO.driverLicenseFileId;
 
     this.customerService.update(this.customerValidationUIDTO.customer).pipe(first()).subscribe({
       next: (data: any) => {
@@ -503,6 +560,10 @@ export class CustomerValidationComponent implements OnInit {
 
     this.userService.uploadFile(event.files[0]).pipe(first()).subscribe({
       next: (data: any) => {
+
+        if (data.body != null) {
+          this.customerValidationUIDTO.user.photoFileId = data.body.fileId;
+        }
 
         this.messageService.add({ 
           severity: 'info', 

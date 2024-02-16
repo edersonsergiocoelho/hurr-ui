@@ -11,8 +11,9 @@
 
         <!-- Campo - File Table -->
         <div class="col-6 md:col-6 field">
-          <label class="formTitle">{{'label_file_table_FileApprovedSearch' | translate}}</label>
-          <p-dropdown [options]="fileApprovedSearchUIDTO.fileTables" 
+          <label class="font-medium text-2xl">{{'label_file_table_FileApprovedSearch' | translate}}</label>
+          <p-dropdown class="p-inputtext-lg" 
+            [options]="fileApprovedSearchUIDTO.fileTables" 
             [(ngModel)]="fileApprovedSearchUIDTO.selectedFileTable" 
             optionLabel="name" [showClear]="true" name="fileTable"
             placeholder="{{ 'placeholder_file_table_FileApprovedSearch' | translate }}?">
@@ -21,16 +22,18 @@
 
         <!-- Campo - File Type -->
         <div class="col-6 md:col-6 field">
-          <label class="formTitle">{{'label_file_type_FileApprovedSearch' | translate}}</label>
-          <p-dropdown [options]="fileApprovedSearchUIDTO.fileTypes" 
+          <label class="font-medium text-2xl">{{'label_file_type_FileApprovedSearch' | translate}}</label>
+          <p-dropdown class="p-inputtext-lg"
+            [options]="fileApprovedSearchUIDTO.fileTypes" 
             [(ngModel)]="fileApprovedSearchUIDTO.selectedFileType" 
             optionLabel="name" [showClear]="true" name="fileType"
             placeholder="{{'placeholder_file_type_FileApprovedSearch' | translate}}?"></p-dropdown>
         </div>
 
         <div class="col-12 md:col-6 field">
-          <label for="approved_by_user" class="formTitle">{{'label_approved_by_user_FileApprovedRegister' | translate}}</label>
-          <p-dropdown [options]="fileApprovedSearchUIDTO.approvedByUsers" [(ngModel)]="fileApprovedSearchUIDTO.selectedApprovedByUser" optionLabel="email" 
+          <label for="approved_by_user" class="font-medium text-2xl">{{'label_approved_by_user_FileApprovedRegister' | translate}}</label>
+          <p-dropdown class="p-inputtext-lg" 
+            [options]="fileApprovedSearchUIDTO.approvedByUsers" [(ngModel)]="fileApprovedSearchUIDTO.selectedApprovedByUser" optionLabel="email" 
             [filter]="true" filterBy="email" [showClear]="true" name="user"
             placeholder="{{'placeholder_approved_by_user_FileApprovedRegister' | translate}}"
             [required]="true">
@@ -48,8 +51,9 @@
         </div>
 
         <div class="col-12 md:col-6 field">
-          <label for="reproved_by_user" class="formTitle">{{'label_reproved_by_user_FileApprovedRegister' | translate}}</label>
-          <p-dropdown [options]="fileApprovedSearchUIDTO.reprovedByUsers" [(ngModel)]="fileApprovedSearchUIDTO.selectedReprovedByUser" optionLabel="email" 
+          <label for="reproved_by_user" class="font-medium text-2xl">{{'label_reproved_by_user_FileApprovedRegister' | translate}}</label>
+          <p-dropdown class="p-inputtext-lg"
+            [options]="fileApprovedSearchUIDTO.reprovedByUsers" [(ngModel)]="fileApprovedSearchUIDTO.selectedReprovedByUser" optionLabel="email" 
             [filter]="true" filterBy="email" [showClear]="true" name="user"
             placeholder="{{'placeholder_reproved_by_user_FileApprovedRegister' | translate}}"
             [required]="true">
@@ -156,6 +160,10 @@
                   {{rowData.user?.email}}
                 </td>
               </ng-container>
+
+              <td class="text-left">
+                {{rowData.createdDate}}
+              </td>
 
               <td class="text-left">
                 {{rowData.enabled}}

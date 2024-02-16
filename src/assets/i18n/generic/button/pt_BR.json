@@ -6,7 +6,11 @@
   "span_button_label_disapprove_Generic": "Reprovar",
   "span_button_label_see_details_Generic": "Ver Detalhes",
   "span_button_label_send_code_Generic": "Enviar Código",
+  "span_button_label_validate_code_Generic": "Validar Código",
   "span_button_label_send_information_Generic": "Enviar Informações",
+  "span_button_label_send_sms_code_Generic": "Enviar Código SMS",
+  "span_button_label_send_whatsapp_code_Generic": "Enviar Código WhatsApp",
+  "span_button_label_open_pdf_Generic": "Abrir PDF",
 
   "span_button_label_new_Generic": "Novo",
   "span_button_label_save_Generic": "Salvar",

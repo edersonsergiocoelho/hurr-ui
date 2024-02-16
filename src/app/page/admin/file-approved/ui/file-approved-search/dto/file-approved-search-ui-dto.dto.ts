@@ -42,6 +42,7 @@ export class FileApprovedSearchUIDTO {
   table_header_file_table_FileApprovedSearch: string;
   table_header_file_type_FileApprovedSearch: string;
   table_header_customer_user_FileApprovedSearch: string;
+  table_header_created_date_FileApprovedSearch: string;
   table_header_enabled_FileApprovedSearch: string;
   table_header_action_FileApprovedSearch: string;
 }

@@ -10,8 +10,10 @@ export class FileApprovedDetailUIDTO {
   fileApproved: FileApproved;
   file: File;
   dataURI: any;
+  dataURIPDF: any;
 
   customer: Customer;
+  user: User;
 
   // Messages
   error_message_service_Generic: string;
@@ -19,4 +21,6 @@ export class FileApprovedDetailUIDTO {
   success_message_service_Generic: string;
 
   message_not_null_message_service_FileApprovedDetail: string;
+  success_approve_message_service_FileApprovedDetail: string;
+  success_disapprove_message_service_FileApprovedDetail: string;
 }

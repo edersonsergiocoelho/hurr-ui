@@ -53,6 +53,7 @@ export class FileApprovedSearchComponent implements OnInit {
 
     this.fileApprovedSearchUIDTO.fileTypes = [
       { name: 'DRIVER_LICENSE', code: 'DRIVER_LICENSE' },
+      { name: 'IDENTITY_NUMBER', code: 'IDENTITY_NUMBER' },
       { name: 'PROFILE_PICTURE', code: 'PROFILE_PICTURE' }
     ];
 
@@ -66,6 +67,7 @@ export class FileApprovedSearchComponent implements OnInit {
         'table_header_file_table_FileApprovedSearch',
         'table_header_file_type_FileApprovedSearch',
         'table_header_customer_user_FileApprovedSearch',
+        'table_header_created_date_FileApprovedSearch',
         'table_header_enabled_FileApprovedSearch',
         'table_header_action_FileApprovedSearch'
       ];
@@ -79,6 +81,7 @@ export class FileApprovedSearchComponent implements OnInit {
       this.fileApprovedSearchUIDTO.table_header_file_table_FileApprovedSearch = translations['table_header_file_table_FileApprovedSearch'];
       this.fileApprovedSearchUIDTO.table_header_file_type_FileApprovedSearch = translations['table_header_file_type_FileApprovedSearch'];
       this.fileApprovedSearchUIDTO.table_header_customer_user_FileApprovedSearch = translations['table_header_customer_user_FileApprovedSearch'];
+      this.fileApprovedSearchUIDTO.table_header_created_date_FileApprovedSearch = translations['table_header_created_date_FileApprovedSearch'];
       this.fileApprovedSearchUIDTO.table_header_enabled_FileApprovedSearch = translations['table_header_enabled_FileApprovedSearch'];
       this.fileApprovedSearchUIDTO.table_header_action_FileApprovedSearch = translations['table_header_action_FileApprovedSearch'];
 
@@ -115,6 +118,7 @@ export class FileApprovedSearchComponent implements OnInit {
       { field: 'fileTable', sortField: 'fileTable', header: '' + this.fileApprovedSearchUIDTO.table_header_file_table_FileApprovedSearch },
       { field: 'fileType', sortField: 'fileType', header: '' + this.fileApprovedSearchUIDTO.table_header_file_type_FileApprovedSearch },
       { header: '' + this.fileApprovedSearchUIDTO.table_header_customer_user_FileApprovedSearch },
+      { field: 'createdDate', sortField: 'createdDate', header: '' + this.fileApprovedSearchUIDTO.table_header_created_date_FileApprovedSearch },
       { field: 'enabled', sortField: 'enabled', header: '' + this.fileApprovedSearchUIDTO.table_header_enabled_FileApprovedSearch },
       { header: '' + this.fileApprovedSearchUIDTO.table_header_action_FileApprovedSearch },
     ];

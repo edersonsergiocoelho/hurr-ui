@@ -2,6 +2,9 @@
   "label_email_CustomerValidation": "Email",
   "placeholder_email_CustomerValidation": "Informe O Email",
 
+  "label_email_verification_code_CustomerValidation": "Código De Verificação",
+  "placeholder_email_verification_code_CustomerValidation": "Informe O Código De Verificação Enviado No Email",
+
   "label_first_name_CustomerValidation": "Primeiro Nome",
   "placeholder_first_name_CustomerValidation": "Informe O Primeiro Nome",
   "label_last_name_CustomerValidation": "Último Nome",

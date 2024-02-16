@@ -22,9 +22,13 @@ export class CustomerValidationUIDTO {
 
   customer: Customer;
   user: User;
-  fileApprovedProfilePicture: FileApproved;
-  fileApprovedDriverLicense: FileApproved;
+
+  identityNumberFileId: string;
   fileApprovedIdentityNumber: FileApproved;
+  driverLicenseFileId: string;
+  fileApprovedDriverLicense: FileApproved;
+  photoFileId: string;
+  fileApprovedProfilePicture: FileApproved;
 
   divButtonIdentityNumber: boolean;
   divButtonDriverLicense: boolean;

@@ -21,6 +21,7 @@ import { ImageModule } from 'primeng/image';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { FileApprovedDetailComponent } from '../ui/file-approved-detail/file-approved-detail.component';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { FileApprovedDetailComponent } from '../ui/file-approved-detail/file-app
     DropdownModule,
     InputTextModule,
     InputTextareaModule,
+    InputMaskModule,
     InputSwitchModule,
     ImageModule,
     SelectButtonModule,

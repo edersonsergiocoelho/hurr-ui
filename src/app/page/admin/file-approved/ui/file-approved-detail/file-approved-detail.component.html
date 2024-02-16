@@ -4,101 +4,214 @@
     <!-- Seção De Detalhes -->
     <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_FileApprovedDetail' | translate}}</h3>
 
-    <div class="p-fluid p-formgrid grid">
+    <form #fileApprovedDetailForm="ngForm" (ngSubmit)="onClickFileApprovedApprove()">
 
-      <div class="col-12 md:col-12 field">
-        <button type="button" class="p-element p-button p-component mr-3 md:w-10rem"
-          pButton
-          (click)="onClickFileApprovedSearch()">
-          <span class="p-button-label">
-            {{'span_button_label_to_go_back_Generic' | translate}}
-          </span>
-          <i class="pi pi-step-backward"></i>
-        </button>
+      <div class="p-fluid p-formgrid grid">
+
+        <div class="col-12 md:col-12 field">
+          <button type="button" class="p-element p-button p-component mr-3 md:w-10rem"
+            pButton
+            (click)="onClickFileApprovedSearch()">
+            <span class="p-button-label">
+              {{'span_button_label_to_go_back_Generic' | translate}}
+            </span>
+            <i class="pi pi-step-backward"></i>
+          </button>
+        </div>
+
+        <div class="col-12 md:col-12 field" style="text-align: center;" *ngIf="fileApprovedDetailUIDTO.dataURI">
+          <p-image [src]="fileApprovedDetailUIDTO.dataURI" alt="Image" width="250" [preview]="true" ></p-image>
+        </div>
+
+        <div class="col-12 md:col-12 field" style="text-align: center;" *ngIf="fileApprovedDetailUIDTO.dataURIPDF">
+          <button type="button" class="p-element p-button p-component mr-3 md:w-10rem"
+            pButton
+            (click)="onClickOpenPDF()">
+            <span class="p-button-label">
+              {{'span_button_label_open_pdf_Generic' | translate}}
+            </span>
+            <i class="pi pi-file-pdf"></i>
+          </button>
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="fileTable" class="font-medium text-2xl">{{'label_file_table_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_file_table_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.fileApproved.fileTable" name="fileTable" autocomplete="off" disabled="true" />
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="fileType" class="font-medium text-2xl">{{'label_file_type_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_file_type_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.fileApproved.fileType" name="fileType" autocomplete="off" disabled="true" />
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="firstName" class="font-medium text-2xl">{{'label_first_name_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_first_name_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.firstName" name="firstName" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="lastName" class="font-medium text-2xl">{{'label_last_name_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_last_name_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.lastName" name="lastName" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="cpf" class="font-medium text-2xl">{{'label_cpf_FileApprovedDetail' | translate}}</label>
+          <p-inputMask class="p-inputtext-lg" mask="999.999.999-99"
+            placeholder="{{'placeholder_cpf_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.cpf" name="cpf" autocomplete="off" [disabled]="true" />
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="lastName" class="font-medium text-2xl">{{'label_email_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_email_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.email" name="email" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-2 md:col-2 field">
+          <label for="ddiPhone" class="font-medium text-2xl">{{'label_ddi_phone_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_ddi_phone_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.ddiPhone" name="ddiPhone" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-4 md:col-4 field">
+          <label for="phone" class="font-medium text-2xl">{{'label_phone_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_phone_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.phone" name="phone" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="createdDate" class="font-medium text-2xl">{{'label_created_date_FileApprovedDetail' | translate}}</label>
+          <p-calendar class="p-inputtext-lg"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.createdDate" 
+            dateFormat="dd/mm/yy" autocomplete="off" [disabled]="true" name="createdDate"
+            [showTime]="true" [showSeconds]="true"
+            placeholder="{{'placeholder_created_date_FileApprovedDetail' | translate}}">
+          </p-calendar>
+        </div>
+
+        <div class="col-3 md:col-3 field">
+          <label for="identityNumber" class="font-medium text-2xl">{{'label_identity_number_FileApprovedDetail' | translate}}</label>
+          <p-inputMask class="p-inputtext-lg" mask="99.999.999-9"
+            placeholder="{{'placeholder_identity_number_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.identityNumber" name="identityNumber" autocomplete="off" [disabled]="true" />
+        </div>
+
+        <div class="col-2 md:col-2 field">
+          <label for="identityNumberIssuingBody" class="font-medium text-2xl">{{'label_identity_number_issuing_body_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_identity_number_issuing_body_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.identityNumberIssuingBody" name="identityNumberIssuingBody" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-1 md:col-1 field">
+          <label for="identityNumberIssuingBodyUF" class="font-medium text-2xl">{{'label_identity_number_issuing_body_uf_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_identity_number_issuing_body_uf_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.identityNumberIssuingBodyUF" name="identityNumberIssuingBodyUF" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="dateOfBirth" class="font-medium text-2xl">{{'label_date_of_birth_FileApprovedDetail' | translate}}</label>
+          <p-calendar class="p-inputtext-lg"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.dateOfBirth" 
+            dateFormat="dd/mm/yy" autocomplete="off" [disabled]="true" name="dateOfBirth"
+            placeholder="{{'placeholder_date_of_birth_FileApprovedDetail' | translate}}">
+          </p-calendar>
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="driverLicenseRegistrationNumber" class="font-medium text-2xl">{{'label_driver_license_registration_number_FileApprovedDetail' | translate}}</label>
+          <p-inputMask class="p-inputtext-lg" mask="99999999999"
+            placeholder="{{'placeholder_driver_license_registration_number_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.driverLicenseRegistrationNumber" name="driverLicenseRegistrationNumber" autocomplete="off" [disabled]="true" />
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="driverLicenseCategory" class="font-medium text-2xl">{{'label_driver_license_category_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_driver_license_category_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.driverLicenseCategory" name="driverLicenseCategory" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-3 md:col-3 field">
+          <label for="driverLicenseFirstLicenseDate" class="font-medium text-2xl">{{'label_driver_license_first_license_date_FileApprovedDetail' | translate}}</label>
+          <p-calendar class="p-inputtext-lg"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.driverLicenseFirstLicenseDate" 
+            dateFormat="dd/mm/yy" name="driverLicenseFirstLicenseDate" autocomplete="off" [disabled]="true"
+            placeholder="{{'placeholder_driver_license_first_license_date_FileApprovedDetail' | translate}}"
+            >
+          </p-calendar>
+        </div>
+
+        <div class="col-3 md:col-3 field">
+          <label for="driverLicenseExpirationDate" class="font-medium text-2xl">{{'label_driver_license_expiration_date_FileApprovedDetail' | translate}}</label>
+          <p-calendar class="p-inputtext-lg"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.driverLicenseExpirationDate" 
+            dateFormat="dd/mm/yy" name="driverLicenseExpirationDate" autocomplete="off" [disabled]="true"
+            placeholder="{{'placeholder_driver_license_expiration_date_FileApprovedDetail' | translate}}"
+            >
+          </p-calendar>
+        </div>
+
+        <div class="col-3 md:col-3 field">
+          <label for="driverLicenseIssueDate" class="font-medium text-2xl">{{'label_driver_license_issue_date_FileApprovedDetail' | translate}}</label>
+          <p-calendar class="p-inputtext-lg"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.driverLicenseIssueDate" 
+            dateFormat="dd/mm/yy" name="driverLicenseIssueDate" autocomplete="off" [disabled]="true"
+            placeholder="{{'placeholder_driver_license_issue_date_FileApprovedDetail' | translate}}"
+            >
+          </p-calendar>
+        </div>
+
+        <div class="col-3 md:col-3 field">
+          <label for="driverLicenseIssueUF" class="font-medium text-2xl">{{'label_driver_license_issue_uf_FileApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_driver_license_issue_uf_FileApprovedDetail' | translate}}"
+            [(ngModel)]="fileApprovedDetailUIDTO.customer.driverLicenseIssueUF" name="driverLicenseIssueUF" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <label for="message" class="font-medium text-2xl">{{'label_message_FileApprovedDetail' | translate}}</label>
+          <textarea rows="5" cols="30" pInputTextarea name="message" [(ngModel)]="fileApprovedDetailUIDTO.fileApproved.message"
+            placeholder="{{'placeholder_message_FileApprovedDetail' | translate}}" required="true">
+          </textarea>
+        </div>
+
+        <div class="col-12 md:col-12 field" style="text-align: center;" *ngIf="fileApprovedDetailUIDTO.fileApproved.approvedBy == null && fileApprovedDetailUIDTO.fileApproved.reprovedBy == null">
+          <button type="submit" class="p-element p-button p-component p-button-success mr-3 md:w-10rem"
+            pButton
+            [disabled]="!fileApprovedDetailForm.valid">
+            <span class="p-button-label">
+              {{'span_button_label_approve_Generic' | translate}}
+            </span>
+            <i class="pi pi-check"></i>
+          </button>
+
+          <button type="button" class="p-element p-button p-component p-button-danger mr-3 md:w-10rem"
+            pButton
+            (click)="onClickFileApprovedDisapprove()"
+            [disabled]="!fileApprovedDetailForm.valid">
+            <span class="p-button-label">
+              {{'span_button_label_disapprove_Generic' | translate}}
+            </span>
+            <i class="pi pi-times"></i>
+          </button>
+
+        </div>
+
       </div>
-
-      <div class="col-12 md:col-12 field" style="text-align: center;">
-        <p-image [src]="fileApprovedDetailUIDTO.dataURI" alt="Image" width="250" [preview]="true"></p-image>
-      </div>
-
-      <div class="col-6 md:col-6 field">
-        <label for="fileTable" class="formTitle">{{'label_file_table_FileApprovedDetail' | translate}}</label>
-        <input id="fileTable" type="text" pInputText 
-          placeholder="{{'placeholder_file_table_FileApprovedDetail' | translate}}"
-          [(ngModel)]="fileApprovedDetailUIDTO.fileApproved.fileTable" name="fileTable" autocomplete="off" disabled="true" />
-      </div>
-
-      <div class="col-6 md:col-6 field">
-        <label for="fileType" class="formTitle">{{'label_file_type_FileApprovedDetail' | translate}}</label>
-        <input id="fileType" type="text" pInputText 
-          placeholder="{{'placeholder_file_type_FileApprovedDetail' | translate}}"
-          [(ngModel)]="fileApprovedDetailUIDTO.fileApproved.fileType" name="fileType" autocomplete="off" disabled="true" />
-      </div>
-
-      <div class="col-6 md:col-6 field">
-        <label for="firstName" class="formTitle">{{'label_first_name_FileApprovedDetail' | translate}}</label>
-        <input id="firstName" type="text" pInputText 
-          placeholder="{{'placeholder_first_name_FileApprovedDetail' | translate}}"
-          [(ngModel)]="fileApprovedDetailUIDTO.customer.firstName" name="firstName" autocomplete="off" disabled="true" />
-      </div>
-
-      <div class="col-6 md:col-6 field">
-        <label for="lastName" class="formTitle">{{'label_last_name_FileApprovedDetail' | translate}}</label>
-        <input id="lastName" type="text" pInputText 
-          placeholder="{{'placeholder_last_name_FileApprovedDetail' | translate}}"
-          [(ngModel)]="fileApprovedDetailUIDTO.customer.lastName" name="lastName" autocomplete="off" disabled="true" />
-      </div>
-
-      <div class="col-6 md:col-6 field">
-        <label for="driverLicenseRegistrationNumber" class="formTitle">{{'label_driver_license_registration_number_FileApprovedDetail' | translate}}</label>
-        <input id="driverLicenseRegistrationNumber" type="text" pInputText 
-          placeholder="{{'placeholder_driver_license_registration_number_FileApprovedDetail' | translate}}"
-          [(ngModel)]="fileApprovedDetailUIDTO.customer.driverLicenseRegistrationNumber" name="driverLicenseRegistrationNumber" autocomplete="off" disabled="true" />
-      </div>
-
-      <div class="col-6 md:col-6 field">
-        <label for="driverLicenseCategory" class="formTitle">{{'label_driver_license_category_FileApprovedDetail' | translate}}</label>
-        <input id="driverLicenseCategory" type="text" pInputText 
-          placeholder="{{'placeholder_driver_license_category_FileApprovedDetail' | translate}}"
-          [(ngModel)]="fileApprovedDetailUIDTO.customer.driverLicenseCategory" name="driverLicenseCategory" autocomplete="off" disabled="true" />
-      </div>
-
-      <div class="col-6 md:col-6 field">
-        <label for="driverLicenseExpirationDate" class="formTitle">{{'label_driver_license_expiration_date_FileApprovedDetail' | translate}}</label>
-        <input id="driverLicenseExpirationDate" type="text" pInputText 
-          placeholder="{{'placeholder_driver_license_expiration_date_FileApprovedDetail' | translate}}"
-          [(ngModel)]="fileApprovedDetailUIDTO.customer.driverLicenseExpirationDate" name="driverLicenseExpirationDate" autocomplete="off" disabled="true" />
-      </div>
-
-      <div class="col-12 md:col-12 field">
-        <label for="message" class="formTitle">{{'label_message_FileApprovedDetail' | translate}}</label>
-        <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="fileApprovedDetailUIDTO.fileApproved.message"
-          placeholder="{{'placeholder_message_FileApprovedDetail' | translate}}" required="true">
-        </textarea>
-      </div>
-
-      <div class="col-12 md:col-12 field" style="text-align: center;" *ngIf="fileApprovedDetailUIDTO.fileApproved.approvedBy == null && fileApprovedDetailUIDTO.fileApproved.reprovedBy == null">
-        <button type="button" class="p-element p-button p-component p-button-success mr-3 md:w-10rem"
-          pButton
-          (click)="onClickFileApprovedApprove()">
-          <span class="p-button-label">
-            {{'span_button_label_approve_Generic' | translate}}
-          </span>
-          <i class="pi pi-check"></i>
-        </button>
-
-        <button type="button" class="p-element p-button p-component p-button-danger mr-3 md:w-10rem"
-          pButton
-          (click)="onClickFileApprovedDisapprove()">
-          <span class="p-button-label">
-            {{'span_button_label_disapprove_Generic' | translate}}
-          </span>
-          <i class="pi pi-times"></i>
-        </button>
-
-      </div>
-
-    </div>
+    </form>
 
   </div>
 </div>
