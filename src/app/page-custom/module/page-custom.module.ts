@@ -11,7 +11,8 @@ import { CustomerValidationModule } from '../customer-validation/module/customer
 
     // Modules - PageCustomModule
     CustomerValidationModule
-  ], exports: [
+  ], 
+  exports: [
     CustomerValidationModule
   ]
 })

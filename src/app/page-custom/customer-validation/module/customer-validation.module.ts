@@ -8,10 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerValidationComponent } from '../ui/customer-validation/customer-validation.component';
 
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
 import { TooltipModule } from 'primeng/tooltip';
-
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [CustomerValidationComponent],
@@ -23,11 +25,18 @@ import { TooltipModule } from 'primeng/tooltip';
     ReactiveFormsModule,
     CustomerValidationRoutingModule,
 
+    TranslateModule,
+
     // PrimeNG
     ButtonModule,
+    CalendarModule,
     FileUploadModule, 
     InputTextModule,
+    InputMaskModule,
     TooltipModule,
+  ],
+  exports: [
+    CustomerValidationComponent
   ]
 })
 export class CustomerValidationModule { }

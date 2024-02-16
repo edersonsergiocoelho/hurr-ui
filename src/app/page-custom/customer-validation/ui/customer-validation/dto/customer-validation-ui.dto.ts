@@ -2,8 +2,9 @@ import { Customer } from "src/app/global/page/customer/entity/customer.entity";
 import { FileApproved } from "src/app/page/admin/file-approved/entity/file-approved.entity";
 import { User } from "src/app/page/user/entity/user.entity";
 
-export class CustomerValidationUUIDTO {
+export class CustomerValidationUIDTO {
 
+  showApprovalMessageIdentityNumber: boolean = false;
   showApprovalMessageDriverLicense: boolean = false;
   showApprovalMessageProfilePicture: boolean = false;
 
@@ -20,7 +21,15 @@ export class CustomerValidationUUIDTO {
   uploadedFiles: any[] = [];
 
   customer: Customer;
-  fileApprovedProfilePicture: FileApproved;
-  fileApprovedDriverLicense: FileApproved;
   user: User;
+
+  identityNumberFileId: string;
+  fileApprovedIdentityNumber: FileApproved;
+  driverLicenseFileId: string;
+  fileApprovedDriverLicense: FileApproved;
+  photoFileId: string;
+  fileApprovedProfilePicture: FileApproved;
+
+  divButtonIdentityNumber: boolean;
+  divButtonDriverLicense: boolean;
 }

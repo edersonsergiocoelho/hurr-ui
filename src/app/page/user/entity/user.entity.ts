@@ -6,7 +6,12 @@ export class User {
   displayName: string;
   password: string;
   provider: string;
-  fileId: string;
+  photoFileId: string;
   imageURL: string;
   photoValidated: boolean;
+  createdDate: Date;
+  modifiedDate: Date;
+  enabled: boolean;
+
+  roles: any;
 }
