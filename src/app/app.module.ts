@@ -29,6 +29,8 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/generic/button/',
   '/assets/i18n/generic/table/',
   '/assets/i18n/generic/message/',
+  '/assets/i18n/address/',
+  '/assets/i18n/checkout/',
   '/assets/i18n/customer-validation/',
   '/assets/i18n/file-approved/',
   '/assets/i18n/role/',
@@ -68,7 +70,7 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
     PageAdminModule,
     PageCustomModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [{ provide: Window, useValue: window }, authInterceptorProviders],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

@@ -1,19 +1,17 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DecimalPipe, Location } from '@angular/common';
-
-import { CustomerVehicleDetailUUIDTO } from './dto/customer-vehicle-detail-ui.dto';
-
-import { VehicleService } from 'src/app/page/admin/vehicle/service/vehicle.service';
-import { VehicleModelService } from 'src/app/page/admin/vehicle-model/service/vehicle-model.service';
 import { first, firstValueFrom } from 'rxjs';
+import { NavigationExtras, Router } from '@angular/router';
+
+import { CustomerVehicleDetailUIDTO } from './dto/customer-vehicle-detail-ui.dto';
 import { CustomerVehicleReviewService } from '../../../customer-vehicle-review/service/customer-vehicle-review.service';
 import { CustomerVehicleService } from '../../service/customer-vehicle.service';
 import { CustomerVehicleAddressService } from '../../../customer-vehicle-address/service/customer-vehicle-address.service';
 import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
 import { AddressType } from 'src/app/page/admin/address-type/address-type.enum';
 import { MessageService } from 'primeng/api';
-import { NavigationExtras, Router } from '@angular/router';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
+import { CustomerService } from '../../../customer/service/customer.service';
 
 @Component({
   selector: 'app-customer-vehicle-detail',
@@ -22,7 +20,7 @@ import { SessionStorageService } from 'src/app/core/session-storage/service/sess
 })
 export class CustomerVehicleDetailComponent implements OnInit {
 
-  customerVehicleDetailUUIDTO: CustomerVehicleDetailUUIDTO;
+  customerVehicleDetailUIDTO: CustomerVehicleDetailUIDTO;
 
   rateUtilsService: RateUtilsService;
 
@@ -41,6 +39,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
               private messageService: MessageService,
 
+              private customerService: CustomerService,
               private customerVehicleService: CustomerVehicleService,
               private customerVehicleReviewService: CustomerVehicleReviewService,
               private customerVehicleAddressService: CustomerVehicleAddressService,
@@ -62,25 +61,25 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.resetRegisterForm();
+    this.resetDetailForm();
   }
 
-  resetRegisterForm () {
+  resetDetailForm () {
 
-    this.customerVehicleDetailUUIDTO = new CustomerVehicleDetailUUIDTO();
+    this.customerVehicleDetailUIDTO = new CustomerVehicleDetailUIDTO();
 
     const state = this.location.getState() as any;
     
     if (state != null) {
-      this.customerVehicleDetailUUIDTO.customerVehicleId = state.customerVehicleId;
+      this.customerVehicleDetailUIDTO.customerVehicleId = state.customerVehicleId;
 
-      this.customerVehicleDetailUUIDTO.dateInit = state.dateInit;
-      this.customerVehicleDetailUUIDTO.selectedHourInit = state.selectedHourInit;
-      this.customerVehicleDetailUUIDTO.dateEnd = state.dateEnd;
-      this.customerVehicleDetailUUIDTO.selectedHourEnd = state.selectedHourEnd;
+      this.customerVehicleDetailUIDTO.dateInit = state.dateInit;
+      this.customerVehicleDetailUIDTO.selectedHourInit = state.selectedHourInit;
+      this.customerVehicleDetailUIDTO.dateEnd = state.dateEnd;
+      this.customerVehicleDetailUIDTO.selectedHourEnd = state.selectedHourEnd;
 
-      this.customerVehicleDetailUUIDTO.dateCancelFree = new Date(this.customerVehicleDetailUUIDTO.dateInit);
-      this.customerVehicleDetailUUIDTO.dateCancelFree.setDate(this.customerVehicleDetailUUIDTO.dateCancelFree.getDate() - 1);
+      this.customerVehicleDetailUIDTO.dateCancelFree = new Date(this.customerVehicleDetailUIDTO.dateInit);
+      this.customerVehicleDetailUIDTO.dateCancelFree.setDate(this.customerVehicleDetailUIDTO.dateCancelFree.getDate() - 1);
     }
 
     this.asyncCallFunctions();
@@ -90,23 +89,23 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     try {
 
-      const resultFindAllByCustomerVehicleId = await firstValueFrom(this.customerVehicleReviewService.findAllByCustomerVehicleId(this.customerVehicleDetailUUIDTO.customerVehicleId).pipe(first()));
+      const resultFindAllByCustomerVehicleId = await firstValueFrom(this.customerVehicleReviewService.findAllByCustomerVehicleId(this.customerVehicleDetailUIDTO.customerVehicleId).pipe(first()));
 
       if (resultFindAllByCustomerVehicleId.status == 200) {
 
         if (resultFindAllByCustomerVehicleId.body != null) {
-          this.customerVehicleDetailUUIDTO.customersVehiclesReviews = resultFindAllByCustomerVehicleId.body;
+          this.customerVehicleDetailUIDTO.customersVehiclesReviews = resultFindAllByCustomerVehicleId.body;
 
           // Inicializar contadores para cada nota
           let counts = [0, 0, 0, 0, 0];
 
           // Contar o número de ocorrências para cada nota
-          this.customerVehicleDetailUUIDTO.customersVehiclesReviews.forEach(review => {
+          this.customerVehicleDetailUIDTO.customersVehiclesReviews.forEach(review => {
             counts[review.rating - 1]++;
           });
 
           // Calcular porcentagem para cada nota
-          const totalReviews = this.customerVehicleDetailUUIDTO.customersVehiclesReviews.length;
+          const totalReviews = this.customerVehicleDetailUIDTO.customersVehiclesReviews.length;
 
           this.percentages = counts.map(count => {
             return (count / totalReviews) * 100;
@@ -121,12 +120,12 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     try {
 
-      const resultFindAllByCustomerVehicleId = await firstValueFrom(this.customerVehicleService.getCustomerVehicleById(this.customerVehicleDetailUUIDTO.customerVehicleId).pipe(first()));
+      const resultFindAllByCustomerVehicleId = await firstValueFrom(this.customerVehicleService.getCustomerVehicleById(this.customerVehicleDetailUIDTO.customerVehicleId).pipe(first()));
 
       if (resultFindAllByCustomerVehicleId.status == 200) {
 
         if (resultFindAllByCustomerVehicleId.body != null) {
-          this.customerVehicleDetailUUIDTO.customerVehicle = resultFindAllByCustomerVehicleId.body;
+          this.customerVehicleDetailUIDTO.customerVehicle = resultFindAllByCustomerVehicleId.body;
         }
       }
 
@@ -136,12 +135,12 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     try {
 
-      const resultCVAFindAllByCustomerVehicleIdAndAddressTypeVehicle = await firstValueFrom(this.customerVehicleAddressService.findAllByCustomerVehicleIdAndAddressType(this.customerVehicleDetailUUIDTO.customerVehicleId, AddressType.VEHICLE).pipe(first()));
+      const resultCVAFindAllByCustomerVehicleIdAndAddressTypeVehicle = await firstValueFrom(this.customerVehicleAddressService.findAllByCustomerVehicleIdAndAddressType(this.customerVehicleDetailUIDTO.customerVehicleId, AddressType.VEHICLE).pipe(first()));
 
       if (resultCVAFindAllByCustomerVehicleIdAndAddressTypeVehicle.status == 200) {
 
         if (resultCVAFindAllByCustomerVehicleIdAndAddressTypeVehicle.body != null) {
-          this.customerVehicleDetailUUIDTO.listCustomerVehicleAddressVehicle = resultCVAFindAllByCustomerVehicleIdAndAddressTypeVehicle.body;
+          this.customerVehicleDetailUIDTO.listCustomerVehicleAddressVehicle = resultCVAFindAllByCustomerVehicleIdAndAddressTypeVehicle.body;
         }
       }
 
@@ -151,12 +150,12 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     try {
 
-      const resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery = await firstValueFrom(this.customerVehicleAddressService.findAllByCustomerVehicleIdAndAddressType(this.customerVehicleDetailUUIDTO.customerVehicleId, AddressType.DELIVERY).pipe(first()));
+      const resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery = await firstValueFrom(this.customerVehicleAddressService.findAllByCustomerVehicleIdAndAddressType(this.customerVehicleDetailUIDTO.customerVehicleId, AddressType.DELIVERY).pipe(first()));
 
       if (resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery.status == 200) {
 
         if (resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery.body != null) {
-          this.customerVehicleDetailUUIDTO.listCustomerVehicleAddressDelivery = resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery.body;
+          this.customerVehicleDetailUIDTO.listCustomerVehicleAddressDelivery = resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery.body;
         }
       }
 
@@ -166,12 +165,12 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     try {
 
-      const resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup = await firstValueFrom(this.customerVehicleAddressService.findAllByCustomerVehicleIdAndAddressType(this.customerVehicleDetailUUIDTO.customerVehicleId, AddressType.PICKUP).pipe(first()));
+      const resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup = await firstValueFrom(this.customerVehicleAddressService.findAllByCustomerVehicleIdAndAddressType(this.customerVehicleDetailUIDTO.customerVehicleId, AddressType.PICKUP).pipe(first()));
 
       if (resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup.status == 200) {
 
         if (resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup.body != null) {
-          this.customerVehicleDetailUUIDTO.listCustomerVehicleAddressPickup = resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup.body;
+          this.customerVehicleDetailUIDTO.listCustomerVehicleAddressPickup = resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup.body;
         }
       }
 
@@ -192,8 +191,8 @@ export class CustomerVehicleDetailComponent implements OnInit {
   getAverageRating(): number {
     let totalRating = 0;
 
-    if (this.customerVehicleDetailUUIDTO && this.customerVehicleDetailUUIDTO.customersVehiclesReviews) {
-      const reviews = this.customerVehicleDetailUUIDTO.customersVehiclesReviews;
+    if (this.customerVehicleDetailUIDTO && this.customerVehicleDetailUIDTO.customersVehiclesReviews) {
+      const reviews = this.customerVehicleDetailUIDTO.customersVehiclesReviews;
       const totalReviews = reviews.length;
 
       if (totalReviews > 0) {
@@ -214,30 +213,29 @@ export class CustomerVehicleDetailComponent implements OnInit {
   }
 
   ngModelChangeDateInit() {
-    this.customerVehicleDetailUUIDTO.dateCancelFree = new Date(this.customerVehicleDetailUUIDTO.dateInit);
-    this.customerVehicleDetailUUIDTO.dateCancelFree.setDate(this.customerVehicleDetailUUIDTO.dateCancelFree.getDate() - 1);
+    this.customerVehicleDetailUIDTO.dateCancelFree = new Date(this.customerVehicleDetailUIDTO.dateInit);
+    this.customerVehicleDetailUIDTO.dateCancelFree.setDate(this.customerVehicleDetailUIDTO.dateCancelFree.getDate() - 1);
 
-    this.rateUtils.calculateTotalRate(this.customerVehicleDetailUUIDTO.dateInit, this.customerVehicleDetailUUIDTO.dateEnd, this.customerVehicleDetailUUIDTO.customerVehicle.dailyRate)
+    this.rateUtils.calculateTotalRate(this.customerVehicleDetailUIDTO.dateInit, this.customerVehicleDetailUIDTO.dateEnd, this.customerVehicleDetailUIDTO.customerVehicle.dailyRate)
   }
 
   ngModelChangeDateEnd() {
-    this.rateUtils.calculateTotalRate(this.customerVehicleDetailUUIDTO.dateInit, this.customerVehicleDetailUUIDTO.dateEnd, this.customerVehicleDetailUUIDTO.customerVehicle.dailyRate)
+    this.rateUtils.calculateTotalRate(this.customerVehicleDetailUIDTO.dateInit, this.customerVehicleDetailUIDTO.dateEnd, this.customerVehicleDetailUIDTO.customerVehicle.dailyRate)
   }
 
-  onClickContinue() {
+  async onClickContinue() {
 
-    const token = this.sessionStorageService.getToken();
+    const currentUser = this.sessionStorageService.getUser();
     
-    if (token == null) {
+    if (currentUser == null) {
 
       const navigationExtras: NavigationExtras = {
         state: {
-          //customerVehicleId: customerVehicle.customerVehicleId,
-          //place: JSON.stringify(this.place),
-          //dateInit: this.dateInit,
-          //selectedHourInit: this.selectedHourInit,
-          //dateEnd: this.dateEnd,
-          //selectedHourEnd: this.selectedHourEnd,
+          customerVehicleId: this.customerVehicleDetailUIDTO.customerVehicleId,
+          dateInit: this.customerVehicleDetailUIDTO.dateInit,
+          selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
+          dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
+          selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
         }
       };
   
@@ -245,18 +243,42 @@ export class CustomerVehicleDetailComponent implements OnInit {
       
     } else {
 
-      const navigationExtras: NavigationExtras = {
-        state: {
-          //customerVehicleId: customerVehicle.customerVehicleId,
-          //place: JSON.stringify(this.place),
-          //dateInit: this.dateInit,
-          //selectedHourInit: this.selectedHourInit,
-          //dateEnd: this.dateEnd,
-          //selectedHourEnd: this.selectedHourEnd,
-        }
-      };
+      // Customer
+      try {
 
-      this.router.navigate(['customer/customer-validation'], navigationExtras);
+        const navigationExtras: NavigationExtras = {
+          state: {
+            customerVehicleId: this.customerVehicleDetailUIDTO.customerVehicleId,
+            dateInit: this.customerVehicleDetailUIDTO.dateInit,
+            selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
+            dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
+            selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
+          }
+        };
+
+        const resultCustomerFindByEmail = await firstValueFrom(this.customerService.findByEmail(currentUser.email).pipe(first()));
+
+        if (resultCustomerFindByEmail.status == 200) {
+
+          if (resultCustomerFindByEmail.body != null) {
+            const customer = resultCustomerFindByEmail.body;
+
+            if (currentUser.photoValidated == true &&
+                customer.phoneValidated == true &&
+                customer.emailValidated == true &&
+                customer.identityNumberValidated == true &&
+                customer.driverLicenseValidated == true) {
+
+                this.router.navigate(['checkout'], navigationExtras);
+            } else {
+              this.router.navigate(['customer/customer-validation'], navigationExtras);
+            }
+          }
+        }
+
+      } catch (error: any) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
     }
   }
 }

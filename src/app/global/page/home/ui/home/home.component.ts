@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.homeUIService.currentUser$.subscribe(user => {
       this.currentUser = user;
+      this.resetForm();
     });
 
     if (this.sessionStorageService.getToken()) {
@@ -54,18 +55,23 @@ export class HomeComponent implements OnInit {
 
     try {
 
-      if (this.currentUser.photoFileId != null) {
+      if (this.currentUser != null) {
 
-        const fileServiceFindById = await firstValueFrom(this.fileService.findById(this.currentUser.photoFileId).pipe(first()));
-  
-        if (fileServiceFindById.status == 200) {
-          if (fileServiceFindById.body != null) {
-            this.homeUIDTO.file = fileServiceFindById.body;
-
-            debugger;
-            this.homeUIDTO.dataURI = `data:${this.homeUIDTO.file.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        if (this.currentUser.photoFileId != null) {
+          
+          const fileServiceFindById = await firstValueFrom(this.fileService.findById(this.currentUser.photoFileId).pipe(first()));
+          
+          if (fileServiceFindById.status == 200) {
+            if (fileServiceFindById.body != null) {
+              
+              this.homeUIDTO.file = fileServiceFindById.body;
+              this.homeUIDTO.dataURI = `data:${this.homeUIDTO.file.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+            }
           }
         }
+
+      } else {
+        this.homeUIDTO.dataURI = null;
       }
 
     } catch (error: any) {

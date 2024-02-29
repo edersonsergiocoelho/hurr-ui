@@ -1,0 +1,15 @@
+{
+  "title_Checkout": "Carrinho",
+
+  "title_Address_Checkout": "Endereço De Cobrança",
+  "button_Address_Checkout": "Adicionar Novo Endereço",
+  "header_Address_Checkout": "Adicionar Novo Endereço",
+
+  "title_Cart_Checkout": "Carrinho",
+  "price_Cart_Checkout": "Preço",
+  "days_Cart_Checkout": "Dias",
+
+  "title_OrderSummary_Checkout": "Resumo Do Pedido",
+  "price_OrderSummary_Checkout": "Preço",
+  "total_OrderSummary_Checkout": "Total"
+}

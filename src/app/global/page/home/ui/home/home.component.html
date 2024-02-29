@@ -124,12 +124,12 @@
                 <a pripple=""
                   class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
                   
-                  <ng-container *ngIf="homeUIDTO.dataURI !== null; else showDefaultImage">
+                  <ng-container *ngIf="currentUser !== null && homeUIDTO.dataURI !== null; else showDefaultImage">
                     <img [src]="homeUIDTO.dataURI" class="mr-3 lg:mr-0" style="width: 62px; height: 62px; border-radius: 50%;" (click)="toggleMenuUser()">
                   </ng-container>
 
                   <ng-template #showDefaultImage>
-                    <img *ngIf="currentUser !== null && currentUser.imageURL !== null"
+                    <img *ngIf="currentUser !== null && homeUIDTO.dataURI == null && currentUser.imageURL !== null"
                         [src]="currentUser.imageURL"
                         class="mr-3 lg:mr-0"
                         style="width: 62px; height: 62px; border-radius: 50%;"
