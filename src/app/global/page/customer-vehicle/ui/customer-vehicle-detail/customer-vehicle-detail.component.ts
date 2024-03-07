@@ -120,12 +120,12 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     try {
 
-      const resultFindAllByCustomerVehicleId = await firstValueFrom(this.customerVehicleService.getCustomerVehicleById(this.customerVehicleDetailUIDTO.customerVehicleId).pipe(first()));
+      const resultCustomerVehicleServiceFindById = await firstValueFrom(this.customerVehicleService.findById(this.customerVehicleDetailUIDTO.customerVehicleId).pipe(first()));
 
-      if (resultFindAllByCustomerVehicleId.status == 200) {
+      if (resultCustomerVehicleServiceFindById.status == 200) {
 
-        if (resultFindAllByCustomerVehicleId.body != null) {
-          this.customerVehicleDetailUIDTO.customerVehicle = resultFindAllByCustomerVehicleId.body;
+        if (resultCustomerVehicleServiceFindById.body != null) {
+          this.customerVehicleDetailUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
         }
       }
 

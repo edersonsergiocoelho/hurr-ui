@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { UserService } from '../../service/user.service';
 import { HomeUIService } from 'src/app/global/page/home/service/home-ui/home-ui.service';
+import { UserLoginUIDTO } from './dto/user-login.ui.dto.dto';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-login',
@@ -12,6 +14,8 @@ import { HomeUIService } from 'src/app/global/page/home/service/home-ui/home-ui.
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent {
+
+  userLoginUIDTO: UserLoginUIDTO;
 
   form: any = {};
   isLoggedIn = false;
@@ -23,14 +27,22 @@ export class UserLoginComponent {
   githubURL = AppConstants.GITHUB_AUTH_URL;
   linkedinURL = AppConstants.LINKEDIN_AUTH_URL;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(
+    private activatedRoute: ActivatedRoute,
               private router: Router,
               private homeUIService: HomeUIService,
               private authService: AuthService,
               private sessionStorageService: SessionStorageService,
-              private userService: UserService) { }
+              private userService: UserService,
+              private translateService: TranslateService
+  ) { 
+
+  }
 
   ngOnInit(): void {
+
+    this.translateService.setDefaultLang('pt_BR');
+
     const token: string = this.activatedRoute.snapshot.queryParamMap.get('token') as string;
     const error: string = this.activatedRoute.snapshot.queryParamMap.get('error') as string;
 

@@ -176,6 +176,15 @@
                     </a>
                   </li>
 
+                  <li *ngIf="currentUser != null && currentUser.roles[0] == 'ROLE_USER'">
+                    <a pripple=""
+                      class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
+                      <i class="pi pi-id-card mr-2"></i>
+                      <span class="font-medium" (click)="onClickCustomerVehicleBooking()">Minhas Reservas</span>
+                      <span class="p-ink"></span>
+                    </a>
+                  </li>
+
                   <li class="relative"><a pripple="" pstyleclass="@next" enterclass="hidden" enteractiveclass="scalein"
                       leavetoclass="hidden" leaveactiveclass="fadeout"
                       class="p-element p-ripple flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"><i

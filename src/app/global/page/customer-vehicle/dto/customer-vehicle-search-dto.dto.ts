@@ -1,4 +1,4 @@
-export class SearchCustomerVehicle {
+export class CustomerVehicleSearchDTO {
 
   vehicleId?: string;
   vehicleModelId?: string;

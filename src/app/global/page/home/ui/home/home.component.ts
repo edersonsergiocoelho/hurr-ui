@@ -112,4 +112,8 @@ export class HomeComponent implements OnInit {
   onClickCustomerValidation() {
     this.router.navigate(['/customer/customer-validation']);
   }
+
+  onClickCustomerVehicleBooking() {
+    this.router.navigate(['/customer-vehicle-booking']);
+  }
 }
