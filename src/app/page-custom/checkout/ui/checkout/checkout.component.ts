@@ -95,12 +95,12 @@ export class CheckoutComponent implements OnInit {
 
     try {
 
-      const resultCustomerVehicleServiceGetCustomerVehicleById = await firstValueFrom(this.customerVehicleService.getCustomerVehicleById(this.checkoutUIDTO.customerVehicleId).pipe(first()));
+      const resultCustomerVehicleServiceFindById = await firstValueFrom(this.customerVehicleService.findById(this.checkoutUIDTO.customerVehicleId).pipe(first()));
 
-      if (resultCustomerVehicleServiceGetCustomerVehicleById.status == 200) {
+      if (resultCustomerVehicleServiceFindById.status == 200) {
 
-        if (resultCustomerVehicleServiceGetCustomerVehicleById.body != null) {
-          this.checkoutUIDTO.customerVehicle = resultCustomerVehicleServiceGetCustomerVehicleById.body;
+        if (resultCustomerVehicleServiceFindById.body != null) {
+          this.checkoutUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
 
           this.checkoutUIDTO.totalBookingValue = this.rateUtilsService.calculateTotalRate(this.checkoutUIDTO.dateInit, this.checkoutUIDTO.dateEnd, this.checkoutUIDTO.customerVehicle.dailyRate);
           this.checkoutUIDTO.totalBookingValueFormat = this.decimalPipeService.formatR$(this.checkoutUIDTO.totalBookingValue);
@@ -215,5 +215,9 @@ export class CheckoutComponent implements OnInit {
       });
       
     });
+  }
+
+  selectCustomerAddress(customerAddress: CustomerAddress) {
+    this.checkoutUIDTO.selectCustomerAddress = customerAddress;
   }
 }

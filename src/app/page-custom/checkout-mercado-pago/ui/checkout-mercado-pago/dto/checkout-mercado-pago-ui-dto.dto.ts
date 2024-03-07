@@ -15,4 +15,6 @@ export class CheckoutMercadoPagoUIDTO {
 
     // Messages
     error_message_service_Generic: string;
+    warn_message_service_Generic: string;
+    select_customer_address_Address_Checkout: string;
 }

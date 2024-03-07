@@ -9,6 +9,9 @@ import { MessageService } from 'primeng/api';
 import { first, firstValueFrom } from 'rxjs';
 import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/service/customer-vehicle.service';
 import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
+import { CustomerAddress } from 'src/app/global/page/customer-address/entity/customer-address.entity';
+
+export type MetadataMap = { [key: string]: any };
 
 declare const MercadoPago: any;
 
@@ -20,35 +23,28 @@ declare const MercadoPago: any;
 export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
 
   checkoutMercadoPagoUIDTO: CheckoutMercadoPagoUIDTO;
+  
+  @Input() customerId: string;
+  @Input() selectCustomerAddress: CustomerAddress;
 
-  @Input() variavel1: any;
-  @Input() variavel2: any;
-  @Input() selectAddress: any;
-
-  constructor(private customerVehicleService: CustomerVehicleService,
-              private location: Location,
-              private messageService: MessageService,
-              private ngxSpinnerService: NgxSpinnerService,
-              private rateUtilsService: RateUtilsService,
-              private sessionStorageService: SessionStorageService,
-              private translateService: TranslateService) {}
+  constructor(
+    private customerVehicleService: CustomerVehicleService,
+    private location: Location,
+    private messageService: MessageService,
+    private ngxSpinnerService: NgxSpinnerService,
+    private rateUtilsService: RateUtilsService,
+    private sessionStorageService: SessionStorageService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // Este método é chamado sempre que houver alterações nas propriedades de entrada.
-    // Você pode colocar aqui a lógica para recarregar os valores quando as variáveis mudarem.
-    if (changes) {
-      // Faça algo quando variavel1 mudar, por exemplo:
-      // this.variavel1 = changes.variavel1.currentValue;
-    }
-
-    if (changes) {
-      // Faça algo quando variavel2 mudar, por exemplo:
-      // this.variavel2 = changes.variavel2.currentValue;
+  ngOnChanges(simpleChanges: SimpleChanges): void {
+    if (simpleChanges['selectCustomerAddress']) {
+      this.selectCustomerAddress = simpleChanges['selectCustomerAddress'].currentValue;
     }
   }
 
@@ -78,12 +74,16 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
     try {
 
       const keys = [
-        'error_message_service_Generic'
+        'error_message_service_Generic',
+        'warn_message_service_Generic',
+        'select_customer_address_Address_Checkout'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
       this.checkoutMercadoPagoUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.checkoutMercadoPagoUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.checkoutMercadoPagoUIDTO.select_customer_address_Address_Checkout = translations['select_customer_address_Address_Checkout'];
 
     } catch (error: any) {
       this.messageService.add({
@@ -95,12 +95,12 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
 
     try {
 
-      const resultCustomerVehicleServiceGetCustomerVehicleById = await firstValueFrom(this.customerVehicleService.getCustomerVehicleById(this.checkoutMercadoPagoUIDTO.customerVehicleId).pipe(first()));
+      const resultCustomerVehicleServiceFindById = await firstValueFrom(this.customerVehicleService.findById(this.checkoutMercadoPagoUIDTO.customerVehicleId).pipe(first()));
 
-      if (resultCustomerVehicleServiceGetCustomerVehicleById.status == 200) {
+      if (resultCustomerVehicleServiceFindById.status == 200) {
 
-        if (resultCustomerVehicleServiceGetCustomerVehicleById.body != null) {
-          this.checkoutMercadoPagoUIDTO.customerVehicle = resultCustomerVehicleServiceGetCustomerVehicleById.body;
+        if (resultCustomerVehicleServiceFindById.body != null) {
+          this.checkoutMercadoPagoUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
 
           this.checkoutMercadoPagoUIDTO.totalBookingValue = this.rateUtilsService.calculateTotalRate(this.checkoutMercadoPagoUIDTO.dateInit, this.checkoutMercadoPagoUIDTO.dateEnd, this.checkoutMercadoPagoUIDTO.customerVehicle.dailyRate);
         }
@@ -128,7 +128,7 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
 
   private setupMercadoPago(): void {
 
-    const mp = new MercadoPago('TEST-c5ae5bd9-83f9-4d4f-932d-c9449af2cb3e', {
+    const mp = new MercadoPago(`${environment.publicKeyMercadoPago}`, {
       locale: 'pt-BR'
     });
 
@@ -173,15 +173,30 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
             at this time of submit, you must create the preference
             */
 
-            const yourRequestBodyHere = {
-              payer: {
-                address: {
-                  streetName: 'Street Name',
-                  streetNumber: '123',
-                  zipCode: '12345',
-                },
-              },
-              notificationUrl: `${environment.api}/mercado-pago/webhook`,
+            if (this.selectCustomerAddress == null) {
+
+              this.messageService.add({
+                severity: 'warn',
+                summary: '' + this.checkoutMercadoPagoUIDTO.warn_message_service_Generic,
+                detail: '' + this.checkoutMercadoPagoUIDTO.select_customer_address_Address_Checkout
+              });
+
+              return;
+            }
+
+            const metadataMap = new Map<string, any>();
+            metadataMap.set('customerId', this.customerId);
+            metadataMap.set('customerAddressId', this.selectCustomerAddress.customerAddressId);
+            metadataMap.set('customerVehicleId', this.checkoutMercadoPagoUIDTO.customerVehicleId);
+            metadataMap.set('bookingStartDate', this.checkoutMercadoPagoUIDTO.dateInit);
+            metadataMap.set('bookingStartTime', this.checkoutMercadoPagoUIDTO.selectedHourInit);
+            metadataMap.set('bookingEndDate', this.checkoutMercadoPagoUIDTO.dateEnd);
+            metadataMap.set('bookingEndTime', this.checkoutMercadoPagoUIDTO.selectedHourEnd);
+            metadataMap.set('totalBookingValue', this.checkoutMercadoPagoUIDTO.totalBookingValue);
+            
+            const metadataObject = Object.fromEntries(metadataMap);
+
+            const preferenceRequest = {
               items: [
                 {
                   title: this.checkoutMercadoPagoUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + this.checkoutMercadoPagoUIDTO.customerVehicle.vehicle.vehicleName + ' ' + this.checkoutMercadoPagoUIDTO.customerVehicle.yearOfTheCar,
@@ -189,18 +204,29 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
                   unitPrice: this.checkoutMercadoPagoUIDTO.totalBookingValue,
                 },
               ],
-              externalReference: '',
+              payer: {
+                address: {
+                  streetName: this.selectCustomerAddress.address.streetAddress,
+                  streetNumber: this.selectCustomerAddress.address.number,
+                  zipCode: this.selectCustomerAddress.address.zipCode.replace(".", "").replace("-", ""),
+                },
+              },
+              notificationUrl: `${environment.apiMercadoPago}`,
+              backUrls: {
+                success: `${environment.apiUI}/customer-vehicle-booking/success`
+              },
+              metadata: metadataObject
             };
 
             return new Promise((resolve, reject) => {
 
-              fetch(`${environment.api}/mercado-pago/create-preference`, {
+              fetch(`${environment.api}/mercado-pago/preference`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${this.sessionStorageService.getToken()}`
                 },
-                  body: JSON.stringify(yourRequestBodyHere),
+                  body: JSON.stringify(preferenceRequest),
                 })
                   .then((response) => response.json())
                   .then((response) => {

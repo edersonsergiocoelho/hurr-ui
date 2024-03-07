@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   api: 'http://localhost:8080',
-  apiUI: 'http://localhost:4200'
+  apiUI: 'http://localhost:4200',
+  apiMercadoPago: 'https://49cd-177-195-151-175.ngrok-free.app/mercado-pago/webhook',
+  publicKeyMercadoPago: 'TEST-c5ae5bd9-83f9-4d4f-932d-c9449af2cb3e'
 };
 
 /*

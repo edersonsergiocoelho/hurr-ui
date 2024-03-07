@@ -17,7 +17,7 @@
                 <div class="mb-3"><span class="text-900 text-xl block ml-2">{{'title_Address_Checkout' | translate}}</span>
                 </div>
                 <div class="grid flex-column lg:flex-row">
-                  <div *ngFor="let customerAddress of checkoutUIDTO.customersAddresses" class="col p-3">
+                  <div *ngFor="let customerAddress of checkoutUIDTO.customersAddresses" class="col p-3" (click)="selectCustomerAddress(customerAddress)">
                     <div
                       class="flex flex-column border-round border-1 surface-border p-4 cursor-pointer hover:border-primary transition-duration-150 border-primary">
                       <div class="flex justify-content-between mb-3">
@@ -180,12 +180,17 @@
 
             </div>
             <div class="border-bottom-1 surface-border my-3 py-2">
-              <div class="flex justify-content-between mb-3"><span
-                  class="text-900 font-medium">{{ 'total_OrderSummary_Checkout' | translate }}</span><span
-                  class="text-900 font-bold">R$ {{ checkoutUIDTO.totalBookingValueFormat }}</span></div>
+              <div class="flex justify-content-between mb-3">
+                <span
+                  class="text-900 font-medium">{{ 'total_OrderSummary_Checkout' | translate }}
+                </span>
+                <span
+                  class="text-900 font-bold">R$ {{ checkoutUIDTO.totalBookingValueFormat }}
+                </span>
+              </div>
             </div>
 
-            <app-checkout-mercado-pago [variavel1]="checkoutUIDTO.customerVehicleId" [variavel2]="checkoutUIDTO.dateInit" [selectAddress]="checkoutUIDTO.dateInit"></app-checkout-mercado-pago>
+            <app-checkout-mercado-pago [customerId]="checkoutUIDTO.customer.customerId" [selectCustomerAddress]="checkoutUIDTO.selectCustomerAddress"></app-checkout-mercado-pago>
 
           </div>
         </div>
