@@ -22,6 +22,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     HomeRoutingModule,
 
+    TranslateModule,
     NgxSpinnerModule,
     GoogleMapsModule,
 

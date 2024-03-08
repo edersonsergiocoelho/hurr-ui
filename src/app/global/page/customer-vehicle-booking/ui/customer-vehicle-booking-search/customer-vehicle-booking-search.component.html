@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <p-dataView [value]="customerVehicleBookingSearchUIDTO.products"
+  <p-dataView [value]="customerVehicleBookingSearchUIDTO.customerVehicleBookings"
     [sortField]="customerVehicleBookingSearchUIDTO.sortField" [sortOrder]="customerVehicleBookingSearchUIDTO.sortOrder"
     [rows]="3" [showCurrentPageReport]="true" 
     [paginator]="true"
@@ -24,7 +24,8 @@
         <p-dropdown 
           [options]="customerVehicleBookingSearchUIDTO.sortOptions" 
           [(ngModel)]="customerVehicleBookingSearchUIDTO.sortField" 
-          placeholder="{{'placeholder_created_date_CustomerVehicleBookingSearch' | translate}}" 
+          placeholder="{{'placeholder_created_date_CustomerVehicleBookingSearch' | translate}}"
+          [showClear]="true"
           (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0">
         </p-dropdown>
       </div>
@@ -112,13 +113,16 @@
               </div>
             </div>
 
-            <div class="bg-green-50 mr-0 lg:mr-3 mt-4 lg:mt-0 p-2 flex align-items-center" style="border-radius: 2.5rem;">
+            <div *ngIf="item.bookingDeliveryDate != null" 
+              class="bg-green-50 mr-0 lg:mr-3 mt-4 lg:mt-0 p-2 flex align-items-center" 
+              style="border-radius: 2.5rem;">
               <span class="bg-green-500 text-white flex align-items-center justify-content-center border-circle mr-2"
                 style="min-width: 2rem; min-height: 2rem;">
                 <i class="pi pi-check"></i>
               </span>
-              <span
-                class="text-green-600">Delivered on 7 February 2023
+              <span class="text-green-600">
+                {{'label_booking_delivery_date_CustomerVehicleBookingSearch' | translate}}
+                {{item.customerVehicle.bookingDeliveryDate | date:'dd/MM/yyyy HH:mm:ss'}}
               </span>
             </div>
 

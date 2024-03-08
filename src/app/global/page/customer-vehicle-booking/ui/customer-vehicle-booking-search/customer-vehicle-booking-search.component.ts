@@ -8,6 +8,9 @@ import { CustomerVehicleBookingService } from '../../service/customer-vehicle-bo
 import { DataViewLazyLoadEvent } from 'primeng/dataview';
 import { CustomerVehicleBooking } from '../../entity/customer-vehicle-booking.entity';
 import { DecimalPipeService } from 'src/app/utils/service/rate-utils-service copy';
+import { CustomerService } from '../../../customer/service/customer.service';
+import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
+import { CustomerVehicleBookingSearchDTO } from '../../dto/customer-vehicle-booking-search-dto.dto';
 
 @Component({
   selector: 'app-customer-vehicle-booking-search',
@@ -22,10 +25,12 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
   decimalPipe: DecimalPipeService;
 
   constructor(
+    private customerService: CustomerService,
     private customerVehicleBookingService: CustomerVehicleBookingService,
     private decimalPipeService: DecimalPipeService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
+    private sessionStorageService: SessionStorageService,
     private translateService: TranslateService,
 ) {
     this.decimalPipe = decimalPipeService;
@@ -40,8 +45,8 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
 
     this.customerVehicleBookingSearchUIDTO = new CustomerVehicleBookingSearchUIDTO();
 
-    this.customerVehicleBookingSearchUIDTO.products = new Array<CustomerVehicleBooking>;
-    this.customerVehicleBookingSearchUIDTO.customerVehicleBookingSearchDTO = new CustomerVehicleBookingSearchUIDTO();
+    this.customerVehicleBookingSearchUIDTO.customerVehicleBookings = new Array<CustomerVehicleBooking>;
+    this.customerVehicleBookingSearchUIDTO.customerVehicleBookingSearchDTO = new CustomerVehicleBookingSearchDTO();
 
     this.asyncCallFunctions();
   }
@@ -77,7 +82,7 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     this.customerVehicleBookingSearchUIDTO.sortOptions = [
       { label: '' + this.customerVehicleBookingSearchUIDTO.label_created_date_option_1_CustomerVehicleBookingSearch, value: '!createdDate' },
       { label: '' + this.customerVehicleBookingSearchUIDTO.label_created_date_option_2_CustomerVehicleBookingSearch, value: 'createdDate' }
-  ];
+    ];
 
     this.ngxSpinnerService.show();
   }
@@ -109,7 +114,7 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
   
     this.customerVehicleBookingService.searchPage(this.customerVehicleBookingSearchUIDTO.customerVehicleBookingSearchDTO, this.customerVehicleBookingSearchUIDTO.page, this.customerVehicleBookingSearchUIDTO.size, this.customerVehicleBookingSearchUIDTO.sortDir, this.customerVehicleBookingSearchUIDTO.sortBy).pipe(first()).subscribe({
       next: (data: any) => {
-        this.customerVehicleBookingSearchUIDTO.products = data.body.content;
+        this.customerVehicleBookingSearchUIDTO.customerVehicleBookings = data.body.content;
         this.customerVehicleBookingSearchUIDTO.totalRecords = data.body.totalElements;
       },
       error: (error) => {

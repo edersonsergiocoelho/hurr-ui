@@ -7,6 +7,7 @@ import { SessionStorageService } from 'src/app/core/session-storage/service/sess
 import { HomeUIDTO } from './dto/home-ui-dto.dto';
 import { FileService } from 'src/app/page/file/service/file.service';
 import { MessageService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -26,9 +27,12 @@ export class HomeComponent implements OnInit {
               private homeUIService: HomeUIService,
               private sessionStorageService: SessionStorageService,
               private messageService: MessageService,
-              private fileService: FileService) {}
+              private fileService: FileService,
+              private translateService: TranslateService) {}
 
   ngOnInit() {
+    this.translateService.setDefaultLang('pt_BR');
+
     this.homeUIService.currentUser$.subscribe(user => {
       this.currentUser = user;
       this.resetForm();

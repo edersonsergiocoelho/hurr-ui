@@ -25,8 +25,9 @@ export class SessionStorageService {
   }
 
   public saveUser(user): void {
+    debugger;
     window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user.body));
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
   public getUser(): any {

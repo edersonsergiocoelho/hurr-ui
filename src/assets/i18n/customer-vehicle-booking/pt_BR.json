@@ -26,5 +26,7 @@
 
   "placeholder_created_date_CustomerVehicleBookingSearch": "Ordernar Por Data De Reserva",
   "label_created_date_option_1_CustomerVehicleBookingSearch": "Ordernar Por Data De Reserva Menor Para Maior",
-  "label_created_date_option_2_CustomerVehicleBookingSearch": "Ordernar Por Data De Reserva Maior Para Menor"
+  "label_created_date_option_2_CustomerVehicleBookingSearch": "Ordernar Por Data De Reserva Maior Para Menor",
+
+  "label_booking_delivery_date_CustomerVehicleBookingSearch": "Data De Entrega: "
 }

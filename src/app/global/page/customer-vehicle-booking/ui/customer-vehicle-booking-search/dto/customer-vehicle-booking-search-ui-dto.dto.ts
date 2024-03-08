@@ -1,5 +1,7 @@
 import { SelectItem } from "primeng/api";
 import { CustomerVehicleBooking } from "../../../entity/customer-vehicle-booking.entity";
+import { Customer } from "src/app/global/page/customer/entity/customer.entity";
+import { CustomerVehicleBookingSearchDTO } from "../../../dto/customer-vehicle-booking-search-dto.dto";
 
 export class CustomerVehicleBookingSearchUIDTO {
 
@@ -16,8 +18,8 @@ export class CustomerVehicleBookingSearchUIDTO {
   sortDir: string = '';
   sortBy: string | string[];
 
-  customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchUIDTO;
-  products: Array<CustomerVehicleBooking>;
+  customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO;
+  customerVehicleBookings: Array<CustomerVehicleBooking>;
 
   // Messages
   error_message_service_Generic: string;

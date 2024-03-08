@@ -12,6 +12,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
 import { TranslateModule } from '@ngx-translate/core';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [UserLoginComponent],
@@ -29,8 +30,8 @@ import { TranslateModule } from '@ngx-translate/core';
     // PrimeNG
     CarouselModule,
     CheckboxModule,
-    DividerModule
-
+    DividerModule,
+    InputTextModule
   ],
   exports: [
     UserLoginComponent

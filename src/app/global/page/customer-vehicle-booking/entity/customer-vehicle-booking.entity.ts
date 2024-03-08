@@ -11,6 +11,7 @@ export class CustomerVehicleBooking {
   bookingEndDate: Date;
   bookingStartTime: string;
   bookingEndTime: string;
+  bookingDeliveryDate: Date;
   totalBookingValue: number;
   createdDate: Date;
   modifiedDate: Date;
