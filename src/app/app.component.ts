@@ -11,8 +11,7 @@ export class AppComponent {
   
   title = 'hurr-ui';
 
-  constructor (private router: Router,
-               private themeService: ThemeService) {
+  constructor (private themeService: ThemeService) {
 
     this.themeService.switchTheme("lara-light-purple");
   }

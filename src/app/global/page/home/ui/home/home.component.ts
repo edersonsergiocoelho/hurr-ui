@@ -7,6 +7,7 @@ import { SessionStorageService } from 'src/app/core/session-storage/service/sess
 import { HomeUIDTO } from './dto/home-ui-dto.dto';
 import { FileService } from 'src/app/page/file/service/file.service';
 import { MessageService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -26,11 +27,15 @@ export class HomeComponent implements OnInit {
               private homeUIService: HomeUIService,
               private sessionStorageService: SessionStorageService,
               private messageService: MessageService,
-              private fileService: FileService) {}
+              private fileService: FileService,
+              private translateService: TranslateService) {}
 
   ngOnInit() {
+    this.translateService.setDefaultLang('pt_BR');
+
     this.homeUIService.currentUser$.subscribe(user => {
       this.currentUser = user;
+      this.resetForm();
     });
 
     if (this.sessionStorageService.getToken()) {
@@ -54,18 +59,23 @@ export class HomeComponent implements OnInit {
 
     try {
 
-      if (this.currentUser.photoFileId != null) {
+      if (this.currentUser != null) {
 
-        const fileServiceFindById = await firstValueFrom(this.fileService.findById(this.currentUser.photoFileId).pipe(first()));
-  
-        if (fileServiceFindById.status == 200) {
-          if (fileServiceFindById.body != null) {
-            this.homeUIDTO.file = fileServiceFindById.body;
-
-            debugger;
-            this.homeUIDTO.dataURI = `data:${this.homeUIDTO.file.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        if (this.currentUser.photoFileId != null) {
+          
+          const fileServiceFindById = await firstValueFrom(this.fileService.findById(this.currentUser.photoFileId).pipe(first()));
+          
+          if (fileServiceFindById.status == 200) {
+            if (fileServiceFindById.body != null) {
+              
+              this.homeUIDTO.file = fileServiceFindById.body;
+              this.homeUIDTO.dataURI = `data:${this.homeUIDTO.file.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+            }
           }
         }
+
+      } else {
+        this.homeUIDTO.dataURI = null;
       }
 
     } catch (error: any) {
@@ -105,5 +115,9 @@ export class HomeComponent implements OnInit {
 
   onClickCustomerValidation() {
     this.router.navigate(['/customer/customer-validation']);
+  }
+
+  onClickCustomerVehicleBooking() {
+    this.router.navigate(['/customer-vehicle-booking']);
   }
 }

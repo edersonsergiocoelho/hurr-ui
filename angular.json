@@ -221,11 +221,6 @@
                 "inject": false
               },
               {
-                "input": "src/themes/tailwind-light/theme.css",
-                "bundleName": "tailwind-light",
-                "inject": false
-              },
-              {
                 "input": "src/themes/vela-blue/theme.css",
                 "bundleName": "vela-blue",
                 "inject": false
@@ -498,11 +493,6 @@
               {
                 "input": "src/themes/saga-purple/theme.css",
                 "bundleName": "saga-purple",
-                "inject": false
-              },
-              {
-                "input": "src/themes/tailwind-light/theme.css",
-                "bundleName": "tailwind-light",
                 "inject": false
               },
               {

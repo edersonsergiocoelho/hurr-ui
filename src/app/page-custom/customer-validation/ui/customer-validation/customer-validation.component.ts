@@ -558,7 +558,7 @@ export class CustomerValidationComponent implements OnInit {
 
     this.fileUploadProfilePicture.disabled = true;
 
-    this.userService.uploadFile(event.files[0]).pipe(first()).subscribe({
+    this.userService.upload(event.files[0]).pipe(first()).subscribe({
       next: (data: any) => {
 
         if (data.body != null) {

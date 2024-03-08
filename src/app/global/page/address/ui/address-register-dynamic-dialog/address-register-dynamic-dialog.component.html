@@ -1,0 +1,144 @@
+<form novalidate #addressRegisterDynamicDialogForm="ngForm" (ngSubmit)="save()">
+  
+  <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_AddressRegisterDynamicDialog' | translate}}</h3>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-6 md:col-6 field">
+      <label for="nickname" class="font-medium text-2xl">{{'label_nickname_AddressRegisterDynamicDialog' | translate}}</label>
+      <input pInputText type="text" class="p-inputtext-lg"
+        placeholder="{{'placeholder_nickname_AddressRegisterDynamicDialog' | translate}}"
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.addressDTO.nickname" name="nickname" autocomplete="off" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="country" class="font-medium text-2xl">{{'label_country_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="addressRegisterDynamicDialogUIDTO.countries" 
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.selectedCountry" optionLabel="countryName" 
+        name="country" [showClear]="true"
+        placeholder="{{'placeholder_country_AddressRegisterDynamicDialog' | translate}}" (onChange)="changeCountry($event.value)">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="state" class="font-medium text-2xl">{{'label_state_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="addressRegisterDynamicDialogUIDTO.states" 
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.selectedState" optionLabel="stateName" 
+        name="state" [showClear]="true"
+        placeholder="{{'placeholder_state_AddressRegisterDynamicDialog' | translate}}" (onChange)="changeState($event.value)">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="city" class="font-medium text-2xl">{{'label_city_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="addressRegisterDynamicDialogUIDTO.cities" 
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.selectedCity" optionLabel="cityName" 
+        name="city" [showClear]="true"
+        placeholder="{{'placeholder_city_AddressRegisterDynamicDialog' | translate}}">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="streetAddress" class="font-medium text-2xl">{{'label_street_address_AddressRegisterDynamicDialog' | translate}}</label>
+      <input pInputText type="text" class="p-inputtext-lg"
+        placeholder="{{'placeholder_street_address_AddressRegisterDynamicDialog' | translate}}"
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.addressDTO.streetAddress" name="streetAddress" autocomplete="off" required="true" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="number" class="font-medium text-2xl">{{'label_number_AddressRegisterDynamicDialog' | translate}}</label>
+      <input pInputText type="text" class="p-inputtext-lg"
+        placeholder="{{'placeholder_number_AddressRegisterDynamicDialog' | translate}}"
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.addressDTO.number" name="number" autocomplete="off" required="true" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="complement" class="font-medium text-2xl">{{'label_complement_AddressRegisterDynamicDialog' | translate}}</label>
+      <input pInputText type="text" class="p-inputtext-lg"
+        placeholder="{{'placeholder_complement_AddressRegisterDynamicDialog' | translate}}"
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.addressDTO.complement" name="complement" autocomplete="off" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="zipCode" class="font-medium text-2xl">{{'label_zip_code_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-inputMask class="p-inputtext-lg" mask="99.999-999"
+        placeholder="{{'placeholder_zip_code_AddressRegisterDynamicDialog' | translate}}"
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.addressDTO.zipCode" name="zipCode" autocomplete="off" [required]="true" />
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="createdDate" class="font-medium text-2xl">{{'label_created_date_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-calendar class="p-inputtext-lg"
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.addressDTO.createdDate" 
+        placeholder="{{'placeholder_created_date_AddressRegisterDynamicDialog' | translate}}"
+        name="createdDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="modifiedDate" class="font-medium text-2xl">{{'label_modified_date_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-calendar class="p-inputtext-lg"
+        placeholder="{{'placeholder_modified_date_AddressRegisterDynamicDialog' | translate}}"
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.addressDTO.modifiedDate" name="modifiedDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" style="display: flex; flex-direction: column;">
+      <label for="enabled" class="font-medium text-2xl">{{'label_enabled_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-inputSwitch class="p-inputtext-lg" 
+        [(ngModel)]="addressRegisterDynamicDialogUIDTO.addressDTO.enabled" name="enabled">
+      </p-inputSwitch>
+    </div>
+
+    <div class="col-12 flex flex-row justify-content-left py-0">
+
+      <div *ngIf="addressRegisterDynamicDialogUIDTO.newRegister" class="md:col-3 mt-4 pt-1 field" >
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-secondary md:w-10rem"
+          type="button"
+          (click)="resetRegisterForm()">
+          <span class="p-button-label">
+            {{'span_button_label_new_Generic' | translate}}
+          </span>
+          <i class="pi pi-file"></i>
+        </button>
+      </div>
+
+      <div *ngIf="addressRegisterDynamicDialogUIDTO.newRegister" class="md:col-3 mt-4 pt-1 field">
+        <button pButton type="submit" class="p-ripple p-element w-auto p-button p-component md:w-10rem"
+          [disabled]="addressRegisterDynamicDialogForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_save_Generic' | translate}}
+          </span>
+          <i class="pi pi-save"></i>
+        </button>
+      </div>
+
+      <div *ngIf="addressRegisterDynamicDialogUIDTO.newRegister == false" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-info md:w-10rem"
+          type="button"
+          severity="info"
+          (click)="update()"
+          [disabled]="addressRegisterDynamicDialogForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_update_Generic' | translate}}
+          </span>
+          <i class="pi pi-file-edit"></i>
+        </button>
+      </div>
+
+      <div *ngIf="addressRegisterDynamicDialogUIDTO.newRegister == false" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-danger md:w-10rem"
+          type="button"
+          (click)="delete()">
+          <span class="p-button-label">
+            {{'span_button_label_delete_Generic' | translate}}
+          </span>
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</form>

@@ -11,6 +11,8 @@ import { UserLoginComponent } from '../ui/user-login/user-login.component';
 import { CarouselModule } from 'primeng/carousel';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
+import { TranslateModule } from '@ngx-translate/core';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [UserLoginComponent],
@@ -22,11 +24,14 @@ import { DividerModule } from 'primeng/divider';
     ReactiveFormsModule,
     UserRoutingModule,
 
+    // NgxTranslate
+    TranslateModule,
+
     // PrimeNG
     CarouselModule,
     CheckboxModule,
-    DividerModule
-
+    DividerModule,
+    InputTextModule
   ],
   exports: [
     UserLoginComponent

@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import { SearchCustomerVehicle } from '../../../customer-vehicle/dto/search-customer-vehicle.dto';
-import { Observable, catchError, first, firstValueFrom, map, of } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { DecimalPipe, Location } from '@angular/common';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
@@ -14,8 +13,8 @@ import { VehicleCategoryService } from 'src/app/page/admin/vehicle-category/serv
 import { VehicleModelService } from 'src/app/page/admin/vehicle-model/service/vehicle-model.service';
 import { HomeUIService } from '../../service/home-ui/home-ui.service';
 import { MessageService } from 'primeng/api';
-import { CustomerVehicleReview } from '../../../customer-vehicle-review/entity/customer-vehicle-review.entity';
 import { CustomerVehicleReviewService } from '../../../customer-vehicle-review/service/customer-vehicle-review.service';
+import { CustomerVehicleSearchDTO } from '../../../customer-vehicle/dto/customer-vehicle-search-dto.dto';
 
 const directionsService = new google.maps.DirectionsService();
 
@@ -215,7 +214,7 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
 
     this.initializeMap();
     
-    let searchCustomerVehicle: SearchCustomerVehicle = new SearchCustomerVehicle();
+    let searchCustomerVehicle: CustomerVehicleSearchDTO = new CustomerVehicleSearchDTO();
 
     if (this.homeSearchCarsDetailUIDTO.selectedVehicle != null) {
       searchCustomerVehicle.vehicleId = this.homeSearchCarsDetailUIDTO.selectedVehicle.vehicleId;
@@ -244,9 +243,14 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
     const cityName = city ? city.long_name : '';
     searchCustomerVehicle.cityName = cityName;
 
-    this.customerVehicleService.searchCustomerVehicles(searchCustomerVehicle).subscribe(
+    this.customerVehicleService.search(searchCustomerVehicle).subscribe(
       async (response) => {
-        this.homeSearchCarsDetailUIDTO.customerVehicles = response.body || [];
+
+        if (response.body) {
+          this.homeSearchCarsDetailUIDTO.customerVehicles = Array.isArray(response.body)
+            ? response.body
+            : [response.body];
+        }
     
         for (const customerVehicle of this.homeSearchCarsDetailUIDTO.customerVehicles) {
           try {

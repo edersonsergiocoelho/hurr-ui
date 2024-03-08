@@ -1,0 +1,28 @@
+{
+  "title_AddressRegisterDynamicDialog": "Cadastro De Endereço",
+
+  "label_nickname_AddressRegisterDynamicDialog": "Apelido",
+  "placeholder_nickname_AddressRegisterDynamicDialog": "Informe O Apelido Por Ex. Cartão Santander",
+  "label_country_AddressRegisterDynamicDialog": "País",
+  "placeholder_country_AddressRegisterDynamicDialog": "Informe O País",
+  "label_state_AddressRegisterDynamicDialog": "Estado",
+  "placeholder_state_AddressRegisterDynamicDialog": "Informe O Estado",
+  "label_city_AddressRegisterDynamicDialog": "Cidade",
+  "placeholder_city_AddressRegisterDynamicDialog": "Informe A Cidade",
+  "label_street_address_AddressRegisterDynamicDialog": "Rua",
+  "placeholder_street_address_AddressRegisterDynamicDialog": "Informe A Rua, Avenida, Etc.",
+  "label_number_AddressRegisterDynamicDialog": "Número",
+  "placeholder_number_AddressRegisterDynamicDialog": "Informe O Número Da Rua, Avenida, Etc.",
+  "label_complement_AddressRegisterDynamicDialog": "Complemento",
+  "placeholder_complement_AddressRegisterDynamicDialog": "Informe Complemento Por Ex. Apartamento 1, Bloco 1",
+  "label_zip_code_AddressRegisterDynamicDialog": "CEP",
+  "placeholder_zip_code_AddressRegisterDynamicDialog": "Informe O Número Do CEP, Ex: 17.340-000",
+  "label_created_date_AddressRegisterDynamicDialog": "Data De Criação",
+  "placeholder_created_date_AddressRegisterDynamicDialog": "Data De Criação Do Registro",
+  "label_modified_date_AddressRegisterDynamicDialog": "Data De Modificação",
+  "placeholder_modified_date_AddressRegisterDynamicDialog": "Data De Modificação Do Registro",
+  "label_enabled_AddressRegisterDynamicDialog": "Habilitado?",
+
+  "save_success_message_service_AddressRegisterDynamicDialog": "Endereço De Cobrança Cadastrado Com Sucesso.",
+  "update_success_message_service_AddressRegisterDynamicDialog": "Endereço De Cobrança Atualizado Com Sucesso."
+}

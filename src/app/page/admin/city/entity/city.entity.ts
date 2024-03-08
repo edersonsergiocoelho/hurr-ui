@@ -9,6 +9,5 @@ export interface City {
   modifiedDate: Date;
   enabled: boolean;
 
-  country: Country;
   state: State;
 }

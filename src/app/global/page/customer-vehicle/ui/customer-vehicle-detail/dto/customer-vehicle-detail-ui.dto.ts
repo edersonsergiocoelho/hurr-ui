@@ -1,6 +1,6 @@
 import { CustomerVehicleAddress } from "src/app/global/page/customer-vehicle-address/entity/customer-vehicle-address.entity";
 
-export class CustomerVehicleDetailUUIDTO {
+export class CustomerVehicleDetailUIDTO {
 
   customerVehicleId: any;
   customerVehicle: any;

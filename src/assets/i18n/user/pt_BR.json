@@ -1,0 +1,13 @@
+{
+  "title_UserLogin": "Faça Login Na HURR",
+  "sign_up_UserLogin": "Inscrever-se",
+
+  "sign_in_with_facebook_UserLogin": "Faça Login No Facebook",
+  "sign_in_with_google_UserLogin": "Faça Login No Google",
+  "or_UserLogin": "Ou",
+
+  "label_email_UserLogin": "Email",
+  "placeholder_email_UserLogin": "Informe O Email",
+  "label_password_UserLogin": "Senha",
+  "placeholder_password_UserLogin": "Informe A Senha"
+}

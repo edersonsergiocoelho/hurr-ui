@@ -6,7 +6,7 @@ export class HomeSearchCarsDetailUIDTO {
   selectedVehicleBrand: any;
   vehiclesModels?: any[];
   selectedVehicleModel: any;
-  customerVehicles?: any[];
+  customerVehicles: any[];
   vehiclesCategorys: any[];
   selectedVehicleCategory: any;
 

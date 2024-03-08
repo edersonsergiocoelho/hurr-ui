@@ -26,20 +26,20 @@
     <div class="grid">
       <div class="col-12">
 
-        <div *ngIf="customerVehicleDetailUUIDTO.customerVehicle" class="text-center p-3 border-round-sm font-bold" style="font-size: 40px;">
-          {{customerVehicleDetailUUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + customerVehicleDetailUUIDTO.customerVehicle.vehicle.vehicleName + ' ' + customerVehicleDetailUUIDTO.customerVehicle.yearOfTheCar}}
+        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="text-center p-3 border-round-sm font-bold" style="font-size: 40px;">
+          {{customerVehicleDetailUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + customerVehicleDetailUIDTO.customerVehicle.vehicle.vehicleName + ' ' + customerVehicleDetailUIDTO.customerVehicle.yearOfTheCar}}
         </div>
 
-        <div *ngIf="customerVehicleDetailUUIDTO.customerVehicle" class="text-center p-3 border-round-sm" style="margin-top: -20px;">
-          {{customerVehicleDetailUUIDTO.customerVehicle.vehicleModel.vehicleModelName}}
+        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="text-center p-3 border-round-sm" style="margin-top: -20px;">
+          {{customerVehicleDetailUIDTO.customerVehicle.vehicleModel.vehicleModelName}}
         </div>
 
-        <div *ngIf="customerVehicleDetailUUIDTO.customerVehicle" class="surface-section px-4 py-8 md:px-6 lg:px-8">
+        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="surface-section px-4 py-8 md:px-6 lg:px-8">
           <label><strong>Hospedado Por</strong></label>
           <div class="flex items-center" style="padding-top: 10px;">
             <div class="mr-3">
-              <ng-container *ngIf="customerVehicleDetailUUIDTO.customerVehicle.customer.profileImage; else noImage">
-                <img [src]="customerVehicleDetailUUIDTO.customerVehicle.customer.profileImage" alt="Imagem do Perfil" width="50" height="50">
+              <ng-container *ngIf="customerVehicleDetailUIDTO.customerVehicle.customer.profileImage; else noImage">
+                <img [src]="customerVehicleDetailUIDTO.customerVehicle.customer.profileImage" alt="Imagem do Perfil" width="50" height="50">
               </ng-container>
               <ng-template #noImage>
                 <i
@@ -49,21 +49,21 @@
             </div>
             <div class="field">
               <div class="field">
-                <label style="font-size: 28px;"><strong>{{ customerVehicleDetailUUIDTO.customerVehicle.customer.firstName + ' ' + customerVehicleDetailUUIDTO.customerVehicle.customer.lastName }}</strong></label>
+                <label style="font-size: 28px;"><strong>{{ customerVehicleDetailUIDTO.customerVehicle.customer.firstName + ' ' + customerVehicleDetailUIDTO.customerVehicle.customer.lastName }}</strong></label>
               </div>
               <div class="field">
-                <label>Ingressou em {{ customerVehicleDetailUUIDTO.customerVehicle.customer.createdDate | dateFormatDDMMMMYYYYBR }}</label>
+                <label>Ingressou em {{ customerVehicleDetailUIDTO.customerVehicle.customer.createdDate | dateFormatDDMMMMYYYYBR }}</label>
               </div>
             </div>
           </div>
         </div>
 
-        <div *ngIf="customerVehicleDetailUUIDTO.customerVehicle" class="surface-section px-4 py-8 md:px-6 lg:px-8">
+        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="surface-section px-4 py-8 md:px-6 lg:px-8">
           
           <div class="field" style="display: inline-block;">
             <label><strong>Descrição:</strong></label>
             <div style="padding-top: 10px;">
-              {{customerVehicleDetailUUIDTO.customerVehicle.description}}
+              {{customerVehicleDetailUIDTO.customerVehicle.description}}
             </div>
           </div>
         </div>
@@ -74,8 +74,8 @@
 
   <div class="col-4">
     <div class="text-left p-3 border-round-sm h-full font-bold">
-      <p *ngIf="customerVehicleDetailUUIDTO.customerVehicle">R$ {{ formatDailyRateWithComma(customerVehicleDetailUUIDTO.customerVehicle.dailyRate) }} / Dia</p>
-      <p *ngIf="customerVehicleDetailUUIDTO.customerVehicle" style="text-decoration: underline;">R$ {{ formatDailyRateWithComma(rateUtilsService.calculateTotalRate(customerVehicleDetailUUIDTO.dateInit, customerVehicleDetailUUIDTO.dateEnd, customerVehicleDetailUUIDTO.customerVehicle.dailyRate)) }} / Sem Incluir Impostos E Taxas</p>
+      <p *ngIf="customerVehicleDetailUIDTO.customerVehicle">R$ {{ formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.dailyRate) }} / Dia</p>
+      <p *ngIf="customerVehicleDetailUIDTO.customerVehicle" style="text-decoration: underline;">R$ {{ formatDailyRateWithComma(rateUtilsService.calculateTotalRate(customerVehicleDetailUIDTO.dateInit, customerVehicleDetailUIDTO.dateEnd, customerVehicleDetailUIDTO.customerVehicle.dailyRate)) }} / Sem Incluir Impostos E Taxas</p>
     
       <div style="width: 100%;">
         <hr style="border: none; height: 2px; background-color: #6610f2;">
@@ -84,26 +84,26 @@
       <div class="field" style="display: inline-block;">
         <label for="dateInit"><strong>Início Da Viagem:</strong></label>
         <div>
-          <p-calendar id="dateInit" [(ngModel)]="customerVehicleDetailUUIDTO.dateInit" [showIcon]="true" [minDate]="customerVehicleDetailUUIDTO.today" [dateFormat]="customerVehicleDetailUUIDTO.dateFormat" (ngModelChange)="ngModelChangeDateInit()"></p-calendar>
+          <p-calendar id="dateInit" [(ngModel)]="customerVehicleDetailUIDTO.dateInit" [showIcon]="true" [minDate]="customerVehicleDetailUIDTO.today" [dateFormat]="customerVehicleDetailUIDTO.dateFormat" (ngModelChange)="ngModelChangeDateInit()"></p-calendar>
         </div>
       </div>
     
       <div class="field" style="display: inline-block;">
         <div style="padding-top: 22px; padding-left: 10px;">
-          <p-dropdown id="selectedHourInit" [options]="customerVehicleDetailUUIDTO.hours" [(ngModel)]="customerVehicleDetailUUIDTO.selectedHourInit"></p-dropdown>
+          <p-dropdown id="selectedHourInit" [options]="customerVehicleDetailUIDTO.hours" [(ngModel)]="customerVehicleDetailUIDTO.selectedHourInit"></p-dropdown>
         </div>
       </div>
     
       <div class="field" style="display: inline-block;">
         <label for="dateEnd"><strong>Fim Da Viagem:</strong></label>
         <div>
-          <p-calendar id="dateEnd" [(ngModel)]="customerVehicleDetailUUIDTO.dateEnd" [showIcon]="true" [minDate]="customerVehicleDetailUUIDTO.today" [dateFormat]="customerVehicleDetailUUIDTO.dateFormat" (ngModelChange)="ngModelChangeDateEnd()"></p-calendar>
+          <p-calendar id="dateEnd" [(ngModel)]="customerVehicleDetailUIDTO.dateEnd" [showIcon]="true" [minDate]="customerVehicleDetailUIDTO.today" [dateFormat]="customerVehicleDetailUIDTO.dateFormat" (ngModelChange)="ngModelChangeDateEnd()"></p-calendar>
         </div>
       </div>
     
       <div class="field" style="display: inline-block;">
         <div style="padding-top: 22px; padding-left: 10px;">
-          <p-dropdown id="selectedHourEnd" [options]="customerVehicleDetailUUIDTO.hours" [(ngModel)]="customerVehicleDetailUUIDTO.selectedHourEnd"></p-dropdown>
+          <p-dropdown id="selectedHourEnd" [options]="customerVehicleDetailUIDTO.hours" [(ngModel)]="customerVehicleDetailUIDTO.selectedHourEnd"></p-dropdown>
         </div>
       </div>
 
@@ -114,15 +114,15 @@
       <label style="padding-top: 10px;"><strong>Local De Retirada E Devolução</strong></label>
 
       <div class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
-        <p-dropdown [options]="customerVehicleDetailUUIDTO.listCustomerVehicleAddressVehicle" 
-          [(ngModel)]="customerVehicleDetailUUIDTO.selectedCustomerVehicleAddressVehicle" 
+        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressVehicle" 
+          [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle" 
           optionLabel="address.streetAddress" 
           [showClear]="true" 
           placeholder="Selecione O Local De Retirada E Devolução"
           [style]="{ 'width.px': 360 }">
           <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUUIDTO.selectedCustomerVehicleAddressVehicle">              
-              <div>{{ customerVehicleDetailUUIDTO.selectedCustomerVehicleAddressVehicle.address.streetAddress }}</div>
+            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle">              
+              <div>{{ customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle.address.streetAddress }}</div>
             </div>
           </ng-template>
           <ng-template let-cva pTemplate="item">
@@ -133,16 +133,16 @@
         </p-dropdown>
       </div>
 
-      <div *ngIf="customerVehicleDetailUUIDTO.listCustomerVehicleAddressDelivery != null && customerVehicleDetailUUIDTO.listCustomerVehicleAddressDelivery.length > 0" class="field" style="display: flex; flex-direction: column;">
-        <p-dropdown [options]="customerVehicleDetailUUIDTO.listCustomerVehicleAddressDelivery" 
-          [(ngModel)]="customerVehicleDetailUUIDTO.selectedCustomerVehicleAddressDelivery" 
+      <div *ngIf="customerVehicleDetailUIDTO.listCustomerVehicleAddressDelivery != null && customerVehicleDetailUIDTO.listCustomerVehicleAddressDelivery.length > 0" class="field" style="display: flex; flex-direction: column;">
+        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressDelivery" 
+          [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressDelivery" 
           optionLabel="address.streetAddress" 
           [showClear]="true" 
           placeholder="Selecione O Local De Entrega"
           [style]="{ 'width.px': 360 }">
           <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUUIDTO.selectedCustomerVehicleAddressDelivery">              
-              <div>{{ customerVehicleDetailUUIDTO.selectedCustomerVehicleAddressDelivery.address.streetAddress }}</div>
+            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressDelivery">              
+              <div>{{ customerVehicleDetailUIDTO.selectedCustomerVehicleAddressDelivery.address.streetAddress }}</div>
             </div>
           </ng-template>
           <ng-template let-cva pTemplate="item">
@@ -154,16 +154,16 @@
         </p-dropdown>
       </div>
 
-      <div *ngIf="customerVehicleDetailUUIDTO.listCustomerVehicleAddressPickup != null && customerVehicleDetailUUIDTO.listCustomerVehicleAddressPickup.length > 0" class="field" style="display: flex; flex-direction: column;">
-        <p-dropdown [options]="customerVehicleDetailUUIDTO.listCustomerVehicleAddressPickup" 
-          [(ngModel)]="customerVehicleDetailUUIDTO.selectedCustomerVehicleAddressPickup" 
+      <div *ngIf="customerVehicleDetailUIDTO.listCustomerVehicleAddressPickup != null && customerVehicleDetailUIDTO.listCustomerVehicleAddressPickup.length > 0" class="field" style="display: flex; flex-direction: column;">
+        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressPickup" 
+          [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressPickup" 
           optionLabel="address.streetAddress" 
           [showClear]="true" 
           placeholder="Selecione O Local De Retirada"
           [style]="{ 'width.px': 360 }">
           <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUUIDTO.selectedCustomerVehicleAddressPickup">              
-              <div>{{ customerVehicleDetailUUIDTO.selectedCustomerVehicleAddressPickup.address.streetAddress }}</div>
+            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressPickup">              
+              <div>{{ customerVehicleDetailUIDTO.selectedCustomerVehicleAddressPickup.address.streetAddress }}</div>
             </div>
           </ng-template>
           <ng-template let-cva pTemplate="item">
@@ -190,7 +190,7 @@
         <i class="pi pi-thumbs-up mr-2"></i>
         <div style="display: flex; flex-direction: column;">
           <label style="font-size: 20px;"><strong>Cancelamento grátis</strong></label>
-          <label style="font-style: normal; font-weight: normal;">Reembolso total antes de {{customerVehicleDetailUUIDTO.dateCancelFree | dateFormatDDMMMMYYYYBR}}, às {{customerVehicleDetailUUIDTO.selectedHourInit}}</label>
+          <label style="font-style: normal; font-weight: normal;">Reembolso total antes de {{customerVehicleDetailUIDTO.dateCancelFree | dateFormatDDMMMMYYYYBR}}, às {{customerVehicleDetailUIDTO.selectedHourInit}}</label>
         </div>
       </div>      
 
@@ -198,16 +198,16 @@
         <hr style="border: none; height: 2px; background-color: #6610f2;">
       </div>
 
-      <div *ngIf="customerVehicleDetailUUIDTO.customerVehicle.unlimitedMileage" style="width: 100%;">
+      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.unlimitedMileage" style="width: 100%;">
         <label style="font-style: normal; font-weight: normal; font-size: 20px;">Distância incluída: Ilimitado</label>
       </div>
 
-      <div *ngIf="customerVehicleDetailUUIDTO.customerVehicle.limitedMileage" style="width: 100%;">
+      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.limitedMileage" style="width: 100%;">
         <div class="field">
-          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Distância incluída: {{ customerVehicleDetailUUIDTO.customerVehicle.limitedMileageIncluded }}</label>
+          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Distância incluída: {{ customerVehicleDetailUIDTO.customerVehicle.limitedMileageIncluded }}</label>
         </div>
         <div class="field">
-          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço do KM excedente R$: {{ formatDailyRateWithComma(customerVehicleDetailUUIDTO.customerVehicle.limitedMileageValue) }}</label>
+          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço do KM excedente R$: {{ formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.limitedMileageValue) }}</label>
         </div>
       </div>
 
@@ -231,7 +231,7 @@
 
         <div class="col-12 lg:col-4 flex align-items-start justify-content-center py-5 lg:py-0">
           <div>
-            <span *ngIf="customerVehicleDetailUUIDTO.customersVehiclesReviews != null && customerVehicleDetailUUIDTO.customersVehiclesReviews.length > 0" class="text-5xl text-900 font-bold mr-2">{{ customerVehicleDetailUUIDTO.customersVehiclesReviews.length }}</span>
+            <span *ngIf="customerVehicleDetailUIDTO.customersVehiclesReviews != null && customerVehicleDetailUIDTO.customersVehiclesReviews.length > 0" class="text-5xl text-900 font-bold mr-2">{{ customerVehicleDetailUIDTO.customersVehiclesReviews.length }}</span>
             <span class="text-5xl text-600">Reviews</span>
             <div class="mt-3 text-center">
               <i *ngFor="let star of [1, 2, 3, 4, 5]" class="pi text-2xl mr-1" [ngClass]="{
@@ -264,7 +264,7 @@
       </div>
       <div class="mt-5">
         <ul class="list-none m-0 p-0">
-          <li class="py-5 border-top-1 surface-border" *ngFor="let customerVehicleReview of customerVehicleDetailUUIDTO.customersVehiclesReviews">
+          <li class="py-5 border-top-1 surface-border" *ngFor="let customerVehicleReview of customerVehicleDetailUIDTO.customersVehiclesReviews">
             <div class="flex align-items-center justify-content-between mb-3">
               <div class="flex align-items-center">
                 <img src="assets/images/blocks/avatars/circle/avatar-m-1.png"
