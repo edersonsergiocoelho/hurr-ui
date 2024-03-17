@@ -21,8 +21,8 @@ export interface CustomerVehicle {
   cleaningFee: number;
   unlimitedMileage: boolean;
   limitedMileage: boolean;
-  limitedMileageIncluded?: number;
-  limitedMileageValue?: number;
+  limitedMileageIncluded: number;
+  limitedMileageValue: number;
   deliverToAddress: boolean;
   pickUpAtAddress: boolean;
   mileageFeeDelivery?: number;

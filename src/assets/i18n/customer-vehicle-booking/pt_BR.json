@@ -28,5 +28,39 @@
   "label_created_date_option_1_CustomerVehicleBookingSearch": "Ordernar Por Data De Reserva Menor Para Maior",
   "label_created_date_option_2_CustomerVehicleBookingSearch": "Ordernar Por Data De Reserva Maior Para Menor",
 
-  "label_booking_delivery_date_CustomerVehicleBookingSearch": "Data De Entrega: "
+  "label_booking_delivery_date_CustomerVehicleBookingSearch": "Data De Entrega: ",
+
+  "title_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "Reservas Dos Meus Carros",
+  "subtitle_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "Verifique Aqui As Suas Últimas Reservas Dos Meus Carros.",
+  "booking_CustomerVehicleBookingCustomerVehicleSearch": "Número Da Reserva",
+  "created_date_CustomerVehicleBookingCustomerVehicleSearch": "Data Da Reserva",
+  "total_booking_value_CustomerVehicleBookingCustomerVehicleSearch": "Total",
+
+  "placeholder_created_date_CustomerVehicleBookingCustomerVehicleSearch": "Ordernar Por Data De Reserva",
+  "label_created_date_option_1_CustomerVehicleBookingCustomerVehicleSearch": "Ordernar Por Data De Reserva Menor Para Maior",
+  "label_created_date_option_2_CustomerVehicleBookingCustomerVehicleSearch": "Ordernar Por Data De Reserva Maior Para Menor",
+
+  "label_booking_delivery_date_CustomerVehicleBookingCustomerVehicleSearch": "Data De Entrega: ",
+
+  "header_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog_CustomerVehicleBookingCustomerVehicleSearch": "Finalização Da Reserva",
+
+  "title_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Finalizar Reserva",
+  "label_booking_start_date_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Data Início Da Reserva: ",
+  "label_booking_start_time_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Hora Início Da Reserva: ",
+  "label_booking_end_date_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Data Final Da Reserva: ",
+  "label_booking_end_time_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Hora Final Da Reserva: ",
+  "label_daily_rate_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Preço Da Diária: ",
+  "label_total_booking_value_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Total Da Reserva:",
+  "label_unlimited_mileage_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Tipo De Reserva: Ilimitado",
+  "label_limited_mileage_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Tipo De Reserva: Limitado",
+  "label_limited_mileage_included_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Quilometragem Limitada Incluída:",
+  "label_limited_mileage_value_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Valor Da Quilometragem Adicional:",
+  "label_booking_start_km_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Quilometragem Inicial",
+  "placeholder_booking_start_km_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Informe A Quilometragem Inicial Do Veículo",
+  "label_booking_end_km_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Quilometragem Final",
+  "placeholder_booking_end_km_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Informe A Quilometragem Final Do Veículo",
+  "label_limited_mileage_total_km_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Total Da Quilometragem Adicional",
+  "placeholder_limited_mileage_total_km_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Informe O Total Da Quilometragem Adicional",
+  "label_limited_mileage_total_value_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Valor Total A Pagar Da Quilometragem Adicional",
+  "placeholder_limited_mileage_total_value_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog": "Informe O Valor Total A Pagar Da Quilometragem Adicional"
 }

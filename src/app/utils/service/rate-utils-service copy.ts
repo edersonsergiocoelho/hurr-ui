@@ -9,7 +9,7 @@ export class DecimalPipeService {
 
   constructor(private decimalPipe: DecimalPipe) {}
 
-  formatR$(dailyRate: number): string {
-    return this.decimalPipe?.transform(dailyRate, '1.2-2')?.replace('.', ',') ?? '';
+  formatR$(value: number): string {
+    return this.decimalPipe?.transform(value, '1.2-2')?.replace('.', ',') ?? '';
   }
 }
