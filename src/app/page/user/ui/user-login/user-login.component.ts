@@ -138,4 +138,8 @@ export class UserLoginComponent {
       }
     });
   }
+
+  navigateToUserRegister() {
+    this.router.navigate(['user/register']);
+  }
 }

@@ -9,5 +9,18 @@
   "label_email_UserLogin": "Email",
   "placeholder_email_UserLogin": "Informe O Email",
   "label_password_UserLogin": "Senha",
-  "placeholder_password_UserLogin": "Informe A Senha"
+  "placeholder_password_UserLogin": "Informe A Senha",
+
+  "title_UserRegister": "Registrar-se Na HURR",
+  "title_paragraph_UserRegister": "Descubra Novos Destinos Com A Hurr",
+  "label_display_name_UserRegister": "Nome",
+  "placeholder_display_name_UserRegister": "Informe O Nome Completo Por Ex. João Pinto Coelho",
+  "label_email_UserRegister": "Email",
+  "placeholder_email_UserRegister": "Informe O Email Por Ex. joao@gmail.com",
+  "label_password_UserRegister": "Senha",
+  "placeholder_password_UserRegister": "Informe A Senha",
+  "label_matching_password_UserRegister": "Repetir Senha",
+  "placeholder_matching_password_UserRegister": "Repetir A Senha",
+
+  "save_success_message_service_UserRegister": "Usuário Salvo Com Sucesso."
 }
