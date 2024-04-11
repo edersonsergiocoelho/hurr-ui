@@ -1,4 +1,5 @@
 {
+  "___UserLogin___": "Tradução Da Tela De UserLogin",
   "title_UserLogin": "Faça Login Na HURR",
   "sign_up_UserLogin": "Inscrever-se",
 
@@ -10,6 +11,9 @@
   "placeholder_email_UserLogin": "Informe O Email",
   "label_password_UserLogin": "Senha",
   "placeholder_password_UserLogin": "Informe A Senha",
+
+  "remember_me_UserLogin": "Lembrar De Mim",
+  "forgot_password_UserLogin": "Esqueceu Sua Senha?",
 
   "title_UserRegister": "Registrar-se Na HURR",
   "title_paragraph_UserRegister": "Descubra Novos Destinos Com A Hurr",

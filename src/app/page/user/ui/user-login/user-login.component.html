@@ -114,14 +114,17 @@
                   <div class="p-checkbox-box"></div>
                 </div>
               </p-checkbox>
-              <label for="rememberme4">Remember me</label>
+              <label for="rememberme4" style="padding-left: 10px;">
+                {{'remember_me_UserLogin' | translate}}
+              </label>
             </div>
             <a class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150" (click)="navigateToUserForgotPassword()">
-              Forgot password?
+              {{'forgot_password_UserLogin' | translate}}
             </a>
           </div>
-          <button pbutton="" pripple="" label="Sign In" class="p-element p-ripple w-full py-3 font-medium p-button p-component" (click)="signin()">
-            <span class="p-button-label">Sign In</span>
+          
+          <button pbutton="" pripple="" class="p-element p-ripple w-full py-3 font-medium p-button p-component" (click)="signin()">
+            <span class="p-button-label">{{'span_button_label_sign_in_Generic' | translate}}</span>
             <span class="p-ink"></span>
           </button>
         </div>
