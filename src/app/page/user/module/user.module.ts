@@ -18,11 +18,13 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { OverlayModule } from 'primeng/overlay';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
+import { UserForgotPasswordComponent } from '../ui/user-forgot-password/user-forgot-password.component';
 
 @NgModule({
   declarations: [
     UserLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    UserForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { FileUploadModule } from 'primeng/fileupload';
   ],
   exports: [
     UserLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    UserForgotPasswordComponent
   ]
 })
 export class UserModule { }

@@ -142,4 +142,8 @@ export class UserLoginComponent {
   navigateToUserRegister() {
     this.router.navigate(['user/register']);
   }
+
+  navigateToUserForgotPassword() {
+    this.router.navigate(['user/forgot-password']);
+  }
 }

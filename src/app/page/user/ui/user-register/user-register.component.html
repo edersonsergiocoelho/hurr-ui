@@ -16,46 +16,6 @@
               placeholder="{{ 'placeholder_display_name_UserRegister' | translate}}">
           </div>
 
-          <!--
-          <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
-          -->
-
-          <!--
-          <div class="field mb-4 col-12 md:col-6">
-            <label for="bio2" class="font-medium text-900">Bio</label>
-            <textarea
-              id="bio2" type="text" pinputtextarea="" rows="5"
-              class="p-inputtextarea p-inputtext p-component p-element p-inputtextarea-resizable"
-              style="height: 129px; overflow: hidden;">
-            </textarea>
-          </div>
-          -->
-
-          <!--
-          <div class="field mb-4 col-12 md:col-6">
-            <label for="avatar2" class="font-medium text-900">Avatar</label>
-            <div class="flex align-items-center">
-              <img src="assets/images/blocks/avatars/circle/avatar-f-4.png"
-                class="mr-4">
-                <p-fileUpload id="avatar2" mode="basic" name="avatar" url="./upload.php" accept="image/*"
-                maxfilesize="1000000" styleclass="p-button-outlined p-button-plain" chooselabel="Upload Image"
-                chooseicon="pi pi-upload" class="p-element">
-                <div class="p-fileupload p-fileupload-basic p-component ng-star-inserted"><p-messages
-                    class="p-element ng-tns-c31-7 ng-star-inserted">
-                    <div role="alert" class="p-messages p-component ng-tns-c31-7"></div>
-                  </p-messages><span tabindex="0" pripple=""
-                    class="p-ripple p-element p-button-outlined p-button-plain p-button p-component p-fileupload-choose"><span
-                      class="p-button-icon p-button-icon-left pi pi-upload ng-star-inserted"></span><span
-                      class="p-button-label ng-star-inserted">Upload Image</span><input type="file"
-                      accept="image/*" class="ng-star-inserted"><span class="p-ink"></span></span></div>
-              </p-fileUpload></div>
-          </div>
-          -->
-
-          <!--
-          <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
-          -->
-
           <div class="field mb-4 col-12 md:col-6">
             <label for="email" class="font-medium text-900">{{ 'label_email_UserRegister' | translate}}</label>
             <input id="email" type="text" pinputtext="" class="p-inputtext p-component p-element"
@@ -76,53 +36,6 @@
               [(ngModel)]="userRegisterUIDTO.authSignUpDTO.matchingPassword"
               placeholder="{{ 'placeholder_matching_password_UserRegister' | translate}}">
           </div>
-
-          <!--
-          <div class="field mb-4 col-12 md:col-6"><label for="country2"
-              class="font-medium text-900">Country</label><p-dropdown inputid="country2" optionlabel="name"
-              filterby="name" placeholder="Select a Country" class="p-element p-inputwrapper">
-              <div class="p-dropdown p-component p-dropdown-clearable">
-                <div class="p-hidden-accessible"><input type="text" readonly="" aria-haspopup="listbox" pautofocus=""
-                    role="combobox" class="p-element" id="country2" placeholder="Select a Country"
-                    aria-expanded="false"></div><span
-                  class="p-dropdown-label p-inputtext p-placeholder ng-star-inserted">Select a
-                  Country</span>
-                <div role="button" aria-label="dropdown trigger" aria-haspopup="listbox" class="p-dropdown-trigger">
-
-                  <chevrondownicon class="p-element p-icon-wrapper ng-star-inserted"><svg width="14" height="14"
-                      viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
-                      class="p-dropdown-trigger-icon p-icon" aria-hidden="true">
-                      <path
-                        d="M7.01744 10.398C6.91269 10.3985 6.8089 10.378 6.71215 10.3379C6.61541 10.2977 6.52766 10.2386 6.45405 10.1641L1.13907 4.84913C1.03306 4.69404 0.985221 4.5065 1.00399 4.31958C1.02276 4.13266 1.10693 3.95838 1.24166 3.82747C1.37639 3.69655 1.55301 3.61742 1.74039 3.60402C1.92777 3.59062 2.11386 3.64382 2.26584 3.75424L7.01744 8.47394L11.769 3.75424C11.9189 3.65709 12.097 3.61306 12.2748 3.62921C12.4527 3.64535 12.6199 3.72073 12.7498 3.84328C12.8797 3.96582 12.9647 4.12842 12.9912 4.30502C13.0177 4.48162 12.9841 4.662 12.8958 4.81724L7.58083 10.1322C7.50996 10.2125 7.42344 10.2775 7.32656 10.3232C7.22968 10.3689 7.12449 10.3944 7.01744 10.398Z"
-                        fill="currentColor"></path>
-                    </svg>
-                  </chevrondownicon>
-                </div><p-overlay class="p-element ng-tns-c19-5 ng-star-inserted"></p-overlay>
-              </div>
-            </p-dropdown>
-          </div>
-          -->
-
-          <!--
-          <div class="field mb-4 col-12 md:col-6"><label for="city2" class="font-medium text-900">City</label><input
-              id="city2" type="text" pinputtext="" class="p-inputtext p-component p-element"></div>
-          <div class="field mb-4 col-12 md:col-6"><label for="state2" class="font-medium text-900">State</label><input
-              id="state2" type="text" pinputtext="" class="p-inputtext p-component p-element"></div>
-          <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
-          <div class="field mb-4 col-12"><label for="website2" class="font-medium text-900">Website</label>
-            <div class="p-inputgroup"><span class="p-inputgroup-addon">www</span><input id="website2" type="text"
-                pinputtext="" class="p-inputtext p-component p-element"></div>
-          </div>
-          <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
-          <div class="field mb-4 col-12"><label for="privacy2" class="font-medium text-900">Privacy</label>
-            <div class="flex align-items-center"><p-inputSwitch inputid="privacy2" class="p-element">
-                <div class="p-inputswitch p-component">
-                  <div class="p-hidden-accessible"><input type="checkbox" role="switch" id="privacy2"
-                      aria-checked="false"></div><span class="p-inputswitch-slider"></span>
-                </div>
-              </p-inputSwitch><span class="ml-2 text-900">Share my data with contacts</span></div>
-          </div>
-          -->
 
           <div class="surface-border border-top-1 opacity-50 mb-3 col-12"></div>
           
