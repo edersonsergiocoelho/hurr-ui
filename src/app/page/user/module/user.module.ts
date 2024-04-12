@@ -18,6 +18,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { OverlayModule } from 'primeng/overlay';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
+import { TagModule } from 'primeng/tag';
 import { UserForgotPasswordComponent } from '../ui/user-forgot-password/user-forgot-password.component';
 
 @NgModule({
@@ -42,10 +43,11 @@ import { UserForgotPasswordComponent } from '../ui/user-forgot-password/user-for
     CheckboxModule,
     DividerModule,
     DropdownModule,
-    InputTextModule,
-    InputSwitchModule,
     FileUploadModule,
-    OverlayModule
+    InputSwitchModule,
+    InputTextModule,
+    OverlayModule,
+    TagModule 
   ],
   exports: [
     UserLoginComponent,
