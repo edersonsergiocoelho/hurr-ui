@@ -317,7 +317,7 @@ export class FileApprovedDetailComponent implements OnInit {
                 this.messageService.add({
                   severity: 'success',
                   summary: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
-                  detail: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
+                  detail: '' + this.fileApprovedDetailUIDTO.success_approve_message_service_FileApprovedDetail,
                 });
               }
             }
@@ -380,7 +380,7 @@ export class FileApprovedDetailComponent implements OnInit {
                 this.messageService.add({
                   severity: 'success',
                   summary: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
-                  detail: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
+                  detail: '' + this.fileApprovedDetailUIDTO.success_disapprove_message_service_FileApprovedDetail,
                 });
               }
             }
@@ -402,7 +402,7 @@ export class FileApprovedDetailComponent implements OnInit {
                 this.messageService.add({
                   severity: 'success',
                   summary: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
-                  detail: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
+                  detail: '' + this.fileApprovedDetailUIDTO.success_disapprove_message_service_FileApprovedDetail,
                 });
               }
             }
