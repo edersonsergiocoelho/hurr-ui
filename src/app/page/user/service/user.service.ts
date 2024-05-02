@@ -71,7 +71,7 @@ export class UserService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.httpClient.post<any>(`${environment.api}/upload`, formData, {
+    return this.httpClient.post<any>(`${this.apiUrl}/upload`, formData, {
       observe: 'response',
     });
   }
