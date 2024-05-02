@@ -26,7 +26,7 @@ export class UserService {
   }
 
   findByEmail(email: string): Observable<HttpResponse<User>> {
-    const url = `${this.apiUrl}/${email}`;
+    const url = `${this.apiUrl}/by/email/${email}`;
     return this.httpClient.get<User>(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<User>) => {
         return response;

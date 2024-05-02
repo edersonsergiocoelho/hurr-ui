@@ -12,6 +12,9 @@ import { AddressType } from 'src/app/page/admin/address-type/address-type.enum';
 import { MessageService } from 'primeng/api';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { CustomerService } from '../../../customer/service/customer.service';
+import { UserService } from 'src/app/page/user/service/user.service';
+import { FileService } from 'src/app/page/file/service/file.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-customer-vehicle-detail',
@@ -38,12 +41,13 @@ export class CustomerVehicleDetailComponent implements OnInit {
               private sessionStorageService: SessionStorageService,
 
               private messageService: MessageService,
-
+              private translateService: TranslateService,
               private customerService: CustomerService,
               private customerVehicleService: CustomerVehicleService,
               private customerVehicleReviewService: CustomerVehicleReviewService,
               private customerVehicleAddressService: CustomerVehicleAddressService,
-              
+              private userService: UserService,
+              private fileService: FileService,
               private rateUtils: RateUtilsService) {
                 
     this.rateUtilsService = rateUtils;
@@ -99,10 +103,14 @@ export class CustomerVehicleDetailComponent implements OnInit {
           // Inicializar contadores para cada nota
           let counts = [0, 0, 0, 0, 0];
 
-          // Contar o número de ocorrências para cada nota
-          this.customerVehicleDetailUIDTO.customersVehiclesReviews.forEach(review => {
+          // Iterar sobre as revisões dos clientes
+          for (const review of this.customerVehicleDetailUIDTO.customersVehiclesReviews) {
+
+            this.getUser(review);
+
+            // Incrementar o contador correspondente à nota da revisão
             counts[review.rating - 1]++;
-          });
+          }
 
           // Calcular porcentagem para cada nota
           const totalReviews = this.customerVehicleDetailUIDTO.customersVehiclesReviews.length;
@@ -179,6 +187,51 @@ export class CustomerVehicleDetailComponent implements OnInit {
     }
   }
 
+  async getUser(customerVehicleReview: any) {
+
+    try {
+
+      const userServiceFindByEmail = await firstValueFrom(this.userService.findByEmail(customerVehicleReview.customer.email).pipe(first()));
+
+      if (userServiceFindByEmail.status == 200) {
+
+        customerVehicleReview.user = userServiceFindByEmail.body;
+
+        if (customerVehicleReview.user.photoFileId != null) {
+          this.getFile(customerVehicleReview)
+        }
+      }
+
+    } catch (error: any) {
+      
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
+    }
+  }
+
+  async getFile (customerVehicleReview: any) {
+
+    try {
+
+      const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicleReview.user.photoFileId).pipe(first()));
+        
+      if (fileServiceFindById.status == 200) {
+        if (fileServiceFindById.body != null) {
+          
+          customerVehicleReview.file = fileServiceFindById.body;
+          customerVehicleReview.dataURI = `data:${customerVehicleReview.file.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
+    }
+  }
+
   getFilledStarsArray(rating: number): number[] {
     return Array(rating).fill(0);
   }
@@ -226,18 +279,18 @@ export class CustomerVehicleDetailComponent implements OnInit {
   async onClickContinue() {
 
     const currentUser = this.sessionStorageService.getUser();
+
+    const navigationExtras: NavigationExtras = {
+      state: {
+        customerVehicleId: this.customerVehicleDetailUIDTO.customerVehicleId,
+        dateInit: this.customerVehicleDetailUIDTO.dateInit,
+        selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
+        dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
+        selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
+      }
+    };
     
     if (currentUser == null) {
-
-      const navigationExtras: NavigationExtras = {
-        state: {
-          customerVehicleId: this.customerVehicleDetailUIDTO.customerVehicleId,
-          dateInit: this.customerVehicleDetailUIDTO.dateInit,
-          selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
-          dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
-          selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
-        }
-      };
   
       this.router.navigate(['user/login'], navigationExtras);
       
@@ -245,16 +298,6 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
       // Customer
       try {
-
-        const navigationExtras: NavigationExtras = {
-          state: {
-            customerVehicleId: this.customerVehicleDetailUIDTO.customerVehicleId,
-            dateInit: this.customerVehicleDetailUIDTO.dateInit,
-            selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
-            dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
-            selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
-          }
-        };
 
         const resultCustomerFindByEmail = await firstValueFrom(this.customerService.findByEmail(currentUser.email).pipe(first()));
 
@@ -269,14 +312,18 @@ export class CustomerVehicleDetailComponent implements OnInit {
                 customer.identityNumberValidated == true &&
                 customer.driverLicenseValidated == true) {
 
-                this.router.navigate(['checkout'], navigationExtras);
-            } else {
-              this.router.navigate(['customer/customer-validation'], navigationExtras);
+              this.router.navigate(['checkout'], navigationExtras);
             }
           }
         }
 
       } catch (error: any) {
+
+        if (error.status == 404) {
+          this.router.navigate(['customer/customer-validation'], navigationExtras);
+          return;
+        }
+
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
       }
     }

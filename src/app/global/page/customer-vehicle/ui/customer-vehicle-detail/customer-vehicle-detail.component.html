@@ -119,7 +119,7 @@
           optionLabel="address.streetAddress" 
           [showClear]="true" 
           placeholder="Selecione O Local De Retirada E Devolução"
-          [style]="{ 'width.px': 360 }">
+          [style]="{'width': '100%'}">
           <ng-template pTemplate="selectedItem">
             <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle">              
               <div>{{ customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle.address.streetAddress }}</div>
@@ -198,13 +198,15 @@
         <hr style="border: none; height: 2px; background-color: #6610f2;">
       </div>
 
+      <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;"><strong>Informações Da Quilometragem</strong></label>
+
       <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.unlimitedMileage" style="width: 100%;">
         <label style="font-style: normal; font-weight: normal; font-size: 20px;">Distância incluída: Ilimitado</label>
       </div>
 
       <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.limitedMileage" style="width: 100%;">
         <div class="field">
-          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Distância incluída: {{ customerVehicleDetailUIDTO.customerVehicle.limitedMileageIncluded }}</label>
+          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">Distância incluída: {{ customerVehicleDetailUIDTO.customerVehicle.limitedMileageIncluded }}</label>
         </div>
         <div class="field">
           <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço do KM excedente R$: {{ formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.limitedMileageValue) }}</label>
@@ -213,6 +215,26 @@
 
       <div style="width: 100%;">
         <hr style="border: none; height: 2px; background-color: #6610f2;">
+      </div>
+
+      <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;"><strong>Comodidade</strong></label>
+
+      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress" style="width: 100%;">
+        <div class="field">
+          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">Entrega No Endereço</label>
+        </div>
+        <div class="field">
+          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço Do KM Para Entrega R$: {{ formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.mileageFeeDelivery) }}</label>
+        </div>
+      </div>
+
+      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress" style="width: 100%;">
+        <div class="field">
+          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">Retira No Endereço</label>
+        </div>
+        <div class="field">
+          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço Do KM Para Retirada R$: {{ formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.mileageFeePickUp) }}</label>
+        </div>
       </div>
       
     </div>
@@ -267,8 +289,25 @@
           <li class="py-5 border-top-1 surface-border" *ngFor="let customerVehicleReview of customerVehicleDetailUIDTO.customersVehiclesReviews">
             <div class="flex align-items-center justify-content-between mb-3">
               <div class="flex align-items-center">
-                <img src="assets/images/blocks/avatars/circle/avatar-m-1.png"
-                  class="w-3rem h-3rem flex-shrink-0 mr-3">
+
+                <ng-container *ngIf="customerVehicleReview.user != null && customerVehicleReview.dataURI != null; else showDefaultImage">
+                  <img [src]="customerVehicleReview.dataURI" class="mr-3 lg:mr-0" style="width: 62px; height: 62px; border-radius: 50%;">
+                </ng-container>
+
+                <ng-template #showDefaultImage>
+                  <img *ngIf="customerVehicleReview.user != null && customerVehicleReview.dataURI == null && customerVehicleReview.user.imageURL != null; else showNoImage"
+                      [src]="customerVehicleReview.user.imageURL"
+                      class="mr-3 lg:mr-0"
+                      style="width: 62px; height: 62px; border-radius: 50%;"
+                      >
+                </ng-template>
+
+                <ng-template #showNoImage>
+                  <div class="mr-3 lg:mr-0" style="width: 62px; height: 62px; border-radius: 50%; background-color: white; position: relative;">
+                    <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">{{'span_no_image_Home' | translate}}</span>
+                  </div>
+                </ng-template>
+
                 <div class="flex flex-column"><span class="text-900 font-medium mb-1">{{customerVehicleReview.customer.firstName + ' ' + customerVehicleReview.customer.lastName}}</span>
                   <span
                     class="text-500 font-medium text-sm">{{customerVehicleReview.createdDate | dateFormatDDMMMMYYYYBR}}</span>

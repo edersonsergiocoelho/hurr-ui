@@ -129,7 +129,7 @@
                   </ng-container>
 
                   <ng-template #showDefaultImage>
-                    <img *ngIf="currentUser !== null && homeUIDTO.dataURI == null && currentUser.imageURL != null; else showNoImage"
+                    <img *ngIf="currentUser != null && homeUIDTO.dataURI == null && currentUser.imageURL != null; else showNoImage"
                         [src]="currentUser.imageURL"
                         class="mr-3 lg:mr-0"
                         style="width: 62px; height: 62px; border-radius: 50%;"
@@ -137,7 +137,7 @@
                   </ng-template>
 
                   <ng-template #showNoImage>
-                    <div *ngIf="currentUser !== null && homeUIDTO.dataURI == null && currentUser.imageURL == null;" class="mr-3 lg:mr-0" style="width: 62px; height: 62px; border-radius: 50%; background-color: white; position: relative;" (click)="toggleMenuUser()">
+                    <div *ngIf="currentUser != null && homeUIDTO.dataURI == null && currentUser.imageURL == null;" class="mr-3 lg:mr-0" style="width: 62px; height: 62px; border-radius: 50%; background-color: white; position: relative;" (click)="toggleMenuUser()">
                       <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">{{'span_no_image_Home' | translate}}</span>
                     </div>
                   </ng-template>

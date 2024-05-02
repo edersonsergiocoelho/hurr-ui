@@ -5,6 +5,7 @@ import { VehicleColor } from "src/app/page/admin/vehicle-color/entity/vehicle-co
 import { VehicleFuelType } from "src/app/page/admin/vehicle-fuel-type/entity/vehicle-fuel.type.entity";
 
 export interface CustomerVehicle {
+  
   customerVehicleId: string;
   customer: Customer;
   vehicle: Vehicle;
@@ -24,8 +25,9 @@ export interface CustomerVehicle {
   limitedMileageIncluded: number;
   limitedMileageValue: number;
   deliverToAddress: boolean;
+  mileageFeeDelivery: number;
   pickUpAtAddress: boolean;
-  mileageFeeDelivery?: number;
+  mileageFeePickUp: number;
   createdDate: string;
   modifiedDate?: string;
   enabled: boolean;
