@@ -5,6 +5,7 @@ export class User {
   email: string;
   displayName: string;
   password: string;
+  passwordVerificationCode: string;
   provider: string;
   photoFileId: string;
   imageURL: string;

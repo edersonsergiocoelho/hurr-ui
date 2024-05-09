@@ -12,6 +12,11 @@ import { AddressType } from 'src/app/page/admin/address-type/address-type.enum';
 import { MessageService } from 'primeng/api';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { CustomerService } from '../../../customer/service/customer.service';
+import { UserService } from 'src/app/page/user/service/user.service';
+import { FileService } from 'src/app/page/file/service/file.service';
+import { TranslateService } from '@ngx-translate/core';
+import { AddressRegisterDynamicDialogComponent } from '../../../address/ui/address-register-dynamic-dialog/address-register-dynamic-dialog.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-customer-vehicle-detail',
@@ -31,20 +36,22 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private location: Location,
-              private decimalPipe: DecimalPipe,
-              private router: Router,
-
-              private sessionStorageService: SessionStorageService,
-
-              private messageService: MessageService,
-
-              private customerService: CustomerService,
-              private customerVehicleService: CustomerVehicleService,
-              private customerVehicleReviewService: CustomerVehicleReviewService,
-              private customerVehicleAddressService: CustomerVehicleAddressService,
-              
-              private rateUtils: RateUtilsService) {
+  constructor(
+    private customerService: CustomerService,
+    private customerVehicleAddressService: CustomerVehicleAddressService,
+    private customerVehicleReviewService: CustomerVehicleReviewService,
+    private customerVehicleService: CustomerVehicleService,
+    private dialogService: DialogService,
+    private decimalPipe: DecimalPipe,
+    private fileService: FileService,
+    private location: Location,
+    private messageService: MessageService,
+    private rateUtils: RateUtilsService,
+    private router: Router,
+    private sessionStorageService: SessionStorageService,
+    private translateService: TranslateService,
+    private userService: UserService,
+  ) {
                 
     this.rateUtilsService = rateUtils;
 
@@ -89,6 +96,28 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     try {
 
+      const keys = [
+        'error_message_service_Generic', 
+        'warn_message_service_Generic',
+        'header_Address_CustomerVehicleDetail'
+      ];
+
+      const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
+
+      this.customerVehicleDetailUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.customerVehicleDetailUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleDetailUIDTO.header_Address_CustomerVehicleDetail = translations['header_Address_CustomerVehicleDetail'];
+
+    } catch (error: any) {
+      this.messageService.add({
+        severity: 'error',
+        summary: '' + this.customerVehicleDetailUIDTO.error_message_service_Generic,
+        detail: error.toString()
+      });
+    }
+
+    try {
+
       const resultFindAllByCustomerVehicleId = await firstValueFrom(this.customerVehicleReviewService.findAllByCustomerVehicleId(this.customerVehicleDetailUIDTO.customerVehicleId).pipe(first()));
 
       if (resultFindAllByCustomerVehicleId.status == 200) {
@@ -99,10 +128,14 @@ export class CustomerVehicleDetailComponent implements OnInit {
           // Inicializar contadores para cada nota
           let counts = [0, 0, 0, 0, 0];
 
-          // Contar o número de ocorrências para cada nota
-          this.customerVehicleDetailUIDTO.customersVehiclesReviews.forEach(review => {
+          // Iterar sobre as revisões dos clientes
+          for (const review of this.customerVehicleDetailUIDTO.customersVehiclesReviews) {
+
+            this.getUser(review);
+
+            // Incrementar o contador correspondente à nota da revisão
             counts[review.rating - 1]++;
-          });
+          }
 
           // Calcular porcentagem para cada nota
           const totalReviews = this.customerVehicleDetailUIDTO.customersVehiclesReviews.length;
@@ -179,6 +212,51 @@ export class CustomerVehicleDetailComponent implements OnInit {
     }
   }
 
+  async getUser(customerVehicleReview: any) {
+
+    try {
+
+      const userServiceFindByEmail = await firstValueFrom(this.userService.findByEmail(customerVehicleReview.customer.email).pipe(first()));
+
+      if (userServiceFindByEmail.status == 200) {
+
+        customerVehicleReview.user = userServiceFindByEmail.body;
+
+        if (customerVehicleReview.user.photoFileId != null) {
+          this.getFile(customerVehicleReview)
+        }
+      }
+
+    } catch (error: any) {
+      
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
+    }
+  }
+
+  async getFile (customerVehicleReview: any) {
+
+    try {
+
+      const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicleReview.user.photoFileId).pipe(first()));
+        
+      if (fileServiceFindById.status == 200) {
+        if (fileServiceFindById.body != null) {
+          
+          customerVehicleReview.file = fileServiceFindById.body;
+          customerVehicleReview.dataURI = `data:${customerVehicleReview.file.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
+    }
+  }
+
   getFilledStarsArray(rating: number): number[] {
     return Array(rating).fill(0);
   }
@@ -223,21 +301,59 @@ export class CustomerVehicleDetailComponent implements OnInit {
     this.rateUtils.calculateTotalRate(this.customerVehicleDetailUIDTO.dateInit, this.customerVehicleDetailUIDTO.dateEnd, this.customerVehicleDetailUIDTO.customerVehicle.dailyRate)
   }
 
+  newAddressDeliveryRegisterDynamicDialog(): void {
+    const ref = this.dialogService.open(AddressRegisterDynamicDialogComponent, {
+      header: '' + this.customerVehicleDetailUIDTO.header_Address_CustomerVehicleDetail,
+      width: '70%',
+      contentStyle: { 'max-height': '500px', 'overflow-y': 'auto' },
+      baseZIndex: 10000,
+      style: { 'max-height': '90%', 'overflow-y': 'auto' },
+      closable: true,
+      data: {
+        newRegister: true,
+        addressType: 'DELIVERY'
+      }
+    });
+  
+    ref.onClose.subscribe((result: any) => {
+
+    });
+  }
+
+  newAddressPickUpRegisterDynamicDialog(): void {
+    const ref = this.dialogService.open(AddressRegisterDynamicDialogComponent, {
+      header: '' + this.customerVehicleDetailUIDTO.header_Address_CustomerVehicleDetail,
+      width: '70%',
+      contentStyle: { 'max-height': '500px', 'overflow-y': 'auto' },
+      baseZIndex: 10000,
+      style: { 'max-height': '90%', 'overflow-y': 'auto' },
+      closable: true,
+      data: {
+        newRegister: true,
+        addressType: 'PICKUP'
+      }
+    });
+  
+    ref.onClose.subscribe((result: any) => {
+
+    });
+  }
+
   async onClickContinue() {
 
     const currentUser = this.sessionStorageService.getUser();
+
+    const navigationExtras: NavigationExtras = {
+      state: {
+        customerVehicleId: this.customerVehicleDetailUIDTO.customerVehicleId,
+        dateInit: this.customerVehicleDetailUIDTO.dateInit,
+        selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
+        dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
+        selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
+      }
+    };
     
     if (currentUser == null) {
-
-      const navigationExtras: NavigationExtras = {
-        state: {
-          customerVehicleId: this.customerVehicleDetailUIDTO.customerVehicleId,
-          dateInit: this.customerVehicleDetailUIDTO.dateInit,
-          selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
-          dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
-          selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
-        }
-      };
   
       this.router.navigate(['user/login'], navigationExtras);
       
@@ -245,16 +361,6 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
       // Customer
       try {
-
-        const navigationExtras: NavigationExtras = {
-          state: {
-            customerVehicleId: this.customerVehicleDetailUIDTO.customerVehicleId,
-            dateInit: this.customerVehicleDetailUIDTO.dateInit,
-            selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
-            dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
-            selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
-          }
-        };
 
         const resultCustomerFindByEmail = await firstValueFrom(this.customerService.findByEmail(currentUser.email).pipe(first()));
 
@@ -269,14 +375,27 @@ export class CustomerVehicleDetailComponent implements OnInit {
                 customer.identityNumberValidated == true &&
                 customer.driverLicenseValidated == true) {
 
-                this.router.navigate(['checkout'], navigationExtras);
+              this.router.navigate(['checkout'], navigationExtras);
+
             } else {
-              this.router.navigate(['customer/customer-validation'], navigationExtras);
+
+              this.messageService.add({ 
+                severity: 'warn', 
+                summary: 'Alerta',
+                detail: 'Não é possível termine de validar sua conta primeiro'
+              });
+
             }
           }
         }
 
       } catch (error: any) {
+
+        if (error.status == 404) {
+          this.router.navigate(['customer/customer-validation'], navigationExtras);
+          return;
+        }
+
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
       }
     }

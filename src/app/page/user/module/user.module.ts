@@ -13,9 +13,20 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputTextModule } from 'primeng/inputtext';
+import { UserRegisterComponent } from '../ui/user-register/user-register.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { OverlayModule } from 'primeng/overlay';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { TagModule } from 'primeng/tag';
+import { UserForgotPasswordComponent } from '../ui/user-forgot-password/user-forgot-password.component';
 
 @NgModule({
-  declarations: [UserLoginComponent],
+  declarations: [
+    UserLoginComponent,
+    UserRegisterComponent,
+    UserForgotPasswordComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -31,10 +42,17 @@ import { InputTextModule } from 'primeng/inputtext';
     CarouselModule,
     CheckboxModule,
     DividerModule,
-    InputTextModule
+    DropdownModule,
+    FileUploadModule,
+    InputSwitchModule,
+    InputTextModule,
+    OverlayModule,
+    TagModule 
   ],
   exports: [
-    UserLoginComponent
+    UserLoginComponent,
+    UserRegisterComponent,
+    UserForgotPasswordComponent
   ]
 })
 export class UserModule { }

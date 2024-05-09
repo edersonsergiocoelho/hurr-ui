@@ -11,6 +11,7 @@ import { first } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthSignInDTO } from 'src/app/core/auth/dto/auth-sign-in-dto.dto';
+import { Product } from '../../dto/product';
 
 @Component({
   selector: 'app-user-login',
@@ -41,9 +42,7 @@ export class UserLoginComponent {
     private userService: UserService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService
-  ) { 
-  
-  }
+  ) { }
 
   ngOnInit(): void {
 
@@ -85,6 +84,19 @@ export class UserLoginComponent {
     this.userLoginUIDTO = new UserLoginUIDTO();
 
     this.userLoginUIDTO.authSignInDTO = new AuthSignInDTO();
+  }
+
+  getSeverity(status: string) {
+    switch (status) {
+      case 'INSTOCK':
+          return 'success';
+      case 'LOWSTOCK':
+          return 'warning';
+      case 'OUTOFSTOCK':
+          return 'danger';
+    }
+
+    return null;
   }
 
   onSubmit(): void {
@@ -137,5 +149,13 @@ export class UserLoginComponent {
         this.ngxSpinnerService.hide();
       }
     });
+  }
+
+  navigateToUserRegister() {
+    this.router.navigate(['user/register']);
+  }
+
+  navigateToUserForgotPassword() {
+    this.router.navigate(['user/forgot-password']);
   }
 }

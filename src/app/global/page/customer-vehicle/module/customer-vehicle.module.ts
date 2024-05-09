@@ -16,7 +16,7 @@ import { ToastModule } from 'primeng/toast';
 import { CustomerVehicleDetailComponent } from '../ui/customer-vehicle-detail/customer-vehicle-detail.component';
 
 import { DateFormatDDMMMMYYYYBR } from 'src/app/utils/pipe/date/date-format-dd-mmmm-yyyy-br';
-import { MessageService } from 'primeng/api';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [CustomerVehicleDetailComponent, DateFormatDDMMMMYYYYBR],
@@ -27,6 +27,8 @@ import { MessageService } from 'primeng/api';
     FormsModule,
     ReactiveFormsModule,
     CustomerVehicleRoutingModule,
+
+    TranslateModule,
 
     ButtonModule,
     CalendarModule,

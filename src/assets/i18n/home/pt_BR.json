@@ -1,3 +1,7 @@
 {
-  "span_no_image_Home": "Sem Imagem"
+  "span_no_image_Home": "Sem Imagem",
+
+  "warn_error_getting_current_location_HomeSearchCars": "Erro Ao Obter O Local Atual, Tente Informar Um Endereço Manualmente.",
+  "warn_error_accessing_geolocation_HomeSearchCars": "Erro Ao Acessar A Geolocalização.",
+  "warn_geolocation_not_supported_by_the_browser_HomeSearchCars": "Geolocalização Não Suportada Pelo Navegador, Tente Outro Navegador."
 }

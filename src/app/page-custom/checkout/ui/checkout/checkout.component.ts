@@ -164,7 +164,8 @@ export class CheckoutComponent implements OnInit {
       style: { 'max-height': '90%', 'overflow-y': 'auto' },
       closable: true,
       data: {
-        newRegister: true
+        newRegister: true,
+        addressType: 'CUSTOMER'
       }
     });
   

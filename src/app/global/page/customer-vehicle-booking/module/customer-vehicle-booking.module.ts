@@ -16,6 +16,10 @@ import { CustomerVehicleBookingSearchComponent } from '../ui/customer-vehicle-bo
 import { CustomerVehicleBookingSuccessComponent } from '../ui/customer-vehicle-booking-success/customer-vehicle-booking-success.component';
 import { CustomerVehicleBookingCustomerVehicleComponent } from '../ui/customer-vehicle-booking-customer-vehicle/customer-vehicle-booking-customer-vehicle.component';
 import { CustomerVehicleBookingCustomerVehicleSearchComponent } from '../ui/customer-vehicle-booking-customer-vehicle-search/customer-vehicle-booking-customer-vehicle-search.component';
+import { DialogService } from 'primeng/dynamicdialog';
+import { CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog.component';
+import { CustomerVehicleBookingCustomerVehicleDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-dynamic-dialog/customer-vehicle-booking-customer-vehicle-dynamic-dialog.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,10 @@ import { CustomerVehicleBookingCustomerVehicleSearchComponent } from '../ui/cust
     CustomerVehicleBookingSearchComponent,
     CustomerVehicleBookingSuccessComponent,
     CustomerVehicleBookingCustomerVehicleComponent,
+    CustomerVehicleBookingCustomerVehicleDynamicDialogComponent,
+    CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent,
     CustomerVehicleBookingCustomerVehicleSearchComponent,
+    CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,14 +46,21 @@ import { CustomerVehicleBookingCustomerVehicleSearchComponent } from '../ui/cust
     // PrimeNG
     DataViewModule,
     DividerModule,
-    DropdownModule
+    DropdownModule,
+    InputTextModule
   ], 
   exports: [
     CustomerVehicleBookingComponent,
     CustomerVehicleBookingSearchComponent,
+    CustomerVehicleBookingCustomerVehicleDynamicDialogComponent,
+    CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent,
     CustomerVehicleBookingSuccessComponent,
     CustomerVehicleBookingCustomerVehicleComponent,
     CustomerVehicleBookingCustomerVehicleSearchComponent,
+    CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent,
+  ],
+  providers: [
+    DialogService
   ]
 })
 export class CustomerVehicleBookingModule { }

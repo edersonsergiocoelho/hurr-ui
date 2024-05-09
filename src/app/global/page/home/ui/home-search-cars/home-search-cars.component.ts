@@ -1,7 +1,10 @@
-import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { HomeUIService } from '../../service/home-ui/home-ui.service';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { HomeSearchCarsUIDTO } from './dto/home-search-cars-ui.dto';
+import { MessageService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { first, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home-search-cars',
@@ -14,17 +17,22 @@ export class HomeSearchCarsComponent implements OnInit {
 
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private ngZone: NgZone,
-              private router: Router,
-              private homeUIService: HomeUIService) { }
+  constructor(
+    private messageService: MessageService,
+    private ngZone: NgZone,
+    private ngxSpinnerService: NgxSpinnerService,
+    private router: Router,
+    private translateService: TranslateService,
+  ) { }
 
   ngOnInit() {
+    this.translateService.setDefaultLang('pt_BR');
+    this.initAutocomplete();
+    this.resetSearchForm();
+  }
 
-    this.resetRegisterForm();
-
+  initAutocomplete() {
     const autocompleteGoogle = new google.maps.places.Autocomplete(this.searchInput.nativeElement);
-
     autocompleteGoogle.addListener('place_changed', () => {
       this.ngZone.run(() => {
         this.homeSearchCarsUIDTO.place = autocompleteGoogle.getPlace();
@@ -32,7 +40,7 @@ export class HomeSearchCarsComponent implements OnInit {
     });
   }
 
-  resetRegisterForm () {
+  resetSearchForm () {
 
     this.homeSearchCarsUIDTO = new HomeSearchCarsUIDTO();
     this.homeSearchCarsUIDTO.today = new Date();
@@ -40,6 +48,37 @@ export class HomeSearchCarsComponent implements OnInit {
     this.homeSearchCarsUIDTO.dateEnd = new Date(this.homeSearchCarsUIDTO.today);
   
     this.homeSearchCarsUIDTO.dateEnd.setDate(this.homeSearchCarsUIDTO.dateEnd.getDate() + 2);
+  }
+
+  async asyncCallFunctions() {
+
+    this.ngxSpinnerService.show();
+
+    try {
+
+      const keys = [
+        'warn_message_service_Generic',
+        'warn_error_getting_current_location_HomeSearchCars',
+        'warn_error_accessing_geolocation_HomeSearchCars',
+        'warn_geolocation_not_supported_by_the_browser_HomeSearchCars'
+      ];
+
+      const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
+
+      this.homeSearchCarsUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.homeSearchCarsUIDTO.warn_error_getting_current_location_HomeSearchCars = translations['warn_error_getting_current_location_HomeSearchCars'];
+      this.homeSearchCarsUIDTO.warn_error_accessing_geolocation_HomeSearchCars = translations['warn_error_accessing_geolocation_HomeSearchCars'];
+      this.homeSearchCarsUIDTO.warn_geolocation_not_supported_by_the_browser_HomeSearchCars = translations['warn_geolocation_not_supported_by_the_browser_HomeSearchCars'];
+
+    } catch (error: any) {
+      this.messageService.add({
+        severity: 'error',
+        summary: '' + this.homeSearchCarsUIDTO.warn_error_getting_current_location_HomeSearchCars,
+        detail: error.toString()
+      });
+    }
+
+    this.ngxSpinnerService.hide();
   }
 
   getCurrentLocation() {
@@ -56,46 +95,56 @@ export class HomeSearchCarsComponent implements OnInit {
           if (status === 'OK' && results && results.length > 0) {
             this.homeSearchCarsUIDTO.place = results[0];
 
-            const navigationExtras: NavigationExtras = {
-              state: {
-                place: JSON.stringify(results[0]),
-                dateInit: this.homeSearchCarsUIDTO.dateInit,
-                selectedHourInit: this.homeSearchCarsUIDTO.selectedHourInit,
-                dateEnd: this.homeSearchCarsUIDTO.dateEnd,
-                selectedHourEnd: this.homeSearchCarsUIDTO.selectedHourEnd,
-              }
-            };
-
-            this.router.navigate(['search-cars-detail'], navigationExtras);
+            this.navigateToSearchCarsDetail();
+            
           } else {
-            console.error('Erro ao obter o local atual.');
+            
+            this.messageService.add({ 
+              severity: 'warn', 
+              summary: '' + this.homeSearchCarsUIDTO.warn_message_service_Generic, 
+              detail: '' + this.homeSearchCarsUIDTO.warn_error_getting_current_location_HomeSearchCars 
+            });
+
           }
         });
       }, () => {
-        console.error('Erro ao acessar a geolocalização.');
+
+        this.messageService.add({ 
+          severity: 'warn', 
+          summary: '' + this.homeSearchCarsUIDTO.warn_message_service_Generic, 
+          detail: '' + this.homeSearchCarsUIDTO.warn_error_accessing_geolocation_HomeSearchCars 
+        });
+
       });
     } else {
-      console.error('Geolocalização não suportada pelo navegador.');
+
+      this.messageService.add({ 
+        severity: 'warn', 
+        summary: '' + this.homeSearchCarsUIDTO.warn_message_service_Generic, 
+        detail: '' + this.homeSearchCarsUIDTO.warn_geolocation_not_supported_by_the_browser_HomeSearchCars 
+      });
+
     }
   }
 
-  search () {
-
-    if (this.homeSearchCarsUIDTO.place == null) {
+  search() {
+    if (!this.homeSearchCarsUIDTO.place) {
       this.getCurrentLocation();
     } else {
-
-      const navigationExtras: NavigationExtras = {
-        state: {
-          place: JSON.stringify(this.homeSearchCarsUIDTO.place),
-          dateInit: this.homeSearchCarsUIDTO.dateInit,
-          selectedHourInit: this.homeSearchCarsUIDTO.selectedHourInit,
-          dateEnd: this.homeSearchCarsUIDTO.dateEnd,
-          selectedHourEnd: this.homeSearchCarsUIDTO.selectedHourEnd,
-        }
-      };
-
-      this.router.navigate(['search-cars-detail'], navigationExtras);
+      this.navigateToSearchCarsDetail();
     }
+  }
+
+  private navigateToSearchCarsDetail() {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        place: JSON.stringify(this.homeSearchCarsUIDTO.place),
+        dateInit: this.homeSearchCarsUIDTO.dateInit,
+        selectedHourInit: this.homeSearchCarsUIDTO.selectedHourInit,
+        dateEnd: this.homeSearchCarsUIDTO.dateEnd,
+        selectedHourEnd: this.homeSearchCarsUIDTO.selectedHourEnd,
+      }
+    };
+    this.router.navigate(['search-cars-detail'], navigationExtras);
   }
 }

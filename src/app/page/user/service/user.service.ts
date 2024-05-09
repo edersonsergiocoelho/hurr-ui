@@ -4,6 +4,8 @@ import { Observable, catchError, map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../entity/user.entity';
 import { UserSearchDTO } from '../dto/user-search-dto.dto';
+import { UserForgotPasswordDTO } from '../dto/user-forgot-password-dto.dto';
+import { UserPasswordVerificationCodeDTO } from '../dto/user-password-verification-code-dto.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,7 @@ export class UserService {
   }
 
   findByEmail(email: string): Observable<HttpResponse<User>> {
-    const url = `${this.apiUrl}/${email}`;
+    const url = `${this.apiUrl}/by/email/${email}`;
     return this.httpClient.get<User>(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<User>) => {
         return response;
@@ -69,9 +71,25 @@ export class UserService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.httpClient.post<any>(`${environment.api}/upload`, formData, {
+    return this.httpClient.post<any>(`${this.apiUrl}/upload`, formData, {
       observe: 'response',
     });
+  }
+
+  forgotPasswordVerificationCode(userPasswordVerificationCodeDTO: UserPasswordVerificationCodeDTO): Observable<HttpResponse<User>> {
+    return this.httpClient.post<User>(`${this.apiUrl}/forgotPasswordVerificationCode`, userPasswordVerificationCodeDTO, { observe: 'response' }).pipe(
+      map((response: HttpResponse<User>) => {
+        return response;
+      })
+    );
+  }
+
+  forgotPasswordValidated(userForgotPasswordDTO: UserForgotPasswordDTO): Observable<HttpResponse<User>> {
+    return this.httpClient.post<User>(`${this.apiUrl}/forgotPasswordValidated`, userForgotPasswordDTO, { observe: 'response' }).pipe(
+      map((response: HttpResponse<User>) => {
+        return response;
+      })
+    );
   }
 
   save(user: User): Observable<HttpResponse<User>> {
@@ -85,6 +103,15 @@ export class UserService {
   update(user: User): Observable<HttpResponse<User>> {
     const url = `${this.apiUrl}/${user.userId}`;
     return this.httpClient.put<User>(url, user, { observe: 'response' }).pipe(
+      map((response: HttpResponse<User>) => {
+        return response;
+      })
+    );
+  }
+
+  forgotPassword(userForgotPasswordDTO: UserForgotPasswordDTO): Observable<HttpResponse<User>> {
+    const url = `${this.apiUrl}/forgotPassword`;
+    return this.httpClient.put<User>(url, userForgotPasswordDTO, { observe: 'response' }).pipe(
       map((response: HttpResponse<User>) => {
         return response;
       })

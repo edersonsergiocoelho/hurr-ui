@@ -62,6 +62,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
     this.addressRegisterDynamicDialogUIDTO.customerAddress = new CustomerAddress();
 
     this.addressRegisterDynamicDialogUIDTO.newRegister = this.dynamicDialogConfig.data.newRegister;
+    this.addressRegisterDynamicDialogUIDTO.addressType = this.dynamicDialogConfig.data.addressType;
 
     if (this.addressRegisterDynamicDialogUIDTO.newRegister == false) {
       this.addressRegisterDynamicDialogUIDTO.addressDTO = Address.toDTO(this.dynamicDialogConfig.data.customerAddress.address);
@@ -237,7 +238,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
       this.addressRegisterDynamicDialogUIDTO.address.country = this.addressRegisterDynamicDialogUIDTO.selectedCountry;
       this.addressRegisterDynamicDialogUIDTO.address.state = this.addressRegisterDynamicDialogUIDTO.selectedState;
       this.addressRegisterDynamicDialogUIDTO.address.city = this.addressRegisterDynamicDialogUIDTO.selectedCity;
-      this.addressRegisterDynamicDialogUIDTO.address.addressType = 'CUSTOMER';
+      this.addressRegisterDynamicDialogUIDTO.address.addressType = this.addressRegisterDynamicDialogUIDTO.addressType;
 
       const resultAddressServiceSave = await firstValueFrom(this.addressService.save(this.addressRegisterDynamicDialogUIDTO.address).pipe(first()));
 

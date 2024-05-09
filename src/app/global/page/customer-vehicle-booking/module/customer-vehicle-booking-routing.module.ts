@@ -6,7 +6,7 @@ import { CustomerVehicleBookingCustomerVehicleComponent } from '../ui/customer-v
 
 const routes: Routes = [
   {path: 'customer-vehicle-booking', component: CustomerVehicleBookingComponent},
-  {path: 'customer-vehicle-booking', component: CustomerVehicleBookingCustomerVehicleComponent},
+  {path: 'customer-vehicle-booking/customer-vehicle', component: CustomerVehicleBookingCustomerVehicleComponent},
   {path: 'customer-vehicle-booking/success', component: CustomerVehicleBookingSuccessComponent},
 ];
 

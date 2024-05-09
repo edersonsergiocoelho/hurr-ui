@@ -13,7 +13,7 @@
       <div class="bg-indigo-500" style="height: 400px;">
         <div class="py-3 px-5 flex align-items-center justify-content-between relative lg:static"
           style="min-height: 80px;">
-          <img src="assets/images/logo/HURR-5.png" alt="Image" height="200"
+          <img src="assets/images/logo/HURR.png" alt="Image" height="200"
             class="mr-0 lg:mr-6">
             <a pripple="" pstyleclass="@next" enterclass="hidden" leavetoclass="hidden"
               class="p-element p-ripple cursor-pointer block lg:hidden text-indigo-50">
@@ -129,7 +129,7 @@
                   </ng-container>
 
                   <ng-template #showDefaultImage>
-                    <img *ngIf="currentUser !== null && homeUIDTO.dataURI == null && currentUser.imageURL != null; else showNoImage"
+                    <img *ngIf="currentUser != null && homeUIDTO.dataURI == null && currentUser.imageURL != null; else showNoImage"
                         [src]="currentUser.imageURL"
                         class="mr-3 lg:mr-0"
                         style="width: 62px; height: 62px; border-radius: 50%;"
@@ -137,7 +137,7 @@
                   </ng-template>
 
                   <ng-template #showNoImage>
-                    <div class="mr-3 lg:mr-0" style="width: 62px; height: 62px; border-radius: 50%; background-color: white; position: relative;" (click)="toggleMenuUser()">
+                    <div *ngIf="currentUser != null && homeUIDTO.dataURI == null && currentUser.imageURL == null;" class="mr-3 lg:mr-0" style="width: 62px; height: 62px; border-radius: 50%; background-color: white; position: relative;" (click)="toggleMenuUser()">
                       <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">{{'span_no_image_Home' | translate}}</span>
                     </div>
                   </ng-template>
@@ -173,6 +173,8 @@
                     </a>
                   </li>
 
+                  <p-divider></p-divider>
+
                   <li *ngIf="currentUser != null && currentUser.roles[0] == 'ROLE_USER'">
                     <a pripple=""
                       class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
@@ -187,6 +189,15 @@
                       class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
                       <i class="pi pi-book mr-2"></i>
                       <span class="font-medium" (click)="onClickCustomerVehicleBooking()">Minhas Reservas</span>
+                      <span class="p-ink"></span>
+                    </a>
+                  </li>
+
+                  <li *ngIf="currentUser != null && currentUser.roles[0] == 'ROLE_USER'">
+                    <a pripple=""
+                      class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
+                      <i class="pi pi-car mr-2"></i>
+                      <span class="font-medium" (click)="onClickCustomerVehicleBookingCustomerVehicle()">Reservas Dos Meus Carros</span>
                       <span class="p-ink"></span>
                     </a>
                   </li>
