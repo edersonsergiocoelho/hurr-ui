@@ -42,4 +42,9 @@ export class CustomerVehicleDetailUIDTO {
   customersVehiclesReviews: any[];
 
   place: any;
+
+  // Messages
+  error_message_service_Generic: string;
+  warn_message_service_Generic: string;
+  header_Address_CustomerVehicleDetail: string;
 }

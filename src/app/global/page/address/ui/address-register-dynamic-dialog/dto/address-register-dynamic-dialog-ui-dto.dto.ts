@@ -10,6 +10,8 @@ import { CustomerAddressDTO } from "src/app/global/page/customer-address/dto/cus
 export class AddressRegisterDynamicDialogUIDTO {
 
   newRegister: boolean;
+  addressType: string;
+
   customer: Customer;
 
   address: Address;
