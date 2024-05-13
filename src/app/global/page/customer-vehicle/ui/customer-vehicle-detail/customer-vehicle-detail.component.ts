@@ -17,6 +17,8 @@ import { FileService } from 'src/app/page/file/service/file.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AddressRegisterDynamicDialogComponent } from '../../../address/ui/address-register-dynamic-dialog/address-register-dynamic-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
+import { CustomerAddressService } from '../../../customer-address/service/customer-address.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-customer-vehicle-detail',
@@ -38,6 +40,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
+    private customerAddressService: CustomerAddressService,
     private customerVehicleAddressService: CustomerVehicleAddressService,
     private customerVehicleReviewService: CustomerVehicleReviewService,
     private customerVehicleService: CustomerVehicleService,
@@ -71,22 +74,28 @@ export class CustomerVehicleDetailComponent implements OnInit {
     this.resetDetailForm();
   }
 
-  resetDetailForm () {
+  resetDetailForm() {
 
     this.customerVehicleDetailUIDTO = new CustomerVehicleDetailUIDTO();
 
     const state = this.location.getState() as any;
     
     if (state != null) {
+
       this.customerVehicleDetailUIDTO.customerVehicleId = state.customerVehicleId;
 
-      this.customerVehicleDetailUIDTO.dateInit = state.dateInit;
+      this.customerVehicleDetailUIDTO.dateInit = moment(state.dateInit).toDate();
       this.customerVehicleDetailUIDTO.selectedHourInit = state.selectedHourInit;
-      this.customerVehicleDetailUIDTO.dateEnd = state.dateEnd;
+      this.customerVehicleDetailUIDTO.dateEnd = moment(state.dateEnd).toDate();
       this.customerVehicleDetailUIDTO.selectedHourEnd = state.selectedHourEnd;
 
-      this.customerVehicleDetailUIDTO.dateCancelFree = new Date(this.customerVehicleDetailUIDTO.dateInit);
-      this.customerVehicleDetailUIDTO.dateCancelFree.setDate(this.customerVehicleDetailUIDTO.dateCancelFree.getDate() - 1);
+      const dateInitMoment = moment(this.customerVehicleDetailUIDTO.dateInit);
+
+      if (dateInitMoment.isSame(moment(), 'day')) {
+        this.customerVehicleDetailUIDTO.dateCancelFree = dateInitMoment.toDate();
+      } else {
+        this.customerVehicleDetailUIDTO.dateCancelFree = moment(this.customerVehicleDetailUIDTO.dateInit).subtract(1, 'day').toDate();
+      }
     }
 
     this.asyncCallFunctions();
@@ -114,6 +123,23 @@ export class CustomerVehicleDetailComponent implements OnInit {
         summary: '' + this.customerVehicleDetailUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
+    }
+
+    try {
+
+      const currentUser = this.sessionStorageService.getUser();
+
+      const resultCustomerFindByEmail = await firstValueFrom(this.customerService.findByEmail(currentUser.email).pipe(first()));
+
+      if (resultCustomerFindByEmail.status == 200) {
+
+        if (resultCustomerFindByEmail.body != null) {
+          this.customerVehicleDetailUIDTO.customer = resultCustomerFindByEmail.body;
+        }
+      }
+
+    } catch (error: any) {
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
     }
 
     try {
@@ -183,7 +209,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     try {
 
-      const resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery = await firstValueFrom(this.customerVehicleAddressService.findAllByCustomerVehicleIdAndAddressType(this.customerVehicleDetailUIDTO.customerVehicleId, AddressType.DELIVERY).pipe(first()));
+      const resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery = await firstValueFrom(this.customerAddressService.findByCustomerIdAndAddressTypeName(this.customerVehicleDetailUIDTO.customer.customerId, AddressType.DELIVERY).pipe(first()));
 
       if (resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery.status == 200) {
 
@@ -198,7 +224,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     try {
 
-      const resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup = await firstValueFrom(this.customerVehicleAddressService.findAllByCustomerVehicleIdAndAddressType(this.customerVehicleDetailUIDTO.customerVehicleId, AddressType.PICKUP).pipe(first()));
+      const resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup = await firstValueFrom(this.customerAddressService.findByCustomerIdAndAddressTypeName(this.customerVehicleDetailUIDTO.customer.customerId, AddressType.PICKUP).pipe(first()));
 
       if (resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup.status == 200) {
 
@@ -224,7 +250,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
         if (customerVehicleReview.user.photoFileId != null) {
           this.getFile(customerVehicleReview)
-        }
+        }        
       }
 
     } catch (error: any) {
@@ -291,10 +317,20 @@ export class CustomerVehicleDetailComponent implements OnInit {
   }
 
   ngModelChangeDateInit() {
-    this.customerVehicleDetailUIDTO.dateCancelFree = new Date(this.customerVehicleDetailUIDTO.dateInit);
-    this.customerVehicleDetailUIDTO.dateCancelFree.setDate(this.customerVehicleDetailUIDTO.dateCancelFree.getDate() - 1);
 
-    this.rateUtils.calculateTotalRate(this.customerVehicleDetailUIDTO.dateInit, this.customerVehicleDetailUIDTO.dateEnd, this.customerVehicleDetailUIDTO.customerVehicle.dailyRate)
+    const dateInitMoment = moment(this.customerVehicleDetailUIDTO.dateInit);
+
+    if (dateInitMoment.isSame(moment(), 'day')) {
+      this.customerVehicleDetailUIDTO.dateCancelFree = dateInitMoment.toDate();
+    } else {
+      this.customerVehicleDetailUIDTO.dateCancelFree = moment(this.customerVehicleDetailUIDTO.dateInit).subtract(1, 'day').toDate();
+    }
+
+    this.rateUtils.calculateTotalRate(
+        moment(this.customerVehicleDetailUIDTO.dateInit).toDate(),
+        moment(this.customerVehicleDetailUIDTO.dateEnd).toDate(),
+        this.customerVehicleDetailUIDTO.customerVehicle.dailyRate
+    );
   }
 
   ngModelChangeDateEnd() {
@@ -310,8 +346,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
       style: { 'max-height': '90%', 'overflow-y': 'auto' },
       closable: true,
       data: {
-        newRegister: true,
-        addressType: 'DELIVERY'
+        newRegister: true
       }
     });
   
@@ -329,8 +364,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
       style: { 'max-height': '90%', 'overflow-y': 'auto' },
       closable: true,
       data: {
-        newRegister: true,
-        addressType: 'PICKUP'
+        newRegister: true
       }
     });
   

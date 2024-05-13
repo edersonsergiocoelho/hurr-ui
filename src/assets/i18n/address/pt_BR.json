@@ -1,6 +1,8 @@
 {
   "title_AddressRegisterDynamicDialog": "Cadastro De Endereço",
 
+  "label_address_type_AddressRegisterDynamicDialog": "Tipo De Endereço",
+  "placeholder_address_type_AddressRegisterDynamicDialog": "Informe O Tipo De Endereço, Usado Por Ex. Quando Você Quer Cadastrar O Mesmo Endereço De Entrega E Retirada",
   "label_nickname_AddressRegisterDynamicDialog": "Apelido",
   "placeholder_nickname_AddressRegisterDynamicDialog": "Informe O Apelido Por Ex. Cartão Santander",
   "label_country_AddressRegisterDynamicDialog": "País",

@@ -3,7 +3,9 @@ export class HomeSearchCarsUIDTO {
   dateInit: Date;
   dateEnd: Date;
   today: Date;
+
   dateFormat = 'dd/mm/yy';
+  
   selectedHourInit: string = '10:00';
   selectedHourEnd: string = '10:00';
 

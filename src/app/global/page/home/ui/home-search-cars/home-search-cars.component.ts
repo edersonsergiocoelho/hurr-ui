@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first, firstValueFrom } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home-search-cars',
@@ -40,14 +41,13 @@ export class HomeSearchCarsComponent implements OnInit {
     });
   }
 
-  resetSearchForm () {
-
+  resetSearchForm() {
+    
     this.homeSearchCarsUIDTO = new HomeSearchCarsUIDTO();
-    this.homeSearchCarsUIDTO.today = new Date();
-    this.homeSearchCarsUIDTO.dateInit = new Date(this.homeSearchCarsUIDTO.today);
-    this.homeSearchCarsUIDTO.dateEnd = new Date(this.homeSearchCarsUIDTO.today);
-  
-    this.homeSearchCarsUIDTO.dateEnd.setDate(this.homeSearchCarsUIDTO.dateEnd.getDate() + 2);
+    this.homeSearchCarsUIDTO.today = moment().toDate();
+
+    this.homeSearchCarsUIDTO.dateInit = moment(this.homeSearchCarsUIDTO.today).toDate();
+    this.homeSearchCarsUIDTO.dateEnd = moment(this.homeSearchCarsUIDTO.today).add(2, 'days').toDate();
   }
 
   async asyncCallFunctions() {

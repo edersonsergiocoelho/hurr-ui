@@ -1,13 +1,16 @@
+import { CustomerAddress } from "src/app/global/page/customer-address/entity/customer-address.entity";
 import { CustomerVehicleAddress } from "src/app/global/page/customer-vehicle-address/entity/customer-vehicle-address.entity";
 
 export class CustomerVehicleDetailUIDTO {
+
+  customer: any;
 
   customerVehicleId: any;
   customerVehicle: any;
 
   listCustomerVehicleAddressVehicle: Array<CustomerVehicleAddress>;
-  listCustomerVehicleAddressDelivery: Array<CustomerVehicleAddress>;
-  listCustomerVehicleAddressPickup: Array<CustomerVehicleAddress>;
+  listCustomerVehicleAddressDelivery: Array<CustomerAddress>;
+  listCustomerVehicleAddressPickup: Array<CustomerAddress>;
 
   selectedCustomerVehicleAddressVehicle: CustomerVehicleAddress;
   selectedCustomerVehicleAddressDelivery: CustomerVehicleAddress;
@@ -22,6 +25,19 @@ export class CustomerVehicleDetailUIDTO {
 
   selectedHourInit?: string = '10:00';
   selectedHourEnd?: string = '10:00';
+
+  // Array de horas a partir da hora atual
+  hoursInit: string[] = Array.from({ length: 48 }, (_, index) => {
+    const currentHour = new Date().getHours();
+    const currentMinute = new Date().getMinutes();
+    const hour = Math.floor(index / 2);
+    const minute: number = index % 2 === 0 ? 0 : 30; // Converter minute para número
+    if (hour < currentHour || (hour === currentHour && minute < currentMinute)) {
+      return ''; // Para as horas passadas, retornar uma string vazia
+    } else {
+      return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+    }
+  }).filter(hour => hour !== ''); // Filtrar as horas vazias
 
   hours: string[] = Array.from({ length: 48 }, (_, index) => {
     const hour = Math.floor(index / 2);

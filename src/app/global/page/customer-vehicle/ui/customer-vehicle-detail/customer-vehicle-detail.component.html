@@ -209,7 +209,7 @@
       </div>
       -->
 
-      <div *ngif="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress" style="width: 100%;">
+      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress" style="width: 100%;">
         <p-button label="Adicionar Endereço" (onClick)="newAddressPickUpRegisterDynamicDialog()" [style]="{ 'width.px': 360 }"></p-button>
       </div>
 

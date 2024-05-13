@@ -241,8 +241,8 @@
         <div class="p-5 flex flex-column flex-auto" style="margin-top: -8rem;">
           <div class="border-2 border-dashed surface-border border-round surface-section flex-auto">
       
-            <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="cog" [fullScreen]="true">
-              <h1>Carregando...</h1>
+            <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#6610f2" type="cog" [fullScreen]="true">
+              <h1 style="color: #6610f2;">{{ loadingText }}</h1>
             </ngx-spinner>
             <p-toast [life]="15000"></p-toast>
             <router-outlet></router-outlet>

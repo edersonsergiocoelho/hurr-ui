@@ -33,6 +33,7 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/address/',
   '/assets/i18n/checkout/',
   '/assets/i18n/customer-validation/',
+  '/assets/i18n/customer-vehicle/',
   '/assets/i18n/customer-vehicle-booking/',
   '/assets/i18n/file-approved/',
   '/assets/i18n/home/',

@@ -15,6 +15,7 @@ import { CustomerAddressService } from 'src/app/global/page/customer-address/ser
 import { CustomerService } from 'src/app/global/page/customer/service/customer.service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { CustomerAddress } from 'src/app/global/page/customer-address/entity/customer-address.entity';
+import { AddressType } from 'src/app/page/admin/address-type/address-type.enum';
 
 @Component({
   selector: 'app-checkout',
@@ -54,16 +55,21 @@ export class CheckoutComponent implements OnInit {
     const state = this.location.getState() as any;
     
     if (state != null) {
-
+      
       this.checkoutUIDTO.customerVehicleId = state.customerVehicleId;
 
-      this.checkoutUIDTO.dateInit = state.dateInit;
+      this.checkoutUIDTO.dateInit = moment(state.dateInit).toDate();
       this.checkoutUIDTO.selectedHourInit = state.selectedHourInit;
-      this.checkoutUIDTO.dateEnd = state.dateEnd;
+      this.checkoutUIDTO.dateEnd = moment(state.dateEnd).toDate();
       this.checkoutUIDTO.selectedHourEnd = state.selectedHourEnd;
 
-      this.checkoutUIDTO.dateCancelFree = new Date(this.checkoutUIDTO.dateInit);
-      this.checkoutUIDTO.dateCancelFree.setDate(this.checkoutUIDTO.dateCancelFree.getDate() - 1);
+      const dateInitMoment = moment(this.checkoutUIDTO.dateInit);
+
+      if (dateInitMoment.isSame(moment(), 'day')) {
+        this.checkoutUIDTO.dateCancelFree = dateInitMoment.toDate();
+      } else {
+        this.checkoutUIDTO.dateCancelFree = moment(this.checkoutUIDTO.dateInit).subtract(1, 'day').toDate();
+      }
     }
 
     this.asyncCallFunctions();
@@ -133,7 +139,7 @@ export class CheckoutComponent implements OnInit {
 
           this.checkoutUIDTO.customer = resultCustomerFindByEmail.body;
 
-          const resultCustomerAddressServiceFindByCustomerId = await firstValueFrom(this.customerAddressService.findByCustomerId(resultCustomerFindByEmail.body.customerId).pipe(first()));
+          const resultCustomerAddressServiceFindByCustomerId = await firstValueFrom(this.customerAddressService.findByCustomerIdAndAddressTypeName(resultCustomerFindByEmail.body.customerId, AddressType.CUSTOMER).pipe(first()));
 
           if (resultCustomerAddressServiceFindByCustomerId.status == 200) {
     

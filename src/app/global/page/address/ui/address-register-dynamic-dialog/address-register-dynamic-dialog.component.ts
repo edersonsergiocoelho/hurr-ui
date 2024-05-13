@@ -6,7 +6,7 @@ import { AddressRegisterDynamicDialogUIDTO } from './dto/address-register-dynami
 import { TranslateService } from '@ngx-translate/core';
 import { AddressDTO } from '../../dto/address-dto.dto';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { first, firstValueFrom } from 'rxjs';
+import { Observable, first, firstValueFrom, forkJoin } from 'rxjs';
 import { CountryService } from 'src/app/page/admin/country/service/country.service';
 import { StateService } from 'src/app/page/admin/state/service/state.service';
 import { Country } from 'src/app/page/admin/country/entity/country.entity';
@@ -21,6 +21,13 @@ import { SessionStorageService } from 'src/app/core/session-storage/service/sess
 import { Customer } from '../../../customer/entity/customer.entity';
 import * as moment from 'moment';
 import { CustomerAddressDTO } from '../../../customer-address/dto/customer-address-dto.dto';
+import { AddressAddressTypeService } from '../../../address-address-type/service/address-address-type.service';
+import { AddressTypeService } from '../../../address-type/service/address-type.service';
+import { AddressType } from '../../../address-type/entity/address-type.entity';
+import { AddressAddressType } from '../../../address-address-type/entity/address-address-type.entity';
+import { AddressAddressTypeIdDTO } from '../../../address-address-type/dto/address-address-type-id-dto.dto';
+import { AddressAddressTypeId } from '../../../address-address-type/entity/address-address-type-id.entity';
+import { CustomerAddressSaveAddressDTO } from '../../../customer-address/dto/customer-address-save-address-dto.dto';
 
 @Component({
   selector: 'app-address-register-dynamic-dialog',
@@ -35,6 +42,8 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
   constructor(
     private addressService: AddressService,
+    private addressTypeService: AddressTypeService,
+    private addressAddressTypeService: AddressAddressTypeService,
     private cityService: CityService,
     private countryService: CountryService,
     private customerAddressService: CustomerAddressService,
@@ -62,7 +71,6 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
     this.addressRegisterDynamicDialogUIDTO.customerAddress = new CustomerAddress();
 
     this.addressRegisterDynamicDialogUIDTO.newRegister = this.dynamicDialogConfig.data.newRegister;
-    this.addressRegisterDynamicDialogUIDTO.addressType = this.dynamicDialogConfig.data.addressType;
 
     if (this.addressRegisterDynamicDialogUIDTO.newRegister == false) {
       this.addressRegisterDynamicDialogUIDTO.addressDTO = Address.toDTO(this.dynamicDialogConfig.data.customerAddress.address);
@@ -172,6 +180,29 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
       }
     }
 
+    try {
+
+      const addressTypeServiceFindAll = await firstValueFrom(this.addressTypeService.findAll().pipe(first()));
+
+      if (addressTypeServiceFindAll.status == 200) {
+
+        if (addressTypeServiceFindAll.body != null) {
+          this.addressRegisterDynamicDialogUIDTO.addressTypes = addressTypeServiceFindAll.body;
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: 'error',
+          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
+
     this.ngxSpinnerService.hide();
   }
 
@@ -238,19 +269,51 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
       this.addressRegisterDynamicDialogUIDTO.address.country = this.addressRegisterDynamicDialogUIDTO.selectedCountry;
       this.addressRegisterDynamicDialogUIDTO.address.state = this.addressRegisterDynamicDialogUIDTO.selectedState;
       this.addressRegisterDynamicDialogUIDTO.address.city = this.addressRegisterDynamicDialogUIDTO.selectedCity;
-      this.addressRegisterDynamicDialogUIDTO.address.addressType = this.addressRegisterDynamicDialogUIDTO.addressType;
 
-      const resultAddressServiceSave = await firstValueFrom(this.addressService.save(this.addressRegisterDynamicDialogUIDTO.address).pipe(first()));
+      const customerAddressSaveAddressDTO: CustomerAddressSaveAddressDTO = new CustomerAddressSaveAddressDTO();
+      customerAddressSaveAddressDTO.address = this.addressRegisterDynamicDialogUIDTO.address;
+      customerAddressSaveAddressDTO.customer = this.addressRegisterDynamicDialogUIDTO.customer;
+      customerAddressSaveAddressDTO.addressTypes = this.addressRegisterDynamicDialogUIDTO.selectedAddressTypes;
+
+      const resultAddressServiceSave = await firstValueFrom(this.customerAddressService.saveAddress(customerAddressSaveAddressDTO).pipe(first()));
 
       if (resultAddressServiceSave.status == 200) {
 
         if (resultAddressServiceSave.body != null) {
 
+          this.messageService.add({
+            severity: 'success',
+            summary: '' + this.addressRegisterDynamicDialogUIDTO.success_message_service_Generic,
+            detail: '' + this.addressRegisterDynamicDialogUIDTO.save_success_message_service_AddressRegisterDynamicDialog,
+          });
+
+          /*
+          const addressAddressTypes: AddressAddressType[] = [];
+          for (const selectedAddressType of this.addressRegisterDynamicDialogUIDTO.selectedAddressType) {
+            const addressAddressType: AddressAddressType = new AddressAddressType();
+            addressAddressType.address = resultAddressServiceSave.body;
+            addressAddressType.addressType = selectedAddressType;
+            
+            addressAddressType.id = new AddressAddressTypeId;
+            addressAddressType.id.addressId = resultAddressServiceSave.body.addressId;
+            addressAddressType.id.addressTypeId = selectedAddressType.addressTypeId;
+
+            addressAddressTypes.push(addressAddressType);
+          }
+
+          
+          const addressAddressTypeServiceSaves: Observable<any>[] = addressAddressTypes.map(addressAddressType => {
+            return this.addressAddressTypeService.save(addressAddressType);
+          });
+
+          
+          await forkJoin(addressAddressTypeServiceSaves).toPromise();
+
           this.addressRegisterDynamicDialogUIDTO.customerAddress.address = resultAddressServiceSave.body;
           this.addressRegisterDynamicDialogUIDTO.customerAddress.customer = this.addressRegisterDynamicDialogUIDTO.customer;
 
           const resutlCustomerAddressServiceSave = await firstValueFrom(this.customerAddressService.save(this.addressRegisterDynamicDialogUIDTO.customerAddress).pipe(first()));
-
+          
           if (resutlCustomerAddressServiceSave.status == 200) {
 
             this.messageService.add({
@@ -259,6 +322,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
               detail: '' + this.addressRegisterDynamicDialogUIDTO.save_success_message_service_AddressRegisterDynamicDialog,
             });
           }
+          */
         }
       }
 
@@ -288,7 +352,6 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
       this.addressRegisterDynamicDialogUIDTO.address.country = this.addressRegisterDynamicDialogUIDTO.selectedCountry;
       this.addressRegisterDynamicDialogUIDTO.address.state = this.addressRegisterDynamicDialogUIDTO.selectedState;
       this.addressRegisterDynamicDialogUIDTO.address.city = this.addressRegisterDynamicDialogUIDTO.selectedCity;
-      this.addressRegisterDynamicDialogUIDTO.address.addressType = 'CUSTOMER';
 
       const resultAddressServiceSave = await firstValueFrom(this.addressService.update(this.addressRegisterDynamicDialogUIDTO.address).pipe(first()));
 
