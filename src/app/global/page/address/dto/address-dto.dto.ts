@@ -11,7 +11,6 @@ export class AddressDTO {
   number: number;
   complement: string;
   zipCode: string;
-  addressType: string;
   createdDate: Date;
   modifiedDate?: Date;
   enabled: boolean;
@@ -28,7 +27,6 @@ export class AddressDTO {
       number: addressDTO.number,
       complement: addressDTO.complement,
       zipCode: addressDTO.zipCode,
-      addressType: addressDTO.addressType,
       createdDate: addressDTO.createdDate,
       modifiedDate: addressDTO.modifiedDate,
       enabled: addressDTO.enabled,

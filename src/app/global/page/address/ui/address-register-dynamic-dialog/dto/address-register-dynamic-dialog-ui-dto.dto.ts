@@ -6,11 +6,11 @@ import { Address } from "../../../entity/address.entity";
 import { CustomerAddress } from "src/app/global/page/customer-address/entity/customer-address.entity";
 import { Customer } from "src/app/global/page/customer/entity/customer.entity";
 import { CustomerAddressDTO } from "src/app/global/page/customer-address/dto/customer-address-dto.dto";
+import { AddressType } from "src/app/global/page/address-type/entity/address-type.entity";
 
 export class AddressRegisterDynamicDialogUIDTO {
 
   newRegister: boolean;
-  addressType: string;
 
   customer: Customer;
 
@@ -20,6 +20,8 @@ export class AddressRegisterDynamicDialogUIDTO {
   customerAddress: CustomerAddress;
   customerAddressDTO: CustomerAddressDTO;
 
+  addressTypes: Array<AddressType>;
+  selectedAddressTypes: Array<AddressType>;
   countries: Array<Country>;
   selectedCountry: Country;
   states: Array<State>;

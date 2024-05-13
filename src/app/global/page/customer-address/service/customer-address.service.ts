@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { CustomerAddress } from '../entity/customer-address.entity';
 import { Observable, catchError, map, of } from 'rxjs';
 import { CustomerAddressSearchDTO } from '../dto/customer-address-search-dto.dto';
+import { CustomerAddressSaveAddressDTO } from '../dto/customer-address-save-address-dto.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,14 @@ export class CustomerAddressService {
 
   findByCustomerId(customerId: string): Observable<HttpResponse<CustomerAddress[]>> {
     return this.httpClient.get<CustomerAddress[]>(`${this.apiUrl}/by/customerId/${customerId}`, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerAddress[]>) => {
+        return response;
+      })
+    );
+  }
+
+  findByCustomerIdAndAddressTypeName(customerId: string, addressTypeName: string): Observable<HttpResponse<CustomerAddress[]>> {
+    return this.httpClient.get<CustomerAddress[]>(`${this.apiUrl}/by/customerId/${customerId}/and/addressTypeName/${addressTypeName}`, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerAddress[]>) => {
         return response;
       })
@@ -58,6 +67,15 @@ export class CustomerAddressService {
 
   save(customerAddress: CustomerAddress): Observable<HttpResponse<CustomerAddress>> {
     return this.httpClient.post<CustomerAddress>(this.apiUrl, customerAddress, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerAddress>) => {
+        return response;
+      })
+    );
+  }
+
+  saveAddress(customerAddressSaveAddressDTO: CustomerAddressSaveAddressDTO): Observable<HttpResponse<CustomerAddress>> {
+    const url = `${this.apiUrl}/address`;
+    return this.httpClient.post<CustomerAddress>(url, customerAddressSaveAddressDTO, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerAddress>) => {
         return response;
       })

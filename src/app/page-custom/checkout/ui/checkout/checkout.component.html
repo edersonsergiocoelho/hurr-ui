@@ -190,7 +190,9 @@
               </div>
             </div>
 
-            <app-checkout-mercado-pago [customerId]="checkoutUIDTO.customer.customerId" [selectCustomerAddress]="checkoutUIDTO.selectCustomerAddress"></app-checkout-mercado-pago>
+            <ng-container *ngIf="checkoutUIDTO.customer && checkoutUIDTO.customer.customerId">
+              <app-checkout-mercado-pago [customerId]="checkoutUIDTO.customer.customerId" [selectCustomerAddress]="checkoutUIDTO.selectCustomerAddress"></app-checkout-mercado-pago>
+            </ng-container>
 
           </div>
         </div>

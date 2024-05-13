@@ -8,11 +8,12 @@ import { AddressDynamicDialogComponent } from '../ui/address-dynamic-dialog/addr
 import { AddressRegisterDynamicDialogComponent } from '../ui/address-register-dynamic-dialog/address-register-dynamic-dialog.component';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputMaskModule } from 'primeng/inputmask';
-import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DropdownModule } from 'primeng/dropdown';
     DropdownModule,
     InputSwitchModule,
     InputMaskModule, 
-    InputTextModule
+    InputTextModule,
+    MultiSelectModule
   ],
   exports: [
     AddressDynamicDialogComponent,

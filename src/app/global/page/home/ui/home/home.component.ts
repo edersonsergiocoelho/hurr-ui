@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { first, firstValueFrom } from 'rxjs';
+import { first, firstValueFrom, interval } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HomeUIService } from '../../service/home-ui/home-ui.service';
@@ -15,6 +15,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  loadingText = 'Carregando';
 
   homeUIDTO: HomeUIDTO;
 
@@ -32,6 +34,19 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.translateService.setDefaultLang('pt_BR');
+
+    const interval$ = interval(2000);
+    let count = 0;
+
+    interval$.subscribe(() => {
+      count++;
+      if (count <= 3) {
+        this.loadingText += '.';
+      } else {
+        this.loadingText = 'Carregando';
+        count = 0;
+      }
+    });
 
     this.homeUIService.currentUser$.subscribe(user => {
       this.currentUser = user;

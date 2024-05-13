@@ -11,7 +11,6 @@ export class Address {
   number: number;
   complement: string;
   zipCode: string;
-  addressType: string;
   createdDate: Date;
   modifiedDate?: Date;
   enabled: boolean;
@@ -28,7 +27,6 @@ export class Address {
       number: address.number,
       complement: address.complement,
       zipCode: address.zipCode,
-      addressType: address.addressType,
       createdDate: address.createdDate,
       modifiedDate: address.modifiedDate,
       enabled: address.enabled,
