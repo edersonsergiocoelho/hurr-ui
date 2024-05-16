@@ -1,6 +1,8 @@
 {
   "title_Checkout": "Carrinho",
 
+  "title_delivery_Address_Checkout": "Endereço De Entrega",
+  "title_pickup_Address_Checkout": "Endereço De Retirada",
   "title_Address_Checkout": "Endereço De Cobrança",
   "button_Address_Checkout": "Adicionar Novo Endereço",
   "header_Address_Checkout": "Adicionar Novo Endereço",
@@ -12,5 +14,7 @@
 
   "title_OrderSummary_Checkout": "Resumo Do Pedido",
   "price_OrderSummary_Checkout": "Preço",
+  "delivery_OrderSummary_Checkout": "Entrega",
+  "pickup_OrderSummary_Checkout": "Retirada",
   "total_OrderSummary_Checkout": "Total"
 }

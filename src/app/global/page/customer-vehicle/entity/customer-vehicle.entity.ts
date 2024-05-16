@@ -3,6 +3,8 @@ import { Vehicle } from "src/app/page/admin/vehicle/entity/vehicle.entity";
 import { VehicleModel } from "src/app/page/admin/vehicle-model/entity/vehicle-model.entity";
 import { VehicleColor } from "src/app/page/admin/vehicle-color/entity/vehicle-color.entity";
 import { VehicleFuelType } from "src/app/page/admin/vehicle-fuel-type/entity/vehicle-fuel.type.entity";
+import { VehicleTransmission } from "src/app/page/admin/vehicle-transmission/entity/vehicle-transmission.entity";
+import { CustomerVehicleAddress } from "../../customer-vehicle-address/entity/customer-vehicle-address.entity";
 
 export interface CustomerVehicle {
   
@@ -12,6 +14,8 @@ export interface CustomerVehicle {
   vehicleModel: VehicleModel;
   vehicleColor: VehicleColor;
   vehicleFuelType: VehicleFuelType;
+  vehicleTransmission: VehicleTransmission;
+  addresses: Array<CustomerVehicleAddress>;
   description: string;
   licensePlate: string;
   renavam: string;

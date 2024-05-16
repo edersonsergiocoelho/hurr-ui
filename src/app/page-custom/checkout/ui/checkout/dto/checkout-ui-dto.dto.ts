@@ -11,9 +11,19 @@ export class CheckoutUIDTO {
   customersAddresses: Array<CustomerAddress>;
   selectCustomerAddress: CustomerAddress;
 
+  customerAddressDeliverys: Array<CustomerAddress>;
+  selectCustomerAddressDelivery: CustomerAddress | null;
+
+  customersAddressPickups: Array<CustomerAddress>;
+  selectCustomerAddressPickup: CustomerAddress | null;
+
   //
   days: number;
   dailyRateFormat: string;
+  deliveryCost: number | null;
+  deliveryCostFormat: string | null;
+  pickUpCost: number | null;
+  pickUpCostFormat: string | null;
   totalBookingValue: number;
   totalBookingValueFormat: string;
 

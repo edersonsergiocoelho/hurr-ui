@@ -21,4 +21,8 @@ export class RateUtilsService {
   formatDailyRateWithComma(dailyRate: number): string {
     return this.decimalPipe?.transform(dailyRate, '1.2-2')?.replace('.', ',') ?? '';
   }
+
+  formatBRL(dailyRate: number): string {
+    return this.decimalPipe?.transform(dailyRate, '1.2-2')?.replace('.', ',') ?? '';
+  }
 }
