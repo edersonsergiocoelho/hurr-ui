@@ -25,14 +25,22 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
   checkoutMercadoPagoUIDTO: CheckoutMercadoPagoUIDTO;
   
   @Input() customerId: string;
-  @Input() selectCustomerAddress: CustomerAddress;
+
+  @Input() selectCustomerAddressDelivery: CustomerAddress | null;
+  @Input() customerAddressDeliveryValue: number | null;
+
+  @Input() selectCustomerAddressPickUp: CustomerAddress | null;
+  @Input() customerAddressPickUpValue: number | null;
+  
+  @Input() selectCustomerAddress: CustomerAddress | null;
+
+  @Input() totalBookingValue: number;
 
   constructor(
     private customerVehicleService: CustomerVehicleService,
     private location: Location,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
-    private rateUtilsService: RateUtilsService,
     private sessionStorageService: SessionStorageService,
     private translateService: TranslateService
   ) {}
@@ -43,8 +51,21 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges): void {
+
+    if (simpleChanges['selectCustomerAddressDelivery']) {
+      this.selectCustomerAddressDelivery = simpleChanges['selectCustomerAddressDelivery'].currentValue;
+    }
+
+    if (simpleChanges['selectCustomerAddressPickUp']) {
+      this.selectCustomerAddressPickUp = simpleChanges['selectCustomerAddressPickUp'].currentValue;
+    }
+
     if (simpleChanges['selectCustomerAddress']) {
       this.selectCustomerAddress = simpleChanges['selectCustomerAddress'].currentValue;
+    }
+
+    if (simpleChanges['totalBookingValue']) {
+      this.totalBookingValue = simpleChanges['totalBookingValue'].currentValue;
     }
   }
 
@@ -53,7 +74,7 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
     this.checkoutMercadoPagoUIDTO = new CheckoutMercadoPagoUIDTO();
 
     const state = this.location.getState() as any;
-    
+   
     if (state != null) {
 
       this.checkoutMercadoPagoUIDTO.customerVehicleId = state.customerVehicleId;
@@ -101,8 +122,6 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
 
         if (resultCustomerVehicleServiceFindById.body != null) {
           this.checkoutMercadoPagoUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
-
-          this.checkoutMercadoPagoUIDTO.totalBookingValue = this.rateUtilsService.calculateTotalRate(this.checkoutMercadoPagoUIDTO.dateInit, this.checkoutMercadoPagoUIDTO.dateEnd, this.checkoutMercadoPagoUIDTO.customerVehicle.dailyRate);
         }
       }
 
@@ -185,14 +204,25 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
             }
 
             const metadataMap = new Map<string, any>();
-            metadataMap.set('customerId', this.customerId);
-            metadataMap.set('customerAddressId', this.selectCustomerAddress.customerAddressId);
             metadataMap.set('customerVehicleId', this.checkoutMercadoPagoUIDTO.customerVehicleId);
+            metadataMap.set('customerId', this.customerId);
+
+            if (this.selectCustomerAddressDelivery != null) {
+              metadataMap.set('customerAddressDeliveryId', this.selectCustomerAddressDelivery.customerAddressId);
+              metadataMap.set('customerAddressDeliveryValue', this.selectCustomerAddressDelivery.customerAddressId);
+            }
+
+            if (this.selectCustomerAddressPickUp != null) {
+              metadataMap.set('customerAddressPickUpId', this.selectCustomerAddressPickUp.customerAddressId);
+              metadataMap.set('customerAddressPickUpValue', this.selectCustomerAddressPickUp.customerAddressId);
+            }
+
+            metadataMap.set('customerAddressId', this.selectCustomerAddress.customerAddressId);
             metadataMap.set('bookingStartDate', this.checkoutMercadoPagoUIDTO.dateInit);
             metadataMap.set('bookingStartTime', this.checkoutMercadoPagoUIDTO.selectedHourInit);
             metadataMap.set('bookingEndDate', this.checkoutMercadoPagoUIDTO.dateEnd);
             metadataMap.set('bookingEndTime', this.checkoutMercadoPagoUIDTO.selectedHourEnd);
-            metadataMap.set('totalBookingValue', this.checkoutMercadoPagoUIDTO.totalBookingValue);
+            metadataMap.set('totalBookingValue', this.totalBookingValue);
             
             const metadataObject = Object.fromEntries(metadataMap);
 
@@ -201,7 +231,7 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
                 {
                   title: this.checkoutMercadoPagoUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + this.checkoutMercadoPagoUIDTO.customerVehicle.vehicle.vehicleName + ' ' + this.checkoutMercadoPagoUIDTO.customerVehicle.yearOfTheCar,
                   quantity: 1,
-                  unitPrice: this.checkoutMercadoPagoUIDTO.totalBookingValue,
+                  unitPrice: this.totalBookingValue,
                 },
               ],
               payer: {

@@ -1,7 +1,7 @@
 import { SelectItem } from "primeng/api";
 import { CustomerVehicleBooking } from "../../../entity/customer-vehicle-booking.entity";
-import { Customer } from "src/app/global/page/customer/entity/customer.entity";
 import { CustomerVehicleBookingSearchDTO } from "../../../dto/customer-vehicle-booking-search-dto.dto";
+import { CustomerVehicleReview } from "src/app/global/page/customer-vehicle-review/entity/customer-vehicle-review.entity";
 
 export class CustomerVehicleBookingSearchUIDTO {
 
@@ -21,10 +21,15 @@ export class CustomerVehicleBookingSearchUIDTO {
   customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO;
   customerVehicleBookings: Array<CustomerVehicleBooking>;
 
+  customerVehicleReview: CustomerVehicleReview;
+
   // Messages
   error_message_service_Generic: string;
   warn_message_service_Generic: string;
 
   label_created_date_option_1_CustomerVehicleBookingSearch: string;
   label_created_date_option_2_CustomerVehicleBookingSearch: string;
+
+  save_message_service_Generic: string;
+  save_success_write_a_review_message_service_CustomerVehicleBookingSearch: string;
 }

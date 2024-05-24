@@ -139,7 +139,10 @@ export class CustomerVehicleDetailComponent implements OnInit {
       }
 
     } catch (error: any) {
-      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
     }
 
     try {
@@ -189,7 +192,10 @@ export class CustomerVehicleDetailComponent implements OnInit {
       }
 
     } catch (error: any) {
-      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
     }
 
     try {
@@ -204,37 +210,46 @@ export class CustomerVehicleDetailComponent implements OnInit {
       }
 
     } catch (error: any) {
-      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
     }
 
     try {
 
-      const resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery = await firstValueFrom(this.customerAddressService.findByCustomerIdAndAddressTypeName(this.customerVehicleDetailUIDTO.customer.customerId, AddressType.DELIVERY).pipe(first()));
+      const customerAddressServiceFindByCustomerIdAndAddressTypeName = await firstValueFrom(this.customerAddressService.findByCustomerIdAndAddressTypeName(this.customerVehicleDetailUIDTO.customer.customerId, AddressType.DELIVERY).pipe(first()));
 
-      if (resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery.status == 200) {
+      if (customerAddressServiceFindByCustomerIdAndAddressTypeName.status == 200) {
 
-        if (resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery.body != null) {
-          this.customerVehicleDetailUIDTO.listCustomerVehicleAddressDelivery = resultCVAFindAllByCustomerVehicleIdAndAddressTypeDelivery.body;
+        if (customerAddressServiceFindByCustomerIdAndAddressTypeName.body != null) {
+          this.customerVehicleDetailUIDTO.listCustomerAddressDelivery = customerAddressServiceFindByCustomerIdAndAddressTypeName.body;
         }
       }
 
     } catch (error: any) {
-      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
     }
 
     try {
 
-      const resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup = await firstValueFrom(this.customerAddressService.findByCustomerIdAndAddressTypeName(this.customerVehicleDetailUIDTO.customer.customerId, AddressType.PICKUP).pipe(first()));
+      const customerAddressServiceFindByCustomerIdAndAddressTypeName = await firstValueFrom(this.customerAddressService.findByCustomerIdAndAddressTypeName(this.customerVehicleDetailUIDTO.customer.customerId, AddressType.PICKUP).pipe(first()));
 
-      if (resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup.status == 200) {
+      if (customerAddressServiceFindByCustomerIdAndAddressTypeName.status == 200) {
 
-        if (resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup.body != null) {
-          this.customerVehicleDetailUIDTO.listCustomerVehicleAddressPickup = resultCVAFindAllByCustomerVehicleIdAndAddressTypePickup.body;
+        if (customerAddressServiceFindByCustomerIdAndAddressTypeName.body != null) {
+          this.customerVehicleDetailUIDTO.listCustomerAddressPickUp = customerAddressServiceFindByCustomerIdAndAddressTypeName.body;
         }
       }
 
     } catch (error: any) {
-      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
     }
   }
 
@@ -384,6 +399,8 @@ export class CustomerVehicleDetailComponent implements OnInit {
         selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
         dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
         selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
+        selectCustomerAddressDelivery: this.customerVehicleDetailUIDTO.selectCustomerAddressDelivery,
+        selectCustomerAddressPickUp: this.customerVehicleDetailUIDTO.selectCustomerAddressPickUp
       }
     };
     
@@ -430,7 +447,9 @@ export class CustomerVehicleDetailComponent implements OnInit {
           return;
         }
 
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+        if (error.status == 500) {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+        }
       }
     }
   }

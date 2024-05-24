@@ -13,6 +13,8 @@
   "days_Cart_Checkout": "Dias",
 
   "title_OrderSummary_Checkout": "Resumo Do Pedido",
+  "date_init_OrderSummary_Checkout": "Início Da Viagem",
+  "date_end_OrderSummary_Checkout": "Fim Da Viagem",
   "price_OrderSummary_Checkout": "Preço",
   "delivery_OrderSummary_Checkout": "Entrega",
   "pickup_OrderSummary_Checkout": "Retirada",

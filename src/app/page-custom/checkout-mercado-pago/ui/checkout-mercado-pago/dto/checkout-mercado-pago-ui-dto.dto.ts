@@ -4,8 +4,6 @@ export class CheckoutMercadoPagoUIDTO {
 
     customerVehicle: CustomerVehicle;
 
-    totalBookingValue: number;
-
     // State
     customerVehicleId: string;
     dateInit: Date;

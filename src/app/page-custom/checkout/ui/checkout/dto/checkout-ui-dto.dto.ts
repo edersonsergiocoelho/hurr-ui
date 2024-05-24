@@ -8,14 +8,14 @@ export class CheckoutUIDTO {
   customer: Customer;
   customerVehicle: CustomerVehicle;
 
-  customersAddresses: Array<CustomerAddress>;
-  selectCustomerAddress: CustomerAddress;
-
   customerAddressDeliverys: Array<CustomerAddress>;
   selectCustomerAddressDelivery: CustomerAddress | null;
 
   customersAddressPickups: Array<CustomerAddress>;
-  selectCustomerAddressPickup: CustomerAddress | null;
+  selectCustomerAddressPickUp: CustomerAddress | null;
+
+  customersAddresses: Array<CustomerAddress>;
+  selectCustomerAddress: CustomerAddress | null;
 
   //
   days: number;

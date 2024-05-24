@@ -73,6 +73,15 @@ export class CustomerVehicleBookingService {
     );
   }
 
+  finalizeBooking(customerVehicleBooking: CustomerVehicleBooking): Observable<HttpResponse<CustomerVehicleBooking>> {
+    const url = `${this.apiUrl}/finalize-booking/${customerVehicleBooking.customerVehicleBookingId}`;
+    return this.httpClient.put<CustomerVehicleBooking>(url, customerVehicleBooking, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleBooking>) => {
+        return response;
+      })
+    );
+  }
+
   update(customerVehicleBooking: CustomerVehicleBooking): Observable<HttpResponse<CustomerVehicleBooking>> {
     const url = `${this.apiUrl}/${customerVehicleBooking.customerVehicleBookingId}`;
     return this.httpClient.put<CustomerVehicleBooking>(url, customerVehicleBooking, { observe: 'response' }).pipe(

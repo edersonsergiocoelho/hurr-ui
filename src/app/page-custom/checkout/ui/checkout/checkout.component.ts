@@ -146,7 +146,7 @@ export class CheckoutComponent implements OnInit {
 
     this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNameCustomer();
     this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNameDelivery();
-    this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNamePickup();
+    this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNamePickUp();
 
     this.ngxSpinnerService.hide();
   }
@@ -183,6 +183,15 @@ export class CheckoutComponent implements OnInit {
         
         if (customerAddressServiceFindByCustomerIdAndAddressTypeName.status == 200 && customerAddressServiceFindByCustomerIdAndAddressTypeName.body != null) {
           this.checkoutUIDTO.customerAddressDeliverys = customerAddressServiceFindByCustomerIdAndAddressTypeName.body;
+
+          const state = this.location.getState() as any;
+    
+          if (state != null) {
+      
+            if (state.selectCustomerAddressDelivery != null) {
+              this.selectCustomerAddressDelivery2(state.selectCustomerAddressDelivery);
+            }
+          }
         }
         
       } catch (error: any) {
@@ -195,7 +204,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  async getCustomerAddressServiceFindByCustomerIdAndAddressTypeNamePickup () {
+  async getCustomerAddressServiceFindByCustomerIdAndAddressTypeNamePickUp () {
 
     if (this.checkoutUIDTO.customer != null) {
 
@@ -205,6 +214,15 @@ export class CheckoutComponent implements OnInit {
         
         if (customerAddressServiceFindByCustomerIdAndAddressTypeName.status == 200 && customerAddressServiceFindByCustomerIdAndAddressTypeName.body != null) {
           this.checkoutUIDTO.customersAddressPickups = customerAddressServiceFindByCustomerIdAndAddressTypeName.body;
+
+          const state = this.location.getState() as any;
+    
+          if (state != null) {
+            
+            if (state.selectCustomerAddressPickUp) {
+              this.selectCustomerAddressPickUp2(state.selectCustomerAddressPickUp);
+            }
+          }
         }
         
       } catch (error: any) {
@@ -226,8 +244,7 @@ export class CheckoutComponent implements OnInit {
       style: { 'max-height': '90%', 'overflow-y': 'auto' },
       closable: true,
       data: {
-        newRegister: true,
-        addressType: 'CUSTOMER'
+        newRegister: true
       }
     });
   
@@ -254,12 +271,17 @@ export class CheckoutComponent implements OnInit {
 
       this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNameCustomer();
       this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNameDelivery();
-      this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNamePickup();
+      this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNamePickUp();
     });
   }
 
   selectCustomerAddress(customerAddress: CustomerAddress) {
-    this.checkoutUIDTO.selectCustomerAddress = customerAddress;
+
+    if (this.checkoutUIDTO.selectCustomerAddress === customerAddress) {
+      this.checkoutUIDTO.selectCustomerAddress = null;
+    } else {
+      this.checkoutUIDTO.selectCustomerAddress = customerAddress;
+    }
   }
 
   async selectCustomerAddressDelivery(customerAddress: CustomerAddress) {
@@ -314,11 +336,52 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  async selectCustomerAddressPickup(customerAddress: CustomerAddress) {
+  async selectCustomerAddressDelivery2(customerAddress: CustomerAddress) {
 
-    if (this.checkoutUIDTO.selectCustomerAddressPickup === customerAddress) {
+    this.checkoutUIDTO.selectCustomerAddressDelivery = customerAddress;
+    
+    let vehicleAddress = '';
+    let addressDelivery = '';
 
-      this.checkoutUIDTO.selectCustomerAddressPickup = null;
+    if (this.checkoutUIDTO.customerVehicle.addresses.length > 0) {
+
+      vehicleAddress = this.checkoutUIDTO.customerVehicle.addresses[0].address.streetAddress + ', ' +
+      this.checkoutUIDTO.customerVehicle.addresses[0].address.number + ', ' +
+      this.checkoutUIDTO.customerVehicle.addresses[0].address.city.cityName + ', ' +
+      this.checkoutUIDTO.customerVehicle.addresses[0].address.city.state.stateName + ', ' +
+      this.checkoutUIDTO.customerVehicle.addresses[0].address.country.countryName;
+    }
+
+    if (this.checkoutUIDTO.selectCustomerAddressDelivery != null) {
+
+      addressDelivery = this.checkoutUIDTO.selectCustomerAddressDelivery.address.streetAddress + ', ' +
+      this.checkoutUIDTO.selectCustomerAddressDelivery.address.number + ', ' +
+      this.checkoutUIDTO.selectCustomerAddressDelivery.address.city.cityName + ', ' +
+      this.checkoutUIDTO.selectCustomerAddressDelivery.address.city.state.stateName + ', ' +
+      this.checkoutUIDTO.selectCustomerAddressDelivery.address.country.countryName;
+    }
+
+    try {
+
+      const distanceInKilometers = await this.calculateDistance(vehicleAddress, addressDelivery);
+      const mileageFeeDelivery = this.checkoutUIDTO.customerVehicle.mileageFeeDelivery;
+      
+      const deliveryCost = distanceInKilometers * mileageFeeDelivery;
+      this.checkoutUIDTO.deliveryCost = deliveryCost;
+      this.checkoutUIDTO.deliveryCostFormat = this.rateUtilsService.formatBRL(deliveryCost);
+
+      this.calculateTotalBookingValue();
+  
+    } catch (error) {
+        console.error('Erro ao calcular a distância:', error);
+    }
+  }
+
+  async selectCustomerAddressPickUp(customerAddress: CustomerAddress) {
+
+    if (this.checkoutUIDTO.selectCustomerAddressPickUp === customerAddress) {
+
+      this.checkoutUIDTO.selectCustomerAddressPickUp = null;
       this.checkoutUIDTO.pickUpCost = null;
       this.checkoutUIDTO.pickUpCostFormat = null;
 
@@ -326,7 +389,7 @@ export class CheckoutComponent implements OnInit {
 
     } else {
 
-      this.checkoutUIDTO.selectCustomerAddressPickup = customerAddress;
+      this.checkoutUIDTO.selectCustomerAddressPickUp = customerAddress;
     
       let vehicleAddress = '';
       let addressPickup = '';
@@ -340,13 +403,13 @@ export class CheckoutComponent implements OnInit {
         this.checkoutUIDTO.customerVehicle.addresses[0].address.country.countryName;
       }
   
-      if (this.checkoutUIDTO.selectCustomerAddressPickup != null) {
+      if (this.checkoutUIDTO.selectCustomerAddressPickUp != null) {
   
-        addressPickup = this.checkoutUIDTO.selectCustomerAddressPickup.address.streetAddress + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressPickup.address.number + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressPickup.address.city.cityName + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressPickup.address.city.state.stateName + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressPickup.address.country.countryName;
+        addressPickup = this.checkoutUIDTO.selectCustomerAddressPickUp.address.streetAddress + ', ' +
+        this.checkoutUIDTO.selectCustomerAddressPickUp.address.number + ', ' +
+        this.checkoutUIDTO.selectCustomerAddressPickUp.address.city.cityName + ', ' +
+        this.checkoutUIDTO.selectCustomerAddressPickUp.address.city.state.stateName + ', ' +
+        this.checkoutUIDTO.selectCustomerAddressPickUp.address.country.countryName;
       }
   
       try {
@@ -363,6 +426,47 @@ export class CheckoutComponent implements OnInit {
       } catch (error) {
           console.error('Erro ao calcular a distância:', error);
       }
+    }
+  }
+
+  async selectCustomerAddressPickUp2(customerAddress: CustomerAddress) {
+
+    this.checkoutUIDTO.selectCustomerAddressPickUp = customerAddress;
+  
+    let vehicleAddress = '';
+    let addressPickup = '';
+
+    if (this.checkoutUIDTO.customerVehicle.addresses.length > 0) {
+
+      vehicleAddress = this.checkoutUIDTO.customerVehicle.addresses[0].address.streetAddress + ', ' +
+      this.checkoutUIDTO.customerVehicle.addresses[0].address.number + ', ' +
+      this.checkoutUIDTO.customerVehicle.addresses[0].address.city.cityName + ', ' +
+      this.checkoutUIDTO.customerVehicle.addresses[0].address.city.state.stateName + ', ' +
+      this.checkoutUIDTO.customerVehicle.addresses[0].address.country.countryName;
+    }
+
+    if (this.checkoutUIDTO.selectCustomerAddressPickUp != null) {
+
+      addressPickup = this.checkoutUIDTO.selectCustomerAddressPickUp.address.streetAddress + ', ' +
+      this.checkoutUIDTO.selectCustomerAddressPickUp.address.number + ', ' +
+      this.checkoutUIDTO.selectCustomerAddressPickUp.address.city.cityName + ', ' +
+      this.checkoutUIDTO.selectCustomerAddressPickUp.address.city.state.stateName + ', ' +
+      this.checkoutUIDTO.selectCustomerAddressPickUp.address.country.countryName;
+    }
+
+    try {
+
+      const distanceInKilometers = await this.calculateDistance(vehicleAddress, addressPickup);
+      const mileageFeePickUp = this.checkoutUIDTO.customerVehicle.mileageFeePickUp;
+      
+      const pickupCost = distanceInKilometers * mileageFeePickUp;
+      this.checkoutUIDTO.pickUpCost = pickupCost;
+      this.checkoutUIDTO.pickUpCostFormat = this.rateUtilsService.formatBRL(pickupCost);
+
+      this.calculateTotalBookingValue();
+  
+    } catch (error) {
+        console.error('Erro ao calcular a distância:', error);
     }
   }
 

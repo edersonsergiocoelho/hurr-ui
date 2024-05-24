@@ -30,6 +30,10 @@
 
   "label_booking_delivery_date_CustomerVehicleBookingSearch": "Data De Entrega: ",
 
+  "placeholder_review_CustomerVehicleBookingSearch": "Informe Uma Crítica Para O Dono Do Carro",
+
+  "save_success_write_a_review_message_service_CustomerVehicleBookingSearch": "Crítica Salva Com Sucesso",
+
   "title_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "Reservas Dos Meus Carros",
   "subtitle_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "Verifique Aqui As Suas Últimas Reservas Dos Meus Carros.",
   "booking_CustomerVehicleBookingCustomerVehicleSearch": "Número Da Reserva",

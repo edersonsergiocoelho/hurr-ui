@@ -4,6 +4,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { CustomerVehicleBooking } from '../../entity/customer-vehicle-booking.entity';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DecimalPipeService } from 'src/app/utils/service/rate-utils-service copy';
+import { CustomerVehicleBookingService } from '../../service/customer-vehicle-booking.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { first, firstValueFrom } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog',
@@ -18,9 +22,12 @@ export class CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogCo
   decimalPipe: DecimalPipeService;
 
   constructor(
+    private customerVehicleBookingService: CustomerVehicleBookingService,
     private decimalPipeService: DecimalPipeService,
     private dynamicDialogConfig: DynamicDialogConfig,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private ngxSpinnerService: NgxSpinnerService,
+    private messageService: MessageService
   ) { 
     this.decimalPipe = decimalPipeService;
   }
@@ -31,10 +38,38 @@ export class CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogCo
   }
 
   resetForm() {
+
     this.customerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO = new CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO();
     this.customerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO.customerVehicleBooking = new CustomerVehicleBooking();
 
     this.customerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO.customerVehicleBooking = this.dynamicDialogConfig.data.customerVehicleBooking;
+  
+    this.asyncCallFunctions();
+  }
+
+  async asyncCallFunctions() {
+
+    this.ngxSpinnerService.show();
+
+    try {
+
+      const keys = [
+        'error_message_service_Generic'
+      ];
+
+      const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
+
+      this.customerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+
+    } catch (error: any) {
+      this.messageService.add({
+        severity: 'error',
+        summary: '' + this.customerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO.error_message_service_Generic,
+        detail: error.toString()
+      });
+    }
+
+    this.ngxSpinnerService.hide();
   }
 
   changeBookingEndKM() {
@@ -52,5 +87,35 @@ export class CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogCo
 
   finalizeBooking() {
 
+    this.customerVehicleBookingService.finalizeBooking(this.customerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO.customerVehicleBooking).pipe(first()).subscribe({
+      next: (data: any) => {
+
+        if (data.status == 200) {
+
+          this.messageService.add({ 
+            severity: 'success', 
+            summary: '' + this.customerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO.error_message_service_Generic, 
+            detail: '' +  this.customerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO.error_message_service_Generic, 
+          });
+        }
+
+      },
+      error: (error) => {
+
+        if (error.status == 500) {
+
+          this.messageService.add({ 
+            severity: 'error', 
+            summary: '' + this.customerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO.error_message_service_Generic, 
+            detail: error.error.message 
+          });
+        }
+
+        this.ngxSpinnerService.hide();
+      },
+      complete: () => {
+        this.ngxSpinnerService.hide();
+      }
+    });
   }
 }
