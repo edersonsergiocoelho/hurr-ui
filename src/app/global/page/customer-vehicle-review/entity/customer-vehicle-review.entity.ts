@@ -1,8 +1,12 @@
-export interface CustomerVehicleReview {
+import { CustomerVehicleBooking } from "../../customer-vehicle-booking/entity/customer-vehicle-booking.entity";
+import { CustomerVehicle } from "../../customer-vehicle/entity/customer-vehicle.entity";
+import { Customer } from "../../customer/entity/customer.entity";
+
+export class CustomerVehicleReview {
 
   customerVehicleReviewId: string;
-  customerVehicleId: string;
-  customerId: string;
+  customerVehicleBooking: CustomerVehicleBooking;
+  customer: Customer;
   review: string;
   rating: number;
   createdDate: string;
