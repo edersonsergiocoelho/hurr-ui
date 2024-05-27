@@ -34,7 +34,13 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/checkout/',
   '/assets/i18n/customer-validation/',
   '/assets/i18n/customer-vehicle/',
-  '/assets/i18n/customer-vehicle-booking/',
+  
+  // CustomerVehicleBooking
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog/',
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-search/',
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-search/',
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-success/',
+
   '/assets/i18n/file-approved/',
   '/assets/i18n/home/',
   '/assets/i18n/role/',

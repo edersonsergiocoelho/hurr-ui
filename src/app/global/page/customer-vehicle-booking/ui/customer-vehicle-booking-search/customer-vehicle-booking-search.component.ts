@@ -22,6 +22,7 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 })
 export class CustomerVehicleBookingSearchComponent implements OnInit {
 
+  // DTO's
   customerVehicleBookingSearchUIDTO: CustomerVehicleBookingSearchUIDTO;
 
   // Utils
@@ -163,6 +164,7 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
 
         if (data.status == 200 && data.body != null) {
 
+          customerVehicleBooking.customerVehicleReviewId = data.body.customerVehicleReviewId;
           customerVehicleBooking.review = data.body.review;
           customerVehicleBooking.rating = data.body.rating;
 
@@ -211,39 +213,81 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     this.customerVehicleBookingSearchUIDTO.customerVehicleReview.review = customerVehicleBooking.review;
     this.customerVehicleBookingSearchUIDTO.customerVehicleReview.rating = customerVehicleBooking.rating;
 
-    this.customerVehicleReviewService.save(this.customerVehicleBookingSearchUIDTO.customerVehicleReview).pipe(first()).subscribe({
-      next: (data: any) => {
+    if (customerVehicleBooking.customerVehicleReviewId == null) {
 
-        if (data.status == 201) {
-
-          this.messageService.add({ 
-            severity: 'success', 
-            summary: '' + this.customerVehicleBookingSearchUIDTO.save_message_service_Generic, 
-            detail: '' +  this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
-          });
-
-          this.overlayPanelWriteAReview.hide();
+      this.customerVehicleReviewService.save(this.customerVehicleBookingSearchUIDTO.customerVehicleReview).pipe(first()).subscribe({
+        next: (data: any) => {
+  
+          if (data.status == 201) {
+  
+            this.messageService.add({ 
+              severity: 'success', 
+              summary: '' + this.customerVehicleBookingSearchUIDTO.save_message_service_Generic, 
+              detail: '' +  this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
+            });
+  
+            this.overlayPanelWriteAReview.hide();
+          }
+  
+        },
+        error: (error) => {
+  
+          if (error.status == 500) {
+  
+            this.messageService.add({ 
+              severity: 'error', 
+              summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
+              detail: error.error.message 
+            });
+          }
+  
+          this.ngxSpinnerService.hide();
+        },
+        complete: () => {
+          this.resetForm();
+          this.search(null);
+          this.ngxSpinnerService.hide();
         }
+      });
 
-      },
-      error: (error) => {
+    } else {
 
-        if (error.status == 500) {
+      this.customerVehicleBookingSearchUIDTO.customerVehicleReview.customerVehicleReviewId = customerVehicleBooking.customerVehicleReviewId;
 
-          this.messageService.add({ 
-            severity: 'error', 
-            summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
-            detail: error.error.message 
-          });
+      this.customerVehicleReviewService.update(this.customerVehicleBookingSearchUIDTO.customerVehicleReview).pipe(first()).subscribe({
+        next: (data: any) => {
+
+          if (data.status == 200) {
+
+            this.messageService.add({ 
+              severity: 'success', 
+              summary: '' + this.customerVehicleBookingSearchUIDTO.save_message_service_Generic, 
+              detail: '' +  this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
+            });
+
+            this.overlayPanelWriteAReview.hide();
+          }
+
+        },
+        error: (error) => {
+
+          if (error.status == 500) {
+
+            this.messageService.add({ 
+              severity: 'error', 
+              summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
+              detail: error.error.message 
+            });
+          }
+
+          this.ngxSpinnerService.hide();
+        },
+        complete: () => {
+          this.resetForm();
+          this.search(null);
+          this.ngxSpinnerService.hide();
         }
-
-        this.ngxSpinnerService.hide();
-      },
-      complete: () => {
-        this.resetForm();
-        this.search(null);
-        this.ngxSpinnerService.hide();
-      }
-    });
+      });
+    }
   }
 }
