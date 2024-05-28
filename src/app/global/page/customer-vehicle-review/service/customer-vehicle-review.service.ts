@@ -23,6 +23,14 @@ export class CustomerVehicleReviewService {
     );
   }
 
+  findByCustomerVehicleIdAndCustomerId(customerVehicleId, customerId): Observable<HttpResponse<CustomerVehicleReview[]>> {
+    return this.http.get<CustomerVehicleReview[]>(`${this.apiUrl}/by/customer-vehicle/${customerVehicleId}/customer/${customerId}`, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleReview[]>) => {
+        return response;
+      })
+    );
+  }
+
   findAll(): Observable<HttpResponse<CustomerVehicleReview[]>> {
     return this.http.get<CustomerVehicleReview[]>(this.apiUrl, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleReview[]>) => {
@@ -32,7 +40,7 @@ export class CustomerVehicleReviewService {
   }
 
   findAllByCustomerVehicleId(customerVehicleId): Observable<HttpResponse<CustomerVehicleReview[]>> {
-    return this.http.get<CustomerVehicleReview[]>(`${this.apiUrl}/by/customer-vehicle/${customerVehicleId}`, { observe: 'response' }).pipe(
+    return this.http.get<CustomerVehicleReview[]>(`${this.apiUrl}/all/by/customer-vehicle/${customerVehicleId}`, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleReview[]>) => {
         return response;
       })

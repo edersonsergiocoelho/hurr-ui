@@ -102,7 +102,7 @@
                   {{item.customerVehicle.vehicleColor.vehicleColorName}}
                 </span>
 
-                <a pripple="" tabindex="0"
+                <a *ngIf="item.bookingDeliveryDate == null" pripple="" tabindex="0"
                   class="p-ripple p-element p-2 cursor-pointer w-14rem mx-auto lg:mx-0 border-round font-medium text-center border-1 border-primary text-primary transition-duration-150"
                   (click)="clickCustomerVehicleFinalizeBooking(item)">
                   <i class="pi pi-check-circle"></i>
@@ -122,7 +122,7 @@
               </span>
               <span class="text-green-600">
                 {{'label_booking_delivery_date_CustomerVehicleBookingCustomerVehicleSearch' | translate}}
-                {{item.customerVehicle.bookingDeliveryDate | date:'dd/MM/yyyy HH:mm:ss'}}
+                {{item.bookingDeliveryDate | date:'dd/MM/yyyy HH:mm:ss'}}
               </span>
             </div>
 
@@ -171,16 +171,63 @@
           -->
         </div>
         
-        <div class="col-12 p-0 flex border-top-1 surface-border"><a tabindex="0"
+        <div class="col-12 p-0 flex border-top-1 surface-border">
+          <a tabindex="0"
             class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-            style="border-bottom-left-radius: 6px;"><i class="pi pi-folder mr-2 mb-2 md:mb-0"></i>Archive Order</a><a
+            style="border-bottom-left-radius: 6px;">
+            <i class="pi pi-folder mr-2 mb-2 md:mb-0"></i>
+            Archive Order
+          </a>
+          <a
             tabindex="0"
-            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"><i
-              class="pi pi-refresh mr-2 mb-2 md:mb-0"></i>Return</a><a tabindex="0"
-            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"><i
-              class="pi pi-file mr-2 mb-2 md:mb-0"></i>View Invoice</a><a tabindex="0"
+            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full">
+            <i class="pi pi-refresh mr-2 mb-2 md:mb-0"></i>
+            Return
+          </a>
+          <a tabindex="0"
+            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full">
+            <i class="pi pi-file mr-2 mb-2 md:mb-0"></i>
+            View Invoice
+          </a>
+          <a tabindex="0"
             class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-            style="border-bottom-right-radius: 6px;"><i class="pi pi-comment mr-2 mb-2 md:mb-0"></i>Write a Review</a></div>
+            [ngStyle]="item.bookingDeliveryDate == null ? {'pointer-events': 'none', 'opacity': '0.5'} : {}"
+            (click)="clickOverlayPanelWriteAReview($event, item)"
+            style="border-bottom-right-radius: 6px;">
+            <i class="pi pi-comment mr-2 mb-2 md:mb-0"></i>
+            {{'span_button_label_write_a_review_Generic' | translate}}
+          </a>
+
+          <p-overlayPanel #overlayPanelWriteAReview>
+            <div class="flex flex-column gap-3 w-25rem">
+              <div>
+                <textarea 
+                    rows="10"
+                    cols="50" 
+                    pInputTextarea 
+                    name="review"
+                    [(ngModel)]="item.review"
+                    placeholder="{{'placeholder_review_CustomerVehicleBookingCustomerVehicleSearch' | translate}}">
+                </textarea>
+              </div>
+
+              <div (click)="$event.stopPropagation()">
+                <p-rating 
+                  [(ngModel)]="item.rating" 
+                  [stars]="5"
+                  [cancel]="false"
+                  (click)="$event.stopPropagation()" />
+              </div>
+
+              <div>
+                <div class="flex">
+                  <p-button label="{{'span_button_label_save_Generic' | translate}}" icon="pi pi-save" (onClick)="onClickWriteAReview(item)"/>
+                </div>
+              </div>
+            </div>
+          </p-overlayPanel>
+
+        </div>
       </div>
 
       <br>

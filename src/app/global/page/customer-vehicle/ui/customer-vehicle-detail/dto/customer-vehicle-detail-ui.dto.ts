@@ -9,12 +9,12 @@ export class CustomerVehicleDetailUIDTO {
   customerVehicle: any;
 
   listCustomerVehicleAddressVehicle: Array<CustomerVehicleAddress>;
-  listCustomerVehicleAddressDelivery: Array<CustomerAddress>;
-  listCustomerVehicleAddressPickup: Array<CustomerAddress>;
+  listCustomerAddressDelivery: Array<CustomerAddress>;
+  listCustomerAddressPickUp: Array<CustomerAddress>;
 
-  selectedCustomerVehicleAddressVehicle: CustomerVehicleAddress;
-  selectedCustomerVehicleAddressDelivery: CustomerVehicleAddress;
-  selectedCustomerVehicleAddressPickup: CustomerVehicleAddress;
+  selectCustomerVehicleAddressVehicle: CustomerVehicleAddress;
+  selectCustomerAddressDelivery: CustomerAddress;
+  selectCustomerAddressPickUp: CustomerAddress;
 
   dateInit: Date;
   dateEnd: Date;

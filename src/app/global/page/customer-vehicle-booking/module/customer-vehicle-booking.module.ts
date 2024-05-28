@@ -20,6 +20,9 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog.component';
 import { CustomerVehicleBookingCustomerVehicleDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-dynamic-dialog/customer-vehicle-booking-customer-vehicle-dynamic-dialog.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ButtonModule } from 'primeng/button';
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
   declarations: [
@@ -44,10 +47,13 @@ import { InputTextModule } from 'primeng/inputtext';
     TranslateModule,
 
     // PrimeNG
+    ButtonModule,
     DataViewModule,
     DividerModule,
     DropdownModule,
-    InputTextModule
+    InputTextModule,
+    OverlayPanelModule,
+    RatingModule
   ], 
   exports: [
     CustomerVehicleBookingComponent,

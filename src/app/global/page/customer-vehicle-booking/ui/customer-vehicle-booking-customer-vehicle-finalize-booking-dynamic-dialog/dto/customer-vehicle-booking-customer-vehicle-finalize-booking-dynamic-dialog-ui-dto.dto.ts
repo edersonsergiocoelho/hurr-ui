@@ -6,4 +6,7 @@ export class CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUI
 
   limitedMileageTotalKM: number;
   limitedMileageTotalValue: number;
+
+  // Messages
+  error_message_service_Generic: string;
 }

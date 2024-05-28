@@ -1,0 +1,8 @@
+/**
+ * Define o estilo para elementos selecionados.
+ * A borda é sólida com cor #6610f2 e bordas arredondadas.
+ */
+ .selected {
+  border: 2px solid #6610f2; /* Define uma borda sólida de 2px com cor #6610f2 para elementos selecionados */
+  border-radius: 5px; /* Ou qualquer outro valor desejado para arredondar as bordas */
+}

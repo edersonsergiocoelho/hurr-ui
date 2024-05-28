@@ -8,12 +8,22 @@ export class CheckoutUIDTO {
   customer: Customer;
   customerVehicle: CustomerVehicle;
 
+  customerAddressDeliverys: Array<CustomerAddress>;
+  selectCustomerAddressDelivery: CustomerAddress | null;
+
+  customersAddressPickups: Array<CustomerAddress>;
+  selectCustomerAddressPickUp: CustomerAddress | null;
+
   customersAddresses: Array<CustomerAddress>;
-  selectCustomerAddress: CustomerAddress;
+  selectCustomerAddress: CustomerAddress | null;
 
   //
   days: number;
   dailyRateFormat: string;
+  deliveryCost: number | null;
+  deliveryCostFormat: string | null;
+  pickUpCost: number | null;
+  pickUpCostFormat: string | null;
   totalBookingValue: number;
   totalBookingValueFormat: string;
 

@@ -115,14 +115,14 @@
 
       <div class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
         <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressVehicle" 
-          [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle" 
+          [(ngModel)]="customerVehicleDetailUIDTO.selectCustomerVehicleAddressVehicle" 
           optionLabel="address.streetAddress" 
           [showClear]="true" 
           placeholder="Selecione O Local De Retirada E Devolução"
           [style]="{'width': '100%'}">
           <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle">              
-              <div>{{ customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle.address.streetAddress }}</div>
+            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectCustomerVehicleAddressVehicle">              
+              <div>{{ customerVehicleDetailUIDTO.selectCustomerVehicleAddressVehicle.address.streetAddress }}</div>
             </div>
           </ng-template>
           <ng-template let-cva pTemplate="item">
@@ -140,15 +140,15 @@
       <label style="padding-top: 10px;"><strong>Local De Retirada E Devolução Em Sua Residência Ou Local De Sua Preferência</strong></label>
 
       <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress" class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
-        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressDelivery" 
-          [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressDelivery" 
+        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerAddressDelivery" 
+          [(ngModel)]="customerVehicleDetailUIDTO.selectCustomerAddressDelivery" 
           optionLabel="address.streetAddress" 
           [showClear]="true" 
           placeholder="Selecione O Local De Entrega"
           [style]="{'width': '100%'}">
           <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressDelivery">              
-              <div>{{ customerVehicleDetailUIDTO.selectedCustomerVehicleAddressDelivery.address.streetAddress }}</div>
+            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectCustomerAddressDelivery">              
+              <div>{{ customerVehicleDetailUIDTO.selectCustomerAddressDelivery.address.streetAddress }}</div>
             </div>
           </ng-template>
           <ng-template let-cva pTemplate="item">
@@ -177,15 +177,15 @@
       </div>
 
       <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress" class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
-        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressPickup" 
-          [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressPickup" 
+        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerAddressPickUp" 
+          [(ngModel)]="customerVehicleDetailUIDTO.selectCustomerAddressPickUp" 
           optionLabel="address.streetAddress" 
           [showClear]="true" 
           placeholder="Selecione O Local De Retirada"
           [style]="{'width': '100%'}">
           <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressPickup">              
-              <div>{{ customerVehicleDetailUIDTO.selectedCustomerVehicleAddressPickup.address.streetAddress }}</div>
+            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectCustomerAddressPickUp">              
+              <div>{{ customerVehicleDetailUIDTO.selectCustomerAddressPickUp.address.streetAddress }}</div>
             </div>
           </ng-template>
           <ng-template let-cva pTemplate="item">
@@ -195,19 +195,6 @@
           </ng-template>
         </p-dropdown>
       </div>
-
-      <!--
-      <div class="col p-3" style="min-height: 10rem; min-width: 10rem;" (click)="newAddressRegisterDynamicDialog()">
-        <div
-          class="flex h-full flex-column justify-content-center align-items-center py-5 lg:py-0 border-round border-1 surface-border surface-100 cursor-pointer hover:border-primary transition-duration-150">
-          <span
-            class="text-600 border-circle border-2 w-2rem h-2rem flex align-items-center justify-content-center">
-            <i class="pi pi-fw pi-plus"></i>
-          </span>
-          <span class="text-600 mt-3">{{'button_Address_Checkout' | translate}}</span>
-        </div>
-      </div>
-      -->
 
       <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress" style="width: 100%;">
         <p-button label="Adicionar Endereço" (onClick)="newAddressPickUpRegisterDynamicDialog()" [style]="{ 'width.px': 360 }"></p-button>
