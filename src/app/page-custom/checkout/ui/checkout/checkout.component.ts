@@ -10,12 +10,12 @@ import { Location } from '@angular/common';
 import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/service/customer-vehicle.service';
 import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
 import * as moment from 'moment';
-import { DecimalPipeService } from 'src/app/utils/service/rate-utils-service copy';
 import { CustomerAddressService } from 'src/app/global/page/customer-address/service/customer-address.service';
 import { CustomerService } from 'src/app/global/page/customer/service/customer.service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { CustomerAddress } from 'src/app/global/page/customer-address/entity/customer-address.entity';
 import { AddressType } from 'src/app/page/admin/address-type/address-type.enum';
+import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
 
 @Component({
   selector: 'app-checkout',

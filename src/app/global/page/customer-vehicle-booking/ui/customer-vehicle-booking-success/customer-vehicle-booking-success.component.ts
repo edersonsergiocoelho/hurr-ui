@@ -9,9 +9,9 @@ import { CustomerVehicleBookingSuccessUIDTO } from './dto/customer-vehicle-booki
 import { CustomerVehicleBookingService } from '../../service/customer-vehicle-booking.service';
 import { CustomerVehicleService } from '../../../customer-vehicle/service/customer-vehicle.service';
 import { MpPreferenceService } from 'src/app/page-custom/mercado-pago/service/preference/mp-preference.service';
-import { DecimalPipeService } from 'src/app/utils/service/rate-utils-service copy';
 import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
 import * as moment from 'moment';
+import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
 
 @Component({
   selector: 'app-customer-vehicle-booking-success',

@@ -31,6 +31,25 @@ export class CustomerVehicleBookingService {
     );
   }
 
+  sumCustomerVehicleTotalBookingValue(customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO): Observable<HttpResponse<any>> {
+    const url = `${this.apiUrl}/sum/customer-vehicle/total-booking-value`;
+
+    /*
+    let params = new HttpParams()
+    .set('page', page.toString())
+    .set('size', size.toString())
+    .set('sortDir', sortDir);
+
+    if (typeof sortBy === 'string') {
+      params = params.set('sortBy', sortBy);
+    } else if (Array.isArray(sortBy) && sortBy.length > 0) {
+      params = params.set('sortBy', sortBy.join(','));
+    }
+    */
+
+    return this.httpClient.post<any>(url, customerVehicleBookingSearchDTO, { observe: 'response' });
+  }
+
   searchPage(customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO, page: number = 0, size: number = 10, sortDir: string, sortBy: string | string[]): Observable<HttpResponse<any>> {
     const url = `${this.apiUrl}/search/page`;
 

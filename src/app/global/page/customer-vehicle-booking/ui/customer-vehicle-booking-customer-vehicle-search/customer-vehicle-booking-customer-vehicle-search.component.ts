@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerVehicleBookingCustomerVehicleSearchUIDTO } from './dto/customer-vehicle-booking-customer-vehicle-search-ui-dto.dto';
 import { CustomerVehicleBooking } from '../../entity/customer-vehicle-booking.entity';
 import { CustomerVehicleBookingSearchDTO } from '../../dto/customer-vehicle-booking-search-dto.dto';
-import { DecimalPipeService } from 'src/app/utils/service/rate-utils-service copy';
 import { CustomerService } from '../../../customer/service/customer.service';
 import { CustomerVehicleBookingService } from '../../service/customer-vehicle-booking.service';
 import { MessageService } from 'primeng/api';
@@ -16,6 +15,7 @@ import { CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogCompon
 import { CustomerVehicleReviewService } from '../../../customer-vehicle-review/service/customer-vehicle-review.service';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { CustomerVehicleReview } from '../../../customer-vehicle-review/entity/customer-vehicle-review.entity';
+import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
 
 @Component({
   selector: 'app-customer-vehicle-booking-customer-vehicle-search',

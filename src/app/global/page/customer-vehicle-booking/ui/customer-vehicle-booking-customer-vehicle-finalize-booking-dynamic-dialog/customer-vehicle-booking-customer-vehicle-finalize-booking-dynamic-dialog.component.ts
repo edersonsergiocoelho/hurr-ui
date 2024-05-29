@@ -3,11 +3,12 @@ import { CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogUIDTO 
 import { TranslateService } from '@ngx-translate/core';
 import { CustomerVehicleBooking } from '../../entity/customer-vehicle-booking.entity';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { DecimalPipeService } from 'src/app/utils/service/rate-utils-service copy';
+
 import { CustomerVehicleBookingService } from '../../service/customer-vehicle-booking.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first, firstValueFrom } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
 
 @Component({
   selector: 'app-customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog',
