@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EarningsUIDTO } from '../dto/earnings-ui.dto';
+import { EarningsUIDTO } from './dto/earnings-ui.dto';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,10 +17,29 @@ export class EarningsComponent implements OnInit {
 
   earningsUIDTO: EarningsUIDTO;
 
-  withdrawableBalance: any;
+  isOverviewActive: boolean = true;
+  isTransactionsVisibleActive: boolean = false;
+
+  resumeVisible: boolean = true;
+  transactionsVisible: boolean = false;
+
+  toggleOverview() {
+    this.isOverviewActive = true;
+    this.isTransactionsVisibleActive = false;
+
+    this.resumeVisible = true;
+    this.transactionsVisible = false;
+  }
+
+  toggleTransactions() {
+    this.isOverviewActive = false;
+    this.isTransactionsVisibleActive = true;
+
+    this.resumeVisible = false;
+    this.transactionsVisible = true;
+  }
 
   constructor(
-    private customerVehicleBookingService: CustomerVehicleBookingService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
     private translateService: TranslateService,
@@ -34,8 +53,6 @@ export class EarningsComponent implements OnInit {
   resetForm() {
 
     this.earningsUIDTO = new EarningsUIDTO();
-
-    this.earningsUIDTO.customerVehicleBookingSearchDTO = new CustomerVehicleBookingSearchDTO();
 
     this.asyncCallFunctions();
   }
@@ -62,28 +79,7 @@ export class EarningsComponent implements OnInit {
         detail: error.toString()
       });
     }
-
-    try {
-        
-      const customerVehicleBookingServiceSumCustomerVehicleTotalBookingValue = await firstValueFrom(this.customerVehicleBookingService.sumCustomerVehicleTotalBookingValue(this.earningsUIDTO.customerVehicleBookingSearchDTO).pipe(first()));
-      
-      if (customerVehicleBookingServiceSumCustomerVehicleTotalBookingValue.status == 200 && customerVehicleBookingServiceSumCustomerVehicleTotalBookingValue.body != null) {
-        debugger;
-        this.earningsUIDTO.totalBookingValue = customerVehicleBookingServiceSumCustomerVehicleTotalBookingValue.body;
-      }
-      
-    } catch (error: any) {
-      this.messageService.add({ 
-        severity: 'error', 
-        summary: '' + this.earningsUIDTO.error_message_service_Generic,
-        detail: error.toString() 
-      });
-    }
   
     this.ngxSpinnerService.hide();
-  }
-
-  clickWithdrawMoney() {
-
   }
 }

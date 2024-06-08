@@ -1,8 +1,10 @@
 import { CustomerVehicleBookingSearchDTO } from "src/app/global/page/customer-vehicle-booking/dto/customer-vehicle-booking-search-dto.dto";
 
-export class EarningsUIDTO {
+export class EarningsResumeUIDTO {
 
-  totalBookingValue: number;
+  totalEarnings: number;
+  withdrawableCurrentBalance: number;
+  withdrawableBalance: number;
 
   customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO;
 

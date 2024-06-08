@@ -31,22 +31,18 @@ export class CustomerVehicleBookingService {
     );
   }
 
-  sumCustomerVehicleTotalBookingValue(customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO): Observable<HttpResponse<any>> {
-    const url = `${this.apiUrl}/sum/customer-vehicle/total-booking-value`;
+  sumCustomerVehicleTotalEarnings(customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO): Observable<HttpResponse<any>> {
+    const url = `${this.apiUrl}/sum/customer-vehicle/total-earnings`;
+    return this.httpClient.post<any>(url, customerVehicleBookingSearchDTO, { observe: 'response' });
+  }
 
-    /*
-    let params = new HttpParams()
-    .set('page', page.toString())
-    .set('size', size.toString())
-    .set('sortDir', sortDir);
+  sumCustomerVehicleWithdrawableCurrentBalance(customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO): Observable<HttpResponse<any>> {
+    const url = `${this.apiUrl}/sum/customer-vehicle/withdrawable-current-balance`;
+    return this.httpClient.post<any>(url, customerVehicleBookingSearchDTO, { observe: 'response' });
+  }
 
-    if (typeof sortBy === 'string') {
-      params = params.set('sortBy', sortBy);
-    } else if (Array.isArray(sortBy) && sortBy.length > 0) {
-      params = params.set('sortBy', sortBy.join(','));
-    }
-    */
-
+  sumCustomerVehicleWithdrawableBalance(customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO): Observable<HttpResponse<any>> {
+    const url = `${this.apiUrl}/sum/customer-vehicle/withdrawable-balance`;
     return this.httpClient.post<any>(url, customerVehicleBookingSearchDTO, { observe: 'response' });
   }
 

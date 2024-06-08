@@ -1,0 +1,124 @@
+<div class="lg:px-8 md:px-6 px-4 py-2">
+
+  <div class="surface-card p-4 shadow-2 border-round">
+    <div class="font-medium text-3xl text-900 mb-3">{{'title_Earnings' | translate}}</div>
+    <div class="text-500 mb-5">{{'subtitle_Earnings' | translate}}</div>
+    <ul class="list-none p-0 m-0 border-top-1 surface-border">
+      <li class="flex align-items-center py-3 px-2 flex-wrap">
+        <div class="text-500 w-full md:w-2 font-medium">{{'total_earnings_Earnings' | translate}}</div>
+        <div class="text-900 w-full md:w-10">
+          {{'currency_Generic' | translate}}
+          {{ earningsResumeUIDTO.totalEarnings }}
+        </div>
+      </li>
+      <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+        <div class="text-500 w-full md:w-2 font-medium">{{'withdrawable_current_balance_Earnings' | translate}}</div>
+        <div class="text-900 w-full md:w-10">
+          {{'currency_Generic' | translate}}
+          {{ earningsResumeUIDTO.withdrawableCurrentBalance }}
+        </div>
+      </li>
+      <li class="flex align-items-center py-3 px-2 flex-wrap">
+        <div class="text-500 w-full md:w-2 font-medium">{{'withdrawable_balance_Earnings' | translate}}</div>
+        <div class="text-900 w-full md:w-10">
+          {{'currency_Generic' | translate}}
+          {{ earningsResumeUIDTO.withdrawableBalance }}
+        </div>
+      </li>
+    </ul>
+    <div class="mt-4">
+      <button class="p-button p-component p-button-success" [disabled]="earningsResumeUIDTO.withdrawableBalance <= 0"
+      (click)="showDialog()">
+        <span class="p-button-label">Withdraw Money</span>
+      </button>
+    </div>
+
+    <p-dialog
+      class="p-element"
+      [modal]="true" 
+      [(visible)]="visible"
+      [style]="{ width: '50rem' }">
+
+      <div class="p-dialog-content">
+        <form novalidate="" class="flex flex-column w-full mt-4 ng-untouched ng-pristine">
+          <div class="flex w-full justify-content-between mb-4">
+            <span
+              class="w-4rem h-4rem border-circle flex justify-content-center align-items-center bg-blue-100">
+              <!--
+              <i class="pi pi-building text-blue-700 text-4xl"></i>
+              -->
+              <img src="assets/images/icon/bank.png" alt="Image" width="40px">
+            </span>
+          </div>
+          <p class="font-semibold text-xl mt-0 mb-4 text-900">Manage Payment Info</p>
+          <div
+            class="flex justify-content-between w-full align-items-center border-1 p-3 border-round surface-border mb-2 cursor-pointer">
+            <div>
+              <div class="flex align-items-center mb-3"><img src="assets/images/blocks/dialog/dialog-1.svg"
+                  alt="Image" class="mr-2 w-3rem border-1 surface-border border-round">
+                <p class="font-medium text-xl mt-0 mb-0 mr-2 text-900">Visa ending in 1234</p><span
+                  class="p-tag">Default</span>
+              </div>
+              <p class="font-medium text-base mt-0 mb-0 text-600">Expires 12/2038</p>
+            </div><p-radioButton name="payment" value="Visa" inputid="payment1"
+              class="p-element ng-untouched ng-pristine">
+              <div class="p-radiobutton p-component p-radiobutton-disabled">
+                <div class="p-hidden-accessible"><input type="radio" id="payment1" name="payment" value="Visa"
+                    disabled="" aria-checked="false"></div>
+                <div class="p-radiobutton-box p-disabled"><span class="p-radiobutton-icon"></span></div>
+              </div>
+            </p-radioButton>
+          </div>
+          <div
+            class="flex justify-content-between w-full align-items-center border-1 p-3 border-round surface-border mb-2 cursor-pointer surface-hover">
+            <div>
+              <div class="flex align-items-center mb-3"><img src="assets/images/blocks/dialog/dialog-2.svg"
+                  alt="Image" class="mr-2 w-3rem border-1 surface-border border-round">
+                <p class="font-medium text-xl mt-0 mb-0 text-900">MasterCard ending in 1234</p>
+              </div>
+              <p class="font-medium text-base mt-0 mb-0 text-600">Expires 07/2025</p>
+            </div><p-radioButton name="payment" value="MasterCard" inputid="payment1"
+              class="p-element ng-untouched ng-pristine">
+              <div class="p-radiobutton p-component p-radiobutton-disabled p-radiobutton-checked">
+                <div class="p-hidden-accessible"><input type="radio" id="payment1" name="payment"
+                    value="MasterCard" disabled="" aria-checked="true"></div>
+                <div class="p-radiobutton-box p-disabled p-highlight"><span class="p-radiobutton-icon"></span>
+                </div>
+              </div>
+            </p-radioButton>
+          </div>
+          <div
+            class="flex justify-content-between w-full align-items-center border-1 p-3 border-round surface-border opacity-50">
+            <div>
+              <div class="flex align-items-center mb-3"><img src="assets/images/blocks/dialog/dialog-1.svg"
+                  alt="Image" class="mr-2 w-3rem border-1 surface-border border-round">
+                <p class="font-medium text-xl text-900 mt-0 mb-0 mr-2">Visa ending in 1234</p><span
+                  class="p-tag bg-red-500 text-white">Expired</span>
+              </div>
+              <p class="font-medium text-base text-600 mt-0 mb-0">Expires 01/2022</p>
+            </div><p-radioButton name="payment" value="Other" inputid="payment1"
+              class="p-element ng-untouched ng-pristine">
+              <div class="p-radiobutton p-component p-radiobutton-disabled">
+                <div class="p-hidden-accessible"><input type="radio" disabled="" id="payment1" name="payment"
+                    value="Other" aria-checked="false"></div>
+                <div class="p-radiobutton-box p-disabled"><span class="p-radiobutton-icon"></span></div>
+              </div>
+            </p-radioButton>
+          </div>
+        </form>
+      </div>
+      <div class="p-dialog-footer ng-tns-c36-13" style="">
+        <div class="flex -mt-3 justify-content-between align-items-center"><button pbutton=""
+            pripple="" icon="pi pi-plus" label="Add Payment Method"
+            class="p-element p-ripple p-button-text m-0 p-button p-component"><span
+              class="p-button-icon p-button-icon-left pi pi-plus" aria-hidden="true"></span><span
+              class="p-button-label">Add Payment Method</span><span class="p-ink"></span></button><button
+            pbutton="" pripple="" icon="pi pi-check" label="Save"
+            class="p-element p-ripple m-0 p-button p-component"><span
+              class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true"></span><span
+              class="p-button-label">Save</span><span class="p-ink"></span></button></div>
+      </div>
+    </p-dialog>
+
+  </div>
+</div>

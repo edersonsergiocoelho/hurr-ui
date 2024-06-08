@@ -6,12 +6,19 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EarningsComponent } from '../ui/earnings/earnings.component';
+import { DialogModule } from 'primeng/dialog';
+import { MenuModule } from 'primeng/menu';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
+import { EarningsComponent } from '../ui/earnings/earnings.component';
+import { EarningsResumeComponent } from '../ui/earnings-resume/earnings-resume.component';
+import { EarningsCustomerWithdrawalRequestsComponent } from '../ui/earnings-customer-withdrawal-requests/earnings-customer-withdrawal-requests.component';
 
 @NgModule({
   declarations: [
-    EarningsComponent
+    EarningsComponent,
+    EarningsResumeComponent,
+    EarningsCustomerWithdrawalRequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -21,10 +28,15 @@ import { EarningsComponent } from '../ui/earnings/earnings.component';
     ReactiveFormsModule,
     EarningsRoutingModule,
 
+    DialogModule,
+    RadioButtonModule,
     TranslateModule,
+    MenuModule
   ],
   exports: [
-    EarningsComponent
+    EarningsComponent,
+    EarningsResumeComponent,
+    EarningsCustomerWithdrawalRequestsComponent
   ]
 })
 export class EarningsModule { }

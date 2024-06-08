@@ -1,76 +1,35 @@
 <div class="block-content">
-  <div class="lg:px-8 md:px-6 px-4 py-8">
-    
-    <div class="surface-card p-4 shadow-2 border-round">
-      <div class="font-medium text-3xl text-900 mb-3">{{'title_Earnings' | translate}}</div>
-      <div class="text-500 mb-5">Egestas sed tempus urna et pharetra pharetra massa massa ultricies.</div>
-      <ul class="list-none p-0 m-0 border-top-1 surface-border">
-        <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-          <div class="text-500 w-full md:w-2 font-medium">Name</div>
-          <div class="text-900 w-full md:w-10">Elliot Alderson</div>
-        </li>
-        <li class="flex align-items-center py-3 px-2 flex-wrap">
-          <div class="text-500 w-full md:w-2 font-medium">Bio</div>
-          <div class="text-900 w-full md:w-10 line-height-3">Faucibus pulvinar elementum integer enim neque volutpat ac
-            tincidunt vitae. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Eget felis eget nunc
-            lobortis mattis aliquam faucibus purus in.</div>
-        </li>
-        <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-          <div class="text-500 w-full md:w-2 font-medium">Salary Expectation</div>
-          <div class="text-900 w-full md:w-10">$150,000</div>
-        </li>
-        <li class="flex align-items-center py-3 px-2 flex-wrap">
-          <div class="text-500 w-full md:w-2 font-medium">Total Earnings</div>
-          <div class="text-900 w-full md:w-10">$50,000</div>
-        </li>
-        <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-          <div class="text-500 w-full md:w-2 font-medium">Current Balance</div>
-          <div class="text-900 w-full md:w-10">$10,000</div>
-        </li>
-        <li class="flex align-items-center py-3 px-2 flex-wrap">
-          <div class="text-500 w-full md:w-2 font-medium">Withdrawable Balance</div>
-          <div class="text-900 w-full md:w-10">$8,000</div>
-        </li>
-        <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
-          <div class="text-500 w-full md:w-2 font-medium">Repositories</div>
-          <div class="text-900 w-full md:w-10">
-            <div class="grid mt-0 mr-0">
-              <div class="col-12 md:col-6">
-                <div class="p-3 border-1 surface-border border-round surface-card">
-                  <div class="text-900 mb-2"><i class="pi pi-github mr-2"></i><span class="font-medium">PrimeFaces</span></div>
-                  <div class="text-700">Ultimate UI Component Suite for JavaServer Faces</div>
-                </div>
-              </div>
-              <div class="col-12 md:col-6">
-                <div class="p-3 border-1 surface-border border-round surface-card">
-                  <div class="text-900 mb-2"><i class="pi pi-github mr-2"></i><span class="font-medium">PrimeNG</span>
-                  </div>
-                  <div class="text-700">The Most Complete Angular UI Component Library</div>
-                </div>
-              </div>
-              <div class="col-12 md:col-6">
-                <div class="p-3 border-1 surface-border border-round surface-card">
-                  <div class="text-900 mb-2"><i class="pi pi-github mr-2"></i><span class="font-medium">PrimeReact</span></div>
-                  <div class="text-700">Advanced UI Components for ReactJS</div>
-                </div>
-              </div>
-              <div class="col-12 md:col-6">
-                <div class="p-3 border-1 surface-border border-round surface-card">
-                  <div class="text-900 mb-2"><i class="pi pi-github mr-2"></i><span class="font-medium">PrimeVue</span>
-                  </div>
-                  <div class="text-700">The Most Powerful Vue UI Component Library</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="mt-4">
-        <button class="p-button p-component p-button-success" [disabled]="withdrawableBalance <= 0" 
-          (click)="clickWithdrawMoney()">
-          <span class="p-button-label">Withdraw Money</span>
-        </button>
-      </div>
-    </div>
+  <div class="lg:px-8 md:px-6 px-3 py-8">
+    <ul class="surface-card p-2 m-0 list-none flex overflow-x-auto select-none">
+      <li class="pr-3">
+        <a pripple=""
+          class="p-ripple p-element cursor-pointer px-4 py-3 flex align-items-center hover:surface-100 border-round transition-colors transition-duration-150 text-700"
+          [ngClass]="{'bg-primary hover:bg-primary': isOverviewActive}" (click)="toggleOverview()">
+          <i class="pi pi-chart-line mr-2"></i>
+          <span class="font-medium">{{'tab_resume_Earnings' | translate}}</span>
+          <span class="p-ink" style="height: 140px; width: 140px; top: -42px; left: 61px;"></span>
+        </a>
+      </li>
+      <li class="flex align-items-center">
+        <div class="border-right-1 surface-border" style="width: 1px; height: 50%;"></div>
+      </li>
+      <li class="px-3">
+        <a pripple=""
+          class="p-ripple p-element cursor-pointer px-4 py-3 flex align-items-center hover:surface-100 border-round transition-colors transition-duration-150 text-700"
+          [ngClass]="{'bg-primary hover:bg-primary': isTransactionsVisibleActive}" (click)="toggleTransactions()">
+          <i class="pi pi-list mr-2"></i>
+          <span class="font-medium">{{'tab_customer_withdrawal_requests_Earnings' | translate}}</span>
+          <span class="p-ink" style="height: 141px; width: 141px; top: -50.5px; left: -8.54688px;"></span>
+        </a>
+      </li>
+    </ul>
   </div>
+</div>
+
+<div class="block-content" [ngStyle]="{'display': resumeVisible ? 'block' : 'none'}">
+  <app-earnings-resume></app-earnings-resume>
+</div>
+
+<div class="block-content" [ngStyle]="{'display': transactionsVisible ? 'block' : 'none'}">
+  <app-earnings-customer-withdrawal-requests></app-earnings-customer-withdrawal-requests>
 </div>
