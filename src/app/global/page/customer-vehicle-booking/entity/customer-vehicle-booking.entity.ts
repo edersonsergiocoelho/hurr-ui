@@ -3,24 +3,25 @@ import { CustomerVehicle } from "../../customer-vehicle/entity/customer-vehicle.
 import { Customer } from "../../customer/entity/customer.entity";
 
 export class CustomerVehicleBooking {
-
+  
   customerVehicleBookingId: string;
   customerVehicle: CustomerVehicle;
   customer: Customer;
-  customerAddressDelivery: CustomerAddress;
-  customerAddressDeliveryValue: number;
-  customerAddressPickUp: CustomerAddress;
-  customerAddressPickUpValue: number;
+  customerAddressDelivery?: CustomerAddress;
+  customerAddressDeliveryValue?: number;
+  customerAddressPickUp?: CustomerAddress;
+  customerAddressPickUpValue?: number;
   booking: string;
-  bookingStartDate: Date;
-  bookingEndDate: Date;
-  bookingStartTime: string;
-  bookingEndTime: string;
-  bookingDeliveryDate: Date;
-  totalBookingValue: number;
+  reservationStartDate: Date;
+  reservationStartTime: string;
+  reservationEndDate: Date;
+  reservationEndTime: string;
   bookingStartKM: number;
   bookingEndKM: number;
-  createdDate: Date;
-  modifiedDate: Date;
-  enabled: boolean;
+  bookingStartDate: Date;
+  bookingEndDate: Date;
+  bookingCancellationDate: Date;
+  withdrawableBookingValue: number;
+  totalBookingValue: number;
+  mpPaymentId: number;
 }

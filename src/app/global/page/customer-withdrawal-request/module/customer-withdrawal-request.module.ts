@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CustomerWithdrawalRequestsRoutingModule } from './customer-withdrawal-requests-routing.module';
+import { CustomerWithdrawalRequestRoutingModule } from './customer-withdrawal-request-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    CustomerWithdrawalRequestsRoutingModule
+    CustomerWithdrawalRequestRoutingModule
   ]
 })
 export class CustomerWithdrawalRequestsModule { }

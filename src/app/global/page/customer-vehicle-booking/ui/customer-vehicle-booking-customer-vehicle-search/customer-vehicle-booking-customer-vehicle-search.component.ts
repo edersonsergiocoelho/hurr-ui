@@ -176,8 +176,6 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
 
   clickOverlayPanelWriteAReview(event: any, customerVehicleBooking: any) {
 
-    debugger;
-
     this.customerVehicleReviewService.findByCustomerVehicleIdAndCustomerId(customerVehicleBooking.customerVehicle.customerVehicleId, customerVehicleBooking.customerVehicle.customer.customerId).pipe(first()).subscribe({
       next: (data: any) => {
 

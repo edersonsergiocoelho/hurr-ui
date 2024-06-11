@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { first, firstValueFrom } from 'rxjs';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerVehicleBookingSearchDTO } from 'src/app/global/page/customer-vehicle-booking/dto/customer-vehicle-booking-search-dto.dto';
-import { CustomerWithdrawalRequestsService } from 'src/app/global/page/customer-withdrawal-requests/service/customer-withdrawal-requests.service';
+import { CustomerWithdrawalRequestService } from 'src/app/global/page/customer-withdrawal-request/service/customer-withdrawal-request.service';
 
 @Component({
   selector: 'app-earnings-resume',
@@ -20,7 +20,7 @@ export class EarningsResumeComponent {
 
   constructor(
     private customerVehicleBookingService: CustomerVehicleBookingService,
-    private customerWithdrawalRequestsService: CustomerWithdrawalRequestsService,
+    private customerWithdrawalRequestService: CustomerWithdrawalRequestService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
     private translateService: TranslateService
