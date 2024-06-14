@@ -7,7 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { first, firstValueFrom } from 'rxjs';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerVehicleBookingSearchDTO } from 'src/app/global/page/customer-vehicle-booking/dto/customer-vehicle-booking-search-dto.dto';
-import { CustomerWithdrawalRequestService } from 'src/app/global/page/customer-withdrawal-request/service/customer-withdrawal-request.service';
+import { CustomerBankAccountService } from 'src/app/page/customer-bank-account/service/customer-bank-account.service';
+import { PaymentMethodService } from 'src/app/page/admin/payment-method/service/payment-method.service';
 
 @Component({
   selector: 'app-earnings-resume',
@@ -20,7 +21,8 @@ export class EarningsResumeComponent {
 
   constructor(
     private customerVehicleBookingService: CustomerVehicleBookingService,
-    private customerWithdrawalRequestService: CustomerWithdrawalRequestService,
+    private customerBankAccountService: CustomerBankAccountService,
+    private paymentMethodService: PaymentMethodService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
     private translateService: TranslateService
@@ -73,7 +75,7 @@ export class EarningsResumeComponent {
       
     } catch (error: any) {
       this.messageService.add({ 
-        severity: 'error', 
+        severity: SeverityConstants.ERROR,
         summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
         detail: error.toString() 
       });
@@ -89,7 +91,7 @@ export class EarningsResumeComponent {
       
     } catch (error: any) {
       this.messageService.add({ 
-        severity: 'error', 
+        severity: SeverityConstants.ERROR,
         summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
         detail: error.toString() 
       });
@@ -105,7 +107,60 @@ export class EarningsResumeComponent {
       
     } catch (error: any) {
       this.messageService.add({ 
-        severity: 'error', 
+        severity: SeverityConstants.ERROR,
+        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        detail: error.toString() 
+      });
+    }
+
+    try {
+        
+      const customerBankAccountServiceFindAll = await firstValueFrom(this.customerBankAccountService.findAll().pipe(first()));
+      
+      if (customerBankAccountServiceFindAll.status == 200 && customerBankAccountServiceFindAll.body != null) {
+        this.earningsResumeUIDTO.customerBankAccounts = customerBankAccountServiceFindAll.body;
+      }
+      
+    } catch (error: any) {
+      this.messageService.add({ 
+        severity: SeverityConstants.ERROR,
+        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        detail: error.toString() 
+      });
+    }
+
+    try {
+        
+      const paymentMethodServiceFindAll = await firstValueFrom(this.paymentMethodService.findAll().pipe(first()));
+      
+      if (paymentMethodServiceFindAll.status == 200 && paymentMethodServiceFindAll.body != null) {
+        this.earningsResumeUIDTO.paymentMethods = paymentMethodServiceFindAll.body;
+        for (let paymentMethod of this.earningsResumeUIDTO.paymentMethods) {
+          if (paymentMethod.file != null) {
+            paymentMethod.dataURI = `data:${paymentMethod.file.contentType};base64,${paymentMethod.file.dataAsByteArray}`;
+          }
+        }
+      }
+      
+    } catch (error: any) {
+      this.messageService.add({ 
+        severity: SeverityConstants.ERROR,
+        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        detail: error.toString() 
+      });
+    }
+
+    try {
+        
+      const customerBankAccountServiceFindAll = await firstValueFrom(this.customerBankAccountService.findAll().pipe(first()));
+      
+      if (customerBankAccountServiceFindAll.status == 200 && customerBankAccountServiceFindAll.body != null) {
+        this.earningsResumeUIDTO.customerBankAccounts = customerBankAccountServiceFindAll.body;
+      }
+      
+    } catch (error: any) {
+      this.messageService.add({ 
+        severity: SeverityConstants.ERROR,
         summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
         detail: error.toString() 
       });
@@ -114,9 +169,15 @@ export class EarningsResumeComponent {
     this.ngxSpinnerService.hide();
   }
 
-  visible: boolean = false;
-
   showDialog() {
-      this.visible = true;
+      this.earningsResumeUIDTO.visibleDialog = true;
+  }
+
+  nextStepDialog() {
+    this.earningsResumeUIDTO.stepDialog++;
+  }
+
+  previousStepDialog() {
+    this.earningsResumeUIDTO.stepDialog--;
   }
 }

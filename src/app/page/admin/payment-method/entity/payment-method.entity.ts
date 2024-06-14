@@ -8,4 +8,6 @@ export class PaymentMethod {
   createdDate: Date;
   modifiedDate?: Date;
   enabled: boolean;
+
+  dataURI: string;
 }

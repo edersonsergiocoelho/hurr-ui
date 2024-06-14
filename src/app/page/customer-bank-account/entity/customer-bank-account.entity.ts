@@ -1,4 +1,5 @@
 import { Customer } from "src/app/global/page/customer/entity/customer.entity";
+import { Bank } from "../../admin/bank/entity/bank.entity";
 
 export class CustomerBankAccount {
   
@@ -15,7 +16,7 @@ export class CustomerBankAccount {
   /**
    * Identificador do banco.
    */
-  bankId: string;
+  bank: Bank;
 
   /**
    * Número da conta bancária.

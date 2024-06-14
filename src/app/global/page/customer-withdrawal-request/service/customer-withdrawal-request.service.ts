@@ -23,14 +23,6 @@ export class CustomerWithdrawalRequestService {
     );
   }
 
-  findByCustomerId(): Observable<HttpResponse<CustomerWithdrawalRequest[]>> {
-    return this.httpClient.get<CustomerWithdrawalRequest[]>(this.apiUrl, { observe: 'response' }).pipe(
-      map((response: HttpResponse<CustomerWithdrawalRequest[]>) => {
-        return response;
-      })
-    );
-  }
-
   findAll(): Observable<HttpResponse<CustomerWithdrawalRequest[]>> {
     return this.httpClient.get<CustomerWithdrawalRequest[]>(this.apiUrl, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerWithdrawalRequest[]>) => {
