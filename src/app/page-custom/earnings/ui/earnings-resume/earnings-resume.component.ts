@@ -9,6 +9,9 @@ import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerVehicleBookingSearchDTO } from 'src/app/global/page/customer-vehicle-booking/dto/customer-vehicle-booking-search-dto.dto';
 import { CustomerBankAccountService } from 'src/app/page/customer-bank-account/service/customer-bank-account.service';
 import { PaymentMethodService } from 'src/app/page/admin/payment-method/service/payment-method.service';
+import { CustomerWithdrawalRequestService } from 'src/app/global/page/customer-withdrawal-request/service/customer-withdrawal-request.service';
+import { CustomerWithdrawalRequest } from 'src/app/global/page/customer-withdrawal-request/entity/customer-withdrawal-request.entity';
+import { PaymentStatusService } from 'src/app/page/admin/payment-status/service/payment-status.service';
 
 @Component({
   selector: 'app-earnings-resume',
@@ -20,11 +23,13 @@ export class EarningsResumeComponent {
   earningsResumeUIDTO: EarningsResumeUIDTO;
 
   constructor(
-    private customerVehicleBookingService: CustomerVehicleBookingService,
     private customerBankAccountService: CustomerBankAccountService,
-    private paymentMethodService: PaymentMethodService,
+    private customerVehicleBookingService: CustomerVehicleBookingService,
+    private customerWithdrawalRequestService: CustomerWithdrawalRequestService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
+    private paymentMethodService: PaymentMethodService,
+    private paymentStatusService: PaymentStatusService,
     private translateService: TranslateService
   ) {}
 
@@ -115,22 +120,6 @@ export class EarningsResumeComponent {
 
     try {
         
-      const customerBankAccountServiceFindAll = await firstValueFrom(this.customerBankAccountService.findAll().pipe(first()));
-      
-      if (customerBankAccountServiceFindAll.status == 200 && customerBankAccountServiceFindAll.body != null) {
-        this.earningsResumeUIDTO.customerBankAccounts = customerBankAccountServiceFindAll.body;
-      }
-      
-    } catch (error: any) {
-      this.messageService.add({ 
-        severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
-        detail: error.toString() 
-      });
-    }
-
-    try {
-        
       const paymentMethodServiceFindAll = await firstValueFrom(this.paymentMethodService.findAll().pipe(first()));
       
       if (paymentMethodServiceFindAll.status == 200 && paymentMethodServiceFindAll.body != null) {
@@ -152,10 +141,42 @@ export class EarningsResumeComponent {
 
     try {
         
+      const paymentStatusServiceFindByPaymentStatusName = await firstValueFrom(this.paymentStatusService.findByPaymentStatusName("PENDING").pipe(first()));
+      
+      if (paymentStatusServiceFindByPaymentStatusName.status == 200 && paymentStatusServiceFindByPaymentStatusName.body != null) {
+        this.earningsResumeUIDTO.paymentStatus = paymentStatusServiceFindByPaymentStatusName.body;
+      }
+      
+    } catch (error: any) {
+      this.messageService.add({ 
+        severity: SeverityConstants.ERROR,
+        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        detail: error.toString() 
+      });
+    }
+
+    try {
+        
       const customerBankAccountServiceFindAll = await firstValueFrom(this.customerBankAccountService.findAll().pipe(first()));
       
       if (customerBankAccountServiceFindAll.status == 200 && customerBankAccountServiceFindAll.body != null) {
         this.earningsResumeUIDTO.customerBankAccounts = customerBankAccountServiceFindAll.body;
+      }
+      
+    } catch (error: any) {
+      this.messageService.add({ 
+        severity: SeverityConstants.ERROR,
+        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        detail: error.toString() 
+      });
+    }
+
+    try {
+      
+      const customerVehicleBookingServiceFindByCustomerVehicleWithdrawableBalance = await firstValueFrom(this.customerVehicleBookingService.findByCustomerVehicleWithdrawableBalance().pipe(first()));
+      
+      if (customerVehicleBookingServiceFindByCustomerVehicleWithdrawableBalance.status == 200 && customerVehicleBookingServiceFindByCustomerVehicleWithdrawableBalance.body != null) {
+        this.earningsResumeUIDTO.customerVehicleBookings = customerVehicleBookingServiceFindByCustomerVehicleWithdrawableBalance.body;
       }
       
     } catch (error: any) {
@@ -179,5 +200,79 @@ export class EarningsResumeComponent {
 
   previousStepDialog() {
     this.earningsResumeUIDTO.stepDialog--;
+  }
+
+  ngModelChangeSelectAllCustomerVehicleBookings() {
+
+    if (this.earningsResumeUIDTO.selectAllCustomerVehicleBookings) {
+        this.earningsResumeUIDTO.selectedCustomerVehicleBookings = [...this.earningsResumeUIDTO.customerVehicleBookings];
+    } else {
+        this.earningsResumeUIDTO.selectedCustomerVehicleBookings = [];
+    }
+  }
+
+  ngModelChangeSelectedCustomerVehicleBookings() {
+
+    const selectedLength = this.earningsResumeUIDTO.selectedCustomerVehicleBookings.length;
+    const totalLength = this.earningsResumeUIDTO.customerVehicleBookings.length;
+
+    this.earningsResumeUIDTO.selectAllCustomerVehicleBookings = selectedLength === totalLength;
+  }
+
+  requestMoney() {
+
+    if (!this.earningsResumeUIDTO.customerVehicleBookings || this.earningsResumeUIDTO.customerVehicleBookings.length === 0) {
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: 'Erro',
+          detail: 'Nenhuma reserva selecionada para solicitação de retirada.'
+        });
+        return;
+    }
+
+    this.ngxSpinnerService.show();
+
+    let customerWithdrawalRequests: Array<CustomerWithdrawalRequest> = new Array<CustomerWithdrawalRequest>;
+
+    this.earningsResumeUIDTO.customerVehicleBookings.forEach((customerVehicleBooking: any) => {
+
+      let customerWithdrawalRequest: CustomerWithdrawalRequest = new CustomerWithdrawalRequest();
+      
+      customerWithdrawalRequest.customer = this.earningsResumeUIDTO.selectedCustomerBankAccount.customer;
+      customerWithdrawalRequest.customerBankAccount = this.earningsResumeUIDTO.selectedCustomerBankAccount;
+      customerWithdrawalRequest.paymentMethod = this.earningsResumeUIDTO.selectedPaymentMethod;
+      customerWithdrawalRequest.paymentStatus = this.earningsResumeUIDTO.paymentStatus;
+      customerWithdrawalRequest.customerVehicleBooking = customerVehicleBooking;
+
+      customerWithdrawalRequests.push(customerWithdrawalRequest);
+    });
+
+    this.customerWithdrawalRequestService.saveAll(customerWithdrawalRequests).pipe(first()).subscribe({
+      next: (data: any) => {
+        if (data.status == 201) {
+          this.messageService.add({
+            severity: SeverityConstants.INFO,
+            summary: 'Solicitação de retirada concluída',
+            detail: 'A solicitação de retirada foi realizada com sucesso.'
+          });
+        }
+      },
+      error: (error) => {
+
+        if (error.status == 500) {
+          this.messageService.add({
+            severity: SeverityConstants.ERROR,
+            summary: 'Erro',
+            detail: 'Erro ao solicitar retirada, tente novamente mais tarde.'
+          });
+        }
+
+        this.ngxSpinnerService.hide();
+
+      },
+      complete: () => {
+        this.ngxSpinnerService.hide();
+      }
+    });
   }
 }

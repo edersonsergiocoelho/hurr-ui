@@ -28,9 +28,18 @@
       </li>
     </ul>
     <div class="mt-4">
-      <button class="p-button p-component p-button-success" [disabled]="earningsResumeUIDTO.withdrawableBalance <= 0"
+      <button [disabled]="earningsResumeUIDTO.withdrawableBalance <= 0"
+        pbutton="" pripple="" label="Voltar"
+        class="p-button p-component p-button-success"
         (click)="showDialog()">
-        <span class="p-button-label">{{'span_button_label_withdraw_money_Generic' | translate}}</span>
+        <span
+          class="p-button-icon p-button-icon-left" aria-hidden="true">
+          <img src="assets/images/icon/cash-withdrawal.png" alt="Image" width="40px" style="filter: invert(100%);">
+        </span>
+        <span
+          class="p-button-label">{{'span_button_label_withdraw_money_Generic' | translate}}
+        </span>
+        <span class="p-ink"></span>
       </button>
     </div>
 
@@ -47,9 +56,6 @@
             <div class="flex w-full justify-content-between mb-4">
               <span
                 class="w-4rem h-4rem border-circle flex justify-content-center align-items-center bg-blue-100">
-                <!--
-                <i class="pi pi-building text-blue-700 text-4xl"></i>
-                -->
                 <img src="assets/images/icon/payment-method.png" alt="Image" width="40px">
               </span>
             </div>
@@ -61,29 +67,12 @@
                 <div class="flex align-items-center mb-3">
                   <img src="{{paymentMethod.dataURI}}" alt="Image" class="mr-2 w-3rem border-1 surface-border border-round">
                   <p class="font-medium text-xl mt-0 mb-0 mr-2 text-900">{{paymentMethod.paymentMethodName}}</p>
-                  <!--
-                  <span class="p-tag">Default</span>
-                  -->
                 </div>
-                <!--
-                <p class="font-medium text-base mt-0 mb-0 text-600">{{paymentMethod.paymentMethodName}}</p>
-                -->
               </div>
-              <!--
-              <p-radioButton name="payment" value="{{customerBankAccount.pixKey}}" inputid="payment1" class="p-element ng-untouched ng-pristine">
-                <div class="p-radiobutton p-component p-radiobutton-disabled">
-                  <div class="p-hidden-accessible">
-                    <input type="radio" id="payment1" name="payment" value="{{customerBankAccount.pixKey}}" disabled="" aria-checked="false">
-                  </div>
-                  <div class="p-radiobutton-box p-disabled">
-                    <span class="p-radiobutton-icon"></span>
-                  </div>
-                </div>
-              </p-radioButton>
-              -->
+
               <p-radioButton class="p-element" 
                 name="payment" 
-                [value]="paymentMethod.paymentMethodName" 
+                [value]="paymentMethod" 
                 [(ngModel)]="earningsResumeUIDTO.selectedPaymentMethod" 
                 inputId="{{paymentMethod.paymentMethodName}}" >
               </p-radioButton>
@@ -94,9 +83,6 @@
             <div class="flex w-full justify-content-between mb-4">
               <span
                 class="w-4rem h-4rem border-circle flex justify-content-center align-items-center bg-blue-100">
-                <!--
-                <i class="pi pi-building text-blue-700 text-4xl"></i>
-                -->
                 <img src="assets/images/icon/bank.png" alt="Image" width="40px">
               </span>
             </div>
@@ -106,64 +92,76 @@
               *ngFor="let customerBankAccount of earningsResumeUIDTO.customerBankAccounts">
               <div>
                 <div class="flex align-items-center mb-3">
-                  <img src="assets/images/blocks/dialog/dialog-1.svg" alt="Image" class="mr-2 w-3rem border-1 surface-border border-round">
+                  <img src="{{customerBankAccount.bank.dataURI}}" alt="Image" class="mr-2 w-3rem border-1 surface-border border-round">
                   <p class="font-medium text-xl mt-0 mb-0 mr-2 text-900">{{customerBankAccount.bank.bankName}}</p>
-                  <!--
-                  <span class="p-tag">Default</span>
-                  -->
                 </div>
                 <p class="font-medium text-base mt-0 mb-0 text-600">{{customerBankAccount.pixKey}}</p>
               </div>
-              <!--
-              <p-radioButton name="payment" value="{{customerBankAccount.pixKey}}" inputid="payment1" class="p-element ng-untouched ng-pristine">
-                <div class="p-radiobutton p-component p-radiobutton-disabled">
-                  <div class="p-hidden-accessible">
-                    <input type="radio" id="payment1" name="payment" value="{{customerBankAccount.pixKey}}" disabled="" aria-checked="false">
-                  </div>
-                  <div class="p-radiobutton-box p-disabled">
-                    <span class="p-radiobutton-icon"></span>
-                  </div>
-                </div>
-              </p-radioButton>
-              -->
+
               <p-radioButton class="p-element" 
                 name="payment" 
-                [value]="customerBankAccount.pixKey" 
+                [value]="customerBankAccount" 
                 [(ngModel)]="earningsResumeUIDTO.selectedCustomerBankAccount" 
                 inputId="{{customerBankAccount.pixKey}}" >
               </p-radioButton>
+
             </div>
           </div>
+
+          <div *ngIf="earningsResumeUIDTO.stepDialog === 3">
+            <div class="flex w-full justify-content-between mb-4">
+              <span
+                class="w-4rem h-4rem border-circle flex justify-content-center align-items-center bg-blue-100">
+                <img src="assets/images/icon/traffic-jam.png" alt="Image" width="40px">
+              </span>
+            </div>
+            <p class="font-semibold text-xl mt-0 mb-4 text-900">{{'title_customer_vehicle_booking_EarningsResume' | translate}}</p>
+
+            <div class="flex justify-content-between w-full align-items-center border-1 p-3 border-round surface-border mb-2 cursor-pointer">
+              <div>
+                  <div class="flex align-items-center mb-3">
+                      <p class="font-medium text-xl mt-0 mb-0 mr-2 text-900">Select All</p>
+                  </div>
+              </div>
+              <p-checkbox class="p-element" 
+                [(ngModel)]="earningsResumeUIDTO.selectAllCustomerVehicleBookings" 
+                (ngModelChange)="ngModelChangeSelectAllCustomerVehicleBookings()"
+                name="selectAllCustomerVehicleBookings"
+                [binary]="true">
+              </p-checkbox>
+            </div>
+
+            <div class="flex justify-content-between w-full align-items-center border-1 p-3 border-round surface-border mb-2 cursor-pointer"
+              *ngFor="let customerVehicleBooking of earningsResumeUIDTO.customerVehicleBookings">
+              <div>
+                <div class="flex align-items-center mb-3">
+                  <!--
+                  <img src="{{customerVehicleBooking.bank.dataURI}}" alt="Image" class="mr-2 w-3rem border-1 surface-border border-round">
+                  -->
+                  <p class="font-medium text-xl mt-0 mb-0 mr-2 text-900">{{customerVehicleBooking.booking}}</p>
+                </div>
+                <p class="font-medium text-base mt-0 mb-0 text-600">{{customerVehicleBooking.customerVehicle.vehicle.vehicleName}}</p>
+              </div>
+
+              <p-checkbox class="p-element" 
+                [value]="customerVehicleBooking" 
+                [(ngModel)]="earningsResumeUIDTO.selectedCustomerVehicleBookings"
+                [ngModelOptions]="{standalone: true}" 
+                name="{{ customerVehicleBooking.booking }}"
+                inputId="{{ customerVehicleBooking.booking }}"
+                (ngModelChange)="ngModelChangeSelectedCustomerVehicleBookings()">
+              </p-checkbox>
+
+            </div>
+          </div>
+
         </form>
 
       </div>
       <div class="p-dialog-footer ng-tns-c36-13" style="">
         <div class="flex -mt-3 justify-content-between align-items-center">
-          <button *ngIf="earningsResumeUIDTO.stepDialog === 1"
-            pbutton="" pripple="" icon="pi pi-arrow-right" label="Avançar"
-            class="p-element p-ripple m-0 p-button p-component" (click)="nextStepDialog()">
-            <span
-              class="p-button-icon p-button-icon-left pi pi-arrow-right" aria-hidden="true">
-            </span>
-            <span
-              class="p-button-label">Avançar
-            </span>
-            <span class="p-ink"></span>
-          </button>
-          <!--
-          <button pbutton=""
-            pripple="" icon="pi pi-plus" label="Add Payment Method"
-            class="p-element p-ripple p-button-text m-0 p-button p-component">
-            <span
-              class="p-button-icon p-button-icon-left pi pi-plus" aria-hidden="true">
-            </span>
-            <span
-              class="p-button-label">Add Payment Method
-            </span>
-            <span class="p-ink"></span>
-          </button>
-          -->
-          <button *ngIf="earningsResumeUIDTO.stepDialog === 2"
+
+          <button *ngIf="earningsResumeUIDTO.stepDialog === 2 || earningsResumeUIDTO.stepDialog === 3"
             pbutton="" pripple="" icon="pi pi-arrow-left" label="Voltar"
             class="p-element p-ripple m-0 p-button p-component"
             (click)="previousStepDialog()">
@@ -171,21 +169,35 @@
               class="p-button-icon p-button-icon-left pi pi-arrow-left" aria-hidden="true">
             </span>
             <span
-              class="p-button-label">Voltar
+              class="p-button-label">{{'span_button_label_to_go_back_Generic' | translate}}
             </span>
             <span class="p-ink"></span>
           </button>
-          <button *ngIf="earningsResumeUIDTO.stepDialog === 2"
+
+          <button *ngIf="earningsResumeUIDTO.stepDialog === 1 || earningsResumeUIDTO.stepDialog === 2"
+            pbutton="" pripple="" icon="pi pi-arrow-right" label="Avançar"
+            class="p-element p-ripple m-0 p-button p-component" (click)="nextStepDialog()">
+            <span
+              class="p-button-icon p-button-icon-left pi pi-arrow-right" aria-hidden="true">
+            </span>
+            <span
+              class="p-button-label">{{'span_button_label_go_Generic' | translate}}
+            </span>
+            <span class="p-ink"></span>
+          </button>
+
+          <button *ngIf="earningsResumeUIDTO.stepDialog === 3"
             pbutton="" pripple="" icon="pi pi-check" label="Save"
-            class="p-element p-ripple m-0 p-button p-component">
+            class="p-element p-ripple m-0 p-button p-component" (click)="requestMoney()">
             <span
               class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true">
             </span>
             <span
-              class="p-button-label">Save
+              class="p-button-label">{{'span_button_label_request_money_Generic' | translate}}
             </span>
             <span class="p-ink"></span>
           </button>
+
         </div>
       </div>
     </p-dialog>

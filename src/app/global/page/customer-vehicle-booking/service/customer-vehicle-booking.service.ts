@@ -31,6 +31,14 @@ export class CustomerVehicleBookingService {
     );
   }
 
+  findByCustomerVehicleWithdrawableBalance(): Observable<HttpResponse<CustomerVehicleBooking[]>> {
+    return this.httpClient.get<CustomerVehicleBooking[]>(`${this.apiUrl}/by/customer-vehicle/withdrawable-balance`, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleBooking[]>) => {
+        return response;
+      })
+    );
+  }
+
   sumCustomerVehicleTotalEarnings(customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO): Observable<HttpResponse<any>> {
     const url = `${this.apiUrl}/sum/customer-vehicle/total-earnings`;
     return this.httpClient.post<any>(url, customerVehicleBookingSearchDTO, { observe: 'response' });

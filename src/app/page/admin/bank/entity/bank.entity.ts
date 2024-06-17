@@ -29,4 +29,6 @@ export class Bank {
    * Indica se o banco está ativo.
    */
   enabled: boolean;
+
+  dataURI: string;
 }

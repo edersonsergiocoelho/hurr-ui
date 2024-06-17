@@ -81,7 +81,7 @@ export class EarningsCustomerWithdrawalRequestComponent implements OnInit {
     if (event && event.sortField) {
       this.earningsCustomerWithdrawalRequestUIDTO.sortBy = event.sortField;
     }
-    console.log('search.sortField:' + event?.sortField);
+    
     if (event && event.sortOrder) {
       if(event.sortOrder == 1) {
         this.earningsCustomerWithdrawalRequestUIDTO.sortDir = "DESC";
@@ -89,8 +89,7 @@ export class EarningsCustomerWithdrawalRequestComponent implements OnInit {
         this.earningsCustomerWithdrawalRequestUIDTO.sortDir = "ASC";
       }
     }
-    console.log('search.sortOrder:' + event?.sortOrder);
-  
+      
     this.customerWithdrawalRequestService.searchPage(this.earningsCustomerWithdrawalRequestUIDTO.customerWithdrawalRequestSearchDTO, this.earningsCustomerWithdrawalRequestUIDTO.page, this.earningsCustomerWithdrawalRequestUIDTO.size, this.earningsCustomerWithdrawalRequestUIDTO.sortDir, this.earningsCustomerWithdrawalRequestUIDTO.sortBy).pipe(first()).subscribe({
       next: (data: any) => {
         this.earningsCustomerWithdrawalRequestUIDTO.customerWithdrawalRequests = data.body.content;

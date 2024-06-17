@@ -18,6 +18,7 @@ import { ButtonModule } from 'primeng/button';
 import { EarningsComponent } from '../ui/earnings/earnings.component';
 import { EarningsResumeComponent } from '../ui/earnings-resume/earnings-resume.component';
 import { EarningsCustomerWithdrawalRequestComponent } from '../ui/earnings-customer-withdrawal-request/earnings-customer-withdrawal-request.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { EarningsCustomerWithdrawalRequestComponent } from '../ui/earnings-custo
     EarningsRoutingModule,
 
     ButtonModule,
+    CheckboxModule,
     DataViewModule,
     DialogModule,
     DropdownModule,

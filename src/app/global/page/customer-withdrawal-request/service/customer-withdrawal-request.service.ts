@@ -73,6 +73,15 @@ export class CustomerWithdrawalRequestService {
     );
   }
 
+  saveAll(customerWithdrawalRequests: Array<CustomerWithdrawalRequest>): Observable<HttpResponse<CustomerWithdrawalRequest>> {
+    const url = `${this.apiUrl}/all`;
+    return this.httpClient.post<CustomerWithdrawalRequest>(url, customerWithdrawalRequests, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerWithdrawalRequest>) => {
+        return response;
+      })
+    );
+  }
+
   update(customerWithdrawalRequest: CustomerWithdrawalRequest): Observable<HttpResponse<CustomerWithdrawalRequest>> {
     const url = `${this.apiUrl}/${customerWithdrawalRequest.customerWithdrawalRequestId}`;
     return this.httpClient.put<CustomerWithdrawalRequest>(url, customerWithdrawalRequest, { observe: 'response' }).pipe(

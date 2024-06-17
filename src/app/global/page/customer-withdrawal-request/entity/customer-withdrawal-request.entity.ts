@@ -2,6 +2,7 @@ import { Customer } from "../../customer/entity/customer.entity";
 import { CustomerVehicleBooking } from "../../customer-vehicle-booking/entity/customer-vehicle-booking.entity";
 import { PaymentMethod } from "src/app/page/admin/payment-method/entity/payment-method.entity";
 import { PaymentStatus } from "src/app/page/admin/payment-status/entity/payment-status.entity";
+import { CustomerBankAccount } from "src/app/page/customer-bank-account/entity/customer-bank-account.entity";
 
 export class CustomerWithdrawalRequest {
 
@@ -19,6 +20,8 @@ export class CustomerWithdrawalRequest {
    * Identificador da reserva do veículo do cliente.
    */
   customerVehicleBooking: CustomerVehicleBooking;
+
+  customerBankAccount: CustomerBankAccount;
 
   /**
    * Identificador do método de pagamento usado para a retirada.

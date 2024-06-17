@@ -2,6 +2,7 @@
   "span_button_label_clean_Generic": "Limpar",
   "span_button_label_search_Generic": "Pesquisar",
   "span_button_label_to_go_back_Generic": "Voltar",
+  "span_button_label_go_Generic": "Avançar",
   "span_button_label_sign_up_Generic": "Registrar-se",
   "span_button_label_sign_in_Generic": "Fazer Login",
   "span_button_label_change_password_Generic": "Alterar Senha",
@@ -17,6 +18,7 @@
   "span_button_label_finalize_booking_Generic": "Finalizar Reserva",
   "span_button_label_write_a_review_Generic": "Escreva Uma Crítica",
   "span_button_label_withdraw_money_Generic": "Retirar Dinheiro",
+  "span_button_label_request_money_Generic": "Solicitar Dinheiro",
 
   "span_button_label_new_Generic": "Novo",
   "span_button_label_save_Generic": "Salvar",
