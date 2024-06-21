@@ -1,108 +1,105 @@
 <div class="block-content">
-  <div class="ng-star-inserted">
-    <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
-      <div class="flex flex-wrap shadow-2">
+  <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
+    <div class="flex flex-wrap shadow-2">
 
-        <div class="w-full lg:w-6 px-0 py-4 lg:p-7 bg-blue-50">
+      <div class="w-full lg:w-6 px-0 py-4 lg:p-7 bg-blue-50">
 
-          <!--
+        <!--
           <img src="assets/images/blocks/logos/bastion-700.svg" alt="Image" height="35" class="mb-6">
           -->
 
-          <p-carousel [value]="userLoginUIDTO.carouselUserLogin" [numVisible]="1" [numScroll]="1" [circular]="false">
-            <ng-template let-product pTemplate="item">
+        <p-carousel [value]="userLoginUIDTO.carouselUserLogin" [numVisible]="1" [numScroll]="1" [circular]="false">
+          <ng-template let-product pTemplate="item">
 
-              <div class="text-center mb-8">
+            <div class="text-center mb-8">
 
-                <img alt="Image" class="mb-6 w-6"
-                  src="{{product.image}}">
+              <img alt="Image" class="mb-6 w-6" src="{{product.image}}">
 
-                <div class="mx-auto font-medium text-xl mb-4 text-blue-900">
-                  {{ product.title }}
-                </div>
-                <p class="m-0 text-blue-700 line-height-3">
-                  {{ product.description }}
-                </p>
+              <div class="mx-auto font-medium text-xl mb-4 text-blue-900">
+                {{ product.title }}
               </div>
-              
-            </ng-template>
-          </p-carousel>
+              <p class="m-0 text-blue-700 line-height-3">
+                {{ product.description }}
+              </p>
+            </div>
+
+          </ng-template>
+        </p-carousel>
+      </div>
+
+      <div class="w-full lg:w-6 p-4 lg:p-7 surface-card">
+
+        <div class="flex align-items-center justify-content-between mb-7">
+          <span class="text-2xl font-medium text-900">{{'title_UserLogin' | translate}}
+          </span>
+          <a tabindex="0"
+            class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150"
+            (click)="navigateToUserRegister()">
+            {{'sign_up_UserLogin' | translate}}
+          </a>
         </div>
 
-        <div class="w-full lg:w-6 p-4 lg:p-7 surface-card">
-
-          <div class="flex align-items-center justify-content-between mb-7">
-            <span class="text-2xl font-medium text-900">{{'title_UserLogin' | translate}}
-            </span>
-            <a tabindex="0"
-              class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150"
-              (click)="navigateToUserRegister()">
-              {{'sign_up_UserLogin' | translate}}
-            </a>
-          </div>
-
-          <div class="flex justify-content-between">
-            <button pripple=""
-              class="p-ripple p-element mr-2 w-6 font-medium border-1 surface-border surface-100 py-3 px-2 p-component hover:surface-200 active:surface-300 text-900 cursor-pointer transition-colors transition-duration-150 inline-flex align-items-center justify-content-center">
-              <i class="pi pi-facebook text-indigo-500 mr-2"></i>
-              <span>{{'sign_in_with_facebook_UserLogin' | translate}}</span>
-              <span class="p-ink"></span>
-            </button>
-            <button pripple=""
-              class="p-ripple p-element ml-2 w-6 font-medium border-1 surface-border surface-100 py-3 px-2 p-component hover:surface-200 active:surface-300 text-900 cursor-pointer transition-colors transition-duration-150 inline-flex align-items-center justify-content-center"
-              (click)="loginGoogle()">
-              <i class="pi pi-google text-red-500 mr-2"></i>
-              <span>{{'sign_in_with_google_UserLogin' | translate}}</span>
-              <span class="p-ink"></span>
-            </button>
-          </div>
-
-          <p-divider align="center" styleclass="my-4" class="p-element">
-            <div role="separator"
-              class="my-4 p-divider p-component p-divider-horizontal p-divider-solid p-divider-center">
-              <div class="p-divider-content">
-                <span class="text-600 font-normal text-sm">{{'or_UserLogin' | translate}}</span>
-              </div>
-            </div>
-          </p-divider>
-
-          <label for="email4" class="block text-900 font-medium mb-2">{{'label_email_UserLogin' | translate}}</label>
-          <input id="email4" type="text" [(ngModel)]="userLoginUIDTO.authSignInDTO.email"
-            placeholder="{{'placeholder_email_UserLogin' | translate}}" pinputtext=""
-            class="p-inputtext p-component p-element w-full mb-3 p-3">
-
-          <label for="password4" class="block text-900 font-medium mb-2">{{'label_password_UserLogin' |
-            translate}}</label>
-          <input id="password4" type="password" [(ngModel)]="userLoginUIDTO.authSignInDTO.password"
-            placeholder="{{'placeholder_password_UserLogin' | translate}}" pinputtext=""
-            class="p-inputtext p-component p-element w-full mb-3 p-3">
-
-          <div class="flex align-items-center justify-content-between mb-6">
-            <div class="flex align-items-center">
-              <p-checkbox id="rememberme4" styleclass="mr-2" class="p-element">
-                <div class="mr-2 p-checkbox p-component">
-                  <div class="p-hidden-accessible">
-                    <input type="checkbox" value="undefined" aria-checked="false">
-                  </div>
-                  <div class="p-checkbox-box"></div>
-                </div>
-              </p-checkbox>
-              <label for="rememberme4" style="padding-left: 10px;">
-                {{'remember_me_UserLogin' | translate}}
-              </label>
-            </div>
-            <a class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150"
-              (click)="navigateToUserForgotPassword()">
-              {{'forgot_password_UserLogin' | translate}}
-            </a>
-          </div>
-
-          <button pbutton="" pripple="" class="p-element p-ripple w-full py-3 font-medium p-button p-component"
-            (click)="signin()">
-            <span class="p-button-label">{{'span_button_label_sign_in_Generic' | translate}}</span>
+        <div class="flex justify-content-between">
+          <button pripple=""
+            class="p-ripple p-element mr-2 w-6 font-medium border-1 surface-border surface-100 py-3 px-2 p-component hover:surface-200 active:surface-300 text-900 cursor-pointer transition-colors transition-duration-150 inline-flex align-items-center justify-content-center">
+            <i class="pi pi-facebook text-indigo-500 mr-2"></i>
+            <span>{{'sign_in_with_facebook_UserLogin' | translate}}</span>
+            <span class="p-ink"></span>
+          </button>
+          <button pripple=""
+            class="p-ripple p-element ml-2 w-6 font-medium border-1 surface-border surface-100 py-3 px-2 p-component hover:surface-200 active:surface-300 text-900 cursor-pointer transition-colors transition-duration-150 inline-flex align-items-center justify-content-center"
+            (click)="loginGoogle()">
+            <i class="pi pi-google text-red-500 mr-2"></i>
+            <span>{{'sign_in_with_google_UserLogin' | translate}}</span>
             <span class="p-ink"></span>
           </button>
         </div>
+
+        <p-divider align="center" styleclass="my-4" class="p-element">
+          <div role="separator"
+            class="my-4 p-divider p-component p-divider-horizontal p-divider-solid p-divider-center">
+            <div class="p-divider-content">
+              <span class="text-600 font-normal text-sm">{{'or_UserLogin' | translate}}</span>
+            </div>
+          </div>
+        </p-divider>
+
+        <label for="email4" class="block text-900 font-medium mb-2">{{'label_email_UserLogin' | translate}}</label>
+        <input id="email4" type="text" [(ngModel)]="userLoginUIDTO.authSignInDTO.email"
+          placeholder="{{'placeholder_email_UserLogin' | translate}}" pinputtext=""
+          class="p-inputtext p-component p-element w-full mb-3 p-3">
+
+        <label for="password4" class="block text-900 font-medium mb-2">{{'label_password_UserLogin' |
+          translate}}</label>
+        <input id="password4" type="password" [(ngModel)]="userLoginUIDTO.authSignInDTO.password"
+          placeholder="{{'placeholder_password_UserLogin' | translate}}" pinputtext=""
+          class="p-inputtext p-component p-element w-full mb-3 p-3">
+
+        <div class="flex align-items-center justify-content-between mb-6">
+          <div class="flex align-items-center">
+            <p-checkbox id="rememberme4" styleclass="mr-2" class="p-element">
+              <div class="mr-2 p-checkbox p-component">
+                <div class="p-hidden-accessible">
+                  <input type="checkbox" value="undefined" aria-checked="false">
+                </div>
+                <div class="p-checkbox-box"></div>
+              </div>
+            </p-checkbox>
+            <label for="rememberme4" style="padding-left: 10px;">
+              {{'remember_me_UserLogin' | translate}}
+            </label>
+          </div>
+          <a class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150"
+            (click)="navigateToUserForgotPassword()">
+            {{'forgot_password_UserLogin' | translate}}
+          </a>
+        </div>
+
+        <button pbutton="" pripple="" class="p-element p-ripple w-full py-3 font-medium p-button p-component"
+          (click)="signin()">
+          <span class="p-button-label">{{'span_button_label_sign_in_Generic' | translate}}</span>
+          <span class="p-ink"></span>
+        </button>
       </div>
     </div>
   </div>

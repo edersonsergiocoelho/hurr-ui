@@ -139,4 +139,8 @@ export class HomeComponent implements OnInit {
   onClickCustomerVehicleBookingCustomerVehicle() {
     this.router.navigate(['/customer-vehicle-booking/customer-vehicle']);
   }
+
+  navigateToEarnings() {
+    this.router.navigate(['/earnings']);
+  }
 }

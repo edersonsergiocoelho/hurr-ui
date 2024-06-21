@@ -7,7 +7,6 @@ export class UserRoleSearchUIDTO {
 
   columns: any[] = [];
   totalRecords = 0;
-  loading = true;
 
   page: number = 0;
   size: number = 10;
@@ -26,7 +25,6 @@ export class UserRoleSearchUIDTO {
 
   error_message_service_Generic: string;
   warn_message_service_Generic: string;
-  no_connection_to_the_api_message_service_Generic: string;
   table_header_display_name_UserRoleSearch: string;
   table_header_email_UserRoleSearch: string;
   table_header_role_name_UserRoleSearch: string;

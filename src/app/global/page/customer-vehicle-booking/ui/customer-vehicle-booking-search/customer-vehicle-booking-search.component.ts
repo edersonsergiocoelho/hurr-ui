@@ -7,13 +7,13 @@ import { MessageService } from 'primeng/api';
 import { CustomerVehicleBookingService } from '../../service/customer-vehicle-booking.service';
 import { DataViewLazyLoadEvent } from 'primeng/dataview';
 import { CustomerVehicleBooking } from '../../entity/customer-vehicle-booking.entity';
-import { DecimalPipeService } from 'src/app/utils/service/rate-utils-service copy';
 import { CustomerService } from '../../../customer/service/customer.service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { CustomerVehicleBookingSearchDTO } from '../../dto/customer-vehicle-booking-search-dto.dto';
 import { CustomerVehicleReviewService } from '../../../customer-vehicle-review/service/customer-vehicle-review.service';
 import { CustomerVehicleReview } from '../../../customer-vehicle-review/entity/customer-vehicle-review.entity';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
 
 @Component({
   selector: 'app-customer-vehicle-booking-search',

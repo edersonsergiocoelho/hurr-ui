@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CustomerValidationModule } from '../customer-validation/module/customer-validation.module';
 import { CheckoutModule } from '../checkout/module/checkout.module';
 import { CheckoutMercadoPagoModule } from '../checkout-mercado-pago/module/checkout-mercado-pago.module';
-
-
+import { EarningsModule } from '../earnings/module/earnings.module';
 
 @NgModule({
   declarations: [],
@@ -14,12 +13,14 @@ import { CheckoutMercadoPagoModule } from '../checkout-mercado-pago/module/check
     // Modules - PageCustomModule
     CheckoutModule,
     CheckoutMercadoPagoModule,
-    CustomerValidationModule
+    CustomerValidationModule,
+    EarningsModule
   ], 
   exports: [
     CheckoutModule,
     CheckoutMercadoPagoModule,
-    CustomerValidationModule
+    CustomerValidationModule,
+    EarningsModule
   ]
 })
 export class PageCustomModule { }

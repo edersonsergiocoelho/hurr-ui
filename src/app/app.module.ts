@@ -21,6 +21,7 @@ import { GlobalTemplateModule } from './global/template/module/global-template.m
 import { PageModule } from './page/module/page.module';
 import { PageAdminModule } from './page/admin/module/page-admin.module';
 import { PageCustomModule } from './page-custom/module/page-custom.module';
+import { BooleanPipe } from './utils/pipe/boolean-pipe';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
@@ -28,6 +29,7 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   [
   '/assets/i18n/generic/button/',
   '/assets/i18n/generic/currency/',
+  '/assets/i18n/generic/label/',
   '/assets/i18n/generic/table/',
   '/assets/i18n/generic/message/',
   '/assets/i18n/address/',
@@ -40,6 +42,13 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-search/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-search/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-success/',
+
+  '/assets/i18n/customer-withdrawal-request/customer-withdrawal-request-approval/',
+
+  // Earnings
+  '/assets/i18n/earnings/',
+  '/assets/i18n/earnings/earnings-customer-withdrawal-request/',
+  '/assets/i18n/earnings/earnings-resume/',
 
   '/assets/i18n/file-approved/',
   '/assets/i18n/home/',

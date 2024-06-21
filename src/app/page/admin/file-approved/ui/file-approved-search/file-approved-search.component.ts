@@ -62,7 +62,6 @@ export class FileApprovedSearchComponent implements OnInit {
       const keys = [
         'error_message_service_Generic', 
         'warn_message_service_Generic',
-        "no_connection_to_the_api_message_service_Generic",
         'table_header_file_approved_id_FileApprovedSearch',
         'table_header_file_table_FileApprovedSearch',
         'table_header_file_type_FileApprovedSearch',
@@ -76,7 +75,6 @@ export class FileApprovedSearchComponent implements OnInit {
 
       this.fileApprovedSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
       this.fileApprovedSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.fileApprovedSearchUIDTO.no_connection_to_the_api_message_service_Generic = translations['no_connection_to_the_api_message_service_Generic'];
       this.fileApprovedSearchUIDTO.table_header_file_approved_id_FileApprovedSearch = translations['table_header_file_approved_id_FileApprovedSearch'];
       this.fileApprovedSearchUIDTO.table_header_file_table_FileApprovedSearch = translations['table_header_file_table_FileApprovedSearch'];
       this.fileApprovedSearchUIDTO.table_header_file_type_FileApprovedSearch = translations['table_header_file_type_FileApprovedSearch'];
@@ -176,10 +174,6 @@ export class FileApprovedSearchComponent implements OnInit {
         this.fileApprovedSearchUIDTO.totalRecords = data.body.totalElements;
       },
       error: (error) => {
-
-        if (error.status == 0) {
-          this.messageService.add({ severity: 'warn', summary: '' + this.fileApprovedSearchUIDTO.warn_message_service_Generic, detail: '' + this.fileApprovedSearchUIDTO.no_connection_to_the_api_message_service_Generic });
-        }
 
         if (error.status == 500) {
           this.messageService.add({ severity: 'error', summary: '' + this.fileApprovedSearchUIDTO.error_message_service_Generic, detail: error.error.message });

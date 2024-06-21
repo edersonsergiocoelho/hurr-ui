@@ -7,7 +7,6 @@ export class CustomerVehicleBookingCustomerVehicleSearchUIDTO {
 
   columns: any[] = [];
   totalRecords = 0;
-  loading = true;
 
   sortOptions!: SelectItem[];
   sortOrder!: number;

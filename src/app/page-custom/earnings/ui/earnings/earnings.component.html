@@ -1,1 +1,35 @@
-<p>earnings works!</p>
+<div class="block-content">
+  <div class="lg:px-8 md:px-6 px-3 py-8">
+    <ul class="surface-card p-2 m-0 list-none flex overflow-x-auto select-none">
+      <li class="pr-3">
+        <a pripple=""
+          class="p-ripple p-element cursor-pointer px-4 py-3 flex align-items-center hover:surface-100 border-round transition-colors transition-duration-150 text-700"
+          [ngClass]="{'bg-primary hover:bg-primary': isOverviewActive}" (click)="toggleOverview()">
+          <i class="pi pi-chart-line mr-2"></i>
+          <span class="font-medium">{{'tab_resume_Earnings' | translate}}</span>
+          <span class="p-ink" style="height: 140px; width: 140px; top: -42px; left: 61px;"></span>
+        </a>
+      </li>
+      <li class="flex align-items-center">
+        <div class="border-right-1 surface-border" style="width: 1px; height: 50%;"></div>
+      </li>
+      <li class="px-3">
+        <a pripple=""
+          class="p-ripple p-element cursor-pointer px-4 py-3 flex align-items-center hover:surface-100 border-round transition-colors transition-duration-150 text-700"
+          [ngClass]="{'bg-primary hover:bg-primary': isTransactionsVisibleActive}" (click)="toggleTransactions()">
+          <i class="pi pi-list mr-2"></i>
+          <span class="font-medium">{{'tab_customer_withdrawal_requests_Earnings' | translate}}</span>
+          <span class="p-ink" style="height: 141px; width: 141px; top: -50.5px; left: -8.54688px;"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="block-content" [ngStyle]="{'display': resumeVisible ? 'block' : 'none'}">
+  <app-earnings-resume></app-earnings-resume>
+</div>
+
+<div class="block-content" [ngStyle]="{'display': transactionsVisible ? 'block' : 'none'}">
+  <app-earnings-customer-withdrawal-request></app-earnings-customer-withdrawal-request>
+</div>

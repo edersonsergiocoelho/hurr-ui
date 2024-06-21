@@ -6,7 +6,6 @@ export class RoleSearchUIDTO {
   columns: any[] = [];
   dt: any;
   totalRecords = 0;
-  loading = true;
 
   page: number = 0;
   size: number = 10;

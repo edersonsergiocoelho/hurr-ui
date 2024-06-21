@@ -26,11 +26,15 @@
     <div class="grid">
       <div class="col-12">
 
-        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="text-center p-3 border-round-sm font-bold" style="font-size: 40px;">
-          {{customerVehicleDetailUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + customerVehicleDetailUIDTO.customerVehicle.vehicle.vehicleName + ' ' + customerVehicleDetailUIDTO.customerVehicle.yearOfTheCar}}
+        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="text-center p-3 border-round-sm font-bold"
+          style="font-size: 40px;">
+          {{customerVehicleDetailUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' +
+          customerVehicleDetailUIDTO.customerVehicle.vehicle.vehicleName + ' ' +
+          customerVehicleDetailUIDTO.customerVehicle.yearOfTheCar}}
         </div>
 
-        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="text-center p-3 border-round-sm" style="margin-top: -20px;">
+        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="text-center p-3 border-round-sm"
+          style="margin-top: -20px;">
           {{customerVehicleDetailUIDTO.customerVehicle.vehicleModel.vehicleModelName}}
         </div>
 
@@ -39,27 +43,29 @@
           <div class="flex items-center" style="padding-top: 10px;">
             <div class="mr-3">
               <ng-container *ngIf="customerVehicleDetailUIDTO.customerVehicle.customer.profileImage; else noImage">
-                <img [src]="customerVehicleDetailUIDTO.customerVehicle.customer.profileImage" alt="Imagem do Perfil" width="50" height="50">
+                <img [src]="customerVehicleDetailUIDTO.customerVehicle.customer.profileImage" alt="Imagem do Perfil"
+                  width="50" height="50">
               </ng-container>
               <ng-template #noImage>
-                <i
-                  class="pi pi-user mr-2" style="font-size: 100px;">
+                <i class="pi pi-user mr-2" style="font-size: 100px;">
                 </i>
               </ng-template>
             </div>
             <div class="field">
               <div class="field">
-                <label style="font-size: 28px;"><strong>{{ customerVehicleDetailUIDTO.customerVehicle.customer.firstName + ' ' + customerVehicleDetailUIDTO.customerVehicle.customer.lastName }}</strong></label>
+                <label style="font-size: 28px;"><strong>{{ customerVehicleDetailUIDTO.customerVehicle.customer.firstName
+                    + ' ' + customerVehicleDetailUIDTO.customerVehicle.customer.lastName }}</strong></label>
               </div>
               <div class="field">
-                <label>Ingressou em {{ customerVehicleDetailUIDTO.customerVehicle.customer.createdDate | dateFormatDDMMMMYYYYBR }}</label>
+                <label>Ingressou em {{ customerVehicleDetailUIDTO.customerVehicle.customer.createdDate |
+                  dateFormatDDMMMMYYYYBR }}</label>
               </div>
             </div>
           </div>
         </div>
 
         <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="surface-section px-4 py-8 md:px-6 lg:px-8">
-          
+
           <div class="field" style="display: inline-block;">
             <label><strong>Descrição:</strong></label>
             <div style="padding-top: 10px;">
@@ -74,9 +80,13 @@
 
   <div class="col-4">
     <div class="text-left p-3 border-round-sm h-full font-bold">
-      <p *ngIf="customerVehicleDetailUIDTO.customerVehicle">R$ {{ formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.dailyRate) }} / Dia</p>
-      <p *ngIf="customerVehicleDetailUIDTO.customerVehicle" style="text-decoration: underline;">R$ {{ formatDailyRateWithComma(rateUtilsService.calculateTotalRate(customerVehicleDetailUIDTO.dateInit, customerVehicleDetailUIDTO.dateEnd, customerVehicleDetailUIDTO.customerVehicle.dailyRate)) }} / Sem Incluir Impostos E Taxas</p>
-    
+      <p *ngIf="customerVehicleDetailUIDTO.customerVehicle">R$ {{
+        formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.dailyRate) }} / Dia</p>
+      <p *ngIf="customerVehicleDetailUIDTO.customerVehicle" style="text-decoration: underline;">R$ {{
+        formatDailyRateWithComma(rateUtilsService.calculateTotalRate(customerVehicleDetailUIDTO.dateInit,
+        customerVehicleDetailUIDTO.dateEnd, customerVehicleDetailUIDTO.customerVehicle.dailyRate)) }} / Sem Incluir
+        Impostos E Taxas</p>
+
       <div style="width: 100%;">
         <hr style="border: none; height: 2px; background-color: #6610f2;">
       </div>
@@ -84,26 +94,32 @@
       <div class="field" style="display: inline-block;">
         <label for="dateInit"><strong>Início Da Viagem:</strong></label>
         <div>
-          <p-calendar id="dateInit" [(ngModel)]="customerVehicleDetailUIDTO.dateInit" [showIcon]="true" [minDate]="customerVehicleDetailUIDTO.today" [dateFormat]="customerVehicleDetailUIDTO.dateFormat" (ngModelChange)="ngModelChangeDateInit()"></p-calendar>
+          <p-calendar id="dateInit" [(ngModel)]="customerVehicleDetailUIDTO.dateInit" [showIcon]="true"
+            [minDate]="customerVehicleDetailUIDTO.today" [dateFormat]="customerVehicleDetailUIDTO.dateFormat"
+            (ngModelChange)="ngModelChangeDateInit()"></p-calendar>
         </div>
       </div>
-    
+
       <div class="field" style="display: inline-block;">
         <div style="padding-top: 22px; padding-left: 10px;">
-          <p-dropdown id="selectedHourInit" [options]="customerVehicleDetailUIDTO.hours" [(ngModel)]="customerVehicleDetailUIDTO.selectedHourInit"></p-dropdown>
+          <p-dropdown id="selectedHourInit" [options]="customerVehicleDetailUIDTO.hours"
+            [(ngModel)]="customerVehicleDetailUIDTO.selectedHourInit"></p-dropdown>
         </div>
       </div>
-    
+
       <div class="field" style="display: inline-block;">
         <label for="dateEnd"><strong>Fim Da Viagem:</strong></label>
         <div>
-          <p-calendar id="dateEnd" [(ngModel)]="customerVehicleDetailUIDTO.dateEnd" [showIcon]="true" [minDate]="customerVehicleDetailUIDTO.today" [dateFormat]="customerVehicleDetailUIDTO.dateFormat" (ngModelChange)="ngModelChangeDateEnd()"></p-calendar>
+          <p-calendar id="dateEnd" [(ngModel)]="customerVehicleDetailUIDTO.dateEnd" [showIcon]="true"
+            [minDate]="customerVehicleDetailUIDTO.today" [dateFormat]="customerVehicleDetailUIDTO.dateFormat"
+            (ngModelChange)="ngModelChangeDateEnd()"></p-calendar>
         </div>
       </div>
-    
+
       <div class="field" style="display: inline-block;">
         <div style="padding-top: 22px; padding-left: 10px;">
-          <p-dropdown id="selectedHourEnd" [options]="customerVehicleDetailUIDTO.hours" [(ngModel)]="customerVehicleDetailUIDTO.selectedHourEnd"></p-dropdown>
+          <p-dropdown id="selectedHourEnd" [options]="customerVehicleDetailUIDTO.hours"
+            [(ngModel)]="customerVehicleDetailUIDTO.selectedHourEnd"></p-dropdown>
         </div>
       </div>
 
@@ -114,19 +130,19 @@
       <label style="padding-top: 10px;"><strong>Local De Retirada E Devolução</strong></label>
 
       <div class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
-        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressVehicle" 
-          [(ngModel)]="customerVehicleDetailUIDTO.selectCustomerVehicleAddressVehicle" 
-          optionLabel="address.streetAddress" 
-          [showClear]="true" 
-          placeholder="Selecione O Local De Retirada E Devolução"
+        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressVehicle"
+          [(ngModel)]="customerVehicleDetailUIDTO.selectCustomerVehicleAddressVehicle"
+          optionLabel="address.streetAddress" [showClear]="true" placeholder="Selecione O Local De Retirada E Devolução"
           [style]="{'width': '100%'}">
           <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectCustomerVehicleAddressVehicle">              
+            <div class="flex align-items-center gap-2"
+              *ngIf="customerVehicleDetailUIDTO.selectCustomerVehicleAddressVehicle">
               <div>{{ customerVehicleDetailUIDTO.selectCustomerVehicleAddressVehicle.address.streetAddress }}</div>
             </div>
           </ng-template>
           <ng-template let-cva pTemplate="item">
-            <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' + cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
+            <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' +
+              cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
             <br>
             <label>Enviaremos o endereço exato assim que sua viagem for reservada.</label>
           </ng-template>
@@ -137,22 +153,23 @@
         <hr style="border: none; height: 2px; background-color: #6610f2;">
       </div>
 
-      <label style="padding-top: 10px;"><strong>Local De Retirada E Devolução Em Sua Residência Ou Local De Sua Preferência</strong></label>
+      <label style="padding-top: 10px;"><strong>Local De Retirada E Devolução Em Sua Residência Ou Local De Sua
+          Preferência</strong></label>
 
-      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress" class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
-        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerAddressDelivery" 
-          [(ngModel)]="customerVehicleDetailUIDTO.selectCustomerAddressDelivery" 
-          optionLabel="address.streetAddress" 
-          [showClear]="true" 
-          placeholder="Selecione O Local De Entrega"
-          [style]="{'width': '100%'}">
+      <div
+        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress"
+        class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
+        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerAddressDelivery"
+          [(ngModel)]="customerVehicleDetailUIDTO.selectCustomerAddressDelivery" optionLabel="address.streetAddress"
+          [showClear]="true" placeholder="Selecione O Local De Entrega" [style]="{'width': '100%'}">
           <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectCustomerAddressDelivery">              
+            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectCustomerAddressDelivery">
               <div>{{ customerVehicleDetailUIDTO.selectCustomerAddressDelivery.address.streetAddress }}</div>
             </div>
           </ng-template>
           <ng-template let-cva pTemplate="item">
-            <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' + cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
+            <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' +
+              cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
             <br>
             <label>Enviaremos o endereço exato assim que sua viagem for reservada.</label>
           </ng-template>
@@ -172,32 +189,38 @@
       </div>
       -->
 
-      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress" style="width: 100%;">
-        <p-button label="Adicionar Endereço" (onClick)="newAddressDeliveryRegisterDynamicDialog()" [style]="{ 'width.px': 360 }"></p-button>
+      <div
+        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress"
+        style="width: 100%;">
+        <p-button label="Adicionar Endereço" (onClick)="newAddressDeliveryRegisterDynamicDialog()"
+          [style]="{ 'width.px': 360 }"></p-button>
       </div>
 
-      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress" class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
-        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerAddressPickUp" 
-          [(ngModel)]="customerVehicleDetailUIDTO.selectCustomerAddressPickUp" 
-          optionLabel="address.streetAddress" 
-          [showClear]="true" 
-          placeholder="Selecione O Local De Retirada"
-          [style]="{'width': '100%'}">
+      <div
+        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress"
+        class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
+        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerAddressPickUp"
+          [(ngModel)]="customerVehicleDetailUIDTO.selectCustomerAddressPickUp" optionLabel="address.streetAddress"
+          [showClear]="true" placeholder="Selecione O Local De Retirada" [style]="{'width': '100%'}">
           <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectCustomerAddressPickUp">              
+            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectCustomerAddressPickUp">
               <div>{{ customerVehicleDetailUIDTO.selectCustomerAddressPickUp.address.streetAddress }}</div>
             </div>
           </ng-template>
           <ng-template let-cva pTemplate="item">
-            <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' + cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
+            <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' +
+              cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
             <br>
             <label>Enviaremos o endereço exato assim que sua viagem for reservada.</label>
           </ng-template>
         </p-dropdown>
       </div>
 
-      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress" style="width: 100%;">
-        <p-button label="Adicionar Endereço" (onClick)="newAddressPickUpRegisterDynamicDialog()" [style]="{ 'width.px': 360 }"></p-button>
+      <div
+        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress"
+        style="width: 100%;">
+        <p-button label="Adicionar Endereço" (onClick)="newAddressPickUpRegisterDynamicDialog()"
+          [style]="{ 'width.px': 360 }"></p-button>
       </div>
 
       <div style="width: 100%;">
@@ -216,26 +239,35 @@
         <i class="pi pi-thumbs-up mr-2"></i>
         <div style="display: flex; flex-direction: column;">
           <label style="font-size: 20px;"><strong>Cancelamento grátis</strong></label>
-          <label style="font-style: normal; font-weight: normal;">Reembolso total antes de {{customerVehicleDetailUIDTO.dateCancelFree | dateFormatDDMMMMYYYYBR}}, às {{customerVehicleDetailUIDTO.selectedHourInit}}</label>
+          <label style="font-style: normal; font-weight: normal;">Reembolso total antes de
+            {{customerVehicleDetailUIDTO.dateCancelFree | dateFormatDDMMMMYYYYBR}}, às
+            {{customerVehicleDetailUIDTO.selectedHourInit}}</label>
         </div>
-      </div>      
+      </div>
 
       <div style="width: 100%;">
         <hr style="border: none; height: 2px; background-color: #6610f2;">
       </div>
 
-      <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;"><strong>Informações Da Quilometragem</strong></label>
+      <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;"><strong>Informações Da
+          Quilometragem</strong></label>
 
-      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.unlimitedMileage" style="width: 100%;">
+      <div
+        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.unlimitedMileage"
+        style="width: 100%;">
         <label style="font-style: normal; font-weight: normal; font-size: 20px;">Distância incluída: Ilimitado</label>
       </div>
 
-      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.limitedMileage" style="width: 100%;">
+      <div
+        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.limitedMileage"
+        style="width: 100%;">
         <div class="field">
-          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">Distância incluída: {{ customerVehicleDetailUIDTO.customerVehicle.limitedMileageIncluded }}</label>
+          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">Distância
+            incluída: {{ customerVehicleDetailUIDTO.customerVehicle.limitedMileageIncluded }}</label>
         </div>
         <div class="field">
-          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço do KM excedente R$: {{ formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.limitedMileageValue) }}</label>
+          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço do KM excedente R$: {{
+            formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.limitedMileageValue) }}</label>
         </div>
       </div>
 
@@ -243,125 +275,145 @@
         <hr style="border: none; height: 2px; background-color: #6610f2;">
       </div>
 
-      <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;"><strong>Comodidade</strong></label>
+      <label
+        style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;"><strong>Comodidade</strong></label>
 
-      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress" style="width: 100%;">
+      <div
+        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress"
+        style="width: 100%;">
         <div class="field">
-          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">Entrega No Endereço</label>
+          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">Entrega No
+            Endereço</label>
         </div>
         <div class="field">
-          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço Do KM Para Entrega R$: {{ formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.mileageFeeDelivery) }}</label>
+          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço Do KM Para Entrega R$: {{
+            formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.mileageFeeDelivery) }}</label>
         </div>
       </div>
 
-      <div *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress" style="width: 100%;">
+      <div
+        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress"
+        style="width: 100%;">
         <div class="field">
-          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">Retira No Endereço</label>
+          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">Retira No
+            Endereço</label>
         </div>
         <div class="field">
-          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço Do KM Para Retirada R$: {{ formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.mileageFeePickUp) }}</label>
+          <label style="font-style: normal; font-weight: normal; font-size: 20px;">Preço Do KM Para Retirada R$: {{
+            formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.mileageFeePickUp) }}</label>
         </div>
       </div>
-      
+
     </div>
 
   </div>
 </div>
 
 <div class="block-content">
-  <div class="ng-star-inserted">
-    <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
-      <div class="grid">
-        <div class="col-12 lg:col-4">
-          <div class="font-medium text-xl text-900 mb-3">Compartilhe sua experiência</div>
-          <p class="text-600 p-0 mt-0 mb-3 line-height-3">Seu feedback é valioso para nós e para futuros motoristas. Conte-nos como foi dirigir este carro e o que mais chamou sua atenção durante o aluguel. Compartilhe suas descobertas, pontos positivos e até mesmo desafios que enfrentou. Sua opinião ajuda a comunidade a tomar decisões informadas sobre suas escolhas de aluguel de carro.</p>
-        </div>
+  <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+    <div class="grid">
+      <div class="col-12 lg:col-4">
+        <div class="font-medium text-xl text-900 mb-3">Compartilhe sua experiência</div>
+        <p class="text-600 p-0 mt-0 mb-3 line-height-3">Seu feedback é valioso para nós e para futuros motoristas.
+          Conte-nos como foi dirigir este carro e o que mais chamou sua atenção durante o aluguel. Compartilhe suas
+          descobertas, pontos positivos e até mesmo desafios que enfrentou. Sua opinião ajuda a comunidade a tomar
+          decisões informadas sobre suas escolhas de aluguel de carro.</p>
+      </div>
 
-        <div class="col-12 lg:col-4 flex align-items-start justify-content-center py-5 lg:py-0">
-          <div>
-            <span *ngIf="customerVehicleDetailUIDTO.customersVehiclesReviews != null && customerVehicleDetailUIDTO.customersVehiclesReviews.length > 0" class="text-5xl text-900 font-bold mr-2">{{ customerVehicleDetailUIDTO.customersVehiclesReviews.length }}</span>
-            <span class="text-5xl text-600">Reviews</span>
-            <div class="mt-3 text-center">
-              <i *ngFor="let star of [1, 2, 3, 4, 5]" class="pi text-2xl mr-1" [ngClass]="{
+      <div class="col-12 lg:col-4 flex align-items-start justify-content-center py-5 lg:py-0">
+        <div>
+          <span
+            *ngIf="customerVehicleDetailUIDTO.customersVehiclesReviews != null && customerVehicleDetailUIDTO.customersVehiclesReviews.length > 0"
+            class="text-5xl text-900 font-bold mr-2">{{ customerVehicleDetailUIDTO.customersVehiclesReviews.length
+            }}</span>
+          <span class="text-5xl text-600">Reviews</span>
+          <div class="mt-3 text-center">
+            <i *ngFor="let star of [1, 2, 3, 4, 5]" class="pi text-2xl mr-1" [ngClass]="{
                 'pi-star-fill text-yellow-500': star <= getAverageRating(),
                 'pi-star text-300': star > getAverageRating()
               }"></i>
-            </div>
-            <div class="text-900 text-center mt-3">
-              Average Rating: {{ getAverageRating() | number: '1.1-1' }}
-            </div>
+          </div>
+          <div class="text-900 text-center mt-3">
+            Average Rating: {{ getAverageRating() | number: '1.1-1' }}
           </div>
         </div>
-
-        <div class="col-12 lg:col-4">
-          <ul class="list-none p-0 m-0">
-            <li *ngFor="let percentage of percentages; let i = index" class="flex align-items-center mb-2">
-              <span class="text-900 font-medium mr-1 w-1rem">{{ i + 1 }}</span>
-              <i *ngIf="percentage > 0" class="pi pi-star-fill text-yellow-500 mr-2"></i>
-              <i *ngIf="percentage == 0" class="pi pi-star-fill text-500 mr-2"></i>
-              <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
-                <div class="h-full bg-yellow-500" [style.width.%]="percentage"></div>
-              </div>
-              <span class="text-500 font-medium ml-2">
-                {{ handlePercentage(percentage) }}
-              </span>
-            </li>
-          </ul>
-        </div>
-        
       </div>
-      <div class="mt-5">
-        <ul class="list-none m-0 p-0">
-          <li class="py-5 border-top-1 surface-border" *ngFor="let customerVehicleReview of customerVehicleDetailUIDTO.customersVehiclesReviews">
-            <div class="flex align-items-center justify-content-between mb-3">
-              <div class="flex align-items-center">
 
-                <ng-container *ngIf="customerVehicleReview.user != null && customerVehicleReview.dataURI != null; else showDefaultImage">
-                  <img [src]="customerVehicleReview.dataURI" class="mr-3 lg:mr-0" style="width: 62px; height: 62px; border-radius: 50%;">
-                </ng-container>
-
-                <ng-template #showDefaultImage>
-                  <img *ngIf="customerVehicleReview.user != null && customerVehicleReview.dataURI == null && customerVehicleReview.user.imageURL != null; else showNoImage"
-                      [src]="customerVehicleReview.user.imageURL"
-                      class="mr-3 lg:mr-0"
-                      style="width: 62px; height: 62px; border-radius: 50%;"
-                      >
-                </ng-template>
-
-                <ng-template #showNoImage>
-                  <div class="mr-3 lg:mr-0" style="width: 62px; height: 62px; border-radius: 50%; background-color: white; position: relative;">
-                    <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">{{'span_no_image_Home' | translate}}</span>
-                  </div>
-                </ng-template>
-
-                <div class="flex flex-column"><span class="text-900 font-medium mb-1">{{customerVehicleReview.customer.firstName + ' ' + customerVehicleReview.customer.lastName}}</span>
-                  <span
-                    class="text-500 font-medium text-sm">{{customerVehicleReview.createdDate | dateFormatDDMMMMYYYYBR}}</span>
-                </div>
-              </div>
-                    
-              <div class="flex align-items-center">
-                <ng-container *ngFor="let star of getFilledStarsArray(customerVehicleReview.rating)">
-                  <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                </ng-container>
-                <ng-container *ngFor="let star of getEmptyStarsArray(customerVehicleReview.rating)">
-                  <i class="pi pi-star mr-1"></i>
-                </ng-container>
-                <span class="font-medium">{{ customerVehicleReview.rating }}</span>
-              </div>
-
+      <div class="col-12 lg:col-4">
+        <ul class="list-none p-0 m-0">
+          <li *ngFor="let percentage of percentages; let i = index" class="flex align-items-center mb-2">
+            <span class="text-900 font-medium mr-1 w-1rem">{{ i + 1 }}</span>
+            <i *ngIf="percentage > 0" class="pi pi-star-fill text-yellow-500 mr-2"></i>
+            <i *ngIf="percentage == 0" class="pi pi-star-fill text-500 mr-2"></i>
+            <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+              <div class="h-full bg-yellow-500" [style.width.%]="percentage"></div>
             </div>
-            <p class="text-600 p-0 m-0 line-height-3">{{customerVehicleReview.review}}</p>
-            
-            <button pbutton="" pripple="" icon="pi pi-exclamation-circle" label="Reportar"
-              class="p-element p-ripple p-button-text p-button p-component"><span
-                class="p-button-icon p-button-icon-left pi pi-exclamation-circle" aria-hidden="true"></span><span
-                class="p-button-label">Reportar</span><span class="p-ink"
-                style="height: 117px; width: 117px; top: -36.3594px; left: -0.03125px;"></span></button>
-
+            <span class="text-500 font-medium ml-2">
+              {{ handlePercentage(percentage) }}
+            </span>
           </li>
         </ul>
       </div>
+
+    </div>
+    <div class="mt-5">
+      <ul class="list-none m-0 p-0">
+        <li class="py-5 border-top-1 surface-border"
+          *ngFor="let customerVehicleReview of customerVehicleDetailUIDTO.customersVehiclesReviews">
+          <div class="flex align-items-center justify-content-between mb-3">
+            <div class="flex align-items-center">
+
+              <ng-container
+                *ngIf="customerVehicleReview.user != null && customerVehicleReview.dataURI != null; else showDefaultImage">
+                <img [src]="customerVehicleReview.dataURI" class="mr-3 lg:mr-0"
+                  style="width: 62px; height: 62px; border-radius: 50%;">
+              </ng-container>
+
+              <ng-template #showDefaultImage>
+                <img
+                  *ngIf="customerVehicleReview.user != null && customerVehicleReview.dataURI == null && customerVehicleReview.user.imageURL != null; else showNoImage"
+                  [src]="customerVehicleReview.user.imageURL" class="mr-3 lg:mr-0"
+                  style="width: 62px; height: 62px; border-radius: 50%;">
+              </ng-template>
+
+              <ng-template #showNoImage>
+                <div class="mr-3 lg:mr-0"
+                  style="width: 62px; height: 62px; border-radius: 50%; background-color: white; position: relative;">
+                  <span
+                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">{{'span_no_image_Home'
+                    | translate}}</span>
+                </div>
+              </ng-template>
+
+              <div class="flex flex-column"><span
+                  class="text-900 font-medium mb-1">{{customerVehicleReview.customer.firstName + ' ' +
+                  customerVehicleReview.customer.lastName}}</span>
+                <span class="text-500 font-medium text-sm">{{customerVehicleReview.createdDate |
+                  dateFormatDDMMMMYYYYBR}}</span>
+              </div>
+            </div>
+
+            <div class="flex align-items-center">
+              <ng-container *ngFor="let star of getFilledStarsArray(customerVehicleReview.rating)">
+                <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+              </ng-container>
+              <ng-container *ngFor="let star of getEmptyStarsArray(customerVehicleReview.rating)">
+                <i class="pi pi-star mr-1"></i>
+              </ng-container>
+              <span class="font-medium">{{ customerVehicleReview.rating }}</span>
+            </div>
+
+          </div>
+          <p class="text-600 p-0 m-0 line-height-3">{{customerVehicleReview.review}}</p>
+
+          <button pbutton="" pripple="" icon="pi pi-exclamation-circle" label="Reportar"
+            class="p-element p-ripple p-button-text p-button p-component"><span
+              class="p-button-icon p-button-icon-left pi pi-exclamation-circle" aria-hidden="true"></span><span
+              class="p-button-label">Reportar</span><span class="p-ink"
+              style="height: 117px; width: 117px; top: -36.3594px; left: -0.03125px;"></span></button>
+
+        </li>
+      </ul>
     </div>
   </div>
 </div>

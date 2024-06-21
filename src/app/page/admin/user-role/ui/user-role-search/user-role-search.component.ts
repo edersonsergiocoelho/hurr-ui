@@ -56,7 +56,6 @@ export class UserRoleSearchComponent implements OnInit {
       const keys = [
         'error_message_service_Generic', 
         'warn_message_service_Generic',
-        "no_connection_to_the_api_message_service_Generic",
         'table_header_display_name_UserRoleSearch',
         'table_header_email_UserRoleSearch',
         'table_header_role_name_UserRoleSearch',
@@ -67,7 +66,6 @@ export class UserRoleSearchComponent implements OnInit {
 
       this.userRoleSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
       this.userRoleSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.userRoleSearchUIDTO.no_connection_to_the_api_message_service_Generic = translations['no_connection_to_the_api_message_service_Generic'];
       this.userRoleSearchUIDTO.table_header_display_name_UserRoleSearch = translations['table_header_display_name_UserRoleSearch'];
       this.userRoleSearchUIDTO.table_header_email_UserRoleSearch = translations['table_header_email_UserRoleSearch'];
       this.userRoleSearchUIDTO.table_header_role_name_UserRoleSearch = translations['table_header_role_name_UserRoleSearch'];
@@ -146,10 +144,6 @@ export class UserRoleSearchComponent implements OnInit {
         this.userRoleSearchUIDTO.totalRecords = data.body.totalElements;
       },
       error: (error) => {
-
-        if (error.status == 0) {
-          this.messageService.add({ severity: 'warn', summary: '' + this.userRoleSearchUIDTO.warn_message_service_Generic, detail: '' + this.userRoleSearchUIDTO.no_connection_to_the_api_message_service_Generic });
-        }
 
         if (error.status == 500) {
           this.messageService.add({ severity: 'error', summary: '' + this.userRoleSearchUIDTO.error_message_service_Generic, detail: error.error.message });
