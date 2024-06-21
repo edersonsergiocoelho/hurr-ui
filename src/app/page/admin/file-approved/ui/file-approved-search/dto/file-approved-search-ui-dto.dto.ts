@@ -6,7 +6,6 @@ export class FileApprovedSearchUIDTO {
 
   columns: any[] = [];
   totalRecords = 0;
-  loading = true;
 
   page: number = 0;
   size: number = 10;
@@ -37,7 +36,6 @@ export class FileApprovedSearchUIDTO {
   // Message
   error_message_service_Generic: string;
   warn_message_service_Generic: string;
-  no_connection_to_the_api_message_service_Generic: string;
   table_header_file_approved_id_FileApprovedSearch: string;
   table_header_file_table_FileApprovedSearch: string;
   table_header_file_type_FileApprovedSearch: string;

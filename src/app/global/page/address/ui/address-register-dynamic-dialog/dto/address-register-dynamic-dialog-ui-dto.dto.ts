@@ -35,6 +35,5 @@ export class AddressRegisterDynamicDialogUIDTO {
   success_message_service_Generic: string;
   save_success_message_service_AddressRegisterDynamicDialog: string;
   update_success_message_service_AddressRegisterDynamicDialog: string;
-  no_connection_to_the_api_message_service_Generic: string;
   header_AddressRegisterDynamicDialog: string;
 }

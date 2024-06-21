@@ -103,8 +103,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
         'warn_message_service_Generic',
         'success_message_service_Generic',
         'save_success_message_service_AddressRegisterDynamicDialog',
-        'update_success_message_service_AddressRegisterDynamicDialog',
-        'no_connection_to_the_api_message_service_Generic'
+        'update_success_message_service_AddressRegisterDynamicDialog'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
@@ -114,7 +113,6 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
       this.addressRegisterDynamicDialogUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
       this.addressRegisterDynamicDialogUIDTO.save_success_message_service_AddressRegisterDynamicDialog = translations['save_success_message_service_AddressRegisterDynamicDialog'];
       this.addressRegisterDynamicDialogUIDTO.update_success_message_service_AddressRegisterDynamicDialog = translations['update_success_message_service_AddressRegisterDynamicDialog'];
-      this.addressRegisterDynamicDialogUIDTO.no_connection_to_the_api_message_service_Generic = translations['no_connection_to_the_api_message_service_Generic'];
 
     } catch (error: any) {
 

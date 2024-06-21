@@ -91,6 +91,15 @@ export class CustomerWithdrawalRequestService {
     );
   }
 
+  approval(customerWithdrawalRequestId: string): Observable<HttpResponse<CustomerWithdrawalRequest>> {
+    const url = `${this.apiUrl}/approval/${customerWithdrawalRequestId}`;
+    return this.httpClient.put<CustomerWithdrawalRequest>(url, null, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerWithdrawalRequest>) => {
+        return response;
+      })
+    );
+  }
+
   delete(customerWithdrawalRequestId: string): Observable<HttpResponse<void> | null> {
     const url = `${this.apiUrl}/${customerWithdrawalRequestId}`;
     return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(

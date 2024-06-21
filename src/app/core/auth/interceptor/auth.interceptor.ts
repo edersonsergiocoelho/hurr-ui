@@ -79,14 +79,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     } catch (error: any) {
 
-      if (error.status == 0) {
-
-        this.messageService.add({ 
-          severity: 'warn', 
-          summary: '' + this.authInterceptorDTO.warn_message_service_Generic, 
-          detail: '' + this.authInterceptorDTO.no_connection_to_the_api_message_service_Generic });
-      }
-
       if (error.status == 500) {
 
         this.messageService.add({
