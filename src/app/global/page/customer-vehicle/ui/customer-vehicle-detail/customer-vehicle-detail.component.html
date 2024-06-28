@@ -57,8 +57,7 @@
                     + ' ' + customerVehicleDetailUIDTO.customerVehicle.customer.lastName }}</strong></label>
               </div>
               <div class="field">
-                <label>Ingressou em {{ customerVehicleDetailUIDTO.customerVehicle.customer.createdDate |
-                  dateFormatDDMMMMYYYYBR }}</label>
+                <label>Ingressou em {{ customerVehicleDetailUIDTO.customerVehicle.customer.createdDate | date:'dd/MM/yyyy HH:mm:ss' }}</label>
               </div>
             </div>
           </div>
@@ -240,7 +239,7 @@
         <div style="display: flex; flex-direction: column;">
           <label style="font-size: 20px;"><strong>Cancelamento grátis</strong></label>
           <label style="font-style: normal; font-weight: normal;">Reembolso total antes de
-            {{customerVehicleDetailUIDTO.dateCancelFree | dateFormatDDMMMMYYYYBR}}, às
+            {{customerVehicleDetailUIDTO.dateCancelFree | date:'dd/MM/yyyy HH:mm:ss'}}, às
             {{customerVehicleDetailUIDTO.selectedHourInit}}</label>
         </div>
       </div>
@@ -388,8 +387,7 @@
               <div class="flex flex-column"><span
                   class="text-900 font-medium mb-1">{{customerVehicleReview.customer.firstName + ' ' +
                   customerVehicleReview.customer.lastName}}</span>
-                <span class="text-500 font-medium text-sm">{{customerVehicleReview.createdDate |
-                  dateFormatDDMMMMYYYYBR}}</span>
+                <span class="text-500 font-medium text-sm">{{customerVehicleReview.createdDate | date:'dd/MM/yyyy HH:mm:ss'}}</span>
               </div>
             </div>
 

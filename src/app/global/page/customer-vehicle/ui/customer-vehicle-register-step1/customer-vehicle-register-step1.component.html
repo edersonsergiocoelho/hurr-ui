@@ -1,0 +1,39 @@
+<form #customerVehicleRegisterStep1Form="ngForm">
+
+  <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerVehicleRegisterStep1' | translate}}</h3>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-6 md:col-6 field">
+      <label for="country" class="font-medium text-2xl">{{'label_country_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep1UIDTO.countries" 
+        [(ngModel)]="customerVehicleRegisterStep1UIDTO.selectedCountry" optionLabel="countryName" 
+        name="country" [showClear]="true"
+        placeholder="{{'placeholder_country_AddressRegisterDynamicDialog' | translate}}" (onChange)="changeCountry($event.value)">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="state" class="font-medium text-2xl">{{'label_state_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep1UIDTO.states" 
+        [(ngModel)]="customerVehicleRegisterStep1UIDTO.selectedState" optionLabel="stateName" 
+        name="state" [showClear]="true"
+        placeholder="{{'placeholder_state_AddressRegisterDynamicDialog' | translate}}" (onChange)="changeState($event.value)">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="city" class="font-medium text-2xl">{{'label_city_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep1UIDTO.cities" 
+        [(ngModel)]="customerVehicleRegisterStep1UIDTO.selectedCity" optionLabel="cityName" 
+        name="city" [showClear]="true"
+        placeholder="{{'placeholder_city_AddressRegisterDynamicDialog' | translate}}" (onChange)="changeCity($event.value)">
+      </p-dropdown>
+    </div>
+
+  </div>
+
+</form>

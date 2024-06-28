@@ -1,0 +1,51 @@
+<form #customerVehicleRegisterStep1Form="ngForm">
+
+  <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerVehicleRegisterStep2' | translate}}</h3>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-6 md:col-6 field">
+      <label for="vehicleBrand" class="font-medium text-2xl">{{'label_vehicle_brand_CustomerVehicleRegisterStep2' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep2UIDTO.vehicleBrands" 
+        [(ngModel)]="customerVehicleRegisterStep2UIDTO.selectedVehicleBrand" 
+        optionLabel="vehicleBrandName" 
+        name="vehicleBrand" 
+        [showClear]="true"
+        [filter]="true"
+        filterBy="vehicleBrandName"
+        placeholder="{{'placeholder_vehicle_brand_CustomerVehicleRegisterStep2' | translate}}" (onChange)="changeVehicleBrand($event.value)">
+      </p-dropdown>
+    </div>
+    
+    <div class="col-6 md:col-6 field">
+      <label for="vehicle" class="font-medium text-2xl">{{'label_vehicle_CustomerVehicleRegisterStep2' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep2UIDTO.vehicles" 
+        [(ngModel)]="customerVehicleRegisterStep2UIDTO.selectedVehicle" 
+        optionLabel="vehicleName" 
+        name="vehicle" 
+        [showClear]="true"
+        [filter]="true"
+        filterBy="vehicleName"
+        placeholder="{{'placeholder_vehicle_CustomerVehicleRegisterStep2' | translate}}" (onChange)="changeVehicle($event.value)">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="vehicleModel" class="font-medium text-2xl">{{'label_vehicle_model_CustomerVehicleRegisterStep2' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep2UIDTO.vehicleModels" 
+        [(ngModel)]="customerVehicleRegisterStep2UIDTO.selectedVehicleModel" 
+        optionLabel="vehicleModelName" 
+        name="vehicleModel" 
+        [showClear]="true"
+        [filter]="true"
+        filterBy="vehicleModelName"
+        placeholder="{{'placeholder_vehicle_model_CustomerVehicleRegisterStep2' | translate}}" (onChange)="onChangeVehicleModel($event.value)">
+      </p-dropdown>
+    </div>
+
+  </div>
+
+</form>

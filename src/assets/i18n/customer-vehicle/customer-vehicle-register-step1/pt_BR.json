@@ -1,0 +1,7 @@
+{
+  "title_CustomerVehicleRegisterStep1": "Etapa 1 - Verifique Se O Serviço Está Disponível Na Sua Região",
+  "label_country_CustomerVehicleRegisterStep1": "País",
+  "placeholder_country_CustomerVehicleRegisterStep1": "Informe O País",
+
+  "city_service_not_available_message_service_CustomerVehicleRegisterStep1": "O Serviço Ainda Não Está Disponível Na Sua Região, Estamos Trabalhando Para Ampliar Os Serviços."
+}

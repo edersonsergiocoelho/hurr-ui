@@ -1,0 +1,9 @@
+{
+  "title_CustomerVehicleRegisterStep2": "Etapa 2 - Informe O Veículo A Ser Cadastrado",
+  "label_vehicle_brand_CustomerVehicleRegisterStep2": "Marca",
+  "placeholder_vehicle_brand_CustomerVehicleRegisterStep2": "Informe A Marca",
+  "label_vehicle_CustomerVehicleRegisterStep2": "Veículo",
+  "placeholder_vehicle_CustomerVehicleRegisterStep2": "Informe O Veículo",
+  "label_vehicle_model_CustomerVehicleRegisterStep2": "Modelo",
+  "placeholder_vehicle_model_CustomerVehicleRegisterStep2": "Informe O Modelo Do Veículo"
+}

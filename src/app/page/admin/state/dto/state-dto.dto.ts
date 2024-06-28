@@ -4,6 +4,7 @@ export class StateDTO {
 
   stateId: string;
   stateName: string;
+  serviceAvailable: boolean;
   createdDate: Date;
   modifiedDate: Date;
   enabled: boolean;

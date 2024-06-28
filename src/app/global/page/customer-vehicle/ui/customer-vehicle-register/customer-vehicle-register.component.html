@@ -1,0 +1,237 @@
+<div class="block-content">
+  <div class="lg:px-8 md:px-6 px-3 py-8">
+
+    <div style="border: 2px #6610f2 solid; padding: 8px; width: 300px; margin: auto;">
+      <label class="font-bold">Legenda</label>
+      <div style="display: flex; align-items: center; margin-top: 8px;">
+        <div style="width: 20px; height: 20px; background-color: yellow; margin-right: 8px;"></div>
+        <label>Verificação Em Andamento</label>
+      </div>
+      <div style="display: flex; align-items: center; margin-top: 8px;">
+        <div style="width: 20px; height: 20px; background-color: blue; margin-right: 8px;"></div>
+        <label>Documento Já Verificado</label>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="flex flex-column lg:flex-row surface-card shadow-2 border-round">
+
+      <!-- Região -->
+      <div
+        *ngIf="customerVehicleRegisterUIDTO.address == null"
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-globe text-900 mr-3"></i>
+          <div class="flex flex-column">
+            <span class="text-900 font-medium text-xl mb-1 line-height-1">Região</span>
+            <span class="text-600 line-height-3">Verificar o Região</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="customerVehicleRegisterUIDTO.address != null"
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-globe text-900 mr-3"></i>
+          <div class="flex flex-column">
+            <span class="text-900 font-medium text-xl mb-1 line-height-1">Região</span>
+            <span class="text-600 line-height-3">Verificar o Região</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Celular -->
+      <!--
+      <div *ngIf="customerVehicleRegisterUIDTO.customer == null || customerVehicleRegisterUIDTO.customer.phoneValidated == null || customerVehicleRegisterUIDTO.customer.phoneValidated == false" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Celular</span><span
+              class="text-600 line-height-3">Número do Celular</span></div>
+        </div>
+      </div>
+
+      <div *ngIf="customerVehicleRegisterUIDTO.customer != null && customerVehicleRegisterUIDTO.customer.phoneValidated == true" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-phone text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Celular</span><span
+              class="text-600 line-height-3">Número do Celular</span></div>
+        </div>
+      </div>
+      -->
+
+      <!-- Carteira de identidade -->
+      <!--
+      <div *ngIf="customerVehicleRegisterUIDTO.customer == null || customerVehicleRegisterUIDTO.customer.identityNumberValidated == null || customerVehicleRegisterUIDTO.customer.identityNumberValidated == false && customerVehicleRegisterUIDTO.fileApprovedIdentityNumber == null" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-id-card text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Identidade</span><span
+              class="text-600 line-height-3">Carteira de identidade</span></div>
+        </div>
+      </div>
+
+      <div (click)="toggleApprovalIdentityNumber()" *ngIf="customerVehicleRegisterUIDTO.customer.identityNumberValidated == false && customerVehicleRegisterUIDTO.fileApprovedIdentityNumber != null && customerVehicleRegisterUIDTO.fileApprovedIdentityNumber.approvedBy == null" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-yellow-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-id-card text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Identidade</span><span
+              class="text-600 line-height-3">Carteira de identidade</span></div>
+        </div>
+      </div>
+
+      <div *ngIf="customerVehicleRegisterUIDTO.customer != null && customerVehicleRegisterUIDTO.customer.identityNumberValidated == true" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-id-card text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Identidade</span><span
+              class="text-600 line-height-3">Carteira de identidade</span></div>
+        </div>
+      </div>
+      -->
+
+      <!-- Carteira de motorista -->
+      <!--
+      <div *ngIf="customerVehicleRegisterUIDTO.customer == null || customerVehicleRegisterUIDTO.customer.driverLicenseValidated == null || customerVehicleRegisterUIDTO.customer.driverLicenseValidated == false && customerVehicleRegisterUIDTO.fileApprovedDriverLicense == null" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-car text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">CNH</span><span
+              class="text-600 line-height-3">Carteira de motorista</span></div>
+        </div>
+      </div>
+
+      <div (click)="toggleApprovalMessageDriverLicense()" *ngIf="customerVehicleRegisterUIDTO.customer.driverLicenseValidated == false && customerVehicleRegisterUIDTO.fileApprovedDriverLicense != null && customerVehicleRegisterUIDTO.fileApprovedDriverLicense.approvedBy == null" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-yellow-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-car text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">CNH</span><span
+              class="text-600 line-height-3">Carteira de motorista</span></div>
+        </div>
+      </div>
+
+      <div *ngIf="customerVehicleRegisterUIDTO.customer != null && customerVehicleRegisterUIDTO.customer.driverLicenseValidated == true" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-car text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">CNH</span><span
+              class="text-600 line-height-3">Carteira de motorista</span></div>
+        </div>
+      </div>
+      -->
+
+      <!-- Foto do perfil -->
+      <!--
+      <div *ngIf="customerVehicleRegisterUIDTO.user == null || customerVehicleRegisterUIDTO.user.photoValidated == null || customerVehicleRegisterUIDTO.user.photoValidated == false && customerVehicleRegisterUIDTO.fileApprovedProfilePicture == null" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent opacity-50">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-camera text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Foto</span><span
+              class="text-600 line-height-3">Foto do perfil</span></div>
+        </div>
+      </div>
+
+      <div (click)="toggleApprovalMessageProfilePicture()" *ngIf="customerVehicleRegisterUIDTO.user == null || customerVehicleRegisterUIDTO.user.photoValidated == null || customerVehicleRegisterUIDTO.user.photoValidated == false && customerVehicleRegisterUIDTO.fileApprovedProfilePicture != null && customerVehicleRegisterUIDTO.fileApprovedProfilePicture.approvedBy == null" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-yellow-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-camera text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Foto</span><span
+              class="text-600 line-height-3">Foto do perfil</span></div>
+        </div>
+      </div>
+
+      <div *ngIf="customerVehicleRegisterUIDTO.user != null && customerVehicleRegisterUIDTO.user.photoValidated == true" 
+        class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none border-blue-500">
+        <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
+          <i class="text-2xl pi pi-camera text-900 mr-3"></i>
+          <div class="flex flex-column"><span
+              class="text-900 font-medium text-xl mb-1 line-height-1">Foto</span><span
+              class="text-600 line-height-3">Foto do perfil</span></div>
+        </div>
+      </div>
+      -->
+
+    </div>
+  </div>
+</div>
+
+<div class="md:col-12 mb-2">
+  <div class="card no-margin bordered-card">
+
+    <div *ngIf="customerVehicleRegisterUIDTO.step == 1">
+      <app-customer-vehicle-register-step1 
+        (validateStep1)="handleIsValidateStep1($event)">
+      </app-customer-vehicle-register-step1>
+    </div>
+
+    <div *ngIf="customerVehicleRegisterUIDTO.step == 2">
+      <app-customer-vehicle-register-step2
+        (validateStep2)="handleIsValidateStep2($event)">
+      </app-customer-vehicle-register-step2>
+    </div>
+
+  </div>
+</div>
+
+<div class="flex -mt-3 justify-content-between align-items-center">
+
+  <div *ngIf="customerVehicleRegisterUIDTO.step === 2 || customerVehicleRegisterUIDTO.step === 3"
+    class="col-1 md:col-1 field">
+    <button 
+      pbutton="" pripple="" icon="pi pi-arrow-left"
+      class="p-element p-ripple m-0 p-button p-component"
+      (click)="previousStep()">
+      <span
+        class="p-button-icon p-button-icon-left pi pi-arrow-left" aria-hidden="true">
+      </span>
+      <span
+        class="p-button-label">{{'span_button_label_to_go_back_Generic' | translate}}
+      </span>
+      <span class="p-ink"></span>
+    </button>
+  </div>
+
+  <div *ngIf="customerVehicleRegisterUIDTO.step === 1 || customerVehicleRegisterUIDTO.step === 2"
+    class="col-1 md:col-1 field" style="margin-left: auto;">
+    <button 
+      pbutton="" pripple="" icon="pi pi-arrow-right"
+      class="p-element p-ripple m-0 p-button p-component" (click)="nextStep()"
+      [disabled]="!validateCurrentStep()">
+      <span
+        class="p-button-icon p-button-icon-left pi pi-arrow-right" aria-hidden="true">
+      </span>
+      <span
+        class="p-button-label">{{'span_button_label_go_Generic' | translate}}
+      </span>
+      <span class="p-ink"></span>
+    </button>
+  </div>
+
+  <div *ngIf="customerVehicleRegisterUIDTO.step === 3" 
+    class="col-1 md:col-1 field">
+    <button 
+      pbutton="" pripple="" icon="pi pi-check" label="Save"
+      class="p-element p-ripple m-0 p-button p-component" (click)="requestMoney()">
+      <span
+        class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true">
+      </span>
+      <span
+        class="p-button-label">{{'span_button_label_request_money_Generic' | translate}}
+      </span>
+      <span class="p-ink"></span>
+    </button>
+  </div>
+
+</div>
