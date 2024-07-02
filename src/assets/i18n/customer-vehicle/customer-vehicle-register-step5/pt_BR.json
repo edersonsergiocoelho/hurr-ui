@@ -1,0 +1,12 @@
+{
+  "title_CustomerVehicleRegisterStep5": "Etapa 5 - Detalhes Do Veículo",
+  "label_license_plate_type_CustomerVehicleRegisterStep5": "Tipo De Placa",
+  "label_license_plate_type_old_model_CustomerVehicleRegisterStep5": "Modelo Antigo",
+  "label_license_plate_type_mercosul_CustomerVehicleRegisterStep5": "Mercosul",
+  "label_license_plate_CustomerVehicleRegisterStep5": "Placa Do Veículo",
+  "placeholder_license_plate_CustomerVehicleRegisterStep5": "Informe A Placa Do Veículo",
+  "label_renavam_CustomerVehicleRegisterStep5": "Renavam Do Veículo",
+  "placeholder_renavam_CustomerVehicleRegisterStep5": "Informe O Renavam Do Veículo",
+  "label_chassis_CustomerVehicleRegisterStep5": "Chassis Do Veículo",
+  "placeholder_chassis_CustomerVehicleRegisterStep5": "Informe O Chassis Do Veículo"
+}

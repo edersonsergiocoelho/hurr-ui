@@ -1,0 +1,7 @@
+{
+  "title_CustomerVehicleRegisterStep3": "Etapa 3 - Informe A Transmissão E A Quilometragem",
+  "label_vehicle_transmission_CustomerVehicleRegisterStep3": "Transmissão",
+  "placeholder_vehicle_transmission_CustomerVehicleRegisterStep3": "Informe A Transmissão Do Veículo",
+  "label_mileage_created_CustomerVehicleRegisterStep3": "Quilometragem",
+  "placeholder_mileage_created_CustomerVehicleRegisterStep3": "Informe A Quilometragem Do Veículo"
+}

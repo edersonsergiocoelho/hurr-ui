@@ -1,4 +1,4 @@
-export class VehicleTransmission {
+export class VehicleTransmissionDTO {
   
   vehicleTransmissionId: string;
   vehicleTransmissionName: string;

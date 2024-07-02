@@ -1,0 +1,57 @@
+<form #customerVehicleRegisterStep1Form="ngForm">
+
+  <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerVehicleRegisterStep5' | translate}}</h3>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="flex flex-wrap col-6 md:col-6 gap-3">
+      <label for="licensePlateType" class="font-medium text-2xl">{{'label_license_plate_type_CustomerVehicleRegisterStep5' | translate}}</label>
+      <div class="flex align-items-center">
+        <p-radioButton 
+            name="licensePlateType" 
+            value="oldModel" 
+            [(ngModel)]="customerVehicleRegisterStep5UIDTO.licensePlateType" 
+            inputId="oldModel" 
+            (ngModelChange)="ngModelChangeLicensePlateType($event)"/>
+        <label for="oldModel" class="ml-2">
+          {{'label_license_plate_type_old_model_CustomerVehicleRegisterStep5' | translate}}
+        </label>
+      </div>
+      
+      <div class="flex align-items-center">
+        <p-radioButton 
+            name="licensePlateType" 
+            value="mercosul" 
+            [(ngModel)]="customerVehicleRegisterStep5UIDTO.licensePlateType" 
+            inputId="mercosul" 
+            (ngModelChange)="ngModelChangeLicensePlateType($event)"/>
+        <label for="mercosul" class="ml-2">
+          {{'label_license_plate_type_mercosul_CustomerVehicleRegisterStep5' | translate}}
+        </label>
+      </div>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="licensePlate" class="font-medium text-2xl">{{'label_license_plate_CustomerVehicleRegisterStep5' | translate}}</label>
+      <p-inputMask class="p-inputtext-lg" [mask]="customerVehicleRegisterStep5UIDTO.licensePlateMask"
+        placeholder="{{'placeholder_license_plate_CustomerVehicleRegisterStep5' | translate}}"
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.licensePlate" name="licensePlate" autocomplete="off" [required]="true" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="renavam" class="font-medium text-2xl">{{'label_renavam_CustomerVehicleRegisterStep5' | translate}}</label>
+      <p-inputMask class="p-inputtext-lg" mask="99999999999"
+        placeholder="{{'placeholder_renavam_CustomerVehicleRegisterStep5' | translate}}"
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.renavam" name="renavam" autocomplete="off" [required]="true" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="chassis" class="font-medium text-2xl">{{'label_chassis_CustomerVehicleRegisterStep5' | translate}}</label>
+      <p-inputMask class="p-inputtext-lg" mask="*****************" 
+        placeholder="{{'placeholder_chassis_CustomerVehicleRegisterStep5' | translate}}"
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.chassis" name="chassis" autocomplete="off" [required]="true" />
+    </div>
+
+  </div>
+
+</form>

@@ -70,8 +70,7 @@ export class CustomerVehicleRegisterStep2Component implements OnInit {
 
       const keys = [
         'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'city_service_not_available_message_service_CustomerVehicleRegisterStep1'
+        'warn_message_service_Generic'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
