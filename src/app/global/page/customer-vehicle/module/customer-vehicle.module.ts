@@ -19,6 +19,8 @@ import { GalleriaModule } from 'primeng/galleria';
 import { RatingModule } from 'primeng/rating';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ToastModule } from 'primeng/toast';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { CustomerVehicleComponent } from '../ui/customer-vehicle/customer-vehicle.component';
 import { CustomerVehicleDetailComponent } from '../ui/customer-vehicle-detail/customer-vehicle-detail.component';
@@ -29,6 +31,9 @@ import { CustomerVehicleRegisterStep2Component } from '../ui/customer-vehicle-re
 import { CustomerVehicleRegisterStep3Component } from '../ui/customer-vehicle-register-step3/customer-vehicle-register-step3.component';
 import { CustomerVehicleRegisterStep4Component } from '../ui/customer-vehicle-register-step4/customer-vehicle-register-step4.component';
 import { CustomerVehicleRegisterStep5Component } from '../ui/customer-vehicle-register-step5/customer-vehicle-register-step5.component';
+import { CustomerVehicleRegisterStep6Component } from '../ui/customer-vehicle-register-step6/customer-vehicle-register-step6.component';
+import { CustomerVehicleRegisterStep7Component } from '../ui/customer-vehicle-register-step7/customer-vehicle-register-step7.component';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,9 @@ import { CustomerVehicleRegisterStep5Component } from '../ui/customer-vehicle-re
     CustomerVehicleRegisterStep2Component,
     CustomerVehicleRegisterStep3Component,
     CustomerVehicleRegisterStep4Component,
-    CustomerVehicleRegisterStep5Component
+    CustomerVehicleRegisterStep5Component,
+    CustomerVehicleRegisterStep6Component,
+    CustomerVehicleRegisterStep7Component
   ],
   imports: [
     BrowserModule,
@@ -54,11 +61,13 @@ import { CustomerVehicleRegisterStep5Component } from '../ui/customer-vehicle-re
 
     ButtonModule,
     CalendarModule,
+    ConfirmDialogModule,
     DataViewModule,
     DropdownModule,
     DividerModule,
     GalleriaModule,
     RatingModule,
+    FileUploadModule,
     RadioButtonModule,
     InputTextModule,
     InputNumberModule,
@@ -74,7 +83,12 @@ import { CustomerVehicleRegisterStep5Component } from '../ui/customer-vehicle-re
     CustomerVehicleRegisterStep2Component,
     CustomerVehicleRegisterStep3Component,
     CustomerVehicleRegisterStep4Component,
-    CustomerVehicleRegisterStep5Component
+    CustomerVehicleRegisterStep5Component,
+    CustomerVehicleRegisterStep6Component,
+    CustomerVehicleRegisterStep7Component
+  ],
+  providers: [
+    ConfirmationService
   ]
 })
 export class CustomerVehicleModule { }

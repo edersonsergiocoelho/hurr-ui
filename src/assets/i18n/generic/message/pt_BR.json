@@ -1,5 +1,6 @@
 {
-  "no_connection_to_the_api_message_service_Generic": "Ops! Parece que estamos com dificuldades de conexão. Por favor, tente novamente mais tarde.",
+  "no_connection_to_the_api_message_service_Generic": "Ops! Parece Que Estamos Com Dificuldades De Conexão. Por favor, Tente Novamente Mais Tarde.",
+  "failed_to_open_new_tab_message_service_Generic": "Falha Ao Abrir Nova Guia.",
 
   "warn_message_service_Generic": "Alerta",
   "error_message_service_Generic": "Erro",

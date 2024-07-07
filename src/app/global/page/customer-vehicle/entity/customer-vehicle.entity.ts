@@ -6,7 +6,7 @@ import { VehicleFuelType } from "src/app/page/admin/vehicle-fuel-type/entity/veh
 import { VehicleTransmission } from "src/app/page/admin/vehicle-transmission/entity/vehicle-transmission.entity";
 import { CustomerVehicleAddress } from "../../customer-vehicle-address/entity/customer-vehicle-address.entity";
 
-export interface CustomerVehicle {
+export class CustomerVehicle {
   
   customerVehicleId: string;
   customer: Customer;

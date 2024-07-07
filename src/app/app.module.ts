@@ -34,15 +34,18 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/address/',
   '/assets/i18n/checkout/',
   '/assets/i18n/customer-validation/',
-  '/assets/i18n/customer-vehicle/',
   
   // CustomerVehicle
-  '/assets/i18n/customer-vehicle/customer-vehicle-search/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-detail/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register/',
   '/assets/i18n/customer-vehicle/customer-vehicle-register-step1/',
   '/assets/i18n/customer-vehicle/customer-vehicle-register-step2/',
   '/assets/i18n/customer-vehicle/customer-vehicle-register-step3/',
   '/assets/i18n/customer-vehicle/customer-vehicle-register-step4/',
   '/assets/i18n/customer-vehicle/customer-vehicle-register-step5/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register-step6/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register-step7/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-search/',
 
   // CustomerVehicleBooking
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog/',

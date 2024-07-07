@@ -8,5 +8,11 @@
   "label_renavam_CustomerVehicleRegisterStep5": "Renavam Do Veículo",
   "placeholder_renavam_CustomerVehicleRegisterStep5": "Informe O Renavam Do Veículo",
   "label_chassis_CustomerVehicleRegisterStep5": "Chassis Do Veículo",
-  "placeholder_chassis_CustomerVehicleRegisterStep5": "Informe O Chassis Do Veículo"
+  "placeholder_chassis_CustomerVehicleRegisterStep5": "Informe O Chassis Do Veículo",
+  "label_year_of_manufacture_CustomerVehicleRegisterStep5": "Ano De Fabricação",
+  "placeholder_year_of_manufacture_CustomerVehicleRegisterStep5": "Informe O Ano De Fabricação",
+  "label_year_of_the_car_CustomerVehicleRegisterStep5": "Ano Do Carro",
+  "placeholder_year_of_the_car_CustomerVehicleRegisterStep5": "Informe O Ano Do Carro",
+  "label_description_CustomerVehicleRegisterStep5": "Descrição",
+  "placeholder_description_CustomerVehicleRegisterStep5": "Informe A Descrição"
 }

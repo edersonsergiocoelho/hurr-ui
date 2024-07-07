@@ -17,7 +17,7 @@
 
     <div style="overflow-y: auto;">
     <div class="flex flex-column lg:flex-row surface-card shadow-2 border-round">
-      <div *ngFor="let step of customerVehicleRegisterUIDTO.steps; let i = index" class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none" 
+      <div *ngFor="let step of customerVehicleRegisterUIDTO.customervehicleRegisterSteps; let i = index" class="flex-grow-1 border-left-2 lg:border-bottom-2 lg:border-left-none" 
            [ngClass]="{ 'border-blue-500': i + 1 <= customerVehicleRegisterUIDTO.currentStepIndex, 'border-transparent opacity-50': i + 1 > customerVehicleRegisterUIDTO.currentStepIndex }">
         <div class="flex align-items-start p-4 border-bottom-1 lg:border-right-1 lg:border-bottom-none surface-border">
           <i class="text-2xl" [ngClass]="step.icon + ' text-900 mr-3'"></i>
@@ -36,34 +36,46 @@
 <div class="md:col-12 mb-2">
   <div class="card no-margin bordered-card">
 
-    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 1">
+    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 0">
       <app-customer-vehicle-register-step1 
         (validateStep1)="handleIsValidateStep1($event)">
       </app-customer-vehicle-register-step1>
     </div>
 
-    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 2">
+    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 1">
       <app-customer-vehicle-register-step2
         (validateStep2)="handleIsValidateStep2($event)">
       </app-customer-vehicle-register-step2>
     </div>
 
-    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 3">
+    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 2">
       <app-customer-vehicle-register-step3
         (validateStep3)="handleIsValidateStep3($event)">
       </app-customer-vehicle-register-step3>
     </div>
 
-    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 4">
+    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 3">
       <app-customer-vehicle-register-step4
         (validateStep4)="handleIsValidateStep4($event)">
       </app-customer-vehicle-register-step4>
     </div>
 
-    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 5">
+    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 4">
       <app-customer-vehicle-register-step5
         (validateStep5)="handleIsValidateStep5($event)">
       </app-customer-vehicle-register-step5>
+    </div>
+
+    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 5">
+      <app-customer-vehicle-register-step6
+        (validateStep6)="handleIsValidateStep6($event)">
+      </app-customer-vehicle-register-step6>
+    </div>
+
+    <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == 6">
+      <app-customer-vehicle-register-step7
+        (validateStep7)="handleIsValidateStep7($event)">
+      </app-customer-vehicle-register-step7>
     </div>
 
   </div>
@@ -74,7 +86,7 @@
   <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex > 1"
     class="col-1 md:col-1 field">
     <button 
-      pbutton="" pripple="" icon="pi pi-arrow-left"
+      pbutton="" pripple=""
       class="p-element p-ripple m-0 p-button p-component"
       (click)="previousStep()">
       <span
@@ -87,10 +99,10 @@
     </button>
   </div>
 
-  <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex >= 1"
+  <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex >= 0 && customerVehicleRegisterUIDTO.currentStepIndex < customerVehicleRegisterUIDTO.customervehicleRegisterSteps.length - 1"
     class="col-1 md:col-1 field" style="margin-left: auto;">
     <button 
-      pbutton="" pripple="" icon="pi pi-arrow-right"
+      pbutton="" pripple=""
       class="p-element p-ripple m-0 p-button p-component" (click)="nextStep()"
       [disabled]="!validateCurrentStep()">
       <span
@@ -103,19 +115,29 @@
     </button>
   </div>
 
-  <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == customerVehicleRegisterUIDTO.steps.length" 
-    class="col-1 md:col-1 field">
+  <div *ngIf="customerVehicleRegisterUIDTO.currentStepIndex == customerVehicleRegisterUIDTO.customervehicleRegisterSteps.length - 1" 
+    class="col-1 md:col-1 field" style="margin-left: auto;">
     <button 
-      pbutton="" pripple="" icon="pi pi-check" label="Save"
-      class="p-element p-ripple m-0 p-button p-component" (click)="requestMoney()">
+      pbutton="" pripple=""
+      class="p-element p-ripple m-0 p-button p-component" (click)="confirmDialogSave()"
+      [disabled]="!validateCurrentStep()">
       <span
-        class="p-button-icon p-button-icon-left pi pi-check" aria-hidden="true">
+        class="p-button-icon p-button-icon-left pi pi-save" aria-hidden="true">
       </span>
       <span
-        class="p-button-label">{{'span_button_label_request_money_Generic' | translate}}
+        class="p-button-label">{{'span_button_label_save_Generic' | translate}}
       </span>
       <span class="p-ink"></span>
     </button>
   </div>
+
+  <p-confirmDialog #cd [style]="{'width': '500px', 'height': '300px'}">
+    <ng-template pTemplate="headless" let-message>
+      <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
+        <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+        <p>{{ message.message }}</p>
+      </div>
+    </ng-template>
+  </p-confirmDialog>
 
 </div>

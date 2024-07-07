@@ -1,4 +1,4 @@
-export interface Step {
+export interface CustomervehicleRegisterStep {
   label: string;
   icon: string;
   description: string;

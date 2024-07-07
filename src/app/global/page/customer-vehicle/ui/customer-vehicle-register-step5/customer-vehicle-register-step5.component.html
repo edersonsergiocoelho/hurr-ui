@@ -1,4 +1,4 @@
-<form #customerVehicleRegisterStep1Form="ngForm">
+<form #customerVehicleRegisterStep5Form="ngForm" (change)="onFormChange(customerVehicleRegisterStep5Form)">
 
   <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerVehicleRegisterStep5' | translate}}</h3>
 
@@ -12,7 +12,8 @@
             value="oldModel" 
             [(ngModel)]="customerVehicleRegisterStep5UIDTO.licensePlateType" 
             inputId="oldModel" 
-            (ngModelChange)="ngModelChangeLicensePlateType($event)"/>
+            (ngModelChange)="ngModelChangeLicensePlateType($event)"
+            [required]="true" />
         <label for="oldModel" class="ml-2">
           {{'label_license_plate_type_old_model_CustomerVehicleRegisterStep5' | translate}}
         </label>
@@ -24,7 +25,8 @@
             value="mercosul" 
             [(ngModel)]="customerVehicleRegisterStep5UIDTO.licensePlateType" 
             inputId="mercosul" 
-            (ngModelChange)="ngModelChangeLicensePlateType($event)"/>
+            (ngModelChange)="ngModelChangeLicensePlateType($event)"
+            [required]="true" />
         <label for="mercosul" class="ml-2">
           {{'label_license_plate_type_mercosul_CustomerVehicleRegisterStep5' | translate}}
         </label>
@@ -35,7 +37,8 @@
       <label for="licensePlate" class="font-medium text-2xl">{{'label_license_plate_CustomerVehicleRegisterStep5' | translate}}</label>
       <p-inputMask class="p-inputtext-lg" [mask]="customerVehicleRegisterStep5UIDTO.licensePlateMask"
         placeholder="{{'placeholder_license_plate_CustomerVehicleRegisterStep5' | translate}}"
-        [(ngModel)]="customerVehicleRegisterStep5UIDTO.licensePlate" name="licensePlate" autocomplete="off" [required]="true" />
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.licensePlate" name="licensePlate" autocomplete="off" 
+        [required]="true" />
     </div>
 
     <div class="col-6 md:col-6 field">
@@ -46,10 +49,59 @@
     </div>
 
     <div class="col-6 md:col-6 field">
+      <label for="state" class="font-medium text-2xl">{{'label_state_AddressRegisterDynamicDialog' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep5UIDTO.states" 
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.selectedState" optionLabel="stateName" 
+        name="state" [showClear]="true"
+        placeholder="{{'placeholder_state_AddressRegisterDynamicDialog' | translate}}" 
+        [required]="true" >
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
       <label for="chassis" class="font-medium text-2xl">{{'label_chassis_CustomerVehicleRegisterStep5' | translate}}</label>
       <p-inputMask class="p-inputtext-lg" mask="*****************" 
         placeholder="{{'placeholder_chassis_CustomerVehicleRegisterStep5' | translate}}"
-        [(ngModel)]="customerVehicleRegisterStep5UIDTO.chassis" name="chassis" autocomplete="off" [required]="true" />
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.chassis" name="chassis" autocomplete="off" 
+        [required]="true" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="yearOfManufacture" class="font-medium text-2xl">{{'label_year_of_manufacture_CustomerVehicleRegisterStep5' | translate}}</label>
+      <p-calendar 
+        class="p-inputtext-lg"
+        placeholder="{{'placeholder_year_of_manufacture_CustomerVehicleRegisterStep5' | translate}}"
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.yearOfManufacture" 
+        name="yearOfManufacture"
+        view="year" 
+        dateFormat="yy" 
+        [required]="true" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="yearOfTheCar" class="font-medium text-2xl">{{'label_year_of_the_car_CustomerVehicleRegisterStep5' | translate}}</label>
+      <p-calendar 
+        class="p-inputtext-lg"
+        placeholder="{{'placeholder_year_of_the_car_CustomerVehicleRegisterStep5' | translate}}"
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.yearOfTheCar" 
+        name="yearOfTheCar"
+        view="year" 
+        dateFormat="yy" 
+        [required]="true" />
+    </div>
+
+    <div class="col-12 md:col-12 field">
+      <label for="description" class="font-medium text-2xl">{{'label_description_CustomerVehicleRegisterStep5' | translate}}</label>
+      <div class="col-12 md:col-12 field">
+        <textarea rows="10" pInputTextarea name="description" 
+          [(ngModel)]="customerVehicleRegisterStep5UIDTO.description"
+          placeholder="{{'placeholder_description_CustomerVehicleRegisterStep5' | translate}}" 
+          required="true"
+          style="width: 100%;"
+          [required]="true" >
+        </textarea>
+      </div>
     </div>
 
   </div>

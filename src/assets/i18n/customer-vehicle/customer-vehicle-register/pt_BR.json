@@ -1,0 +1,6 @@
+{
+  "header_ConfirmDialog_CustomerVehicleRegister": "Salvar Cadastro Do Veículo",
+  "message_ConfirmDialog_CustomerVehicleRegister": "Tem Certeza De Que Deseja Continuar E Salvar O Cadastro Do Veículo? Para Continuar, O Cadastro Do Carro Precisa Ser Aprovado Em Um Prazo De Até 3 Dias, Só Depois Disso Você Pode Mexer Nos Preços E Outras Configurações E Ativar Seu Anúncio Na Plataforma.",
+  "reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister": "Cancelado",
+  "reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister": "Cancelado Você Pode Continuar Editando As Informações."
+}
