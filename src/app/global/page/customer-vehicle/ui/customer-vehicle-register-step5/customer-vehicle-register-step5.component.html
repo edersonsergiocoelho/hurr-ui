@@ -91,6 +91,34 @@
         [required]="true" />
     </div>
 
+    <div class="col-6 md:col-6 field">
+      <label for="vehicleColor" class="font-medium text-2xl">{{'label_vehicle_color_CustomerVehicleRegisterStep5' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep5UIDTO.vehicleColors" 
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.selectedVehicleColor" 
+        optionLabel="vehicleColorName" 
+        name="vehicleColor" 
+        [showClear]="true"
+        [filter]="true"
+        filterBy="vehicleColorName"
+        placeholder="{{'placeholder_vehicle_color_CustomerVehicleRegisterStep5' | translate}}">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="vehicleFuelType" class="font-medium text-2xl">{{'label_vehicle_fuel_type_CustomerVehicleRegisterStep5' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep5UIDTO.vehicleFuelTypes" 
+        [(ngModel)]="customerVehicleRegisterStep5UIDTO.selectedVehicleFuelType" 
+        optionLabel="vehicleFuelTypeName" 
+        name="vehicleFuelType" 
+        [showClear]="true"
+        [filter]="true"
+        filterBy="vehicleFuelTypeName"
+        placeholder="{{'placeholder_vehicle_fuel_type_CustomerVehicleRegisterStep5' | translate}}">
+      </p-dropdown>
+    </div>
+
     <div class="col-12 md:col-12 field">
       <label for="description" class="font-medium text-2xl">{{'label_description_CustomerVehicleRegisterStep5' | translate}}</label>
       <div class="col-12 md:col-12 field">

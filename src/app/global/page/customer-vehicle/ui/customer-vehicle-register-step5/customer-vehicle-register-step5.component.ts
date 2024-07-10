@@ -7,6 +7,8 @@ import { first, firstValueFrom } from 'rxjs';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { StateService } from 'src/app/page/admin/state/service/state.service';
 import { NgForm } from '@angular/forms';
+import { VehicleColorService } from 'src/app/page/admin/vehicle-color/service/vehicle-color.service';
+import { VehicleFuelTypeService } from 'src/app/page/admin/vehicle-fuel-type/service/vehicle-fuel-type.service';
 
 @Component({
   selector: 'app-customer-vehicle-register-step5',
@@ -22,6 +24,8 @@ export class CustomerVehicleRegisterStep5Component implements OnInit {
   constructor(
     private stateService: StateService,
     private messageService: MessageService,
+    private vehicleColorService: VehicleColorService,
+    private vehicleFuelTypeService: VehicleFuelTypeService,
     private ngxSpinnerService: NgxSpinnerService,
     private translateService: TranslateService
   ) {
@@ -109,6 +113,50 @@ export class CustomerVehicleRegisterStep5Component implements OnInit {
       if (stateServiceFindByCountryId.status == 200) {
         if (stateServiceFindByCountryId.body != null && stateServiceFindByCountryId.body.length > 0) {
           this.customerVehicleRegisterStep5UIDTO.states = stateServiceFindByCountryId.body;
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
+
+    try {
+
+      const vehicleColorServiceFindAll = await firstValueFrom(this.vehicleColorService.findAll().pipe(first()));
+
+      if (vehicleColorServiceFindAll.status == 200) {
+        if (vehicleColorServiceFindAll.body != null && vehicleColorServiceFindAll.body.length > 0) {
+          this.customerVehicleRegisterStep5UIDTO.vehicleColors = vehicleColorServiceFindAll.body;
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
+
+    try {
+
+      const vehicleFuelTypeServiceFindAll = await firstValueFrom(this.vehicleFuelTypeService.findAll().pipe(first()));
+
+      if (vehicleFuelTypeServiceFindAll.status == 200) {
+        if (vehicleFuelTypeServiceFindAll.body != null && vehicleFuelTypeServiceFindAll.body.length > 0) {
+          this.customerVehicleRegisterStep5UIDTO.vehicleFuelTypes = vehicleFuelTypeServiceFindAll.body;
         }
       }
 

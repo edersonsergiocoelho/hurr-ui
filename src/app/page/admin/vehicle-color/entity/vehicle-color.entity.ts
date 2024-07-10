@@ -1,4 +1,5 @@
-export interface VehicleColor {
+export class VehicleColor {
+  
   vehicleColorId: string;
   vehicleColorName: string;
   createdDate: Date;

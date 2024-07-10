@@ -7,6 +7,7 @@ import { first, firstValueFrom } from 'rxjs';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { NgForm } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
+import { CustomerVehicleFilePhoto } from 'src/app/page/customer-vehicle-file-photo/entity/customer-vehicle-file-photo.entity';
 
 @Component({
   selector: 'app-customer-vehicle-register-step6',
@@ -102,8 +103,10 @@ export class CustomerVehicleRegisterStep6Component implements OnInit {
 
     this.customerVehicleRegisterStep6UIDTO.images = new Array<any>;
     this.customerVehicleRegisterStep6UIDTO.uploadedFiles = new Array<any>;
+    this.customerVehicleRegisterStep6UIDTO.customerVehicleFilePhotos = new Array<CustomerVehicleFilePhoto>;
 
     for (let file of event.files) {
+
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
@@ -116,6 +119,20 @@ export class CustomerVehicleRegisterStep6Component implements OnInit {
         });
 
         this.customerVehicleRegisterStep6UIDTO.uploadedFiles.push(file);
+
+        const arrayBuffer = reader.result as ArrayBuffer;
+        const uint8Array = new Uint8Array(arrayBuffer);
+
+        const base64String = (reader.result as string).split(',')[1];
+
+        const customerVehicleFilePhoto = new CustomerVehicleFilePhoto({
+          contentType: file.type,
+          originalFileName: file.name,
+          dataAsByteArray: base64String
+        });
+
+        this.customerVehicleRegisterStep6UIDTO.customerVehicleFilePhotos.push(customerVehicleFilePhoto);
+
         this.onFormChange(this.customerVehicleRegisterStep6Form);
       };
     }

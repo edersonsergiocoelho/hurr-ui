@@ -23,4 +23,6 @@ export class CustomerVehicleRegisterUIDTO {
   message_ConfirmDialog_CustomerVehicleRegister: string;
   reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister: string;
   reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister: string;
+  save_message_service_Generic: string;
+  save_success_message_service_CustomerVehicleRegister: string;
 }

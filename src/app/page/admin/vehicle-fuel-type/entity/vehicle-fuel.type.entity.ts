@@ -1,4 +1,5 @@
-export interface VehicleFuelType {
+export class VehicleFuelType {
+  
   vehicleFuelTypeId: string;
   vehicleFuelTypeName: string;
   createdDate: Date;

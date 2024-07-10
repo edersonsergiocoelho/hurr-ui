@@ -7,6 +7,14 @@ import { CustomerVehicleService } from '../../service/customer-vehicle.service';
 import { first, firstValueFrom } from 'rxjs';
 import { CustomerVehicle } from '../../entity/customer-vehicle.entity';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { CustomerVehicleRegisterStep1UIDTO } from '../customer-vehicle-register-step1/dto/customer-vehicle-register-step1-ui-dto.dto';
+import { CustomerVehicleRegisterStep2UIDTO } from '../customer-vehicle-register-step2/dto/customer-vehicle-register-step2-ui-dto.dto';
+import { CustomerVehicleRegisterStep3UIDTO } from '../customer-vehicle-register-step3/dto/customer-vehicle-register-step3-ui-dto.dto';
+import { CustomerVehicleRegisterStep4UIDTO } from '../customer-vehicle-register-step4/dto/customer-vehicle-register-step4-ui-dto.dto';
+import { CustomerVehicleRegisterStep5UIDTO } from '../customer-vehicle-register-step5/dto/customer-vehicle-register-step5-ui-dto.dto';
+import { CustomerVehicleRegisterStep6UIDTO } from '../customer-vehicle-register-step6/dto/customer-vehicle-register-step6-ui-dto.dto';
+import { CustomerVehicleRegisterStep7UIDTO } from '../customer-vehicle-register-step7/dto/customer-vehicle-register-step7-ui-dto.dto';
+import { CustomerVehicleSaveDTO } from '../../dto/customer-vehicle-save-dto.dto';
 
 @Component({
   selector: 'app-customer-vehicle-register',
@@ -73,10 +81,10 @@ export class CustomerVehicleRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.translateService.setDefaultLang('pt_BR');
-    this.resetCustomerVehicleRegisterForm();
+    this.resetForm();
   }
 
-  resetCustomerVehicleRegisterForm () {
+  resetForm () {
 
     this.customerVehicleRegisterUIDTO = new CustomerVehicleRegisterUIDTO();
 
@@ -98,6 +106,8 @@ export class CustomerVehicleRegisterComponent implements OnInit {
         'message_ConfirmDialog_CustomerVehicleRegister',
         'reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister',
         'reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister',
+        'save_message_service_Generic',
+        'save_success_message_service_CustomerVehicleRegister'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
@@ -110,6 +120,8 @@ export class CustomerVehicleRegisterComponent implements OnInit {
       this.customerVehicleRegisterUIDTO.message_ConfirmDialog_CustomerVehicleRegister = translations['message_ConfirmDialog_CustomerVehicleRegister'];
       this.customerVehicleRegisterUIDTO.reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister = translations['reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister'];
       this.customerVehicleRegisterUIDTO.reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister = translations['reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister'];
+      this.customerVehicleRegisterUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
+      this.customerVehicleRegisterUIDTO.save_success_message_service_CustomerVehicleRegister = translations['save_success_message_service_CustomerVehicleRegister'];
 
     } catch (error: any) {
 
@@ -170,30 +182,68 @@ export class CustomerVehicleRegisterComponent implements OnInit {
 
     let customerVehicle: CustomerVehicle = new CustomerVehicle();
 
-    this.customerVehicleService.save(customerVehicle).pipe(first()).subscribe({
+    const customerVehicleRegisterStep1UIDTO: CustomerVehicleRegisterStep1UIDTO = JSON.parse(sessionStorage.getItem("customerVehicleRegisterStep1UIDTO") as string);
+    const customerVehicleRegisterStep2UIDTO: CustomerVehicleRegisterStep2UIDTO = JSON.parse(sessionStorage.getItem("customerVehicleRegisterStep2UIDTO") as string);
+    const customerVehicleRegisterStep3UIDTO: CustomerVehicleRegisterStep3UIDTO = JSON.parse(sessionStorage.getItem("customerVehicleRegisterStep3UIDTO") as string);
+    const customerVehicleRegisterStep4UIDTO: CustomerVehicleRegisterStep4UIDTO = JSON.parse(sessionStorage.getItem("customerVehicleRegisterStep4UIDTO") as string);
+    const customerVehicleRegisterStep5UIDTO: CustomerVehicleRegisterStep5UIDTO = JSON.parse(sessionStorage.getItem("customerVehicleRegisterStep5UIDTO") as string);
+    const customerVehicleRegisterStep6UIDTO: CustomerVehicleRegisterStep6UIDTO = JSON.parse(sessionStorage.getItem("customerVehicleRegisterStep6UIDTO") as string);
+    const customerVehicleRegisterStep7UIDTO: CustomerVehicleRegisterStep7UIDTO = JSON.parse(sessionStorage.getItem("customerVehicleRegisterStep7UIDTO") as string);
+
+    // Informações Da Etapa 1
+
+    // Informações Da Etapa 2
+    customerVehicle.vehicle = customerVehicleRegisterStep2UIDTO.selectedVehicle;
+    customerVehicle.vehicleModel = customerVehicleRegisterStep2UIDTO.selectedVehicleModel;
+
+    // Informações Da Etapa 3
+    customerVehicle.vehicleTransmission = customerVehicleRegisterStep3UIDTO.selectedVehicleTransmission;
+    customerVehicle.mileageCreated = customerVehicleRegisterStep3UIDTO.mileageCreated;
+
+    // Informações Da Etapa 4
+    customerVehicle.vehicleValue = customerVehicleRegisterStep4UIDTO.vehicleValue;
+
+    // Informações Da Etapa 5
+    customerVehicle.licensePlate = customerVehicleRegisterStep5UIDTO.licensePlate;
+    customerVehicle.renavam = customerVehicleRegisterStep5UIDTO.renavam;
+    customerVehicle.renavamState = customerVehicleRegisterStep5UIDTO.selectedState;
+    customerVehicle.chassis = customerVehicleRegisterStep5UIDTO.chassis;
+    customerVehicle.yearOfManufacture = new Date(customerVehicleRegisterStep5UIDTO.yearOfManufacture).getFullYear();
+    customerVehicle.yearOfTheCar = new Date(customerVehicleRegisterStep5UIDTO.yearOfTheCar).getFullYear();
+    customerVehicle.description = customerVehicleRegisterStep5UIDTO.description;
+    customerVehicle.vehicleColor = customerVehicleRegisterStep5UIDTO.selectedVehicleColor;
+    customerVehicle.vehicleFuelType = customerVehicleRegisterStep5UIDTO.selectedVehicleFuelType;
+
+    let customerVehicleSaveDTO: CustomerVehicleSaveDTO = new CustomerVehicleSaveDTO();
+    customerVehicleSaveDTO.customerVehicle = customerVehicle;  
+    customerVehicleSaveDTO.customerVehicleFilePhotos = customerVehicleRegisterStep6UIDTO.customerVehicleFilePhotos;
+    customerVehicleSaveDTO.customerVehicleFileInsurances = customerVehicleRegisterStep7UIDTO.customerVehicleFileInsurances;
+
+    this.customerVehicleService.save(customerVehicleSaveDTO).pipe(first()).subscribe({
       next: (data: any) => {
 
-        /*
         this.messageService.add({ 
           severity: 'success', 
           summary: '' + this.customerVehicleRegisterUIDTO.save_message_service_Generic, 
-          detail: '' + this.customerVehicleRegisterUIDTO.save_success_message_service_UserRoleRegister 
+          detail: '' + this.customerVehicleRegisterUIDTO.save_success_message_service_CustomerVehicleRegister 
         });
-        */
 
       },
       error: (error) => {
 
-        this.messageService.add({ 
-          severity: 'error', 
-          summary: '' + this.customerVehicleRegisterUIDTO.error_message_service_Generic, 
-          detail: error.error.message 
-        });
+        if (error.status == 500) {
+
+          this.messageService.add({ 
+            severity: 'error', 
+            summary: '' + this.customerVehicleRegisterUIDTO.error_message_service_Generic, 
+            detail: error.error.message 
+          });
+        }
 
         this.ngxSpinnerService.hide();
       },
       complete: () => {
-        this.resetCustomerVehicleRegisterForm();
+        this.resetForm();
         this.ngxSpinnerService.hide();
       }
     });

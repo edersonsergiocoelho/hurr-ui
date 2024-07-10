@@ -1,5 +1,4 @@
-import { State } from "src/app/page/admin/state/entity/state.entity";
-import { CustomerVehicleRegisterStep1UIDTO } from "../../customer-vehicle-register-step1/dto/customer-vehicle-register-step1-ui-dto.dto";
+import { CustomerVehicleFileInsurance } from "src/app/page/customer-vehicle-file-insurance/entity/customer-vehicle-file-insurance.entity";
 
 export class CustomerVehicleRegisterStep7UIDTO {
 
@@ -34,18 +33,7 @@ export class CustomerVehicleRegisterStep7UIDTO {
       }
   ];
 
-  customerVehicleRegisterStep1UIDTO: CustomerVehicleRegisterStep1UIDTO;
-
-  licensePlate: string;
-  licensePlateType: string = "oldModel";
-  licensePlateMask: string = 'aaa-9999';
-  renavam: string;
-  states: Array<State> 
-  selectedState: State;
-  chassis: string;
-  yearOfManufacture: Date;
-  yearOfTheCar: Date;
-  description: string;
+  customerVehicleFileInsurances: Array<CustomerVehicleFileInsurance>;
 
   // Messages
   error_message_service_Generic: string;

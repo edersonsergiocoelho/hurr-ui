@@ -1,5 +1,7 @@
 import { State } from "src/app/page/admin/state/entity/state.entity";
 import { CustomerVehicleRegisterStep1UIDTO } from "../../customer-vehicle-register-step1/dto/customer-vehicle-register-step1-ui-dto.dto";
+import { VehicleColor } from "src/app/page/admin/vehicle-color/entity/vehicle-color.entity";
+import { VehicleFuelType } from "src/app/page/admin/vehicle-fuel-type/entity/vehicle-fuel.type.entity";
 
 export class CustomerVehicleRegisterStep5UIDTO {
 
@@ -17,6 +19,10 @@ export class CustomerVehicleRegisterStep5UIDTO {
   yearOfManufacture: Date;
   yearOfTheCar: Date;
   description: string;
+  vehicleColors: Array<VehicleColor>;
+  selectedVehicleColor: VehicleColor;
+  vehicleFuelTypes: Array<VehicleFuelType>;
+  selectedVehicleFuelType: VehicleFuelType;
 
   // Messages
   error_message_service_Generic: string;

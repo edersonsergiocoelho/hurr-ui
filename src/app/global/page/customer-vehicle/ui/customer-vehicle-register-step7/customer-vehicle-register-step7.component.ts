@@ -7,6 +7,8 @@ import { first, firstValueFrom } from 'rxjs';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { NgForm } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
+import { CustomerVehicleFilePhoto } from 'src/app/page/customer-vehicle-file-photo/entity/customer-vehicle-file-photo.entity';
+import { CustomerVehicleFileInsurance } from 'src/app/page/customer-vehicle-file-insurance/entity/customer-vehicle-file-insurance.entity';
 
 @Component({
   selector: 'app-customer-vehicle-register-step7',
@@ -104,12 +106,14 @@ export class CustomerVehicleRegisterStep7Component implements OnInit {
 
     this.customerVehicleRegisterStep7UIDTO.documents = new Array<any>;
     this.customerVehicleRegisterStep7UIDTO.uploadedFiles = new Array<any>;
+    this.customerVehicleRegisterStep7UIDTO.customerVehicleFileInsurances = new Array<CustomerVehicleFileInsurance>;
 
     for (let file of event.files) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
       reader.onload = () => {
+
         this.customerVehicleRegisterStep7UIDTO.documents.push({
           itemImageSrc: reader.result as string,
           thumbnailImageSrc: reader.result as string,
@@ -118,6 +122,19 @@ export class CustomerVehicleRegisterStep7Component implements OnInit {
         });
 
         this.customerVehicleRegisterStep7UIDTO.uploadedFiles.push(file);
+
+        const arrayBuffer = reader.result as ArrayBuffer;
+        const uint8Array = new Uint8Array(arrayBuffer);
+
+        const base64String = (reader.result as string).split(',')[1];
+
+        const customerVehicleFileInsurance = new CustomerVehicleFileInsurance({
+          contentType: file.type,
+          originalFileName: file.name,
+          dataAsByteArray: base64String
+        });
+
+        this.customerVehicleRegisterStep7UIDTO.customerVehicleFileInsurances.push(customerVehicleFileInsurance);
         this.onFormChange(this.customerVehicleRegisterStep7Form);
       };
     }

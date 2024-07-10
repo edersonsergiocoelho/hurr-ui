@@ -9,6 +9,7 @@ import { first } from 'rxjs';
 import { CustomerVehicle } from '../../entity/customer-vehicle.entity';
 import { CustomerVehicleSearchDTO } from '../../dto/customer-vehicle-search-dto.dto';
 import { Router } from '@angular/router';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
 
 @Component({
   selector: 'app-customer-vehicle-search',
@@ -84,7 +85,12 @@ export class CustomerVehicleSearchComponent implements OnInit {
       error: (error) => {
 
         if (error.status == 500) {
-          this.messageService.add({ severity: 'error', summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+
+          this.messageService.add({ 
+            severity: SeverityConstants.ERROR, 
+            summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic, 
+            detail: error.error.message 
+          });
         }
 
         this.ngxSpinnerService.hide();

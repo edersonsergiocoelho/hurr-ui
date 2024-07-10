@@ -14,5 +14,9 @@
   "label_year_of_the_car_CustomerVehicleRegisterStep5": "Ano Do Carro",
   "placeholder_year_of_the_car_CustomerVehicleRegisterStep5": "Informe O Ano Do Carro",
   "label_description_CustomerVehicleRegisterStep5": "Descrição",
-  "placeholder_description_CustomerVehicleRegisterStep5": "Informe A Descrição"
+  "placeholder_description_CustomerVehicleRegisterStep5": "Informe A Descrição",
+  "label_vehicle_color_CustomerVehicleRegisterStep5": "Cor",
+  "placeholder_vehicle_color_CustomerVehicleRegisterStep5": "Informe A Cor Do Veículo",
+  "label_vehicle_fuel_type_CustomerVehicleRegisterStep5": "Combustível",
+  "placeholder_vehicle_fuel_type_CustomerVehicleRegisterStep5": "Informe O Combustível Do Veículo"
 }
