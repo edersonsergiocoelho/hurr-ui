@@ -4,6 +4,8 @@ import { State } from "src/app/page/admin/state/entity/state.entity";
 
 export class CustomerVehicleRegisterStep1UIDTO {
 
+  isFormValid: boolean = false;
+
   countries: Array<Country>;
   selectedCountry: Country;
 
@@ -12,6 +14,12 @@ export class CustomerVehicleRegisterStep1UIDTO {
 
   cities: Array<City>;
   selectedCity: City;
+
+  nickname: string;
+  streetAddress: string;
+  number: number;
+  complement: string;
+  zipCode: string;
 
   // Messages
   error_message_service_Generic: string;

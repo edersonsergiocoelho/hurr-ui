@@ -1,4 +1,4 @@
-export class CustomerVehicleFilePhoto {
+export class CustomerVehicleFilePhotoSearchDTO {
   
   /**
    * Identificador único da foto do veículo do cliente.
@@ -23,12 +23,7 @@ export class CustomerVehicleFilePhoto {
   /**
    * Dados do arquivo em formato de array de bytes.
    */
-  dataAsByteArray: string;
-
-  /**
-   *   Indica se a foto é a foto de capa do veículo do cliente
-   */
-  coverPhoto: boolean;
+  dataAsByteArray: Uint8Array;
 
   /**
    * Data de criação do registro.
@@ -45,7 +40,7 @@ export class CustomerVehicleFilePhoto {
    */
   enabled: boolean;
 
-  constructor(init?: Partial<CustomerVehicleFilePhoto>) {
+  constructor(init?: Partial<CustomerVehicleFilePhotoSearchDTO>) {
     Object.assign(this, init);
   }
 }

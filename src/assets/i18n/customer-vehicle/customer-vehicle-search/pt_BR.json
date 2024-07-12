@@ -1,7 +1,7 @@
 {
   "title_my_booking_CustomerVehicleSearch": "Meus Carros",
   "subtitle_my_booking_CustomerVehicleSearch": "Verifique Aqui Os Meus Carros Cadastrados.",
-  "booking_CustomerVehicleSearch": "Número Do Carro",
+  "code_CustomerVehicleSearch": "Código Do Carro",
   "created_date_CustomerVehicleSearch": "Data De Cadastro",
   "total_daily_rate_CustomerVehicleSearch": "Preço Diário",
   "placeholder_created_date_CustomerVehicleSearch": "Ordernar Por Data De Cadastro",

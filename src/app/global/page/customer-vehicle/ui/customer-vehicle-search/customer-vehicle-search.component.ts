@@ -5,11 +5,12 @@ import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TranslateService } from '@ngx-translate/core';
 import { CustomerVehicleService } from '../../service/customer-vehicle.service';
-import { first } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
 import { CustomerVehicle } from '../../entity/customer-vehicle.entity';
 import { CustomerVehicleSearchDTO } from '../../dto/customer-vehicle-search-dto.dto';
 import { Router } from '@angular/router';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
 
 @Component({
   selector: 'app-customer-vehicle-search',
@@ -22,6 +23,7 @@ export class CustomerVehicleSearchComponent implements OnInit {
 
   constructor (
     private customerVehicleService: CustomerVehicleService,
+    private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
     private router: Router,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
@@ -81,6 +83,10 @@ export class CustomerVehicleSearchComponent implements OnInit {
       next: (data: any) => {
         this.customerVehicleSearchUIDTO.customerVehicles = data.body.content;
         this.customerVehicleSearchUIDTO.totalRecords = data.body.totalElements;
+
+        this.customerVehicleSearchUIDTO.customerVehicles.forEach(vehicle => {
+          this.getFile(vehicle);
+        });
       },
       error: (error) => {
 
@@ -99,6 +105,28 @@ export class CustomerVehicleSearchComponent implements OnInit {
         this.ngxSpinnerService.hide();
       }
     });
+  }
+
+  async getFile (customerVehicle: any) {
+
+    try {
+
+      const customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto = await firstValueFrom(this.customerVehicleFilePhotoService.findByCustomerVehicleAndCoverPhoto(customerVehicle.customerVehicleId).pipe(first()));
+        
+      if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status == 200) {
+        if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
+          
+          customerVehicle.file = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
+          customerVehicle.dataURI = `data:${customerVehicle.file.contentType};base64,${customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body.dataAsByteArray}`;
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
+    }
   }
 
   paginate(event: any) {

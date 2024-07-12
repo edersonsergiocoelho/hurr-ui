@@ -120,9 +120,6 @@ export class CustomerVehicleRegisterStep6Component implements OnInit {
 
         this.customerVehicleRegisterStep6UIDTO.uploadedFiles.push(file);
 
-        const arrayBuffer = reader.result as ArrayBuffer;
-        const uint8Array = new Uint8Array(arrayBuffer);
-
         const base64String = (reader.result as string).split(',')[1];
 
         const customerVehicleFilePhoto = new CustomerVehicleFilePhoto({
@@ -146,4 +143,26 @@ export class CustomerVehicleRegisterStep6Component implements OnInit {
   clearFileUpload(): void {
     this.customerVehicleRegisterStep6UIDTO.uploadedFiles = [];
   }
+
+  onClickSelectedCoverImage(image: any) {
+    // Iterar por todas as fotos e definir coverPhoto como false
+    for (let photo of this.customerVehicleRegisterStep6UIDTO.customerVehicleFilePhotos) {
+        photo.coverPhoto = false;
+    }
+
+    // Encontrar a imagem selecionada e definir coverPhoto como true
+    const selectedPhoto = this.customerVehicleRegisterStep6UIDTO.customerVehicleFilePhotos.find(photo => 
+        photo.originalFileName === image.title && photo.dataAsByteArray === (image.itemImageSrc.split(',')[1])
+    );
+
+    if (selectedPhoto) {
+        selectedPhoto.coverPhoto = true;
+    }
+
+    // Atualizar a imagem de capa selecionada
+    this.customerVehicleRegisterStep6UIDTO.selectedCoverImage = image;
+
+    // Chamar onFormChange para refletir as mudanças no formulário
+    this.onFormChange(this.customerVehicleRegisterStep6Form);
+}
 }

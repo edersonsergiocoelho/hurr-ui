@@ -15,6 +15,8 @@ import { CustomerVehicleRegisterStep5UIDTO } from '../customer-vehicle-register-
 import { CustomerVehicleRegisterStep6UIDTO } from '../customer-vehicle-register-step6/dto/customer-vehicle-register-step6-ui-dto.dto';
 import { CustomerVehicleRegisterStep7UIDTO } from '../customer-vehicle-register-step7/dto/customer-vehicle-register-step7-ui-dto.dto';
 import { CustomerVehicleSaveDTO } from '../../dto/customer-vehicle-save-dto.dto';
+import { Address } from '../../../address/entity/address.entity';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-vehicle-register',
@@ -72,6 +74,7 @@ export class CustomerVehicleRegisterComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private confirmationService: ConfirmationService,
     private customerVehicleService: CustomerVehicleService,
+    private router: Router,
     private ngxSpinnerService: NgxSpinnerService,
     private translateService: TranslateService,
     private messageService: MessageService
@@ -180,6 +183,7 @@ export class CustomerVehicleRegisterComponent implements OnInit {
 
     this.ngxSpinnerService.show();
 
+    let address: Address = new Address();
     let customerVehicle: CustomerVehicle = new CustomerVehicle();
 
     const customerVehicleRegisterStep1UIDTO: CustomerVehicleRegisterStep1UIDTO = JSON.parse(sessionStorage.getItem("customerVehicleRegisterStep1UIDTO") as string);
@@ -191,6 +195,14 @@ export class CustomerVehicleRegisterComponent implements OnInit {
     const customerVehicleRegisterStep7UIDTO: CustomerVehicleRegisterStep7UIDTO = JSON.parse(sessionStorage.getItem("customerVehicleRegisterStep7UIDTO") as string);
 
     // Informações Da Etapa 1
+    address.country = customerVehicleRegisterStep1UIDTO.selectedCountry;
+    address.state = customerVehicleRegisterStep1UIDTO.selectedState;
+    address.city = customerVehicleRegisterStep1UIDTO.selectedCity;
+    address.nickname = customerVehicleRegisterStep1UIDTO.nickname;
+    address.streetAddress = customerVehicleRegisterStep1UIDTO.streetAddress;
+    address.number = customerVehicleRegisterStep1UIDTO.number;
+    address.complement = customerVehicleRegisterStep1UIDTO.complement;
+    address.zipCode = customerVehicleRegisterStep1UIDTO.zipCode;
 
     // Informações Da Etapa 2
     customerVehicle.vehicle = customerVehicleRegisterStep2UIDTO.selectedVehicle;
@@ -215,18 +227,24 @@ export class CustomerVehicleRegisterComponent implements OnInit {
     customerVehicle.vehicleFuelType = customerVehicleRegisterStep5UIDTO.selectedVehicleFuelType;
 
     let customerVehicleSaveDTO: CustomerVehicleSaveDTO = new CustomerVehicleSaveDTO();
-    customerVehicleSaveDTO.customerVehicle = customerVehicle;  
+    customerVehicleSaveDTO.customerVehicle = customerVehicle;
+    customerVehicleSaveDTO.address = address;
     customerVehicleSaveDTO.customerVehicleFilePhotos = customerVehicleRegisterStep6UIDTO.customerVehicleFilePhotos;
     customerVehicleSaveDTO.customerVehicleFileInsurances = customerVehicleRegisterStep7UIDTO.customerVehicleFileInsurances;
 
     this.customerVehicleService.save(customerVehicleSaveDTO).pipe(first()).subscribe({
       next: (data: any) => {
 
-        this.messageService.add({ 
-          severity: 'success', 
-          summary: '' + this.customerVehicleRegisterUIDTO.save_message_service_Generic, 
-          detail: '' + this.customerVehicleRegisterUIDTO.save_success_message_service_CustomerVehicleRegister 
-        });
+        if (data.status == 201) {
+
+          this.messageService.add({ 
+            severity: 'success', 
+            summary: '' + this.customerVehicleRegisterUIDTO.save_message_service_Generic, 
+            detail: '' + this.customerVehicleRegisterUIDTO.save_success_message_service_CustomerVehicleRegister 
+          });
+
+          this.navigateToCustomerVehicleSearch();
+        }
 
       },
       error: (error) => {
@@ -272,5 +290,9 @@ export class CustomerVehicleRegisterComponent implements OnInit {
         });
       }
     });
+  }
+
+  navigateToCustomerVehicleSearch() {
+    this.router.navigate(['/customer-vehicle/']);
   }
 }

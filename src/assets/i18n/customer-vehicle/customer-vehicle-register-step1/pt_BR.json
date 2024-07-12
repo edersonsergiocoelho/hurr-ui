@@ -2,6 +2,20 @@
   "title_CustomerVehicleRegisterStep1": "Etapa 1 - Verifique Se O Serviço Está Disponível Na Sua Região",
   "label_country_CustomerVehicleRegisterStep1": "País",
   "placeholder_country_CustomerVehicleRegisterStep1": "Informe O País",
+  "label_state_CustomerVehicleRegisterStep1": "Estado",
+  "placeholder_state_CustomerVehicleRegisterStep1": "Informe O Estado",
+  "label_city_CustomerVehicleRegisterStep1": "Cidade",
+  "placeholder_city_CustomerVehicleRegisterStep1": "Informe A Cidade",
+  "label_nickname_CustomerVehicleRegisterStep1": "Apelido",
+  "placeholder_nickname_CustomerVehicleRegisterStep1": "Informe O Apelido Por Ex. Cartão Santander",
+  "label_street_address_CustomerVehicleRegisterStep1": "Rua",
+  "placeholder_street_address_CustomerVehicleRegisterStep1": "Informe A Rua, Avenida, Etc.",
+  "label_number_CustomerVehicleRegisterStep1": "Número",
+  "placeholder_number_CustomerVehicleRegisterStep1": "Informe O Número Da Rua, Avenida, Etc.",
+  "label_complement_CustomerVehicleRegisterStep1": "Complemento",
+  "placeholder_complement_CustomerVehicleRegisterStep1": "Informe Complemento Por Ex. Apartamento 1, Bloco 1",
+  "label_zip_code_CustomerVehicleRegisterStep1": "CEP",
+  "placeholder_zip_code_CustomerVehicleRegisterStep1": "Informe O Número Do CEP, Ex: 17.340-000",
 
   "city_service_not_available_message_service_CustomerVehicleRegisterStep1": "O Serviço Ainda Não Está Disponível Na Sua Região, Estamos Trabalhando Para Ampliar Os Serviços."
 }

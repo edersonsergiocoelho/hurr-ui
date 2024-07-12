@@ -1,38 +1,80 @@
-<form #customerVehicleRegisterStep1Form="ngForm">
+<form #customerVehicleRegisterStep1Form="ngForm" (change)="onFormChange(customerVehicleRegisterStep1Form)">
 
   <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerVehicleRegisterStep1' | translate}}</h3>
 
   <div class="p-fluid p-formgrid grid">
 
     <div class="col-6 md:col-6 field">
-      <label for="country" class="font-medium text-2xl">{{'label_country_AddressRegisterDynamicDialog' | translate}}</label>
+      <label for="country" class="font-medium text-2xl">{{'label_country_CustomerVehicleRegisterStep1' | translate}}</label>
       <p-dropdown class="p-inputtext-lg" 
         [options]="customerVehicleRegisterStep1UIDTO.countries" 
         [(ngModel)]="customerVehicleRegisterStep1UIDTO.selectedCountry" optionLabel="countryName" 
         name="country" [showClear]="true"
-        placeholder="{{'placeholder_country_AddressRegisterDynamicDialog' | translate}}" (onChange)="changeCountry($event.value)">
+        placeholder="{{'placeholder_country_CustomerVehicleRegisterStep1' | translate}}" (onChange)="changeCountry($event.value)"
+        [required]="true">
       </p-dropdown>
     </div>
 
     <div class="col-6 md:col-6 field">
-      <label for="state" class="font-medium text-2xl">{{'label_state_AddressRegisterDynamicDialog' | translate}}</label>
+      <label for="state" class="font-medium text-2xl">{{'label_state_CustomerVehicleRegisterStep1' | translate}}</label>
       <p-dropdown class="p-inputtext-lg" 
         [options]="customerVehicleRegisterStep1UIDTO.states" 
         [(ngModel)]="customerVehicleRegisterStep1UIDTO.selectedState" optionLabel="stateName" 
         name="state" [showClear]="true"
-        placeholder="{{'placeholder_state_AddressRegisterDynamicDialog' | translate}}" (onChange)="changeState($event.value)">
+        placeholder="{{'placeholder_state_CustomerVehicleRegisterStep1' | translate}}" (onChange)="changeState($event.value)"
+        [required]="true">
       </p-dropdown>
     </div>
 
     <div class="col-6 md:col-6 field">
-      <label for="city" class="font-medium text-2xl">{{'label_city_AddressRegisterDynamicDialog' | translate}}</label>
+      <label for="city" class="font-medium text-2xl">{{'label_city_CustomerVehicleRegisterStep1' | translate}}</label>
       <p-dropdown class="p-inputtext-lg" 
         [options]="customerVehicleRegisterStep1UIDTO.cities" 
         [(ngModel)]="customerVehicleRegisterStep1UIDTO.selectedCity" optionLabel="cityName" 
         name="city" [showClear]="true"
-        placeholder="{{'placeholder_city_AddressRegisterDynamicDialog' | translate}}" (onChange)="changeCity($event.value)">
+        placeholder="{{'placeholder_city_CustomerVehicleRegisterStep1' | translate}}" (onChange)="changeCity($event.value)"
+        [required]="true">
       </p-dropdown>
     </div>
+
+    <div class="col-6 md:col-6 field"></div>
+
+    <ng-container *ngIf="customerVehicleRegisterStep1UIDTO.selectedCity?.serviceAvailable">
+      <div class="col-6 md:col-6 field">
+        <label for="nickname" class="font-medium text-2xl">{{'label_nickname_CustomerVehicleRegisterStep1' | translate}}</label>
+        <input pInputText type="text" class="p-inputtext-lg"
+          placeholder="{{'placeholder_nickname_CustomerVehicleRegisterStep1' | translate}}"
+          [(ngModel)]="customerVehicleRegisterStep1UIDTO.nickname" name="nickname" autocomplete="off" required="true" />
+      </div>
+
+      <div class="col-6 md:col-6 field">
+        <label for="streetAddress" class="font-medium text-2xl">{{'label_street_address_CustomerVehicleRegisterStep1' | translate}}</label>
+        <input pInputText type="text" class="p-inputtext-lg"
+          placeholder="{{'placeholder_street_address_CustomerVehicleRegisterStep1' | translate}}"
+          [(ngModel)]="customerVehicleRegisterStep1UIDTO.streetAddress" name="streetAddress" autocomplete="off" required="true" />
+      </div>
+
+      <div class="col-6 md:col-6 field">
+        <label for="number" class="font-medium text-2xl">{{'label_number_CustomerVehicleRegisterStep1' | translate}}</label>
+        <input pInputText type="text" class="p-inputtext-lg"
+          placeholder="{{'placeholder_number_CustomerVehicleRegisterStep1' | translate}}"
+          [(ngModel)]="customerVehicleRegisterStep1UIDTO.number" name="number" autocomplete="off" required="true" />
+      </div>
+
+      <div class="col-6 md:col-6 field">
+        <label for="complement" class="font-medium text-2xl">{{'label_complement_CustomerVehicleRegisterStep1' | translate}}</label>
+        <input pInputText type="text" class="p-inputtext-lg"
+          placeholder="{{'placeholder_complement_CustomerVehicleRegisterStep1' | translate}}"
+          [(ngModel)]="customerVehicleRegisterStep1UIDTO.complement" name="complement" autocomplete="off" />
+      </div>
+
+      <div class="col-6 md:col-6 field">
+        <label for="zipCode" class="font-medium text-2xl">{{'label_zip_code_CustomerVehicleRegisterStep1' | translate}}</label>
+        <p-inputMask class="p-inputtext-lg" mask="99.999-999"
+          placeholder="{{'placeholder_zip_code_CustomerVehicleRegisterStep1' | translate}}"
+          [(ngModel)]="customerVehicleRegisterStep1UIDTO.zipCode" name="zipCode" autocomplete="off" [required]="true" />
+      </div>
+    </ng-container>
 
   </div>
 

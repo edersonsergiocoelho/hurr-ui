@@ -123,9 +123,6 @@ export class CustomerVehicleRegisterStep7Component implements OnInit {
 
         this.customerVehicleRegisterStep7UIDTO.uploadedFiles.push(file);
 
-        const arrayBuffer = reader.result as ArrayBuffer;
-        const uint8Array = new Uint8Array(arrayBuffer);
-
         const base64String = (reader.result as string).split(',')[1];
 
         const customerVehicleFileInsurance = new CustomerVehicleFileInsurance({

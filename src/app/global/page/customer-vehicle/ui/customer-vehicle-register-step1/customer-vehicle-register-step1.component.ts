@@ -11,7 +11,7 @@ import { State } from 'src/app/page/admin/state/entity/state.entity';
 import { StateService } from 'src/app/page/admin/state/service/state.service';
 import { CityService } from 'src/app/page/admin/city/service/city.service';
 import { City } from 'src/app/page/admin/city/entity/city.entity';
-import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-customer-vehicle-register-step1',
@@ -112,6 +112,16 @@ export class CustomerVehicleRegisterStep1Component implements OnInit {
     this.ngxSpinnerService.hide();
   }
 
+  onFormChange(ngForm: NgForm): void {
+    if (ngForm) {
+      this.customerVehicleRegisterStep1UIDTO.isFormValid = ngForm.valid ?? false;
+      this.validateStep1.emit(this.customerVehicleRegisterStep1UIDTO.isFormValid);
+      if (this.customerVehicleRegisterStep1UIDTO.isFormValid) {
+        sessionStorage.setItem("customerVehicleRegisterStep1UIDTO", JSON.stringify(this.customerVehicleRegisterStep1UIDTO));
+      }
+    }
+  }
+
   async changeCountry(country: Country) {
 
     this.ngxSpinnerService.show();
@@ -182,9 +192,5 @@ export class CustomerVehicleRegisterStep1Component implements OnInit {
         detail: '' + this.customerVehicleRegisterStep1UIDTO.city_service_not_available_message_service_CustomerVehicleRegisterStep1
       });
     }
-
-    sessionStorage.setItem("customerVehicleRegisterStep1UIDTO", JSON.stringify(this.customerVehicleRegisterStep1UIDTO));
-
-    this.validateStep1.emit(city.serviceAvailable);
   }
 }
