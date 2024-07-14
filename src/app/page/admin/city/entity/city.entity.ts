@@ -5,6 +5,7 @@ export interface City {
 
   cityId: string;
   cityName: string;
+  serviceAvailable: boolean;
   createdDate: Date;
   modifiedDate: Date;
   enabled: boolean;

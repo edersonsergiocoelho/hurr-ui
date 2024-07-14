@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { CustomerVehicle } from '../entity/customer-vehicle.entity';
 import { environment } from 'src/environments/environment';
 import { CustomerVehicleSearchDTO } from '../dto/customer-vehicle-search-dto.dto';
+import { CustomerVehicleSaveDTO } from '../dto/customer-vehicle-save-dto.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -54,8 +55,8 @@ export class CustomerVehicleService {
     return this.httpClient.post<any>(url, customerVehicleSearchDTO, { params, observe: 'response' });
   }
 
-  save(customerVehicle: CustomerVehicle): Observable<HttpResponse<CustomerVehicle>> {
-    return this.httpClient.post<CustomerVehicle>(this.apiUrl, customerVehicle, { observe: 'response' }).pipe(
+  save(customerVehicleSaveDTO: CustomerVehicleSaveDTO): Observable<HttpResponse<CustomerVehicle>> {
+    return this.httpClient.post<CustomerVehicle>(this.apiUrl, customerVehicleSaveDTO, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicle>) => {
         return response;
       })

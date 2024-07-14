@@ -1,0 +1,33 @@
+<form #customerVehicleRegisterStep1Form="ngForm">
+
+  <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerVehicleRegisterStep3' | translate}}</h3>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-6 md:col-6 field">
+      <label for="vehicleTransmission" class="font-medium text-2xl">{{'label_vehicle_transmission_CustomerVehicleRegisterStep3' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleRegisterStep3UIDTO.VehicleTransmissions" 
+        [(ngModel)]="customerVehicleRegisterStep3UIDTO.selectedVehicleTransmission" 
+        optionLabel="vehicleTransmissionName" 
+        name="vehicleTransmission" 
+        [showClear]="true"
+        [filter]="true"
+        filterBy="vehicleTransmissionName"
+        placeholder="{{'placeholder_vehicle_transmission_CustomerVehicleRegisterStep3' | translate}}"
+        (onChange)="onChangeVehicleTransmission($event.value)">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="mileageCreated" class="font-medium text-2xl">{{'label_mileage_created_CustomerVehicleRegisterStep3' | translate}}</label>
+      <p-inputNumber type="number" class="p-inputtext-lg"
+        placeholder="{{'placeholder_mileage_created_CustomerVehicleRegisterStep3' | translate}}"
+        [(ngModel)]="customerVehicleRegisterStep3UIDTO.mileageCreated" name="mileageCreated" autocomplete="off" 
+        mode="decimal" 
+        (ngModelChange)="ngModelChangeMileageCreated()"/>
+    </div>
+
+  </div>
+
+</form>

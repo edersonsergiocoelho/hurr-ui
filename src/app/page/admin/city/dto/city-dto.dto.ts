@@ -4,6 +4,7 @@ export class CityDTO {
 
   cityId: string;
   cityName: string;
+  serviceAvailable: boolean;
   createdDate: Date;
   modifiedDate: Date;
   enabled: boolean;

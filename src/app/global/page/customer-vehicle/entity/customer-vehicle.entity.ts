@@ -5,8 +5,9 @@ import { VehicleColor } from "src/app/page/admin/vehicle-color/entity/vehicle-co
 import { VehicleFuelType } from "src/app/page/admin/vehicle-fuel-type/entity/vehicle-fuel.type.entity";
 import { VehicleTransmission } from "src/app/page/admin/vehicle-transmission/entity/vehicle-transmission.entity";
 import { CustomerVehicleAddress } from "../../customer-vehicle-address/entity/customer-vehicle-address.entity";
+import { State } from "src/app/page/admin/state/entity/state.entity";
 
-export interface CustomerVehicle {
+export class CustomerVehicle {
   
   customerVehicleId: string;
   customer: Customer;
@@ -19,9 +20,12 @@ export interface CustomerVehicle {
   description: string;
   licensePlate: string;
   renavam: string;
+  renavamState: State;
   chassis: string;
   yearOfManufacture: number;
   yearOfTheCar: number;
+  vehicleValue: number;
+  mileageCreated: number;
   dailyRate: number;
   cleaningFee: number;
   unlimitedMileage: boolean;
@@ -32,6 +36,8 @@ export interface CustomerVehicle {
   mileageFeeDelivery: number;
   pickUpAtAddress: boolean;
   mileageFeePickUp: number;
+  code: string;
+  customerVehicleValidated: boolean;
   createdDate: string;
   modifiedDate?: string;
   enabled: boolean;

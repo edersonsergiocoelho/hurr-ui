@@ -1,0 +1,19 @@
+/* Estilos para a borda estilizada */
+.bordered-card {
+  border: 1px solid #ddd; /* Cor da borda */
+  border-radius: 8px; /* Raio da borda para um visual mais arredondado */
+  padding: 20px; /* Espaçamento interno */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para efeito de elevação */
+}
+
+.border-blue-500 {
+  border-color: blue;
+}
+
+.border-transparent {
+  border-color: transparent;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}

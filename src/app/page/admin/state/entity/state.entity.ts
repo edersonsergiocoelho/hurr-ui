@@ -4,6 +4,7 @@ export interface State {
 
   stateId: string;
   stateName: string;
+  serviceAvailable: boolean;
   createdDate: Date;
   modifiedDate: Date;
   enabled: boolean;

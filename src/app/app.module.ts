@@ -21,7 +21,6 @@ import { GlobalTemplateModule } from './global/template/module/global-template.m
 import { PageModule } from './page/module/page.module';
 import { PageAdminModule } from './page/admin/module/page-admin.module';
 import { PageCustomModule } from './page-custom/module/page-custom.module';
-import { BooleanPipe } from './utils/pipe/boolean-pipe';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
@@ -35,8 +34,19 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/address/',
   '/assets/i18n/checkout/',
   '/assets/i18n/customer-validation/',
-  '/assets/i18n/customer-vehicle/',
   
+  // CustomerVehicle
+  '/assets/i18n/customer-vehicle/customer-vehicle-detail/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register-step1/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register-step2/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register-step3/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register-step4/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register-step5/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register-step6/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-register-step7/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-search/',
+
   // CustomerVehicleBooking
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-search/',
