@@ -19,8 +19,7 @@
     [paginator]="true"
     [totalRecords]="customerVehicleSearchUIDTO.totalRecords" 
     [lazy]="true" 
-    (onLazyLoad)="search($event)"
-    (onPage)="paginate($event)">
+    (onLazyLoad)="search($event)">
 
     <ng-template pTemplate="header">
       <div class="flex flex-column md:flex-row md:justify-content-between">
@@ -98,7 +97,7 @@
             <div class="flex flex-column lg:flex-row justify-content-center align-items-center px-2">
 
               <img
-              [src]="item.dataURI" alt="Image Car"
+                [src]="item.dataURI" alt="Image Car"
                 class="w-22rem h-14rem mr-3 flex-shrink-0">
 
               <div class="flex flex-column my-auto text-center md:text-left">

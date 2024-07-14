@@ -12,10 +12,12 @@
   </div>
 
   <p-dataView [value]="customerVehicleBookingSearchUIDTO.customerVehicleBookings"
-    [sortField]="customerVehicleBookingSearchUIDTO.sortField" [sortOrder]="customerVehicleBookingSearchUIDTO.sortOrder"
+    [sortField]="customerVehicleBookingSearchUIDTO.sortField" 
+    [sortOrder]="customerVehicleBookingSearchUIDTO.sortOrder"
     [rows]="3" [showCurrentPageReport]="true" 
     [paginator]="true"
-    [totalRecords]="customerVehicleBookingSearchUIDTO.totalRecords" [lazy]="true" 
+    [totalRecords]="customerVehicleBookingSearchUIDTO.totalRecords" 
+    [lazy]="true" 
     (onLazyLoad)="search($event)"
     (onPage)="paginate($event)">
 

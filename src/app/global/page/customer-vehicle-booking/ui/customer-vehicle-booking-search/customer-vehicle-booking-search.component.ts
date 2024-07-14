@@ -152,7 +152,7 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     });
   }
 
-  paginate(event: any) {
+  async paginate(event: any) {
     this.customerVehicleBookingSearchUIDTO.size = event.rows;
     this.customerVehicleBookingSearchUIDTO.page = event.first / event.rows;
   }

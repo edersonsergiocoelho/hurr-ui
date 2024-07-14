@@ -51,6 +51,35 @@ export class CustomerVehicleSearchComponent implements OnInit {
 
     this.ngxSpinnerService.show();
 
+    try {
+
+      const keys = [
+        'error_message_service_Generic',
+        'label_created_date_option_1_CustomerVehicleSearch',
+        'label_created_date_option_2_CustomerVehicleSearch'
+      ];
+
+      const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
+
+      this.customerVehicleSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.customerVehicleSearchUIDTO.label_created_date_option_1_CustomerVehicleSearch = translations['label_created_date_option_1_CustomerVehicleSearch'];
+      this.customerVehicleSearchUIDTO.label_created_date_option_2_CustomerVehicleSearch = translations['label_created_date_option_2_CustomerVehicleSearch'];
+
+    } catch (error: any) {
+      this.messageService.add({
+        severity: 'error',
+        summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic,
+        detail: error.toString()
+      });
+    }
+    
+    this.customerVehicleSearchUIDTO.sortOptions = [
+      { label: '' + this.customerVehicleSearchUIDTO.label_created_date_option_1_CustomerVehicleSearch, value: '!createdDate' },
+      { label: '' + this.customerVehicleSearchUIDTO.label_created_date_option_2_CustomerVehicleSearch, value: 'createdDate' }
+    ];
+
+    this.customerVehicleSearchUIDTO.sortField = this.customerVehicleSearchUIDTO.sortOptions[1].value;
+
     this.ngxSpinnerService.hide();
   }
 
@@ -66,7 +95,9 @@ export class CustomerVehicleSearchComponent implements OnInit {
     }
   }
 
-  search(event: DataViewLazyLoadEvent | null) {
+  async search(event: DataViewLazyLoadEvent | null) {
+
+    this.paginate(event);
 
     if (event && event.sortField) {
       this.customerVehicleSearchUIDTO.sortBy = event.sortField;
@@ -124,12 +155,17 @@ export class CustomerVehicleSearchComponent implements OnInit {
     } catch (error: any) {
 
       if (error.status == 500) {
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic,
+          detail: error.toString() 
+        });
       }
     }
   }
 
-  paginate(event: any) {
+  async paginate(event: any) {
     this.customerVehicleSearchUIDTO.size = event.rows;
     this.customerVehicleSearchUIDTO.page = event.first / event.rows;
   }
