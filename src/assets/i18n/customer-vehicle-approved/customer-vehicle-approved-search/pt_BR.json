@@ -1,0 +1,19 @@
+{
+  "title_CustomerVehicleApprovedSearch": "Pesquisa De Customer Vehicle Approved",
+  "label_file_table_CustomerVehicleApprovedSearch": "File Table",
+  "placeholder_file_table_CustomerVehicleApprovedSearch": "Informe O File Table",
+  "label_file_type_CustomerVehicleApprovedSearch": "File Type",
+  "placeholder_file_type_CustomerVehicleApprovedSearch": "Informe O File Type",
+  "label_approved_by_user_CustomerVehicleApprovedRegister": "Aprovado Pelo Usuário",
+  "placeholder_approved_by_user_CustomerVehicleApprovedRegister": "Informe O Usuário Que Fez A Aprovação Do Processo",
+  "label_reproved_by_user_CustomerVehicleApprovedRegister": "Reprovado Pelo Usuário",
+  "placeholder_reproved_by_user_CustomerVehicleApprovedRegister": "Informe O Usuário Que Fez A Reprovação Do Processo",
+
+  "table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch": "Customer Vehicle Approved ID",
+  "table_header_first_name_CustomerVehicleApprovedSearch": "Primeiro Nome",
+  "table_header_last_name_CustomerVehicleApprovedSearch": "Segundo Nome",
+  "table_header_cpf_CustomerVehicleApprovedSearch": "CPF",
+  "table_header_created_date_CustomerVehicleApprovedSearch": "Data De Criação",
+  "table_header_enabled_CustomerVehicleApprovedSearch": "Habilitado?",
+  "table_header_action_CustomerVehicleApprovedSearch": "Aprovação"
+}
