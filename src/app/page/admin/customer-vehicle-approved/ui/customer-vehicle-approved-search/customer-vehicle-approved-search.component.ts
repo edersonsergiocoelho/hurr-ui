@@ -10,6 +10,13 @@ import { Router } from '@angular/router';
 import { CustomerVehicleApprovedSearchUIDTO } from './dto/customer-vehicle-approved-search-ui-dto.dto';
 import { CustomerVehicleApprovedService } from '../../service/customer-vehicle-approved.service';
 import { CustomerVehicleApprovedSearchDTO } from '../../dto/customer-vehicle-approved-search-dto.dto';
+import { VehicleModel } from '../../../vehicle-model/entity/vehicle-model.entity';
+import { VehicleBrand } from '../../../vehicle-brand/entity/vehicle-brand.entity';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { Vehicle } from '../../../vehicle/entity/vehicle.entity';
+import { VehicleService } from '../../../vehicle/service/vehicle.service';
+import { VehicleBrandService } from '../../../vehicle-brand/service/vehicle-brand.service';
+import { VehicleModelService } from '../../../vehicle-model/service/vehicle-model.service';
 
 @Component({
   selector: 'app-customer-vehicle-approved-search',
@@ -26,7 +33,9 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
               private messageService: MessageService,
               private translateService: TranslateService,
               private customerVehicleApprovedService: CustomerVehicleApprovedService,
-              private userService: UserService) { }
+              private vehicleService: VehicleService,
+              private vehicleBrandService: VehicleBrandService,
+              private vehicleModelService: VehicleModelService) { }
 
   ngOnInit(): void {
     this.translateService.setDefaultLang('pt_BR');
@@ -46,23 +55,15 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
 
     this.ngxSpinnerService.show();
 
-    this.customerVehicleApprovedSearchUIDTO.fileTables = [
-      { name: 'CUSTOMER', code: 'CUSTOMER' },
-      { name: 'USER', code: 'USER' }
-    ];
-
-    this.customerVehicleApprovedSearchUIDTO.fileTypes = [
-      { name: 'DRIVER_LICENSE', code: 'DRIVER_LICENSE' },
-      { name: 'IDENTITY_NUMBER', code: 'IDENTITY_NUMBER' },
-      { name: 'PROFILE_PICTURE', code: 'PROFILE_PICTURE' }
-    ];
-
     try {
 
       const keys = [
         'error_message_service_Generic', 
         'warn_message_service_Generic',
         'table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch',
+        'table_header_vehicle_brand_CustomerVehicleApprovedSearch',
+        'table_header_vehicle_CustomerVehicleApprovedSearch',
+        'table_header_vehicle_model_CustomerVehicleApprovedSearch',
         'table_header_first_name_CustomerVehicleApprovedSearch',
         'table_header_last_name_CustomerVehicleApprovedSearch',
         'table_header_cpf_CustomerVehicleApprovedSearch',
@@ -76,6 +77,9 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
       this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
       this.customerVehicleApprovedSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
       this.customerVehicleApprovedSearchUIDTO.table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch = translations['table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch'];
+      this.customerVehicleApprovedSearchUIDTO.table_header_vehicle_brand_CustomerVehicleApprovedSearch = translations['table_header_vehicle_brand_CustomerVehicleApprovedSearch'];
+      this.customerVehicleApprovedSearchUIDTO.table_header_vehicle_CustomerVehicleApprovedSearch = translations['table_header_vehicle_CustomerVehicleApprovedSearch'];
+      this.customerVehicleApprovedSearchUIDTO.table_header_vehicle_model_CustomerVehicleApprovedSearch = translations['table_header_vehicle_model_CustomerVehicleApprovedSearch'];
       this.customerVehicleApprovedSearchUIDTO.table_header_first_name_CustomerVehicleApprovedSearch = translations['table_header_first_name_CustomerVehicleApprovedSearch'];
       this.customerVehicleApprovedSearchUIDTO.table_header_last_name_CustomerVehicleApprovedSearch = translations['table_header_last_name_CustomerVehicleApprovedSearch'];
       this.customerVehicleApprovedSearchUIDTO.table_header_cpf_CustomerVehicleApprovedSearch = translations['table_header_cpf_CustomerVehicleApprovedSearch'];
@@ -93,28 +97,33 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
 
     try {
 
-      const userServiceFindAll = await firstValueFrom(this.userService.findAll().pipe(first()));
+      const vehicleBrandServiceFindAll = await firstValueFrom(this.vehicleBrandService.getAllVehicleBrands().pipe(first()));
 
-      if (userServiceFindAll.status == 200) {
-
-        if (userServiceFindAll.body != null && userServiceFindAll.body.length > 0) {
-          this.customerVehicleApprovedSearchUIDTO.approvedByUsers = userServiceFindAll.body;
-          this.customerVehicleApprovedSearchUIDTO.reprovedByUsers = userServiceFindAll.body;
+      if (vehicleBrandServiceFindAll.status == 200) {
+        if (vehicleBrandServiceFindAll.body != null && vehicleBrandServiceFindAll.body.length > 0) {
+          this.customerVehicleApprovedSearchUIDTO.vehicleBrands = vehicleBrandServiceFindAll.body;
         }
       }
 
     } catch (error: any) {
-      this.messageService.add({
-        severity: 'error',
-        summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
-        detail: error.toString()
-      });
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
     }
 
     this.customerVehicleApprovedSearchUIDTO.columns = [
       { field: 'customerVehicleApprovedId', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch },
-      { field: 'fileTable', sortField: 'fileTable', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_first_name_CustomerVehicleApprovedSearch },
-      { field: 'fileType', sortField: 'fileType', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_last_name_CustomerVehicleApprovedSearch },
+      { field: 'customerVehicle.vehicle.vehicleBrand.vehicleBrandName', sortField: 'customerVehicle.vehicle.vehicleBrand.vehicleBrandName', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_vehicle_brand_CustomerVehicleApprovedSearch },
+      { field: 'customerVehicle.vehicle.vehicleName', sortField: 'customerVehicle.vehicle.vehicleName', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_vehicle_CustomerVehicleApprovedSearch },
+      { field: 'customerVehicle.vehicleModel.vehicleModelName', sortField: 'customerVehicle.vehicleModel.vehicleModelName', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_vehicle_model_CustomerVehicleApprovedSearch },
+      { field: 'customerVehicle.customer.firstName', sortField: 'customerVehicle.customer.firstName', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_first_name_CustomerVehicleApprovedSearch },
+      { field: 'customerVehicle.customer.lastName', sortField: 'customerVehicle.customer.lastName', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_last_name_CustomerVehicleApprovedSearch },
       { field: 'customerVehicle.customer.cpf', sortField: 'customerVehicle.customer.cpf', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_cpf_CustomerVehicleApprovedSearch },
       { field: 'createdDate', sortField: 'createdDate', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_created_date_CustomerVehicleApprovedSearch },
       { field: 'enabled', sortField: 'enabled', header: '' + this.customerVehicleApprovedSearchUIDTO.table_header_enabled_CustomerVehicleApprovedSearch },
@@ -125,6 +134,8 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
   }
 
   search(event: TableLazyLoadEvent) {
+
+    this.ngxSpinnerService.show();
 
     if (event && event.sortField) {
       this.customerVehicleApprovedSearchUIDTO.sortBy = event.sortField;
@@ -137,37 +148,23 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
       }
     }
 
-    /*
-    if (this.customerVehicleApprovedSearchUIDTO.enabledValue != null) {
-      if (this.customerVehicleApprovedSearchUIDTO.enabledValue == 'ALL') {
-        this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.enabled = null;
-      } else if (this.customerVehicleApprovedSearchUIDTO.enabledValue == 'ON') {
-        this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.enabled = true;
-      } else if (this.customerVehicleApprovedSearchUIDTO.enabledValue == 'OFF') {
-        this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.enabled = false;
-      }
-    }
-
-    if (this.customerVehicleApprovedSearchUIDTO.filterValue != null) {
-      if (this.customerVehicleApprovedSearchUIDTO.filterValue == 'ALL') {
-        this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.filter = null;
-      } else if (this.customerVehicleApprovedSearchUIDTO.filterValue == 'AGUARDANDO_APROVACAO') {
-        this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.filter = 'AGUARDANDO_APROVACAO';
-      }
-    }
-
-    if (this.customerVehicleApprovedSearchUIDTO.selectedFileTable != null) {
-      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.fileTable = this.customerVehicleApprovedSearchUIDTO.selectedFileTable.code;
+    if (this.customerVehicleApprovedSearchUIDTO.selectedVehicleBrand != null) {
+      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.vehicleBrandId = this.customerVehicleApprovedSearchUIDTO.selectedVehicleBrand.vehicleBrandId;
     } else {
-      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.fileTable = null;
+      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.vehicleBrandId = null;
     }
 
-    if (this.customerVehicleApprovedSearchUIDTO.selectedFileType != null) {
-      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.fileType = this.customerVehicleApprovedSearchUIDTO.selectedFileType.code;
-    } else {
-      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.fileType = null;
+    if (this.customerVehicleApprovedSearchUIDTO.selectedVehicle != null) {
+      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.vehicleId = this.customerVehicleApprovedSearchUIDTO.selectedVehicle.vehicleId;
+    } else{
+      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.vehicleId = null;
     }
-    */
+
+    if (this.customerVehicleApprovedSearchUIDTO.selectedVehicleModel != null) {
+      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.vehicleModelId = this.customerVehicleApprovedSearchUIDTO.selectedVehicleModel.vehicleModelId;
+    } else {
+      this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.vehicleModelId = null;
+    }
   
     this.customerVehicleApprovedService.searchPage(this.customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO, this.customerVehicleApprovedSearchUIDTO.page, this.customerVehicleApprovedSearchUIDTO.size, this.customerVehicleApprovedSearchUIDTO.sortDir, this.customerVehicleApprovedSearchUIDTO.sortBy).pipe(first()).subscribe({
       next: (data: any) => {
@@ -178,7 +175,12 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
       error: (error) => {
 
         if (error.status == 500) {
-          this.messageService.add({ severity: 'error', summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+
+          this.messageService.add({
+            severity: SeverityConstants.ERROR,
+            summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
+            detail: error.toString()
+          });
         }
 
         this.ngxSpinnerService.hide();
@@ -194,15 +196,65 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
     this.customerVehicleApprovedSearchUIDTO.page = event.first / event.rows;
   }
 
-  onChangeEnabled(event: any){
-    this.customerVehicleApprovedSearchUIDTO.enabledValue = event.value;
+  clickRouterNavigateToCustomerVehicleApprovedDetail(rowData) {
+    this.router.navigate(['customer-vehicle-approved/detail/' + rowData.customerVehicleApprovedId]);
   }
 
-  onChangeFilter(event: any){
-    this.customerVehicleApprovedSearchUIDTO.filterValue = event.value;
+  async conChangeVehicleBrand(vehicleBrand: VehicleBrand) {
+
+    this.ngxSpinnerService.show();
+
+    try {
+
+      const vehicleServiceByBrandId = await firstValueFrom(this.vehicleService.getVehiclesByBrandId(vehicleBrand.vehicleBrandId).pipe(first()));
+
+      if (vehicleServiceByBrandId.status == 200) {
+        if (vehicleServiceByBrandId.body != null && vehicleServiceByBrandId.body.length > 0) {
+          this.customerVehicleApprovedSearchUIDTO.vehicles = vehicleServiceByBrandId.body;
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
+
+    this.ngxSpinnerService.hide();
   }
 
-  onClickCustomerVehicleApprovedDetail(rowData) {
-    this.router.navigate(['file-approved/detail/' + rowData.customerVehicleApprovedId]);
+  async onChangeVehicle(vehicle: Vehicle) {
+
+    this.ngxSpinnerService.show();
+
+    try {
+
+      const vehicleModelServiceByVehicleId = await firstValueFrom(this.vehicleModelService.getVehicleModelsByVehicleId(vehicle.vehicleId).pipe(first()));
+
+      if (vehicleModelServiceByVehicleId.status == 200) {
+        if (vehicleModelServiceByVehicleId.body != null && vehicleModelServiceByVehicleId.body.length > 0) {
+          this.customerVehicleApprovedSearchUIDTO.vehicleModels = vehicleModelServiceByVehicleId.body;
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
+
+    this.ngxSpinnerService.hide();
   }
 }

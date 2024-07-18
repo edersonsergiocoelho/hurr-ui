@@ -4,92 +4,85 @@
 
     <!-- Formulário De Pesquisa -->
     <form #customerVehicleApprovedSearchForm="ngForm" (ngSubmit)="search($event)">
+      
       <!-- Seção De Pesquisa -->
-      <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerVehicleApprovedSearch' | translate}}</h3>
+      <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleApprovedSearch' | translate}}</h1>
 
       <div class="grid p-fluid form-group">
 
-        <!-- Campo - File Table -->
+        <div class="col-12 md:col-12 field">
+          <div class="col-2 md:col-2 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_vehicle_CustomerVehicleApprovedSearch' | translate}}</h2>
+          </div>
+        </div>
+        
         <div class="col-6 md:col-6 field">
-          <label class="font-medium text-2xl">{{'label_file_table_CustomerVehicleApprovedSearch' | translate}}</label>
+          <label for="vehicleBrand" class="font-medium text-2xl">{{'label_vehicle_brand_CustomerVehicleApprovedSearch' | translate}}</label>
           <p-dropdown class="p-inputtext-lg" 
-            [options]="customerVehicleApprovedSearchUIDTO.fileTables" 
-            [(ngModel)]="customerVehicleApprovedSearchUIDTO.selectedFileTable" 
-            optionLabel="name" [showClear]="true" name="fileTable"
-            placeholder="{{ 'placeholder_file_table_CustomerVehicleApprovedSearch' | translate }}?">
+            [options]="customerVehicleApprovedSearchUIDTO.vehicleBrands" 
+            [(ngModel)]="customerVehicleApprovedSearchUIDTO.selectedVehicleBrand" 
+            optionLabel="vehicleBrandName" 
+            name="vehicleBrand" 
+            [showClear]="true"
+            [filter]="true"
+            filterBy="vehicleBrandName"
+            placeholder="{{'placeholder_vehicle_brand_CustomerVehicleApprovedSearch' | translate}}" (onChange)="conChangeVehicleBrand($event.value)">
           </p-dropdown>
         </div>
-
-        <!-- Campo - File Type -->
+        
         <div class="col-6 md:col-6 field">
-          <label class="font-medium text-2xl">{{'label_file_type_CustomerVehicleApprovedSearch' | translate}}</label>
-          <p-dropdown class="p-inputtext-lg"
-            [options]="customerVehicleApprovedSearchUIDTO.fileTypes" 
-            [(ngModel)]="customerVehicleApprovedSearchUIDTO.selectedFileType" 
-            optionLabel="name" [showClear]="true" name="fileType"
-            placeholder="{{'placeholder_file_type_CustomerVehicleApprovedSearch' | translate}}?"></p-dropdown>
-        </div>
-
-        <div class="col-12 md:col-6 field">
-          <label for="approved_by_user" class="font-medium text-2xl">{{'label_approved_by_user_CustomerVehicleApprovedRegister' | translate}}</label>
+          <label for="vehicle" class="font-medium text-2xl">{{'label_vehicle_CustomerVehicleApprovedSearch' | translate}}</label>
           <p-dropdown class="p-inputtext-lg" 
-            [options]="customerVehicleApprovedSearchUIDTO.approvedByUsers" [(ngModel)]="customerVehicleApprovedSearchUIDTO.selectedApprovedByUser" optionLabel="email" 
-            [filter]="true" filterBy="email" [showClear]="true" name="user"
-            placeholder="{{'placeholder_approved_by_user_CustomerVehicleApprovedRegister' | translate}}"
-            [required]="true">
-            <ng-template pTemplate="selectedItem">
-              <div class="flex align-items-center gap-2" *ngIf="customerVehicleApprovedSearchUIDTO.selectedApprovedByUser">
-                <div>{{ customerVehicleApprovedSearchUIDTO.selectedApprovedByUser.email }}</div>
-              </div>
-            </ng-template>
-            <ng-template let-user pTemplate="item">
-              <div class="flex align-items-center gap-2">
-                <div>{{ user.email }}</div>
-              </div>
-            </ng-template>
+            [options]="customerVehicleApprovedSearchUIDTO.vehicles" 
+            [(ngModel)]="customerVehicleApprovedSearchUIDTO.selectedVehicle" 
+            optionLabel="vehicleName" 
+            name="vehicle" 
+            [showClear]="true"
+            [filter]="true"
+            filterBy="vehicleName"
+            placeholder="{{'placeholder_vehicle_CustomerVehicleApprovedSearch' | translate}}" (onChange)="onChangeVehicle($event.value)">
           </p-dropdown>
         </div>
-
-        <div class="col-12 md:col-6 field">
-          <label for="reproved_by_user" class="font-medium text-2xl">{{'label_reproved_by_user_CustomerVehicleApprovedRegister' | translate}}</label>
-          <p-dropdown class="p-inputtext-lg"
-            [options]="customerVehicleApprovedSearchUIDTO.reprovedByUsers" [(ngModel)]="customerVehicleApprovedSearchUIDTO.selectedReprovedByUser" optionLabel="email" 
-            [filter]="true" filterBy="email" [showClear]="true" name="user"
-            placeholder="{{'placeholder_reproved_by_user_CustomerVehicleApprovedRegister' | translate}}"
-            [required]="true">
-            <ng-template pTemplate="selectedItem">
-              <div class="flex align-items-center gap-2" *ngIf="customerVehicleApprovedSearchUIDTO.selectedReprovedByUser">
-                <div>{{ customerVehicleApprovedSearchUIDTO.selectedReprovedByUser.email }}</div>
-              </div>
-            </ng-template>
-            <ng-template let-user pTemplate="item">
-              <div class="flex align-items-center gap-2">
-                <div>{{ user.email }}</div>
-              </div>
-            </ng-template>
+    
+        <div class="col-6 md:col-6 field">
+          <label for="vehicleModel" class="font-medium text-2xl">{{'label_vehicle_model_CustomerVehicleApprovedSearch' | translate}}</label>
+          <p-dropdown class="p-inputtext-lg" 
+            [options]="customerVehicleApprovedSearchUIDTO.vehicleModels" 
+            [(ngModel)]="customerVehicleApprovedSearchUIDTO.selectedVehicleModel" 
+            optionLabel="vehicleModelName" 
+            name="vehicleModel" 
+            [showClear]="true"
+            [filter]="true"
+            filterBy="vehicleModelName"
+            placeholder="{{'placeholder_vehicle_model_CustomerVehicleApprovedSearch' | translate}}">
           </p-dropdown>
         </div>
 
         <div class="col-12 md:col-12 field">
-          <div class="card flex justify-content-end">
-            <p-selectButton 
-              [options]="customerVehicleApprovedSearchUIDTO.enabledOptions" 
-              (onChange)="onChangeEnabled($event)" 
-              [(ngModel)]="customerVehicleApprovedSearchUIDTO.enabledValue" 
-              optionLabel="label" optionValue="value" name="enabled">
-            </p-selectButton>
+          <div class="col-2 md:col-2 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_personal_data_CustomerVehicleApprovedSearch' | translate}}</h2>
           </div>
         </div>
 
-        <div class="col-12 md:col-12 field">
-          <div class="card flex justify-content-end">
-            <p-selectButton
-              [options]="customerVehicleApprovedSearchUIDTO.filterOptions" 
-              (onChange)="onChangeFilter($event)" 
-              [(ngModel)]="customerVehicleApprovedSearchUIDTO.filterValue" 
-              optionLabel="label" optionValue="value" name="filter">
-            </p-selectButton>
-          </div>
+        <div class="col-6 md:col-6 field">
+          <label for="firstName" class="font-medium text-2xl">{{'label_first_name_CustomerVehicleApprovedSearch' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_first_name_CustomerVehicleApprovedSearch' | translate}}"
+            [(ngModel)]="customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.firstName" name="firstName" autocomplete="off" />
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="lastName" class="font-medium text-2xl">{{'label_last_name_CustomerVehicleApprovedSearch' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_last_name_CustomerVehicleApprovedSearch' | translate}}"
+            [(ngModel)]="customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.lastName" name="lastName" autocomplete="off" />
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label for="cpf" class="font-medium text-2xl">{{'label_cpf_CustomerVehicleApprovedSearch' | translate}}</label>
+          <p-inputMask class="p-inputtext-lg" mask="999.999.999-99"
+            placeholder="{{'placeholder_cpf_CustomerVehicleApprovedSearch' | translate}}"
+            [(ngModel)]="customerVehicleApprovedSearchUIDTO.customerVehicleApprovedSearchDTO.cpf" name="cpf" autocomplete="off" />
         </div>
 
       </div>
@@ -145,6 +138,18 @@
               </td>
 
               <td class="text-left">
+                {{rowData.customerVehicle.vehicle.vehicleBrand.vehicleBrandName}}
+              </td>
+
+              <td class="text-left">
+                {{rowData.customerVehicle.vehicle.vehicleName}}
+              </td>
+
+              <td class="text-left">
+                {{rowData.customerVehicle.vehicleModel.vehicleModelName}}
+              </td>
+
+              <td class="text-left">
                 {{rowData.customerVehicle.customer.firstName}}
               </td>
 
@@ -161,12 +166,12 @@
               </td>
 
               <td class="text-left">
-                {{rowData.enabled}}
+                {{rowData.enabled | boolean}}
               </td>
 
               <td class="text-left">
                 <button type="button" class="p-element p-button p-component mr-3 md:w-10rem" *ngIf="rowData.approvedBy == null && rowData.reprovedBy == null"
-                  (click)="onClickCustomerVehicleApprovedDetail(rowData)" pButton>
+                  (click)="clickRouterNavigateToCustomerVehicleApprovedDetail(rowData)" pButton>
                   <span class="p-button-label">
                     {{'span_button_label_approve_Generic' | translate}}
                   </span>
@@ -174,7 +179,7 @@
                 </button>
 
                 <button type="button" class="p-element p-button p-component p-button-info mr-3 md:w-12rem" *ngIf="rowData.approvedBy != null || rowData.reprovedBy != null"
-                  (click)="onClickCustomerVehicleApprovedDetail(rowData)" pButton>
+                  (click)="clickRouterNavigateToCustomerVehicleApprovedDetail(rowData)" pButton>
                   <span class="p-button-label">
                     {{'span_button_label_see_details_Generic' | translate}}
                   </span>

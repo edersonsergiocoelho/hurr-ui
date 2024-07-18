@@ -19,6 +19,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ImageModule } from 'primeng/image';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     FormsModule,
     ReactiveFormsModule,
     CustomerVehicleApprovedRoutingModule,
+
+    UtilsPipeModule,
 
     // Translate
     TranslateModule,

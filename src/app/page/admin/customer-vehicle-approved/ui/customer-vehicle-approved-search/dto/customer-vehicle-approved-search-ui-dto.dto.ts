@@ -1,6 +1,9 @@
 import { User } from "src/app/page/user/entity/user.entity";
 import { CustomerVehicleApproved } from "../../../entity/customer-vehicle-approved.entity";
 import { CustomerVehicleApprovedSearchDTO } from "../../../dto/customer-vehicle-approved-search-dto.dto";
+import { VehicleBrand } from "src/app/page/admin/vehicle-brand/entity/vehicle-brand.entity";
+import { Vehicle } from "src/app/page/admin/vehicle/entity/vehicle.entity";
+import { VehicleModel } from "src/app/page/admin/vehicle-model/entity/vehicle-model.entity";
 
 export class CustomerVehicleApprovedSearchUIDTO {
 
@@ -15,42 +18,26 @@ export class CustomerVehicleApprovedSearchUIDTO {
   customerVehicleApprovedSearchDTO: CustomerVehicleApprovedSearchDTO;
   customerVehicleApproveds: Array<CustomerVehicleApproved>;
 
-  fileTables: FileTable[];
-  selectedFileTable: FileTable;
+  vehicleBrands: Array<VehicleBrand>;
+  selectedVehicleBrand: VehicleBrand;
 
-  fileTypes: fileType[];
-  selectedFileType: fileType;
+  vehicles: Array<Vehicle>;
+  selectedVehicle: Vehicle;
 
-  approvedByUsers: Array<User>;
-  selectedApprovedByUser: User;
-
-  reprovedByUsers: Array<User>;
-  selectedReprovedByUser: User;
-
-  enabledOptions: any[] = [{label: 'Todos', value: 'ALL'}, {label: 'Habilitados', value: 'ON'}, {label: 'Desabilitados', value: 'OFF'}];
-  enabledValue: string = 'ALL';
-
-  filterOptions: any[] = [{label: 'Todos', value: 'ALL'}, {label: 'Aguardando Aprovação', value: 'AGUARDANDO_APROVACAO'}];
-  filterValue: string = 'ALL';
+  vehicleModels: Array<VehicleModel>;
+  selectedVehicleModel: VehicleModel;
 
   // Message
   error_message_service_Generic: string;
   warn_message_service_Generic: string;
   table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch: string;
+  table_header_vehicle_brand_CustomerVehicleApprovedSearch: string;
+  table_header_vehicle_CustomerVehicleApprovedSearch: string;
+  table_header_vehicle_model_CustomerVehicleApprovedSearch: string;
   table_header_first_name_CustomerVehicleApprovedSearch: string;
   table_header_last_name_CustomerVehicleApprovedSearch: string;
   table_header_cpf_CustomerVehicleApprovedSearch: string;
   table_header_created_date_CustomerVehicleApprovedSearch: string;
   table_header_enabled_CustomerVehicleApprovedSearch: string;
   table_header_action_CustomerVehicleApprovedSearch: string;
-}
-
-interface FileTable {
-  name: string;
-  code: string;
-}
-
-interface fileType {
-  name: string;
-  code: string;
 }

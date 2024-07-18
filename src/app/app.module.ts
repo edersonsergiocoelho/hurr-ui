@@ -21,6 +21,7 @@ import { GlobalTemplateModule } from './global/template/module/global-template.m
 import { PageModule } from './page/module/page.module';
 import { PageAdminModule } from './page/admin/module/page-admin.module';
 import { PageCustomModule } from './page-custom/module/page-custom.module';
+import { UtilsPipeModule } from './utils/pipe/module/utils-pipe.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
@@ -96,6 +97,8 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
 
     GoogleMapsModule,
     NgxSpinnerModule,
+
+    UtilsPipeModule,
 
     GlobalPageModule,
     GlobalTemplateModule,
