@@ -20,11 +20,14 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ImageModule } from 'primeng/image';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
+import { CustomerVehicleApprovedDetailComponent } from '../ui/customer-vehicle-approved-detail/customer-vehicle-approved-detail.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
     CustomerVehicleApprovedComponent,
-    CustomerVehicleApprovedSearchComponent
+    CustomerVehicleApprovedSearchComponent,
+    CustomerVehicleApprovedDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -48,13 +51,15 @@ import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
     InputTextareaModule,
     InputMaskModule,
     InputSwitchModule,
+    InputNumberModule,
     ImageModule,
     SelectButtonModule,
     TableModule
   ], 
   exports: [
     CustomerVehicleApprovedComponent,
-    CustomerVehicleApprovedSearchComponent
+    CustomerVehicleApprovedSearchComponent,
+    CustomerVehicleApprovedDetailComponent
   ]
 })
 export class CustomerVehicleApprovedModule { }
