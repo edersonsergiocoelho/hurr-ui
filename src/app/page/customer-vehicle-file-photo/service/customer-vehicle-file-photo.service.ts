@@ -23,6 +23,15 @@ export class CustomerVehicleFilePhotoService {
     );
   }
 
+  findByCustomerVehicle(customerVehicleId: string): Observable<HttpResponse<CustomerVehicleFilePhoto[]>> {
+    const url = `${this.apiUrl}/by/customer-vehicle/${customerVehicleId}`;
+    return this.httpClient.get<CustomerVehicleFilePhoto[]>(url, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleFilePhoto[]>) => {
+        return response;
+      })
+    );
+  }
+
   findByCustomerVehicleAndCoverPhoto(customerVehicleId: string): Observable<HttpResponse<CustomerVehicleFilePhoto>> {
     const url = `${this.apiUrl}/by/customer-vehicle/${customerVehicleId}/and/cover-photo`;
     return this.httpClient.get<CustomerVehicleFilePhoto>(url, { observe: 'response' }).pipe(

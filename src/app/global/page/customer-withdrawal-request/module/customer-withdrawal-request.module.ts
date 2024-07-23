@@ -11,14 +11,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { BooleanPipe } from 'src/app/utils/pipe/boolean-pipe';
 import { InputMaskModule } from 'primeng/inputmask';
+import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
 
 @NgModule({
   declarations: [
     CustomerWithdrawalRequestComponent,
-    CustomerWithdrawalRequestApprovalComponent,
-    BooleanPipe
+    CustomerWithdrawalRequestApprovalComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +26,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     FormsModule,
     ReactiveFormsModule,
     CustomerWithdrawalRequestRoutingModule,
+
+    UtilsPipeModule,
 
     // Translate
     TranslateModule,

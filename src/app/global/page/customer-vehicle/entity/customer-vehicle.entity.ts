@@ -38,6 +38,7 @@ export class CustomerVehicle {
   mileageFeePickUp: number;
   code: string;
   customerVehicleValidated: boolean;
+  advertisementStatus: string;
   createdDate: string;
   modifiedDate?: string;
   enabled: boolean;

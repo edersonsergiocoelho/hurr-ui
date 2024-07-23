@@ -21,6 +21,7 @@ import { GlobalTemplateModule } from './global/template/module/global-template.m
 import { PageModule } from './page/module/page.module';
 import { PageAdminModule } from './page/admin/module/page-admin.module';
 import { PageCustomModule } from './page-custom/module/page-custom.module';
+import { UtilsPipeModule } from './utils/pipe/module/utils-pipe.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
@@ -46,6 +47,10 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/customer-vehicle/customer-vehicle-register-step6/',
   '/assets/i18n/customer-vehicle/customer-vehicle-register-step7/',
   '/assets/i18n/customer-vehicle/customer-vehicle-search/',
+
+  // CustomerVehicleApproved
+  '/assets/i18n/customer-vehicle-approved/customer-vehicle-approved-search/',
+  '/assets/i18n/customer-vehicle-approved/customer-vehicle-approved-detail/',
 
   // CustomerVehicleBooking
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog/',
@@ -92,6 +97,8 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
 
     GoogleMapsModule,
     NgxSpinnerModule,
+
+    UtilsPipeModule,
 
     GlobalPageModule,
     GlobalTemplateModule,

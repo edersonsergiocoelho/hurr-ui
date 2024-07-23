@@ -1,0 +1,307 @@
+<!-- Tela De Detalhes -->
+<div class="md:col-12 mb-2">
+  <div class="card no-margin bordered-card" style="width: 1800px;">
+
+    <!-- Formulário De Detalhes -->
+    <form #customerVehicleApprovedDetailForm="ngForm" (ngSubmit)="onClickCustomerVehicleApprovedApprove()">
+
+      <!-- Seção De Detalhes -->
+      <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleApprovedDetail' | translate}}</h1>
+
+      <div class="p-fluid p-formgrid grid">
+
+        <div class="col-12 md:col-12 field">
+          <button type="button" class="p-element p-button p-component mr-3 md:w-10rem"
+            pButton
+            (click)="clickRouterNavigateToCustomerVehicleApproved()">
+            <span class="p-button-label">
+              {{'span_button_label_to_go_back_Generic' | translate}}
+            </span>
+            <i class="pi pi-step-backward"></i>
+          </button>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="col-2 md:col-2 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_photos_CustomerVehicleApprovedDetail' | translate}}</h2>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="card">
+            <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleFilePhotos" class="grid" style="max-width: 100%;">
+              <div *ngFor="let image of customerVehicleApprovedDetailUIDTO.customerVehicleFilePhotos; let index = index" class="col-3" key="index" style="text-align: center; margin-top: 10px;">
+                <img 
+                  [src]="image.dataURI" 
+                  [alt]="image.originalFileName" 
+                  style="cursor: pointer; width: 50%;" 
+                  (click)="clickOpenPhoto(index)" />
+    
+              </div>
+            </div>
+            <p-galleria
+              [value]="customerVehicleApprovedDetailUIDTO.customerVehicleFilePhotos"
+              [(visible)]="customerVehicleApprovedDetailUIDTO.displayCustom"
+              [(activeIndex)]="customerVehicleApprovedDetailUIDTO.activeIndex"
+              [containerStyle]="{ 'max-width': '100%' }"
+              [numVisible]="5"
+              [circular]="true"
+              [fullScreen]="true"
+              [showItemNavigators]="true"
+              [showThumbnails]="false">
+              <ng-template pTemplate="item" let-item>
+                <img [src]="item.dataURI"
+                  style="width: 100%; display: block;"/>
+              </ng-template>
+            </p-galleria>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="col-2 md:col-2 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_insurance_CustomerVehicleApprovedDetail' | translate}}</h2>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="card">
+            <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleFileInsurances" class="grid" style="max-width: 100%;">
+              <div *ngFor="let customerVehicleFileInsurance of customerVehicleApprovedDetailUIDTO.customerVehicleFileInsurances; let index = index" class="col-12" key="index">
+                <a (click)="clickOpenInsurance(customerVehicleFileInsurance)" style="cursor: pointer; text-decoration: underline;">
+                  {{ customerVehicleFileInsurance.originalFileName }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="col-2 md:col-2 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_vehicle_CustomerVehicleApprovedDetail' | translate}}</h2>
+          </div>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="vehicleBrandName" class="font-medium text-2xl">{{'label_vehicle_brand_name_CustomerVehicleApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_vehicle_brand_name_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.vehicle.vehicleBrand.vehicleBrandName" name="vehicleBrandName" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="vehicleName" class="font-medium text-2xl">{{'label_vehicle_name_CustomerVehicleApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_vehicle_name_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.vehicle.vehicleName" name="vehicleName" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="vehicleModelName" class="font-medium text-2xl">{{'label_vehicle_model_name_CustomerVehicleApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_vehicle_model_name_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.vehicleModel.vehicleModelName" name="vehicleModelName" autocomplete="off" disabled="true"/>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="col-3 md:col-3 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_transmission_and_mileage_CustomerVehicleApprovedDetail' | translate}}</h2>
+          </div>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="vehicleTransmissionName" class="font-medium text-2xl">{{'label_vehicle_transmission_name_CustomerVehicleApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_vehicle_transmission_name_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.vehicleTransmission.vehicleTransmissionName" 
+            name="vehicleTransmissionName" 
+            autocomplete="off" 
+            disabled="true"/>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="mileageCreated" class="font-medium text-2xl">{{'label_mileage_created_CustomerVehicleApprovedDetail' | translate}}</label>
+          <p-inputNumber type="number" class="p-inputtext-lg"
+            placeholder="{{'placeholder_mileage_created_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.mileageCreated" 
+            name="mileageCreated" 
+            autocomplete="off" 
+            mode="decimal"
+            [disabled]="true"/>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="col-1 md:col-1 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_vehicle_value_CustomerVehicleApprovedDetail' | translate}}</h2>
+          </div>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="vehicleValue" class="font-medium text-2xl">{{'label_vehicle_value_CustomerVehicleApprovedDetail' | translate}}</label>
+          <p-inputNumber type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_vehicle_value_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.vehicleValue" 
+            name="vehicleValue" 
+            autocomplete="off" 
+            mode="decimal" 
+            [minFractionDigits]="2"
+            [disabled]="true"/>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="col-2 md:col-2 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_vehicle_details_CustomerVehicleApprovedDetail' | translate}}</h2>
+          </div>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="licensePlate" class="font-medium text-2xl">{{'label_license_plate_CustomerVehicleApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_license_plate_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.licensePlate" 
+            name="licensePlate" 
+            autocomplete="off" 
+            disabled="true"/>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="renavam" class="font-medium text-2xl">{{'label_renavam_CustomerVehicleApprovedDetail' | translate}}</label>
+          <p-inputMask class="p-inputtext-lg" mask="99999999999"
+            placeholder="{{'placeholder_renavam_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.renavam" 
+            name="renavam" 
+            autocomplete="off" 
+            [disabled]="true"/>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="renavamStateName" class="font-medium text-2xl">{{'label_renavam_state_name_CustomerVehicleApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_renavam_state_name_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.renavamState.stateName" 
+            name="renavamStateName" 
+            autocomplete="off" 
+            disabled="true"/>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="chassis" class="font-medium text-2xl">{{'label_chassis_CustomerVehicleApprovedDetail' | translate}}</label>
+          <p-inputMask class="p-inputtext-lg" mask="*****************" 
+            placeholder="{{'placeholder_chassis_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.chassis" 
+            name="chassis" 
+            autocomplete="off" 
+            [disabled]="true" />
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="yearOfManufacture" class="font-medium text-2xl">{{'label_year_of_manufacture_CustomerVehicleApprovedDetail' | translate}}</label>
+          <p-calendar 
+            class="p-inputtext-lg"
+            placeholder="{{'placeholder_year_of_manufacture_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.yearOfManufacture" 
+            name="yearOfManufacture"
+            view="year" 
+            dateFormat="yy" 
+            [disabled]="true" />
+        </div>
+    
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="yearOfTheCar" class="font-medium text-2xl">{{'label_year_of_the_car_CustomerVehicleApprovedDetail' | translate}}</label>
+          <p-calendar 
+            class="p-inputtext-lg"
+            placeholder="{{'placeholder_year_of_the_car_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.yearOfTheCar" 
+            name="yearOfTheCar"
+            view="year" 
+            dateFormat="yy" 
+            [disabled]="true" />
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="vehicleColorName" class="font-medium text-2xl">{{'label_vehicle_color_CustomerVehicleApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_vehicle_color_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.vehicleColor.vehicleColorName" 
+            name="vehicleColorName" 
+            autocomplete="off" 
+            disabled="true"/>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-6 md:col-6 field">
+          <label for="vehicleFuelTypeName" class="font-medium text-2xl">{{'label_vehicle_fuel_type_CustomerVehicleApprovedDetail' | translate}}</label>
+          <input pInputText type="text" class="p-inputtext-lg"
+            placeholder="{{'placeholder_vehicle_fuel_type_CustomerVehicleApprovedDetail' | translate}}"
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.vehicleFuelType.vehicleFuelTypeName" 
+            name="vehicleFuelTypeName" 
+            autocomplete="off" 
+            disabled="true"/>
+        </div>
+
+        <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle != null"
+          class="col-12 md:col-12 field">
+          <label for="description" class="font-medium text-2xl">{{'label_description_CustomerVehicleApprovedDetail' | translate}}</label>
+          <div class="col-12 md:col-12 field">
+            <textarea rows="10" pInputTextarea name="description" 
+              [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.description"
+              placeholder="{{'placeholder_description_CustomerVehicleApprovedDetail' | translate}}" 
+              style="width: 100%;"
+              autocomplete="off"
+              [disabled]="true">
+            </textarea>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="col-2 md:col-2 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_approve_CustomerVehicleApprovedDetail' | translate}}</h2>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <label for="message" class="font-medium text-2xl">{{'label_message_CustomerVehicleApprovedDetail' | translate}}</label>
+          <textarea rows="5" cols="30" pInputTextarea name="message" [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.message"
+            placeholder="{{'placeholder_message_CustomerVehicleApprovedDetail' | translate}}" required="true">
+          </textarea>
+        </div>
+
+        <div class="col-12 md:col-12 field" style="text-align: center;" *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.approvedBy == null && customerVehicleApprovedDetailUIDTO.customerVehicleApproved.reprovedBy == null">
+          <button type="submit" class="p-element p-button p-component p-button-success mr-3 md:w-10rem"
+            pButton
+            [disabled]="!customerVehicleApprovedDetailForm.valid">
+            <span class="p-button-label">
+              {{'span_button_label_approve_Generic' | translate}}
+            </span>
+            <i class="pi pi-check"></i>
+          </button>
+
+          <button type="button" class="p-element p-button p-component p-button-danger mr-3 md:w-10rem"
+            pButton
+            (click)="onClickCustomerVehicleApprovedDisapprove()"
+            [disabled]="!customerVehicleApprovedDetailForm.valid">
+            <span class="p-button-label">
+              {{'span_button_label_disapprove_Generic' | translate}}
+            </span>
+            <i class="pi pi-times"></i>
+          </button>
+
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+</div>
