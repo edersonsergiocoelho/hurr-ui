@@ -5,12 +5,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { TableLazyLoadEvent } from 'primeng/table';
-import { UserService } from 'src/app/page/user/service/user.service';
 import { Router } from '@angular/router';
 import { CustomerVehicleApprovedSearchUIDTO } from './dto/customer-vehicle-approved-search-ui-dto.dto';
 import { CustomerVehicleApprovedService } from '../../service/customer-vehicle-approved.service';
 import { CustomerVehicleApprovedSearchDTO } from '../../dto/customer-vehicle-approved-search-dto.dto';
-import { VehicleModel } from '../../../vehicle-model/entity/vehicle-model.entity';
 import { VehicleBrand } from '../../../vehicle-brand/entity/vehicle-brand.entity';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { Vehicle } from '../../../vehicle/entity/vehicle.entity';
@@ -28,14 +26,18 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
   customerVehicleApprovedSearchUIDTO: CustomerVehicleApprovedSearchUIDTO;
   customerVehicleApprovedSearchForm: NgForm;
 
-  constructor(private router: Router,
-              private ngxSpinnerService: NgxSpinnerService,
-              private messageService: MessageService,
-              private translateService: TranslateService,
-              private customerVehicleApprovedService: CustomerVehicleApprovedService,
-              private vehicleService: VehicleService,
-              private vehicleBrandService: VehicleBrandService,
-              private vehicleModelService: VehicleModelService) { }
+  constructor(
+    private customerVehicleApprovedService: CustomerVehicleApprovedService,
+    private messageService: MessageService,
+    private ngxSpinnerService: NgxSpinnerService,
+    private router: Router,
+    private translateService: TranslateService,
+    private vehicleBrandService: VehicleBrandService,
+    private vehicleModelService: VehicleModelService,
+    private vehicleService: VehicleService) 
+  { 
+    
+  }
 
   ngOnInit(): void {
     this.translateService.setDefaultLang('pt_BR');

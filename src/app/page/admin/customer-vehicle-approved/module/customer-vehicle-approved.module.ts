@@ -22,6 +22,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
 import { CustomerVehicleApprovedDetailComponent } from '../ui/customer-vehicle-approved-detail/customer-vehicle-approved-detail.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { GalleriaModule } from 'primeng/galleria';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CalendarModule,
     DividerModule,
     DropdownModule,
+    GalleriaModule,
     InputTextModule,
     InputTextareaModule,
     InputMaskModule,

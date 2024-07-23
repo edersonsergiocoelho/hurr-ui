@@ -4,16 +4,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
 import { CustomerVehicleApprovedDetailUIDTO } from './dto/customer-vehicle-approved-detail-ui-dto.dto';
-import { UserService } from 'src/app/page/user/service/user.service';
 import { first, firstValueFrom } from 'rxjs';
 import { CustomerVehicleApprovedService } from '../../service/customer-vehicle-approved.service';
 import { CustomerVehicleApproved } from '../../entity/customer-vehicle-approved.entity';
-import { FileService } from 'src/app/page/file/service/file.service';
-import { CustomerService } from 'src/app/global/page/customer/service/customer.service';
-import { Customer } from 'src/app/global/page/customer/entity/customer.entity';
-import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
-import { User } from 'src/app/page/user/entity/user.entity';
 import { NgForm } from '@angular/forms';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { CustomerVehicleFileInsuranceService } from 'src/app/page/customer-vehicle-file-insurance/service/customer-vehicle-file-insurance.service';
+import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
+import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
+import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/service/customer-vehicle.service';
 
 @Component({
   selector: 'app-customer-vehicle-approved-detail',
@@ -31,12 +30,13 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
               private router: Router,
               private ngxSpinnerService: NgxSpinnerService,
               private messageService: MessageService,
-              private sessionStorageService: SessionStorageService,
               private translateService: TranslateService,
-              private customerService: CustomerService,
-              private fileService: FileService,
+              private sessionStorageService: SessionStorageService,
+              private customerVehicleService: CustomerVehicleService,
               private customerVehicleApprovedService: CustomerVehicleApprovedService,
-              private userService: UserService) { 
+              private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
+              private customerVehicleFileInsuranceService: CustomerVehicleFileInsuranceService
+            ) { 
 
     this.activatedRoute.paramMap.subscribe(params => {
       this.customerVehicleApprovedId = params.get('customerVehicleApprovedId');
@@ -53,8 +53,6 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     this.customerVehicleApprovedDetailUIDTO = new CustomerVehicleApprovedDetailUIDTO();
 
     this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved = new CustomerVehicleApproved();
-    this.customerVehicleApprovedDetailUIDTO.customer = new Customer();
-    this.customerVehicleApprovedDetailUIDTO.currentUser = new User();
 
     this.asyncCallFunctions();
   }
@@ -85,7 +83,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
+        severity: SeverityConstants.ERROR,
         summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
@@ -99,6 +97,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
   
         if (customerVehicleApprovedServiceFindById.status == 200) {
           if (customerVehicleApprovedServiceFindById.body != null) {
+            debugger;
             this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved = customerVehicleApprovedServiceFindById.body;
           }
         }
@@ -106,154 +105,109 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
+        severity: SeverityConstants.ERROR,
         summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
 
-    /*
     try {
 
-      if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.userId != null) {
+      if (this.customerVehicleApprovedId != null) {
 
-        const userServiceFindById = await firstValueFrom(this.userService.findById(this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.userId).pipe(first()));
+        const customerVehicleServiceFindById = await firstValueFrom(this.customerVehicleService.findById(this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.customerVehicleId).pipe(first()));
   
-        if (userServiceFindById.status == 200) {
-          if (userServiceFindById.body != null) {
-
-            this.customerVehicleApprovedDetailUIDTO.user = userServiceFindById.body;
-
-            const customerServiceFindByEmail = await firstValueFrom(this.customerService.findByEmail(this.customerVehicleApprovedDetailUIDTO.user.email).pipe(first()));
-
-            if (customerServiceFindByEmail.status == 200) {
-              if (customerServiceFindByEmail.body != null) {
-
-                this.customerVehicleApprovedDetailUIDTO.customer = customerServiceFindByEmail.body
-
-                if (this.customerVehicleApprovedDetailUIDTO.customer.createdDate != null) {
-                  this.customerVehicleApprovedDetailUIDTO.customer.createdDate = moment(this.customerVehicleApprovedDetailUIDTO.customer.createdDate).toDate();
-                }
-    
-                if (this.customerVehicleApprovedDetailUIDTO.customer.dateOfBirth != null) {
-                  this.customerVehicleApprovedDetailUIDTO.customer.dateOfBirth = moment(this.customerVehicleApprovedDetailUIDTO.customer.dateOfBirth).toDate();
-                }
-      
-                if (this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseFirstLicenseDate != null) {
-                  this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseFirstLicenseDate = moment(this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseFirstLicenseDate).toDate();
-                }
-      
-                if (this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseExpirationDate != null) {
-                  this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseExpirationDate = moment(this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseExpirationDate).toDate();
-                }
-      
-                if (this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseIssueDate != null) {
-                  this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseIssueDate = moment(this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseIssueDate).toDate();
-                }
-              }
-            }
+        if (customerVehicleServiceFindById.status == 200) {
+          if (customerVehicleServiceFindById.body != null) {
+            this.customerVehicleApprovedDetailUIDTO.customerVehicle = customerVehicleServiceFindById.body;
           }
         }
       }
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
+        severity: SeverityConstants.ERROR,
         summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
-    */
 
-    /*
     try {
 
-      if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerId != null) {
+      const customerVehicleFilePhotoServiceFindByCustomerVehicle = await firstValueFrom(this.customerVehicleFilePhotoService.findByCustomerVehicle(this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.customerVehicleId).pipe(first()));
 
-        const customerServiceFindById = await firstValueFrom(this.customerService.findById(this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerId).pipe(first()));
-  
-        if (customerServiceFindById.status == 200) {
-          if (customerServiceFindById.body != null) {
-            this.customerVehicleApprovedDetailUIDTO.customer = customerServiceFindById.body;
-
-            if (this.customerVehicleApprovedDetailUIDTO.customer.createdDate != null) {
-              this.customerVehicleApprovedDetailUIDTO.customer.createdDate = moment(this.customerVehicleApprovedDetailUIDTO.customer.createdDate).toDate();
-            }
-
-            if (this.customerVehicleApprovedDetailUIDTO.customer.dateOfBirth != null) {
-              this.customerVehicleApprovedDetailUIDTO.customer.dateOfBirth = moment(this.customerVehicleApprovedDetailUIDTO.customer.dateOfBirth).toDate();
-            }
-  
-            if (this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseFirstLicenseDate != null) {
-              this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseFirstLicenseDate = moment(this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseFirstLicenseDate).toDate();
-            }
-  
-            if (this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseExpirationDate != null) {
-              this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseExpirationDate = moment(this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseExpirationDate).toDate();
-            }
-  
-            if (this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseIssueDate != null) {
-              this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseIssueDate = moment(this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseIssueDate).toDate();
-            }
-          }
+      if (customerVehicleFilePhotoServiceFindByCustomerVehicle.status == 200) {
+        if (customerVehicleFilePhotoServiceFindByCustomerVehicle.body != null) {
+          this.customerVehicleApprovedDetailUIDTO.customerVehicleFilePhotos = customerVehicleFilePhotoServiceFindByCustomerVehicle.body.map(customerVehicleFilePhoto => {
+            return {
+              ...customerVehicleFilePhoto,
+              dataURI: `data:${customerVehicleFilePhoto.contentType};base64,${customerVehicleFilePhoto.dataAsByteArray}`
+            };
+          });
         }
       }
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
+        severity: SeverityConstants.ERROR,
         summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
-    */
 
-    /*
     try {
 
-      if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved != null) {
+      const customerVehicleFileInsuranceServiceFindByCustomerVehicle = await firstValueFrom(this.customerVehicleFileInsuranceService.findByCustomerVehicle(this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.customerVehicleId).pipe(first()));
 
-        const fileServiceFindById = await firstValueFrom(this.fileService.findById(this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileId).pipe(first()));
-  
-        if (fileServiceFindById.status == 200) {
-          if (fileServiceFindById.body != null) {
-            this.customerVehicleApprovedDetailUIDTO.file = fileServiceFindById.body;
-
-            if (this.customerVehicleApprovedDetailUIDTO.file.contentType === 'application/pdf') {
-                this.customerVehicleApprovedDetailUIDTO.dataURIPDF = 'data:' + this.customerVehicleApprovedDetailUIDTO.file.contentType +';base64,' + encodeURIComponent(this.customerVehicleApprovedDetailUIDTO.file.dataAsByteArray.toString());
-            } else {
-              this.customerVehicleApprovedDetailUIDTO.dataURI = `data:${this.customerVehicleApprovedDetailUIDTO.file.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
-            }
-          }
+      if (customerVehicleFileInsuranceServiceFindByCustomerVehicle.status == 200) {
+        if (customerVehicleFileInsuranceServiceFindByCustomerVehicle.body != null) {
+          this.customerVehicleApprovedDetailUIDTO.customerVehicleFileInsurances = customerVehicleFileInsuranceServiceFindByCustomerVehicle.body;
         }
       }
-
+      
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
+        severity: SeverityConstants.ERROR,
         summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
-    */
 
     this.ngxSpinnerService.hide();
   }
 
-  onClickOpenPDF() {
-    if (this.customerVehicleApprovedDetailUIDTO.dataURIPDF) {
-      const newTab = window.open();
-      if (newTab) {
-        newTab.document.write(`<iframe width="100%" height="100%" src="${this.customerVehicleApprovedDetailUIDTO.dataURIPDF}"></iframe>`);
-      } else {
-        console.error('Failed to open new tab.');
-      }
+  clickOpenPhoto(index: number): void {
+    this.customerVehicleApprovedDetailUIDTO.activeIndex = index;
+    this.customerVehicleApprovedDetailUIDTO.displayCustom = true;
+  }
+
+  clickOpenInsurance(file: any) {
+
+    const newTab = window.open();
+    
+    let dataURI;
+
+    if (file.contentType === 'application/pdf') {
+      dataURI = 'data:' + file.contentType +';base64,' + encodeURIComponent(file.dataAsByteArray.toString());
     } else {
-      console.error('No pdfSource available.');
+      dataURI = `data:${file.contentType};base64,${file.dataAsByteArray}`;
+    }
+
+    if (newTab) {
+
+      newTab.document.write(`<iframe width="100%" height="100%" src="${dataURI}"></iframe>`);
+
+    } else {
+
+      this.messageService.add({
+        severity: SeverityConstants.ERROR,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
+        detail: '' + this.customerVehicleApprovedDetailUIDTO.failed_to_open_new_tab_message_service_Generic
+      });
     }
   }
 
-  onClickCustomerVehicleApprovedSearch() {
+  clickRouterNavigateToCustomerVehicleApproved() {
     this.router.navigate(['customer-vehicle-approved']);
   }
 
@@ -261,7 +215,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
     if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.message == null || this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.message == "") {
       this.messageService.add({
-        severity: 'warn',
+        severity: SeverityConstants.WARN,
         summary: '' + this.customerVehicleApprovedDetailUIDTO.warn_message_service_Generic,
         detail: '' + this.customerVehicleApprovedDetailUIDTO.message_not_null_message_service_CustomerVehicleApprovedDetail,
       });
@@ -271,7 +225,6 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
     this.ngxSpinnerService.show();
 
-    /*
     try {
 
       this.customerVehicleApprovedDetailUIDTO.currentUser = this.sessionStorageService.getUser();
@@ -283,49 +236,20 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
       if (customerVehicleApprovedServiceSave.status == 200) {
         if (customerVehicleApprovedServiceSave.body != null) {
 
-          if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileTable == 'CUSTOMER') {
-            if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileType == 'DRIVER_LICENSE') {
-              this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseValidated = true;
-            }
+          this.customerVehicleApprovedDetailUIDTO.customerVehicle.customerVehicleValidated = true;
 
-            if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileType == 'IDENTITY_NUMBER') {
-              this.customerVehicleApprovedDetailUIDTO.customer.identityNumberValidated = true;
-            }
+          const customerServiceSave = await firstValueFrom(this.customerVehicleService.update(this.customerVehicleApprovedDetailUIDTO.customerVehicle).pipe(first()));
+  
+          if (customerServiceSave.status == 200) {
+            if (customerServiceSave.body != null) {
 
-            const customerServiceSave = await firstValueFrom(this.customerService.save(this.customerVehicleApprovedDetailUIDTO.customer).pipe(first()));
-    
-            if (customerServiceSave.status == 200) {
-              if (customerServiceSave.body != null) {
+              this.ngxSpinnerService.hide();
 
-                this.ngxSpinnerService.hide();
-
-                this.messageService.add({
-                  severity: 'success',
-                  summary: '' + this.customerVehicleApprovedDetailUIDTO.success_message_service_Generic,
-                  detail: '' + this.customerVehicleApprovedDetailUIDTO.success_approve_message_service_CustomerVehicleApprovedDetail,
-                });
-              }
-            }
-          }
-
-          if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileTable == 'USER') {
-            if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileType == 'PROFILE_PICTURE') {
-              this.customerVehicleApprovedDetailUIDTO.user.photoValidated = true;
-            }
-
-            const userServiceUpdate = await firstValueFrom(this.userService.update(this.customerVehicleApprovedDetailUIDTO.user).pipe(first()));
-    
-            if (userServiceUpdate.status == 200) {
-              if (userServiceUpdate.body != null) {
-
-                this.ngxSpinnerService.hide();
-
-                this.messageService.add({
-                  severity: 'success',
-                  summary: '' + this.customerVehicleApprovedDetailUIDTO.success_message_service_Generic,
-                  detail: '' + this.customerVehicleApprovedDetailUIDTO.success_approve_message_service_CustomerVehicleApprovedDetail,
-                });
-              }
+              this.messageService.add({
+                severity: SeverityConstants.SUCCESS,
+                summary: '' + this.customerVehicleApprovedDetailUIDTO.success_message_service_Generic,
+                detail: '' + this.customerVehicleApprovedDetailUIDTO.success_approve_message_service_CustomerVehicleApprovedDetail,
+              });
             }
           }
         }
@@ -333,19 +257,18 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
+        severity: SeverityConstants.ERROR,
         summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
-    */
   }
 
   async onClickCustomerVehicleApprovedDisapprove() {
 
     if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.message == null || this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.message == "") {
       this.messageService.add({
-        severity: 'warn',
+        severity: SeverityConstants.WARN,
         summary: '' + this.customerVehicleApprovedDetailUIDTO.warn_message_service_Generic,
         detail: '' + this.customerVehicleApprovedDetailUIDTO.message_not_null_message_service_CustomerVehicleApprovedDetail,
       });
@@ -355,7 +278,6 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
     this.ngxSpinnerService.show();
 
-    /*
     try {
 
       this.customerVehicleApprovedDetailUIDTO.currentUser = this.sessionStorageService.getUser();
@@ -367,52 +289,20 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
       if (customerVehicleApprovedServiceSave.status == 200) {
         if (customerVehicleApprovedServiceSave.body != null) {
 
-          if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileTable == 'CUSTOMER') {
-            if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileType == 'DRIVER_LICENSE') {
-              this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseValidated = false;
-              this.customerVehicleApprovedDetailUIDTO.customer.driverLicenseFileId = "";
-            }
+          this.customerVehicleApprovedDetailUIDTO.customerVehicle.customerVehicleValidated = false;
 
-            if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileType == 'IDENTITY_NUMBER') {
-              this.customerVehicleApprovedDetailUIDTO.customer.identityNumberValidated = false;
-              this.customerVehicleApprovedDetailUIDTO.customer.identityNumberFileId = "";
-            }
+          const customerServiceUpdate = await firstValueFrom(this.customerVehicleService.update(this.customerVehicleApprovedDetailUIDTO.customerVehicle).pipe(first()));
 
-            const customerServiceUpdate = await firstValueFrom(this.customerService.update(this.customerVehicleApprovedDetailUIDTO.customer).pipe(first()));
-    
-            if (customerServiceUpdate.status == 200) {
-              if (customerServiceUpdate.body != null) {
+          if (customerServiceUpdate.status == 200) {
+            if (customerServiceUpdate.body != null) {
 
-                this.ngxSpinnerService.hide();
+              this.ngxSpinnerService.hide();
 
-                this.messageService.add({
-                  severity: 'success',
-                  summary: '' + this.customerVehicleApprovedDetailUIDTO.success_message_service_Generic,
-                  detail: '' + this.customerVehicleApprovedDetailUIDTO.success_disapprove_message_service_CustomerVehicleApprovedDetail,
-                });
-              }
-            }
-          }
-
-          if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileTable == 'USER') {
-            if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.fileType == 'PROFILE_PICTURE') {
-              this.customerVehicleApprovedDetailUIDTO.user.photoValidated = false;
-              this.customerVehicleApprovedDetailUIDTO.user.photoFileId = "";
-            }
-
-            const userServiceUpdate = await firstValueFrom(this.userService.update(this.customerVehicleApprovedDetailUIDTO.user).pipe(first()));
-    
-            if (userServiceUpdate.status == 200) {
-              if (userServiceUpdate.body != null) {
-
-                this.ngxSpinnerService.hide();
-
-                this.messageService.add({
-                  severity: 'success',
-                  summary: '' + this.customerVehicleApprovedDetailUIDTO.success_message_service_Generic,
-                  detail: '' + this.customerVehicleApprovedDetailUIDTO.success_disapprove_message_service_CustomerVehicleApprovedDetail,
-                });
-              }
+              this.messageService.add({
+                severity: SeverityConstants.SUCCESS,
+                summary: '' + this.customerVehicleApprovedDetailUIDTO.success_message_service_Generic,
+                detail: '' + this.customerVehicleApprovedDetailUIDTO.success_disapprove_message_service_CustomerVehicleApprovedDetail,
+              });
             }
           }
         }
@@ -420,11 +310,10 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
+        severity: SeverityConstants.ERROR,
         summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
-    */
   }
 }

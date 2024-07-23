@@ -1,24 +1,25 @@
-import { File } from "src/app/page/file/entity/file.entity";
 import { CustomerVehicleApproved } from "../../../entity/customer-vehicle-approved.entity";
-import { Customer } from "src/app/global/page/customer/entity/customer.entity";
-import { User } from "src/app/page/user/entity/user.entity";
+import { CustomerVehicleFileInsurance } from "src/app/page/customer-vehicle-file-insurance/entity/customer-vehicle-file-insurance.entity";
+import { CustomerVehicle } from "src/app/global/page/customer-vehicle/entity/customer-vehicle.entity";
 
 export class CustomerVehicleApprovedDetailUIDTO {
 
-  currentUser: User;
+  currentUser: any;
 
+  // Galleria
+  displayCustom: boolean;
+  activeIndex: number = 0;
+  customerVehicleFilePhotos: Array<any>;
+
+  customerVehicle: CustomerVehicle;
   customerVehicleApproved: CustomerVehicleApproved;
-  file: File;
-  dataURI: any;
-  dataURIPDF: any;
-
-  customer: Customer;
-  user: User;
+  customerVehicleFileInsurances: Array<CustomerVehicleFileInsurance>;
 
   // Messages
   error_message_service_Generic: string;
   warn_message_service_Generic: string;
   success_message_service_Generic: string;
+  failed_to_open_new_tab_message_service_Generic: string;
 
   message_not_null_message_service_CustomerVehicleApprovedDetail: string;
   success_approve_message_service_CustomerVehicleApprovedDetail: string;

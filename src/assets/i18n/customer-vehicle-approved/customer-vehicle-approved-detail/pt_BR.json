@@ -1,5 +1,9 @@
 {
   "title_CustomerVehicleApprovedDetail": "Detalhes De Customer Vehicle Approved",
+
+  "subtitle_photos_CustomerVehicleApprovedDetail": "Fotos",
+
+  "subtitle_insurance_CustomerVehicleApprovedDetail": "Contrato",
   
   "subtitle_vehicle_CustomerVehicleApprovedDetail": "Veículo",
   "label_vehicle_brand_name_CustomerVehicleApprovedDetail": "Marca",

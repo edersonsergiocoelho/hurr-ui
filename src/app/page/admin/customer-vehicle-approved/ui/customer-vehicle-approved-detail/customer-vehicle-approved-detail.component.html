@@ -13,7 +13,7 @@
         <div class="col-12 md:col-12 field">
           <button type="button" class="p-element p-button p-component mr-3 md:w-10rem"
             pButton
-            (click)="onClickCustomerVehicleApprovedSearch()">
+            (click)="clickRouterNavigateToCustomerVehicleApproved()">
             <span class="p-button-label">
               {{'span_button_label_to_go_back_Generic' | translate}}
             </span>
@@ -21,19 +21,58 @@
           </button>
         </div>
 
-        <div class="col-12 md:col-12 field" style="text-align: center;" *ngIf="customerVehicleApprovedDetailUIDTO.dataURI">
-          <p-image [src]="customerVehicleApprovedDetailUIDTO.dataURI" alt="Image" width="250" [preview]="true" ></p-image>
+        <div class="col-12 md:col-12 field">
+          <div class="col-2 md:col-2 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_photos_CustomerVehicleApprovedDetail' | translate}}</h2>
+          </div>
         </div>
 
-        <div class="col-12 md:col-12 field" style="text-align: center;" *ngIf="customerVehicleApprovedDetailUIDTO.dataURIPDF">
-          <button type="button" class="p-element p-button p-component mr-3 md:w-10rem"
-            pButton
-            (click)="onClickOpenPDF()">
-            <span class="p-button-label">
-              {{'span_button_label_open_pdf_Generic' | translate}}
-            </span>
-            <i class="pi pi-file-pdf"></i>
-          </button>
+        <div class="col-12 md:col-12 field">
+          <div class="card">
+            <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleFilePhotos" class="grid" style="max-width: 100%;">
+              <div *ngFor="let image of customerVehicleApprovedDetailUIDTO.customerVehicleFilePhotos; let index = index" class="col-3" key="index" style="text-align: center; margin-top: 10px;">
+                <img 
+                  [src]="image.dataURI" 
+                  [alt]="image.originalFileName" 
+                  style="cursor: pointer; width: 50%;" 
+                  (click)="clickOpenPhoto(index)" />
+    
+              </div>
+            </div>
+            <p-galleria
+              [value]="customerVehicleApprovedDetailUIDTO.customerVehicleFilePhotos"
+              [(visible)]="customerVehicleApprovedDetailUIDTO.displayCustom"
+              [(activeIndex)]="customerVehicleApprovedDetailUIDTO.activeIndex"
+              [containerStyle]="{ 'max-width': '100%' }"
+              [numVisible]="5"
+              [circular]="true"
+              [fullScreen]="true"
+              [showItemNavigators]="true"
+              [showThumbnails]="false">
+              <ng-template pTemplate="item" let-item>
+                <img [src]="item.dataURI"
+                  style="width: 100%; display: block;"/>
+              </ng-template>
+            </p-galleria>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="col-2 md:col-2 field">
+            <h2 id="divH2" class="bg-indigo-500 text-white">{{'subtitle_insurance_CustomerVehicleApprovedDetail' | translate}}</h2>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="card">
+            <div *ngIf="customerVehicleApprovedDetailUIDTO.customerVehicleFileInsurances" class="grid" style="max-width: 100%;">
+              <div *ngFor="let customerVehicleFileInsurance of customerVehicleApprovedDetailUIDTO.customerVehicleFileInsurances; let index = index" class="col-12" key="index">
+                <a (click)="clickOpenInsurance(customerVehicleFileInsurance)" style="cursor: pointer; text-decoration: underline;">
+                  {{ customerVehicleFileInsurance.originalFileName }}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="col-12 md:col-12 field">
@@ -88,8 +127,11 @@
           <label for="mileageCreated" class="font-medium text-2xl">{{'label_mileage_created_CustomerVehicleApprovedDetail' | translate}}</label>
           <p-inputNumber type="number" class="p-inputtext-lg"
             placeholder="{{'placeholder_mileage_created_CustomerVehicleApprovedDetail' | translate}}"
-            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.mileageCreated" name="mileageCreated" autocomplete="off" 
-            mode="decimal"/>
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.mileageCreated" 
+            name="mileageCreated" 
+            autocomplete="off" 
+            mode="decimal"
+            [disabled]="true"/>
         </div>
 
         <div class="col-12 md:col-12 field">
@@ -103,9 +145,12 @@
           <label for="vehicleValue" class="font-medium text-2xl">{{'label_vehicle_value_CustomerVehicleApprovedDetail' | translate}}</label>
           <p-inputNumber type="text" class="p-inputtext-lg"
             placeholder="{{'placeholder_vehicle_value_CustomerVehicleApprovedDetail' | translate}}"
-            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.vehicleValue" name="vehicleValue" autocomplete="off" 
+            [(ngModel)]="customerVehicleApprovedDetailUIDTO.customerVehicleApproved.customerVehicle.vehicleValue" 
+            name="vehicleValue" 
+            autocomplete="off" 
             mode="decimal" 
-            [minFractionDigits]="2"/>
+            [minFractionDigits]="2"
+            [disabled]="true"/>
         </div>
 
         <div class="col-12 md:col-12 field">
