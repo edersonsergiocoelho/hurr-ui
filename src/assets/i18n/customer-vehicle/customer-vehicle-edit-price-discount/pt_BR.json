@@ -1,0 +1,8 @@
+{
+  "title_CustomerVehicleEditPriceDiscount": "Preços E Descontos",
+
+  "label_daily_rate_CustomerVehicleEditPriceDiscount": "Diária",
+  "placeholder_daily_rate_CustomerVehicleEditPriceDiscount": "Informe O Valor Da Diária Do Veículo.",
+
+  "save_success_message_service_CustomerVehicleEditPriceDiscount": "Preços E Descontos Atualizado Com Sucesso."
+}

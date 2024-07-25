@@ -1,0 +1,36 @@
+<div style="padding-top: 20px; padding-left: 20px; padding-right: 20px;">
+  
+  <form #customerVehicleEditPriceDiscountForm="ngForm" (ngSubmit)="ngSubmit()">
+
+    <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleEditPriceDiscount' | translate}}</h1>
+
+    <div class="p-fluid formgrid grid">
+
+      <div class="col-6 md:col-6 field col">
+        <label for="dailyRate" class="font-medium text-2xl">{{'label_daily_rate_CustomerVehicleEditPriceDiscount' |
+          translate}}</label>
+        <p-inputNumber type="text" class="p-inputtext-lg"
+          placeholder="{{'placeholder_daily_rate_CustomerVehicleEditPriceDiscount' | translate}}"
+          [(ngModel)]="customerVehicleEditPriceDiscountUIDTO.customerVehicle.dailyRate" name="dailyRate"
+          autocomplete="off" mode="decimal" [minFractionDigits]="2" />
+      </div>
+
+    </div>
+
+    <p-divider align="center" layout="horizontal" styleclass="h-full mx-0 lg:mx-3" class="p-element">
+    </p-divider>
+
+    <div class="col-12 md:col-12 field" style="text-align: right;">
+
+      <button type="submit" class="p-element p-button p-component p-button-success mr-3 md:w-10rem" pButton
+        [disabled]="!customerVehicleEditPriceDiscountForm.valid">
+        <i class="pi pi-save"></i>
+        <span class="p-button-label">
+          {{'span_button_label_save_Generic' | translate}}
+        </span>
+      </button>
+
+    </div>
+
+  </form>
+</div>

@@ -164,5 +164,5 @@ export class CustomerVehicleRegisterStep6Component implements OnInit {
 
     // Chamar onFormChange para refletir as mudanças no formulário
     this.onFormChange(this.customerVehicleRegisterStep6Form);
-}
+  }
 }

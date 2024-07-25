@@ -97,7 +97,6 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
   
         if (customerVehicleApprovedServiceFindById.status == 200) {
           if (customerVehicleApprovedServiceFindById.body != null) {
-            debugger;
             this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved = customerVehicleApprovedServiceFindById.body;
           }
         }

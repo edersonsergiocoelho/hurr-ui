@@ -34,6 +34,9 @@ import { CustomerVehicleRegisterStep5Component } from '../ui/customer-vehicle-re
 import { CustomerVehicleRegisterStep6Component } from '../ui/customer-vehicle-register-step6/customer-vehicle-register-step6.component';
 import { CustomerVehicleRegisterStep7Component } from '../ui/customer-vehicle-register-step7/customer-vehicle-register-step7.component';
 import { ConfirmationService } from 'primeng/api';
+import { CustomerVehicleEditComponent } from '../ui/customer-vehicle-edit/customer-vehicle-edit.component';
+import { CustomerVehicleEditPhotosComponent } from '../ui/customer-vehicle-edit-photos/customer-vehicle-edit-photos.component';
+import { CustomerVehicleEditPriceDiscountComponent } from '../ui/customer-vehicle-edit-price-discount/customer-vehicle-edit-price-discount.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,10 @@ import { ConfirmationService } from 'primeng/api';
     CustomerVehicleRegisterStep4Component,
     CustomerVehicleRegisterStep5Component,
     CustomerVehicleRegisterStep6Component,
-    CustomerVehicleRegisterStep7Component
+    CustomerVehicleRegisterStep7Component,
+    CustomerVehicleEditComponent,
+    CustomerVehicleEditPhotosComponent,
+    CustomerVehicleEditPriceDiscountComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +91,10 @@ import { ConfirmationService } from 'primeng/api';
     CustomerVehicleRegisterStep4Component,
     CustomerVehicleRegisterStep5Component,
     CustomerVehicleRegisterStep6Component,
-    CustomerVehicleRegisterStep7Component
+    CustomerVehicleRegisterStep7Component,
+    CustomerVehicleEditComponent,
+    CustomerVehicleEditPhotosComponent,
+    CustomerVehicleEditPriceDiscountComponent
   ],
   providers: [
     ConfirmationService

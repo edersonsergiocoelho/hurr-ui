@@ -67,7 +67,7 @@ export class CustomerVehicleSearchComponent implements OnInit {
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
+        severity: SeverityConstants.ERROR,
         summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
@@ -170,7 +170,11 @@ export class CustomerVehicleSearchComponent implements OnInit {
     this.customerVehicleSearchUIDTO.page = event.first / event.rows;
   }
 
-  navigateToCustomerVehicleRegister() {
+  clickRouterNavigateToCustomerVehicleRegister() {
     this.router.navigate(['/customer-vehicle/register']);
+  }
+
+  clickRouterNavigateToCustomerVehicleEdit(rowData) {
+    this.router.navigate(['/customer-vehicle/edit/' + rowData.customerVehicleId]);
   }
 }

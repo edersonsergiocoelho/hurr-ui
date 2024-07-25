@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="grid" style="padding-top: 20px; padding-left: 20px; padding-right: 20px;">
+    
+    <form #customerVehicleEditPhotosForm="ngForm" (ngSubmit)="ngSubmit()">
+
+      <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleEditPhotos' | translate}}</h1>
+
+      <div class="p-fluid p-formgrid grid">
+
+        <div class="col-12 md:col-12 field">
+
+          <p-fileUpload #fileUpload name="file" [customUpload]="true"
+            (uploadHandler)="uploadHandlerVehiclePhoto($event)" [multiple]="true" accept="image/*"
+            [maxFileSize]="2000000">
+            <ng-template pTemplate="content">
+              <ul
+                *ngIf="customerVehicleEditPhotosUIDTO.uploadedFiles != null && customerVehicleEditPhotosUIDTO.uploadedFiles.length">
+                <li *ngFor="let file of customerVehicleEditPhotosUIDTO.uploadedFiles">{{ file.name }} - {{ file.size }}
+                  bytes</li>
+              </ul>
+            </ng-template>
+          </p-fileUpload>
+
+        </div>
+
+        <div class="col-12 md:col-12 field">
+          <div class="card">
+            <div *ngIf="customerVehicleEditPhotosUIDTO.customerVehicleFilePhotos" class="grid" style="max-width: 100%;">
+              <div
+                *ngFor="let customerVehicleFilePhoto of customerVehicleEditPhotosUIDTO.customerVehicleFilePhotos; let index = index"
+                class="col-3" key="index" style="text-align: center; margin-top: 10px;">
+                <img [src]="customerVehicleFilePhoto.dataURI" [alt]="customerVehicleFilePhoto.originalFileName"
+                  style="cursor: pointer; width: 50%;" (click)="imageClick(index)" />
+
+                <div style="text-align: center; margin-top: 10px;">
+                  <p-radioButton name="coverImage" [value]="customerVehicleFilePhoto"
+                    [(ngModel)]="customerVehicleEditPhotosUIDTO.selectedCoverImage"
+                    (onClick)="onClickSelectedCoverImage(customerVehicleFilePhoto)">
+                  </p-radioButton>
+                  <label style="margin-left: 5px;">{{'label_cover_image_CustomerVehicleEditPhotos' | translate}}</label>
+                </div>
+
+              </div>
+            </div>
+            <p-galleria [value]="customerVehicleEditPhotosUIDTO.customerVehicleFilePhotos"
+              [(visible)]="customerVehicleEditPhotosUIDTO.displayCustom"
+              [(activeIndex)]="customerVehicleEditPhotosUIDTO.activeIndex" [containerStyle]="{ 'max-width': '80%' }"
+              [numVisible]="5" [circular]="true" [fullScreen]="true" [showItemNavigators]="true"
+              [showThumbnails]="false">
+              <ng-template pTemplate="item" let-item>
+                <img [src]="item.dataURI" style="width: 100%; display: block;" />
+              </ng-template>
+            </p-galleria>
+          </div>
+        </div>
+
+      </div>
+
+      <p-divider align="center" layout="horizontal" styleclass="h-full mx-0 lg:mx-3" class="p-element">
+      </p-divider>
+
+      <div class="col-12 md:col-12 field" style="text-align: right;">
+
+        <button type="submit" class="p-element p-button p-component p-button-success mr-3 md:w-10rem"
+          pButton
+          [disabled]="!customerVehicleEditPhotosForm.valid">
+          <i class="pi pi-save"></i>
+          <span class="p-button-label">
+            {{'span_button_label_save_Generic' | translate}}
+          </span>
+        </button>
+
+      </div>
+
+    </form>
+  </div>
+</div>

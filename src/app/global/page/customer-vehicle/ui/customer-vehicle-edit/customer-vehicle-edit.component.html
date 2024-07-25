@@ -1,0 +1,185 @@
+<div id="blockContent" class="block-content">
+  <div class="block-content-active " style="height: 100vh; overflow: auto;">
+    <div class="min-h-screen flex relative lg:static surface-ground">
+      <div id="app-sidebar-11"
+        class="surface-section h-screen hidden lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none"
+        style="width: 280px">
+        <div class="flex flex-column h-full">
+
+          <div *ngIf="customerVehicleEditUIDTO.customerVehicleFilePhoto != null"
+            class="flex align-items-center px-5 flex-shrink-0" style="height: 200px">
+            <img
+              [src]="customerVehicleEditUIDTO.customerVehicleFilePhoto.dataURI"
+              alt="Image" height="130px" ismap="false">
+          </div>
+
+          <label *ngIf="customerVehicleEditUIDTO.customerVehicle != null" class="font-bold text-2xl" style="text-align: center;">
+            {{ customerVehicleEditUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName }} - {{ customerVehicleEditUIDTO.customerVehicle.vehicle.vehicleName }}
+          </label>
+
+          <label *ngIf="customerVehicleEditUIDTO.customerVehicle != null" class="text-sm" style="text-align: center;">
+            {{ customerVehicleEditUIDTO.customerVehicle.vehicleModel.vehicleModelName }}
+          </label>
+
+          <p-divider align="center" layout="horizontal" styleclass="h-full mx-0 lg:mx-3" class="p-element">
+          </p-divider>
+
+          <div class="overflow-y-auto">
+            <ul class="list-none p-3 m-0">
+              <li>
+                <div
+                  class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer border-2 border-transparent border-rounded"
+                  data-pb-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup'}">
+                  <span class="font-medium">FAVORITES</span>
+                  <i class="pi pi-chevron-down"></i>
+                </div>
+                <ul class="list-none p-0 m-0 overflow-hidden hidden" style="">
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors text-indigo-500"
+                      style="border-radius: 12px">
+                      <i class="pi pi-home mr-2"></i>
+                      <span class="font-medium">Dashboard</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                      style="border-radius: 12px">
+                      <i class="pi pi-bookmark mr-2 text-blue-500"></i>
+                      <span class="font-medium">Bookmarks</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                      style="border-radius: 12px"
+                      data-pb-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup'}">
+                      <i class="pi pi-chart-line mr-2 text-purple-500"></i>
+                      <span class="font-medium">Reports</span>
+                      <i class="pi pi-chevron-down ml-auto"></i>
+                    </a>
+                    <ul
+                      class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                      <li>
+                        <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                          style="border-radius: 12px"
+                          data-pb-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup'}">
+                          <i class="pi pi-chart-line mr-2 text-purple-500"></i>
+                          <span class="font-medium">Revenue</span>
+                          <i class="pi pi-chevron-down ml-auto"></i>
+                        </a>
+                        <ul
+                          class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                          <li>
+                            <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                              style="border-radius: 12px">
+                              <i class="pi pi-table text-purple-500 mr-2"></i>
+                              <span class="font-medium">View</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                              style="border-radius: 12px">
+                              <i class="pi pi-search mr-2 text-purple-500"></i>
+                              <span class="font-medium">Search</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                          style="border-radius: 12px">
+                          <i class="pi pi-chart-line mr-2 text-purple-500"></i>
+                          <span class="font-medium">Expenses</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                      style="border-radius: 12px">
+                      <i class="pi pi-users mr-2 text-green-500"></i>
+                      <span class="font-medium">Team</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                      style="border-radius: 12px">
+                      <i class="pi pi-comments mr-2 text-cyan-500"></i>
+                      <span class="font-medium">Messages</span>
+                      <span
+                        class="inline-flex align-items-center justify-content-center ml-auto bg-indigo-500 text-0 border-circle"
+                        style="min-width: 1.5rem; height: 1.5rem">3</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                      style="border-radius: 12px">
+                      <i class="pi pi-calendar mr-2 text-teal-500"></i>
+                      <span class="font-medium">Calendar</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors"
+                      style="border-radius: 12px">
+                      <i class="pi pi-cog mr-2 text-pink-500"></i>
+                      <span class="font-medium">Settings</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="list-none p-3 m-0">
+              <li>
+                <div class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer"
+                  data-pb-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup'}"
+                  (click)="toggleApplicationsMenu()">
+                  <span class="font-medium">APPLICATIONS</span>
+                  <i class="pi pi-chevron-down"></i>
+                </div>
+                <ul class="list-none p-0 m-0 overflow-hidden" [ngClass]="{'hidden': !applicationsMenuOpen}">
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors"
+                      style="border-radius: 12px" (click)="showContent('photos')">
+                      <i class="pi pi-images mr-2 text-cyan-500"></i>
+                      <span class="font-medium">Fotos</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors"
+                      style="border-radius: 12px" (click)="showContent('price-discount')">
+                      <i class="pi pi-dollar mr-2 text-purple-500"></i>
+                      <span class="font-medium">Preços</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors"
+                      style="border-radius: 12px">
+                      <i class="pi pi-github mr-2 text-blue-500"></i>
+                      <span class="font-medium">GitHub</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="min-h-screen flex flex-column relative flex-auto">
+        <div class="p-5 flex flex-column flex-auto">
+          <div class="border-2 border-dashed surface-border border-round surface-section flex-auto">
+            <!--
+            <router-outlet></router-outlet>
+            -->
+            <div *ngIf="currentContent === 'photos'">
+              <app-customer-vehicle-edit-photos></app-customer-vehicle-edit-photos>
+            </div>
+
+            <div *ngIf="currentContent === 'price-discount'">
+              <app-customer-vehicle-edit-price-discount></app-customer-vehicle-edit-price-discount>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

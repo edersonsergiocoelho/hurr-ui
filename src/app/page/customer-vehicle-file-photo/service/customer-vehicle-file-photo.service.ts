@@ -91,6 +91,15 @@ export class CustomerVehicleFilePhotoService {
     );
   }
 
+  saveAll(customerVehicleFilePhotos: Array<CustomerVehicleFilePhoto>): Observable<HttpResponse<CustomerVehicleFilePhoto>> {
+    const url = `${this.apiUrl}/all`;
+    return this.httpClient.post<CustomerVehicleFilePhoto>(url, customerVehicleFilePhotos, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleFilePhoto>) => {
+        return response;
+      })
+    );
+  }
+
   update(customerVehicleFilePhoto: CustomerVehicleFilePhoto): Observable<HttpResponse<CustomerVehicleFilePhoto>> {
     const url = `${this.apiUrl}/${customerVehicleFilePhoto.customerVehicleFilePhotoId}`;
     return this.httpClient.put<CustomerVehicleFilePhoto>(url, customerVehicleFilePhoto, { observe: 'response' }).pipe(
@@ -102,6 +111,19 @@ export class CustomerVehicleFilePhotoService {
 
   delete(customerVehicleFilePhotoId: string): Observable<HttpResponse<void> | null> {
     const url = `${this.apiUrl}/${customerVehicleFilePhotoId}`;
+    return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(
+      catchError((error: any) => {
+        if (error.status === 404) {
+          return of(null);
+        } else {
+          throw error;
+        }
+      })
+    );
+  }
+
+  deleteByCustomerVehicle(customerVehicleId: string): Observable<HttpResponse<void> | null> {
+    const url = `${this.apiUrl}/by/customer-vehicle/${customerVehicleId}`;
     return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(
       catchError((error: any) => {
         if (error.status === 404) {

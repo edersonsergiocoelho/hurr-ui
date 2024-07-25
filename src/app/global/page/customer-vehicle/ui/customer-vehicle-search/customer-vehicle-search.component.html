@@ -35,7 +35,7 @@
         <button
           pbutton="" pripple="" icon="pi pi-plus"
           class="p-element p-ripple m-0 p-button p-component"
-          (click)="navigateToCustomerVehicleRegister()">
+          (click)="clickRouterNavigateToCustomerVehicleRegister()">
           <span
             class="p-button-icon p-button-icon-left pi pi-plus" aria-hidden="true">
           </span>
@@ -205,9 +205,10 @@
             Return
           </a>
           <a tabindex="0"
-            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full">
+            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
+            (click)="clickRouterNavigateToCustomerVehicleEdit(item)">
             <i class="pi pi-file mr-2 mb-2 md:mb-0"></i>
-            View Invoice
+            Editar
           </a>
           <!--
           <a tabindex="0"
