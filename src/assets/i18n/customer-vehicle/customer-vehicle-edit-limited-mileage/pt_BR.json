@@ -1,0 +1,14 @@
+{
+  "title_CustomerVehicleEditLimitedMileage": "Quilometragem Ilimitada?",
+
+  "label_limited_mileage_type_CustomerVehicleEditLimitedMileage": "Quilometragem Ilimitada?",
+  "label_limited_mileage_type_limited_mileage_CustomerVehicleEditLimitedMileage": "Limitada",
+  "label_limited_mileage_type_unlimited_mileage_CustomerVehicleEditLimitedMileage": "Ilimitada",
+
+  "label_limited_mileage_included_CustomerVehicleEditLimitedMileage": "KM Incluída",
+  "placeholder_limited_mileage_included_CustomerVehicleEditLimitedMileage": "Informe A KM Incluída",
+  "label_limited_mileage_value_CustomerVehicleEditLimitedMileage": "Taxa KM Excedente",
+  "placeholder_limited_mileage_value_CustomerVehicleEditLimitedMileage": "Informe A Taxa Do KM Excedente",
+
+  "save_success_message_service_CustomerVehicleEditLimitedMileage": "Informações Da Quilometragem Atualizada Com Sucesso."
+}

@@ -146,15 +146,22 @@
                   <li>
                     <a class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors"
                       style="border-radius: 12px" (click)="showContent('price-discount')">
-                      <i class="pi pi-dollar mr-2 text-purple-500"></i>
+                      <i class="pi pi-dollar mr-2 text-700"></i>
                       <span class="font-medium">Preços</span>
                     </a>
                   </li>
                   <li>
                     <a class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors"
-                      style="border-radius: 12px">
-                      <i class="pi pi-github mr-2 text-blue-500"></i>
-                      <span class="font-medium">GitHub</span>
+                      style="border-radius: 12px" (click)="showContent('limited-mileage')">
+                      <i class="pi pi-gauge mr-2 text-green-500"></i>
+                      <span class="font-medium">Quilometragem Limitada?</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors"
+                      style="border-radius: 12px" (click)="showContent('advertisement-status')">
+                      <i class="pi pi-book mr-2 text-blue-500"></i>
+                      <span class="font-medium">Status do Anúncio</span>
                     </a>
                   </li>
                 </ul>
@@ -175,6 +182,14 @@
 
             <div *ngIf="currentContent === 'price-discount'">
               <app-customer-vehicle-edit-price-discount></app-customer-vehicle-edit-price-discount>
+            </div>
+
+            <div *ngIf="currentContent === 'limited-mileage'">
+              <app-customer-vehicle-edit-limited-mileage></app-customer-vehicle-edit-limited-mileage>
+            </div>
+
+            <div *ngIf="currentContent === 'advertisement-status'">
+              <app-customer-vehicle-edit-advertisement-status></app-customer-vehicle-edit-advertisement-status>
             </div>
 
           </div>

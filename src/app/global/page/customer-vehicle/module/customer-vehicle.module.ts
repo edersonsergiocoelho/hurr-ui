@@ -37,6 +37,8 @@ import { ConfirmationService } from 'primeng/api';
 import { CustomerVehicleEditComponent } from '../ui/customer-vehicle-edit/customer-vehicle-edit.component';
 import { CustomerVehicleEditPhotosComponent } from '../ui/customer-vehicle-edit-photos/customer-vehicle-edit-photos.component';
 import { CustomerVehicleEditPriceDiscountComponent } from '../ui/customer-vehicle-edit-price-discount/customer-vehicle-edit-price-discount.component';
+import { CustomerVehicleEditAdvertisementStatusComponent } from '../ui/customer-vehicle-edit-advertisement-status/customer-vehicle-edit-advertisement-status.component';
+import { CustomerVehicleEditLimitedMileageComponent } from '../ui/customer-vehicle-edit-limited-mileage/customer-vehicle-edit-limited-mileage.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { CustomerVehicleEditPriceDiscountComponent } from '../ui/customer-vehicl
     CustomerVehicleRegisterStep7Component,
     CustomerVehicleEditComponent,
     CustomerVehicleEditPhotosComponent,
-    CustomerVehicleEditPriceDiscountComponent
+    CustomerVehicleEditPriceDiscountComponent,
+    CustomerVehicleEditAdvertisementStatusComponent,
+    CustomerVehicleEditLimitedMileageComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +98,9 @@ import { CustomerVehicleEditPriceDiscountComponent } from '../ui/customer-vehicl
     CustomerVehicleRegisterStep7Component,
     CustomerVehicleEditComponent,
     CustomerVehicleEditPhotosComponent,
-    CustomerVehicleEditPriceDiscountComponent
+    CustomerVehicleEditPriceDiscountComponent,
+    CustomerVehicleEditAdvertisementStatusComponent,
+    CustomerVehicleEditLimitedMileageComponent
   ],
   providers: [
     ConfirmationService

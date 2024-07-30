@@ -4,5 +4,8 @@
   "label_daily_rate_CustomerVehicleEditPriceDiscount": "Diária",
   "placeholder_daily_rate_CustomerVehicleEditPriceDiscount": "Informe O Valor Da Diária Do Veículo.",
 
+  "label_cleaning_fee_CustomerVehicleEditPriceDiscount": "Taxa De Limpeza",
+  "placeholder_cleaning_fee_CustomerVehicleEditPriceDiscount": "Informe A Taxa De Limpeza Para Quando For Cobrar Do Seu Cliente.",
+
   "save_success_message_service_CustomerVehicleEditPriceDiscount": "Preços E Descontos Atualizado Com Sucesso."
 }
