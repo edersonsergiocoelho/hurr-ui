@@ -40,6 +40,7 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/customer-vehicle/customer-vehicle-detail/',
   '/assets/i18n/customer-vehicle/customer-vehicle-edit/',
   '/assets/i18n/customer-vehicle/customer-vehicle-edit-advertisement-status/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-edit-detail/',
   '/assets/i18n/customer-vehicle/customer-vehicle-edit-limited-mileage/',
   '/assets/i18n/customer-vehicle/customer-vehicle-edit-photos/',
   '/assets/i18n/customer-vehicle/customer-vehicle-edit-price-discount/',

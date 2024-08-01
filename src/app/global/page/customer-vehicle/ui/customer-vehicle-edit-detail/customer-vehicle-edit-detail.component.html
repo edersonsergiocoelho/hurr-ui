@@ -1,0 +1,232 @@
+<div style="padding-top: 20px; padding-left: 20px; padding-right: 20px;">
+  
+  <form #customerVehicleEditDetailForm="ngForm" (ngSubmit)="ngSubmit()">
+
+    <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleEditDetail' | translate}}</h1>
+
+    <div class="p-fluid formgrid grid">
+
+      <div class="col-6 md:col-6 field">
+        <label for="vehicleBrand" class="font-medium text-2xl">{{'label_vehicle_brand_CustomerVehicleEditDetail' | translate}}</label>
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="customerVehicleEditDetailUIDTO.vehicleBrands" 
+          [(ngModel)]="customerVehicleEditDetailUIDTO.selectedVehicleBrand" 
+          optionLabel="vehicleBrandName" 
+          name="vehicleBrand" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleBrandName"
+          placeholder="{{'placeholder_vehicle_brand_CustomerVehicleEditDetail' | translate}}" 
+          (onChange)="onChangeVehicleBrand($event.value)"
+          [disabled]="true">
+        </p-dropdown>
+      </div>
+      
+      <div class="col-6 md:col-6 field">
+        <label for="vehicle" class="font-medium text-2xl">{{'label_vehicle_CustomerVehicleEditDetail' | translate}}</label>
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="customerVehicleEditDetailUIDTO.vehicles" 
+          [(ngModel)]="customerVehicleEditDetailUIDTO.selectedVehicle" 
+          optionLabel="vehicleName" 
+          name="vehicle" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleName"
+          placeholder="{{'placeholder_vehicle_CustomerVehicleEditDetail' | translate}}" 
+          (onChange)="onChangeVehicle($event.value)"
+          [disabled]="true">
+        </p-dropdown>
+      </div>
+  
+      <div class="col-6 md:col-6 field">
+        <label for="vehicleModel" class="font-medium text-2xl">{{'label_vehicle_model_CustomerVehicleEditDetail' | translate}}</label>
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="customerVehicleEditDetailUIDTO.vehicleModels" 
+          [(ngModel)]="customerVehicleEditDetailUIDTO.selectedVehicleModel" 
+          optionLabel="vehicleModelName" 
+          name="vehicleModel" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleModelName"
+          placeholder="{{'placeholder_vehicle_model_CustomerVehicleEditDetail' | translate}}">
+        </p-dropdown>
+      </div>
+
+      <div class="col-6 md:col-6 field">
+        <label for="vehicleTransmission" class="font-medium text-2xl">{{'label_vehicle_transmission_CustomerVehicleEditDetail' | translate}}</label>
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="customerVehicleEditDetailUIDTO.VehicleTransmissions" 
+          [(ngModel)]="customerVehicleEditDetailUIDTO.selectedVehicleTransmission" 
+          optionLabel="vehicleTransmissionName" 
+          name="vehicleTransmission" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleTransmissionName"
+          placeholder="{{'placeholder_vehicle_transmission_CustomerVehicleEditDetail' | translate}}">
+        </p-dropdown>
+      </div>
+  
+      <div class="col-6 md:col-6 field">
+        <label for="mileageCreated" class="font-medium text-2xl">{{'label_mileage_created_CustomerVehicleEditDetail' | translate}}</label>
+        <p-inputNumber type="number" class="p-inputtext-lg"
+          placeholder="{{'placeholder_mileage_created_CustomerVehicleEditDetail' | translate}}"
+          [(ngModel)]="customerVehicleEditDetailUIDTO.customerVehicle.mileageCreated" name="mileageCreated" autocomplete="off" 
+          mode="decimal"/>
+      </div>
+
+      <div class="col-6 md:col-6 field">
+        <label for="vehicleValue" class="font-medium text-2xl">{{'label_vehicle_value_CustomerVehicleRegisterStep4' | translate}}</label>
+        <p-inputNumber type="text" class="p-inputtext-lg"
+          placeholder="{{'placeholder_vehicle_value_CustomerVehicleRegisterStep4' | translate}}"
+          [(ngModel)]="customerVehicleEditDetailUIDTO.customerVehicle.vehicleValue" name="vehicleValue" autocomplete="off" 
+          mode="decimal" 
+          [minFractionDigits]="2"/>
+      </div>
+
+      <div class="flex flex-wrap col-6 md:col-6 gap-3">
+        <label for="licensePlateType" class="font-medium text-2xl">{{'label_license_plate_type_CustomerVehicleEditDetail' | translate}}</label>
+        <div class="flex align-items-center">
+          <p-radioButton 
+              name="licensePlateType" 
+              value="oldModel" 
+              [(ngModel)]="customerVehicleEditDetailUIDTO.licensePlateType" 
+              inputId="oldModel" 
+              (ngModelChange)="ngModelChangeLicensePlateType($event)"
+              [required]="true" />
+          <label for="oldModel" class="ml-2">
+            {{'label_license_plate_type_old_model_CustomerVehicleEditDetail' | translate}}
+          </label>
+        </div>
+        
+        <div class="flex align-items-center">
+          <p-radioButton 
+              name="licensePlateType" 
+              value="mercosul" 
+              [(ngModel)]="customerVehicleEditDetailUIDTO.licensePlateType" 
+              inputId="mercosul" 
+              (ngModelChange)="ngModelChangeLicensePlateType($event)"
+              [required]="true" />
+          <label for="mercosul" class="ml-2">
+            {{'label_license_plate_type_mercosul_CustomerVehicleEditDetail' | translate}}
+          </label>
+        </div>
+      </div>
+
+      <div class="col-6 md:col-6 field">
+        <label for="licensePlate" class="font-medium text-2xl">{{'label_license_plate_CustomerVehicleEditDetail' | translate}}</label>
+        <p-inputMask class="p-inputtext-lg" [mask]="customerVehicleEditDetailUIDTO.licensePlateMask"
+          placeholder="{{'placeholder_license_plate_CustomerVehicleEditDetail' | translate}}"
+          [(ngModel)]="customerVehicleEditDetailUIDTO.customerVehicle.licensePlate" name="licensePlate" autocomplete="off" 
+          [required]="true" />
+      </div>
+  
+      <div class="col-6 md:col-6 field">
+        <label for="renavam" class="font-medium text-2xl">{{'label_renavam_CustomerVehicleEditDetail' | translate}}</label>
+        <p-inputMask class="p-inputtext-lg" mask="99999999999"
+          placeholder="{{'placeholder_renavam_CustomerVehicleEditDetail' | translate}}"
+          [(ngModel)]="customerVehicleEditDetailUIDTO.customerVehicle.renavam" name="renavam" autocomplete="off" [required]="true" />
+      </div>
+  
+      <div class="col-6 md:col-6 field">
+        <label for="state" class="font-medium text-2xl">{{'label_state_CustomerVehicleEditDetail' | translate}}</label>
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="customerVehicleEditDetailUIDTO.states" 
+          [(ngModel)]="customerVehicleEditDetailUIDTO.selectedState" optionLabel="stateName" 
+          name="state" [showClear]="true"
+          placeholder="{{'placeholder_state_CustomerVehicleEditDetail' | translate}}" 
+          [required]="true" >
+        </p-dropdown>
+      </div>
+  
+      <div class="col-6 md:col-6 field">
+        <label for="chassis" class="font-medium text-2xl">{{'label_chassis_CustomerVehicleEditDetail' | translate}}</label>
+        <p-inputMask class="p-inputtext-lg" mask="*****************" 
+          placeholder="{{'placeholder_chassis_CustomerVehicleEditDetail' | translate}}"
+          [(ngModel)]="customerVehicleEditDetailUIDTO.customerVehicle.chassis" name="chassis" autocomplete="off" 
+          [required]="true" />
+      </div>
+  
+      <div class="col-6 md:col-6 field">
+        <label for="yearOfManufacture" class="font-medium text-2xl">{{'label_year_of_manufacture_CustomerVehicleEditDetail' | translate}}</label>
+        <p-calendar 
+          class="p-inputtext-lg"
+          placeholder="{{'placeholder_year_of_manufacture_CustomerVehicleEditDetail' | translate}}"
+          [(ngModel)]="customerVehicleEditDetailUIDTO.yearOfManufacture" 
+          name="yearOfManufacture"
+          view="year" 
+          dateFormat="yy" 
+          [required]="true" />
+      </div>
+  
+      <div class="col-6 md:col-6 field">
+        <label for="yearOfTheCar" class="font-medium text-2xl">{{'label_year_of_the_car_CustomerVehicleEditDetail' | translate}}</label>
+        <p-calendar 
+          class="p-inputtext-lg"
+          placeholder="{{'placeholder_year_of_the_car_CustomerVehicleEditDetail' | translate}}"
+          [(ngModel)]="customerVehicleEditDetailUIDTO.yearOfTheCar" 
+          name="yearOfTheCar"
+          view="year" 
+          dateFormat="yy" 
+          [required]="true" />
+      </div>
+  
+      <div class="col-6 md:col-6 field">
+        <label for="vehicleColor" class="font-medium text-2xl">{{'label_vehicle_color_CustomerVehicleEditDetail' | translate}}</label>
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="customerVehicleEditDetailUIDTO.vehicleColors" 
+          [(ngModel)]="customerVehicleEditDetailUIDTO.selectedVehicleColor" 
+          optionLabel="vehicleColorName" 
+          name="vehicleColor" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleColorName"
+          placeholder="{{'placeholder_vehicle_color_CustomerVehicleEditDetail' | translate}}">
+        </p-dropdown>
+      </div>
+  
+      <div class="col-6 md:col-6 field">
+        <label for="vehicleFuelType" class="font-medium text-2xl">{{'label_vehicle_fuel_type_CustomerVehicleEditDetail' | translate}}</label>
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="customerVehicleEditDetailUIDTO.vehicleFuelTypes" 
+          [(ngModel)]="customerVehicleEditDetailUIDTO.selectedVehicleFuelType" 
+          optionLabel="vehicleFuelTypeName" 
+          name="vehicleFuelType" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleFuelTypeName"
+          placeholder="{{'placeholder_vehicle_fuel_type_CustomerVehicleEditDetail' | translate}}">
+        </p-dropdown>
+      </div>
+  
+      <div class="col-12 md:col-12 field">
+        <label for="description" class="font-medium text-2xl">{{'label_description_CustomerVehicleEditDetail' | translate}}</label>
+        <div class="col-12 md:col-12 field">
+          <textarea rows="10" pInputTextarea name="description" 
+            [(ngModel)]="customerVehicleEditDetailUIDTO.customerVehicle.description"
+            placeholder="{{'placeholder_description_CustomerVehicleEditDetail' | translate}}" 
+            required="true"
+            style="width: 100%;"
+            [required]="true" >
+          </textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <p-divider align="center" layout="horizontal" styleclass="h-full mx-0 lg:mx-3" class="p-element">
+    </p-divider>
+
+    <div class="col-12 md:col-12 field" style="text-align: right;">
+
+      <button type="submit" class="p-element p-button p-component p-button-success mr-3 md:w-10rem" pButton
+        [disabled]="!customerVehicleEditDetailForm.valid">
+        <i class="pi pi-save"></i>
+        <span class="p-button-label">
+          {{'span_button_label_save_Generic' | translate}}
+        </span>
+      </button>
+
+    </div>
+
+  </form>
+</div>

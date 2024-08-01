@@ -39,11 +39,18 @@ import { CustomerVehicleEditPhotosComponent } from '../ui/customer-vehicle-edit-
 import { CustomerVehicleEditPriceDiscountComponent } from '../ui/customer-vehicle-edit-price-discount/customer-vehicle-edit-price-discount.component';
 import { CustomerVehicleEditAdvertisementStatusComponent } from '../ui/customer-vehicle-edit-advertisement-status/customer-vehicle-edit-advertisement-status.component';
 import { CustomerVehicleEditLimitedMileageComponent } from '../ui/customer-vehicle-edit-limited-mileage/customer-vehicle-edit-limited-mileage.component';
+import { CustomerVehicleEditDetailComponent } from '../ui/customer-vehicle-edit-detail/customer-vehicle-edit-detail.component';
 
 @NgModule({
   declarations: [
     CustomerVehicleComponent,
     CustomerVehicleDetailComponent,
+    CustomerVehicleEditComponent,
+    CustomerVehicleEditAdvertisementStatusComponent,
+    CustomerVehicleEditDetailComponent,
+    CustomerVehicleEditLimitedMileageComponent,
+    CustomerVehicleEditPhotosComponent,
+    CustomerVehicleEditPriceDiscountComponent,
     CustomerVehicleSearchComponent,
     CustomerVehicleRegisterComponent,
     CustomerVehicleRegisterStep1Component,
@@ -52,12 +59,7 @@ import { CustomerVehicleEditLimitedMileageComponent } from '../ui/customer-vehic
     CustomerVehicleRegisterStep4Component,
     CustomerVehicleRegisterStep5Component,
     CustomerVehicleRegisterStep6Component,
-    CustomerVehicleRegisterStep7Component,
-    CustomerVehicleEditComponent,
-    CustomerVehicleEditPhotosComponent,
-    CustomerVehicleEditPriceDiscountComponent,
-    CustomerVehicleEditAdvertisementStatusComponent,
-    CustomerVehicleEditLimitedMileageComponent
+    CustomerVehicleRegisterStep7Component
   ],
   imports: [
     BrowserModule,
@@ -87,6 +89,12 @@ import { CustomerVehicleEditLimitedMileageComponent } from '../ui/customer-vehic
   exports: [
     CustomerVehicleComponent,
     CustomerVehicleDetailComponent,
+    CustomerVehicleEditComponent,
+    CustomerVehicleEditAdvertisementStatusComponent,
+    CustomerVehicleEditDetailComponent,
+    CustomerVehicleEditLimitedMileageComponent,
+    CustomerVehicleEditPhotosComponent,
+    CustomerVehicleEditPriceDiscountComponent,
     CustomerVehicleSearchComponent,
     CustomerVehicleRegisterComponent,
     CustomerVehicleRegisterStep1Component,
@@ -95,12 +103,7 @@ import { CustomerVehicleEditLimitedMileageComponent } from '../ui/customer-vehic
     CustomerVehicleRegisterStep4Component,
     CustomerVehicleRegisterStep5Component,
     CustomerVehicleRegisterStep6Component,
-    CustomerVehicleRegisterStep7Component,
-    CustomerVehicleEditComponent,
-    CustomerVehicleEditPhotosComponent,
-    CustomerVehicleEditPriceDiscountComponent,
-    CustomerVehicleEditAdvertisementStatusComponent,
-    CustomerVehicleEditLimitedMileageComponent
+    CustomerVehicleRegisterStep7Component
   ],
   providers: [
     ConfirmationService

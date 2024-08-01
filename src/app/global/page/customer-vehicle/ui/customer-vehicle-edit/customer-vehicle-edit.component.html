@@ -145,6 +145,12 @@
                   </li>
                   <li>
                     <a class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors"
+                      style="border-radius: 12px" (click)="showContent('detail')">
+                      <i class="pi pi-car mr-2 text-blue-500"></i>
+                      <span class="font-medium">Detalhes</span>
+                    </a>
+                  <li>
+                    <a class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors"
                       style="border-radius: 12px" (click)="showContent('price-discount')">
                       <i class="pi pi-dollar mr-2 text-700"></i>
                       <span class="font-medium">Preços</span>
@@ -178,6 +184,10 @@
             -->
             <div *ngIf="currentContent === 'photos'">
               <app-customer-vehicle-edit-photos></app-customer-vehicle-edit-photos>
+            </div>
+
+            <div *ngIf="currentContent === 'detail'">
+              <app-customer-vehicle-edit-detail></app-customer-vehicle-edit-detail>
             </div>
 
             <div *ngIf="currentContent === 'price-discount'">
