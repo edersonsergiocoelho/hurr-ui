@@ -1,19 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerVehicleEditAddressesRegisterUIDTO } from './dto/customer-vehicle-edit-addresses-register-ui-dto.dto';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { TranslateService } from '@ngx-translate/core';
 import { first, firstValueFrom } from 'rxjs';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerVehicleService } from '../../service/customer-vehicle.service';
-import { CustomerVehicle } from '../../entity/customer-vehicle.entity';
 import { NgForm } from '@angular/forms';
-import { RoleService } from 'src/app/page/admin/role/service/role.service';
-import { RoleDTO } from 'src/app/page/admin/role/dto/role-dto.dto';
-import { Role } from 'src/app/page/admin/role/entity/role.entity';
 import { CustomerVehicleAddressService } from '../../../customer-vehicle-address/service/customer-vehicle-address.service';
-import { CustomerVehicleAddressSearchDTO } from '../../../customer-vehicle-address/dto/customer-vehicle-address-search-dto.dto';
 import { CustomerVehicleAddressDTO } from '../../../customer-vehicle-address/dto/customer-vehicle-address-dto.dto';
 import { CustomerVehicleAddress } from '../../../customer-vehicle-address/entity/customer-vehicle-address.entity';
 import { State } from 'src/app/page/admin/state/entity/state.entity';
@@ -25,9 +19,7 @@ import { AddressDTO } from '../../../address/dto/address-dto.dto';
 import { AddressTypeService } from '../../../address-type/service/address-type.service';
 import { AddressAddressTypeService } from '../../../address-address-type/service/address-address-type.service';
 import { CustomerVehicleAddressSaveAddressDTO } from '../../../customer-vehicle-address/dto/customer-vehicle-address-save-address-dto.dto';
-import { CountryDTO } from 'src/app/page/admin/country/dto/country-dto.dto';
-import { StateDTO } from 'src/app/page/admin/state/dto/state-dto.dto';
-import { CityDTO } from 'src/app/page/admin/city/dto/city-dto.dto';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-customer-vehicle-edit-addresses-register',
@@ -50,7 +42,8 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
     private ngxSpinnerService: NgxSpinnerService,
     private messageService: MessageService,
     private stateService: StateService,
-    private cityService: CityService
+    private cityService: CityService,
+    private translateService: TranslateService
   ) {
 
     this.activatedRoute.paramMap.subscribe(params => {
@@ -75,6 +68,38 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
   async asyncCallFunctions() {
 
     this.ngxSpinnerService.show();
+
+    try {
+
+      const keys = [
+        'error_message_service_Generic',
+        'warn_message_service_Generic',
+        'success_message_service_Generic',
+        'save_success_message_service_CustomerVehicleEditAddressesRegister',
+        'update_success_message_service_CustomerVehicleEditAddressesRegister',
+        'delete_success_message_service_CustomerVehicleEditAddressesRegister'
+      ];
+
+      const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
+
+      this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.customerVehicleEditAddressesRegisterUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleEditAddressesRegisterUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleEditAddressesRegisterUIDTO.save_success_message_service_CustomerVehicleEditAddressesRegister = translations['save_success_message_service_CustomerVehicleEditAddressesRegister'];
+      this.customerVehicleEditAddressesRegisterUIDTO.update_success_message_service_CustomerVehicleEditAddressesRegister = translations['update_success_message_service_CustomerVehicleEditAddressesRegister'];
+      this.customerVehicleEditAddressesRegisterUIDTO.delete_success_message_service_CustomerVehicleEditAddressesRegister = translations['delete_success_message_service_CustomerVehicleEditAddressesRegister'];
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+        
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
 
     try {
 
@@ -269,11 +294,25 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
     this.customerVehicleAddressService.saveAddress(customerAddressSaveAddressDTO).pipe(first()).subscribe({
       next: (data: any) => {
 
-        //this.roleSearchUIDTO.roles = data.body.content;
-        //this.roleSearchUIDTO.totalRecords = data.body.totalElements;
+        if (data.status == 201) {
+
+          this.messageService.add({
+            severity: SeverityConstants.SUCCESS,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.success_message_service_Generic,
+            detail: '' + this.customerVehicleEditAddressesRegisterUIDTO.save_success_message_service_CustomerVehicleEditAddressesRegister
+          });
+        }
       },
       error: (error) => {
-        //this.messageService.add({ severity: SeverityConstants.ERROR, summary: '' + this.broadcastSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+        
+        if (error.status == 500) {
+
+          this.messageService.add({
+            severity: SeverityConstants.ERROR,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+            detail: error.toString()
+          });
+        }
 
         this.ngxSpinnerService.hide();
       },
@@ -287,16 +326,40 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
     this.ngxSpinnerService.show();
 
-    const role = CustomerVehicleAddressDTO.toEntity(this.customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO);
+    this.customerVehicleEditAddressesRegisterUIDTO.address = AddressDTO.toEntity(this.customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.address);
 
-    this.customerVehicleAddressService.update(role).pipe(first()).subscribe({
+    this.customerVehicleEditAddressesRegisterUIDTO.address.country = this.customerVehicleEditAddressesRegisterUIDTO.selectedCountry;
+    this.customerVehicleEditAddressesRegisterUIDTO.address.state = this.customerVehicleEditAddressesRegisterUIDTO.selectedState;
+    this.customerVehicleEditAddressesRegisterUIDTO.address.city = this.customerVehicleEditAddressesRegisterUIDTO.selectedCity;
+
+    const customerAddressSaveAddressDTO: CustomerVehicleAddressSaveAddressDTO = new CustomerVehicleAddressSaveAddressDTO();
+    customerAddressSaveAddressDTO.address = this.customerVehicleEditAddressesRegisterUIDTO.address;
+    customerAddressSaveAddressDTO.addressTypes = this.customerVehicleEditAddressesRegisterUIDTO.selectedAddressTypes;
+    customerAddressSaveAddressDTO.customerVehicle = this.customerVehicleEditAddressesRegisterUIDTO.customerVehicle;
+
+    this.customerVehicleAddressService.updateAddress(this.customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.customerVehicleAddressId, customerAddressSaveAddressDTO).pipe(first()).subscribe({
       next: (data: any) => {
 
-        //this.roleSearchUIDTO.roles = data.body.content;
-        //this.roleSearchUIDTO.totalRecords = data.body.totalElements;
+        if (data.status == 200) {
+
+          this.messageService.add({
+            severity: SeverityConstants.SUCCESS,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.success_message_service_Generic,
+            detail: '' + this.customerVehicleEditAddressesRegisterUIDTO.update_success_message_service_CustomerVehicleEditAddressesRegister
+          });
+        }
+
       },
       error: (error) => {
-        //this.messageService.add({ severity: SeverityConstants.ERROR, summary: '' + this.broadcastSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+        
+        if (error.status == 500) {
+
+          this.messageService.add({
+            severity: SeverityConstants.ERROR,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+            detail: error.toString()
+          });
+        }
 
         this.ngxSpinnerService.hide();
       },
@@ -310,16 +373,30 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
     this.ngxSpinnerService.show();
 
-    const role = CustomerVehicleAddressDTO.toEntity(this.customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO);
+    const customerVehicleAddress = CustomerVehicleAddressDTO.toEntity(this.customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO);
 
-    this.customerVehicleAddressService.update(role).pipe(first()).subscribe({
+    this.customerVehicleAddressService.delete(customerVehicleAddress.customerVehicleAddressId).pipe(first()).subscribe({
       next: (data: any) => {
 
-        //this.roleSearchUIDTO.roles = data.body.content;
-        //this.roleSearchUIDTO.totalRecords = data.body.totalElements;
+        if (data.status == 204) {
+
+          this.messageService.add({
+            severity: SeverityConstants.SUCCESS,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.success_message_service_Generic,
+            detail: '' + this.customerVehicleEditAddressesRegisterUIDTO.delete_success_message_service_CustomerVehicleEditAddressesRegister
+          });
+        }
       },
       error: (error) => {
-        //this.messageService.add({ severity: SeverityConstants.ERROR, summary: '' + this.broadcastSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+
+        if (error.status == 500) {
+
+          this.messageService.add({
+            severity: SeverityConstants.ERROR,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+            detail: error.toString()
+          });
+        }
 
         this.ngxSpinnerService.hide();
       },

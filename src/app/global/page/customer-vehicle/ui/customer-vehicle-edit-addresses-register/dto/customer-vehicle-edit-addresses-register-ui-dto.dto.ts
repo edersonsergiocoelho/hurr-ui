@@ -33,4 +33,6 @@ export class CustomerVehicleEditAddressesRegisterUIDTO {
 
   success_message_service_Generic: string;
   save_success_message_service_CustomerVehicleEditAddressesRegister: string;
+  update_success_message_service_CustomerVehicleEditAddressesRegister: string;
+  delete_success_message_service_CustomerVehicleEditAddressesRegister: string;
 }

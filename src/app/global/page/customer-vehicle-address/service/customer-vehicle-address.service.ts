@@ -91,8 +91,17 @@ export class CustomerVehicleAddressService {
     );
   }
 
-  delete(id: string): Observable<HttpResponse<void> | null> {
-    const url = `${this.apiUrl}/${id}`;
+  updateAddress(customerVehicleAddressId: string, customerVehicleAddressSaveAddressDTO: CustomerVehicleAddressSaveAddressDTO): Observable<HttpResponse<CustomerVehicleAddress>> {
+    const url = `${this.apiUrl}/${customerVehicleAddressId}/address`;
+    return this.httpClient.put<CustomerVehicleAddress>(url, customerVehicleAddressSaveAddressDTO, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleAddress>) => {
+        return response;
+      })
+    );
+  }
+
+  delete(customerVehicleAddressId: string): Observable<HttpResponse<void> | null> {
+    const url = `${this.apiUrl}/${customerVehicleAddressId}`;
     return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(
       catchError((error: any) => {
         if (error.status === 404) {
