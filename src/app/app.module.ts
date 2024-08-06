@@ -39,6 +39,9 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   // CustomerVehicle
   '/assets/i18n/customer-vehicle/customer-vehicle-detail/',
   '/assets/i18n/customer-vehicle/customer-vehicle-edit/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-edit-addresses/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-edit-addresses-register/',
+  '/assets/i18n/customer-vehicle/customer-vehicle-edit-addresses-search/',
   '/assets/i18n/customer-vehicle/customer-vehicle-edit-advertisement-status/',
   '/assets/i18n/customer-vehicle/customer-vehicle-edit-detail/',
   '/assets/i18n/customer-vehicle/customer-vehicle-edit-limited-mileage/',

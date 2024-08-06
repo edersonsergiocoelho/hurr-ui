@@ -21,6 +21,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ToastModule } from 'primeng/toast';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToolbarModule } from 'primeng/toolbar';
 
 import { CustomerVehicleComponent } from '../ui/customer-vehicle/customer-vehicle.component';
 import { CustomerVehicleDetailComponent } from '../ui/customer-vehicle-detail/customer-vehicle-detail.component';
@@ -40,12 +41,23 @@ import { CustomerVehicleEditPriceDiscountComponent } from '../ui/customer-vehicl
 import { CustomerVehicleEditAdvertisementStatusComponent } from '../ui/customer-vehicle-edit-advertisement-status/customer-vehicle-edit-advertisement-status.component';
 import { CustomerVehicleEditLimitedMileageComponent } from '../ui/customer-vehicle-edit-limited-mileage/customer-vehicle-edit-limited-mileage.component';
 import { CustomerVehicleEditDetailComponent } from '../ui/customer-vehicle-edit-detail/customer-vehicle-edit-detail.component';
+import { CustomerVehicleEditAddressesComponent } from '../ui/customer-vehicle-edit-addresses/customer-vehicle-edit-addresses.component';
+import { CustomerVehicleEditAddressesRegisterComponent } from '../ui/customer-vehicle-edit-addresses-register/customer-vehicle-edit-addresses-register.component';
+import { CustomerVehicleEditAddressesSearchComponent } from '../ui/customer-vehicle-edit-addresses-search/customer-vehicle-edit-addresses-search.component';
+import { TableModule } from 'primeng/table';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
     CustomerVehicleComponent,
     CustomerVehicleDetailComponent,
     CustomerVehicleEditComponent,
+    CustomerVehicleEditAddressesComponent,
+    CustomerVehicleEditAddressesRegisterComponent,
+    CustomerVehicleEditAddressesSearchComponent,
     CustomerVehicleEditAdvertisementStatusComponent,
     CustomerVehicleEditDetailComponent,
     CustomerVehicleEditLimitedMileageComponent,
@@ -69,6 +81,8 @@ import { CustomerVehicleEditDetailComponent } from '../ui/customer-vehicle-edit-
     ReactiveFormsModule,
     CustomerVehicleRoutingModule,
 
+    UtilsPipeModule,
+
     TranslateModule,
 
     ButtonModule,
@@ -84,12 +98,20 @@ import { CustomerVehicleEditDetailComponent } from '../ui/customer-vehicle-edit-
     InputTextModule,
     InputNumberModule,
     InputMaskModule,
+    InputSwitchModule,
+    SelectButtonModule,
+    MultiSelectModule,
+    TableModule,
+    ToolbarModule,
     ToastModule
   ],
   exports: [
     CustomerVehicleComponent,
     CustomerVehicleDetailComponent,
     CustomerVehicleEditComponent,
+    CustomerVehicleEditAddressesComponent,
+    CustomerVehicleEditAddressesRegisterComponent,
+    CustomerVehicleEditAddressesSearchComponent,
     CustomerVehicleEditAdvertisementStatusComponent,
     CustomerVehicleEditDetailComponent,
     CustomerVehicleEditLimitedMileageComponent,

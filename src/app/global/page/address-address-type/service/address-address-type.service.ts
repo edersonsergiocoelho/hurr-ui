@@ -31,6 +31,15 @@ export class AddressAddressTypeService {
     );
   }
 
+  findAllByAddressId(addressId: string): Observable<HttpResponse<AddressAddressType[]>> {
+    const url = `${this.apiUrl}/all/by/address/${addressId}`;
+    return this.httpClient.get<AddressAddressType[]>(url, { observe: 'response' }).pipe(
+      map((response: HttpResponse<AddressAddressType[]>) => {
+        return response;
+      })
+    );
+  }
+
   searchPage(addressAddressTypeSearchDTO: AddressAddressTypeSearchDTO, page: number = 0, size: number = 10, sortDir: string, sortBy: string | string[]): Observable<HttpResponse<any>> {
     const url = `${this.apiUrl}/search/page`;
 

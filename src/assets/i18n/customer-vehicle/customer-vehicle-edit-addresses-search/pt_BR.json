@@ -1,0 +1,11 @@
+{
+  "title_CustomerVehicleEditAddressesSearch": "Consulta De Endereço",
+
+  "label_nickname_CustomerVehicleEditAddressesSearch": "Apelido",
+  "placeholder_nickname_CustomerVehicleEditAddressesSearch": "Informe O Apelido Do Endereço",
+
+  "table_header_customer_vehicle_address_id_CustomerVehicleEditAddressesSearch": "ID",
+  "table_header_street_address_CustomerVehicleEditAddressesSearch": "Rua",
+  "table_header_nickname_CustomerVehicleEditAddressesSearch": "Apelido",
+  "table_header_enabled_CustomerVehicleEditAddressesSearch": "Habilitado?"
+}

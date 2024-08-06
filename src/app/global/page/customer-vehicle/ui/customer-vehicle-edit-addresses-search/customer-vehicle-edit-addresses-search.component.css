@@ -1,0 +1,21 @@
+/* Estilos para a borda estilizada */
+.bordered-card {
+  border: 1px solid #ddd; /* Cor da borda */
+  border-radius: 8px; /* Raio da borda para um visual mais arredondado */
+  padding: 20px; /* Espaçamento interno */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para efeito de elevação */
+}
+
+/* Estilos para a borda estilizada da table*/
+.custom-bordered-table {
+  border: 1px solid #ddd; /* Adiciona uma borda sólida de 1px com a cor cinza claro (#ddd) */
+  border-radius: 10px; /* Adiciona um raio de borda de 8px, criando cantos arredondados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave para dar uma aparência de elevação */
+}
+
+#divH1 {
+  padding: 10px; /* Espaçamento interno (opcional) */
+  border-radius: 10px; /* Raio da borda para criar um efeito arredondado */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra (opcional) */
+  text-align: center;
+}
