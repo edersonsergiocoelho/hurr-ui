@@ -1,0 +1,31 @@
+{
+  "title_CustomerVehicleEditAddressesRegister": "Cadastro De Endereço",
+
+  "label_address_type_CustomerVehicleEditAddressesRegister": "Tipo De Endereço",
+  "placeholder_address_type_CustomerVehicleEditAddressesRegister": "Informe O Tipo De Endereço, Usado Por Ex. Quando Você Quer Cadastrar O Mesmo Endereço De Entrega E Retirada",
+  "label_nickname_CustomerVehicleEditAddressesRegister": "Apelido",
+  "placeholder_nickname_CustomerVehicleEditAddressesRegister": "Informe O Apelido Por Ex. Cartão Santander",
+  "label_country_CustomerVehicleEditAddressesRegister": "País",
+  "placeholder_country_CustomerVehicleEditAddressesRegister": "Informe O País",
+  "label_state_CustomerVehicleEditAddressesRegister": "Estado",
+  "placeholder_state_CustomerVehicleEditAddressesRegister": "Informe O Estado",
+  "label_city_CustomerVehicleEditAddressesRegister": "Cidade",
+  "placeholder_city_CustomerVehicleEditAddressesRegister": "Informe A Cidade",
+  "label_street_address_CustomerVehicleEditAddressesRegister": "Rua",
+  "placeholder_street_address_CustomerVehicleEditAddressesRegister": "Informe A Rua, Avenida, Etc.",
+  "label_number_CustomerVehicleEditAddressesRegister": "Número",
+  "placeholder_number_CustomerVehicleEditAddressesRegister": "Informe O Número Da Rua, Avenida, Etc.",
+  "label_complement_CustomerVehicleEditAddressesRegister": "Complemento",
+  "placeholder_complement_CustomerVehicleEditAddressesRegister": "Informe Complemento Por Ex. Apartamento 1, Bloco 1",
+  "label_zip_code_CustomerVehicleEditAddressesRegister": "CEP",
+  "placeholder_zip_code_CustomerVehicleEditAddressesRegister": "Informe O Número Do CEP, Ex: 17.340-000",
+  "label_created_date_CustomerVehicleEditAddressesRegister": "Data De Criação",
+  "placeholder_created_date_CustomerVehicleEditAddressesRegister": "Data De Criação Do Registro",
+  "label_modified_date_CustomerVehicleEditAddressesRegister": "Data De Modificação",
+  "placeholder_modified_date_CustomerVehicleEditAddressesRegister": "Data De Modificação Do Registro",
+  "label_enabled_CustomerVehicleEditAddressesRegister": "Habilitado?",
+
+  "save_success_message_service_CustomerVehicleEditAddressesRegister": "Endereço Cadastrado Com Sucesso.",
+  "update_success_message_service_CustomerVehicleEditAddressesRegister": "Endereço Atualizado Com Sucesso.",
+  "delete_success_message_service_CustomerVehicleEditAddressesRegister": "Endereço Excluído Com Sucesso."
+}

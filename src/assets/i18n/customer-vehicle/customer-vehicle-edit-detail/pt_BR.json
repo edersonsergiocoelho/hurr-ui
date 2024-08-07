@@ -1,0 +1,39 @@
+{
+  "title_CustomerVehicleEditDetail": "Detalhes",
+
+  "label_vehicle_brand_CustomerVehicleEditDetail": "Marca",
+  "placeholder_vehicle_brand_CustomerVehicleEditDetail": "Informe A Marca",
+  "label_vehicle_CustomerVehicleEditDetail": "Veículo",
+  "placeholder_vehicle_CustomerVehicleEditDetail": "Informe O Veículo",
+  "label_vehicle_model_CustomerVehicleEditDetail": "Modelo",
+  "placeholder_vehicle_model_CustomerVehicleEditDetail": "Informe O Modelo Do Veículo",
+
+  "label_vehicle_transmission_CustomerVehicleEditDetail": "Transmissão",
+  "placeholder_vehicle_transmission_CustomerVehicleEditDetail": "Informe A Transmissão Do Veículo",
+  "label_mileage_created_CustomerVehicleEditDetail": "Quilometragem",
+  "placeholder_mileage_created_CustomerVehicleEditDetail": "Informe A Quilometragem Do Veículo",
+
+  "label_license_plate_type_CustomerVehicleEditDetail": "Tipo De Placa",
+  "label_license_plate_type_old_model_CustomerVehicleEditDetail": "Modelo Antigo",
+  "label_license_plate_type_mercosul_CustomerVehicleEditDetail": "Mercosul",
+  "label_license_plate_CustomerVehicleEditDetail": "Placa Do Veículo",
+  "placeholder_license_plate_CustomerVehicleEditDetail": "Informe A Placa Do Veículo",
+  "label_renavam_CustomerVehicleEditDetail": "Renavam Do Veículo",
+  "placeholder_renavam_CustomerVehicleEditDetail": "Informe O Renavam Do Veículo",
+  "label_state_CustomerVehicleEditDetail": "Estado",
+  "placeholder_state_CustomerVehicleEditDetail": "Informe O Estado",
+  "label_chassis_CustomerVehicleEditDetail": "Chassis Do Veículo",
+  "placeholder_chassis_CustomerVehicleEditDetail": "Informe O Chassis Do Veículo",
+  "label_year_of_manufacture_CustomerVehicleEditDetail": "Ano De Fabricação",
+  "placeholder_year_of_manufacture_CustomerVehicleEditDetail": "Informe O Ano De Fabricação",
+  "label_year_of_the_car_CustomerVehicleEditDetail": "Ano Do Carro",
+  "placeholder_year_of_the_car_CustomerVehicleEditDetail": "Informe O Ano Do Carro",
+  "label_vehicle_color_CustomerVehicleEditDetail": "Cor",
+  "placeholder_vehicle_color_CustomerVehicleEditDetail": "Informe A Cor Do Veículo",
+  "label_vehicle_fuel_type_CustomerVehicleEditDetail": "Combustível",
+  "placeholder_vehicle_fuel_type_CustomerVehicleEditDetail": "Informe O Combustível Do Veículo",
+  "label_description_CustomerVehicleEditDetail": "Descrição",
+  "placeholder_description_CustomerVehicleEditDetail": "Informe A Descrição",
+
+  "save_success_message_service_CustomerVehicleEditDetail": "Detalhes Do Veículo Atualizado Com Sucesso."
+}

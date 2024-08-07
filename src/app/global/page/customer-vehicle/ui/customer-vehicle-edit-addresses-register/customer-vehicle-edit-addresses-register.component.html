@@ -1,0 +1,161 @@
+<form novalidate #customerVehicleEditAddressesRegisterForm="ngForm" (ngSubmit)="ngSubmit()">
+  
+  <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleEditAddressesRegister' | translate}}</h1>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-12 md:col-12 field">
+      <label for="address_type" class="font-medium text-2xl">{{'label_address_type_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <p-multiSelect class="p-inputtext-lg" 
+        [options]="customerVehicleEditAddressesRegisterUIDTO.addressTypes" 
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.selectedAddressTypes" 
+        [filter]="true" 
+        optionLabel="addressTypeName" 
+        name="addressType"
+        placeholder="{{'placeholder_address_type_CustomerVehicleEditAddressesRegister' | translate}}" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="nickname" class="font-medium text-2xl">{{'label_nickname_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <input pInputText type="text" class="p-inputtext-lg"
+        placeholder="{{'placeholder_nickname_CustomerVehicleEditAddressesRegister' | translate}}"
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.address.nickname" name="nickname" autocomplete="off" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="country" class="font-medium text-2xl">{{'label_country_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleEditAddressesRegisterUIDTO.countries" 
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.selectedCountry" optionLabel="countryName" 
+        name="country" [showClear]="true"
+        placeholder="{{'placeholder_country_CustomerVehicleEditAddressesRegister' | translate}}" (onChange)="changeCountry($event.value)">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="state" class="font-medium text-2xl">{{'label_state_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleEditAddressesRegisterUIDTO.states" 
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.selectedState" optionLabel="stateName" 
+        name="state" [showClear]="true"
+        placeholder="{{'placeholder_state_CustomerVehicleEditAddressesRegister' | translate}}" (onChange)="changeState($event.value)">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="city" class="font-medium text-2xl">{{'label_city_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <p-dropdown class="p-inputtext-lg" 
+        [options]="customerVehicleEditAddressesRegisterUIDTO.cities" 
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.selectedCity" optionLabel="cityName" 
+        name="city" [showClear]="true"
+        placeholder="{{'placeholder_city_CustomerVehicleEditAddressesRegister' | translate}}">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="streetAddress" class="font-medium text-2xl">{{'label_street_address_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <input pInputText type="text" class="p-inputtext-lg"
+        placeholder="{{'placeholder_street_address_CustomerVehicleEditAddressesRegister' | translate}}"
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.address.streetAddress" name="streetAddress" autocomplete="off" required="true" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="number" class="font-medium text-2xl">{{'label_number_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <input pInputText type="text" class="p-inputtext-lg"
+        placeholder="{{'placeholder_number_CustomerVehicleEditAddressesRegister' | translate}}"
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.address.number" name="number" autocomplete="off" required="true" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="complement" class="font-medium text-2xl">{{'label_complement_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <input pInputText type="text" class="p-inputtext-lg"
+        placeholder="{{'placeholder_complement_CustomerVehicleEditAddressesRegister' | translate}}"
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.address.complement" name="complement" autocomplete="off" />
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label for="zipCode" class="font-medium text-2xl">{{'label_zip_code_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <p-inputMask class="p-inputtext-lg" mask="99.999-999"
+        placeholder="{{'placeholder_zip_code_CustomerVehicleEditAddressesRegister' | translate}}"
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.address.zipCode" name="zipCode" autocomplete="off" [required]="true" />
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="createdDate" class="font-medium text-2xl">{{'label_created_date_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <p-calendar class="p-inputtext-lg"
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.createdDate" 
+        placeholder="{{'placeholder_created_date_CustomerVehicleEditAddressesRegister' | translate}}"
+        name="createdDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field">
+      <label for="modifiedDate" class="font-medium text-2xl">{{'label_modified_date_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <p-calendar class="p-inputtext-lg"
+        placeholder="{{'placeholder_modified_date_CustomerVehicleEditAddressesRegister' | translate}}"
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.modifiedDate" name="modifiedDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" style="display: flex; flex-direction: column;">
+      <label for="enabled" class="font-medium text-2xl">{{'label_enabled_CustomerVehicleEditAddressesRegister' | translate}}</label>
+      <p-inputSwitch class="p-inputtext-lg" 
+        [(ngModel)]="customerVehicleEditAddressesRegisterUIDTO.customerVehicleAddressDTO.address.enabled" name="enabled">
+      </p-inputSwitch>
+    </div>
+
+    <div class="col-12 md:col-12 field">
+      <p-divider align="center" layout="horizontal" styleclass="h-full mx-0 lg:mx-3" class="p-element">
+      </p-divider>
+    </div>
+
+    <div class="col-12 flex flex-row justify-content-left py-0">
+
+      <div *ngIf="customerVehicleEditAddressesRegisterUIDTO?.customerVehicleAddressDTO?.customerVehicleAddressId" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-secondary md:w-10rem"
+          type="button"
+          (click)="resetRegisterForm()">
+          <i class="pi pi-file"></i>
+          <span class="p-button-label">
+            {{'span_button_label_new_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="customerVehicleEditAddressesRegisterUIDTO?.customerVehicleAddressDTO?.customerVehicleAddressId == null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton  type="submit" class="p-ripple p-element w-auto p-button p-component md:w-10rem"
+          [disabled]="customerVehicleEditAddressesRegisterForm.invalid">
+          <i class="pi pi-save"></i>
+          <span class="p-button-label">
+            {{'span_button_label_save_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="customerVehicleEditAddressesRegisterUIDTO?.customerVehicleAddressDTO?.customerVehicleAddressId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-info md:w-10rem"
+          type="button"
+          severity="info"
+          (click)="update()"
+          [disabled]="customerVehicleEditAddressesRegisterForm.invalid">
+          <i class="pi pi-file-edit"></i>
+          <span class="p-button-label">
+            {{'span_button_label_update_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="customerVehicleEditAddressesRegisterUIDTO?.customerVehicleAddressDTO?.customerVehicleAddressId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-danger md:w-10rem"
+          type="button"
+          (click)="delete()"
+          [disabled]="customerVehicleEditAddressesRegisterForm.invalid">
+          <i class="pi pi-times"></i>
+          <span class="p-button-label">
+            {{'span_button_label_delete_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</form>

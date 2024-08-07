@@ -1,0 +1,73 @@
+<div style="padding-top: 20px; padding-left: 20px; padding-right: 20px;">
+  
+  <form #customerVehicleEditLimitedMileageForm="ngForm" (ngSubmit)="ngSubmit()">
+
+    <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleEditLimitedMileage' | translate}}</h1>
+
+    <div class="p-fluid formgrid grid">
+
+      <div class="flex flex-wrap col-6 md:col-6 gap-3">
+        <label for="limitedMileage" class="font-medium text-2xl">{{'label_limited_mileage_type_CustomerVehicleEditLimitedMileage' | translate}}</label>
+        <div class="flex align-items-center">
+          <p-radioButton 
+              name="limitedMileage" 
+              value="limitedMileage" 
+              [(ngModel)]="customerVehicleEditLimitedMileageUIDTO.limitedMileage" 
+              inputId="limitedMileage"
+              [required]="true" />
+          <label for="limitedMileage" class="ml-2">
+            {{'label_limited_mileage_type_limited_mileage_CustomerVehicleEditLimitedMileage' | translate}}
+          </label>
+        </div>
+        
+        <div class="flex align-items-center">
+          <p-radioButton 
+              name="limitedMileage" 
+              value="unlimitedMileage" 
+              [(ngModel)]="customerVehicleEditLimitedMileageUIDTO.limitedMileage" 
+              inputId="unlimitedMileage"
+              [required]="true" />
+          <label for="unlimitedMileage" class="ml-2">
+            {{'label_limited_mileage_type_unlimited_mileage_CustomerVehicleEditLimitedMileage' | translate}}
+          </label>
+        </div>
+      </div>
+
+      <div *ngIf="customerVehicleEditLimitedMileageUIDTO.limitedMileage == 'limitedMileage'" class="col-6 md:col-6 field">
+        <label for="limitedMileageIncluded" class="font-medium text-2xl">{{'label_limited_mileage_included_CustomerVehicleEditLimitedMileage' | translate}}</label>
+        <p-inputNumber type="number" class="p-inputtext-lg"
+          placeholder="{{'placeholder_limited_mileage_included_CustomerVehicleEditLimitedMileage' | translate}}"
+          [(ngModel)]="customerVehicleEditLimitedMileageUIDTO.limitedMileageIncluded" name="limitedMileageIncluded" autocomplete="off" 
+          mode="decimal"
+          [required]="true"/>
+      </div>
+
+      <div *ngIf="customerVehicleEditLimitedMileageUIDTO.limitedMileage == 'limitedMileage'" class="col-6 md:col-6 field">
+        <label for="limitedMileageValue" class="font-medium text-2xl">{{'label_limited_mileage_value_CustomerVehicleEditLimitedMileage' | translate}}</label>
+        <p-inputNumber type="text" class="p-inputtext-lg"
+          placeholder="{{'placeholder_limited_mileage_value_CustomerVehicleEditLimitedMileage' | translate}}"
+          [(ngModel)]="customerVehicleEditLimitedMileageUIDTO.limitedMileageValue" name="limitedMileageValue" autocomplete="off" 
+          mode="decimal" 
+          [minFractionDigits]="2"
+          [required]="true"/>
+      </div>
+
+    </div>
+
+    <p-divider align="center" layout="horizontal" styleclass="h-full mx-0 lg:mx-3" class="p-element">
+    </p-divider>
+
+    <div class="col-12 md:col-12 field" style="text-align: right;">
+
+      <button type="submit" class="p-element p-button p-component p-button-success mr-3 md:w-10rem" pButton
+        [disabled]="!customerVehicleEditLimitedMileageForm.valid">
+        <i class="pi pi-save"></i>
+        <span class="p-button-label">
+          {{'span_button_label_save_Generic' | translate}}
+        </span>
+      </button>
+
+    </div>
+
+  </form>
+</div>
