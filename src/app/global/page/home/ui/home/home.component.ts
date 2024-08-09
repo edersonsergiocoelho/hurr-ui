@@ -8,6 +8,10 @@ import { HomeUIDTO } from './dto/home-ui-dto.dto';
 import { FileService } from 'src/app/page/file/service/file.service';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { MenuService } from 'src/app/page/admin/menu/service/menu.service';
+import { MenuDTO } from 'src/app/page/admin/menu/dto/menu-dto.dto';
+import { Menu } from 'src/app/page/admin/menu/entity/menu.entity';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +19,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  menus: Menu[] = [];
 
   loadingText = 'Carregando';
 
@@ -30,7 +36,8 @@ export class HomeComponent implements OnInit {
               private sessionStorageService: SessionStorageService,
               private messageService: MessageService,
               private fileService: FileService,
-              private translateService: TranslateService) {}
+              private translateService: TranslateService, 
+            private menuService: MenuService) {}
 
   ngOnInit() {
     this.translateService.setDefaultLang('pt_BR');
@@ -50,7 +57,7 @@ export class HomeComponent implements OnInit {
 
     this.homeUIService.currentUser$.subscribe(user => {
       this.currentUser = user;
-      this.resetForm();
+      //this.resetForm();
     });
 
     if (this.sessionStorageService.getToken()) {
@@ -94,17 +101,50 @@ export class HomeComponent implements OnInit {
       }
 
     } catch (error: any) {
-      this.messageService.add({
-        severity: 'error',
-        summary: '' + this.homeUIDTO.error_message_service_Generic,
-        detail: error.toString()
-      });
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.homeUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
+
+    try {
+
+      if (this.currentUser != null) {
+          
+        const menuServiceFindMeAll = await firstValueFrom(this.menuService.findByTypeMenuMeAll('MENU_HEADER').pipe(first()));
+        
+        if (menuServiceFindMeAll.status == 200) {
+          if (menuServiceFindMeAll.body != null) {
+            this.homeUIDTO.menusHeader = menuServiceFindMeAll.body;
+          }
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.homeUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
     }
 
     this.ngxSpinnerService.hide();
   }
 
-  toggleSubMenu(): void {
+  toggleMenu(menu: Menu): void {
+    menu.showSubMenu = !menu.showSubMenu;
+  }
+
+  toggleSubMenuTest(): void {
     this.showSubMenu = !this.showSubMenu;
   }
 

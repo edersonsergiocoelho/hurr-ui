@@ -1,0 +1,14 @@
+/* Remove o sublinhado dos links em todos os elementos <a> */
+a {
+  text-decoration: none; /* Remove o sublinhado dos links */
+}
+
+/* Remove o marcador dos itens de lista que foram inseridos dinamicamente pelo Angular */
+li.ng-star-inserted::marker {
+  content: none; /* Remove o marcador de lista, que pode ser um ponto ou outro símbolo padrão */
+}
+
+/* Remove o espaço à esquerda (padding) da lista quando itens são inseridos dinamicamente pelo Angular */
+ul.ng-star-inserted {
+  padding-inline-start: 0px; /* Remove o espaçamento padrão à esquerda em listas não ordenadas */
+}
