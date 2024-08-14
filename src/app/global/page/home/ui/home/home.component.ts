@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { first, firstValueFrom, interval } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -10,7 +10,6 @@ import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { MenuService } from 'src/app/page/admin/menu/service/menu.service';
-import { MenuDTO } from 'src/app/page/admin/menu/dto/menu-dto.dto';
 import { Menu } from 'src/app/page/admin/menu/entity/menu.entity';
 
 @Component({
@@ -20,24 +19,26 @@ import { Menu } from 'src/app/page/admin/menu/entity/menu.entity';
 })
 export class HomeComponent implements OnInit {
 
-  menus: Menu[] = [];
+  selectedBreadcrumb: any;
+
+  onBreadcrumbClick(crumb: any): void {
+    this.selectedBreadcrumb = crumb;
+  }
 
   loadingText = 'Carregando';
 
+  currentUser: any;
   homeUIDTO: HomeUIDTO;
 
-  currentUser: any;
-  showMenuUser: boolean = false;
-  showSubMenu: boolean = false;
-
-  constructor(private router: Router,
+  constructor(private cdr: ChangeDetectorRef,
+    private router: Router,
               private ngxSpinnerService: NgxSpinnerService,
               private homeUIService: HomeUIService,
               private sessionStorageService: SessionStorageService,
               private messageService: MessageService,
               private fileService: FileService,
               private translateService: TranslateService, 
-            private menuService: MenuService) {}
+              private menuService: MenuService) {}
 
   ngOnInit() {
     this.translateService.setDefaultLang('pt_BR');
@@ -57,14 +58,14 @@ export class HomeComponent implements OnInit {
 
     this.homeUIService.currentUser$.subscribe(user => {
       this.currentUser = user;
-      //this.resetForm();
+      this.resetForm();
     });
 
     if (this.sessionStorageService.getToken()) {
       this.currentUser = this.sessionStorageService.getUser();
       this.homeUIService.setCurrentUser(this.currentUser);
     }
-
+    
     this.resetForm();
   }
 
@@ -120,7 +121,57 @@ export class HomeComponent implements OnInit {
         
         if (menuServiceFindMeAll.status == 200) {
           if (menuServiceFindMeAll.body != null) {
-            this.homeUIDTO.menusHeader = menuServiceFindMeAll.body;
+            this.homeUIDTO.menuHeaders = menuServiceFindMeAll.body;
+          }
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.homeUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
+
+    try {
+
+      if (this.currentUser != null) {
+          
+        const menuServiceFindMeAll = await firstValueFrom(this.menuService.findByTypeMenuMeAll('MENU_HEADER_ICON').pipe(first()));
+        
+        if (menuServiceFindMeAll.status == 200) {
+          if (menuServiceFindMeAll.body != null) {
+            this.homeUIDTO.menuHeaderIcons = menuServiceFindMeAll.body;
+          }
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.homeUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
+
+    try {
+
+      if (this.currentUser != null) {
+          
+        const menuServiceFindMeAll = await firstValueFrom(this.menuService.findByTypeMenuMeAll('MENU_HEADER_DROPDOWN').pipe(first()));
+        
+        if (menuServiceFindMeAll.status == 200) {
+          if (menuServiceFindMeAll.body != null) {
+            this.homeUIDTO.menuHeaderDropdowns = menuServiceFindMeAll.body;
           }
         }
       }
@@ -140,23 +191,78 @@ export class HomeComponent implements OnInit {
     this.ngxSpinnerService.hide();
   }
 
-  toggleMenu(menu: Menu): void {
+  breadcrumb: Array<{ name: string, url: string }> = [];
+
+  // Método para atualizar o breadcrumb baseado no menu selecionado
+  updateBreadcrumb(selectedMenu: any, menus: any): void {
+    if (selectedMenu.url) {
+      const breadcrumbPath = this.buildBreadcrumbPath(selectedMenu, menus);
+      this.breadcrumb = breadcrumbPath;
+      this.onBreadcrumbClick({ name: selectedMenu.name, url: selectedMenu.url })
+      this.cdr.detectChanges();
+    }
+  }
+
+  // Método recursivo para construir o caminho do breadcrumb
+  buildBreadcrumbPath(menu: any, menus: any, path: Array<{ name: string, url: string }> = []): Array<{ name: string, url: string }> {
+    // Adiciona o menu atual ao início do caminho
+    path.unshift({ name: menu.name, url: menu.url });
+
+    // Procura o menu pai
+    const parentMenu = this.findParentMenu(menu.menuParentId, menus);
+    if (parentMenu) {
+      return this.buildBreadcrumbPath(parentMenu, menus, path);
+    }
+
+    return path;
+  }
+
+  // Método recursivo para encontrar o menu pai no array de headers
+  findParentMenu(parentId: string | null, menus: any[]): any {
+    for (let menu of menus) {
+      if (menu.menuId === parentId) {
+        return menu;
+      }
+      if (menu.subMenus && menu.subMenus.length > 0) {
+        const foundParentMenu = this.findParentMenu(parentId, menu.subMenus);
+        if (foundParentMenu) {
+          return foundParentMenu;
+        }
+      }
+    }
+    return null;
+  }
+
+  isSelected(crumb: { name: string, url: string }): boolean {
+    return this.selectedBreadcrumb
+      ? this.selectedBreadcrumb.name === crumb.name && this.selectedBreadcrumb.url === crumb.url
+      : false;
+  }
+
+  toggleMenuHeader(menu: Menu): void {
     menu.showSubMenu = !menu.showSubMenu;
+
+    this.updateBreadcrumb(menu, this.homeUIDTO.menuHeaders);
   }
 
-  toggleSubMenuTest(): void {
-    this.showSubMenu = !this.showSubMenu;
+  toggleMenuHeaderDropDown(menu: Menu): void {
+    menu.showSubMenu = !menu.showSubMenu;
+
+    this.updateBreadcrumb(menu, this.homeUIDTO.menuHeaderDropdowns);
   }
 
-  toggleMenuUser(): void {
-    this.showMenuUser = !this.showMenuUser;
+  toggleMenuHeaderDropDownShowMenu(): void {
+    this.homeUIDTO.menuHeaderDropDownShowMenu = !this.homeUIDTO.menuHeaderDropDownShowMenu;
   }
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent): void {
-    const isClickedInsideMenu = (event.target as HTMLElement).closest('.border-indigo-400') !== null;
-    if (!isClickedInsideMenu) {
-      this.showMenuUser = false;
+    const clickedElement = event.target as HTMLElement;
+    const isClickedInsideMenu = clickedElement.closest('.border-indigo-400') !== null;
+    const isClickedInsideDropdown = clickedElement.closest('.p-element') !== null;
+  
+    if (!isClickedInsideMenu && !isClickedInsideDropdown) {
+      this.homeUIDTO.menuHeaderDropDownShowMenu = false;
     }
   }
 

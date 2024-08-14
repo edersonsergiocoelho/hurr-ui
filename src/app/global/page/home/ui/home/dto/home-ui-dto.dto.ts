@@ -3,7 +3,11 @@ import { File } from "src/app/page/file/entity/file.entity";
 
 export class HomeUIDTO {
 
-  menusHeader: Menu[] = [];
+  menuHeaders: Menu[] = [];
+  menuHeaderIcons: Menu[] = [];
+  menuHeaderDropdowns: Menu[] = [];
+
+  menuHeaderDropDownShowMenu: boolean;
 
   file: File;
   dataURI: any;
