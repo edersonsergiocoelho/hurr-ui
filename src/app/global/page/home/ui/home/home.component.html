@@ -162,6 +162,7 @@
         </div>
       </div>
 
+      <!-- Breadcrumb -->
       <ul class="list-none py-3 px-5 m-0 flex align-items-center font-medium overflow-x-auto border-top-1 border-indigo-600">
         <li class="pr-3">
           <a class="cursor-pointer">
@@ -173,7 +174,7 @@
 
           </i>
         </li>
-        <li *ngFor="let crumb of breadcrumb; let i = index" class="flex items-center">
+        <li *ngFor="let crumb of homeUIDTO.breadcrumb; let i = index" class="flex items-center">
           <a 
             [routerLink]="[crumb.url]" 
             [ngClass]="{
@@ -184,7 +185,7 @@
             (click)="onBreadcrumbClick(crumb)">
             {{ crumb.name }}
           </a>
-          <i *ngIf="i < breadcrumb.length - 1" class="pi pi-angle-right text-indigo-200 mx-2"></i>
+          <i *ngIf="i < homeUIDTO.breadcrumb.length - 1" class="pi pi-angle-right text-indigo-200 mx-2"></i>
         </li>
       </ul>
 

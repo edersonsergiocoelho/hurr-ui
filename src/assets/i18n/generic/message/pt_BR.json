@@ -4,6 +4,7 @@
 
   "warn_message_service_Generic": "Alerta",
   "error_message_service_Generic": "Erro",
+  "info_message_service_Generic": "Informação",
   "success_message_service_Generic": "Sucesso",
 
   "save_message_service_Generic": "Salvo Com Sucesso.",

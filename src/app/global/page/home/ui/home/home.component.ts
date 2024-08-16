@@ -19,16 +19,9 @@ import { Menu } from 'src/app/page/admin/menu/entity/menu.entity';
 })
 export class HomeComponent implements OnInit {
 
-  selectedBreadcrumb: any;
-
-  onBreadcrumbClick(crumb: any): void {
-    this.selectedBreadcrumb = crumb;
-  }
-
-  loadingText = 'Carregando';
-
   currentUser: any;
   homeUIDTO: HomeUIDTO;
+  loadingText = 'Carregando';
 
   constructor(private cdr: ChangeDetectorRef,
     private router: Router,
@@ -79,6 +72,30 @@ export class HomeComponent implements OnInit {
   async asyncCallFunctions() {
 
     this.ngxSpinnerService.show();
+
+    try {
+
+      const keys = [
+        'warn_message_service_Generic',
+        'error_message_service_Generic',
+        'info_message_service_Generic',
+        'success_message_service_Generic'
+      ];
+
+      const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
+
+      this.homeUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.homeUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.homeUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
+      this.homeUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+
+    } catch (error: any) {
+      this.messageService.add({
+        severity: SeverityConstants.ERROR,
+        summary: '' + this.homeUIDTO.error_message_service_Generic,
+        detail: error.toString()
+      });
+    }
 
     try {
 
@@ -191,13 +208,11 @@ export class HomeComponent implements OnInit {
     this.ngxSpinnerService.hide();
   }
 
-  breadcrumb: Array<{ name: string, url: string }> = [];
-
   // Método para atualizar o breadcrumb baseado no menu selecionado
   updateBreadcrumb(selectedMenu: any, menus: any): void {
     if (selectedMenu.url) {
       const breadcrumbPath = this.buildBreadcrumbPath(selectedMenu, menus);
-      this.breadcrumb = breadcrumbPath;
+      this.homeUIDTO.breadcrumb = breadcrumbPath;
       this.onBreadcrumbClick({ name: selectedMenu.name, url: selectedMenu.url })
       this.cdr.detectChanges();
     }
@@ -233,9 +248,13 @@ export class HomeComponent implements OnInit {
     return null;
   }
 
+  onBreadcrumbClick(crumb: any): void {
+    this.homeUIDTO.selectedBreadcrumb = crumb;
+  }
+
   isSelected(crumb: { name: string, url: string }): boolean {
-    return this.selectedBreadcrumb
-      ? this.selectedBreadcrumb.name === crumb.name && this.selectedBreadcrumb.url === crumb.url
+    return this.homeUIDTO.selectedBreadcrumb
+      ? this.homeUIDTO.selectedBreadcrumb.name === crumb.name && this.homeUIDTO.selectedBreadcrumb.url === crumb.url
       : false;
   }
 
@@ -268,25 +287,5 @@ export class HomeComponent implements OnInit {
 
   signOut() {
     this.sessionStorageService.signOut();
-  }
-
-  onClickHome() {
-    this.router.navigate(['/']);
-  }
-
-  onClickCustomerValidation() {
-    this.router.navigate(['/customer/customer-validation']);
-  }
-
-  onClickCustomerVehicleBooking() {
-    this.router.navigate(['/customer-vehicle-booking']);
-  }
-
-  onClickCustomerVehicleBookingCustomerVehicle() {
-    this.router.navigate(['/customer-vehicle-booking/customer-vehicle']);
-  }
-
-  navigateToEarnings() {
-    this.router.navigate(['/earnings']);
   }
 }

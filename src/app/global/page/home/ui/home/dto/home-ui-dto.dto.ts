@@ -1,7 +1,10 @@
+import { TranslateSeverityDTO } from "src/app/core/translate/dto/translate-severity-dto.dto";
 import { Menu } from "src/app/page/admin/menu/entity/menu.entity";
 import { File } from "src/app/page/file/entity/file.entity";
 
-export class HomeUIDTO {
+export class HomeUIDTO extends TranslateSeverityDTO {
+
+  currentUser: any;
 
   menuHeaders: Menu[] = [];
   menuHeaderIcons: Menu[] = [];
@@ -9,9 +12,11 @@ export class HomeUIDTO {
 
   menuHeaderDropDownShowMenu: boolean;
 
+  breadcrumb: Array<{ name: string, url: string }> = [];
+  selectedBreadcrumb: any;
+
   file: File;
   dataURI: any;
 
-  // Message
-  error_message_service_Generic: string;
+  loadingText = 'Carregando';
 }
