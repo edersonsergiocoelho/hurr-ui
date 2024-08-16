@@ -9,7 +9,7 @@
         <div class="mt-3 lg:mt-0 flex align-items-center flex-column md:flex-row">
 
           <div class="field" style="align-items: flex-start;">
-            <label for="searchInput"><strong>Onde:</strong></label>
+            <label for="searchInput"><strong>{{ 'label_where_HomeSearchCars' | translate }}:</strong></label>
             <span class="p-input-icon-left mr-3">
               <i class="pi pi-search">
               </i>
@@ -19,10 +19,11 @@
           </div>
 
           <div class="field" style="align-items: flex-start;">
-            <label for="dateInit" style="padding-left: 10px;"><strong>De:</strong></label>
+            <label for="dateInit" style="padding-left: 10px;"><strong>{{ 'label_from_HomeSearchCars' | translate }}:</strong></label>
             <div style="padding-left: 10px;">
               <p-calendar id="dateInit" [(ngModel)]="homeSearchCarsUIDTO.dateInit" [showIcon]="true"
-                [minDate]="homeSearchCarsUIDTO.today" [dateFormat]="homeSearchCarsUIDTO.dateFormat"></p-calendar>
+                [minDate]="homeSearchCarsUIDTO.today" [dateFormat]="homeSearchCarsUIDTO.dateFormat"
+                (ngModelChange)="updateHoursInit()"></p-calendar>
             </div>
           </div>
 
@@ -34,7 +35,7 @@
           </div>
 
           <div class="field" style="align-items: flex-start;">
-            <label for="dateEnd" style="padding-left: 10px;"><strong>Até:</strong></label>
+            <label for="dateEnd" style="padding-left: 10px;"><strong>{{ 'label_until_HomeSearchCars' | translate }}:</strong></label>
             <div style="padding-left: 10px;">
               <p-calendar id="dateEnd" [(ngModel)]="homeSearchCarsUIDTO.dateEnd" [showIcon]="true"
                 [minDate]="homeSearchCarsUIDTO.today" [dateFormat]="homeSearchCarsUIDTO.dateFormat"></p-calendar>

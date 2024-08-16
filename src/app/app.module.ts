@@ -75,7 +75,10 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/earnings/earnings-resume/',
 
   '/assets/i18n/file-approved/',
+  
+  // Home
   '/assets/i18n/home/',
+  '/assets/i18n/home/home-search-cars/',
   '/assets/i18n/role/',
   '/assets/i18n/user/',
   '/assets/i18n/user-role/'
