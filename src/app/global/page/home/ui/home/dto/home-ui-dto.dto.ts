@@ -12,11 +12,11 @@ export class HomeUIDTO extends TranslateSeverityDTO {
 
   menuHeaderDropDownShowMenu: boolean;
 
-  breadcrumb: Array<{ name: string, url: string }> = [];
+  breadcrumbs: Array<{ name: string, url: string }> = [];
   selectedBreadcrumb: any;
 
   file: File;
   dataURI: any;
 
-  loadingText = 'Carregando';
+  label_loading_Generic: string;
 }
