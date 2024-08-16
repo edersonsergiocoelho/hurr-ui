@@ -82,8 +82,11 @@ export class HomeSearchCarsComponent implements OnInit {
   }
 
   getCurrentLocation() {
+    debugger
     if (navigator.geolocation) {
+      debugger;
       navigator.geolocation.getCurrentPosition((position) => {
+        debugger
         
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
@@ -107,7 +110,9 @@ export class HomeSearchCarsComponent implements OnInit {
 
           }
         });
-      }, () => {
+      }, 
+      (error) => {
+        console.error('Error getting geolocation:', error)
 
         this.messageService.add({ 
           severity: 'warn', 

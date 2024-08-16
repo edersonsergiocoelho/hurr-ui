@@ -1,4 +1,5 @@
 <div class="block-content">
+
   <div
     class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
     <div class="font-bold mr-8">🔥 Hot Deals!</div>
@@ -8,6 +9,7 @@
       class="flex align-items-center no-underline justify-content-center border-circle text-gray-100 hover:bg-bluegray-700 cursor-pointer transition-colors transition-duration-150"
       style="width: 2rem; height: 2rem;"><i class="pi pi-times"></i></a>
   </div>
+
   <div class="min-h-screen flex flex-column">
     <div class="bg-indigo-500" style="height: 400px;">
       <div class="py-3 px-5 flex align-items-center justify-content-between relative lg:static"
@@ -20,112 +22,62 @@
         </a>
         <div
           class="align-items-center flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full bg-indigo-500 left-0 top-100 z-1">
+          
+          <!-- Menu Header -->
           <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row">
-            <li>
-              <a pripple=""
-                class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150"
-                (click)="onClickHome()">
-                <i class="pi pi-home mr-2">
-                </i>
-                <span>Home</span>
+            <li *ngFor="let menu of homeUIDTO.menuHeaders">
+              <a [ngClass]="{'p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150': true}"
+                 (click)="toggleMenuHeader(menu)"
+                 [routerLink]="menu.url ? [menu.url] : null">
+                <i [class]="menu.icon + ' mr-2'"></i>
+                <span>{{ menu.name }}</span>
+                <i *ngIf="menu.subMenus != null && menu.subMenus.length > 0" class="pi pi-angle-down ml-auto lg:ml-3"></i>
                 <span class="p-ink"></span>
               </a>
-            </li>
-            <li>
-              <a pripple="" pstyleclass="@next" enterclass="hidden" enteractiveclass="scalein" leavetoclass="hidden"
-                leaveactiveclass="fadeout"
-                class="p-element p-ripple flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150"
-                (click)="toggleSubMenu()">
-                <i class="pi pi-users mr-2">
-                </i>
-                <span>Customers</span>
-                <i class="pi pi-angle-down ml-auto lg:ml-3"></i>
-                <span class="p-ink"></span>
-              </a>
-              <ul *ngIf="showSubMenu"
-                class="list-none py-3 px-6 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:border-1 border-50 lg:shadow-2 lg:absolute surface-overlay origin-top w-full lg:w-15rem cursor-pointer">
-                <li><a pripple=""
-                    class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"><i
-                      class="pi pi-user-plus mr-2"></i><span class="font-medium">Add New</span><span
-                      class="p-ink"></span></a></li>
-                <li class="relative"><a pripple="" pstyleclass="@next" enterclass="hidden" enteractiveclass="scalein"
-                    leavetoclass="hidden" leaveactiveclass="fadeout"
-                    class="p-element p-ripple flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"><i
-                      class="pi pi-search mr-2"></i><span class="font-medium">Search</span><i
-                      class="pi pi-angle-down ml-auto lg:-rotate-90"></i><span class="p-ink"></span></a>
-                  <ul
-                    class="list-none py-3 pl-3 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:border-1 border-50 lg:shadow-2 lg:absolute surface-overlay hidden origin-top w-full lg:w-15rem cursor-pointer left-100 top-0">
-                    <li><a pripple=""
-                        class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"><i
-                          class="pi pi-shopping-cart mr-2"></i><span class="font-medium">Purchases</span><span
-                          class="p-ink"></span></a></li>
-                    <li class="relative"><a pripple=""
-                        class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"><i
-                          class="pi pi-comments mr-2"></i><span class="font-medium">Messages</span><span
-                          class="p-ink"></span></a></li>
-                  </ul>
-                </li>
+              <ul *ngIf="menu.showSubMenu && menu.subMenus != null && menu.subMenus.length > 0" class="list-none py-3 px-6 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:border-1 border-50 lg:shadow-2 lg:absolute surface-overlay origin-top w-full lg:w-15rem cursor-pointer">
+                <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: menu.subMenus }"></ng-container>
               </ul>
             </li>
-            <li>
-              <a pripple=""
-                class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
-                <i class="pi pi-calendar mr-2">
-                </i>
-                <span>Calendar</span>
-                <span class="p-ink"></span>
-              </a>
-            </li>
-            <li>
-              <a pripple=""
-                class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
-                <i class="pi pi-chart-line mr-2">
-                </i>
-                <span>Stats</span>
-                <span class="p-ink"></span>
-              </a>
-            </li>
-            <li>
-              <a pripple=""
-                class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150"
-                (click)="navigateToEarnings()">
-                <i class="pi pi-dollar mr-2">
-                </i>
-                <span>Ganhos</span>
-                <span class="p-ink"></span>
-              </a>
-            </li>
           </ul>
-          <!-- Inbox -->
+          
+          <ng-template #recursiveMenu let-subMenus>
+            <ul>
+              <li *ngFor="let subMenu of subMenus">
+                <a [ngClass]="{'p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150': true}"
+                   (click)="toggleMenuHeader(subMenu)"
+                   [routerLink]="subMenu.url ? [subMenu.url] : null">
+                  <i [class]="subMenu.icon + ' mr-2'"></i>
+                  <span>{{ subMenu.name }}</span>
+                  <i *ngIf="subMenu.subMenus != null && subMenu.subMenus.length > 0" class="pi pi-angle-right ml-auto lg:ml-3"></i>
+                  <span class="p-ink"></span>
+                </a>
+                <ul *ngIf="subMenu.showSubMenu && subMenu.subMenus != null && subMenu.subMenus.length > 0" class="list-none py-3 px-6 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:border-1 border-50 lg:shadow-2 lg:absolute surface-overlay origin-top w-full lg:w-15rem cursor-pointer left-100 top-0">
+                  <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: subMenu.subMenus }"></ng-container>
+                </ul>
+              </li>
+            </ul>
+          </ng-template>
+
           <ul
             class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row border-top-1 border-indigo-400 lg:border-top-none">
-            <li *ngIf="currentUser != null">
-              <a pripple=""
+            
+            <!-- Menu Header Icon -->
+            <li *ngFor="let menuIcon of homeUIDTO.menuHeaderIcons">
+              <a [routerLink]="menuIcon.url" pripple=""
                 class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
-                <i class="pi pi-inbox text-base lg:text-2xl mr-2 lg:mr-0">
+                <i class="{{menuIcon.icon}} text-base lg:text-2xl mr-2 lg:mr-0">
                 </i>
-                <span class="block lg:hidden font-medium">Inbox</span>
-                <span class="p-ink"></span>
-              </a>
-            </li>
-            <!-- Notifications -->
-            <li *ngIf="currentUser != null">
-              <a pripple=""
-                class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
-                <i class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0">
-                </i>
-                <span class="block lg:hidden font-medium">Notifications</span>
+                <span class="block lg:hidden font-medium">{{menuIcon.name}}</span>
                 <span class="p-ink"></span>
               </a>
             </li>
 
-            <!-- Menu - User -->
-            <li class="border-top-1 border-indigo-400 lg:border-top-none" (click)="toggleMenuUser()">
+            <li class="border-top-1 border-indigo-400 lg:border-top-none" (click)="toggleMenuHeaderDropDownShowMenu();">
 
               <a pripple=""
                 class="p-ripple p-element flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150">
 
-                <ng-container *ngIf="currentUser != null && homeUIDTO.dataURI != null; else showDefaultImage">
+                <ng-container *ngIf="homeUIDTO.currentUser != null && homeUIDTO.dataURI != null; else showDefaultImage">
                   <img class="mr-3 lg:mr-0" 
                     [src]="homeUIDTO.dataURI" 
                     style="width: 62px; height: 62px; border-radius: 50%;">
@@ -133,14 +85,14 @@
 
                 <ng-template #showDefaultImage>
                   <img
-                    *ngIf="currentUser != null && homeUIDTO.dataURI == null && currentUser.imageURL != null; else showNoImage"
+                    *ngIf="homeUIDTO.currentUser != null && homeUIDTO.dataURI == null && homeUIDTO.currentUser.imageURL != null; else showNoImage"
                     class="mr-3 lg:mr-0"
-                    [src]="currentUser.imageURL"
+                    [src]="homeUIDTO.currentUser.imageURL"
                     style="width: 62px; height: 62px; border-radius: 50%;">
                 </ng-template>
 
                 <ng-template #showNoImage>
-                  <div *ngIf="currentUser != null && homeUIDTO.dataURI == null && currentUser.imageURL == null;"
+                  <div *ngIf="homeUIDTO.currentUser != null && homeUIDTO.dataURI == null && homeUIDTO.currentUser.imageURL == null;"
                     class="mr-3 lg:mr-0"
                     style="width: 62px; height: 62px; border-radius: 50%; background-color: white; position: relative;">
                     <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">
@@ -149,21 +101,21 @@
                   </div>
                 </ng-template>
 
-                <i *ngIf="currentUser == null" 
+                <i *ngIf="homeUIDTO.currentUser == null" 
                   class="pi pi-user text-base lg:text-2xl mr-2 lg:mr-0">
                 </i>
 
-                <div *ngIf="currentUser != null" style="padding-left: 10px;">
-                  <div class="text-indigo-50 font-medium">{{currentUser.displayName}}</div>
-                  <span class="text-indigo-100 font-medium text-sm">{{currentUser.email}}</span>
+                <div *ngIf="homeUIDTO.currentUser != null" style="padding-left: 10px;">
+                  <div class="text-indigo-50 font-medium">{{homeUIDTO.currentUser.displayName}}</div>
+                  <span class="text-indigo-100 font-medium text-sm">{{homeUIDTO.currentUser.email}}</span>
                 </div>
                 <span class="p-ink"></span>
               </a>
 
-              <ul *ngIf="showMenuUser"
+              <ul [ngClass]="{'hidden': !homeUIDTO.menuHeaderDropDownShowMenu, 'block': homeUIDTO.menuHeaderDropDownShowMenu}"
                 class="list-none py-3 px-6 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:border-1 border-50 lg:shadow-2 lg:absolute surface-overlay origin-top w-full lg:w-15rem cursor-pointer left-0 lg:left-auto right-0">
 
-                <li *ngIf="currentUser == null">
+                <li *ngIf="homeUIDTO.currentUser == null">
                   <a pripple=""
                     class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"
                     [routerLink]="['/user/login']">
@@ -173,7 +125,7 @@
                   </a>
                 </li>
 
-                <li *ngIf="currentUser != null">
+                <li *ngIf="homeUIDTO.currentUser != null">
                   <a pripple=""
                     class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
                     <i class="pi pi-sign-in mr-2"></i>
@@ -184,67 +136,59 @@
 
                 <p-divider></p-divider>
 
-                <li *ngIf="currentUser != null && currentUser.roles[0] == 'ROLE_USER'">
-                  <a pripple=""
-                    class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
-                    <i class="pi pi-id-card mr-2"></i>
-                    <span class="font-medium" (click)="onClickCustomerValidation()">Validação Do Cliente</span>
-                    <span class="p-ink"></span>
-                  </a>
-                </li>
+                <ng-container *ngTemplateOutlet="recursiveUserMenuDropDown; context: { $implicit: homeUIDTO.menuHeaderDropdowns }"></ng-container>
 
-                <li *ngIf="currentUser != null && currentUser.roles[0] == 'ROLE_USER'">
-                  <a pripple=""
-                    class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
-                    <i class="pi pi-book mr-2"></i>
-                    <span class="font-medium" (click)="onClickCustomerVehicleBooking()">Minhas Reservas</span>
-                    <span class="p-ink"></span>
-                  </a>
-                </li>
+                <ng-template #recursiveUserMenuDropDown let-subMenus>
+                  <li *ngFor="let subMenu of subMenus">
+                    <a [ngClass]="{'p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150': true}"
+                        (click)="toggleMenuHeaderDropDown(subMenu); $event.stopPropagation();"
+                        [routerLink]="subMenu.url ? [subMenu.url] : null">
+                      <i [class]="subMenu.icon + ' mr-2'"></i>
+                      <span>{{ subMenu.name }}</span>
+                      <i *ngIf="subMenu.subMenus != null && subMenu.subMenus.length > 0" class="pi pi-angle-right ml-auto lg:ml-3"></i>
+                      <span class="p-ink"></span>
+                    </a>
+                    <ul *ngIf="subMenu.showSubMenu && subMenu.subMenus != null && subMenu.subMenus.length > 0"
+                        class="list-none py-3 pl-3 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:border-1 border-50 lg:shadow-2 lg:absolute surface-overlay origin-top w-full lg:w-15rem cursor-pointer right-100 top-0">
+                      <ng-container *ngTemplateOutlet="recursiveUserMenuDropDown; context: { $implicit: subMenu.subMenus }"></ng-container>
+                    </ul>
+                  </li>
+                </ng-template>
 
-                <li *ngIf="currentUser != null && currentUser.roles[0] == 'ROLE_USER'">
-                  <a pripple=""
-                    class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
-                    <i class="pi pi-car mr-2"></i>
-                    <span class="font-medium" (click)="onClickCustomerVehicleBookingCustomerVehicle()">Reservas Dos Meus
-                      Carros</span>
-                    <span class="p-ink"></span>
-                  </a>
-                </li>
-
-                <li class="relative"><a pripple="" pstyleclass="@next" enterclass="hidden" enteractiveclass="scalein"
-                    leavetoclass="hidden" leaveactiveclass="fadeout"
-                    class="p-element p-ripple flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"><i
-                      class="pi pi-search mr-2"></i><span class="font-medium">Search</span><i
-                      class="pi pi-angle-down ml-auto lg:-rotate-90"></i><span class="p-ink"></span></a>
-                  <ul
-                    class="list-none py-3 pl-3 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:border-1 border-50 lg:shadow-2 lg:absolute surface-overlay hidden origin-top w-full lg:w-15rem cursor-pointer left-100 top-0">
-                    <li><a pripple=""
-                        class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"><i
-                          class="pi pi-shopping-cart mr-2"></i><span class="font-medium">Purchases</span><span
-                          class="p-ink"></span></a></li>
-                    <li class="relative"><a pripple=""
-                        class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"><i
-                          class="pi pi-comments mr-2"></i><span class="font-medium">Messages</span><span
-                          class="p-ink"></span></a></li>
-                  </ul>
-                </li>
               </ul>
 
             </li>
           </ul>
         </div>
       </div>
-      <ul
-        class="list-none py-3 px-5 m-0 flex align-items-center font-medium overflow-x-auto border-top-1 border-indigo-600">
-        <li class="pr-3"><a class="cursor-pointer"><i class="pi pi-home text-indigo-200"></i></a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-indigo-200"></i></li>
-        <li class="px-2"><a class="cursor-pointer text-indigo-200 white-space-nowrap">Level 3</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-indigo-100"></i></li>
-        <li class="px-2"><a class="cursor-pointer text-indigo-200 white-space-nowrap">Level 2</a></li>
-        <li class="px-2"><i class="pi pi-angle-right text-indigo-200"></i></li>
-        <li class="px-2"><a class="cursor-pointer text-indigo-100 white-space-nowrap">Level 1</a></li>
+
+      <!-- Breadcrumb -->
+      <ul class="list-none py-3 px-5 m-0 flex align-items-center font-medium overflow-x-auto border-top-1 border-indigo-600">
+        <li class="pr-3">
+          <a class="cursor-pointer">
+            <i class="pi pi-home text-indigo-200"></i>
+          </a>
+        </li>
+        <li class="px-2">
+          <i class="pi pi-angle-right text-indigo-200">
+
+          </i>
+        </li>
+        <li *ngFor="let crumb of homeUIDTO.breadcrumbs; let i = index" class="flex items-center">
+          <a 
+            [routerLink]="[crumb.url]" 
+            [ngClass]="{
+              'text-indigo-100': isSelected(crumb),
+              'text-indigo-200': !isSelected(crumb)
+            }" 
+            class="cursor-pointer white-space-nowrap"
+            (click)="onBreadcrumbClick(crumb)">
+            {{ crumb.name }}
+          </a>
+          <i *ngIf="i < homeUIDTO.breadcrumbs.length - 1" class="pi pi-angle-right text-indigo-200 mx-2"></i>
+        </li>
       </ul>
+
     </div>
 
     <div>
@@ -252,7 +196,7 @@
         <div class="border-2 border-dashed surface-border border-round surface-section flex-auto">
 
           <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#6610f2" type="cog" [fullScreen]="true">
-            <h1 style="color: #6610f2;">{{ loadingText }}</h1>
+            <h1 style="color: #6610f2;">{{ homeUIDTO.label_loading_Generic }}</h1>
           </ngx-spinner>
           <p-toast [life]="15000"></p-toast>
           <router-outlet></router-outlet>

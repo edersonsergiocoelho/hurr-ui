@@ -1,4 +1,6 @@
 {
   "label_enable_true_Generic": "Ativo",
-  "label_enable_false_Generic": "Inativo"
+  "label_enable_false_Generic": "Inativo",
+
+  "label_loading_Generic": "Carregando"
 }
