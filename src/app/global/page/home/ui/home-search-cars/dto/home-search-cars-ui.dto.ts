@@ -12,6 +12,7 @@ export class HomeSearchCarsUIDTO extends TranslateSeverityDTO {
   
   selectedHourInit: string = '10:00';
   selectedHourEnd: string = '10:00';
+  
   hoursInit: string[];
   hours: string[] = Array.from({ length: 48 }, (_, index) => {
     const hour = Math.floor(index / 2);

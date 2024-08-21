@@ -58,6 +58,7 @@ export class HomeComponent implements OnInit {
   }
 
   async asyncCallFunctions() {
+
     // Exibe o spinner de carregamento
     this.ngxSpinnerService.show();
 
@@ -119,12 +120,17 @@ export class HomeComponent implements OnInit {
       }
 
     } catch (error: any) {
+
       // Exibe uma mensagem de erro em caso de falha ao carregar menus
       this.messageService.add({
         severity: SeverityConstants.ERROR,
         summary: this.homeUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
+
+      // Oculta o spinner de carregamento
+      this.ngxSpinnerService.hide();
+
     } finally {
       // Oculta o spinner de carregamento
       this.ngxSpinnerService.hide();

@@ -202,7 +202,7 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
     this.router.navigate(['customer-vehicle-approved/detail/' + rowData.customerVehicleApprovedId]);
   }
 
-  async conChangeVehicleBrand(vehicleBrand: VehicleBrand) {
+  async onChangeVehicleBrand(vehicleBrand: VehicleBrand) {
 
     this.ngxSpinnerService.show();
 

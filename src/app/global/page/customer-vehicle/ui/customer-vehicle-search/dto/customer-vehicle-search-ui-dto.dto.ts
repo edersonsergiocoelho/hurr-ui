@@ -4,7 +4,6 @@ import { CustomerVehicleSearchDTO } from "../../../dto/customer-vehicle-search-d
 
 export class CustomerVehicleSearchUIDTO {
 
-  columns: any[] = [];
   totalRecords = 0;
 
   sortOptions!: SelectItem[];

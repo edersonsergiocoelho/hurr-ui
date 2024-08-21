@@ -42,16 +42,14 @@ export class HomeSearchCarsComponent implements OnInit {
   }
 
   async asyncCallFunctions() {
+
     this.ngxSpinnerService.show();
  
     try {
-      // Array de promessas para carregar as traduções e menus
-      const [translations] = await Promise.all([
-        this.loadTranslations(),
-        this.loadPlace(),
-        this.loadHoursInit()
-      ]);
-  
+
+      // Carregar as traduções usando firstValueFrom
+      const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
+
       // Atribuindo valores após as promessas serem resolvidas
       this.homeSearchCarsUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
       this.homeSearchCarsUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
@@ -64,18 +62,26 @@ export class HomeSearchCarsComponent implements OnInit {
       this.homeSearchCarsUIDTO.warn_error_accessing_geolocation_HomeSearchCars = translations['warn_error_accessing_geolocation_HomeSearchCars'];
       this.homeSearchCarsUIDTO.warn_geolocation_not_supported_by_the_browser_HomeSearchCars = translations['warn_geolocation_not_supported_by_the_browser_HomeSearchCars'];
   
+      // Carregar os outros métodos normalmente
+      this.loadPlace();
+      this.loadHoursInit();
+
     } catch (error: any) {
+
       this.messageService.add({
         severity: SeverityConstants.ERROR,
         summary: this.homeSearchCarsUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
+
+      this.ngxSpinnerService.hide();
+
     } finally {
       this.ngxSpinnerService.hide();
     }
   }
 
-  private loadTranslations(): Promise<any> {
+  private loadKeys(): any {
     const keys = [
       'warn_message_service_Generic',
       'error_message_service_Generic',
@@ -88,59 +94,50 @@ export class HomeSearchCarsComponent implements OnInit {
       'warn_error_accessing_geolocation_HomeSearchCars',
       'warn_geolocation_not_supported_by_the_browser_HomeSearchCars'
     ];
-    return firstValueFrom(this.translateService.get(keys).pipe(first()));
+    return keys;
   }
 
-  loadPlace(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      try {
-        const autocompleteGoogle = new google.maps.places.Autocomplete(this.searchInput.nativeElement);
-        autocompleteGoogle.addListener('place_changed', () => {
-          this.ngZone.run(() => {
-            this.homeSearchCarsUIDTO.place = autocompleteGoogle.getPlace();
-            resolve(); // Resolve a promessa quando um lugar for selecionado
-          });
-        });
-      } catch (error) {
-        reject(error); // Rejeita a promessa em caso de erro
-      }
-    });
+  loadPlace() {
+  
+    const autocompleteGoogle = new google.maps.places.Autocomplete(this.searchInput.nativeElement);
+    autocompleteGoogle.addListener('place_changed', () => {
+      this.ngZone.run(() => {
+        this.homeSearchCarsUIDTO.place = autocompleteGoogle.getPlace();
+      });
+    });  
   }
 
-  loadHoursInit(): Promise<void> {
-    return new Promise((resolve) => {
-      const now = new Date();
-      const isToday = this.isSameDay(this.homeSearchCarsUIDTO.dateInit, this.homeSearchCarsUIDTO.today);
-  
-      // Verifica se o horário atual é 23:30 ou mais tarde
-      if (now.getHours() === 23 && now.getMinutes() >= 30) {
-        this.homeSearchCarsUIDTO.dateInit = new Date();
-        this.homeSearchCarsUIDTO.dateInit.setDate(this.homeSearchCarsUIDTO.dateInit.getDate() + 1);
+  loadHoursInit() {
+
+    const now = new Date();
+    const isToday = this.isSameDay(this.homeSearchCarsUIDTO.dateInit, this.homeSearchCarsUIDTO.today);
+
+    // Verifica se o horário atual é 23:30 ou mais tarde
+    if (now.getHours() === 23 && now.getMinutes() >= 30) {
+      this.homeSearchCarsUIDTO.dateInit = new Date();
+      this.homeSearchCarsUIDTO.dateInit.setDate(this.homeSearchCarsUIDTO.dateInit.getDate() + 1);
+    }
+
+    // Calcula hoursInit com base na dataInit atualizada
+    this.homeSearchCarsUIDTO.hoursInit = Array.from({ length: 48 }, (_, index) => {
+      const hour = Math.floor(index / 2);
+      const minute: number = index % 2 === 0 ? 0 : 30;
+      const hourStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+
+      // Mostra todas as horas se dateInit for amanhã ou mais tarde
+      if (this.homeSearchCarsUIDTO.dateInit > now || !isToday) {
+        return hourStr;
       }
-  
-      // Calcula hoursInit com base na dataInit atualizada
-      this.homeSearchCarsUIDTO.hoursInit = Array.from({ length: 48 }, (_, index) => {
-        const hour = Math.floor(index / 2);
-        const minute: number = index % 2 === 0 ? 0 : 30;
-        const hourStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-  
-        // Mostra todas as horas se dateInit for amanhã ou mais tarde
-        if (this.homeSearchCarsUIDTO.dateInit > now || !isToday) {
-          return hourStr;
-        }
-  
-        // Caso contrário, mostra apenas as horas futuras de hoje
-        const currentHour = now.getHours();
-        const currentMinute = now.getMinutes();
-        if (hour < currentHour || (hour === currentHour && minute < currentMinute)) {
-          return ''; // Para horas passadas, retorna uma string vazia
-        } else {
-          return hourStr;
-        }
-      }).filter(hour => hour !== ''); // Filtra as horas vazias
-  
-      resolve(); // Resolve a promessa quando a função terminar de executar
-    });
+
+      // Caso contrário, mostra apenas as horas futuras de hoje
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+      if (hour < currentHour || (hour === currentHour && minute < currentMinute)) {
+        return ''; // Para horas passadas, retorna uma string vazia
+      } else {
+        return hourStr;
+      }
+    }).filter(hour => hour !== ''); // Filtra as horas vazias
   }
 
   // Método auxiliar para verificar se duas datas são do mesmo dia
