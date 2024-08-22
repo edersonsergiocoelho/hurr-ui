@@ -1,0 +1,30 @@
+{
+  "discover_freedom_HomeSearchCarsDetail": "Descubra a liberdade sobre quatro rodas",
+  "find_ideal_car_HomeSearchCarsDetail": "Encontre o carro ideal para transformar seus planos de viagem em realidade. Qualidade, conforto e aventura aguardam por você. Vamos encontrar juntos o veículo perfeito para sua jornada inesquecível.",
+  "search_input_place_placeholder_HomeSearchCarsDetail": "Cidade, Aeroporto, Endereço Ou Hotel",
+  "where_HomeSearchCarsDetail": "Onde",
+  "from_HomeSearchCarsDetail": "De",
+  "to_HomeSearchCarsDetail": "Até",
+
+  "placeholder_vehicle_brand_HomeSearchCarsDetail": "Informe A Marca",
+  "placeholder_vehicle_HomeSearchCarsDetail": "Informe O Veículo",
+  "placeholder_vehicle_model_HomeSearchCarsDetail": "Informe O Modelo Do Veículo",
+  "placeholder_vehicle_category_HomeSearchCarsDetail": "Informe A Categoria Do Veículo",
+
+  "car_available_HomeSearchCarsDetail": "carro disponível",
+  "this_car_can_be_picked_up_HomeSearchCarsDetail": "Esse carro pode ser retirado nesta cidade.",
+  "cars_available_HomeSearchCarsDetail": "carros disponíveis",
+  "these_cars_can_be_picked_up_HomeSearchCarsDetail": "Esses carros podem ser retirados nesta cidade.",
+  "unlimited_mileage_HomeSearchCarsDetail": "Quilometragem Ilimitada",
+  "limited_mileage_HomeSearchCarsDetail": "Quilometragem Limitada",
+  "day_HomeSearchCarsDetail": "Dia",
+
+  "vehicle_model_HomeSearchCarsDetail": "Modelo:",
+  "vehicle_fuel_type_HomeSearchCarsDetail": "Combustível:",
+  "vehicle_transmission_HomeSearchCarsDetail": "Transmissão:",
+  "no_cars_found_title_HomeSearchCarsDetail": "Nenhum carro encontrado",
+  "no_cars_found_message_HomeSearchCarsDetail": "Tente alterar seus filtros, ajustar suas datas ou explorar o mapa",
+
+  "daily_rate_HomeSearchCarsDetail": "Preço:",
+  "excluding_taxes_and_fees_HomeSearchCarsDetail": "Sem Incluir Impostos E Taxas"
+}

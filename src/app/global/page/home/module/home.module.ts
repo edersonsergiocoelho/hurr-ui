@@ -23,6 +23,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TranslateModule } from '@ngx-translate/core';
+import { DataViewModule } from 'primeng/dataview';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ButtonModule,
     CalendarModule,
     DividerModule,
+    DataViewModule,
     DropdownModule,
     InputTextModule,
     MenuModule,

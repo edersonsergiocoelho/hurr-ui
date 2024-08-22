@@ -1,221 +1,411 @@
-import { AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { first, firstValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { DecimalPipe, Location } from '@angular/common';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { NavigationExtras, Router } from '@angular/router';
 import { HomeSearchCarsDetailUIDTO } from './dto/home-search-cars-detail-ui.dto';
 
-// Service
 import { CustomerVehicleService } from '../../../customer-vehicle/service/customer-vehicle.service';
 import { VehicleService } from 'src/app/page/admin/vehicle/service/vehicle.service';
 import { VehicleBrandService } from 'src/app/page/admin/vehicle-brand/service/vehicle-brand.service';
 import { VehicleCategoryService } from 'src/app/page/admin/vehicle-category/service/vehicle-category.service';
 import { VehicleModelService } from 'src/app/page/admin/vehicle-model/service/vehicle-model.service';
-import { HomeUIService } from '../../service/home-ui/home-ui.service';
 import { MessageService } from 'primeng/api';
 import { CustomerVehicleReviewService } from '../../../customer-vehicle-review/service/customer-vehicle-review.service';
 import { CustomerVehicleSearchDTO } from '../../../customer-vehicle/dto/customer-vehicle-search-dto.dto';
+import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { DataViewLazyLoadEvent } from 'primeng/dataview';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { TranslateService } from '@ngx-translate/core';
+import { VehicleBrand } from 'src/app/page/admin/vehicle-brand/entity/vehicle-brand.entity';
+import { Vehicle } from 'src/app/page/admin/vehicle/entity/vehicle.entity';
+import { FileService } from 'src/app/page/file/service/file.service';
+import * as moment from 'moment';
 
 const directionsService = new google.maps.DirectionsService();
 
 @Component({
-  selector: 'app-home-search-cars-detail',
-  templateUrl: './home-search-cars-detail.component.html',
-  styleUrls: ['./home-search-cars-detail.component.css'],
+  selector: 'app-home-search-cars-detail', // Define o seletor do componente para uso em templates.
+  templateUrl: './home-search-cars-detail.component.html', // Define o caminho para o template HTML do componente.
+  styleUrls: ['./home-search-cars-detail.component.css'], // Define o caminho para os estilos CSS do componente.
 })
-export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
+export class HomeSearchCarsDetailComponent implements OnInit  {
 
-  homeSearchCarsDetailUIDTO: HomeSearchCarsDetailUIDTO;
+  homeSearchCarsDetailUIDTO: HomeSearchCarsDetailUIDTO; // Define o DTO para manter o estado dos dados da página.
+  @ViewChild('searchInputPlace', { static: true }) searchInputPlace!: ElementRef<HTMLInputElement>; // Referência ao campo de entrada de endereço.
 
-  dateInit: Date;
-  dateEnd: Date;
-  today: Date;
+  constructor(
+    private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService, // Serviço para manipulação de fotos dos veículos.
+    private customerVehicleReviewService: CustomerVehicleReviewService, // Serviço para manipulação de avaliações de veículos.
+    private customerVehicleService: CustomerVehicleService, // Serviço para manipulação dos dados dos veículos.
+    private fileService: FileService, // Serviço para manipulação de arquivos genéricos.
+    private location: Location, // Serviço para acessar o estado de localização.
+    private messageService: MessageService, // Serviço para exibição de mensagens.
+    private ngxSpinnerService: NgxSpinnerService, // Serviço para exibição de carregamento (spinner).
+    private ngZone: NgZone, // Serviço para execução de código fora da zona Angular.
+    private router: Router, // Serviço para navegação entre rotas.
+    private translateService: TranslateService, // Serviço para tradução de mensagens.
+    private vehicleBrandService: VehicleBrandService, // Serviço para manipulação das marcas de veículos.
+    private vehicleCategoryService: VehicleCategoryService, // Serviço para manipulação das categorias de veículos.
+    private vehicleModelService: VehicleModelService, // Serviço para manipulação dos modelos de veículos.
+    private vehicleService: VehicleService // Serviço para manipulação dos dados dos veículos.
+  ) {
 
-  dateFormat = 'dd/mm/yy';
+    this.homeSearchCarsDetailUIDTO = new HomeSearchCarsDetailUIDTO(); // Inicializa o DTO para a página.
 
-  selectedHourInit?: string = '10:00';
-  selectedHourEnd?: string = '10:00';
+    const state = location.getState() as any; // Obtém o estado da localização atual da navegação.
 
-  hours: string[] = Array.from({ length: 48 }, (_, index) => {
-    const hour = Math.floor(index / 2);
-    const minute = index % 2 === 0 ? '00' : '30';
-    return `${hour.toString().padStart(2, '0')}:${minute}`;
-  });
-
-  place: any;
-
-  center: google.maps.LatLngLiteral = {lat: -23.7189106, lng: -46.8551999};
-  @ViewChild('map', { static: true }) mapElement!: ElementRef;
-  map: any;
-  zoom = 14;
-  markerOptions: google.maps.MarkerOptions = {draggable: false};
-  markerPositions: google.maps.LatLngLiteral[] = [];
-  markers: google.maps.Marker[] = [];
-
-  @ViewChild('searchInput', { static: true }) searchInput!: ElementRef<HTMLInputElement>;
-
-  constructor(private location: Location,
-              private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private httpClient: HttpClient,
-              private ngZone: NgZone,
-              private decimalPipe: DecimalPipe,
-              private homeUIService: HomeUIService,
-
-              private messageService: MessageService,
-
-              private customerVehicleService: CustomerVehicleService,
-              private customerVehicleReviewService: CustomerVehicleReviewService,
-              private vehicleBrandService: VehicleBrandService,
-              private vehicleCategoryService: VehicleCategoryService,
-              private vehicleService: VehicleService,
-              private vehicleModelService: VehicleModelService) {
-
-    const state = location.getState() as any;
-    
     if (state != null) {
 
       if (state.place == null) {
-        this.router.navigate(['']);
+        this.router.navigate(['']); // Redireciona para a página inicial se o local não estiver definido.
       }
 
-      this.place = JSON.parse(state.place);
-      this.dateInit = state.dateInit;
-      this.selectedHourInit = state.selectedHourInit;
-      this.dateEnd = state.dateEnd;
-      this.selectedHourEnd = state.selectedHourEnd;
+      this.homeSearchCarsDetailUIDTO.place = JSON.parse(state.place); // Define o local no DTO.
+      this.homeSearchCarsDetailUIDTO.dateInit = state.dateInit; // Define a data inicial no DTO.
+      this.homeSearchCarsDetailUIDTO.selectedHourInit = state.selectedHourInit; // Define a hora inicial no DTO.
+      this.homeSearchCarsDetailUIDTO.dateEnd = state.dateEnd; // Define a data final no DTO.
+      this.homeSearchCarsDetailUIDTO.selectedHourEnd = state.selectedHourEnd; // Define a hora final no DTO.
     }
   }
 
   ngOnInit(): void {
-
-    this.resetRegisterForm();
-
-    const autocomplete = new google.maps.places.Autocomplete(this.searchInput.nativeElement);
-
-    autocomplete.addListener('place_changed', () => {
-      this.ngZone.run(() => {
-        this.place = autocomplete.getPlace();
-    
-        if (!this.place || !this.place.geometry) {
-          console.error("Localização não encontrada para o endereço fornecido");
-          return;
-        }
-
-        this.getGeocoderLatitudeLongitude();
-    
-      });
-    });
+    this.translateService.setDefaultLang('pt_BR'); // Define o idioma padrão para traduções.
+    this.resetRegisterForm(); // Chama o método para inicializar o formulário.
   }
 
-  ngAfterViewInit(): void {
-    this.map = document.getElementById("map");
-    this.initializeMap();
-  }
+  async resetRegisterForm () {
 
-  resetRegisterForm () {
+    this.homeSearchCarsDetailUIDTO.today = moment().toDate(); // Define a data atual no DTO.
 
-    this.homeSearchCarsDetailUIDTO = new HomeSearchCarsDetailUIDTO();
+    if (this.homeSearchCarsDetailUIDTO.place && this.homeSearchCarsDetailUIDTO.place.formatted_address) {
 
-    this.asyncCallFunctions();
+      this.searchInputPlace.nativeElement.value = this.homeSearchCarsDetailUIDTO.place.formatted_address; // Define o valor do campo de entrada com o endereço formatado.
+
+      const location = await this.getAsyncGeocoderLatitudeLongitude(this.homeSearchCarsDetailUIDTO.place.formatted_address); // Obtém a latitude e longitude do endereço.
+      if (location !== null) {
+        this.homeSearchCarsDetailUIDTO.placeLocationLatitude = location.lat; // Define a latitude no DTO.
+        this.homeSearchCarsDetailUIDTO.placeLocationLongitude = location.lng; // Define a longitude no DTO.
+      }
+    }
+
+    this.asyncCallFunctions(); // Chama a função assíncrona para carregar os dados.
   }
 
   async asyncCallFunctions() {
 
-    //this.ngxSpinnerService.show();
+    this.ngxSpinnerService.show(); // Exibe o spinner de carregamento.
 
     try {
 
-      const resultGetAllVehicleBrands = await firstValueFrom(this.vehicleBrandService.getAllVehicleBrands().pipe(first()));
+      // Carregar as traduções usando firstValueFrom
+      const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
+  
+      // Atribuindo valores após as promessas serem resolvidas
+      this.homeSearchCarsDetailUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic']; // Define a mensagem de aviso no DTO.
+      this.homeSearchCarsDetailUIDTO.error_message_service_Generic = translations['error_message_service_Generic']; // Define a mensagem de erro no DTO.
+      this.homeSearchCarsDetailUIDTO.info_message_service_Generic = translations['info_message_service_Generic']; // Define a mensagem de informação no DTO.
+      this.homeSearchCarsDetailUIDTO.success_message_service_Generic = translations['success_message_service_Generic']; // Define a mensagem de sucesso no DTO.
+      this.homeSearchCarsDetailUIDTO.currency_brl_Generic = translations['currency_brl_Generic']; // Define o símbolo da moeda no DTO.
+      this.homeSearchCarsDetailUIDTO.daily_rate_HomeSearchCarsDetail = translations['daily_rate_HomeSearchCarsDetail']; // Define a taxa diária no DTO.
+      this.homeSearchCarsDetailUIDTO.excluding_taxes_and_fees_HomeSearchCarsDetail = translations['excluding_taxes_and_fees_HomeSearchCarsDetail']; // Define a mensagem de exclusão de impostos e taxas no DTO.
 
-      if (resultGetAllVehicleBrands.status == 200) {
+      // Carregar os outros métodos normalmente
+      this.loadPlace(); // Carrega o local.
 
-        if (resultGetAllVehicleBrands.body != null) {
-          this.homeSearchCarsDetailUIDTO.vehiclesBrands = resultGetAllVehicleBrands.body;
-        }
+      const [vehicleBrandServiceFindAll, vehicleCategoryServiceFindAll] = await Promise.all([
+        firstValueFrom(this.vehicleBrandService.getAllVehicleBrands().pipe(first())), // Obtém todas as marcas de veículos.
+        firstValueFrom(this.vehicleCategoryService.getAllVehicleCategories().pipe(first())) // Obtém todas as categorias de veículos.
+      ]);
+
+      if (vehicleBrandServiceFindAll.status == 200 && vehicleBrandServiceFindAll.body != null) {
+        this.homeSearchCarsDetailUIDTO.vehicleBrands = vehicleBrandServiceFindAll.body; // Define as marcas de veículos no DTO.
+
+        await Promise.all(this.homeSearchCarsDetailUIDTO.vehicleBrands.map(vehicle => this.getFile(vehicle))); // Obtém a foto para cada marca de veículo.
+      }
+  
+      if (vehicleCategoryServiceFindAll.status == 200 && vehicleCategoryServiceFindAll.body != null) {
+        this.homeSearchCarsDetailUIDTO.vehicleCategorys = vehicleCategoryServiceFindAll.body; // Define as categorias de veículos no DTO.
       }
 
+      await this.search(null);
+  
     } catch (error: any) {
-      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      
+      this.messageService.add({
+        severity: SeverityConstants.ERROR, // Define o nível de severidade para o erro.
+        summary: this.homeSearchCarsDetailUIDTO.error_message_service_Generic, // Define o resumo da mensagem de erro.
+        detail: error.toString() // Define o detalhe da mensagem de erro.
+      });
+
+    } finally {
+      this.ngxSpinnerService.hide(); // Oculta o spinner de carregamento.
     }
+  }
 
-    try {
+  private loadKeys(): any {
+    // Define as chaves para tradução.
+    const keys = [
+      'warn_message_service_Generic',
+      'error_message_service_Generic',
+      'info_message_service_Generic',
+      'success_message_service_Generic',
+      'currency_brl_Generic',
+      'daily_rate_HomeSearchCarsDetail',
+      'excluding_taxes_and_fees_HomeSearchCarsDetail'
+    ];
+    return keys;
+  }
 
-      const resultGetAllVehicleCategories = await firstValueFrom(this.vehicleCategoryService.getAllVehicleCategories().pipe(first()));
+  loadPlace() {
+    // Inicializa o autocomplete do Google Maps para o campo de entrada.
+    const autocompleteGoogle = new google.maps.places.Autocomplete(this.searchInputPlace.nativeElement);
+    autocompleteGoogle.addListener('place_changed', () => {
+      this.ngZone.run(() => {
+        this.homeSearchCarsDetailUIDTO.place = autocompleteGoogle.getPlace(); // Obtém o local selecionado.
 
-      if (resultGetAllVehicleCategories.status == 200) {
-
-        if (resultGetAllVehicleCategories.body != null) {
-          this.homeSearchCarsDetailUIDTO.vehiclesCategorys = resultGetAllVehicleCategories.body;
+        if (!this.homeSearchCarsDetailUIDTO.place || !this.homeSearchCarsDetailUIDTO.place.geometry) {
+          console.error("Localização não encontrada para o endereço fornecido"); // Exibe um erro se o local não for encontrado.
+          return;
         }
-      }
 
-    } catch (error: any) {
-      this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
-    }
-
-    if (this.place && this.place.formatted_address) {
-
-      this.searchInput.nativeElement.value = this.place.formatted_address;
-
-      try {
-        const location = await this.getAsyncGeocoderLatitudeLongitude(this.place.formatted_address);
-        if (location !== null) {
-          this.homeSearchCarsDetailUIDTO.placeLocationLatitude = location.lat;
-          this.homeSearchCarsDetailUIDTO.placeLocationLongitude = location.lng;
-        }
-      } catch (error: any) {
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
-      }
-
-      this.search();
-    }
+        this.getGeocoderLatitudeLongitude(); // Obtém a latitude e longitude para o local.
+      });
+    });  
   }
 
   initializeMap() {
-    const mapOptions = {
-      center: this.center,
-      zoom: this.zoom,
-    };
-
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    // Inicializa o mapa com o zoom e centro definidos no DTO.
+    this.homeSearchCarsDetailUIDTO.map = new google.maps.Map(document.getElementById('map') as HTMLElement,  {
+      zoom: this.homeSearchCarsDetailUIDTO.zoom,
+      center: this.homeSearchCarsDetailUIDTO.center,
+      mapId: "MAP_HURR", // Define o ID do mapa.
+    });
   }
 
-  changeBrand(selectedVehicleBrand) {
+  // Função assíncrona que é chamada quando a marca do veículo é alterada.
+  async onChangeVehicleBrand(vehicleBrand: VehicleBrand) {
 
-    this.homeSearchCarsDetailUIDTO.vehicles = [];
-    this.homeSearchCarsDetailUIDTO.vehiclesModels = [];
+    // Exibe o indicador de carregamento.
+    this.ngxSpinnerService.show();
 
-    this.vehicleService.getVehiclesByBrandId(selectedVehicleBrand.vehicleBrandId).subscribe(
-      (response) => {
-        this.homeSearchCarsDetailUIDTO.vehicles = response.body || [];
-      },
-      (error) => {
-        console.error(error);
+    try {
+      // Solicita ao serviço os veículos relacionados à marca selecionada.
+      const vehicleServiceByBrandId = await firstValueFrom(this.vehicleService.getVehiclesByBrandId(vehicleBrand.vehicleBrandId).pipe(first()));
+
+      if (vehicleServiceByBrandId.status == 200) {
+        // Se a resposta for bem-sucedida e contiver veículos, atribui-os ao DTO.
+        if (vehicleServiceByBrandId.body != null && vehicleServiceByBrandId.body.length > 0) {
+          this.homeSearchCarsDetailUIDTO.vehicles = vehicleServiceByBrandId.body;
+        }
       }
-    );
-  }
 
-  changeVehicle(selectedVehicle) {
-
-    this.homeSearchCarsDetailUIDTO.vehiclesModels = [];
-
-    this.vehicleModelService.getVehicleModelsByVehicleId(selectedVehicle.vehicleId).subscribe(
-      (response) => {
-        this.homeSearchCarsDetailUIDTO.vehiclesModels = response.body || [];
-      },
-      (error) => {
-        console.error(error);
+    } catch (error: any) {
+      // Se ocorrer um erro, exibe uma mensagem de erro.
+      if (error.status == 500) {
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
       }
-    );
+    } finally {
+      this.ngxSpinnerService.hide(); // Oculta o spinner de carregamento.
+    }
   }
 
-  async search() {
+  // Função assíncrona que busca o arquivo associado a uma marca de veículo.
+  async getFile(vehicleBrand: any) {
 
+    try {
+      // Verifica se a marca de veículo tem um ID de arquivo associado.
+      if (vehicleBrand.fileId != null) {
+        // Solicita ao serviço o arquivo com base no ID.
+        const fileServiceFindById = await firstValueFrom(this.fileService.findById(vehicleBrand.fileId).pipe(first()));
+        
+        if (fileServiceFindById.status == 200 &&
+          fileServiceFindById.body != null) {
+            // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI ao veículo.
+            vehicleBrand.file = fileServiceFindById.body;
+            vehicleBrand.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        }
+      }
+
+    } catch (error: any) {
+      // Se ocorrer um erro, exibe uma mensagem de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic, 
+          detail: error.error.message 
+        });
+      }
+    }
+  }
+
+  // Função assíncrona que busca o arquivo associado a uma marca de veículo em um veículo de cliente.
+  async getFileVehicleBrandFromCustomerVehicle(customerVehicle: any) {
+
+    try {
+      // Verifica se o veículo de cliente tem um ID de arquivo para a marca do veículo.
+      if (customerVehicle.vehicle.vehicleBrand.fileId != null) {
+        // Solicita ao serviço o arquivo com base no ID.
+        const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicle.vehicle.vehicleBrand.fileId).pipe(first()));
+        
+        if (fileServiceFindById.status == 200 &&
+          fileServiceFindById.body != null) {
+          // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI à marca do veículo do cliente.
+          customerVehicle.vehicle.vehicleBrand.file = fileServiceFindById.body;
+          customerVehicle.vehicle.vehicleBrand.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        }
+      }
+
+    } catch (error: any) {
+      // Se ocorrer um erro, exibe uma mensagem de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic, 
+          detail: error.error.message 
+        });
+      }
+    }
+  }
+
+  // Função assíncrona que busca o arquivo associado a uma categoria de veículo em um veículo de cliente.
+  async getFileVehicleCategoryFromCustomerVehicle(customerVehicle: any) {
+
+    try {
+      // Verifica se o veículo de cliente tem um ID de arquivo para a categoria do veículo.
+      if (customerVehicle.vehicleModel.vehicleCategory.fileId != null) {
+        // Solicita ao serviço o arquivo com base no ID.
+        const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicle.vehicleModel.vehicleCategory.fileId).pipe(first()));
+        
+        if (fileServiceFindById.status == 200 &&
+          fileServiceFindById.body != null) {
+          // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI à categoria do veículo do cliente.
+          customerVehicle.vehicleModel.vehicleCategory.file = fileServiceFindById.body;
+          customerVehicle.vehicleModel.vehicleCategory.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        }
+      }
+
+    } catch (error: any) {
+      // Se ocorrer um erro, exibe uma mensagem de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic, 
+          detail: error.error.message 
+        });
+      }
+    }
+  }
+
+  // Função assíncrona que busca o arquivo associado a um tipo de combustível de veículo em um veículo de cliente.
+  async getFileVehicleFuelTypeFromCustomerVehicle(customerVehicle: any) {
+
+    try {
+      // Verifica se o veículo de cliente tem um ID de arquivo para o tipo de combustível.
+      if (customerVehicle.vehicleFuelType.fileId != null) {
+        // Solicita ao serviço o arquivo com base no ID.
+        const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicle.vehicleFuelType.fileId).pipe(first()));
+        
+        if (fileServiceFindById.status == 200 &&
+          fileServiceFindById.body != null) {
+          // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI ao tipo de combustível do veículo do cliente.
+          customerVehicle.vehicleFuelType.file = fileServiceFindById.body;
+          customerVehicle.vehicleFuelType.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        }
+      }
+
+    } catch (error: any) {
+      // Se ocorrer um erro, exibe uma mensagem de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic, 
+          detail: error.error.message 
+        });
+      }
+    }
+  }
+
+  // Função assíncrona que busca o arquivo associado a uma transmissão de veículo em um veículo de cliente.
+  async getFileVehicleTransmissionFromCustomerVehicle(customerVehicle: any) {
+
+    try {
+      // Verifica se o veículo de cliente tem um ID de arquivo para a transmissão do veículo.
+      if (customerVehicle.vehicleTransmission.fileId != null) {
+        // Solicita ao serviço o arquivo com base no ID.
+        const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicle.vehicleTransmission.fileId).pipe(first()));
+        
+        if (fileServiceFindById.status == 200 &&
+          fileServiceFindById.body != null) {
+          // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI à transmissão do veículo do cliente.
+          customerVehicle.vehicleTransmission.file = fileServiceFindById.body;
+          customerVehicle.vehicleTransmission.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        }
+      }
+
+    } catch (error: any) {
+      // Se ocorrer um erro, exibe uma mensagem de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic, 
+          detail: error.error.message 
+        });
+      }
+    }
+  }
+
+  // Função assíncrona que é chamada quando um veículo é alterado.
+  async onChangeVehicle(vehicle: Vehicle) {
+
+    // Exibe o indicador de carregamento.
+    this.ngxSpinnerService.show();
+
+    try {
+      // Solicita ao serviço os modelos de veículos relacionados ao veículo selecionado.
+      const vehicleModelServiceByVehicleId = await firstValueFrom(this.vehicleModelService.getVehicleModelsByVehicleId(vehicle.vehicleId).pipe(first()));
+
+      if (vehicleModelServiceByVehicleId.status == 200) {
+        // Se a resposta for bem-sucedida e contiver modelos de veículos, atribui-os ao DTO.
+        if (vehicleModelServiceByVehicleId.body != null && vehicleModelServiceByVehicleId.body.length > 0) {
+          this.homeSearchCarsDetailUIDTO.vehicleModels = vehicleModelServiceByVehicleId.body;
+        }
+      }
+
+    } catch (error: any) {
+      // Se ocorrer um erro, exibe uma mensagem de erro.
+      if (error.status == 500) {
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    } finally {
+      this.ngxSpinnerService.hide(); // Oculta o spinner de carregamento.
+    }
+  }
+
+  // Função assíncrona que realiza a busca de veículos com base no evento de carregamento.
+  async search(event: DataViewLazyLoadEvent | null) {
+
+    // Exibe o indicador de carregamento.
+    this.ngxSpinnerService.show();
+
+    // Inicializa o mapa.
     this.initializeMap();
-    
+
+    // Pagina os resultados com base no evento.
+    this.paginate(event);
+
+    // Cria um DTO de busca de veículos de cliente.
     let searchCustomerVehicle: CustomerVehicleSearchDTO = new CustomerVehicleSearchDTO();
 
+    // Define os parâmetros de busca com base na seleção atual.
     if (this.homeSearchCarsDetailUIDTO.selectedVehicle != null) {
       searchCustomerVehicle.vehicleId = this.homeSearchCarsDetailUIDTO.selectedVehicle.vehicleId;
     }
@@ -228,231 +418,343 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
       searchCustomerVehicle.vehicleCategoryId = this.homeSearchCarsDetailUIDTO.selectedVehicleCategory.vehicleCategoryId;
     }
 
-    // Extrair o país
-    const country = this.place.address_components.find(component => component.types.includes('country'));
+    // Obtém e define as informações de localização.
+    const country = this.homeSearchCarsDetailUIDTO.place.address_components.find(component => component.types.includes('country'));
     const countryName = country ? country.long_name : '';
     searchCustomerVehicle.countryName = countryName;
 
-    // Extrair o estado (administrative_area_level_1)
-    const state = this.place.address_components.find(component => component.types.includes('administrative_area_level_1'));
+    const state = this.homeSearchCarsDetailUIDTO.place.address_components.find(component => component.types.includes('administrative_area_level_1'));
     const stateName = state ? state.long_name : '';
     searchCustomerVehicle.stateName = stateName;
 
-    // Extrair a cidade (administrative_area_level_2)
-    const city = this.place.address_components.find(component => component.types.includes('administrative_area_level_2'));
+    const city = this.homeSearchCarsDetailUIDTO.place.address_components.find(component => component.types.includes('administrative_area_level_2'));
     const cityName = city ? city.long_name : '';
     searchCustomerVehicle.cityName = cityName;
 
-    this.customerVehicleService.search(searchCustomerVehicle).subscribe(
-      async (response) => {
+    // Configura a ordenação dos resultados.
+    if (event && event.sortField) {
+      this.homeSearchCarsDetailUIDTO.sortBy = event.sortField;
+    }
+    if (event && event.sortOrder) {
+      if(event.sortOrder == 1) {
+        this.homeSearchCarsDetailUIDTO.sortDir = "DESC";
+      } else if(event.sortOrder == -1) {
+        this.homeSearchCarsDetailUIDTO.sortDir = "ASC";
+      }
+    }
+  
+    try {
+      // Solicita a busca de veículos de cliente com base nos parâmetros definidos.
+      const customerVehicleServiceSearchPage: any = await firstValueFrom(
+        this.customerVehicleService.searchPage(
+          searchCustomerVehicle,
+          this.homeSearchCarsDetailUIDTO.page,
+          this.homeSearchCarsDetailUIDTO.size,
+          this.homeSearchCarsDetailUIDTO.sortDir,
+          this.homeSearchCarsDetailUIDTO.sortBy
+        ).pipe(first())
+      );
 
-        if (response.body) {
-          this.homeSearchCarsDetailUIDTO.customerVehicles = Array.isArray(response.body)
-            ? response.body
-            : [response.body];
-        }
-    
-        for (const customerVehicle of this.homeSearchCarsDetailUIDTO.customerVehicles) {
-          try {
-            const resultCVRFindAllByCustomerVehicleId = await firstValueFrom(this.customerVehicleReviewService.findAllByCustomerVehicleId(customerVehicle.customerVehicleId).pipe(first()));
-    
-            if (resultCVRFindAllByCustomerVehicleId.status == 200) {
-              if (resultCVRFindAllByCustomerVehicleId.body != null) {
-                customerVehicle.customersVehiclesReviews = resultCVRFindAllByCustomerVehicleId.body;
+      // Atualiza os dados de veículos de cliente no DTO com base na resposta do serviço.
+      this.homeSearchCarsDetailUIDTO.customerVehicles = customerVehicleServiceSearchPage.body.content;
+      this.homeSearchCarsDetailUIDTO.totalRecords = customerVehicleServiceSearchPage.body.totalElements;
+ 
+      // Busca e processa as fotos de capa dos veículos.
+      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getCoverPhoto(customerVehicle)));
+  
+      // Busca e processa as avaliações dos veículos.
+      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getReview(customerVehicle)));
 
-                if (customerVehicle.customersVehiclesReviews.length > 0) {
-                  let totalRating = 0;
-                  for (const review of customerVehicle.customersVehiclesReviews) {
-                    totalRating += review.rating;
-                  }
-                  const averageRating = totalRating / customerVehicle.customersVehiclesReviews.length;
+      // Busca e processa os arquivos associados à marca dos veículos.
+      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleBrandFromCustomerVehicle(customerVehicle)));
+
+      // Busca e processa os arquivos associados à categoria dos veículos.
+      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleCategoryFromCustomerVehicle(customerVehicle)));
+
+      // Busca e processa os arquivos associados ao tipo de combustível dos veículos.
+      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleFuelTypeFromCustomerVehicle(customerVehicle)));
+
+      // Busca e processa os arquivos associados à transmissão dos veículos.
+      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleTransmissionFromCustomerVehicle(customerVehicle)));
+  
+      // Realiza a geocodificação dos endereços dos veículos.
+      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(vehicle => {
+        const address = `${vehicle?.addresses[0]?.address?.streetAddress}, ${vehicle?.addresses[0]?.address?.number}, ${vehicle?.addresses[0]?.address?.city?.cityName}, ${vehicle?.addresses[0]?.address?.state?.stateName}`;
+        return this.geocodeAddress(address, vehicle);
+      }));
+
+    } catch (error: any) {
+
+      // Trata erros específicos e exibe mensagens de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic, 
+          detail: error.error.message 
+        });
+      }
+
+    } finally {
+      // Garante que o indicador de carregamento seja ocultado, independentemente do resultado.
+      this.ngxSpinnerService.hide();
+    }
+  }
+
+  // Função assíncrona que busca a foto de capa de um veículo de cliente.
+  async getCoverPhoto (customerVehicle: any) {
+
+    try {
+      // Solicita a foto de capa associada ao veículo de cliente.
+      const customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto = await firstValueFrom(this.customerVehicleFilePhotoService.findByCustomerVehicleAndCoverPhoto(customerVehicle.customerVehicleId).pipe(first()));
         
-                  customerVehicle.averageRating = averageRating;
+      if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status == 200 &&
+        customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
+          
+        // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI ao veículo.
+        customerVehicle.file = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
+        customerVehicle.dataURI = `data:${customerVehicle.file.contentType};base64,${customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body.dataAsByteArray}`;
+      }
+
+    } catch (error: any) {
+
+      // Trata erros específicos e exibe mensagens de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic, 
+          detail: error.error.message 
+        });
+      }
+    }
+  }
+
+  // Função assíncrona que busca as avaliações de um veículo de cliente.
+  async getReview(customerVehicle: any) {
+
+    try {
+      // Solicita todas as avaliações associadas ao veículo de cliente.
+      const resultCVRFindAllByCustomerVehicleId = await firstValueFrom(this.customerVehicleReviewService.findAllByCustomerVehicleId(customerVehicle.customerVehicleId).pipe(first()));
+
+      if (resultCVRFindAllByCustomerVehicleId.status === 200 && 
+          resultCVRFindAllByCustomerVehicleId.body != null) {
+
+        // Se a resposta for bem-sucedida, atribui as avaliações e calcula a média de avaliações.
+        customerVehicle.customersVehiclesReviews = resultCVRFindAllByCustomerVehicleId.body;
+
+        if (customerVehicle.customersVehiclesReviews.length > 0) {
+          const totalRating = customerVehicle.customersVehiclesReviews.reduce((sum, review) => sum + review.rating, 0);
+          customerVehicle.averageRating = totalRating / customerVehicle.customersVehiclesReviews.length;
+        } else {
+          customerVehicle.averageRating = null;
+        }
+      }
+
+    } catch (error: any) {
+
+      // Trata erros específicos e exibe mensagens de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.homeSearchCarsDetailUIDTO.error_message_service_Generic, 
+          detail: error.error.message 
+        });
+      }
+    }
+  }
+
+  geocodeAddress(address: string, customerVehicle: any): Promise<void> {
+    // Função para geocodificar um endereço e adicionar um marcador no mapa.
+    return new Promise((resolve, reject) => {
+      // Instancia o geocodificador do Google Maps.
+      const geocoder = new google.maps.Geocoder();
+  
+      // Realiza a geocodificação do endereço.
+      geocoder.geocode({ address: address }, (results, status) => {
+        if (status === 'OK' && results && results[0] && results[0].geometry) {
+          const latLng = results[0].geometry.location;
+          const position: google.maps.LatLngLiteral = { lat: latLng.lat(), lng: latLng.lng() };
+  
+          // Extrai informações adicionais do endereço.
+          const city = results[0].address_components.find(component => component.types.includes('administrative_area_level_2'));
+          const cityName = city ? city.long_name : '';
+  
+          const neighborhood = results[0].address_components.find(component => component.types.includes('sublocality_level_1'));
+          const neighborhoodName = neighborhood ? neighborhood.long_name : '';
+  
+          // Atualiza a distância com o nome da cidade e do bairro.
+          customerVehicle.distance = cityName + ", " + neighborhoodName;
+  
+          // Se as coordenadas da localização do lugar e do endereço são válidas,
+          // calcula a rota e adiciona a distância ao veículo.
+          if (this.homeSearchCarsDetailUIDTO.place.geometry.location.lat != null &&
+              this.homeSearchCarsDetailUIDTO.place.geometry.location.lng != null &&
+              latLng.lat() != null &&
+              latLng.lng() != null) {
+  
+            directionsService.route(
+              {
+                origin: { lat: this.homeSearchCarsDetailUIDTO.placeLocationLatitude, lng: this.homeSearchCarsDetailUIDTO.placeLocationLongitude },
+                destination: { lat: latLng.lat(), lng: latLng.lng() },
+                travelMode: google.maps.TravelMode.DRIVING,
+                optimizeWaypoints: true
+              },
+              (response, status) => {
+                if (status === 'OK' && response) {
+                  const route = response.routes[0];
+                  if (route && route.legs && route.legs.length > 0 && route.legs[0].distance) {
+                    customerVehicle.distance = customerVehicle.distance + " º " + route.legs[0].distance.text;
+                  }
                 } else {
-                  customerVehicle.averageRating = null;
+                  console.error('Não foi possível encontrar uma rota adequada:', status);
                 }
               }
-            }
-          } catch (error: any) {
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+            );
           }
-    
-          const address = `${customerVehicle?.addresses[0]?.address?.streetAddress}, ${customerVehicle?.addresses[0]?.address?.number}, ${customerVehicle?.addresses[0]?.address?.city?.cityName}, ${customerVehicle?.addresses[0]?.address?.state?.stateName}`;
-    
-          await this.geocodeAddress(address, customerVehicle);
+  
+          // Formata o valor diário do veículo.
+          const price = `${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${customerVehicle.dailyRate}`;
+          const formattedDailyRate = customerVehicle.dailyRate.toFixed(2);
+  
+          // Cria e configura o marcador no mapa.
+          const marker = new google.maps.marker.AdvancedMarkerElement({
+            position: position,
+            map: this.homeSearchCarsDetailUIDTO.map,
+            title: price,  // Título do marcador, que pode ser usado como dica de ferramenta.
+            content: this.homeSearchCarsDetailUIDTO.getDefaultIcon(price),  // Ícone padrão do marcador.
+          });
+  
+          // Adiciona um dataset para identificar o veículo associado ao marcador.
+          (marker.element as HTMLElement).dataset['customerVehicleId'] = customerVehicle.customerVehicleId;
+  
+          // Adiciona listeners para eventos de mouseover e mouseout.
+          marker.addListener('mouseover', () => {
+            marker.content = this.homeSearchCarsDetailUIDTO.getHighlightedIcon(price),
+            marker.map = this.homeSearchCarsDetailUIDTO.map
+          });
+  
+          marker.addListener('mouseout', () => {
+            marker.content = this.homeSearchCarsDetailUIDTO.getDefaultIcon(price),
+            marker.map = this.homeSearchCarsDetailUIDTO.map
+          });
+  
+          // Cria o conteúdo da janela de informações do marcador.
+          const content = `<img src="${customerVehicle.dataURI}" alt="Customer Vehicle Image" class="border-round w-full h-full md:w-16rem md:h-10rem">
+          <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
+            <strong style="font-size: 1.30em;">
+              ${customerVehicle.vehicle.vehicleBrand.vehicleBrandName} ${customerVehicle.vehicle.vehicleName} ${customerVehicle.yearOfTheCar}
+            </strong>
+          </div>
+          <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
+            <p class="text-base flex align-items-center text-900 mt-0 mb-1">
+              <i class="pi pi-map mr-2" style="color: red;"></i>
+              <span class="font-medium" style="font-size: 0.80em;">${customerVehicle.distance}</span>
+            </p>
+          </div>
+          <strong style="font-size: 1.00em;">${this.homeSearchCarsDetailUIDTO.daily_rate_HomeSearchCarsDetail}</strong> 
+          <strong style="font-size: 1.00em; text-align: right;">${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${formattedDailyRate}</strong><br>
+          <strong style="font-size: 0.80em; text-decoration: underline;">${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${formattedDailyRate} / ${this.homeSearchCarsDetailUIDTO.excluding_taxes_and_fees_HomeSearchCarsDetail}</strong>`;
+  
+          // Cria e adiciona uma janela de informações ao marcador.
+          const infoWindow = new google.maps.InfoWindow({
+            content: content,
+          });
+  
+          marker.addListener('click', () => {
+            infoWindow.open(this.homeSearchCarsDetailUIDTO.map, marker);
+          });
+  
+          // Adiciona o marcador e a posição à lista de marcadores.
+          this.homeSearchCarsDetailUIDTO.markers.push(marker);
+          this.homeSearchCarsDetailUIDTO.markerPositions.push(position);
+  
+          resolve();
+        } else {
+          console.error('Geocodificação falhou:', status);
+          reject(new Error('Geocodificação falhou'));
         }
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+      });
+    })
+  }
+  
+  async paginate(event: any) {
+    // Atualiza a paginação com base no evento de carregamento de dados.
+    if (event != null) {
+      this.homeSearchCarsDetailUIDTO.size = event.rows;
+      this.homeSearchCarsDetailUIDTO.page = event.first / event.rows;
+    }
   }
 
   getFilledStarsArray(rating: number): number[] {
+    // Retorna um array com a quantidade de estrelas preenchidas com base na classificação.
     return Array(rating).fill(0);
   }
 
   getEmptyStarsArray(rating: number): number[] {
+    // Retorna um array com a quantidade de estrelas vazias com base na classificação.
     const emptyStars = 5 - rating;
     return Array(emptyStars).fill(0);
   }
-
-  geocodeAddress(address: string, customerVehicle: any) {
-
-    this.initializeMap();
-
-    const geocoder = new google.maps.Geocoder();
   
-    geocoder.geocode({ address: address }, (results, status) => {
-      if (status === 'OK' && results && results[0] && results[0].geometry) {
-        const latLng = results[0].geometry.location;
-        const position: google.maps.LatLngLiteral = { lat: latLng.lat(), lng: latLng.lng() };
-
-        const city = results[0].address_components.find(component => component.types.includes('administrative_area_level_2'));
-        const cityName = city ? city.long_name : '';
-
-        const neighborhood = results[0].address_components.find(component => component.types.includes('sublocality_level_1'));
-        const neighborhoodName = neighborhood ? neighborhood.long_name : '';
-
-        customerVehicle.distance = cityName + ", " + neighborhoodName;
-
-        if (this.place.geometry.location.lat != null &&
-            this.place.geometry.location.lng != null &&
-            latLng.lat() != null &&
-            latLng.lng() != null) {
-
-          directionsService.route(
-            {
-              origin: { lat: this.homeSearchCarsDetailUIDTO.placeLocationLatitude, lng: this.homeSearchCarsDetailUIDTO.placeLocationLongitude },
-              destination: { lat: latLng.lat(), lng: latLng.lng() },
-              travelMode: google.maps.TravelMode.DRIVING,
-              optimizeWaypoints: true
-  
-            },
-            (response, status) => {
-              if (status === 'OK' && response) {
-                const route = response.routes[0];
-                if (route && route.legs && route.legs.length > 0 && route.legs[0].distance) {
-                  customerVehicle.distance = customerVehicle.distance + " º " + route.legs[0].distance.text;
-                }
-              } else {
-                console.error('Não foi possível encontrar uma rota adequada:', status);
-              }
-            }
-          );
-        }
-
-        const price = `R$ ${customerVehicle.dailyRate}`;
-
-        const marker: google.maps.Marker = new google.maps.Marker({
-          position: position,
-          map: this.map,
-          icon: this.homeSearchCarsDetailUIDTO.getDefaultIcon(price),
-        });
-
-        // Associando o veículo ao marcador usando a classe Map do JavaScript
-        marker.set('customerVehicleId', customerVehicle.customerVehicleId);
- 
-        marker.addListener('mouseover', () => {
-          marker.setIcon(this.homeSearchCarsDetailUIDTO.getHighlightedIcon(price));
-        });
-  
-        marker.addListener('mouseout', () => {
-          marker.setIcon(this.homeSearchCarsDetailUIDTO.getDefaultIcon(price));
-        });
-
-        const content = `<img src="assets/images/vehicle/Corolla.png" alt="Image" class="border-round w-full h-full md:w-16rem md:h-10rem"><br>
-        <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
-          <p class="text-base flex align-items-center text-900 mt-0 mb-1">
-            <i class="pi pi-map mr-2" style="color: red;"></i>
-            <span class="font-medium" style="font-size: 0.80em;">${customerVehicle.distance}</span>
-          </p>
-        </div>
-        <strong style="font-size: 1.00em;">Preço:</strong> <strong style="font-size: 1.00em; text-align: right;">R$ ${customerVehicle.dailyRate}</strong><br>
-        <strong style="font-size: 0.80em; text-decoration: underline;">R$ ${this.formatDailyRateWithComma(customerVehicle.dailyRate)} / Sem Incluir Impostos E Taxas</strong>`;
-  
-        const infoWindow = new google.maps.InfoWindow({
-          content: content,
-        });
-  
-        marker.addListener('click', () => {
-          infoWindow.open(this.map, marker);
-        });
-
-        // Adicione o marcador à lista de marcadores
-        this.markers.push(marker);
-
-        this.markerPositions.push(position);
-      } else {
-        console.error('Geocodificação falhou:', status);
-      }
-    });
-  }
-
   exibirMapa(customerVehicle) {
+    // Atualiza o ícone do marcador do veículo selecionado para o ícone destacado.
     const customerVehicleId = customerVehicle.customerVehicleId;
+    const price = `${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${customerVehicle.dailyRate}`;
 
-    const price = `R$ ${customerVehicle.dailyRate}`;
-  
-    this.markers.forEach((marker: google.maps.Marker) => {
-      const markerCustomerId = marker.get('customerVehicleId');
+    this.homeSearchCarsDetailUIDTO.markers.forEach((marker: google.maps.marker.AdvancedMarkerElement) => {
+      const markerCustomerId = (marker.element as HTMLElement).dataset['customerVehicleId'];
       if (markerCustomerId === customerVehicleId) {
-  
-        marker.setIcon(this.homeSearchCarsDetailUIDTO.getHighlightedIcon(price));
+        marker.content = this.homeSearchCarsDetailUIDTO.getHighlightedIcon(price);
       }
     });
   }
-
+  
   desibirMapa(customerVehicle) {
+    // Restaura o ícone do marcador do veículo selecionado para o ícone padrão.
     const customerVehicleId = customerVehicle.customerVehicleId;
+    const price = `${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${customerVehicle.dailyRate}`;
 
-    const price = `R$ ${customerVehicle.dailyRate}`;
-  
-    this.markers.forEach((marker: google.maps.Marker) => {
-      const markerCustomerId = marker.get('customerVehicleId');
+    this.homeSearchCarsDetailUIDTO.markers.forEach((marker: google.maps.marker.AdvancedMarkerElement) => {
+      const markerCustomerId = (marker.element as HTMLElement).dataset['customerVehicleId'];
       if (markerCustomerId === customerVehicleId) {
-  
-        marker.setIcon(this.homeSearchCarsDetailUIDTO.getDefaultIcon(price));
+        marker.content = this.homeSearchCarsDetailUIDTO.getDefaultIcon(price);
       }
     });
   }
-
+  
   clickCustomerVehicle(customerVehicle) {
-
+    // Navega para a página de detalhes do veículo com informações adicionais.
     const navigationExtras: NavigationExtras = {
       state: {
         customerVehicleId: customerVehicle.customerVehicleId,
-        place: JSON.stringify(this.place),
-        dateInit: this.dateInit,
-        selectedHourInit: this.selectedHourInit,
-        dateEnd: this.dateEnd,
-        selectedHourEnd: this.selectedHourEnd,
+        place: JSON.stringify(this.homeSearchCarsDetailUIDTO.place),
+        dateInit: this.homeSearchCarsDetailUIDTO.dateInit,
+        selectedHourInit: this.homeSearchCarsDetailUIDTO.selectedHourInit,
+        dateEnd: this.homeSearchCarsDetailUIDTO.dateEnd,
+        selectedHourEnd: this.homeSearchCarsDetailUIDTO.selectedHourEnd,
       }
     };
 
     this.router.navigate(['customer-vehicle/detail'], navigationExtras);
   }
-
+  
   getGeocoderLatitudeLongitude() {
-
-    const address = this.place.formatted_address;
-
+    // Obtém a latitude e longitude da localização do lugar.
+    const address = this.homeSearchCarsDetailUIDTO.place.formatted_address;
     const geocoder = new google.maps.Geocoder();
 
     geocoder.geocode({ address: address }, (results, status) => {
       if (status === 'OK' && results && results[0] && results[0].geometry) {
         const location = results[0].geometry.location;
-
         this.homeSearchCarsDetailUIDTO.placeLocationLatitude = location.lat()
         this.homeSearchCarsDetailUIDTO.placeLocationLongitude = location.lng()
-
       } else {
         console.error('Geocodificação falhou:', status);
       }
     });
   }
-
+  
   async getAsyncGeocoderLatitudeLongitude(address: string): Promise<{ lat: number; lng: number } | null> {
+    // Obtém a latitude e longitude de um endereço de forma assíncrona.
     const geocoder = new google.maps.Geocoder();
 
     return new Promise((resolve, reject) => {
@@ -462,13 +764,9 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
           resolve({ lat: location.lat(), lng: location.lng() });
         } else {
           console.error('Geocodificação falhou:', status);
-          resolve(null);
+          reject(new Error('Geocodificação falhou: ' + status));  // Usa reject em caso de falha
         }
       });
     });
   }
-
-  formatDailyRateWithComma(dailyRate: number): string {
-    return this.decimalPipe?.transform(dailyRate, '1.2-2')?.replace('.', ',') ?? '';
-  }
-}
+}  

@@ -70,12 +70,17 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/customer-withdrawal-request/customer-withdrawal-request-approval/',
 
   // Earnings
-  '/assets/i18n/earnings/',
+  '/assets/i18n/earnings/earnings/',
   '/assets/i18n/earnings/earnings-customer-withdrawal-request/',
   '/assets/i18n/earnings/earnings-resume/',
 
   '/assets/i18n/file-approved/',
-  '/assets/i18n/home/',
+  
+  // Home
+  '/assets/i18n/home/home/',
+  '/assets/i18n/home/home-search-cars/',
+  '/assets/i18n/home/home-search-cars-detail/',
+
   '/assets/i18n/role/',
   '/assets/i18n/user/',
   '/assets/i18n/user-role/'

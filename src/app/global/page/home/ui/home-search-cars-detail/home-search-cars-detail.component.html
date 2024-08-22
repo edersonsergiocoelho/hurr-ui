@@ -4,14 +4,16 @@
     <div class="flex justify-content-between flex-wrap">
       <div class="flex align-items-center mb-3 md:mb-0">
 
-        <div class="text-900 font-bold text-3xl">Descubra a liberdade sobre quatro rodas </div>
+        <div class="text-900 font-bold text-3xl">
+          {{ 'discover_freedom_HomeSearchCarsDetail' | translate }}
+        </div>
 
       </div>
 
     </div>
 
-    <p class="text-600 text-xl">Encontre o carro ideal para transformar seus planos de viagem em realidade. Qualidade,
-      conforto e aventura aguardam por você. Vamos encontrar juntos o veículo perfeito para sua jornada inesquecível.
+    <p class="text-600 text-xl">
+      {{ 'find_ideal_car_HomeSearchCarsDetail' | translate }}
     </p>
 
     <div style="width: 100%; padding-top: 10px;">
@@ -24,43 +26,51 @@
 
         <div class="field">
 
-          <label for="searchInput" style="padding-top: 18px;"><strong>Onde:</strong></label>
+          <label for="searchInput" style="padding-top: 18px;">
+            <strong>{{ 'where_HomeSearchCarsDetail' | translate }}</strong>
+          </label>
 
           <div class="field">
             <span class="p-input-icon-left mr-3">
               <i class="pi pi-search">
               </i>
-              <input #searchInput type="text" pinputtext="" placeholder="City, Airport, Address Or Hotel"
-                class="p-inputtext p-component p-element" style="border-radius: 20px; width: 800px;">
+              <input #searchInputPlace type="text" pinputtext="" 
+                placeholder="{{ 'search_input_place_placeholder_HomeSearchCarsDetail' | translate }}"
+                class="p-inputtext p-component p-element" style="border-radius: 20px; width: 800px;"
+                name="searchInputPlace">
             </span>
           </div>
         </div>
 
         <div class="field">
-          <label for="dateInit" style="padding-left: 10px;"><strong>De:</strong></label>
+          <label for="dateInit" style="padding-left: 10px;">
+            <strong>{{ 'from_HomeSearchCarsDetail' | translate }}</strong>
+          </label>
           <div style="padding-left: 10px;">
-            <p-calendar id="dateInit" [(ngModel)]="dateInit" [showIcon]="true" [minDate]="today"
-              [dateFormat]="dateFormat"></p-calendar>
+            <p-calendar class="p-inputtext-lg" id="dateInit" [(ngModel)]="homeSearchCarsDetailUIDTO.dateInit" [showIcon]="true" [minDate]="homeSearchCarsDetailUIDTO.today"
+              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat"></p-calendar>
           </div>
         </div>
 
         <div class="field">
           <div style="padding-top: 26px; padding-left: 10px;">
-            <p-dropdown id="selectedHourInit" [options]="hours" [(ngModel)]="selectedHourInit"></p-dropdown>
+            <p-dropdown class="p-inputtext-lg" id="selectedHourInit" [options]="homeSearchCarsDetailUIDTO.hours" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedHourInit"></p-dropdown>
           </div>
         </div>
 
         <div class="field">
-          <label for="dateEnd" style="padding-left: 10px;"><strong>Até:</strong></label>
+          <label for="dateEnd" style="padding-left: 10px;">
+            <strong>{{ 'to_HomeSearchCarsDetail' | translate }}</strong>
+          </label>
           <div style="padding-left: 10px;">
-            <p-calendar id="dateEnd" [(ngModel)]="dateEnd" [showIcon]="true" [minDate]="today"
-              [dateFormat]="dateFormat"></p-calendar>
+            <p-calendar class="p-inputtext-lg" id="dateEnd" [(ngModel)]="homeSearchCarsDetailUIDTO.dateEnd" [showIcon]="true" [minDate]="homeSearchCarsDetailUIDTO.today"
+              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat"></p-calendar>
           </div>
         </div>
 
         <div class="field">
           <div style="padding-top: 26px; padding-left: 10px;">
-            <p-dropdown id="selectedHourEnd" [options]="hours" [(ngModel)]="selectedHourEnd"></p-dropdown>
+            <p-dropdown class="p-inputtext-lg" id="selectedHourEnd" [options]="homeSearchCarsDetailUIDTO.hours" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedHourEnd"></p-dropdown>
           </div>
         </div>
 
@@ -71,53 +81,74 @@
     <div class="grid grid-nogutter align-items-center">
 
       <div>
-        <p-dropdown [options]="homeSearchCarsDetailUIDTO.vehiclesBrands"
-          [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicleBrand" optionLabel="vehicleBrandName" [filter]="true"
-          filterBy="vehicleBrandName" [showClear]="true" placeholder="Select Vehicle Brand"
-          (onChange)="changeBrand($event.value)">
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="homeSearchCarsDetailUIDTO.vehicleBrands" 
+          [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicleBrand" 
+          optionLabel="vehicleBrandName" 
+          name="vehicleBrand" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleBrandName"
+          placeholder="{{'placeholder_vehicle_brand_HomeSearchCarsDetail' | translate}}" 
+          (onChange)="onChangeVehicleBrand($event.value)">
 
           <ng-template pTemplate="selectedItem">
             <div class="flex align-items-center gap-2" *ngIf="homeSearchCarsDetailUIDTO.selectedVehicleBrand">
-              <!--
-                <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + selectedBrand.brandCode.toLowerCase()" style="width: 18px"/>
-                -->
+              <img [src]="homeSearchCarsDetailUIDTO.selectedVehicleBrand.dataURI" style="width: 18px"/>
               <div>{{ homeSearchCarsDetailUIDTO.selectedVehicleBrand.vehicleBrandName }}</div>
             </div>
           </ng-template>
           <ng-template let-vehicleBrand pTemplate="item">
             <div class="flex align-items-center gap-2">
-              <!--
-                <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + brand.brandCode.toLowerCase()" style="width: 18px"/>
-                -->
+              <img [src]="vehicleBrand.dataURI" style="width: 18px"/>
               <div>{{ vehicleBrand.vehicleBrandName }}</div>
             </div>
           </ng-template>
+
         </p-dropdown>
       </div>
 
       <div style="padding-left: 10px;">
-        <p-dropdown [options]="homeSearchCarsDetailUIDTO.vehicles"
-          [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicle" optionLabel="vehicleName" [showClear]="true"
-          placeholder="Select Vehicle" (onChange)="changeVehicle($event.value)">
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="homeSearchCarsDetailUIDTO.vehicles" 
+          [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicle" 
+          optionLabel="vehicleName" 
+          name="vehicle" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleName"
+          placeholder="{{'placeholder_vehicle_HomeSearchCarsDetail' | translate}}" (onChange)="onChangeVehicle($event.value)">
         </p-dropdown>
       </div>
 
       <div style="padding-left: 10px;">
-        <p-dropdown [options]="homeSearchCarsDetailUIDTO.vehiclesModels"
-          [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicleModel" optionLabel="vehicleModelName" [showClear]="true"
-          placeholder="Select Vehicle Model">
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="homeSearchCarsDetailUIDTO.vehicleModels" 
+          [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicleModel" 
+          optionLabel="vehicleModelName" 
+          name="vehicleModel" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleModelName"
+          placeholder="{{'placeholder_vehicle_model_HomeSearchCarsDetail' | translate}}">
         </p-dropdown>
       </div>
 
       <div style="padding-left: 10px;">
-        <p-dropdown [options]="homeSearchCarsDetailUIDTO.vehiclesCategorys"
-          [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicleCategory" optionLabel="vehicleCategoryName"
-          [showClear]="true" placeholder="Select Vehicle Category">
+        <p-dropdown class="p-inputtext-lg" 
+          [options]="homeSearchCarsDetailUIDTO.vehicleCategorys" 
+          [(ngModel)]="homeSearchCarsDetailUIDTO.selectedVehicleCategory" 
+          optionLabel="vehicleCategoryName" 
+          name="vehicleCategory" 
+          [showClear]="true"
+          [filter]="true"
+          filterBy="vehicleCategoryName"
+          placeholder="{{'placeholder_vehicle_category_HomeSearchCarsDetail' | translate}}">
         </p-dropdown>
       </div>
 
       <div style="padding-left: 10px;">
-        <p-button icon="pi pi-search" (onClick)="search()"></p-button>
+        <p-button icon="pi pi-search" (onClick)="search(null)"></p-button>
       </div>
 
     </div>
@@ -130,7 +161,7 @@
 </div>
 
 <div class="flex">
-  <!-- Lado esquerdo: Registros do ngFor -->
+  <!-- Lado esquerdo: DataView -->
   <div class="lg:w-2/3 md:w-2/3 w-full">
     <div class="block-content">
       <div class="lg:px-12 md:px-12 px-4 py-8 surface-ground">
@@ -139,129 +170,153 @@
           <div
             *ngIf="homeSearchCarsDetailUIDTO.customerVehicles != null && homeSearchCarsDetailUIDTO.customerVehicles.length == 1">
             <div class="text-900 font-bold text-3xl" style="padding-left: 10px; padding-bottom: 10px;">
-              {{homeSearchCarsDetailUIDTO.customerVehicles.length}} carro disponível</div>
-            <div class="text-900 font-normal text-1xl" style="padding-left: 10px; padding-bottom: 10px;">Esse carro pode
-              ser retirado nesta cidade.</div>
+              {{homeSearchCarsDetailUIDTO.customerVehicles.length}} 
+              {{'car_available_HomeSearchCarsDetail' | translate}}
+            </div>
+            <div class="text-900 font-normal text-1xl" style="padding-left: 10px; padding-bottom: 10px;">
+              {{'this_car_can_be_picked_up_HomeSearchCarsDetail' | translate}}
+            </div>
           </div>
 
           <div
             *ngIf="homeSearchCarsDetailUIDTO.customerVehicles != null && homeSearchCarsDetailUIDTO.customerVehicles.length > 1">
             <div class="text-900 font-bold text-3xl" style="padding-left: 10px; padding-bottom: 10px;">
-              {{homeSearchCarsDetailUIDTO.customerVehicles.length}} carros disponíveis</div>
-            <div class="text-900 font-normal text-1xl" style="padding-left: 10px; padding-bottom: 10px;">Esses carros
-              podem ser retirados nesta cidade.</div>
+              {{homeSearchCarsDetailUIDTO.customerVehicles.length}} 
+              {{'cars_available_HomeSearchCarsDetail' | translate}}
+            </div>
+            <div class="text-900 font-normal text-1xl" style="padding-left: 10px; padding-bottom: 10px;">
+              {{'these_cars_can_be_picked_up_HomeSearchCarsDetail' | translate}}
+            </div>
           </div>
 
-          <div class="col-12 xl:col-12" *ngFor="let customerVehicle of homeSearchCarsDetailUIDTO.customerVehicles"
-            (mouseover)="exibirMapa(customerVehicle)" (mouseout)="desibirMapa(customerVehicle)"
-            (click)="clickCustomerVehicle(customerVehicle)">
-            <article
-              class="flex flex-column md:flex-row w-full gap-3 p-3 border-round border-1 surface-border surface-card elemento-sobreposicao">
+          <div class="col-12 xl:col-12">
+            
+            <p-dataView [value]="homeSearchCarsDetailUIDTO.customerVehicles"
+              [sortField]="homeSearchCarsDetailUIDTO.sortField" 
+              [sortOrder]="homeSearchCarsDetailUIDTO.sortOrder"
+              [rows]="5" 
+              [showCurrentPageReport]="true" 
+              [paginator]="true"
+              [totalRecords]="homeSearchCarsDetailUIDTO.totalRecords" 
+              (onLazyLoad)="search($event)">
 
-              <div class="relative">
-                <img src="assets/images/vehicle/Corolla.png" alt="Image"
-                  class="border-round w-full h-full md:w-24rem md:h-14rem">
-                <p *ngIf="customerVehicle.unlimitedMileage"
-                  class="absolute px-2 py-1 border-round-lg text-sm font-normal text-black mt-0 mb-0"
-                  style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); top: 3%; left: 3%; color: green;">
-                  Quilometragem Ilimitada
-                </p>
-                <p *ngIf="customerVehicle.limitedMileage"
-                  class="absolute px-2 py-1 border-round-lg text-sm font-normal text-black mt-0 mb-0"
-                  style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); top: 3%; left: 3%; color: red;">
-                  Quilometragem Limitada
-                </p>
-                <img src="assets/images/vehicle-brand/Toyota.jpg" alt="Brand Image"
-                  class="absolute border-round-lg mt-0 mb-0 px-2 py-1 md:w-5rem md:h-4rem" style="left: 80%;">
-              </div>
+              <ng-template let-item pTemplate="listItem">
 
-              <div class="flex flex-column w-full gap-3">
-                <div class="flex w-full justify-content-between align-items-center flex-wrap gap-3">
+                <article
+                  class="flex flex-column md:flex-row w-full gap-3 p-3 border-round border-1 surface-border surface-card elemento-sobreposicao"
+                  (mouseover)="exibirMapa(item)" 
+                  (mouseout)="desibirMapa(item)"
+                  (click)="clickCustomerVehicle(item)">
 
-                  <p class="font-semibold text-2xl mt-0 mb-0">
-                    {{customerVehicle.vehicle.vehicleName + ' ' + customerVehicle.yearOfTheCar}}
-                  </p>
+                  <div class="relative">
+                    <img [src]="item.dataURI" alt="Customer Vehicle Image"
+                      class="border-round w-full h-full md:w-24rem md:h-14rem">
+                    <p *ngIf="item.unlimitedMileage"
+                      class="absolute px-2 py-1 border-round-lg text-sm font-normal text-black mt-0 mb-0"
+                      style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); top: 3%; left: 3%; color: green;">
+                      {{'unlimited_mileage_HomeSearchCarsDetail' | translate}}
+                    </p>
+                    <p *ngIf="item.limitedMileage"
+                      class="absolute px-2 py-1 border-round-lg text-sm font-normal text-black mt-0 mb-0"
+                      style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); top: 3%; left: 3%; color: red;">
+                      {{'limited_mileage_HomeSearchCarsDetail' | translate}}
+                    </p>
 
-                  <div class="col-12 lg:col-4 flex align-items-start justify-content-center py-5 lg:py-0">
-                    <div class="mt-3 text-center">
-                      <ng-container *ngIf="customerVehicle.averageRating != null">
-                        <i *ngFor="let star of [1, 2, 3, 4, 5]" class="pi text-1xl mr-1" [ngClass]="{
-                          'pi-star-fill text-yellow-500': star <= customerVehicle.averageRating,
-                          'pi-star text-300': star > customerVehicle.averageRating
-                        }"></i>
-                      </ng-container>
-                      <ng-container *ngIf="customerVehicle.averageRating === null">
-                        <i *ngFor="let star of [1, 2, 3, 4, 5]" class="pi pi-star text-300 mr-1"></i>
-                      </ng-container>
+                    <img [src]="item.vehicle.vehicleBrand.dataURI" alt="Vehicle Brand Image"
+                      class="absolute border-round-lg mt-0 mb-0 px-2 py-1 md:w-5rem md:h-4rem" style="left: 80%;">
+                      
+                  </div>
+
+                  <div class="flex flex-column w-full gap-3">
+                    <div class="flex w-full justify-content-between align-items-center flex-wrap gap-3">
+
+                      <p class="font-semibold text-2xl mt-0 mb-0">
+                        {{item.vehicle.vehicleName + ' ' + item.yearOfTheCar}}
+                      </p>
+
+                      <div class="col-12 lg:col-4 flex align-items-start justify-content-center py-5 lg:py-0">
+                        <div class="mt-3 text-center">
+                          <ng-container *ngIf="item.averageRating != null">
+                            <i *ngFor="let star of [1, 2, 3, 4, 5]" class="pi text-1xl mr-1" [ngClass]="{
+                              'pi-star-fill text-yellow-500': star <= item.averageRating,
+                              'pi-star text-300': star > item.averageRating
+                            }"></i>
+                          </ng-container>
+                          <ng-container *ngIf="item.averageRating === null">
+                            <i *ngFor="let star of [1, 2, 3, 4, 5]" class="pi pi-star text-300 mr-1"></i>
+                          </ng-container>
+                        </div>
+                      </div>
+
                     </div>
+
+                    <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
+                      <img [src]="item.vehicleModel.vehicleCategory.dataURI" alt="Icon Vehicle Category"
+                          class="border-round w-full h-full md:w-2rem md:h-2rem">
+                      <p style="margin: 0;">
+                        {{'vehicle_model_HomeSearchCarsDetail' | translate}} 
+                        {{item.vehicleModel.vehicleModelName}}
+                      </p>
+                    </div>
+
+                    <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
+                      <div style="display: flex; align-items: center;">
+                        <img [src]="item.vehicleFuelType.dataURI" alt="Icon Vehicle Fuel Type"
+                          class="border-round w-full h-full md:w-2rem md:h-2rem">
+                        <p style="margin: 0; margin-left: 5px;">
+                          {{'vehicle_fuel_type_HomeSearchCarsDetail' | translate}} 
+                          {{item.vehicleFuelType.vehicleFuelTypeName }}
+                        </p>
+                      </div>
+                      <div style="margin-left: auto; display: flex; align-items: center;">
+                        <img [src]="item.vehicleTransmission.dataURI" alt="Icon Vehicle Transmission"
+                            class="border-round w-full h-full md:w-2rem md:h-2rem">
+                        <p style="margin: 0; margin-left: 5px;">
+                          {{'vehicle_transmission_HomeSearchCarsDetail' | translate}} 
+                          {{item.vehicleTransmission.vehicleTransmissionName }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="text-right xl:h-2rem mt-auto">
+                      <p class="text-base text-900 mt-0 mb-1">
+                        <span class="font-medium">
+                          {{ 'currency_brl_Generic' | translate }} {{(item.dailyRate | number:'1.2-2')}} / {{ 'day_HomeSearchCarsDetail' | translate }}
+                        </span>
+                      </p>
+                      <p class="text-sm text-700 mt-0 mb-1">
+                        <span class="font-medium" style="text-decoration: underline;">
+                          {{ 'currency_brl_Generic' | translate }} {{(item.dailyRate | number:'1.2-2')}} / {{ 'excluding_taxes_and_fees_HomeSearchCarsDetail' | translate }}
+                        </span>
+                      </p>
+                    </div>
+
+                    <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
+                      <p class="text-base flex align-items-center text-900 mt-0 mb-1">
+                        <i class="pi pi-map mr-2" style="color: red;"></i>
+                        <span class="font-medium">{{item.distance}}</span>
+                      </p>
+                    </div>
+
                   </div>
+                </article>
 
-                </div>
-
-                <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
-                  <i class="pi pi-car mr-2" style="color: blue;"></i>
-                  <p style="margin: 0;">Modelo: {{customerVehicle.vehicleModel.vehicleModelName}}</p>
-                </div>
-
-                <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
-                  <div style="display: flex; align-items: center;">
-                    <img src="assets/images/icon/fuel.png" alt="Icon Fuel"
-                      class="border-round w-full h-full md:w-2rem md:h-2rem">
-                    <p style="margin: 0; margin-left: 5px;">Combustível: {{
-                      customerVehicle.vehicleFuelType.vehicleFuelTypeName }}</p>
-                  </div>
-                  <div style="margin-left: auto; display: flex; align-items: center;">
-                    <ng-container *ngIf="customerVehicle.vehicleTransmission.vehicleTransmissionName == 'Manual'">
-                      <img src="assets/images/icon/manual-transmission.png" alt="Icon Manual Transmission"
-                        class="border-round w-full h-full md:w-2rem md:h-2rem">
-                    </ng-container>
-                    <ng-container *ngIf="customerVehicle.vehicleTransmission.vehicleTransmissionName == 'Automática'">
-                      <img src="assets/images/icon/automatic-transmission.png" alt="Icon Automatic Transmission"
-                        class="border-round w-full h-full md:w-2rem md:h-2rem">
-                    </ng-container>
-                    <p style="margin: 0; margin-left: 5px;">Transmissão: {{
-                      customerVehicle.vehicleTransmission.vehicleTransmissionName }}</p>
-                  </div>
-                </div>
-
-                <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
-                  <p class="text-base flex align-items-center text-900 mt-0 mb-1">
-                    <i class="pi pi-map mr-2" style="color: red;"></i>
-                    <span class="font-medium">{{customerVehicle.distance}}</span>
-                  </p>
-                </div>
-
-                <!-- Colocar Os Acessórios Do Carro -->
-                <!--
-                <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
-                  <p class="text-base flex align-items-center text-900 mt-0 mb-1"><i class="pi pi-users mr-2"></i><span
-                      class="font-medium">2 Guests</span></p>
-                  <p class="text-base flex align-items-center text-900 mt-0 mb-1"><i class="pi pi-wifi mr-2"></i><span
-                      class="font-medium">1 GBit</span></p>
-                  <p class="text-base flex align-items-center text-900 mt-0 mb-1"><i
-                      class="pi pi-check-circle mr-2"></i><span class="font-medium">Verified</span></p>
-                </div>
-                -->
-                <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                  <p class="font-semibold text-sm text-900 mt-0 mb-2" style="margin: 0;">R$ {{
-                    formatDailyRateWithComma(customerVehicle.dailyRate) }} / Dia</p>
-                  <p class="font-normal smaller-font text-sm mt-0 mb-2 underline-text"
-                    style="margin: 0; text-align: right;">R$ {{ formatDailyRateWithComma(customerVehicle.dailyRate) }} /
-                    Sem Incluir Impostos E Taxas</p>
-                </div>
-              </div>
-            </article>
+              </ng-template>
+            </p-dataView>
           </div>
 
           <div class="col-12 xl:col-12 flex justify-center items-center"
             *ngIf="homeSearchCarsDetailUIDTO.customerVehicles == null || homeSearchCarsDetailUIDTO.customerVehicles.length == 0">
             <article class="w-full gap-3 p-3 border-round border-1 surface-border surface-card">
               <div class="text-center">
-                <p class="font-semibold text-3xl mt-0 mb-2">Nenhum carro encontrado</p>
+                <p class="font-semibold text-3xl mt-0 mb-2">
+                  {{ 'no_cars_found_title_HomeSearchCarsDetail' | translate }}
+                </p>
               </div>
               <div class="text-center">
-                <p class="text-base text-900 mt-0 mb-1">Tente alterar seus filtros, ajustar suas datas ou explorar o
-                  mapa</p>
+                <p class="text-base text-900 mt-0 mb-1">
+                  {{ 'no_cars_found_message_HomeSearchCarsDetail' | translate }}
+                </p>
               </div>
             </article>
           </div>
@@ -274,7 +329,7 @@
   <!-- Lado direito: Mapa -->
   <div class="lg:w-1/3 md:w-1/3 w-full">
     <div style="height: 100%; position: relative;">
-      <div #map class="google-map" style="height: 100%;"></div>
+      <div id="map" #map class="google-map" style="height: 100%;"></div>
     </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
 {
-  "span_no_image_Home": "Sem Imagem",
+  "label_where_HomeSearchCars": "Onde",
+  "label_from_HomeSearchCars": "De",
+  "label_until_HomeSearchCars": "Até",
 
   "warn_error_getting_current_location_HomeSearchCars": "Erro Ao Obter O Local Atual, Tente Informar Um Endereço Manualmente.",
   "warn_error_accessing_geolocation_HomeSearchCars": "Erro Ao Acessar A Geolocalização.",
