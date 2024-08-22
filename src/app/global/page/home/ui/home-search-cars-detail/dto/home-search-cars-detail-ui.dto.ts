@@ -3,6 +3,25 @@ import { TranslateSeverityDTO } from "src/app/core/translate/dto/translate-sever
 
 export class HomeSearchCarsDetailUIDTO extends TranslateSeverityDTO {
 
+  //
+  today: Date;
+  dateInit: Date;
+  dateEnd: Date;
+
+  dateFormat = 'dd/mm/yy';
+
+  selectedHourInit?: string = '10:00';
+  selectedHourEnd?: string = '10:00';
+
+  hours: string[] = Array.from({ length: 48 }, (_, index) => {
+    const hour = Math.floor(index / 2);
+    const minute = index % 2 === 0 ? '00' : '30';
+    return `${hour.toString().padStart(2, '0')}:${minute}`;
+  });
+  
+  place: any;
+
+  // DataView
   totalRecords = 0;
 
   sortOptions!: SelectItem[];
@@ -26,6 +45,11 @@ export class HomeSearchCarsDetailUIDTO extends TranslateSeverityDTO {
 
   placeLocationLatitude: any;
   placeLocationLongitude: any;
+
+  // Messages
+  currency_brl_Generic: string;
+  daily_rate_HomeSearchCarsDetail: string;
+  excluding_taxes_and_fees_HomeSearchCarsDetail: string;
 
   getDefaultIcon(price: string): HTMLElement {
     const div = document.createElement('div');

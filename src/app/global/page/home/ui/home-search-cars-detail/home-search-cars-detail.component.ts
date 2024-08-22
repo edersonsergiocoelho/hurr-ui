@@ -21,6 +21,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { VehicleBrand } from 'src/app/page/admin/vehicle-brand/entity/vehicle-brand.entity';
 import { Vehicle } from 'src/app/page/admin/vehicle/entity/vehicle.entity';
 import { FileService } from 'src/app/page/file/service/file.service';
+import * as moment from 'moment';
 
 const directionsService = new google.maps.DirectionsService();
 
@@ -29,40 +30,20 @@ const directionsService = new google.maps.DirectionsService();
   templateUrl: './home-search-cars-detail.component.html',
   styleUrls: ['./home-search-cars-detail.component.css'],
 })
-export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
+export class HomeSearchCarsDetailComponent implements OnInit  {
 
   homeSearchCarsDetailUIDTO: HomeSearchCarsDetailUIDTO;
   @ViewChild('searchInputPlace', { static: true }) searchInputPlace!: ElementRef<HTMLInputElement>;
 
-  dateInit: Date;
-  dateEnd: Date;
-  today: Date;
-
-  dateFormat = 'dd/mm/yy';
-
-  selectedHourInit?: string = '10:00';
-  selectedHourEnd?: string = '10:00';
-
-  hours: string[] = Array.from({ length: 48 }, (_, index) => {
-    const hour = Math.floor(index / 2);
-    const minute = index % 2 === 0 ? '00' : '30';
-    return `${hour.toString().padStart(2, '0')}:${minute}`;
-  });
-
-  place: any;
-
-  center: google.maps.LatLngLiteral = {lat: -23.7189106, lng: -46.8551999};
-  @ViewChild('map', { static: true }) mapElement!: ElementRef;
   map: any;
+  center: google.maps.LatLngLiteral = {lat: -23.7189106, lng: -46.8551999};
   zoom = 14;
-  markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
   markers: google.maps.marker.AdvancedMarkerElement[] = [];
 
   constructor(private location: Location,
               private router: Router,
               private ngZone: NgZone,
-              private decimalPipe: DecimalPipe,
               private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
               private fileService: FileService,
               private messageService: MessageService,
@@ -75,6 +56,8 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
               private vehicleService: VehicleService,
               private vehicleModelService: VehicleModelService) {
 
+    this.homeSearchCarsDetailUIDTO = new HomeSearchCarsDetailUIDTO();
+
     const state = location.getState() as any;
     
     if (state != null) {
@@ -83,43 +66,33 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
         this.router.navigate(['']);
       }
 
-      this.place = JSON.parse(state.place);
-      this.dateInit = state.dateInit;
-      this.selectedHourInit = state.selectedHourInit;
-      this.dateEnd = state.dateEnd;
-      this.selectedHourEnd = state.selectedHourEnd;
+      this.homeSearchCarsDetailUIDTO.place = JSON.parse(state.place);
+      this.homeSearchCarsDetailUIDTO.dateInit = state.dateInit;
+      this.homeSearchCarsDetailUIDTO.selectedHourInit = state.selectedHourInit;
+      this.homeSearchCarsDetailUIDTO.dateEnd = state.dateEnd;
+      this.homeSearchCarsDetailUIDTO.selectedHourEnd = state.selectedHourEnd;
     }
   }
 
   ngOnInit(): void {
-
+    this.translateService.setDefaultLang('pt_BR');
     this.resetRegisterForm();
-
-    const autocomplete = new google.maps.places.Autocomplete(this.searchInputPlace.nativeElement);
-
-    autocomplete.addListener('place_changed', () => {
-      this.ngZone.run(() => {
-        this.place = autocomplete.getPlace();
-    
-        if (!this.place || !this.place.geometry) {
-          console.error("Localização não encontrada para o endereço fornecido");
-          return;
-        }
-
-        this.getGeocoderLatitudeLongitude();
-    
-      });
-    });
   }
 
-  ngAfterViewInit(): void {
-    this.map = document.getElementById("map");
-    this.initializeMap();
-  }
+  async resetRegisterForm () {
 
-  resetRegisterForm () {
+    this.homeSearchCarsDetailUIDTO.today = moment().toDate();
 
-    this.homeSearchCarsDetailUIDTO = new HomeSearchCarsDetailUIDTO();
+    if (this.homeSearchCarsDetailUIDTO.place && this.homeSearchCarsDetailUIDTO.place.formatted_address) {
+
+      this.searchInputPlace.nativeElement.value = this.homeSearchCarsDetailUIDTO.place.formatted_address;
+
+      const location = await this.getAsyncGeocoderLatitudeLongitude(this.homeSearchCarsDetailUIDTO.place.formatted_address);
+      if (location !== null) {
+        this.homeSearchCarsDetailUIDTO.placeLocationLatitude = location.lat;
+        this.homeSearchCarsDetailUIDTO.placeLocationLongitude = location.lng;
+      }
+    }
 
     this.asyncCallFunctions();
   }
@@ -138,6 +111,12 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
       this.homeSearchCarsDetailUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
       this.homeSearchCarsDetailUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
       this.homeSearchCarsDetailUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.homeSearchCarsDetailUIDTO.currency_brl_Generic = translations['currency_brl_Generic'];
+      this.homeSearchCarsDetailUIDTO.daily_rate_HomeSearchCarsDetail = translations['daily_rate_HomeSearchCarsDetail'];
+      this.homeSearchCarsDetailUIDTO.excluding_taxes_and_fees_HomeSearchCarsDetail = translations['excluding_taxes_and_fees_HomeSearchCarsDetail'];
+
+      // Carregar os outros métodos normalmente
+      this.loadPlace();
 
       const [vehicleBrandServiceFindAll, vehicleCategoryServiceFindAll] = await Promise.all([
         firstValueFrom(this.vehicleBrandService.getAllVehicleBrands().pipe(first())),
@@ -153,17 +132,6 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
   
       if (vehicleCategoryServiceFindAll.status == 200 && vehicleCategoryServiceFindAll.body != null) {
         this.homeSearchCarsDetailUIDTO.vehicleCategorys = vehicleCategoryServiceFindAll.body;
-      }
-
-      if (this.place && this.place.formatted_address) {
-
-        this.searchInputPlace.nativeElement.value = this.place.formatted_address;
-
-        const location = await this.getAsyncGeocoderLatitudeLongitude(this.place.formatted_address);
-        if (location !== null) {
-          this.homeSearchCarsDetailUIDTO.placeLocationLatitude = location.lat;
-          this.homeSearchCarsDetailUIDTO.placeLocationLongitude = location.lng;
-        }
       }
   
     } catch (error: any) {
@@ -182,19 +150,38 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
       'warn_message_service_Generic',
       'error_message_service_Generic',
       'info_message_service_Generic',
-      'success_message_service_Generic'
+      'success_message_service_Generic',
+      'currency_brl_Generic',
+      'daily_rate_HomeSearchCarsDetail',
+      'excluding_taxes_and_fees_HomeSearchCarsDetail'
     ];
     return keys;
   }
 
-  initializeMap() {
-    const mapOptions = {
-      center: this.center,
-      zoom: this.zoom,
-      mapId: "DEMO_MAP_ID"
-    };
+  loadPlace() {
+  
+    const autocompleteGoogle = new google.maps.places.Autocomplete(this.searchInputPlace.nativeElement);
+    autocompleteGoogle.addListener('place_changed', () => {
+      this.ngZone.run(() => {
+        this.homeSearchCarsDetailUIDTO.place = autocompleteGoogle.getPlace();
 
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+        if (!this.homeSearchCarsDetailUIDTO.place || !this.homeSearchCarsDetailUIDTO.place.geometry) {
+          console.error("Localização não encontrada para o endereço fornecido");
+          return;
+        }
+
+        this.getGeocoderLatitudeLongitude();
+      });
+    });  
+  }
+
+  initializeMap() {
+
+    this.map = new google.maps.Map(document.getElementById('map') as HTMLElement,  {
+      zoom: this.zoom,
+      center: this.center,
+      mapId: "MAP_HURR",
+    });
   }
 
   async onChangeVehicleBrand(vehicleBrand: VehicleBrand) {
@@ -399,6 +386,8 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
 
     this.ngxSpinnerService.show();
 
+    this.initializeMap();
+
     this.paginate(event);
 
     let searchCustomerVehicle: CustomerVehicleSearchDTO = new CustomerVehicleSearchDTO();
@@ -416,17 +405,17 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
     }
 
     // Extrair o país
-    const country = this.place.address_components.find(component => component.types.includes('country'));
+    const country = this.homeSearchCarsDetailUIDTO.place.address_components.find(component => component.types.includes('country'));
     const countryName = country ? country.long_name : '';
     searchCustomerVehicle.countryName = countryName;
 
     // Extrair o estado (administrative_area_level_1)
-    const state = this.place.address_components.find(component => component.types.includes('administrative_area_level_1'));
+    const state = this.homeSearchCarsDetailUIDTO.place.address_components.find(component => component.types.includes('administrative_area_level_1'));
     const stateName = state ? state.long_name : '';
     searchCustomerVehicle.stateName = stateName;
 
     // Extrair a cidade (administrative_area_level_2)
-    const city = this.place.address_components.find(component => component.types.includes('administrative_area_level_2'));
+    const city = this.homeSearchCarsDetailUIDTO.place.address_components.find(component => component.types.includes('administrative_area_level_2'));
     const cityName = city ? city.long_name : '';
     searchCustomerVehicle.cityName = cityName;
 
@@ -455,7 +444,7 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
   
       this.homeSearchCarsDetailUIDTO.customerVehicles = customerVehicleServiceSearchPage.body.content;
       this.homeSearchCarsDetailUIDTO.totalRecords = customerVehicleServiceSearchPage.body.totalElements;
-  
+ 
       // Obtendo a foto para cada veículo
       await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getCoverPhoto(customerVehicle)));
   
@@ -469,13 +458,13 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
       await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleFuelTypeFromCustomerVehicle(customerVehicle)));
 
       await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleTransmissionFromCustomerVehicle(customerVehicle)));
-
+  
       // Geocodificando os endereços para cada veículo
       await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(vehicle => {
         const address = `${vehicle?.addresses[0]?.address?.streetAddress}, ${vehicle?.addresses[0]?.address?.number}, ${vehicle?.addresses[0]?.address?.city?.cityName}, ${vehicle?.addresses[0]?.address?.state?.stateName}`;
         return this.geocodeAddress(address, vehicle);
       }));
-  
+
     } catch (error: any) {
 
       if (error.status === 500) {
@@ -551,7 +540,7 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
 
   geocodeAddress(address: string, customerVehicle: any): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.initializeMap();
+
       const geocoder = new google.maps.Geocoder();
   
       geocoder.geocode({ address: address }, (results, status) => {
@@ -567,11 +556,11 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
   
           customerVehicle.distance = cityName + ", " + neighborhoodName;
   
-          if (this.place.geometry.location.lat != null &&
-              this.place.geometry.location.lng != null &&
+          if (this.homeSearchCarsDetailUIDTO.place.geometry.location.lat != null &&
+              this.homeSearchCarsDetailUIDTO.place.geometry.location.lng != null &&
               latLng.lat() != null &&
               latLng.lng() != null) {
-  
+ 
             directionsService.route(
               {
                 origin: { lat: this.homeSearchCarsDetailUIDTO.placeLocationLatitude, lng: this.homeSearchCarsDetailUIDTO.placeLocationLongitude },
@@ -592,7 +581,7 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
             );
           }
   
-          const price = `R$ ${customerVehicle.dailyRate}`;
+          const price = `${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${customerVehicle.dailyRate}`;
 
           const marker = new google.maps.marker.AdvancedMarkerElement({
             position: position,
@@ -614,16 +603,25 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
             marker.content = this.homeSearchCarsDetailUIDTO.getDefaultIcon(price),
             marker.map = this.map
           });
-  
-          const content = `<img src="assets/images/vehicle/Corolla.png" alt="Image" class="border-round w-full h-full md:w-16rem md:h-10rem"><br>
+
+          // Formatar o valor do dailyRate para sempre ter 2 casas decimais
+          const formattedDailyRate = customerVehicle.dailyRate.toFixed(2);
+ 
+          const content = `<img src="${customerVehicle.dataURI}" alt="Customer Vehicle Image" class="border-round w-full h-full md:w-16rem md:h-10rem">
+          <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
+            <strong style="font-size: 1.30em;">
+              ${customerVehicle.vehicle.vehicleBrand.vehicleBrandName} ${customerVehicle.vehicle.vehicleName} ${customerVehicle.yearOfTheCar}
+            </strong>
+          </div>
           <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
             <p class="text-base flex align-items-center text-900 mt-0 mb-1">
               <i class="pi pi-map mr-2" style="color: red;"></i>
               <span class="font-medium" style="font-size: 0.80em;">${customerVehicle.distance}</span>
             </p>
           </div>
-          <strong style="font-size: 1.00em;">Preço:</strong> <strong style="font-size: 1.00em; text-align: right;">R$ ${customerVehicle.dailyRate}</strong><br>
-          <strong style="font-size: 0.80em; text-decoration: underline;">R$ ${this.formatDailyRateWithComma(customerVehicle.dailyRate)} / Sem Incluir Impostos E Taxas</strong>`;
+          <strong style="font-size: 1.00em;">${this.homeSearchCarsDetailUIDTO.daily_rate_HomeSearchCarsDetail}</strong> 
+          <strong style="font-size: 1.00em; text-align: right;">${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${formattedDailyRate}</strong><br>
+          <strong style="font-size: 0.80em; text-decoration: underline;">${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${formattedDailyRate} / ${this.homeSearchCarsDetailUIDTO.excluding_taxes_and_fees_HomeSearchCarsDetail}</strong>`;
   
           const infoWindow = new google.maps.InfoWindow({
             content: content,
@@ -661,7 +659,7 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
 
   exibirMapa(customerVehicle) {
     const customerVehicleId = customerVehicle.customerVehicleId;
-    const price = `R$ ${customerVehicle.dailyRate}`;
+    const price = `${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${customerVehicle.dailyRate}`;
 
     this.markers.forEach((marker: google.maps.marker.AdvancedMarkerElement) => {
       const markerCustomerId = (marker.element as HTMLElement).dataset['customerVehicleId'];
@@ -673,7 +671,7 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
 
   desibirMapa(customerVehicle) {
     const customerVehicleId = customerVehicle.customerVehicleId;
-    const price = `R$ ${customerVehicle.dailyRate}`;
+    const price = `${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${customerVehicle.dailyRate}`;
 
     this.markers.forEach((marker: google.maps.marker.AdvancedMarkerElement) => {
       const markerCustomerId = (marker.element as HTMLElement).dataset['customerVehicleId'];
@@ -688,11 +686,11 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
     const navigationExtras: NavigationExtras = {
       state: {
         customerVehicleId: customerVehicle.customerVehicleId,
-        place: JSON.stringify(this.place),
-        dateInit: this.dateInit,
-        selectedHourInit: this.selectedHourInit,
-        dateEnd: this.dateEnd,
-        selectedHourEnd: this.selectedHourEnd,
+        place: JSON.stringify(this.homeSearchCarsDetailUIDTO.place),
+        dateInit: this.homeSearchCarsDetailUIDTO.dateInit,
+        selectedHourInit: this.homeSearchCarsDetailUIDTO.selectedHourInit,
+        dateEnd: this.homeSearchCarsDetailUIDTO.dateEnd,
+        selectedHourEnd: this.homeSearchCarsDetailUIDTO.selectedHourEnd,
       }
     };
 
@@ -701,7 +699,7 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
 
   getGeocoderLatitudeLongitude() {
 
-    const address = this.place.formatted_address;
+    const address = this.homeSearchCarsDetailUIDTO.place.formatted_address;
 
     const geocoder = new google.maps.Geocoder();
 
@@ -733,9 +731,5 @@ export class HomeSearchCarsDetailComponent implements AfterViewInit, OnInit  {
         }
       });
     });
-  }
-
-  formatDailyRateWithComma(dailyRate: number): string {
-    return this.decimalPipe?.transform(dailyRate, '1.2-2')?.replace('.', ',') ?? '';
   }
 }

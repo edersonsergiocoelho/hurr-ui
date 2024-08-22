@@ -33,6 +33,7 @@ export class HomeSearchCarsComponent implements OnInit {
 
   resetSearchForm() {
     this.homeSearchCarsUIDTO = new HomeSearchCarsUIDTO();
+    
     this.homeSearchCarsUIDTO.today = moment().toDate();
 
     this.homeSearchCarsUIDTO.dateInit = moment(this.homeSearchCarsUIDTO.today).toDate();

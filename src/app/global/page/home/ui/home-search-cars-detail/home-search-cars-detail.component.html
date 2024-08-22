@@ -47,14 +47,14 @@
             <strong>{{ 'from_HomeSearchCarsDetail' | translate }}</strong>
           </label>
           <div style="padding-left: 10px;">
-            <p-calendar class="p-inputtext-lg" id="dateInit" [(ngModel)]="dateInit" [showIcon]="true" [minDate]="today"
-              [dateFormat]="dateFormat"></p-calendar>
+            <p-calendar class="p-inputtext-lg" id="dateInit" [(ngModel)]="homeSearchCarsDetailUIDTO.dateInit" [showIcon]="true" [minDate]="homeSearchCarsDetailUIDTO.today"
+              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat"></p-calendar>
           </div>
         </div>
 
         <div class="field">
           <div style="padding-top: 26px; padding-left: 10px;">
-            <p-dropdown class="p-inputtext-lg" id="selectedHourInit" [options]="hours" [(ngModel)]="selectedHourInit"></p-dropdown>
+            <p-dropdown class="p-inputtext-lg" id="selectedHourInit" [options]="homeSearchCarsDetailUIDTO.hours" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedHourInit"></p-dropdown>
           </div>
         </div>
 
@@ -63,14 +63,14 @@
             <strong>{{ 'to_HomeSearchCarsDetail' | translate }}</strong>
           </label>
           <div style="padding-left: 10px;">
-            <p-calendar class="p-inputtext-lg" id="dateEnd" [(ngModel)]="dateEnd" [showIcon]="true" [minDate]="today"
-              [dateFormat]="dateFormat"></p-calendar>
+            <p-calendar class="p-inputtext-lg" id="dateEnd" [(ngModel)]="homeSearchCarsDetailUIDTO.dateEnd" [showIcon]="true" [minDate]="homeSearchCarsDetailUIDTO.today"
+              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat"></p-calendar>
           </div>
         </div>
 
         <div class="field">
           <div style="padding-top: 26px; padding-left: 10px;">
-            <p-dropdown class="p-inputtext-lg" id="selectedHourEnd" [options]="hours" [(ngModel)]="selectedHourEnd"></p-dropdown>
+            <p-dropdown class="p-inputtext-lg" id="selectedHourEnd" [options]="homeSearchCarsDetailUIDTO.hours" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedHourEnd"></p-dropdown>
           </div>
         </div>
 
@@ -194,7 +194,7 @@
             <p-dataView [value]="homeSearchCarsDetailUIDTO.customerVehicles"
               [sortField]="homeSearchCarsDetailUIDTO.sortField" 
               [sortOrder]="homeSearchCarsDetailUIDTO.sortOrder"
-              [rows]="10" 
+              [rows]="5" 
               [showCurrentPageReport]="true" 
               [paginator]="true"
               [totalRecords]="homeSearchCarsDetailUIDTO.totalRecords" 
@@ -255,7 +255,7 @@
                       <img [src]="item.vehicleModel.vehicleCategory.dataURI" alt="Icon Vehicle Category"
                           class="border-round w-full h-full md:w-2rem md:h-2rem">
                       <p style="margin: 0;">
-                        {{'vehicle_model_HomeSearchCarsDetai' | translate}} 
+                        {{'vehicle_model_HomeSearchCarsDetail' | translate}} 
                         {{item.vehicleModel.vehicleModelName}}
                       </p>
                     </div>
@@ -265,7 +265,7 @@
                         <img [src]="item.vehicleFuelType.dataURI" alt="Icon Vehicle Fuel Type"
                           class="border-round w-full h-full md:w-2rem md:h-2rem">
                         <p style="margin: 0; margin-left: 5px;">
-                          {{'vehicle_fuel_type_HomeSearchCarsDetai' | translate}} 
+                          {{'vehicle_fuel_type_HomeSearchCarsDetail' | translate}} 
                           {{item.vehicleFuelType.vehicleFuelTypeName }}
                         </p>
                       </div>
@@ -273,10 +273,23 @@
                         <img [src]="item.vehicleTransmission.dataURI" alt="Icon Vehicle Transmission"
                             class="border-round w-full h-full md:w-2rem md:h-2rem">
                         <p style="margin: 0; margin-left: 5px;">
-                          {{'vehicle_transmission_HomeSearchCarsDetai' | translate}} 
+                          {{'vehicle_transmission_HomeSearchCarsDetail' | translate}} 
                           {{item.vehicleTransmission.vehicleTransmissionName }}
                         </p>
                       </div>
+                    </div>
+
+                    <div class="text-right xl:h-2rem mt-auto">
+                      <p class="text-base text-900 mt-0 mb-1">
+                        <span class="font-medium">
+                          {{ 'currency_brl_Generic' | translate }} {{(item.dailyRate | number:'1.2-2')}} / {{ 'day_HomeSearchCarsDetail' | translate }}
+                        </span>
+                      </p>
+                      <p class="text-sm text-700 mt-0 mb-1">
+                        <span class="font-medium" style="text-decoration: underline;">
+                          {{ 'currency_brl_Generic' | translate }} {{(item.dailyRate | number:'1.2-2')}} / {{ 'excluding_taxes_and_fees_HomeSearchCarsDetail' | translate }}
+                        </span>
+                      </p>
                     </div>
 
                     <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
@@ -298,12 +311,12 @@
             <article class="w-full gap-3 p-3 border-round border-1 surface-border surface-card">
               <div class="text-center">
                 <p class="font-semibold text-3xl mt-0 mb-2">
-                  {{ 'no_cars_found_title' | translate }}
+                  {{ 'no_cars_found_title_HomeSearchCarsDetail' | translate }}
                 </p>
               </div>
               <div class="text-center">
                 <p class="text-base text-900 mt-0 mb-1">
-                  {{ 'no_cars_found_message' | translate }}
+                  {{ 'no_cars_found_message_HomeSearchCarsDetail' | translate }}
                 </p>
               </div>
             </article>
@@ -317,7 +330,7 @@
   <!-- Lado direito: Mapa -->
   <div class="lg:w-1/3 md:w-1/3 w-full">
     <div style="height: 100%; position: relative;">
-      <div #map class="google-map" style="height: 100%;"></div>
+      <div id="map" #map class="google-map" style="height: 100%;"></div>
     </div>
   </div>
 </div>
