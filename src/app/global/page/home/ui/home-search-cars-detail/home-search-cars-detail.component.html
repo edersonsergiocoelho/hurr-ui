@@ -198,7 +198,6 @@
               [showCurrentPageReport]="true" 
               [paginator]="true"
               [totalRecords]="homeSearchCarsDetailUIDTO.totalRecords" 
-              [lazy]="true" 
               (onLazyLoad)="search($event)">
 
               <ng-template let-item pTemplate="listItem">

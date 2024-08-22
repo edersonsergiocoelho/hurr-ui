@@ -127,13 +127,17 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
       if (vehicleCategoryServiceFindAll.status == 200 && vehicleCategoryServiceFindAll.body != null) {
         this.homeSearchCarsDetailUIDTO.vehicleCategorys = vehicleCategoryServiceFindAll.body; // Define as categorias de veículos no DTO.
       }
+
+      await this.search(null);
   
     } catch (error: any) {
+      
       this.messageService.add({
         severity: SeverityConstants.ERROR, // Define o nível de severidade para o erro.
         summary: this.homeSearchCarsDetailUIDTO.error_message_service_Generic, // Define o resumo da mensagem de erro.
         detail: error.toString() // Define o detalhe da mensagem de erro.
       });
+
     } finally {
       this.ngxSpinnerService.hide(); // Oculta o spinner de carregamento.
     }
@@ -205,10 +209,9 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
           detail: error.toString()
         });
       }
+    } finally {
+      this.ngxSpinnerService.hide(); // Oculta o spinner de carregamento.
     }
-
-    // Oculta o indicador de carregamento.
-    this.ngxSpinnerService.hide();
   }
 
   // Função assíncrona que busca o arquivo associado a uma marca de veículo.
@@ -382,10 +385,9 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
           detail: error.toString()
         });
       }
+    } finally {
+      this.ngxSpinnerService.hide(); // Oculta o spinner de carregamento.
     }
-
-    // Oculta o indicador de carregamento.
-    this.ngxSpinnerService.hide();
   }
 
   // Função assíncrona que realiza a busca de veículos com base no evento de carregamento.
@@ -491,9 +493,6 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
           detail: error.error.message 
         });
       }
-
-      // Oculta o indicador de carregamento em caso de erro.
-      this.ngxSpinnerService.hide();
 
     } finally {
       // Garante que o indicador de carregamento seja ocultado, independentemente do resultado.
@@ -679,8 +678,10 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
   
   async paginate(event: any) {
     // Atualiza a paginação com base no evento de carregamento de dados.
-    this.homeSearchCarsDetailUIDTO.size = event.rows;
-    this.homeSearchCarsDetailUIDTO.page = event.first / event.rows;
+    if (event != null) {
+      this.homeSearchCarsDetailUIDTO.size = event.rows;
+      this.homeSearchCarsDetailUIDTO.page = event.first / event.rows;
+    }
   }
 
   getFilledStarsArray(rating: number): number[] {

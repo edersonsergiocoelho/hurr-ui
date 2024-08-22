@@ -141,9 +141,18 @@ export class HomeComponent implements OnInit {
     // Cria um indicador de carregamento animado que adiciona um ponto a cada 2 segundos
     const interval$ = interval(2000);
     let count = 0;
-
+    let label_loading_Base = this.homeUIDTO.label_loading_Generic;
+  
     interval$.subscribe(() => {
-      this.homeUIDTO.label_loading_Generic = count < 3 ? this.homeUIDTO.label_loading_Generic + '.' : this.homeUIDTO.label_loading_Generic;
+      // Se count é 0, resetar a string para o texto base sem pontos
+      if (count === 0) {
+        this.homeUIDTO.label_loading_Generic = label_loading_Base;
+      }
+  
+      // Adiciona um ponto ao texto base
+      this.homeUIDTO.label_loading_Generic += '.';
+  
+      // Incrementa count, e reseta para 0 quando atingir 3
       count = (count + 1) % 4;
     });
   }
