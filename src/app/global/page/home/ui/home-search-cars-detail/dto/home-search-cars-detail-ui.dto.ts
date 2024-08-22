@@ -18,13 +18,23 @@ export class HomeSearchCarsDetailUIDTO extends TranslateSeverityDTO {
     const minute = index % 2 === 0 ? '00' : '30';
     return `${hour.toString().padStart(2, '0')}:${minute}`;
   });
-  
+
   place: any;
+  placeLocationLatitude: any;
+  placeLocationLongitude: any;
+
+  // Map
+  map: any;
+  center: google.maps.LatLngLiteral = {lat: -23.7189106, lng: -46.8551999};
+  zoom = 14;
+  markerPositions: google.maps.LatLngLiteral[] = [];
+  markers: google.maps.marker.AdvancedMarkerElement[] = [];
 
   // DataView
+  customerVehicles: any[];
+
   totalRecords = 0;
 
-  sortOptions!: SelectItem[];
   sortOrder!: number;
   sortField!: string;
 
@@ -39,12 +49,8 @@ export class HomeSearchCarsDetailUIDTO extends TranslateSeverityDTO {
   selectedVehicleBrand: any;
   vehicleModels?: any[];
   selectedVehicleModel: any;
-  customerVehicles: any[];
   vehicleCategorys: any[];
   selectedVehicleCategory: any;
-
-  placeLocationLatitude: any;
-  placeLocationLongitude: any;
 
   // Messages
   currency_brl_Generic: string;
