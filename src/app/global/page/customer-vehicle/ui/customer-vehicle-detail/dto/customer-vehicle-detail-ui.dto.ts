@@ -1,5 +1,6 @@
 import { CustomerAddress } from "src/app/global/page/customer-address/entity/customer-address.entity";
 import { CustomerVehicleAddress } from "src/app/global/page/customer-vehicle-address/entity/customer-vehicle-address.entity";
+import { CustomerVehicleFilePhoto } from "src/app/page/customer-vehicle-file-photo/entity/customer-vehicle-file-photo.entity";
 
 export class CustomerVehicleDetailUIDTO {
 
@@ -15,6 +16,8 @@ export class CustomerVehicleDetailUIDTO {
   selectCustomerVehicleAddressVehicle: CustomerVehicleAddress;
   selectCustomerAddressDelivery: CustomerAddress;
   selectCustomerAddressPickUp: CustomerAddress;
+
+  customerVehicleFilePhotos: Array<CustomerVehicleFilePhoto>;
 
   dateInit: Date;
   dateEnd: Date;

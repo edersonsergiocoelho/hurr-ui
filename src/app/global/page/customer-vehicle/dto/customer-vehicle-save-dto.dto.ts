@@ -7,6 +7,6 @@ export class CustomerVehicleSaveDTO {
 
   customerVehicle: CustomerVehicle;
   address: Address;
-  customerVehicleFilePhotos: Array<CustomerVehicleFilePhoto>
-  customerVehicleFileInsurances: Array<CustomerVehicleFileInsurance>
+  customerVehicleFilePhotos: Array<CustomerVehicleFilePhoto>;
+  customerVehicleFileInsurances: Array<CustomerVehicleFileInsurance>;
 }

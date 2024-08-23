@@ -19,6 +19,8 @@ import { AddressRegisterDynamicDialogComponent } from '../../../address/ui/addre
 import { DialogService } from 'primeng/dynamicdialog';
 import { CustomerAddressService } from '../../../customer-address/service/customer-address.service';
 import * as moment from 'moment';
+import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
 
 @Component({
   selector: 'app-customer-vehicle-detail',
@@ -31,12 +33,8 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
   rateUtilsService: RateUtilsService;
 
-  images: any;
-  responsiveOptions: any;
   valueRating: number = 5;
   percentages: any;
-
-  @ViewChild('searchInput', { static: true }) searchInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private customerService: CustomerService,
@@ -44,6 +42,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
     private customerVehicleAddressService: CustomerVehicleAddressService,
     private customerVehicleReviewService: CustomerVehicleReviewService,
     private customerVehicleService: CustomerVehicleService,
+    private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
     private dialogService: DialogService,
     private decimalPipe: DecimalPipe,
     private fileService: FileService,
@@ -57,16 +56,6 @@ export class CustomerVehicleDetailComponent implements OnInit {
   ) {
                 
     this.rateUtilsService = rateUtils;
-
-    this.images = [
-      { itemImageSrc: 'assets/images/vehicle/Corolla.png', thumbnailImageSrc: 'assets/images/vehicle/Corolla.png' },
-      // Adicione mais imagens se necessário no mesmo formato
-    ];
-
-    // Defina suas opções de resposta (responsive options) conforme necessário
-    this.responsiveOptions = [
-      // Defina suas opções de resposta aqui
-    ];
   }
 
   ngOnInit(): void {
@@ -125,6 +114,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
       });
     }
 
+    /*
     try {
 
       const currentUser = this.sessionStorageService.getUser();
@@ -144,6 +134,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
       }
     }
+    */
 
     try {
 
@@ -188,6 +179,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
         if (resultCustomerVehicleServiceFindById.body != null) {
           this.customerVehicleDetailUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
+          this.getUserFromCustomerVehicle(this.customerVehicleDetailUIDTO.customerVehicle)
         }
       }
 
@@ -251,6 +243,59 @@ export class CustomerVehicleDetailComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
       }
     }
+
+    try {
+
+      if (this.customerVehicleDetailUIDTO.customerVehicleId != null) {
+        
+        const customerVehicleFilePhotoServiceFindByCustomerVehicle = await firstValueFrom(this.customerVehicleFilePhotoService.findByCustomerVehicle(this.customerVehicleDetailUIDTO.customerVehicleId).pipe(first()));
+
+        if (customerVehicleFilePhotoServiceFindByCustomerVehicle.status == 200) {
+          if (customerVehicleFilePhotoServiceFindByCustomerVehicle.body != null) {
+            this.customerVehicleDetailUIDTO.customerVehicleFilePhotos = customerVehicleFilePhotoServiceFindByCustomerVehicle.body.map(customerVehicleFilePhoto => {
+              return {
+                ...customerVehicleFilePhoto,
+                dataURI: `data:${customerVehicleFilePhoto.contentType};base64,${customerVehicleFilePhoto.dataAsByteArray}`
+              };
+            });
+          }
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({
+          severity: SeverityConstants.ERROR,
+          summary: '' + this.customerVehicleDetailUIDTO.error_message_service_Generic,
+          detail: error.toString()
+        });
+      }
+    }
+  }
+
+  async getUserFromCustomerVehicle(customerVehicle: any) {
+
+    try {
+
+      const userServiceFindByEmail = await firstValueFrom(this.userService.findByEmail(customerVehicle.customer.email).pipe(first()));
+
+      if (userServiceFindByEmail.status == 200) {
+
+        customerVehicle.customer.user = userServiceFindByEmail.body;
+
+        if (customerVehicle.customer.user.photoFileId != null) {
+          this.getFileFromCustomerVehicle(customerVehicle);
+        }        
+      }
+
+    } catch (error: any) {
+      
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
+    }
   }
 
   async getUser(customerVehicleReview: any) {
@@ -270,6 +315,30 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
     } catch (error: any) {
       
+      if (error.status == 500) {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
+      }
+    }
+  }
+
+  async getFileFromCustomerVehicle (customerVehicle: any) {
+
+    try {
+
+      const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicle.customer.user.photoFileId).pipe(first()));
+        
+      if (fileServiceFindById.status == 200) {
+        if (fileServiceFindById.body != null) {
+
+          debugger;
+          
+          customerVehicle.customer.user.file = fileServiceFindById.body;
+          customerVehicle.customer.user.dataURI = `data:${customerVehicle.customer.user.file.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
+        }
+      }
+
+    } catch (error: any) {
+
       if (error.status == 500) {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: error.toString() });
       }

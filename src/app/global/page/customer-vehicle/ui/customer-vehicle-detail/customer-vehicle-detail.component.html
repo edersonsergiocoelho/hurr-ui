@@ -1,24 +1,16 @@
-<p-galleria [value]="images" [showItemNavigators]="true" [responsiveOptions]="responsiveOptions" [circular]="true"
-  [numVisible]="5" [containerStyle]="{ 'max-width': '100%', 'margin': '0 auto' }">
+<p-galleria [value]="customerVehicleDetailUIDTO.customerVehicleFilePhotos" 
+  [showItemNavigators]="true" 
+  [circular]="true"
+  [numVisible]="5" 
+  [containerStyle]="{ 'max-width': '100%', 'margin': '0 auto' }">
   <ng-template pTemplate="item" let-item>
-    <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+    <img [src]="item.dataURI" style="width: 100%; display: block;" />
   </ng-template>
   <ng-template pTemplate="thumbnail" let-item>
     <div class="grid grid-nogutter justify-content-center">
-      <img [src]="item.thumbnailImageSrc" style="display: block; max-width: 80px; height: auto;" />
+      <img [src]="item.dataURI" style="display: block; max-width: 80px; height: auto;" />
     </div>
   </ng-template>
-  <!--
-  <ng-template pTemplate="footer" let-item>
-    <div class="custom-galleria-footer">
-        <span *ngIf="images" class="title-container">
-            <span>{{ activeIndex + 1 }}/{{ images.length }}</span>
-            <span class="title">{{ images[activeIndex].title }}</span>
-            <span>{{ images[activeIndex].alt }}</span>
-        </span>
-    </div>
-  </ng-template>
-  -->
 </p-galleria>
 
 <div class="grid nested-grid" style="padding-top: 10px;">
@@ -38,18 +30,33 @@
           {{customerVehicleDetailUIDTO.customerVehicle.vehicleModel.vehicleModelName}}
         </div>
 
-        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="surface-section px-4 py-8 md:px-6 lg:px-8">
+        <div *ngIf="customerVehicleDetailUIDTO?.customerVehicle?.customer?.user != null" class="surface-section px-4 py-4 md:px-6 lg:px-8">
           <label><strong>Hospedado Por</strong></label>
           <div class="flex items-center" style="padding-top: 10px;">
             <div class="mr-3">
-              <ng-container *ngIf="customerVehicleDetailUIDTO.customerVehicle.customer.profileImage; else noImage">
-                <img [src]="customerVehicleDetailUIDTO.customerVehicle.customer.profileImage" alt="Imagem do Perfil"
-                  width="50" height="50">
+
+              <ng-container
+                *ngIf="customerVehicleDetailUIDTO.customerVehicle.customer.user.dataURI != null && customerVehicleDetailUIDTO.customerVehicle.customer.user.dataURI != null; else showDefaultImage">
+                <img [src]="customerVehicleDetailUIDTO.customerVehicle.customer.user.dataURI.dataURI" 
+                  alt="User Image"
+                  class="mr-3 lg:mr-0"
+                  style="width: 120px; height: 120px; border-radius: 50%;">
               </ng-container>
-              <ng-template #noImage>
+
+              <ng-template #showDefaultImage>
+                <img
+                  *ngIf="customerVehicleDetailUIDTO.customerVehicle.customer.user != null && customerVehicleDetailUIDTO.customerVehicle.customer.user.dataURI == null && customerVehicleDetailUIDTO.customerVehicle.customer.user.imageURL != null; else showNoImage"
+                  [src]="customerVehicleDetailUIDTO.customerVehicle.customer.user.imageURL" 
+                  alt="User Image"
+                  class="mr-3 lg:mr-0"
+                  style="width: 120px; height: 120px; border-radius: 50%;">
+              </ng-template>
+
+              <ng-template #showNoImage>
                 <i class="pi pi-user mr-2" style="font-size: 100px;">
                 </i>
               </ng-template>
+
             </div>
             <div class="field">
               <div class="field">
@@ -63,7 +70,7 @@
           </div>
         </div>
 
-        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="surface-section px-4 py-8 md:px-6 lg:px-8">
+        <div *ngIf="customerVehicleDetailUIDTO.customerVehicle" class="surface-section px-4 py-4 md:px-6 lg:px-8">
 
           <div class="field" style="display: inline-block;">
             <label><strong>Descrição:</strong></label>
@@ -80,11 +87,13 @@
   <div class="col-4">
     <div class="text-left p-3 border-round-sm h-full font-bold">
       <p *ngIf="customerVehicleDetailUIDTO.customerVehicle">R$ {{
-        formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.dailyRate) }} / Dia</p>
+        formatDailyRateWithComma(customerVehicleDetailUIDTO.customerVehicle.dailyRate) }} / Dia
+      </p>
       <p *ngIf="customerVehicleDetailUIDTO.customerVehicle" style="text-decoration: underline;">R$ {{
         formatDailyRateWithComma(rateUtilsService.calculateTotalRate(customerVehicleDetailUIDTO.dateInit,
         customerVehicleDetailUIDTO.dateEnd, customerVehicleDetailUIDTO.customerVehicle.dailyRate)) }} / Sem Incluir
-        Impostos E Taxas</p>
+        Impostos E Taxas
+      </p>
 
       <div style="width: 100%;">
         <hr style="border: none; height: 2px; background-color: #6610f2;">
@@ -248,8 +257,11 @@
         <hr style="border: none; height: 2px; background-color: #6610f2;">
       </div>
 
-      <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;"><strong>Informações Da
-          Quilometragem</strong></label>
+      <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">
+        <strong>Informações Da
+          Quilometragem
+        </strong>
+      </label>
 
       <div
         *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.unlimitedMileage"
@@ -365,26 +377,26 @@
               <ng-container
                 *ngIf="customerVehicleReview.user != null && customerVehicleReview.dataURI != null; else showDefaultImage">
                 <img [src]="customerVehicleReview.dataURI" class="mr-3 lg:mr-0"
-                  style="width: 62px; height: 62px; border-radius: 50%;">
+                  style="width: 80px; height: 80px; border-radius: 50%;">
               </ng-container>
 
               <ng-template #showDefaultImage>
                 <img
                   *ngIf="customerVehicleReview.user != null && customerVehicleReview.dataURI == null && customerVehicleReview.user.imageURL != null; else showNoImage"
                   [src]="customerVehicleReview.user.imageURL" class="mr-3 lg:mr-0"
-                  style="width: 62px; height: 62px; border-radius: 50%;">
+                  style="width: 80px; height: 80px; border-radius: 50%;">
               </ng-template>
 
               <ng-template #showNoImage>
                 <div class="mr-3 lg:mr-0"
-                  style="width: 62px; height: 62px; border-radius: 50%; background-color: white; position: relative;">
+                  style="width: 80px; height: 80px; border-radius: 50%; background-color: white; position: relative;">
                   <span
                     style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">{{'span_no_image_Home'
                     | translate}}</span>
                 </div>
               </ng-template>
 
-              <div class="flex flex-column"><span
+              <div class="flex flex-column" style="padding-left: 20px;"><span
                   class="text-900 font-medium mb-1">{{customerVehicleReview.customer.firstName + ' ' +
                   customerVehicleReview.customer.lastName}}</span>
                 <span class="text-500 font-medium text-sm">{{customerVehicleReview.createdDate | date:'dd/MM/yyyy HH:mm:ss'}}</span>
