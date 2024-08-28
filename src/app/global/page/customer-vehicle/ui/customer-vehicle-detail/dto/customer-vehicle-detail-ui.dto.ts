@@ -13,9 +13,9 @@ export class CustomerVehicleDetailUIDTO {
   listCustomerAddressDelivery: Array<CustomerAddress>;
   listCustomerAddressPickUp: Array<CustomerAddress>;
 
-  selectCustomerVehicleAddressVehicle: CustomerVehicleAddress;
-  selectCustomerAddressDelivery: CustomerAddress;
-  selectCustomerAddressPickUp: CustomerAddress;
+  selectedCustomerVehicleAddressVehicle: CustomerVehicleAddress;
+  selectedCustomerAddressDelivery: CustomerAddress;
+  selectedCustomerAddressPickUp: CustomerAddress;
 
   customerVehicleFilePhotos: Array<CustomerVehicleFilePhoto>;
 
@@ -29,19 +29,7 @@ export class CustomerVehicleDetailUIDTO {
   selectedHourInit?: string = '10:00';
   selectedHourEnd?: string = '10:00';
 
-  // Array de horas a partir da hora atual
-  hoursInit: string[] = Array.from({ length: 48 }, (_, index) => {
-    const currentHour = new Date().getHours();
-    const currentMinute = new Date().getMinutes();
-    const hour = Math.floor(index / 2);
-    const minute: number = index % 2 === 0 ? 0 : 30; // Converter minute para número
-    if (hour < currentHour || (hour === currentHour && minute < currentMinute)) {
-      return ''; // Para as horas passadas, retornar uma string vazia
-    } else {
-      return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-    }
-  }).filter(hour => hour !== ''); // Filtrar as horas vazias
-
+  hoursInit: string[];
   hours: string[] = Array.from({ length: 48 }, (_, index) => {
     const hour = Math.floor(index / 2);
     const minute = index % 2 === 0 ? '00' : '30';
@@ -61,6 +49,9 @@ export class CustomerVehicleDetailUIDTO {
   customersVehiclesReviews: any[];
 
   place: any;
+
+  valueRating: number = 5;
+  percentages: any;
 
   // Messages
   error_message_service_Generic: string;

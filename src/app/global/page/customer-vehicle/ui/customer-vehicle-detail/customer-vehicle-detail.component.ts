@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DecimalPipe, Location } from '@angular/common';
 import { first, firstValueFrom } from 'rxjs';
 import { NavigationExtras, Router } from '@angular/router';
@@ -30,11 +30,7 @@ import { SeverityConstants } from 'src/app/commom/severity.constants';
 export class CustomerVehicleDetailComponent implements OnInit {
 
   customerVehicleDetailUIDTO: CustomerVehicleDetailUIDTO;
-
   rateUtilsService: RateUtilsService;
-
-  valueRating: number = 5;
-  percentages: any;
 
   constructor(
     private customerService: CustomerService,
@@ -59,7 +55,6 @@ export class CustomerVehicleDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.resetDetailForm();
   }
 
@@ -73,6 +68,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
 
       this.customerVehicleDetailUIDTO.customerVehicleId = state.customerVehicleId;
 
+      this.customerVehicleDetailUIDTO.today = moment().toDate();
       this.customerVehicleDetailUIDTO.dateInit = moment(state.dateInit).toDate();
       this.customerVehicleDetailUIDTO.selectedHourInit = state.selectedHourInit;
       this.customerVehicleDetailUIDTO.dateEnd = moment(state.dateEnd).toDate();
@@ -105,6 +101,8 @@ export class CustomerVehicleDetailComponent implements OnInit {
       this.customerVehicleDetailUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
       this.customerVehicleDetailUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
       this.customerVehicleDetailUIDTO.header_Address_CustomerVehicleDetail = translations['header_Address_CustomerVehicleDetail'];
+
+      this.loadHoursInit();
 
     } catch (error: any) {
       this.messageService.add({
@@ -160,7 +158,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
           // Calcular porcentagem para cada nota
           const totalReviews = this.customerVehicleDetailUIDTO.customersVehiclesReviews.length;
 
-          this.percentages = counts.map(count => {
+          this.customerVehicleDetailUIDTO.percentages = counts.map(count => {
             return (count / totalReviews) * 100;
           });
 
@@ -275,6 +273,51 @@ export class CustomerVehicleDetailComponent implements OnInit {
     }
   }
 
+  loadHoursInit() {
+
+    const now = new Date();
+    const isToday = this.isSameDay(this.customerVehicleDetailUIDTO.dateInit, this.customerVehicleDetailUIDTO.today);
+
+    // Verifica se o horário atual é 23:30 ou mais tarde
+    if (now.getHours() === 23 && now.getMinutes() >= 30) {
+      this.customerVehicleDetailUIDTO.dateInit = new Date();
+      this.customerVehicleDetailUIDTO.dateInit.setDate(this.customerVehicleDetailUIDTO.dateInit.getDate() + 1);
+    }
+
+    // Adiciona uma hora ao horário atual
+    now.setHours(now.getHours() + 1);
+
+    // Calcula hoursInit com base na dataInit atualizada
+    this.customerVehicleDetailUIDTO.hoursInit = Array.from({ length: 48 }, (_, index) => {
+      const hour = Math.floor(index / 2);
+      const minute: number = index % 2 === 0 ? 0 : 30;
+      const hourStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+
+      // Mostra todas as horas se dateInit for amanhã ou mais tarde
+      if (this.customerVehicleDetailUIDTO.dateInit > now || !isToday) {
+        return hourStr;
+      }
+
+      // Caso contrário, mostra apenas as horas futuras de hoje
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+      if (hour < currentHour || (hour === currentHour && minute < currentMinute)) {
+        return ''; // Para horas passadas, retorna uma string vazia
+      } else {
+        return hourStr;
+      }
+    }).filter(hour => hour !== ''); // Filtra as horas vazias
+
+    this.ngModelChangeDateInit();
+  }
+
+  // Método auxiliar para verificar se duas datas são do mesmo dia
+  private isSameDay(date1: Date, date2: Date): boolean {
+    return date1.getFullYear() === date2.getFullYear() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getDate() === date2.getDate();
+  }
+
   async getUserFromCustomerVehicle(customerVehicle: any) {
 
     try {
@@ -329,9 +372,6 @@ export class CustomerVehicleDetailComponent implements OnInit {
         
       if (fileServiceFindById.status == 200) {
         if (fileServiceFindById.body != null) {
-
-          debugger;
-          
           customerVehicle.customer.user.file = fileServiceFindById.body;
           customerVehicle.customer.user.dataURI = `data:${customerVehicle.customer.user.file.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
         }
@@ -396,25 +436,24 @@ export class CustomerVehicleDetailComponent implements OnInit {
     return !isNaN(percentage) ? percentage.toFixed(2) + '%' : '0';
   }
 
-  formatDailyRateWithComma(dailyRate: number): string {
-    return this.decimalPipe?.transform(dailyRate, '1.2-2')?.replace('.', ',') ?? '';
-  }
-
   ngModelChangeDateInit() {
 
-    const dateInitMoment = moment(this.customerVehicleDetailUIDTO.dateInit);
-
-    if (dateInitMoment.isSame(moment(), 'day')) {
-      this.customerVehicleDetailUIDTO.dateCancelFree = dateInitMoment.toDate();
-    } else {
-      this.customerVehicleDetailUIDTO.dateCancelFree = moment(this.customerVehicleDetailUIDTO.dateInit).subtract(1, 'day').toDate();
+    if (this.customerVehicleDetailUIDTO.customerVehicle != null) {
+  
+      const dateInitMoment = moment(this.customerVehicleDetailUIDTO.dateInit);
+  
+      if (dateInitMoment.isSame(moment(), 'day')) {
+        this.customerVehicleDetailUIDTO.dateCancelFree = dateInitMoment.toDate();
+      } else {
+        this.customerVehicleDetailUIDTO.dateCancelFree = moment(this.customerVehicleDetailUIDTO.dateInit).subtract(1, 'day').toDate();
+      }
+  
+      this.rateUtils.calculateTotalRate(
+          moment(this.customerVehicleDetailUIDTO.dateInit).toDate(),
+          moment(this.customerVehicleDetailUIDTO.dateEnd).toDate(),
+          this.customerVehicleDetailUIDTO.customerVehicle.dailyRate
+      );
     }
-
-    this.rateUtils.calculateTotalRate(
-        moment(this.customerVehicleDetailUIDTO.dateInit).toDate(),
-        moment(this.customerVehicleDetailUIDTO.dateEnd).toDate(),
-        this.customerVehicleDetailUIDTO.customerVehicle.dailyRate
-    );
   }
 
   ngModelChangeDateEnd() {
@@ -468,8 +507,8 @@ export class CustomerVehicleDetailComponent implements OnInit {
         selectedHourInit: this.customerVehicleDetailUIDTO.selectedHourInit,
         dateEnd: this.customerVehicleDetailUIDTO.dateEnd,
         selectedHourEnd: this.customerVehicleDetailUIDTO.selectedHourEnd,
-        selectCustomerAddressDelivery: this.customerVehicleDetailUIDTO.selectCustomerAddressDelivery,
-        selectCustomerAddressPickUp: this.customerVehicleDetailUIDTO.selectCustomerAddressPickUp
+        selectCustomerAddressDelivery: this.customerVehicleDetailUIDTO.selectedCustomerAddressDelivery,
+        selectCustomerAddressPickUp: this.customerVehicleDetailUIDTO.selectedCustomerAddressPickUp
       }
     };
     
