@@ -84,263 +84,294 @@
     </div>
   </div>
 
+  
   <div class="col-4">
-    <div class="text-left p-3 border-round-sm h-full font-bold">
-      <p *ngIf="customerVehicleDetailUIDTO.customerVehicle">
-        {{'currency_brl_Generic' | translate}}
-        {{customerVehicleDetailUIDTO.customerVehicle.dailyRate | number:'1.2-2'}} / 
-        {{'day_HomeSearchCarsDetail' | translate}}
-      </p>
-      <p *ngIf="customerVehicleDetailUIDTO.customerVehicle" style="text-decoration: underline;">
-        {{'currency_brl_Generic' | translate}} 
-        {{rateUtilsService.calculateTotalRate(
-          customerVehicleDetailUIDTO.dateInit,
-          customerVehicleDetailUIDTO.dateEnd, 
-          customerVehicleDetailUIDTO.customerVehicle.dailyRate) | number:'1.2-2' }} / 
-        {{'excluding_taxes_and_fees_CustomerVehicleDetail' | translate}}
-      </p>
+    <form #customerVehicleDetailForm="ngForm">
+      <div class="text-left p-3 border-round-sm h-full font-bold">
+        <p *ngIf="customerVehicleDetailUIDTO.customerVehicle">
+          {{'currency_brl_Generic' | translate}}
+          {{customerVehicleDetailUIDTO.customerVehicle.dailyRate | number:'1.2-2'}} / 
+          {{'day_HomeSearchCarsDetail' | translate}}
+        </p>
+        <p *ngIf="customerVehicleDetailUIDTO.customerVehicle" style="text-decoration: underline;">
+          {{'currency_brl_Generic' | translate}} 
+          {{rateUtilsService.calculateTotalRate(
+            customerVehicleDetailUIDTO.dateInit,
+            customerVehicleDetailUIDTO.dateEnd, 
+            customerVehicleDetailUIDTO.customerVehicle.dailyRate) | number:'1.2-2' }} / 
+          {{'excluding_taxes_and_fees_CustomerVehicleDetail' | translate}}
+        </p>
 
-      <div style="width: 100%;">
-        <hr style="border: none; height: 2px; background-color: #6610f2;">
-      </div>
+        <div style="width: 100%;">
+          <hr style="border: none; height: 2px; background-color: #6610f2;">
+        </div>
 
-      <div class="field" style="display: inline-block;">
-        <label for="dateInit">
+        <div class="field" style="display: inline-block;">
+          <label for="dateInit">
+            <strong>
+              {{'date_init_CustomerVehicleDetail' | translate}}
+            </strong>
+          </label>
+          <div>
+            <p-calendar class="p-inputtext-lg" 
+              [(ngModel)]="customerVehicleDetailUIDTO.dateInit"
+              name="dateInit"
+              [showIcon]="true"
+              [minDate]="customerVehicleDetailUIDTO.today" 
+              [dateFormat]="customerVehicleDetailUIDTO.dateFormat"
+              (ngModelChange)="loadHoursInit()">
+            </p-calendar>
+          </div>
+        </div>
+
+        <div class="field" style="display: inline-block;">
+          <div style="padding-top: 22px; padding-left: 10px;">
+            <p-dropdown class="p-inputtext-lg" 
+              [options]="customerVehicleDetailUIDTO.hoursInit"
+              [(ngModel)]="customerVehicleDetailUIDTO.selectedHourInit"
+              name="selectedHourInit">
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="field" style="display: inline-block;">
+          <label for="dateEnd">
+            <strong>
+              {{'date_end_CustomerVehicleDetail' | translate}}
+            </strong>
+          </label>
+          <div>
+            <p-calendar class="p-inputtext-lg" 
+              [(ngModel)]="customerVehicleDetailUIDTO.dateEnd" 
+              name="dateEnd"
+              [showIcon]="true"
+              [minDate]="customerVehicleDetailUIDTO.today" 
+              [dateFormat]="customerVehicleDetailUIDTO.dateFormat"
+              (ngModelChange)="ngModelChangeDateEnd()">
+            </p-calendar>
+          </div>
+        </div>
+
+        <div class="field" style="display: inline-block;">
+          <div style="padding-top: 22px; padding-left: 10px;">
+            <p-dropdown class="p-inputtext-lg" 
+              [options]="customerVehicleDetailUIDTO.hours"
+              [(ngModel)]="customerVehicleDetailUIDTO.selectedHourEnd"
+              name="selectedHourEnd"></p-dropdown>
+          </div>
+        </div>
+
+        <div style="width: 100%;">
+          <hr style="border: none; height: 2px; background-color: #6610f2;">
+        </div>
+
+        <label style="padding-top: 10px;">
           <strong>
-            {{'date_init_CustomerVehicleDetail' | translate}}
+            {{'pickup_and_return_location_CustomerVehicleDetail' | translate}}
           </strong>
         </label>
-        <div>
-          <p-calendar id="dateInit" [(ngModel)]="customerVehicleDetailUIDTO.dateInit" [showIcon]="true"
-            [minDate]="customerVehicleDetailUIDTO.today" [dateFormat]="customerVehicleDetailUIDTO.dateFormat"
-             (ngModelChange)="loadHoursInit()"></p-calendar>
-        </div>
-      </div>
 
-      <div class="field" style="display: inline-block;">
-        <div style="padding-top: 22px; padding-left: 10px;">
-          <p-dropdown id="selectedHourInit" [options]="customerVehicleDetailUIDTO.hoursInit"
-            [(ngModel)]="customerVehicleDetailUIDTO.selectedHourInit"></p-dropdown>
+        <div class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
+          <p-dropdown class="p-inputtext-lg" 
+            [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressVehicle"
+            [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle"
+            name="customerVehicleAddressVehicle"
+            optionLabel="address.streetAddress" 
+            [showClear]="true" 
+            placeholder="{{'placeholder_customer_vehicle_address_vehicle_CustomerVehicleDetail' | translate}}"
+            [style]="{'width': '100%'}">
+            <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2"
+                *ngIf="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle">
+                <div>{{ customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle.address.streetAddress }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-cva pTemplate="item">
+              <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' +
+                cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
+              <br>
+              <label>{{'item_label_customer_vehicle_address_vehicle_CustomerVehicleDetail' | translate}}</label>
+            </ng-template>
+          </p-dropdown>
         </div>
-      </div>
 
-      <div class="field" style="display: inline-block;">
-        <label for="dateEnd">
+        <div style="width: 100%;">
+          <hr style="border: none; height: 2px; background-color: #6610f2;">
+        </div>
+
+        <label style="padding-top: 10px;">
           <strong>
-            {{'date_end_CustomerVehicleDetail' | translate}}
+            {{'pickup_and_dropoff_location_CustomerVehicleDetail' | translate}}
           </strong>
         </label>
-        <div>
-          <p-calendar id="dateEnd" [(ngModel)]="customerVehicleDetailUIDTO.dateEnd" [showIcon]="true"
-            [minDate]="customerVehicleDetailUIDTO.today" [dateFormat]="customerVehicleDetailUIDTO.dateFormat"
-            (ngModelChange)="ngModelChangeDateEnd()"></p-calendar>
+
+        <div
+          *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress"
+          class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
+          <p-dropdown class="p-inputtext-lg" 
+            [options]="customerVehicleDetailUIDTO.listCustomerAddressDelivery"
+            [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerAddressDelivery" 
+            optionLabel="address.streetAddress"
+            name="customerAddressDelivery"
+            [showClear]="true" 
+            placeholder="{{'placeholder_customer_vehicle_address_delivery_CustomerVehicleDetail' | translate}}" 
+            [style]="{'width': '100%'}">
+            <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerAddressDelivery">
+                <div>{{ customerVehicleDetailUIDTO.selectedCustomerAddressDelivery.address.streetAddress }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-cva pTemplate="item">
+              <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' +
+                cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
+              <br>
+              <label>{{'item_label_customer_vehicle_address_delivery_CustomerVehicleDetail' | translate}}</label>
+            </ng-template>
+          </p-dropdown>
         </div>
-      </div>
 
-      <div class="field" style="display: inline-block;">
-        <div style="padding-top: 22px; padding-left: 10px;">
-          <p-dropdown id="selectedHourEnd" [options]="customerVehicleDetailUIDTO.hours"
-            [(ngModel)]="customerVehicleDetailUIDTO.selectedHourEnd"></p-dropdown>
+        <div
+          *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress"
+          style="width: 100%;">
+          <p-button label="{{'button_Address_CustomerVehicleDetail' | translate}}" 
+            (onClick)="newAddressDeliveryRegisterDynamicDialog()"
+            [style]="{ 'width.px': 360 }">
+          </p-button>
         </div>
-      </div>
 
-      <div style="width: 100%;">
-        <hr style="border: none; height: 2px; background-color: #6610f2;">
-      </div>
-
-      <label style="padding-top: 10px;">
-        <strong>
-          {{'pickup_and_return_location_CustomerVehicleDetail' | translate}}
-        </strong>
-      </label>
-
-      <div class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
-        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerVehicleAddressVehicle"
-          [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle"
-          optionLabel="address.streetAddress" [showClear]="true" placeholder="{{'placeholder_customer_vehicle_address_vehicle_CustomerVehicleDetail' | translate}}"
-          [style]="{'width': '100%'}">
-          <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2"
-              *ngIf="customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle">
-              <div>{{ customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle.address.streetAddress }}</div>
-            </div>
-          </ng-template>
-          <ng-template let-cva pTemplate="item">
-            <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' +
-              cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
-            <br>
-            <label>{{'item_label_customer_vehicle_address_vehicle_CustomerVehicleDetail' | translate}}</label>
-          </ng-template>
-        </p-dropdown>
-      </div>
-
-      <div style="width: 100%;">
-        <hr style="border: none; height: 2px; background-color: #6610f2;">
-      </div>
-
-      <label style="padding-top: 10px;">
-        <strong>
-          {{'pickup_and_dropoff_location_CustomerVehicleDetail' | translate}}
-        </strong>
-      </label>
-
-      <div
-        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress"
-        class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
-        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerAddressDelivery"
-          [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerAddressDelivery" optionLabel="address.streetAddress"
-          [showClear]="true" placeholder="{{'placeholder_customer_vehicle_address_delivery_CustomerVehicleDetail' | translate}}" [style]="{'width': '100%'}">
-          <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerAddressDelivery">
-              <div>{{ customerVehicleDetailUIDTO.selectedCustomerAddressDelivery.address.streetAddress }}</div>
-            </div>
-          </ng-template>
-          <ng-template let-cva pTemplate="item">
-            <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' +
-              cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
-            <br>
-            <label>{{'item_label_customer_vehicle_address_delivery_CustomerVehicleDetail' | translate}}</label>
-          </ng-template>
-        </p-dropdown>
-      </div>
-
-      <div
-        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress"
-        style="width: 100%;">
-        <p-button label="{{'button_Address_CustomerVehicleDetail' | translate}}" 
-          (onClick)="newAddressDeliveryRegisterDynamicDialog()"
-          [style]="{ 'width.px': 360 }">
-        </p-button>
-      </div>
-
-      <div
-        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress"
-        class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
-        <p-dropdown [options]="customerVehicleDetailUIDTO.listCustomerAddressPickUp"
-          [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerAddressPickUp" optionLabel="address.streetAddress"
-          [showClear]="true" placeholder="{{'placeholder_customer_vehicle_address_pickup_CustomerVehicleDetail' | translate}}" [style]="{'width': '100%'}">
-          <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerAddressPickUp">
-              <div>{{ customerVehicleDetailUIDTO.selectedCustomerAddressPickUp.address.streetAddress }}</div>
-            </div>
-          </ng-template>
-          <ng-template let-cva pTemplate="item">
-            <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' +
-              cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
-            <br>
-            <label>{{'item_label_customer_vehicle_address_pickup_CustomerVehicleDetail' | translate}}</label>
-          </ng-template>
-        </p-dropdown>
-      </div>
-
-      <div
-        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress"
-        style="width: 100%;">
-        <p-button label="{{'button_Address_CustomerVehicleDetail' | translate}}" 
-          (onClick)="newAddressPickUpRegisterDynamicDialog()"
-          [style]="{ 'width.px': 360 }">
-        </p-button>
-      </div>
-
-      <div style="width: 100%;">
-        <hr style="border: none; height: 2px; background-color: #6610f2;">
-      </div>
-
-      <div style="width: 100%;">
-        <p-button label="{{'label_continue_CustomerVehicleDetail' | translate}}" (onClick)="onClickContinue()" [style]="{ 'width.px': 360 }"></p-button>
-      </div>
-
-      <div style="width: 100%;">
-        <hr style="border: none; height: 2px; background-color: #6610f2;">
-      </div>
-
-      <div class="field" style="display: flex; align-items: center;">
-        <i class="pi pi-thumbs-up mr-2"></i>
-        <div style="display: flex; flex-direction: column;">
-          <label style="font-size: 20px;"><strong>{{'label_free_cancellation_CustomerVehicleDetail' | translate}}</strong></label>
-          <label style="font-style: normal; font-weight: normal;">
-            {{'label_full_refund_before_CustomerVehicleDetail' | translate}}
-            {{customerVehicleDetailUIDTO.dateCancelFree | date:'dd/MM/yyyy'}}, {{'label_to_the_CustomerVehicleDetail' | translate}}
-            {{customerVehicleDetailUIDTO.selectedHourInit}}</label>
+        <div
+          *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress"
+          class="field" style="display: flex; flex-direction: column; padding-top: 10px;">
+          <p-dropdown class="p-inputtext-lg" [options]="customerVehicleDetailUIDTO.listCustomerAddressPickUp"
+            [(ngModel)]="customerVehicleDetailUIDTO.selectedCustomerAddressPickUp" 
+            optionLabel="address.streetAddress"
+            name="customerAddressPickUp"
+            [showClear]="true" 
+            placeholder="{{'placeholder_customer_vehicle_address_pickup_CustomerVehicleDetail' | translate}}" 
+            [style]="{'width': '100%'}">
+            <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2" *ngIf="customerVehicleDetailUIDTO.selectedCustomerAddressPickUp">
+                <div>{{ customerVehicleDetailUIDTO.selectedCustomerAddressPickUp.address.streetAddress }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-cva pTemplate="item">
+              <div class="address-box">{{ cva.address.streetAddress + ', ' + cva.address.city.cityName + ', ' +
+                cva.address.state.stateName + ', ' + cva.address.country.countryName}}</div>
+              <br>
+              <label>{{'item_label_customer_vehicle_address_pickup_CustomerVehicleDetail' | translate}}</label>
+            </ng-template>
+          </p-dropdown>
         </div>
-      </div>
 
-      <div style="width: 100%;">
-        <hr style="border: none; height: 2px; background-color: #6610f2;">
-      </div>
-
-      <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">
-        <strong>
-          {{'label_mileage_information_CustomerVehicleDetail' | translate}}
-        </strong>
-      </label>
-
-      <div
-        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.unlimitedMileage"
-        style="width: 100%;">
-        <label style="font-style: normal; font-weight: normal; font-size: 20px;">{{'label_unlimited_mileage_CustomerVehicleDetail' | translate}}</label>
-      </div>
-
-      <div
-        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.limitedMileage"
-        style="width: 100%;">
-        <div class="field">
-          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">
-            {{'label_limited_mileage_included_CustomerVehicleDetail' | translate}}
-            {{ customerVehicleDetailUIDTO.customerVehicle.limitedMileageIncluded }}
-          </label>
+        <div
+          *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress"
+          style="width: 100%;">
+          <p-button label="{{'button_Address_CustomerVehicleDetail' | translate}}" 
+            (onClick)="newAddressPickUpRegisterDynamicDialog()"
+            [style]="{ 'width.px': 360 }">
+          </p-button>
         </div>
-        <div class="field">
-          <label style="font-style: normal; font-weight: normal; font-size: 20px;">
-            {{'label_limited_mileage_value_CustomerVehicleDetail' | translate}} 
-            {{customerVehicleDetailUIDTO.customerVehicle.limitedMileageValue | number:'1.2-2' }}</label>
+
+        <div style="width: 100%;">
+          <hr style="border: none; height: 2px; background-color: #6610f2;">
         </div>
+
+        <div style="width: 100%;">
+          <p-button label="{{'label_continue_CustomerVehicleDetail' | translate}}" (onClick)="onClickContinue()" [style]="{ 'width.px': 360 }"></p-button>
+        </div>
+
+        <div style="width: 100%;">
+          <hr style="border: none; height: 2px; background-color: #6610f2;">
+        </div>
+
+        <div class="field" style="display: flex; align-items: center;">
+          <i class="pi pi-thumbs-up mr-2"></i>
+          <div style="display: flex; flex-direction: column;">
+            <label style="font-size: 20px;"><strong>{{'label_free_cancellation_CustomerVehicleDetail' | translate}}</strong></label>
+            <label style="font-style: normal; font-weight: normal;">
+              {{'label_full_refund_before_CustomerVehicleDetail' | translate}}
+              {{customerVehicleDetailUIDTO.dateCancelFree | date:'dd/MM/yyyy'}}, {{'label_to_the_CustomerVehicleDetail' | translate}}
+              {{customerVehicleDetailUIDTO.selectedHourInit}}</label>
+          </div>
+        </div>
+
+        <div style="width: 100%;">
+          <hr style="border: none; height: 2px; background-color: #6610f2;">
+        </div>
+
+        <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">
+          <strong>
+            {{'label_mileage_information_CustomerVehicleDetail' | translate}}
+          </strong>
+        </label>
+
+        <div
+          *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.unlimitedMileage"
+          style="width: 100%;">
+          <label style="font-style: normal; font-weight: normal; font-size: 20px;">{{'label_unlimited_mileage_CustomerVehicleDetail' | translate}}</label>
+        </div>
+
+        <div
+          *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.limitedMileage"
+          style="width: 100%;">
+          <div class="field">
+            <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">
+              {{'label_limited_mileage_included_CustomerVehicleDetail' | translate}}
+              {{ customerVehicleDetailUIDTO.customerVehicle.limitedMileageIncluded }}
+            </label>
+          </div>
+          <div class="field">
+            <label style="font-style: normal; font-weight: normal; font-size: 20px;">
+              {{'label_limited_mileage_value_CustomerVehicleDetail' | translate}} 
+              {{customerVehicleDetailUIDTO.customerVehicle.limitedMileageValue | number:'1.2-2' }}</label>
+          </div>
+        </div>
+
+        <div style="width: 100%;">
+          <hr style="border: none; height: 2px; background-color: #6610f2;">
+        </div>
+
+        <label
+          style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;"><strong>{{'label_convenience_CustomerVehicleDetail' | translate}}</strong></label>
+
+        <div
+          *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress"
+          style="width: 100%;">
+          <div class="field">
+            <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">
+              {{'label_delivery_to_ddress_CustomerVehicleDetail' | translate}}
+            </label>
+          </div>
+          <div class="field">
+            <label style="font-style: normal; font-weight: normal; font-size: 20px;">
+              {{'label_mileage_fee_delivery_CustomerVehicleDetail' | translate}} 
+              {{'currency_brl_Generic' | translate}} 
+              {{ customerVehicleDetailUIDTO.customerVehicle.mileageFeeDelivery | number:'1.2-2' }}
+            </label>
+          </div>
+        </div>
+
+        <div
+          *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress"
+          style="width: 100%;">
+          <div class="field">
+            <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">
+              {{'label_pickup_at_address_CustomerVehicleDetail' | translate}}
+            </label>
+          </div>
+          <div class="field">
+            <label style="font-style: normal; font-weight: normal; font-size: 20px;">
+              {{'label_mileage_fee_pickups_CustomerVehicleDetail' | translate}}
+              {{'currency_brl_Generic' | translate}} 
+              {{ customerVehicleDetailUIDTO.customerVehicle.mileageFeePickUp | number:'1.2-2' }}
+            </label>
+          </div>
+        </div>
+
       </div>
-
-      <div style="width: 100%;">
-        <hr style="border: none; height: 2px; background-color: #6610f2;">
-      </div>
-
-      <label
-        style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;"><strong>{{'label_convenience_CustomerVehicleDetail' | translate}}</strong></label>
-
-      <div
-        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.deliverToAddress"
-        style="width: 100%;">
-        <div class="field">
-          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">
-            {{'label_delivery_to_ddress_CustomerVehicleDetail' | translate}}
-          </label>
-        </div>
-        <div class="field">
-          <label style="font-style: normal; font-weight: normal; font-size: 20px;">
-            {{'label_mileage_fee_delivery_CustomerVehicleDetail' | translate}} 
-            {{'currency_brl_Generic' | translate}} 
-            {{ customerVehicleDetailUIDTO.customerVehicle.mileageFeeDelivery | number:'1.2-2' }}
-          </label>
-        </div>
-      </div>
-
-      <div
-        *ngIf="customerVehicleDetailUIDTO.customerVehicle != null && customerVehicleDetailUIDTO.customerVehicle.pickUpAtAddress"
-        style="width: 100%;">
-        <div class="field">
-          <label style="padding-top: 10px; font-style: normal; font-weight: normal; font-size: 20px;">
-            {{'label_pickup_at_address_CustomerVehicleDetail' | translate}}
-          </label>
-        </div>
-        <div class="field">
-          <label style="font-style: normal; font-weight: normal; font-size: 20px;">
-            {{'label_mileage_fee_pickups_CustomerVehicleDetail' | translate}}
-            {{'currency_brl_Generic' | translate}} 
-            {{ customerVehicleDetailUIDTO.customerVehicle.mileageFeePickUp | number:'1.2-2' }}
-          </label>
-        </div>
-      </div>
-
-    </div>
-
+    </form>
   </div>
+
 </div>
 
 <div class="block-content">
@@ -411,8 +442,9 @@
                 <div class="mr-3 lg:mr-0"
                   style="width: 80px; height: 80px; border-radius: 50%; background-color: white; position: relative;">
                   <span
-                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">{{'span_no_image_Home'
-                    | translate}}</span>
+                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">
+                    {{'span_no_image_Home' | translate}}
+                  </span>
                 </div>
               </ng-template>
 

@@ -36,5 +36,9 @@
   "div_average_rating_CustomerVehicleDetail": "Classificação média: ",
   
   "button_Address_CustomerVehicleDetail": "Adicionar Endereço",
-  "header_Address_CustomerVehicleDetail": "Cadastre Seu Endereço De Entrega Ou Retirada Do Veículo..."
+  "header_Address_CustomerVehicleDetail": "Cadastre Seu Endereço De Entrega Ou Retirada Do Veículo...",
+
+  "warn_not_null_customer_vehicle_address_vehicle_CustomerVehicleDetail": "Por Favor, Selecione Um Endereço. Nenhum Endereço Foi Selecionado.",
+  "warn_customer_not_validated_CustomerVehicleDetail": "Sua Conta Ainda Não Foi Validada. Vamos Redirecioná-lo Para Enviar As Informações Necessárias Para Validação.",
+  "info_user_not_logged_in_CustomerVehicleDetail": "Você Não Está Logado. Faça Login Para Continuar."
 }
