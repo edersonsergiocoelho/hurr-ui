@@ -36,7 +36,7 @@
               </i>
               <input #searchInputPlace type="text" pinputtext="" 
                 placeholder="{{ 'search_input_place_placeholder_HomeSearchCarsDetail' | translate }}"
-                class="p-inputtext p-component p-element" style="border-radius: 20px; width: 800px;"
+                class="p-inputtext p-component p-element" style="border-radius: 20px; width: 800px; font-size: 22px;"
                 name="searchInputPlace">
             </span>
           </div>
@@ -47,14 +47,23 @@
             <strong>{{ 'from_HomeSearchCarsDetail' | translate }}</strong>
           </label>
           <div style="padding-left: 10px;">
-            <p-calendar class="p-inputtext-lg" id="dateInit" [(ngModel)]="homeSearchCarsDetailUIDTO.dateInit" [showIcon]="true" [minDate]="homeSearchCarsDetailUIDTO.today"
-              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat"></p-calendar>
+            <p-calendar class="p-inputtext-lg" 
+              [(ngModel)]="homeSearchCarsDetailUIDTO.dateInit" 
+              name="dateInit"
+              [showIcon]="true" 
+              [minDate]="homeSearchCarsDetailUIDTO.today"
+              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat">
+            </p-calendar>
           </div>
         </div>
 
         <div class="field">
           <div style="padding-top: 26px; padding-left: 10px;">
-            <p-dropdown class="p-inputtext-lg" id="selectedHourInit" [options]="homeSearchCarsDetailUIDTO.hours" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedHourInit"></p-dropdown>
+            <p-dropdown class="p-inputtext-lg" 
+              [options]="homeSearchCarsDetailUIDTO.hours" 
+              [(ngModel)]="homeSearchCarsDetailUIDTO.selectedHourInit"
+              name="selectedHourInit">
+            </p-dropdown>
           </div>
         </div>
 
@@ -63,14 +72,23 @@
             <strong>{{ 'to_HomeSearchCarsDetail' | translate }}</strong>
           </label>
           <div style="padding-left: 10px;">
-            <p-calendar class="p-inputtext-lg" id="dateEnd" [(ngModel)]="homeSearchCarsDetailUIDTO.dateEnd" [showIcon]="true" [minDate]="homeSearchCarsDetailUIDTO.today"
-              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat"></p-calendar>
+            <p-calendar class="p-inputtext-lg" 
+              [(ngModel)]="homeSearchCarsDetailUIDTO.dateEnd" 
+              name="dateEnd"
+              [showIcon]="true" 
+              [minDate]="homeSearchCarsDetailUIDTO.today"
+              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat">
+            </p-calendar>
           </div>
         </div>
 
         <div class="field">
           <div style="padding-top: 26px; padding-left: 10px;">
-            <p-dropdown class="p-inputtext-lg" id="selectedHourEnd" [options]="homeSearchCarsDetailUIDTO.hours" [(ngModel)]="homeSearchCarsDetailUIDTO.selectedHourEnd"></p-dropdown>
+            <p-dropdown class="p-inputtext-lg" 
+              [options]="homeSearchCarsDetailUIDTO.hours" 
+              [(ngModel)]="homeSearchCarsDetailUIDTO.selectedHourEnd"
+              name="selectedHourEnd">
+            </p-dropdown>
           </div>
         </div>
 

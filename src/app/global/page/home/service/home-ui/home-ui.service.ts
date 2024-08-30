@@ -18,4 +18,15 @@ export class HomeUIService {
   getCurrentUser(): any {
     return this.currentUserSubject.value;
   }
+
+  private customerVehicleIdSubject = new BehaviorSubject<string | null>(null);
+  customerVehicleId$ = this.customerVehicleIdSubject.asObservable();
+
+  setCustomerVehicleId(id: string | null): void {
+    this.customerVehicleIdSubject.next(id);
+  }
+
+  getCustomerVehicleId(): any {
+    return this.customerVehicleIdSubject.value;
+  }
 }
