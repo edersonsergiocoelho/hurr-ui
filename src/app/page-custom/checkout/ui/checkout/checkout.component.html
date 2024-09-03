@@ -6,7 +6,7 @@
         <div class="px-0 py-4 lg:px-4 surface-card border-round shadow-2">
 
           <!-- Endereço De Entrega -->
-          <div class="flex">
+          <div *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.deliverToAddress" class="flex">
 
             <div class="flex flex-column align-items-center ml-3" style="width: 2rem;">
               <span class="bg-green-500 text-0 flex align-items-center justify-content-center border-circle"
@@ -25,8 +25,8 @@
               </div>
               <div class="grid flex-column lg:flex-row">
                 <div *ngFor="let customerAddress of checkoutUIDTO.customerAddressDeliverys" class="col p-3"
-                  [ngClass]="{ 'selected': checkoutUIDTO.selectCustomerAddressDelivery?.customerAddressId === customerAddress.customerAddressId }"
-                  (click)="selectCustomerAddressDelivery(customerAddress)">
+                  [ngClass]="{ 'selected': checkoutUIDTO.selectedCustomerAddressDelivery?.customerAddressId === customerAddress.customerAddressId }"
+                  (click)="selectedCustomerAddressDelivery(customerAddress)">
                   <div
                     class="flex flex-column border-round border-1 surface-border p-4 cursor-pointer hover:border-primary transition-duration-150 border-primary">
                     <div class="flex justify-content-between mb-3">
@@ -69,7 +69,7 @@
           </div>
 
           <!-- Endereço De Retirada -->
-          <div class="flex">
+          <div *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.pickUpAtAddress" class="flex">
             <div class="flex flex-column align-items-center ml-3" style="width: 2rem;">
               <span class="bg-green-500 text-0 flex align-items-center justify-content-center border-circle"
                 style="min-width: 3rem; min-height: 3rem;">
@@ -86,8 +86,8 @@
               </div>
               <div class="grid flex-column lg:flex-row">
                 <div *ngFor="let customerAddress of checkoutUIDTO.customersAddressPickups" class="col p-3"
-                  [ngClass]="{ 'selected': checkoutUIDTO.selectCustomerAddressPickUp?.customerAddressId === customerAddress.customerAddressId }"
-                  (click)="selectCustomerAddressPickUp(customerAddress)">
+                  [ngClass]="{ 'selected': checkoutUIDTO.selectedCustomerAddressPickUp?.customerAddressId === customerAddress.customerAddressId }"
+                  (click)="selectedCustomerAddressPickUp(customerAddress)">
                   <div
                     class="flex flex-column border-round border-1 surface-border p-4 cursor-pointer hover:border-primary transition-duration-150 border-primary">
                     <div class="flex justify-content-between mb-3">
@@ -145,8 +145,8 @@
               </div>
               <div class="grid flex-column lg:flex-row">
                 <div *ngFor="let customerAddress of checkoutUIDTO.customersAddresses" class="col p-3"
-                  [ngClass]="{ 'selected': checkoutUIDTO.selectCustomerAddress?.customerAddressId === customerAddress.customerAddressId }"
-                  (click)="selectCustomerAddress(customerAddress)">
+                  [ngClass]="{ 'selected': checkoutUIDTO.selectedCustomerAddress?.customerAddressId === customerAddress.customerAddressId }"
+                  (click)="selectedCustomerAddress(customerAddress)">
                   <div
                     class="flex flex-column border-round border-1 surface-border p-4 cursor-pointer hover:border-primary transition-duration-150 border-primary">
                     <div class="flex justify-content-between mb-3">
@@ -197,9 +197,13 @@
             <div class="ml-0 lg:ml-5 p-2 flex-auto">
               <div class="mb-3"><span class="text-900 text-xl block ml-2">{{'title_Cart_Checkout' | translate}}</span>
               </div>
-              <div class="p-2 flex flex-column lg:flex-row flex-wrap lg:align-items-center"><img
-                  src="assets/images/vehicle/Corolla.png" alt="product"
+              <div class="p-2 flex flex-column lg:flex-row flex-wrap lg:align-items-center">
+
+                <img *ngIf="checkoutUIDTO.customerVehicle != null" 
+                  [src]="checkoutUIDTO.customerVehicle.dataURI" 
+                  alt="Customer Vehicle Image"
                   class="w-16rem h-10rem mb-3 lg:mb-0 flex-shrink-0">
+
                 <div class="flex-auto lg:ml-3">
                   <div *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.customer != null"
                     class="text-900 text-sm mb-3">
@@ -241,46 +245,50 @@
             <div class="flex justify-content-between mb-3">
               <span class="text-900">{{ 'date_init_OrderSummary_Checkout' | translate }}
               </span>
-              <span class="text-900">{{ checkoutUIDTO.dateInit | date:'dd/MM/yyyy' }} - {{
-                checkoutUIDTO.selectedHourInit }}
+              <span class="text-900">
+                {{ checkoutUIDTO.dateInit | date:'dd/MM/yyyy' }} - 
+                {{ checkoutUIDTO.selectedHourInit }}
               </span>
             </div>
 
             <div class="flex justify-content-between mb-3">
               <span class="text-900">{{ 'date_end_OrderSummary_Checkout' | translate }}
               </span>
-              <span class="text-900">{{ checkoutUIDTO.dateEnd | date:'dd/MM/yyyy' }} - {{ checkoutUIDTO.selectedHourEnd
-                }}
+              <span class="text-900">
+                {{ checkoutUIDTO.dateEnd | date:'dd/MM/yyyy' }} - 
+                {{ checkoutUIDTO.selectedHourEnd }}
               </span>
             </div>
 
           </div>
 
-          <div class="border-bottom-1 surface-border my-3 py-2">
+          <div *ngIf="checkoutUIDTO.customerVehicle != null" class="border-bottom-1 surface-border my-3 py-2">
 
             <div class="flex justify-content-between mb-3">
               <span class="text-900">{{ 'price_OrderSummary_Checkout' | translate }}
               </span>
-              <span class="text-900">R$ {{ checkoutUIDTO.dailyRateFormat }} x {{ checkoutUIDTO.days }} {{
-                'days_Cart_Checkout' | translate }}
+              <span class="text-900">
+                {{'currency_brl_Generic' | translate}} 
+                {{ checkoutUIDTO.customerVehicle.dailyRate | number:'1.2-2' }} x {{ checkoutUIDTO.days }} 
+                {{'days_Cart_Checkout' | translate }}
               </span>
             </div>
 
             <div
-              *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.deliverToAddress && checkoutUIDTO.deliveryCostFormat != null"
+              *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.deliverToAddress && checkoutUIDTO.deliveryCost != null"
               class="flex justify-content-between mb-3">
               <span class="text-900">{{ 'delivery_OrderSummary_Checkout' | translate }}
               </span>
-              <span class="text-900">R$ {{ checkoutUIDTO.deliveryCostFormat }}
+              <span class="text-900">{{ 'currency_brl_Generic' | translate }} {{ checkoutUIDTO.deliveryCost | number:'1.2-2' }}
               </span>
             </div>
 
             <div
-              *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.pickUpAtAddress && checkoutUIDTO.pickUpCostFormat != null"
+              *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.pickUpAtAddress && checkoutUIDTO.pickUpCost != null"
               class="flex justify-content-between mb-3">
               <span class="text-900">{{ 'pickup_OrderSummary_Checkout' | translate }}
               </span>
-              <span class="text-900">R$ {{ checkoutUIDTO.pickUpCostFormat }}
+              <span class="text-900">{{ 'currency_brl_Generic' | translate }} {{ checkoutUIDTO.pickUpCost | number:'1.2-2' }}
               </span>
             </div>
 
@@ -290,16 +298,16 @@
             <div class="flex justify-content-between mb-3">
               <span class="text-900 font-medium">{{ 'total_OrderSummary_Checkout' | translate }}
               </span>
-              <span class="text-900 font-bold">R$ {{ checkoutUIDTO.totalBookingValueFormat }}
+              <span class="text-900 font-bold">{{'currency_brl_Generic' | translate}} {{ checkoutUIDTO.totalBookingValue | number:'1.2-2' }}
               </span>
             </div>
           </div>
 
           <ng-container *ngIf="checkoutUIDTO.customer && checkoutUIDTO.customer.customerId">
             <app-checkout-mercado-pago [customerId]="checkoutUIDTO.customer.customerId"
-              [selectCustomerAddressDelivery]="checkoutUIDTO.selectCustomerAddressDelivery || null"
-              [selectCustomerAddressPickUp]="checkoutUIDTO.selectCustomerAddressPickUp || null"
-              [selectCustomerAddress]="checkoutUIDTO.selectCustomerAddress || null"
+              [selectCustomerAddressDelivery]="checkoutUIDTO.selectedCustomerAddressDelivery || null"
+              [selectCustomerAddressPickUp]="checkoutUIDTO.selectedCustomerAddressPickUp || null"
+              [selectCustomerAddress]="checkoutUIDTO.selectedCustomerAddress || null"
               [totalBookingValue]="checkoutUIDTO.totalBookingValue">
             </app-checkout-mercado-pago>
           </ng-container>
