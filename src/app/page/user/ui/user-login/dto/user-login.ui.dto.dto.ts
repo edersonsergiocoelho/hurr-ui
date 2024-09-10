@@ -1,12 +1,15 @@
 import { AuthSignInDTO } from "src/app/core/auth/dto/auth-sign-in-dto.dto";
+import { TranslateSeverityDTO } from "src/app/core/translate/dto/translate-severity-dto.dto";
 
-export class UserLoginUIDTO {
+export class UserLoginUIDTO extends TranslateSeverityDTO {
  
   authSignInDTO: AuthSignInDTO;
-
   carouselUserLogin: CarouselUserLogin[];
 
   constructor() {
+    super(); // Chama o construtor da classe pai (TranslateSeverityDTO)
+
+    // Inicializa o array carouselUserLogin
     this.carouselUserLogin = [
       {
         title: "Conexão Segura entre Usuários e Proprietários de Carros",
@@ -25,9 +28,6 @@ export class UserLoginUIDTO {
       }
     ];
   }
-
-  // Mesages
-  error_message_service_Generic: string;
 }
 
 interface CarouselUserLogin {

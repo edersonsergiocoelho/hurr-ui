@@ -21,6 +21,10 @@
   "span_button_label_request_money_Generic": "Solicitar Dinheiro",
   "span_button_label_click_here_Generic": "Clique Aqui",
   "span_button_label_report_Generic": "Reportar",
+  
+  "span_button_label_active_Generic": "Ativos",
+  "span_button_label_inactive_Generic": "Inativos",
+  "span_button_label_all_Generic": "Todos",
 
   "span_button_label_new_Generic": "Novo",
   "span_button_label_save_Generic": "Salvar",

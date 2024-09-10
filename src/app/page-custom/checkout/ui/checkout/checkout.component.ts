@@ -24,7 +24,6 @@ import { CustomerAddressService } from 'src/app/global/page/customer-address/ser
 import { CustomerService } from 'src/app/global/page/customer/service/customer.service';
 import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/service/customer-vehicle.service';
 import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
-import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
 import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 
@@ -45,7 +44,6 @@ export class CheckoutComponent implements OnInit {
     private customerService: CustomerService,
     private customerVehicleService: CustomerVehicleService,
     private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
-    private decimalPipeService: DecimalPipeService,
     private dialogService: DialogService,
     private location: Location,
     private messageService: MessageService,

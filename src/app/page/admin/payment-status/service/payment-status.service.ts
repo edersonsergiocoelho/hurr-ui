@@ -65,15 +65,6 @@ export class PaymentStatusService {
     );
   }
 
-  finalizeBooking(paymentStatus: PaymentStatus): Observable<HttpResponse<PaymentStatus>> {
-    const url = `${this.apiUrl}/finalize-booking/${paymentStatus.paymentStatusId}`;
-    return this.httpClient.put<PaymentStatus>(url, paymentStatus, { observe: 'response' }).pipe(
-      map((response: HttpResponse<PaymentStatus>) => {
-        return response;
-      })
-    );
-  }
-
   update(paymentStatus: PaymentStatus): Observable<HttpResponse<PaymentStatus>> {
     const url = `${this.apiUrl}/${paymentStatus.paymentStatusId}`;
     return this.httpClient.put<PaymentStatus>(url, paymentStatus, { observe: 'response' }).pipe(

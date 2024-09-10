@@ -1,0 +1,93 @@
+<!-- Formulário De Registro -->
+<form novalidate #paymentStatusRegisterForm="ngForm" (ngSubmit)="ngSubmit()">
+  <h2 id="divH2" class="bg-indigo-500 text-white">{{'title_PaymentStatusRegister' | translate}}</h2>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="paymentStatusId" [ngClass]="labelSize">{{'label_payment_status_id_PaymentStatusRegister' | translate}}</label>
+      <input id="paymentStatusId" type="text" pInputText 
+        placeholder="{{'placeholder_payment_status_id_PaymentStatusRegister' | translate}}" 
+        [(ngModel)]="paymentStatusRegisterUIDTO.paymentStatusDTO.paymentStatusId" name="paymentStatusId" autocomplete="off" disabled />
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="name" [ngClass]="labelSize">{{'label_payment_status_name_PaymentStatusRegister' | translate}}</label>
+      <input id="name" type="text" pInputText 
+        placeholder="{{'placeholder_payment_status_name_PaymentStatusRegister' | translate}}"
+        [(ngModel)]="paymentStatusRegisterUIDTO.paymentStatusDTO.paymentStatusName" name="paymentStatusName" autocomplete="off" required />
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="createdDate" [ngClass]="labelSize">{{'label_created_date_PaymentStatusRegister' | translate}}</label>
+      <p-calendar [(ngModel)]="paymentStatusRegisterUIDTO.paymentStatusDTO.createdDate" 
+        placeholder="{{'placeholder_created_date_PaymentStatusRegister' | translate}}"
+        name="createdDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="modifiedDate" [ngClass]="labelSize">{{'label_modified_date_PaymentStatusRegister' | translate}}</label>
+      <p-calendar 
+        placeholder="{{'placeholder_modified_date_PaymentStatusRegister' | translate}}"
+        [(ngModel)]="paymentStatusRegisterUIDTO.paymentStatusDTO.modifiedDate" name="modifiedDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize" style="display: flex; flex-direction: column;">
+      <label for="enabled" [ngClass]="labelSize">{{'label_enabled_PaymentStatusRegister' | translate}}</label>
+      <p-inputSwitch [(ngModel)]="paymentStatusRegisterUIDTO.paymentStatusDTO.enabled" 
+        name="enabled">
+      </p-inputSwitch>
+    </div>
+
+    <div class="col-12 flex flex-row justify-content-left py-0">
+
+      <div *ngIf="paymentStatusRegisterUIDTO?.paymentStatusDTO?.paymentStatusId" class="md:col-3 mt-4 pt-1 field" >
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-secondary md:w-12rem"
+          type="button"
+          (click)="resetRegisterForm()">
+          <span class="p-button-label">
+            {{'span_button_label_new_Generic' | translate}}
+          </span>
+          <i class="pi pi-file"></i>
+        </button>
+      </div>
+
+      <div *ngIf="paymentStatusRegisterUIDTO?.paymentStatusDTO?.paymentStatusId == null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton  type="submit" class="p-ripple p-element w-auto p-button p-component md:w-12rem"
+          [disabled]="paymentStatusRegisterForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_save_Generic' | translate}}
+          </span>
+          <i class="pi pi-save"></i>
+        </button>
+      </div>
+
+      <div *ngIf="paymentStatusRegisterUIDTO?.paymentStatusDTO?.paymentStatusId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-info md:w-12rem"
+          type="button"
+          severity="info"
+          (click)="update()"
+          [disabled]="paymentStatusRegisterForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_update_Generic' | translate}}
+          </span>
+          <i class="pi pi-file-edit"></i>
+        </button>
+      </div>
+
+      <div *ngIf="paymentStatusRegisterUIDTO?.paymentStatusDTO?.paymentStatusId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-danger md:w-12rem"
+          type="button"
+          (click)="delete(null)"
+          [disabled]="paymentStatusRegisterForm.invalid">
+          <span class="p-button-label">
+            {{'span_button_label_delete_Generic' | translate}}
+          </span>
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</form>
