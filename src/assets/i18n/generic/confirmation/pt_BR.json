@@ -1,0 +1,8 @@
+{
+  "message_message_service_Generic": "Tem Certeza De Que Deseja Excluir O Item Selecionado?",
+  "message_all_message_service_Generic": "Tem Certeza De Que Deseja Excluir Os Itens Selecionados?",
+  "header_message_service_Generic": "Confirmação",
+
+  "accept_label_message_service_Generic": "Sim",
+  "reject_label_message_service_Generic": "Não"
+}

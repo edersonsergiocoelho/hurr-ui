@@ -175,6 +175,6 @@ export class CustomerVehicleSearchComponent implements OnInit {
   }
 
   clickRouterNavigateToCustomerVehicleEdit(rowData) {
-    this.router.navigate(['/customer-vehicle/edit/' + rowData.customerVehicleId]);
+    this.router.navigate(['/customer-vehicle/edit/photos/' + rowData.customerVehicleId]);
   }
 }

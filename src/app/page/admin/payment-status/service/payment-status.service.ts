@@ -65,15 +65,6 @@ export class PaymentStatusService {
     );
   }
 
-  finalizeBooking(paymentStatus: PaymentStatus): Observable<HttpResponse<PaymentStatus>> {
-    const url = `${this.apiUrl}/finalize-booking/${paymentStatus.paymentStatusId}`;
-    return this.httpClient.put<PaymentStatus>(url, paymentStatus, { observe: 'response' }).pipe(
-      map((response: HttpResponse<PaymentStatus>) => {
-        return response;
-      })
-    );
-  }
-
   update(paymentStatus: PaymentStatus): Observable<HttpResponse<PaymentStatus>> {
     const url = `${this.apiUrl}/${paymentStatus.paymentStatusId}`;
     return this.httpClient.put<PaymentStatus>(url, paymentStatus, { observe: 'response' }).pipe(
@@ -86,6 +77,23 @@ export class PaymentStatusService {
   delete(paymentStatusId: string): Observable<HttpResponse<void> | null> {
     const url = `${this.apiUrl}/${paymentStatusId}`;
     return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(
+      catchError((error: any) => {
+        if (error.status === 404) {
+          return of(null);
+        } else {
+          throw error;
+        }
+      })
+    );
+  }
+
+  // Novo método para deletar múltiplos registros
+  deleteAll(paymentStatusIds: string[]): Observable<HttpResponse<void> | null> {
+    const url = `${this.apiUrl}/all`;
+    return this.httpClient.delete<void>(url, {
+      body: paymentStatusIds,
+      observe: 'response'
+    }).pipe(
       catchError((error: any) => {
         if (error.status === 404) {
           return of(null);

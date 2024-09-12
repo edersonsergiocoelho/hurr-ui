@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { first, firstValueFrom } from 'rxjs';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerVehicleFilePhoto } from 'src/app/page/customer-vehicle-file-photo/entity/customer-vehicle-file-photo.entity';
+import { HomeUIService } from '../../../home/service/home-ui/home-ui.service';
 
 @Component({
   selector: 'app-customer-vehicle-edit-photos',
@@ -22,6 +23,7 @@ export class CustomerVehicleEditPhotosComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
+    private homeUIService: HomeUIService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
     private translateService: TranslateService
@@ -29,6 +31,7 @@ export class CustomerVehicleEditPhotosComponent implements OnInit {
 
     this.activatedRoute.paramMap.subscribe(params => {
       this.customerVehicleId = params.get('customerVehicleId');
+      this.homeUIService.setCustomerVehicleId(this.customerVehicleId);
     });
   }
 

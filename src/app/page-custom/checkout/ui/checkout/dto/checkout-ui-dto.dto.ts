@@ -1,31 +1,32 @@
 
+import { TranslateSeverityDTO } from "src/app/core/translate/dto/translate-severity-dto.dto";
 import { CustomerAddress } from "src/app/global/page/customer-address/entity/customer-address.entity";
 import { CustomerVehicle } from "src/app/global/page/customer-vehicle/entity/customer-vehicle.entity";
 import { Customer } from "src/app/global/page/customer/entity/customer.entity";
 
-export class CheckoutUIDTO {
+export class CheckoutUIDTO extends TranslateSeverityDTO {
 
   customer: Customer;
-  customerVehicle: CustomerVehicle;
+  customerVehicle: any;
 
   customerAddressDeliverys: Array<CustomerAddress>;
-  selectCustomerAddressDelivery: CustomerAddress | null;
+  selectedCustomerAddressDelivery: CustomerAddress | null;
 
   customersAddressPickups: Array<CustomerAddress>;
-  selectCustomerAddressPickUp: CustomerAddress | null;
+  selectedCustomerAddressPickUp: CustomerAddress | null;
 
   customersAddresses: Array<CustomerAddress>;
-  selectCustomerAddress: CustomerAddress | null;
+  selectedCustomerAddress: CustomerAddress | null;
 
   //
   days: number;
-  dailyRateFormat: string;
+  //dailyRateFormat: string;
   deliveryCost: number | null;
-  deliveryCostFormat: string | null;
+  //deliveryCostFormat: string | null;
   pickUpCost: number | null;
-  pickUpCostFormat: string | null;
+  //pickUpCostFormat: string | null;
   totalBookingValue: number;
-  totalBookingValueFormat: string;
+  //totalBookingValueFormat: string;
 
   // State
   customerVehicleId: string;
@@ -36,6 +37,5 @@ export class CheckoutUIDTO {
   selectedHourEnd?: string = '10:00';
 
   // Messages
-  error_message_service_Generic: string;
   header_Address_Checkout: string;
 }

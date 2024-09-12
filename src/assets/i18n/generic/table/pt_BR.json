@@ -1,3 +1,8 @@
 {
-  "table_no_records_found_Generic": "Não encontramos nenhum registro correspondente à sua pesquisa."
+  "table_current_page_report_template_showing_Generic": "Mostrando",
+  "table_current_page_report_template_to_Generic": "A",
+  "table_current_page_report_template_of_Generic": "De",
+  "table_current_page_report_template_records_Generic": "Registros",
+  "table_no_records_found_Generic": "Não encontramos nenhum registro correspondente à sua pesquisa.",
+  "table_summary_total_items_message": "No total, há {{total}} itens."
 }

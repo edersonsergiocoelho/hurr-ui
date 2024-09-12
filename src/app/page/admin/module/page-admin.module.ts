@@ -5,6 +5,7 @@ import { RoleModule } from '../role/module/role.module';
 import { UserRoleModule } from '../user-role/module/user-role.module';
 import { FileApprovedModule } from '../file-approved/module/file-approved.module';
 import { CustomerVehicleApprovedModule } from '../customer-vehicle-approved/module/customer-vehicle-approved.module';
+import { PaymentStatusModule } from '../payment-status/module/payment-status.module';
 
 @NgModule({
   declarations: [],
@@ -12,6 +13,7 @@ import { CustomerVehicleApprovedModule } from '../customer-vehicle-approved/modu
     CommonModule,
 
     CustomerVehicleApprovedModule,
+    PaymentStatusModule,
     FileApprovedModule,
     RoleModule,
     UserRoleModule,
@@ -19,6 +21,7 @@ import { CustomerVehicleApprovedModule } from '../customer-vehicle-approved/modu
   ], 
   exports: [
     CustomerVehicleApprovedModule,
+    PaymentStatusModule,
     FileApprovedModule,
     RoleModule,
     UserRoleModule,

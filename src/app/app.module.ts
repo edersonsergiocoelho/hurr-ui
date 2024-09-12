@@ -28,6 +28,7 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   return new MultiTranslateHttpLoader(_httpBackend,
   [
   '/assets/i18n/generic/button/',
+  '/assets/i18n/generic/confirmation/',
   '/assets/i18n/generic/currency/',
   '/assets/i18n/generic/label/',
   '/assets/i18n/generic/table/',
@@ -80,6 +81,11 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/home/home/',
   '/assets/i18n/home/home-search-cars/',
   '/assets/i18n/home/home-search-cars-detail/',
+
+  // PaymentStatus
+  '/assets/i18n/payment-status/payment-status/',
+  '/assets/i18n/payment-status/payment-status-search/',
+  '/assets/i18n/payment-status/payment-status-register/',
 
   '/assets/i18n/role/',
   '/assets/i18n/user/',

@@ -9,5 +9,8 @@
 
   "save_message_service_Generic": "Salvo Com Sucesso.",
   "update_message_service_Generic": "Alterado Com Sucesso.",
-  "delete_message_service_Generic": "Deletado Com Sucesso."
+  "delete_message_service_Generic": "Deletado Com Sucesso.",
+
+  "delete_all_message_service_Generic": "Itens Deletados Com Sucesso.",
+  "delete_all_success_message_service_Generic": "Todos Os Itens Selecionados Foram Deletados Com Sucesso."
 }

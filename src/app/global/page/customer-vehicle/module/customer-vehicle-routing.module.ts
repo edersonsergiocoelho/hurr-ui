@@ -5,13 +5,15 @@ import { CustomerVehicleDetailComponent } from '../ui/customer-vehicle-detail/cu
 import { CustomerVehicleRegisterComponent } from '../ui/customer-vehicle-register/customer-vehicle-register.component';
 import { CustomerVehicleEditComponent } from '../ui/customer-vehicle-edit/customer-vehicle-edit.component';
 import { CustomerVehicleEditPhotosComponent } from '../ui/customer-vehicle-edit-photos/customer-vehicle-edit-photos.component';
+import { CustomerVehicleEditDetailComponent } from '../ui/customer-vehicle-edit-detail/customer-vehicle-edit-detail.component';
 
 const routes: Routes = [
   {path: 'customer-vehicle', component: CustomerVehicleSearchComponent},
   {path: 'customer-vehicle/register', component: CustomerVehicleRegisterComponent},
   {path: 'customer-vehicle/detail', component: CustomerVehicleDetailComponent},
   {path: 'customer-vehicle/edit/:customerVehicleId', component: CustomerVehicleEditComponent},
-  {path: 'customer-vehicle/edit/photos', component: CustomerVehicleEditPhotosComponent},
+  {path: 'customer-vehicle/edit/photos/:customerVehicleId', component: CustomerVehicleEditPhotosComponent},
+  {path: 'customer-vehicle/edit/detail/:customerVehicleId', component: CustomerVehicleEditDetailComponent},
 ];
 
 @NgModule({

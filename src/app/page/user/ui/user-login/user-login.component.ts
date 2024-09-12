@@ -7,11 +7,11 @@ import { UserService } from '../../service/user.service';
 import { HomeUIService } from 'src/app/global/page/home/service/home-ui/home-ui.service';
 import { UserLoginUIDTO } from './dto/user-login.ui.dto.dto';
 import { TranslateService } from '@ngx-translate/core';
-import { first } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthSignInDTO } from 'src/app/core/auth/dto/auth-sign-in-dto.dto';
-import { Product } from '../../dto/product';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
 
 @Component({
   selector: 'app-user-login',
@@ -82,21 +82,47 @@ export class UserLoginComponent {
   resetForm() {
 
     this.userLoginUIDTO = new UserLoginUIDTO();
-
     this.userLoginUIDTO.authSignInDTO = new AuthSignInDTO();
+
+    this.asyncCallFunctions();
   }
 
-  getSeverity(status: string) {
-    switch (status) {
-      case 'INSTOCK':
-          return 'success';
-      case 'LOWSTOCK':
-          return 'warning';
-      case 'OUTOFSTOCK':
-          return 'danger';
-    }
+  async asyncCallFunctions() {
+    this.ngxSpinnerService.show(); // Exibe o spinner de carregamento para o usuário.
 
-    return null;
+    try {
+      // Carrega as traduções necessárias.
+      const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
+
+      // Atribui as traduções aos campos correspondentes.
+      this.userLoginUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.userLoginUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.userLoginUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
+      this.userLoginUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+
+    } catch (error: any) {
+
+      // Trata os erros de carregamento e exibe uma mensagem de erro.
+      this.messageService.add({
+        severity: SeverityConstants.ERROR,
+        summary: this.userLoginUIDTO.error_message_service_Generic,
+        detail: error.error.message
+      });
+
+    } finally {
+      // Oculta o spinner de carregamento independentemente do resultado.
+      this.ngxSpinnerService.hide();
+    }
+  }
+
+  private loadKeys(): string[] {
+    // Define as chaves para tradução que serão carregadas.
+    return [
+      'warn_message_service_Generic',
+      'error_message_service_Generic',
+      'info_message_service_Generic',
+      'success_message_service_Generic'
+    ];
   }
 
   onSubmit(): void {
@@ -139,8 +165,22 @@ export class UserLoginComponent {
       },
       error: (error) => {
 
+        if (error.status == 400) {
+          
+          this.messageService.add({ 
+            severity: SeverityConstants.WARN, 
+            summary: this.userLoginUIDTO.warn_message_service_Generic, 
+            detail: error.error.message
+          });
+        }
+
         if (error.status == 500) {
-          this.messageService.add({ severity: 'error', summary: '' + this.userLoginUIDTO.error_message_service_Generic, detail: error.error.message });
+
+          this.messageService.add({ 
+            severity: SeverityConstants.ERROR, 
+            summary: this.userLoginUIDTO.error_message_service_Generic, 
+            detail: error.error.message
+          });
         }
 
         this.ngxSpinnerService.hide();

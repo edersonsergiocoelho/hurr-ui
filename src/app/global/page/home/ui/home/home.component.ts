@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
-import { first, firstValueFrom, interval } from 'rxjs';
+import { filter, first, firstValueFrom, interval } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HomeUIService } from '../../service/home-ui/home-ui.service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
@@ -10,6 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { MenuService } from 'src/app/page/admin/menu/service/menu.service';
 import { Menu } from 'src/app/page/admin/menu/entity/menu.entity';
+import { NavigationEnd, Router } from '@angular/router';
+import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
+import { CustomerVehicleService } from '../../../customer-vehicle/service/customer-vehicle.service';
 
 @Component({
   selector: 'app-home',
@@ -18,19 +21,31 @@ import { Menu } from 'src/app/page/admin/menu/entity/menu.entity';
 })
 export class HomeComponent implements OnInit {
 
+  customerVehicleId: string | null;
+  searchQuery: string = ''; // Propriedade para armazenar o termo de pesquisa
   homeUIDTO: HomeUIDTO;
 
   constructor(
     private cdr: ChangeDetectorRef, // Usado para detectar e aplicar mudanças na view manualmente
+    private customerVehicleService: CustomerVehicleService,
+    private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
     private fileService: FileService, // Serviço para operações com arquivos
     private homeUIService: HomeUIService, // Serviço para gerenciar a UI da Home
     private menuService: MenuService, // Serviço para operações com menus
     private messageService: MessageService, // Serviço para exibir mensagens ao usuário
     private ngxSpinnerService: NgxSpinnerService, // Serviço para exibir um spinner de carregamento
     private sessionStorageService: SessionStorageService, // Serviço para manipular a sessão de armazenamento
-    private translateService: TranslateService // Serviço para manipular traduções
+    private translateService: TranslateService, // Serviço para manipular traduções
+    private router: Router
   ) {
     this.homeUIDTO = new HomeUIDTO(); // Inicializa o DTO (Data Transfer Object) para armazenar dados da UI
+
+    // Inscreva-se para receber atualizações do customerVehicleId
+    this.homeUIService.customerVehicleId$.subscribe(customerVehicleId => {
+      this.customerVehicleId = customerVehicleId;
+      this.loadCustomerVehicle();
+      //this.updateMenuWithCustomerVehicleId(id);
+    });
   }
 
   ngOnInit() {
@@ -94,11 +109,12 @@ export class HomeComponent implements OnInit {
 
     try {
       // Realiza chamadas assíncronas para carregar dados de arquivos e menus
-      const [fileData, menuHeaders, menuHeaderIcons, menuHeaderDropdowns] = await Promise.all([
+      const [fileData, menuHeaders, menuHeaderIcons, menuHeaderDropdowns, menuSideCustomerVehicleEdits] = await Promise.all([
         this.loadUserFile(), // Carrega o arquivo de foto do usuário
         this.loadMenus('MENU_HEADER'), // Carrega os cabeçalhos de menu
         this.loadMenus('MENU_HEADER_ICON'), // Carrega ícones de cabeçalhos de menu
-        this.loadMenus('MENU_HEADER_DROPDOWN') // Carrega menus suspensos dos cabeçalhos
+        this.loadMenus('MENU_HEADER_DROPDOWN'), // Carrega menus suspensos dos cabeçalhos
+        this.loadMenus('MENU_SIDE_CUSTOMER_VEHICLE_EDIT')
       ]);
 
       // Atualiza o DTO com os dados carregados
@@ -117,6 +133,10 @@ export class HomeComponent implements OnInit {
       }
       if (menuHeaderDropdowns) {
         this.homeUIDTO.menuHeaderDropdowns = menuHeaderDropdowns;
+      }
+
+      if (menuSideCustomerVehicleEdits) {
+        this.homeUIDTO.menuSideCustomerVehicleEdits = menuSideCustomerVehicleEdits;
       }
 
     } catch (error: any) {
@@ -157,7 +177,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  private async loadUserFile(): Promise<any> {
+  async loadUserFile(): Promise<any> {
     // Carrega o arquivo de foto do usuário, se existir
     if (this.homeUIDTO.currentUser && this.homeUIDTO.currentUser.photoFileId) {
       const fileResponse = await firstValueFrom(this.fileService.findById(this.homeUIDTO.currentUser.photoFileId).pipe(first()));
@@ -171,7 +191,7 @@ export class HomeComponent implements OnInit {
     return null; // Retorna null se não houver arquivo ou em caso de erro
   }
 
-  private async loadMenus(type: string): Promise<any> {
+  async loadMenus(type: string): Promise<any> {
     // Carrega menus de acordo com o tipo fornecido
     if (this.homeUIDTO.currentUser) {
       const response = await firstValueFrom(this.menuService.findByTypeMenuMeAll(type).pipe(first()));
@@ -180,6 +200,43 @@ export class HomeComponent implements OnInit {
       }
     }
     return null; // Retorna null em caso de erro ou ausência de menus
+  }
+
+  async loadCustomerVehicle() {
+
+    try {
+
+      if (this.customerVehicleId != null) {
+
+        const customerVehicleServiceFindById = await firstValueFrom(this.customerVehicleService.findById(this.customerVehicleId).pipe(first()));
+
+        if (customerVehicleServiceFindById.status == 200) {
+          if (customerVehicleServiceFindById.body != null) {
+            this.homeUIDTO.customerVehicle = customerVehicleServiceFindById.body;
+          }
+        }
+
+        const customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto = await firstValueFrom(this.customerVehicleFilePhotoService.findByCustomerVehicleAndCoverPhoto(this.customerVehicleId).pipe(first()));
+          
+        if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status == 200) {
+          if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
+            this.homeUIDTO.customerVehicleFilePhoto = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
+            this.homeUIDTO.customerVehicleFilePhoto.dataURI = `data:${this.homeUIDTO.customerVehicleFilePhoto.contentType};base64,${this.homeUIDTO.customerVehicleFilePhoto.dataAsByteArray}`;
+          }
+        }
+      }
+
+    } catch (error: any) {
+
+      if (error.status == 500) {
+
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: '' + this.homeUIDTO.error_message_service_Generic,
+          detail: error.toString() 
+        });
+      }
+    }
   }
 
   updateBreadcrumb(selectedMenu: any, menus: any): void {
@@ -255,6 +312,24 @@ export class HomeComponent implements OnInit {
     this.homeUIDTO.menuHeaderDropDownShowMenu = !this.homeUIDTO.menuHeaderDropDownShowMenu;
   }
 
+  filterMenuSideCustomerVehicleEdit(menuItems: any[]): any[] {
+    if (!this.searchQuery.trim()) {
+      return menuItems; // Retorna todos os itens se a pesquisa estiver vazia
+    }
+    return menuItems.filter(menu => {
+      return menu.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+             (menu.subMenus && this.filterMenuSideCustomerVehicleEdit(menu.subMenus).length > 0);
+    });
+  }
+
+  toggleMenuSideCustomerVehicleEdit(menu: Menu): void {
+    // Alterna a visibilidade dos submenus
+    menu.showSubMenu = !menu.showSubMenu;
+
+    // Atualiza o breadcrumb com base no menu clicado
+    this.updateBreadcrumb(menu, this.homeUIDTO.menuSideCustomerVehicleEdits);
+  }
+
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent): void {
     const clickedElement = event.target as HTMLElement;
@@ -271,5 +346,11 @@ export class HomeComponent implements OnInit {
   signOut() {
     // Chama o serviço de sessão para realizar o logout
     this.sessionStorageService.signOut();
+  }
+
+  isCustomerVehicleEdit(): boolean {
+    const currentUrl = this.router.url;
+    // Verifica se a URL contém o caminho base seguido por um ID
+    return currentUrl.includes('/customer-vehicle/edit/') && currentUrl.split('/').length == 5;
   }
 }

@@ -1,21 +1,31 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { first, firstValueFrom } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
-import { CheckoutUIDTO } from './dto/checkout-ui-dto.dto';
-import { AddressRegisterDynamicDialogComponent } from 'src/app/global/page/address/ui/address-register-dynamic-dialog/address-register-dynamic-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
-import { TranslateService } from '@ngx-translate/core';
-import { Location } from '@angular/common';
-import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/service/customer-vehicle.service';
-import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
-import * as moment from 'moment';
+
+// DTO's
+import { CheckoutUIDTO } from './dto/checkout-ui-dto.dto';
+
+// Component's
+import { AddressRegisterDynamicDialogComponent } from 'src/app/global/page/address/ui/address-register-dynamic-dialog/address-register-dynamic-dialog.component';
+
+// Entity's
+import { CustomerAddress } from 'src/app/global/page/customer-address/entity/customer-address.entity';
+
+// Enums's
+import { AddressType } from 'src/app/page/admin/address-type/address-type.enum';
+
+// Service's
 import { CustomerAddressService } from 'src/app/global/page/customer-address/service/customer-address.service';
 import { CustomerService } from 'src/app/global/page/customer/service/customer.service';
+import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/service/customer-vehicle.service';
+import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
+import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
-import { CustomerAddress } from 'src/app/global/page/customer-address/entity/customer-address.entity';
-import { AddressType } from 'src/app/page/admin/address-type/address-type.enum';
-import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
 
 @Component({
   selector: 'app-checkout',
@@ -30,10 +40,10 @@ export class CheckoutComponent implements OnInit {
   checkoutUIDTO: CheckoutUIDTO;
 
   constructor(
-    private customerService: CustomerService,
     private customerAddressService: CustomerAddressService,
+    private customerService: CustomerService,
     private customerVehicleService: CustomerVehicleService,
-    private decimalPipeService: DecimalPipeService,
+    private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
     private dialogService: DialogService,
     private location: Location,
     private messageService: MessageService,
@@ -77,78 +87,75 @@ export class CheckoutComponent implements OnInit {
 
   async asyncCallFunctions() {
 
-    this.ngxSpinnerService.show();
+    this.ngxSpinnerService.show(); // Exibe o spinner de carregamento.
 
     try {
+        // Primeiro, carregue as traduções.
+        const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
-      const keys = [
-        'error_message_service_Generic',
-        'header_Address_Checkout'
-      ];
+        this.checkoutUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+        this.checkoutUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+        this.checkoutUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
+        this.checkoutUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+        this.checkoutUIDTO.header_Address_Checkout = translations['header_Address_Checkout'];
 
-      const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
+        // Agora, faça as chamadas assíncronas simultaneamente com Promise.all
+        const currentUser = this.sessionStorageService.getUser();
 
-      this.checkoutUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.checkoutUIDTO.header_Address_Checkout = translations['header_Address_Checkout'];
+        const [customerServiceFindByEmail, customerVehicleServiceFindById, customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto] = await Promise.all([
+          firstValueFrom(this.customerService.findByEmail(currentUser.email).pipe(first())),
+          firstValueFrom(this.customerVehicleService.findById(this.checkoutUIDTO.customerVehicleId).pipe(first())),
+          firstValueFrom(this.customerVehicleFilePhotoService.findByCustomerVehicleAndCoverPhoto(this.checkoutUIDTO.customerVehicleId).pipe(first()))
+        ]);
 
-    } catch (error: any) {
-      this.messageService.add({
-        severity: 'error',
-        summary: '' + this.checkoutUIDTO.error_message_service_Generic,
-        detail: error.toString()
-      });
-    }
+        if (customerServiceFindByEmail.status === 200 && customerServiceFindByEmail.body != null) {
+            this.checkoutUIDTO.customer = customerServiceFindByEmail.body;
+        }
 
-    const currentUser = this.sessionStorageService.getUser();
+        if (customerVehicleServiceFindById.status === 200 && customerVehicleServiceFindById.body != null) {
+            this.checkoutUIDTO.customerVehicle = customerVehicleServiceFindById.body;
 
-    try {
+            this.checkoutUIDTO.totalBookingValue = this.rateUtilsService.calculateTotalRate(this.checkoutUIDTO.dateInit, this.checkoutUIDTO.dateEnd, this.checkoutUIDTO.customerVehicle.dailyRate);
 
-      const customerServiceFindByEmail = await firstValueFrom(this.customerService.findByEmail(currentUser.email).pipe(first()));
+            const dateInit = moment(this.checkoutUIDTO.dateInit);
+            const dateEnd = moment(this.checkoutUIDTO.dateEnd);
 
-      if (customerServiceFindByEmail.status == 200 && customerServiceFindByEmail.body != null) {
-        this.checkoutUIDTO.customer = customerServiceFindByEmail.body;
-      }
+            this.checkoutUIDTO.days = dateEnd.diff(dateInit, 'days');
+        }
 
-    } catch (error: any) {
-      this.messageService.add({ 
-        severity: 'error', 
-        summary: '' + this.checkoutUIDTO.error_message_service_Generic,
-        detail: error.toString() 
-      });
-    }
+        if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status === 200 && customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
+          this.checkoutUIDTO.customerVehicle.file = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
+          this.checkoutUIDTO.customerVehicle.dataURI = `data:${customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body.contentType};base64,${customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body.dataAsByteArray}`;
+        }
 
-    try {
-
-      const resultCustomerVehicleServiceFindById = await firstValueFrom(this.customerVehicleService.findById(this.checkoutUIDTO.customerVehicleId).pipe(first()));
-
-      if (resultCustomerVehicleServiceFindById.status == 200 && resultCustomerVehicleServiceFindById.body != null) {
-
-        this.checkoutUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
-
-        this.checkoutUIDTO.totalBookingValue = this.rateUtilsService.calculateTotalRate(this.checkoutUIDTO.dateInit, this.checkoutUIDTO.dateEnd, this.checkoutUIDTO.customerVehicle.dailyRate);
-        this.checkoutUIDTO.totalBookingValueFormat = this.decimalPipeService.formatR$(this.checkoutUIDTO.totalBookingValue);
-
-        const dateInit = moment(this.checkoutUIDTO.dateInit);
-        const dateEnd = moment(this.checkoutUIDTO.dateEnd);
-
-        this.checkoutUIDTO.days = dateEnd.diff(dateInit, 'days');
-
-        this.checkoutUIDTO.dailyRateFormat = this.rateUtilsService.formatDailyRateWithComma(this.checkoutUIDTO.customerVehicle.dailyRate);
-      }
+        // Agora, faça as chamadas relacionadas ao endereço, também de forma simultânea.
+        await Promise.all([
+            this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNameCustomer(),
+            this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNameDelivery(),
+            this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNamePickUp()
+        ]);
 
     } catch (error: any) {
-      this.messageService.add({ 
-        severity: 'error', 
-        summary: '' + this.checkoutUIDTO.error_message_service_Generic,
-        detail: error.toString() 
-      });
+        this.messageService.add({
+            severity: 'error',
+            summary: this.checkoutUIDTO.error_message_service_Generic,
+            detail: error.toString()
+        });
+    } finally {
+        this.ngxSpinnerService.hide(); // Oculta o spinner de carregamento.
     }
+  }
 
-    this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNameCustomer();
-    this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNameDelivery();
-    this.getCustomerAddressServiceFindByCustomerIdAndAddressTypeNamePickUp();
-
-    this.ngxSpinnerService.hide();
+  private loadKeys(): any {
+    // Define as chaves para tradução.
+    const keys = [
+      'warn_message_service_Generic',
+      'error_message_service_Generic',
+      'info_message_service_Generic',
+      'success_message_service_Generic',
+      'header_Address_Checkout'
+    ];
+    return keys;
   }
 
   async getCustomerAddressServiceFindByCustomerIdAndAddressTypeNameCustomer() {
@@ -188,8 +195,8 @@ export class CheckoutComponent implements OnInit {
     
           if (state != null) {
       
-            if (state.selectCustomerAddressDelivery != null) {
-              this.selectCustomerAddressDelivery2(state.selectCustomerAddressDelivery);
+            if (state.selectedCustomerAddressDelivery != null) {
+              this.selectedCustomerAddressDelivery2(state.selectedCustomerAddressDelivery);
             }
           }
         }
@@ -219,8 +226,8 @@ export class CheckoutComponent implements OnInit {
     
           if (state != null) {
             
-            if (state.selectCustomerAddressPickUp) {
-              this.selectCustomerAddressPickUp2(state.selectCustomerAddressPickUp);
+            if (state.selectedCustomerAddressPickUp) {
+              this.selectedCustomerAddressPickUp2(state.selectedCustomerAddressPickUp);
             }
           }
         }
@@ -275,28 +282,27 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  selectCustomerAddress(customerAddress: CustomerAddress) {
+  selectedCustomerAddress(customerAddress: CustomerAddress) {
 
-    if (this.checkoutUIDTO.selectCustomerAddress === customerAddress) {
-      this.checkoutUIDTO.selectCustomerAddress = null;
+    if (this.checkoutUIDTO.selectedCustomerAddress === customerAddress) {
+      this.checkoutUIDTO.selectedCustomerAddress = null;
     } else {
-      this.checkoutUIDTO.selectCustomerAddress = customerAddress;
+      this.checkoutUIDTO.selectedCustomerAddress = customerAddress;
     }
   }
 
-  async selectCustomerAddressDelivery(customerAddress: CustomerAddress) {
+  async selectedCustomerAddressDelivery(customerAddress: CustomerAddress) {
 
-    if (this.checkoutUIDTO.selectCustomerAddressDelivery === customerAddress) {
+    if (this.checkoutUIDTO.selectedCustomerAddressDelivery === customerAddress) {
 
-      this.checkoutUIDTO.selectCustomerAddressDelivery = null;
+      this.checkoutUIDTO.selectedCustomerAddressDelivery = null;
       this.checkoutUIDTO.deliveryCost = null;
-      this.checkoutUIDTO.deliveryCostFormat = null;
 
       this.calculateTotalBookingValue();
 
     } else {
   
-      this.checkoutUIDTO.selectCustomerAddressDelivery = customerAddress;
+      this.checkoutUIDTO.selectedCustomerAddressDelivery = customerAddress;
       
       let vehicleAddress = '';
       let addressDelivery = '';
@@ -310,13 +316,13 @@ export class CheckoutComponent implements OnInit {
         this.checkoutUIDTO.customerVehicle.addresses[0].address.country.countryName;
       }
 
-      if (this.checkoutUIDTO.selectCustomerAddressDelivery != null) {
+      if (this.checkoutUIDTO.selectedCustomerAddressDelivery != null) {
 
-        addressDelivery = this.checkoutUIDTO.selectCustomerAddressDelivery.address.streetAddress + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressDelivery.address.number + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressDelivery.address.city.cityName + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressDelivery.address.city.state.stateName + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressDelivery.address.country.countryName;
+        addressDelivery = this.checkoutUIDTO.selectedCustomerAddressDelivery.address.streetAddress + ', ' +
+        this.checkoutUIDTO.selectedCustomerAddressDelivery.address.number + ', ' +
+        this.checkoutUIDTO.selectedCustomerAddressDelivery.address.city.cityName + ', ' +
+        this.checkoutUIDTO.selectedCustomerAddressDelivery.address.city.state.stateName + ', ' +
+        this.checkoutUIDTO.selectedCustomerAddressDelivery.address.country.countryName;
       }
 
       try {
@@ -326,7 +332,6 @@ export class CheckoutComponent implements OnInit {
         
         const deliveryCost = distanceInKilometers * mileageFeeDelivery;
         this.checkoutUIDTO.deliveryCost = deliveryCost;
-        this.checkoutUIDTO.deliveryCostFormat = this.rateUtilsService.formatBRL(deliveryCost);
 
         this.calculateTotalBookingValue();
     
@@ -336,9 +341,9 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  async selectCustomerAddressDelivery2(customerAddress: CustomerAddress) {
+  async selectedCustomerAddressDelivery2(customerAddress: CustomerAddress) {
 
-    this.checkoutUIDTO.selectCustomerAddressDelivery = customerAddress;
+    this.checkoutUIDTO.selectedCustomerAddressDelivery = customerAddress;
     
     let vehicleAddress = '';
     let addressDelivery = '';
@@ -352,13 +357,13 @@ export class CheckoutComponent implements OnInit {
       this.checkoutUIDTO.customerVehicle.addresses[0].address.country.countryName;
     }
 
-    if (this.checkoutUIDTO.selectCustomerAddressDelivery != null) {
+    if (this.checkoutUIDTO.selectedCustomerAddressDelivery != null) {
 
-      addressDelivery = this.checkoutUIDTO.selectCustomerAddressDelivery.address.streetAddress + ', ' +
-      this.checkoutUIDTO.selectCustomerAddressDelivery.address.number + ', ' +
-      this.checkoutUIDTO.selectCustomerAddressDelivery.address.city.cityName + ', ' +
-      this.checkoutUIDTO.selectCustomerAddressDelivery.address.city.state.stateName + ', ' +
-      this.checkoutUIDTO.selectCustomerAddressDelivery.address.country.countryName;
+      addressDelivery = this.checkoutUIDTO.selectedCustomerAddressDelivery.address.streetAddress + ', ' +
+      this.checkoutUIDTO.selectedCustomerAddressDelivery.address.number + ', ' +
+      this.checkoutUIDTO.selectedCustomerAddressDelivery.address.city.cityName + ', ' +
+      this.checkoutUIDTO.selectedCustomerAddressDelivery.address.city.state.stateName + ', ' +
+      this.checkoutUIDTO.selectedCustomerAddressDelivery.address.country.countryName;
     }
 
     try {
@@ -368,7 +373,6 @@ export class CheckoutComponent implements OnInit {
       
       const deliveryCost = distanceInKilometers * mileageFeeDelivery;
       this.checkoutUIDTO.deliveryCost = deliveryCost;
-      this.checkoutUIDTO.deliveryCostFormat = this.rateUtilsService.formatBRL(deliveryCost);
 
       this.calculateTotalBookingValue();
   
@@ -377,19 +381,18 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  async selectCustomerAddressPickUp(customerAddress: CustomerAddress) {
+  async selectedCustomerAddressPickUp(customerAddress: CustomerAddress) {
 
-    if (this.checkoutUIDTO.selectCustomerAddressPickUp === customerAddress) {
+    if (this.checkoutUIDTO.selectedCustomerAddressPickUp === customerAddress) {
 
-      this.checkoutUIDTO.selectCustomerAddressPickUp = null;
+      this.checkoutUIDTO.selectedCustomerAddressPickUp = null;
       this.checkoutUIDTO.pickUpCost = null;
-      this.checkoutUIDTO.pickUpCostFormat = null;
 
       this.calculateTotalBookingValue();
 
     } else {
 
-      this.checkoutUIDTO.selectCustomerAddressPickUp = customerAddress;
+      this.checkoutUIDTO.selectedCustomerAddressPickUp = customerAddress;
     
       let vehicleAddress = '';
       let addressPickup = '';
@@ -403,13 +406,13 @@ export class CheckoutComponent implements OnInit {
         this.checkoutUIDTO.customerVehicle.addresses[0].address.country.countryName;
       }
   
-      if (this.checkoutUIDTO.selectCustomerAddressPickUp != null) {
+      if (this.checkoutUIDTO.selectedCustomerAddressPickUp != null) {
   
-        addressPickup = this.checkoutUIDTO.selectCustomerAddressPickUp.address.streetAddress + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressPickUp.address.number + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressPickUp.address.city.cityName + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressPickUp.address.city.state.stateName + ', ' +
-        this.checkoutUIDTO.selectCustomerAddressPickUp.address.country.countryName;
+        addressPickup = this.checkoutUIDTO.selectedCustomerAddressPickUp.address.streetAddress + ', ' +
+        this.checkoutUIDTO.selectedCustomerAddressPickUp.address.number + ', ' +
+        this.checkoutUIDTO.selectedCustomerAddressPickUp.address.city.cityName + ', ' +
+        this.checkoutUIDTO.selectedCustomerAddressPickUp.address.city.state.stateName + ', ' +
+        this.checkoutUIDTO.selectedCustomerAddressPickUp.address.country.countryName;
       }
   
       try {
@@ -419,7 +422,6 @@ export class CheckoutComponent implements OnInit {
         
         const pickupCost = distanceInKilometers * mileageFeePickUp;
         this.checkoutUIDTO.pickUpCost = pickupCost;
-        this.checkoutUIDTO.pickUpCostFormat = this.rateUtilsService.formatBRL(pickupCost);
 
         this.calculateTotalBookingValue();
     
@@ -429,9 +431,9 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  async selectCustomerAddressPickUp2(customerAddress: CustomerAddress) {
+  async selectedCustomerAddressPickUp2(customerAddress: CustomerAddress) {
 
-    this.checkoutUIDTO.selectCustomerAddressPickUp = customerAddress;
+    this.checkoutUIDTO.selectedCustomerAddressPickUp = customerAddress;
   
     let vehicleAddress = '';
     let addressPickup = '';
@@ -445,13 +447,13 @@ export class CheckoutComponent implements OnInit {
       this.checkoutUIDTO.customerVehicle.addresses[0].address.country.countryName;
     }
 
-    if (this.checkoutUIDTO.selectCustomerAddressPickUp != null) {
+    if (this.checkoutUIDTO.selectedCustomerAddressPickUp != null) {
 
-      addressPickup = this.checkoutUIDTO.selectCustomerAddressPickUp.address.streetAddress + ', ' +
-      this.checkoutUIDTO.selectCustomerAddressPickUp.address.number + ', ' +
-      this.checkoutUIDTO.selectCustomerAddressPickUp.address.city.cityName + ', ' +
-      this.checkoutUIDTO.selectCustomerAddressPickUp.address.city.state.stateName + ', ' +
-      this.checkoutUIDTO.selectCustomerAddressPickUp.address.country.countryName;
+      addressPickup = this.checkoutUIDTO.selectedCustomerAddressPickUp.address.streetAddress + ', ' +
+      this.checkoutUIDTO.selectedCustomerAddressPickUp.address.number + ', ' +
+      this.checkoutUIDTO.selectedCustomerAddressPickUp.address.city.cityName + ', ' +
+      this.checkoutUIDTO.selectedCustomerAddressPickUp.address.city.state.stateName + ', ' +
+      this.checkoutUIDTO.selectedCustomerAddressPickUp.address.country.countryName;
     }
 
     try {
@@ -461,7 +463,6 @@ export class CheckoutComponent implements OnInit {
       
       const pickupCost = distanceInKilometers * mileageFeePickUp;
       this.checkoutUIDTO.pickUpCost = pickupCost;
-      this.checkoutUIDTO.pickUpCostFormat = this.rateUtilsService.formatBRL(pickupCost);
 
       this.calculateTotalBookingValue();
   
@@ -505,7 +506,5 @@ export class CheckoutComponent implements OnInit {
     if (this.checkoutUIDTO.pickUpCost != null) {
       this.checkoutUIDTO.totalBookingValue += this.checkoutUIDTO.pickUpCost;
     }
-
-    this.checkoutUIDTO.totalBookingValueFormat = this.decimalPipeService.formatR$(this.checkoutUIDTO.totalBookingValue);
   }
 }

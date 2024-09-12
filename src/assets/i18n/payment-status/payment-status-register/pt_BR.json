@@ -1,0 +1,16 @@
+{
+  "title_PaymentStatusRegister": "Cadastro De Status De Pagamento",
+  "label_payment_status_id_PaymentStatusRegister": "ID Do Status De Pagamento",
+  "placeholder_payment_status_id_PaymentStatusRegister": "Informe O ID Do Status De Pagamento",
+  "label_payment_status_name_PaymentStatusRegister": "Nome Do Status De Pagamento",
+  "placeholder_payment_status_name_PaymentStatusRegister": "Informe O Nome Do Status De Pagamento",
+  "label_created_date_PaymentStatusRegister": "Data de Criação",
+  "placeholder_created_date_PaymentStatusRegister": "Selecione A Data De Criação",
+  "label_modified_date_PaymentStatusRegister": "Data de Modificação",
+  "placeholder_modified_date_PaymentStatusRegister": "Selecione A Data De Modificação",
+  "label_enabled_PaymentStatusRegister": "Ativo",
+
+  "save_success_message_service_PaymentStatusRegister": "Status De Pagamento Cadastrado  Com Sucesso",
+  "update_success_message_service_PaymentStatusRegister": "Status De Pagamento Atualizado Com Sucesso",
+  "delete_success_message_service_PaymentStatusRegister": "Status De Pagamento Removido Com Sucesso"
+}

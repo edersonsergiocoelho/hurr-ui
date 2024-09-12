@@ -1,0 +1,25 @@
+:host ::ng-deep .p-inputtext-sm .p-selectbutton {
+  transform: scale(0.9);
+}
+
+:host ::ng-deep .p-inputtext-md .p-selectbutton {
+  transform: scale(1.1);
+  padding-right: 1.6rem;
+}
+
+:host ::ng-deep .p-inputtext-lg .p-selectbutton {
+  transform: scale(1.3);
+  padding-right: 3.0rem;
+}
+
+:host ::ng-deep .p-inputtext-sm .p-inputswitch {
+  transform: scale(1.0);
+}
+
+:host ::ng-deep .p-inputtext-md .p-inputswitch {
+  transform: scale(1.3);
+}
+
+:host ::ng-deep .p-inputtext-lg .p-inputswitch {
+  transform: scale(1.5);
+}
