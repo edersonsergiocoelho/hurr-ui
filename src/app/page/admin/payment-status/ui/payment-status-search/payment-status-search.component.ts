@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { PaymentStatusSearchUIDTO } from './dto/payment-status-search-ui-dto.dto';
 import { PaymentStatusService } from '../../service/payment-status.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { TableLazyLoadEvent } from 'primeng/table';
+import { Table, TableLazyLoadEvent } from 'primeng/table';
 import { first, firstValueFrom } from 'rxjs';
 import { PaymentStatusRegisterComponent } from '../payment-status-register/payment-status-register.component';
 import { NgForm } from '@angular/forms';
@@ -27,7 +27,6 @@ export class PaymentStatusSearchComponent implements OnInit {
   labelSize: string = 'text-base'; // Define o tamanho do texto dos rótulos no formulário.
   inputSize: string = 'p-inputtext-md'; // Define o tamanho dos campos de entrada no formulário.
   buttonSize: string = 'p-button-md'; // Define o tamanho dos botões no formulário.
-
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -135,6 +134,17 @@ export class PaymentStatusSearchComponent implements OnInit {
     return keys;
   }
 
+  clear(table: Table) {
+    table.clear();
+    this.paymentStatusSearchUIDTO.globalFilter = ''
+  }
+
+  getInputValueWithWildcards(event: Event): string {
+    const target = event.target as HTMLInputElement;
+    const value = target?.value || '';
+    return `%${value}%`;
+  }
+
   // Método chamado quando o usuário seleciona uma linha
   onRowSelectEdit(rowData: any) {
     this.editRow.emit(rowData);
@@ -217,7 +227,17 @@ export class PaymentStatusSearchComponent implements OnInit {
 
       // Ajusta o campo "enabled" baseado no valor selecionado.
       if (this.paymentStatusSearchUIDTO.enabledValue != null) {
-        this.paymentStatusSearchUIDTO.paymentStatusSearchDTO.enabled = this.paymentStatusSearchUIDTO.enabledValue === 'ACTIVE';
+        if (this.paymentStatusSearchUIDTO.enabledValue == 'ACTIVE') {
+          this.paymentStatusSearchUIDTO.paymentStatusSearchDTO.enabled = true;
+        } else if (this.paymentStatusSearchUIDTO.enabledValue == 'INACTIVE') {
+          this.paymentStatusSearchUIDTO.paymentStatusSearchDTO.enabled = false;
+        } else if (this.paymentStatusSearchUIDTO.enabledValue == 'ALL') {
+          this.paymentStatusSearchUIDTO.paymentStatusSearchDTO.enabled = null;
+        }
+      }
+
+      if (event?.globalFilter != null) {
+        this.paymentStatusSearchUIDTO.paymentStatusSearchDTO.globalFilter = event.globalFilter.toString();
       }
 
       // Realiza a busca no serviço de status de pagamento, retornando os resultados paginados.

@@ -3,6 +3,7 @@
 "label_payment_status_name_PaymentStatusSearch": "Nome De Status De Pagamento",
 "placeholder_payment_status_name_PaymentStatusSearch": "Informe O Nome Do Status De Pagamento",
 
+"table_caption_title_PaymentStatusSearch": "Status De Pagamento",
 "table_header_payment_status_id_PaymentStatusSearch": "ID",
 "table_header_payment_status_name_PaymentStatusSearch": "Nome",
 "table_header_enabled_PaymentStatusSearch": "Ativo?"

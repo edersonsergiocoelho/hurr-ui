@@ -13,6 +13,8 @@ export class PaymentStatusSearchUIDTO extends TranslateConfirmServiceDTO {
   sortDir: string = '';
   sortBy: string | string[];
 
+  globalFilter: string | undefined;
+
   paymentStatusSearchDTO: PaymentStatusSearchDTO;
   paymentStatuses: Array<PaymentStatus>;
   selectedPaymentStatus: Array<PaymentStatus>;

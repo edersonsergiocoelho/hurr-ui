@@ -42,48 +42,52 @@
     <div class="col-12 flex flex-row justify-content-left py-0">
 
       <div *ngIf="paymentStatusRegisterUIDTO?.paymentStatusDTO?.paymentStatusId" class="md:col-3 mt-4 pt-1 field" >
-        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-secondary md:w-12rem"
+        <button pButton pRipple 
           type="button"
+          class="p-ripple p-element p-button p-component p-button-contrast p-button-rounded"
           (click)="resetRegisterForm()">
+          <i class="pi pi-file"></i>
           <span class="p-button-label">
             {{'span_button_label_new_Generic' | translate}}
           </span>
-          <i class="pi pi-file"></i>
         </button>
       </div>
 
       <div *ngIf="paymentStatusRegisterUIDTO?.paymentStatusDTO?.paymentStatusId == null" class="md:col-3 mt-4 pt-1 field">
-        <button pButton  type="submit" class="p-ripple p-element w-auto p-button p-component md:w-12rem"
+        <button pButton pRipple 
+          type="submit" 
+          class="p-button-rounded p-button-success md:w-12rem"
           [disabled]="paymentStatusRegisterForm.invalid">
+          <i class="pi pi-save"></i>
           <span class="p-button-label">
             {{'span_button_label_save_Generic' | translate}}
           </span>
-          <i class="pi pi-save"></i>
         </button>
       </div>
 
       <div *ngIf="paymentStatusRegisterUIDTO?.paymentStatusDTO?.paymentStatusId != null" class="md:col-3 mt-4 pt-1 field">
-        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-info md:w-12rem"
+        <button pButton pRipple 
+          class="p-button-rounded p-button-info md:w-12rem"
           type="button"
-          severity="info"
           (click)="update()"
           [disabled]="paymentStatusRegisterForm.invalid">
+          <i class="pi pi-file-edit"></i>
           <span class="p-button-label">
             {{'span_button_label_update_Generic' | translate}}
           </span>
-          <i class="pi pi-file-edit"></i>
         </button>
       </div>
 
       <div *ngIf="paymentStatusRegisterUIDTO?.paymentStatusDTO?.paymentStatusId != null" class="md:col-3 mt-4 pt-1 field">
-        <button pButton class="p-ripple p-element w-auto p-button p-component p-button-danger md:w-12rem"
+        <button pButton pRipple 
+          class="p-button-rounded p-button-danger md:w-12rem"
           type="button"
           (click)="delete(null)"
           [disabled]="paymentStatusRegisterForm.invalid">
+          <i class="pi pi-times"></i>
           <span class="p-button-label">
             {{'span_button_label_delete_Generic' | translate}}
           </span>
-          <i class="pi pi-times"></i>
         </button>
       </div>
 

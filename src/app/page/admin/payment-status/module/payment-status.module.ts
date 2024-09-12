@@ -17,6 +17,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     TranslateModule,
 
     // PrimeNG
+    ButtonModule,
     CalendarModule,
     ConfirmDialogModule,
     TableModule, 
