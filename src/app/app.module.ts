@@ -27,12 +27,17 @@ import { UtilsPipeModule } from './utils/pipe/module/utils-pipe.module';
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   return new MultiTranslateHttpLoader(_httpBackend,
   [
+  // Generic's
   '/assets/i18n/generic/button/',
   '/assets/i18n/generic/confirmation/',
   '/assets/i18n/generic/currency/',
   '/assets/i18n/generic/label/',
-  '/assets/i18n/generic/table/',
   '/assets/i18n/generic/message/',
+  '/assets/i18n/generic/placeholder/',
+  '/assets/i18n/generic/small/',
+  '/assets/i18n/generic/table/',
+  '/assets/i18n/generic/tooltip/',
+
   '/assets/i18n/address/',
   '/assets/i18n/checkout/',
   '/assets/i18n/customer-validation/',
