@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { PaymentStatusSearchUIDTO } from './dto/payment-status-search-ui-dto.dto';
 import { PaymentStatusService } from '../../service/payment-status.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -19,15 +19,15 @@ import { PaymentStatus } from '../../entity/payment-status.entity';
 })
 export class PaymentStatusSearchComponent implements OnInit {
 
+  @Output() editRow = new EventEmitter<any>();
+  @Output() deleteRow = new EventEmitter<any>();
+
   paymentStatusSearchUIDTO: PaymentStatusSearchUIDTO; // Objeto que contém os dados e estados da tela de busca de status de pagamento.
   paymentStatusSearchForm: NgForm; // Formulário para realizar a busca de status de pagamento.
   labelSize: string = 'text-base'; // Define o tamanho do texto dos rótulos no formulário.
   inputSize: string = 'p-inputtext-md'; // Define o tamanho dos campos de entrada no formulário.
   buttonSize: string = 'p-button-md'; // Define o tamanho dos botões no formulário.
 
-  @ViewChild(PaymentStatusRegisterComponent, {static: true}) 
-  paymentStatusRegisterComponent: PaymentStatusRegisterComponent; 
-  // Referência ao componente filho responsável pelo registro de status de pagamento.
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -69,6 +69,15 @@ export class PaymentStatusSearchComponent implements OnInit {
       this.paymentStatusSearchUIDTO.span_button_label_inactive_Generic = translations['span_button_label_inactive_Generic'];
       this.paymentStatusSearchUIDTO.span_button_label_all_Generic = translations['span_button_label_all_Generic'];
 
+      this.paymentStatusSearchUIDTO.message_message_service_Generic = translations['message_message_service_Generic'];
+      this.paymentStatusSearchUIDTO.message_all_message_service_Generic = translations['message_all_message_service_Generic'];
+      this.paymentStatusSearchUIDTO.header_message_service_Generic = translations['header_message_service_Generic'];
+      this.paymentStatusSearchUIDTO.accept_label_message_service_Generic = translations['accept_label_message_service_Generic'];
+      this.paymentStatusSearchUIDTO.reject_label_message_service_Generic = translations['reject_label_message_service_Generic'];
+
+      this.paymentStatusSearchUIDTO.delete_all_message_service_Generic = translations['delete_all_message_service_Generic'];
+      this.paymentStatusSearchUIDTO.delete_all_success_message_service_Generic = translations['delete_all_success_message_service_Generic'];
+
       // Traduções para os cabeçalhos das colunas da tabela de busca.
       this.paymentStatusSearchUIDTO.table_header_payment_status_id_PaymentStatusSearch = translations['table_header_payment_status_id_PaymentStatusSearch'];
       this.paymentStatusSearchUIDTO.table_header_payment_status_name_PaymentStatusSearch = translations['table_header_payment_status_name_PaymentStatusSearch'];
@@ -92,9 +101,9 @@ export class PaymentStatusSearchComponent implements OnInit {
     } catch (error: any) {
       // Exibe uma mensagem de erro caso ocorra uma falha.
       this.messageService.add({
-        severity: 'error',
-        summary: '' + this.paymentStatusSearchUIDTO.error_message_service_Generic,
-        detail: error.toString()
+        severity: SeverityConstants.ERROR,
+        summary: this.paymentStatusSearchUIDTO.error_message_service_Generic,
+        detail: error.error?.message || error.toString()
       });
     } finally {
       // Esconde o spinner após carregar os dados.
@@ -112,6 +121,13 @@ export class PaymentStatusSearchComponent implements OnInit {
       'span_button_label_active_Generic',
       'span_button_label_inactive_Generic',
       'span_button_label_all_Generic',
+      'message_message_service_Generic',
+      'message_all_message_service_Generic',
+      'header_message_service_Generic',
+      'accept_label_message_service_Generic',
+      'reject_label_message_service_Generic',
+      'delete_all_message_service_Generic',
+      'delete_all_success_message_service_Generic',
       'table_header_payment_status_id_PaymentStatusSearch',
       'table_header_payment_status_name_PaymentStatusSearch',
       'table_header_enabled_PaymentStatusSearch'
@@ -119,20 +135,73 @@ export class PaymentStatusSearchComponent implements OnInit {
     return keys;
   }
 
-  deleteSelectedProducts() {
+  // Método chamado quando o usuário seleciona uma linha
+  onRowSelectEdit(rowData: any) {
+    this.editRow.emit(rowData);
+  }
+
+  delete(rowData: any) {
+    // Abre a caixa de diálogo de confirmação
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected products?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
+      message: this.paymentStatusSearchUIDTO.message_message_service_Generic, // Mensagem de confirmação
+      header: this.paymentStatusSearchUIDTO.header_message_service_Generic,   // Cabeçalho da caixa de diálogo
+      icon: 'pi pi-exclamation-triangle', // Ícone de aviso
+      acceptLabel: this.paymentStatusSearchUIDTO.accept_label_message_service_Generic, // Rótulo do botão de aceitação
+      rejectLabel: this.paymentStatusSearchUIDTO.reject_label_message_service_Generic, // Rótulo do botão de rejeição
       accept: () => {
-        this.paymentStatusSearchUIDTO.paymentStatuses = this.paymentStatusSearchUIDTO.paymentStatuses.filter((val) => !this.paymentStatusSearchUIDTO.selectedPaymentStatus.includes(val));
-        this.paymentStatusSearchUIDTO.selectedPaymentStatus = new Array<PaymentStatus>;
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
+        // Emissão de evento quando a confirmação é aceita
+        this.deleteRow.emit(rowData);
       }
     });
   }
 
-  async search(event: TableLazyLoadEvent) {
+  async deleteSelectedRows() : Promise<void> {
+    // Abre a caixa de diálogo de confirmação para múltiplos registros
+    this.confirmationService.confirm({
+      message: this.paymentStatusSearchUIDTO.message_all_message_service_Generic, // Mensagem de confirmação
+      header: this.paymentStatusSearchUIDTO.header_message_service_Generic,   // Cabeçalho da caixa de diálogo
+      icon: 'pi pi-exclamation-triangle', // Ícone de aviso
+      acceptLabel: this.paymentStatusSearchUIDTO.accept_label_message_service_Generic, // Rótulo do botão de aceitação
+      rejectLabel: this.paymentStatusSearchUIDTO.reject_label_message_service_Generic, // Rótulo do botão de rejeição
+      accept: async () => { // Função async para lidar com a confirmação
+
+        try {
+          // Faz a chamada ao serviço para excluir todos os registros selecionados
+          const data = await firstValueFrom(
+            this.paymentStatusService.deleteAll(
+              this.paymentStatusSearchUIDTO.selectedPaymentStatus.map(ps => ps.paymentStatusId) // Mapeia IDs dos registros selecionados
+            ).pipe(first()) // Pega o primeiro valor emitido
+          );
+
+          // Verifica se a resposta foi bem-sucedida (status 204 No Content)
+          if (data && data.status === 204) {
+            // Exibe uma mensagem de sucesso
+            this.messageService.add({ 
+              severity: SeverityConstants.SUCCESS, 
+              summary: this.paymentStatusSearchUIDTO.delete_all_message_service_Generic, // Mensagem de resumo
+              detail: this.paymentStatusSearchUIDTO.delete_all_success_message_service_Generic // Detalhes da mensagem
+            });
+          }
+
+        } catch (error: any) {
+          // Captura e exibe mensagens de erro, se houver
+          this.messageService.add({
+            severity: SeverityConstants.ERROR,
+            summary: this.paymentStatusSearchUIDTO.error_message_service_Generic, // Mensagem de erro
+            detail: error.error?.message || error.toString() // Detalhes do erro
+          });
+
+        } finally {
+          // Garante que o spinner seja escondido após a conclusão da operação
+          this.ngxSpinnerService.hide();
+          // Atualiza a busca para refletir as mudanças
+          this.search(null);
+        }
+      }
+    });
+  }
+
+  async search(event: TableLazyLoadEvent | null) {
     // Função para realizar a busca com base em eventos de paginação ou ordenação.
 
     this.ngxSpinnerService.show(); // Exibe o spinner durante a busca.

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PaymentStatusService } from '../../service/payment-status.service';
@@ -17,6 +17,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./payment-status-register.component.css']
 })
 export class PaymentStatusRegisterComponent implements OnInit {
+
+  @Output() rowModified = new EventEmitter<void>(); // Emissor para notificar alterações
 
   paymentStatusRegisterUIDTO: PaymentStatusRegisterUIDTO;
   paymentStatusRegisterForm: NgForm;
@@ -70,9 +72,9 @@ export class PaymentStatusRegisterComponent implements OnInit {
     } catch (error: any) {
       // Exibe uma mensagem de erro caso ocorra uma falha ao carregar as traduções.
       this.messageService.add({
-        severity: 'error',
-        summary: '' + this.paymentStatusRegisterUIDTO.error_message_service_Generic,
-        detail: error.toString()
+        severity: SeverityConstants.ERROR,
+        summary: this.paymentStatusRegisterUIDTO.error_message_service_Generic,
+        detail: error.error?.message || error.toString()
       });
     } finally {
       // Esconde o spinner após a conclusão da carga dos dados.
@@ -145,6 +147,7 @@ export class PaymentStatusRegisterComponent implements OnInit {
       // Esconde o spinner após a conclusão da operação.
       this.resetRegisterForm();
       this.ngxSpinnerService.hide();
+      this.rowModified.emit();
     }
   }
   
@@ -180,6 +183,7 @@ export class PaymentStatusRegisterComponent implements OnInit {
       // Esconde o spinner após a conclusão da operação.
       this.resetRegisterForm();
       this.ngxSpinnerService.hide();
+      this.rowModified.emit();
     }
   }
   
@@ -221,6 +225,7 @@ export class PaymentStatusRegisterComponent implements OnInit {
       // Esconde o spinner após a conclusão da operação.
       this.ngxSpinnerService.hide();
       this.resetRegisterForm();
+      this.rowModified.emit();
     }
   }
 }

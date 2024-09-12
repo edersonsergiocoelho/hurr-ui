@@ -1,9 +1,8 @@
-import { PaymentStatusDTO } from "../../../dto/payment-status-dto.dto";
+import { TranslateConfirmServiceDTO } from "src/app/core/translate/dto/translate-confirm-service-dto.dto";
 import { PaymentStatusSearchDTO } from "../../../dto/payment-status-search-dto.dto";
 import { PaymentStatus } from "../../../entity/payment-status.entity";
-import { TranslateSelectButtonEnabledDTO } from "src/app/core/translate/dto/translate-select-button-enabled.dto.dto";
 
-export class PaymentStatusSearchUIDTO extends TranslateSelectButtonEnabledDTO {
+export class PaymentStatusSearchUIDTO extends TranslateConfirmServiceDTO {
 
   columns: any[] = [];
   dt: any;

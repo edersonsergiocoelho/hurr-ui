@@ -11,7 +11,6 @@ import { first, firstValueFrom } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthSignInDTO } from 'src/app/core/auth/dto/auth-sign-in-dto.dto';
-import { Product } from '../../dto/product';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 
 @Component({

@@ -86,4 +86,21 @@ export class PaymentStatusService {
       })
     );
   }
+
+  // Novo método para deletar múltiplos registros
+  deleteAll(paymentStatusIds: string[]): Observable<HttpResponse<void> | null> {
+    const url = `${this.apiUrl}/all`;
+    return this.httpClient.delete<void>(url, {
+      body: paymentStatusIds,
+      observe: 'response'
+    }).pipe(
+      catchError((error: any) => {
+        if (error.status === 404) {
+          return of(null);
+        } else {
+          throw error;
+        }
+      })
+    );
+  }
 }

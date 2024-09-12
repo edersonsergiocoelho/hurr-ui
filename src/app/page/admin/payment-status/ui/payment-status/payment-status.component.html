@@ -5,6 +5,16 @@
   
   <div class="grid" style="padding-top: 10px;">
     <!-- Tela De Pesquisa -->
-    <app-payment-status-search class="p-fluid grid formgrid"></app-payment-status-search>
+    <div class="md:col-6 mb-2" style="padding-left: 20px;">
+      <div class="card no-margin bordered-card">
+        <app-payment-status-search (editRow)="onRowSelectEdit($event)" (deleteRow)="delete($event)"></app-payment-status-search>
+      </div>
+    </div>
+    <!-- Tela De Registro -->
+    <div class="md:col-6 mb-2" style="padding-right: 20px;">
+      <div class="card no-margin bordered-card">
+        <app-payment-status-register (rowModified)="search()"></app-payment-status-register>
+      </div>
+    </div>
   </div>
 </div>

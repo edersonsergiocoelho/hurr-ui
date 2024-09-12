@@ -28,6 +28,7 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   return new MultiTranslateHttpLoader(_httpBackend,
   [
   '/assets/i18n/generic/button/',
+  '/assets/i18n/generic/confirmation/',
   '/assets/i18n/generic/currency/',
   '/assets/i18n/generic/label/',
   '/assets/i18n/generic/table/',
