@@ -18,6 +18,8 @@ import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { SidebarModule } from 'primeng/sidebar';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { ButtonModule } from 'primeng/button';
     SelectButtonModule,
     InputTextModule,
     InputSwitchModule,
-    ToolbarModule
+    SidebarModule,
+    ToolbarModule,
+    TooltipModule
   ]
 })
 export class PaymentStatusModule { }

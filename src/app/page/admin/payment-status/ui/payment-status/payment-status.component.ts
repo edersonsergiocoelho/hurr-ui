@@ -10,6 +10,9 @@ import { PaymentStatusRegisterComponent } from '../payment-status-register/payme
 })
 export class PaymentStatusComponent {
 
+  sidebarSearchVisible: boolean = false;
+  sidebarRegisterVisible: boolean = false;
+
   @ViewChild(PaymentStatusSearchComponent) paymentStatusSearchComponent!: PaymentStatusSearchComponent;
   @ViewChild(PaymentStatusRegisterComponent) paymentStatusRegisterComponent!: PaymentStatusRegisterComponent;
 
@@ -24,5 +27,13 @@ export class PaymentStatusComponent {
 
   search() {
     this.paymentStatusSearchComponent.search(null);
+  }
+
+  toggleSidebarSearch() {
+    this.sidebarSearchVisible = !this.sidebarSearchVisible;
+  }
+
+  toggleSidebarRegister() {
+    this.sidebarRegisterVisible = !this.sidebarRegisterVisible;
   }
 }

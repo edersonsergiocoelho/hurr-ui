@@ -18,6 +18,7 @@
     <div class="col-12 md:col-12 field">
       <div class="card flex justify-content-end" [ngClass]="inputSize">
         <p-selectButton [options]="paymentStatusSearchUIDTO.enabledOptions" 
+          class="p-button-rounded mr-3 md:w-10rem" 
           (onChange)="onChangeEnabled($event)" 
           [(ngModel)]="paymentStatusSearchUIDTO.enabledValue" 
           optionLabel="label" 
@@ -87,7 +88,13 @@
         </button>
         <span class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
-          <input pInputText type="text" [(ngModel)]="paymentStatusSearchUIDTO.globalFilter" name="globalFilter" (input)="dt.filterGlobal(getInputValueWithWildcards($event), 'contains')" placeholder="Search keyword" />
+          <input pInputText 
+            type="text" 
+            [(ngModel)]="paymentStatusSearchUIDTO.globalFilter" 
+            name="globalFilter" 
+            (input)="dt.filterGlobal(getInputValueWithWildcards($event), 'contains')" 
+            placeholder="{{'placeholder_global_filter_Generic' | translate}}"
+            pTooltip="{{'tooltip_global_filter_Generic' | translate}}"/>
         </span>
       </ng-template>
     </p-toolbar>
