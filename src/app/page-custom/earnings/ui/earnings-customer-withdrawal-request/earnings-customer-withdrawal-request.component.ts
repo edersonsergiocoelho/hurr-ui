@@ -129,7 +129,5 @@ export class EarningsCustomerWithdrawalRequestComponent implements OnInit {
         this.earningsCustomerWithdrawalRequestUIDTO.sortOrder = 1;
         this.earningsCustomerWithdrawalRequestUIDTO.sortField = value;
     }
-    console.log('onSortChange.sortOrder:' + event?.sortOrder);
-    console.log('onSortChange.sortField:' + event?.sortField);
   }
 }

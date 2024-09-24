@@ -1,7 +1,9 @@
 import { CustomerVehicle } from "src/app/global/page/customer-vehicle/entity/customer-vehicle.entity";
+import { Customer } from "src/app/global/page/customer/entity/customer.entity";
 
 export class CheckoutMercadoPagoUIDTO {
 
+    customer: Customer;
     customerVehicle: CustomerVehicle;
 
     // State

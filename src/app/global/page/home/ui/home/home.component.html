@@ -130,9 +130,10 @@
 
                 <li *ngIf="homeUIDTO.currentUser != null">
                   <a pripple=""
-                    class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
+                    class="p-ripple p-element flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"
+                    (click)="signOut()">
                     <i class="pi pi-sign-in mr-2"></i>
-                    <span class="font-medium" (click)="signOut()">Sign Out</span>
+                    <span class="font-medium">Sign Out</span>
                     <span class="p-ink"></span>
                   </a>
                 </li>

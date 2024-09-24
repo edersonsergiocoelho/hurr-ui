@@ -8,8 +8,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
 import { first, firstValueFrom } from 'rxjs';
 import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/service/customer-vehicle.service';
-import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
 import { CustomerAddress } from 'src/app/global/page/customer-address/entity/customer-address.entity';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { CustomerService } from 'src/app/global/page/customer/service/customer.service';
 
 export type MetadataMap = { [key: string]: any };
 
@@ -37,6 +38,7 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
   @Input() totalBookingValue: number;
 
   constructor(
+    private customerService: CustomerService,
     private customerVehicleService: CustomerVehicleService,
     private location: Location,
     private messageService: MessageService,
@@ -108,8 +110,8 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
-        summary: '' + this.checkoutMercadoPagoUIDTO.error_message_service_Generic,
+        severity: SeverityConstants.ERROR,
+        summary: this.checkoutMercadoPagoUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -124,11 +126,20 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
           this.checkoutMercadoPagoUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
         }
       }
+      
+      const resultCustomerFindByEmail = await firstValueFrom(this.customerService.findById(this.customerId).pipe(first()));
+
+      if (resultCustomerFindByEmail.status == 200) {
+
+        if (resultCustomerFindByEmail.body != null) {
+          this.checkoutMercadoPagoUIDTO.customer = resultCustomerFindByEmail.body;
+        }
+      }
 
     } catch (error: any) {
       this.messageService.add({ 
-        severity: 'error', 
-        summary: '' + this.checkoutMercadoPagoUIDTO.error_message_service_Generic,
+        severity: SeverityConstants.ERROR, 
+        summary: this.checkoutMercadoPagoUIDTO.error_message_service_Generic,
         detail: error.toString() 
       });
     }
@@ -195,7 +206,7 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
             if (this.selectCustomerAddress == null) {
 
               this.messageService.add({
-                severity: 'warn',
+                severity: SeverityConstants.WARN,
                 summary: '' + this.checkoutMercadoPagoUIDTO.warn_message_service_Generic,
                 detail: '' + this.checkoutMercadoPagoUIDTO.select_customer_address_Address_Checkout
               });
@@ -235,6 +246,9 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
                 },
               ],
               payer: {
+                name: this.checkoutMercadoPagoUIDTO.customer.firstName,
+                surname: this.checkoutMercadoPagoUIDTO.customer.lastName,
+                email: this.checkoutMercadoPagoUIDTO.customer.email,
                 address: {
                   streetName: this.selectCustomerAddress.address.streetAddress,
                   streetNumber: this.selectCustomerAddress.address.number,

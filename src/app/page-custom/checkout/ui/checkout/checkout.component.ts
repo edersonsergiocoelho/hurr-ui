@@ -26,6 +26,8 @@ import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/ser
 import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
 import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { MomentUtilsService } from 'src/app/utils/service/moment-utils-service';
 
 @Component({
   selector: 'app-checkout',
@@ -47,6 +49,7 @@ export class CheckoutComponent implements OnInit {
     private dialogService: DialogService,
     private location: Location,
     private messageService: MessageService,
+    private momentUtilsService: MomentUtilsService,
     private ngxSpinnerService: NgxSpinnerService,
     private rateUtilsService: RateUtilsService,
     private sessionStorageService: SessionStorageService,
@@ -116,11 +119,7 @@ export class CheckoutComponent implements OnInit {
             this.checkoutUIDTO.customerVehicle = customerVehicleServiceFindById.body;
 
             this.checkoutUIDTO.totalBookingValue = this.rateUtilsService.calculateTotalRate(this.checkoutUIDTO.dateInit, this.checkoutUIDTO.dateEnd, this.checkoutUIDTO.customerVehicle.dailyRate);
-
-            const dateInit = moment(this.checkoutUIDTO.dateInit);
-            const dateEnd = moment(this.checkoutUIDTO.dateEnd);
-
-            this.checkoutUIDTO.days = dateEnd.diff(dateInit, 'days');
+            this.checkoutUIDTO.days = this.momentUtilsService.diffDays(this.checkoutUIDTO.dateInit, this.checkoutUIDTO.dateEnd);
         }
 
         if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status === 200 && customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
@@ -137,7 +136,7 @@ export class CheckoutComponent implements OnInit {
 
     } catch (error: any) {
         this.messageService.add({
-            severity: 'error',
+            severity: SeverityConstants.ERROR,
             summary: this.checkoutUIDTO.error_message_service_Generic,
             detail: error.toString()
         });
@@ -172,7 +171,7 @@ export class CheckoutComponent implements OnInit {
         
       } catch (error: any) {
         this.messageService.add({ 
-          severity: 'error', 
+          severity: SeverityConstants.ERROR, 
           summary: '' + this.checkoutUIDTO.error_message_service_Generic,
           detail: error.toString() 
         });
@@ -203,7 +202,7 @@ export class CheckoutComponent implements OnInit {
         
       } catch (error: any) {
         this.messageService.add({ 
-          severity: 'error', 
+          severity: SeverityConstants.ERROR, 
           summary: '' + this.checkoutUIDTO.error_message_service_Generic,
           detail: error.toString() 
         });
@@ -234,7 +233,7 @@ export class CheckoutComponent implements OnInit {
         
       } catch (error: any) {
         this.messageService.add({ 
-          severity: 'error', 
+          severity: SeverityConstants.ERROR, 
           summary: '' + this.checkoutUIDTO.error_message_service_Generic,
           detail: error.toString() 
         });

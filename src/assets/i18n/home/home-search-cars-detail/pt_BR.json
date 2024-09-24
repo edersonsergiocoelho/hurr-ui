@@ -26,5 +26,7 @@
   "no_cars_found_message_HomeSearchCarsDetail": "Tente alterar seus filtros, ajustar suas datas ou explorar o mapa",
 
   "daily_rate_HomeSearchCarsDetail": "Preço:",
-  "excluding_taxes_and_fees_HomeSearchCarsDetail": "Sem Incluir Impostos E Taxas"
+  "excluding_taxes_and_fees_HomeSearchCarsDetail": "Sem Incluir Impostos E Taxas",
+
+  "no_image_HomeSearchCarsDetail": "Sem Imagem"
 }

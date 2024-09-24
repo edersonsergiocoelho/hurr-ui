@@ -104,6 +104,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
       this.customerVehicleDetailUIDTO.info_user_not_logged_in_CustomerVehicleDetail = translations['info_user_not_logged_in_CustomerVehicleDetail'];
 
       // Carrega as horas de início e verifica o usuário logado.
+      this.loadDateInit();
       this.loadHoursInit();
 
       const currentUser = this.sessionStorageService.getUser();
@@ -216,6 +217,19 @@ export class CustomerVehicleDetailComponent implements OnInit {
     return keys;
   }
 
+  loadDateInit() {
+
+    const today = moment().toDate();
+  
+    // Defina `today` como a data mínima
+    this.customerVehicleDetailUIDTO.today = today;
+  
+    // Inicialize `dateInit` com a data de hoje se estiver nulo ou for anterior à data mínima
+    if (!this.customerVehicleDetailUIDTO.dateInit || moment(this.customerVehicleDetailUIDTO.dateInit).isBefore(today)) {
+      this.customerVehicleDetailUIDTO.dateInit = today;
+    }
+  }
+
   loadHoursInit() {
     const now = new Date(); // Obtém a data e hora atuais
     const isToday = this.isSameDay(this.customerVehicleDetailUIDTO.dateInit, this.customerVehicleDetailUIDTO.today);
@@ -249,6 +263,11 @@ export class CustomerVehicleDetailComponent implements OnInit {
         return hourStr;
       }
     }).filter(hour => hour !== ''); // Filtra as horas vazias
+
+    if (this.customerVehicleDetailUIDTO.hoursInit != null && this.customerVehicleDetailUIDTO.hoursInit.length > 0) {
+      this.customerVehicleDetailUIDTO.dateInit = this.customerVehicleDetailUIDTO.dateInit;
+      this.customerVehicleDetailUIDTO.selectedHourInit = this.customerVehicleDetailUIDTO.hoursInit[0];
+    }
 
     this.ngModelChangeDateInit(); // Atualiza os modelos relacionados
   }

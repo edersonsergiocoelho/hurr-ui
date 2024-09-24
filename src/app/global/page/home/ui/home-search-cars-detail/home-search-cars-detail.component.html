@@ -52,7 +52,8 @@
               name="dateInit"
               [showIcon]="true" 
               [minDate]="homeSearchCarsDetailUIDTO.today"
-              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat">
+              [dateFormat]="homeSearchCarsDetailUIDTO.dateFormat"
+              (ngModelChange)="loadHoursInit()">
             </p-calendar>
           </div>
         </div>
@@ -60,7 +61,7 @@
         <div class="field">
           <div style="padding-top: 26px; padding-left: 10px;">
             <p-dropdown class="p-inputtext-lg" 
-              [options]="homeSearchCarsDetailUIDTO.hours" 
+              [options]="homeSearchCarsDetailUIDTO.hoursInit" 
               [(ngModel)]="homeSearchCarsDetailUIDTO.selectedHourInit"
               name="selectedHourInit">
             </p-dropdown>
@@ -207,7 +208,7 @@
             </div>
           </div>
 
-          <div class="col-12 xl:col-12">
+          <div class="card">
             
             <p-dataView [value]="homeSearchCarsDetailUIDTO.customerVehicles"
               [sortField]="homeSearchCarsDetailUIDTO.sortField" 
@@ -218,7 +219,9 @@
               [totalRecords]="homeSearchCarsDetailUIDTO.totalRecords" 
               (onLazyLoad)="search($event)">
 
-              <ng-template let-item pTemplate="listItem">
+              <ng-template pTemplate="list" let-item>
+                <div class="grid grid-nogutter">
+                <div class="col-12" *ngFor="let item of homeSearchCarsDetailUIDTO.customerVehicles; let first = first" class="col-12">
 
                 <article
                   class="flex flex-column md:flex-row w-full gap-3 p-3 border-round border-1 surface-border surface-card elemento-sobreposicao"
@@ -227,21 +230,45 @@
                   (click)="clickCustomerVehicle(item)">
 
                   <div class="relative">
-                    <img [src]="item.dataURI" alt="Customer Vehicle Image"
-                      class="border-round w-full h-full md:w-24rem md:h-14rem">
-                    <p *ngIf="item.unlimitedMileage"
+
+                    <ng-container *ngIf="item?.dataURI; else noCustomerVehicleImage">
+                      <img [src]="item.dataURI" alt="Customer Vehicle Image"
+                        class="border-round w-full h-full md:w-24rem md:h-14rem">
+                    </ng-container>
+                    
+                    <ng-template #noCustomerVehicleImage>
+                      <div class="border-round w-full h-full md:w-24rem md:h-14rem">
+                        <span
+                          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">
+                          {{'span_no_image_Generic'| translate}}
+                        </span>
+                      </div>
+                    </ng-template>
+
+                    <p *ngIf="item?.unlimitedMileage"
                       class="absolute px-2 py-1 border-round-lg text-sm font-normal text-black mt-0 mb-0"
                       style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); top: 3%; left: 3%; color: green;">
                       {{'unlimited_mileage_HomeSearchCarsDetail' | translate}}
                     </p>
-                    <p *ngIf="item.limitedMileage"
+                    <p *ngIf="item?.limitedMileage"
                       class="absolute px-2 py-1 border-round-lg text-sm font-normal text-black mt-0 mb-0"
                       style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); top: 3%; left: 3%; color: red;">
                       {{'limited_mileage_HomeSearchCarsDetail' | translate}}
                     </p>
 
-                    <img [src]="item.vehicle.vehicleBrand.dataURI" alt="Vehicle Brand Image"
-                      class="absolute border-round-lg mt-0 mb-0 px-2 py-1 md:w-5rem md:h-4rem" style="left: 80%;">
+                    <ng-container *ngIf="item?.vehicle?.vehicleBrand?.dataURI; else noBrandImage">
+                      <img [src]="item.vehicle.vehicleBrand.dataURI" alt="Vehicle Brand Image"
+                        class="absolute border-round-lg mt-0 mb-0 px-2 py-1 md:w-5rem md:h-4rem" style="top: -320%; left: 80%;">
+                    </ng-container>
+                    
+                    <ng-template #noBrandImage>
+                      <div class="absolute border-round-lg mt-0 mb-0 px-2 py-1 md:w-5rem md:h-4rem" style="top: 0; right: 0; background-color: #f3f4f6;">
+                        <span
+                          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 10px; text-align: center;">
+                          {{'span_no_image_Generic'| translate}}
+                        </span>
+                      </div>
+                    </ng-template>
                       
                   </div>
 
@@ -249,18 +276,18 @@
                     <div class="flex w-full justify-content-between align-items-center flex-wrap gap-3">
 
                       <p class="font-semibold text-2xl mt-0 mb-0">
-                        {{item.vehicle.vehicleName + ' ' + item.yearOfTheCar}}
+                        {{item?.vehicle?.vehicleName + ' ' + item?.yearOfTheCar}}
                       </p>
 
                       <div class="col-12 lg:col-4 flex align-items-start justify-content-center py-5 lg:py-0">
                         <div class="mt-3 text-center">
-                          <ng-container *ngIf="item.averageRating != null">
+                          <ng-container *ngIf="item?.averageRating != null">
                             <i *ngFor="let star of [1, 2, 3, 4, 5]" class="pi text-1xl mr-1" [ngClass]="{
                               'pi-star-fill text-yellow-500': star <= item.averageRating,
                               'pi-star text-300': star > item.averageRating
                             }"></i>
                           </ng-container>
-                          <ng-container *ngIf="item.averageRating === null">
+                          <ng-container *ngIf="item?.averageRating === null">
                             <i *ngFor="let star of [1, 2, 3, 4, 5]" class="pi pi-star text-300 mr-1"></i>
                           </ng-container>
                         </div>
@@ -268,43 +295,97 @@
 
                     </div>
 
+                    <!--
                     <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
                       <img [src]="item.vehicleModel.vehicleCategory.dataURI" alt="Icon Vehicle Category"
                           class="border-round w-full h-full md:w-2rem md:h-2rem">
                       <p style="margin: 0;">
                         {{'vehicle_model_HomeSearchCarsDetail' | translate}} 
-                        {{item.vehicleModel.vehicleModelName}}
+                        {{item.vehicleModel?.vehicleModelName}}
                       </p>
+                    </div>
+                    -->
+
+                    <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
+                      <ng-container *ngIf="item.vehicleModel?.vehicleCategory?.dataURI; else noCategory">
+                        <img [src]="item.vehicleModel?.vehicleCategory?.dataURI" alt="Icon Vehicle Category"
+                          class="border-round w-full h-full md:w-2rem md:h-2rem">
+                        <p style="margin: 0;">
+                          {{ 'vehicle_model_HomeSearchCarsDetail' | translate }} 
+                          {{ item.vehicleModel?.vehicleModelName }}
+                        </p>
+                      </ng-container>
+                      <ng-template #noCategory>
+                        <div class="border-round w-full h-full md:w-2rem md:h-2rem">
+                          <span
+                            style="transform: translate(-50%, -50%); color: black; font-size: 8px; text-align: center;">
+                            {{'span_no_image_Generic'| translate}}
+                          </span>
+                        </div>
+                        <p style="margin: 0;">
+                          {{ 'vehicle_model_HomeSearchCarsDetail' | translate }} 
+                          {{ item.vehicleModel?.vehicleModelName }}
+                        </p>
+                      </ng-template>
                     </div>
 
                     <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
                       <div style="display: flex; align-items: center;">
-                        <img [src]="item.vehicleFuelType.dataURI" alt="Icon Vehicle Fuel Type"
-                          class="border-round w-full h-full md:w-2rem md:h-2rem">
-                        <p style="margin: 0; margin-left: 5px;">
-                          {{'vehicle_fuel_type_HomeSearchCarsDetail' | translate}} 
-                          {{item.vehicleFuelType.vehicleFuelTypeName }}
-                        </p>
-                      </div>
-                      <div style="margin-left: auto; display: flex; align-items: center;">
-                        <img [src]="item.vehicleTransmission.dataURI" alt="Icon Vehicle Transmission"
+                        <ng-container *ngIf="item?.vehicleFuelType?.dataURI; else noFuelType">
+                          <img [src]="item?.vehicleFuelType?.dataURI" alt="Icon Vehicle Fuel Type"
                             class="border-round w-full h-full md:w-2rem md:h-2rem">
-                        <p style="margin: 0; margin-left: 5px;">
-                          {{'vehicle_transmission_HomeSearchCarsDetail' | translate}} 
-                          {{item.vehicleTransmission.vehicleTransmissionName }}
-                        </p>
+                          <p style="margin: 0; margin-left: 5px;">
+                            {{ 'vehicle_fuel_type_HomeSearchCarsDetail' | translate }} 
+                            {{ item.vehicleFuelType?.vehicleFuelTypeName }}
+                          </p>
+                        </ng-container>
+                        <ng-template #noFuelType>
+                          <div class="border-round w-full h-full md:w-2rem md:h-2rem">
+                            <span
+                              style="transform: translate(-50%, -50%); color: black; font-size: 8px; text-align: center;">
+                              {{'span_no_image_Generic'| translate}}
+                            </span>
+                          </div>
+                          <p style="margin: 0; margin-left: 5px;">
+                            {{ 'vehicle_fuel_type_HomeSearchCarsDetail' | translate }} 
+                            {{ item.vehicleFuelType?.vehicleFuelTypeName }}
+                          </p>
+                        </ng-template>
                       </div>
-                    </div>
+
+                      <div style="margin-left: auto; display: flex; align-items: center;">
+                        <ng-container *ngIf="item?.vehicleTransmission?.dataURI; else noTransmission">
+                          <img [src]="item?.vehicleTransmission?.dataURI" alt="Icon Vehicle Transmission"
+                            class="border-round w-full h-full md:w-2rem md:h-2rem">
+                          <p style="margin: 0; margin-left: 5px;">
+                            {{ 'vehicle_transmission_HomeSearchCarsDetail' | translate }} 
+                            {{ item?.vehicleTransmission?.vehicleTransmissionName }}
+                          </p>
+                        </ng-container>
+                        <ng-template #noTransmission>
+                          <div class="border-round w-full h-full md:w-2rem md:h-2rem">
+                            <span
+                              style="transform: translate(-50%, -50%); color: black; font-size: 8px; text-align: center;">
+                              {{'span_no_image_Generic'| translate}}
+                            </span>
+                          </div>
+                          <p style="margin: 0; margin-left: 5px;">
+                            {{ 'vehicle_transmission_HomeSearchCarsDetail' | translate }} 
+                            {{ item?.vehicleTransmission?.vehicleTransmissionName }}
+                          </p>
+                        </ng-template>
+                      </div>
+                    </div>                    
 
                     <div class="text-right xl:h-2rem mt-auto">
                       <p class="text-base text-900 mt-0 mb-1">
                         <span class="font-medium">
-                          {{ 'currency_brl_Generic' | translate }} {{(item.dailyRate | number:'1.2-2')}} / {{ 'day_HomeSearchCarsDetail' | translate }}
+                          {{ 'currency_brl_Generic' | translate }} {{(item?.dailyRate | number:'1.2-2')}} / {{ 'day_HomeSearchCarsDetail' | translate }}
                         </span>
                       </p>
                       <p class="text-sm text-700 mt-0 mb-1">
                         <span class="font-medium" style="text-decoration: underline;">
-                          {{ 'currency_brl_Generic' | translate }} {{(item.dailyRate | number:'1.2-2')}} / {{ 'excluding_taxes_and_fees_HomeSearchCarsDetail' | translate }}
+                          {{ 'currency_brl_Generic' | translate }} {{(item?.dailyRate | number:'1.2-2')}} / {{ 'excluding_taxes_and_fees_HomeSearchCarsDetail' | translate }}
                         </span>
                       </p>
                     </div>
@@ -312,13 +393,15 @@
                     <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
                       <p class="text-base flex align-items-center text-900 mt-0 mb-1">
                         <i class="pi pi-map mr-2" style="color: red;"></i>
-                        <span class="font-medium">{{item.distance}}</span>
+                        <span class="font-medium">{{item?.distance}}</span>
                       </p>
                     </div>
 
                   </div>
                 </article>
 
+              </div>
+              </div>
               </ng-template>
             </p-dataView>
           </div>

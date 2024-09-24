@@ -53,6 +53,8 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
 
     this.homeSearchCarsDetailUIDTO = new HomeSearchCarsDetailUIDTO(); // Inicializa o DTO para a página.
 
+    this.homeSearchCarsDetailUIDTO.today = moment().toDate(); // Define a data atual no DTO.
+
     const state = location.getState() as any; // Obtém o estado da localização atual da navegação.
 
     if (state != null) {
@@ -75,8 +77,6 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
   }
 
   async resetRegisterForm () {
-
-    this.homeSearchCarsDetailUIDTO.today = moment().toDate(); // Define a data atual no DTO.
 
     if (this.homeSearchCarsDetailUIDTO.place && this.homeSearchCarsDetailUIDTO.place.formatted_address) {
 
@@ -109,9 +109,12 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
       this.homeSearchCarsDetailUIDTO.currency_brl_Generic = translations['currency_brl_Generic']; // Define o símbolo da moeda no DTO.
       this.homeSearchCarsDetailUIDTO.daily_rate_HomeSearchCarsDetail = translations['daily_rate_HomeSearchCarsDetail']; // Define a taxa diária no DTO.
       this.homeSearchCarsDetailUIDTO.excluding_taxes_and_fees_HomeSearchCarsDetail = translations['excluding_taxes_and_fees_HomeSearchCarsDetail']; // Define a mensagem de exclusão de impostos e taxas no DTO.
-
+      this.homeSearchCarsDetailUIDTO.span_no_image_Generic = translations['span_no_image_Generic']; // Define a mensagem de sem imagem no DTO.
+      
       // Carregar os outros métodos normalmente
       this.loadPlace(); // Carrega o local.
+      this.loadDateInit();
+      this.loadHoursInit();
 
       const [vehicleBrandServiceFindAll, vehicleCategoryServiceFindAll] = await Promise.all([
         firstValueFrom(this.vehicleBrandService.getAllVehicleBrands().pipe(first())), // Obtém todas as marcas de veículos.
@@ -152,7 +155,8 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
       'success_message_service_Generic',
       'currency_brl_Generic',
       'daily_rate_HomeSearchCarsDetail',
-      'excluding_taxes_and_fees_HomeSearchCarsDetail'
+      'excluding_taxes_and_fees_HomeSearchCarsDetail',
+      'span_no_image_Generic'
     ];
     return keys;
   }
@@ -172,6 +176,64 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
         this.getGeocoderLatitudeLongitude(); // Obtém a latitude e longitude para o local.
       });
     });  
+  }
+
+  loadDateInit() {
+
+    const today = moment().toDate();
+  
+    // Defina `today` como a data mínima
+    this.homeSearchCarsDetailUIDTO.today = today;
+  
+    // Inicialize `dateInit` com a data de hoje se estiver nulo ou for anterior à data mínima
+    if (!this.homeSearchCarsDetailUIDTO.dateInit || moment(this.homeSearchCarsDetailUIDTO.dateInit).isBefore(today)) {
+      this.homeSearchCarsDetailUIDTO.dateInit = today;
+    }
+  }
+
+  loadHoursInit() {
+
+    const now = new Date();
+    const isToday = this.isSameDay(this.homeSearchCarsDetailUIDTO.dateInit, this.homeSearchCarsDetailUIDTO.today);
+
+    // Verifica se o horário atual é 23:30 ou mais tarde
+    if (now.getHours() === 23 && now.getMinutes() >= 30) {
+      this.homeSearchCarsDetailUIDTO.dateInit = new Date();
+      this.homeSearchCarsDetailUIDTO.dateInit.setDate(this.homeSearchCarsDetailUIDTO.dateInit.getDate() + 1);
+    }
+
+    // Calcula hoursInit com base na dataInit atualizada
+    this.homeSearchCarsDetailUIDTO.hoursInit = Array.from({ length: 48 }, (_, index) => {
+      const hour = Math.floor(index / 2);
+      const minute: number = index % 2 === 0 ? 0 : 30;
+      const hourStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+
+      // Mostra todas as horas se dateInit for amanhã ou mais tarde
+      if (this.homeSearchCarsDetailUIDTO.dateInit > now || !isToday) {
+        return hourStr;
+      }
+
+      // Caso contrário, mostra apenas as horas futuras de hoje
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+      if (hour < currentHour || (hour === currentHour && minute < currentMinute)) {
+        return ''; // Para horas passadas, retorna uma string vazia
+      } else {
+        return hourStr;
+      }
+    }).filter(hour => hour !== ''); // Filtra as horas vazias
+
+    if (this.homeSearchCarsDetailUIDTO.hoursInit != null && this.homeSearchCarsDetailUIDTO.hoursInit.length > 0) {
+      this.homeSearchCarsDetailUIDTO.dateInit = this.homeSearchCarsDetailUIDTO.dateInit;
+      this.homeSearchCarsDetailUIDTO.selectedHourInit = this.homeSearchCarsDetailUIDTO.hoursInit[0];
+    }
+  }
+
+  // Método auxiliar para verificar se duas datas são do mesmo dia
+  private isSameDay(date1: Date, date2: Date): boolean {
+    return date1.getFullYear() === date2.getFullYear() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getDate() === date2.getDate();
   }
 
   initializeMap() {
@@ -571,6 +633,7 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
       // Realiza a geocodificação do endereço.
       geocoder.geocode({ address: address }, (results, status) => {
         if (status === 'OK' && results && results[0] && results[0].geometry) {
+
           const latLng = results[0].geometry.location;
           const position: google.maps.LatLngLiteral = { lat: latLng.lat(), lng: latLng.lng() };
   
@@ -638,12 +701,16 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
           });
   
           // Cria o conteúdo da janela de informações do marcador.
-          const content = `<img src="${customerVehicle.dataURI}" alt="Customer Vehicle Image" class="border-round w-full h-full md:w-16rem md:h-10rem">
-          <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
-            <strong style="font-size: 1.30em;">
-              ${customerVehicle.vehicle.vehicleBrand.vehicleBrandName} ${customerVehicle.vehicle.vehicleName} ${customerVehicle.yearOfTheCar}
-            </strong>
-          </div>
+          const content = `
+          ${customerVehicle.dataURI ? 
+            `<img src="${customerVehicle.dataURI}" alt="Customer Vehicle Image" class="border-round w-full h-full md:w-16rem md:h-10rem">` 
+            : 
+            `<div class="border-round w-full h-full md:w-16rem md:h-10rem" style="background-color: #f3f4f6;">
+              <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">
+                ${this.homeSearchCarsDetailUIDTO.span_no_image_Generic}
+              </span>
+            </div>`
+          }
           <div class="flex flex-wrap justify-content-between xl:h-2rem mt-auto">
             <p class="text-base flex align-items-center text-900 mt-0 mb-1">
               <i class="pi pi-map mr-2" style="color: red;"></i>

@@ -106,7 +106,7 @@ export class UserLoginComponent {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
         summary: this.userLoginUIDTO.error_message_service_Generic,
-        detail: error.error.message
+        detail: error.error?.message || error.toString()
       });
 
     } finally {
@@ -170,7 +170,7 @@ export class UserLoginComponent {
           this.messageService.add({ 
             severity: SeverityConstants.WARN, 
             summary: this.userLoginUIDTO.warn_message_service_Generic, 
-            detail: error.error.message
+            detail: error.error?.message || error.toString()
           });
         }
 
@@ -179,7 +179,7 @@ export class UserLoginComponent {
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
             summary: this.userLoginUIDTO.error_message_service_Generic, 
-            detail: error.error.message
+            detail: error.error?.message || error.toString()
           });
         }
 

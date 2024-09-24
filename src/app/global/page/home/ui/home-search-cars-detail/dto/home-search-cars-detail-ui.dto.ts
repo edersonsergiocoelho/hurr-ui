@@ -13,6 +13,7 @@ export class HomeSearchCarsDetailUIDTO extends TranslateSeverityDTO {
   selectedHourInit?: string = '10:00';
   selectedHourEnd?: string = '10:00';
 
+  hoursInit: string[];
   hours: string[] = Array.from({ length: 48 }, (_, index) => {
     const hour = Math.floor(index / 2);
     const minute = index % 2 === 0 ? '00' : '30';
@@ -32,7 +33,6 @@ export class HomeSearchCarsDetailUIDTO extends TranslateSeverityDTO {
 
   // DataView
   customerVehicles: any[];
-
   totalRecords = 0;
 
   sortOrder!: number;
@@ -56,6 +56,7 @@ export class HomeSearchCarsDetailUIDTO extends TranslateSeverityDTO {
   currency_brl_Generic: string;
   daily_rate_HomeSearchCarsDetail: string;
   excluding_taxes_and_fees_HomeSearchCarsDetail: string;
+  span_no_image_Generic: string;
 
   getDefaultIcon(price: string): HTMLElement {
     const div = document.createElement('div');

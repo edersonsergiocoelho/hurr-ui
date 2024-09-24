@@ -35,6 +35,7 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/generic/message/',
   '/assets/i18n/generic/placeholder/',
   '/assets/i18n/generic/small/',
+  '/assets/i18n/generic/span/',
   '/assets/i18n/generic/table/',
   '/assets/i18n/generic/tooltip/',
 

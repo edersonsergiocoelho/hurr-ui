@@ -139,6 +139,10 @@ export class HomeSearchCarsComponent implements OnInit {
         return hourStr;
       }
     }).filter(hour => hour !== ''); // Filtra as horas vazias
+
+    if (this.homeSearchCarsUIDTO.hoursInit != null && this.homeSearchCarsUIDTO.hoursInit.length > 0) {
+      this.homeSearchCarsUIDTO.selectedHourInit = this.homeSearchCarsUIDTO.hoursInit[0];
+    }
   }
 
   // Método auxiliar para verificar se duas datas são do mesmo dia
