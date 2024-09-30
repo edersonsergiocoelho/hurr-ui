@@ -23,6 +23,15 @@ export class CustomerVehicleBookingService {
     );
   }
 
+  findByPaymentId(paymentId: number): Observable<HttpResponse<CustomerVehicleBooking>> {
+    const url = `${this.apiUrl}/mercado-pago/payment/${paymentId}`;
+    return this.httpClient.get<CustomerVehicleBooking>(url, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleBooking>) => {
+        return response;
+      })
+    );
+  }
+
   findAll(): Observable<HttpResponse<CustomerVehicleBooking[]>> {
     return this.httpClient.get<CustomerVehicleBooking[]>(this.apiUrl, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleBooking[]>) => {

@@ -7,26 +7,59 @@
     </p>
     <div style="height: 3px; background: linear-gradient(90deg, #2196F3 0%, rgba(33, 150, 243, 0) 50%);"></div>
     <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between py-5">
+      
       <div class="mb-3 sm:mb-0">
         <span class="font-medium text-xl text-900 mr-2">{{'booking_CustomerVehicleBookingSuccess' | translate}}</span>
-        <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null"
-          class="font-medium text-xl text-blue-500">{{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.booking}}
+        <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null" class="font-medium text-xl text-blue-500">
+          {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.booking}}
         </span>
       </div>
-      <div><button pbutton="" pripple="" label="Details" icon="pi pi-list"
-          class="p-element p-ripple p-button-outlined p-button-secondary mr-2 p-button p-component"><span
-            class="p-button-icon p-button-icon-left pi pi-list" aria-hidden="true"></span><span
-            class="p-button-label">Details</span><span class="p-ink"></span></button><button pbutton="" pripple=""
+
+      <div>
+        <button pbutton="" pripple="" 
+          label="Details" icon="pi pi-list"
+          class="p-element p-ripple p-button-outlined p-button-secondary mr-2 p-button p-component">
+          <span class="p-button-icon p-button-icon-left pi pi-list" 
+            aria-hidden="true">
+          </span>
+          <span class="p-button-label">
+            {{'span_button_label_see_details_Generic' | translate}}            
+          </span>
+          <span class="p-ink"></span>
+        </button>
+        <button pbutton="" pripple=""
           label="Print" icon="pi pi-print"
-          class="p-element p-ripple p-button-outlined p-button-secondary p-button p-component"><span
-            class="p-button-icon p-button-icon-left pi pi-print" aria-hidden="true"></span><span
-            class="p-button-label">Print</span><span class="p-ink"></span></button></div>
+          (click)="printPage()"
+          class="p-element p-ripple p-button-outlined p-button-secondary p-button p-component">
+          <span class="p-button-icon p-button-icon-left pi pi-print" 
+            aria-hidden="true">
+          </span>
+          <span class="p-button-label">
+            {{'span_button_label_print' | translate}}
+          </span>
+          <span class="p-ink"></span>
+        </button>
+      </div>
+
     </div>
     <div class="border-round surface-border border-1">
       <ul class="list-none p-0 m-0">
-        <li class="p-3 border-bottom-1 surface-border flex align-items-start sm:align-items-center"><img
-            src="assets/images/blocks/ecommerce/ordersummary/order-summary-1-1.png"
-            class="w-3rem sm:w-8rem flex-shrink-0 mr-3 shadow-2">
+        <li class="p-3 border-bottom-1 surface-border flex align-items-start sm:align-items-center">
+          
+          <ng-container *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleFilePhoto != null; else noCustomerVehicleImage">
+            <img [src]="customerVehicleBookingSuccessUIDTO.customerVehicleFilePhoto.dataURI" alt="Customer Vehicle Image"
+              class="w-3rem sm:w-8rem flex-shrink-0 mr-3 shadow-2">
+          </ng-container>
+          
+          <ng-template #noCustomerVehicleImage>
+            <div class="w-3rem sm:w-8rem flex-shrink-0 mr-3 shadow-2" style="position: relative;">
+              <span
+                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">
+                {{'span_no_image_Generic' | translate}}
+              </span>
+            </div>
+          </ng-template>
+
           <div class="flex flex-column">
 
             <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null && 
@@ -43,116 +76,126 @@
               {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerVehicle.vehicleColor.vehicleColorName}}
             </span>
 
-            <!--
-              <span class="text-900 font-medium">Quantity 1</span>
-              -->
           </div>
           <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null"
-            class="text-900 font-medium text-lg ml-auto">R$
-            {{decimalPipe.formatR$(customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerVehicle.dailyRate)}}</span>
+            class="text-900 font-medium text-lg ml-auto">
+            {{'currency_brl_Generic' | translate}} {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}}
+          </span>
         </li>
       </ul>
     </div>
     <div class="flex flex-wrap mt-5 pb-3">
-      <div class="w-full lg:w-6 pl-3"><span
-          class="font-medium text-900">{{'billing_address_CustomerVehicleBookingSuccess' | translate}}</span>
-        <div class="flex flex-column text-900 mt-3 mb-5"><span class="mb-1">Celeste Slater</span><span
-            class="mb-1">606-3727 Ullamcorper. Roseville NH 11523</span><span>(786) 713-8616</span></div><span
-          class="font-medium text-900">{{'payment_CustomerVehicleBookingSuccess' | translate}}</span>
+      <div class="w-full lg:w-6 pl-3" *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null &&
+                                             customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling != null &&
+                                             customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address != null">
 
-        <div *ngIf="customerVehicleBookingSuccessUIDTO.payment && customerVehicleBookingSuccessUIDTO.payment.paymentTypeId &&
-            (customerVehicleBookingSuccessUIDTO.payment.paymentTypeId == 'credit_card' || 
-            customerVehicleBookingSuccessUIDTO.payment.paymentTypeId == 'debit_card')"
+        <span class="font-medium text-900">{{'billing_address_CustomerVehicleBookingSuccess' | translate}}</span>
+        <div class="flex flex-column text-900 mt-3 mb-5">
+
+          <span class="mb-1">
+            {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customer.firstName + ' ' + customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customer.lastName}}
+          </span>
+
+          <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.complement == null" class="mb-1">{{
+            customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.streetAddress + ', ' + customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.number + ', ' +
+            customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.city.cityName + ', ' + customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.state.stateName + ', ' + 
+            customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.country.countryName }}
+          </span>
+
+          <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.complement != null" class="mb-1">{{
+            customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.streetAddress + ', ' + customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.number + ', ' +
+            customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.state.stateName + ', ' + customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.complement + ', ' + 
+            customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.city.cityName + ', ' + customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerAddressBilling.address.country.countryName }}
+          </span>
+
+        </div>
+        <span class="font-medium text-900">{{'payment_CustomerVehicleBookingSuccess' | translate}}
+        </span>
+
+        <div *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData &&
+            (customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'credit_card' || 
+            customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'debit_card')"
           class="flex align-items-center mt-3">
 
-          <img *ngIf="customerVehicleBookingSuccessUIDTO.payment != null && 
-              customerVehicleBookingSuccessUIDTO.payment.paymentMethodId == 'amex'"
+          <img *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'amex'"
             src="assets/images/credit-card/amex.png" class="w-6rem mr-3">
 
-          <img *ngIf="customerVehicleBookingSuccessUIDTO.payment != null && 
-              customerVehicleBookingSuccessUIDTO.payment.paymentMethodId == 'mastercard'"
+          <img *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'master'"
             src="assets/images/credit-card/mastercard.png" class="w-6rem mr-3">
 
-          <img *ngIf="customerVehicleBookingSuccessUIDTO.payment != null && 
-              customerVehicleBookingSuccessUIDTO.payment.paymentMethodId == 'visa'"
+          <img *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'visa'"
             src="assets/images/credit-card/visa.png" class="w-6rem mr-3">
 
           <div class="flex flex-column">
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.payment != null &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentMethodId == 'amex' &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentTypeId == 'credit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'amex' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'credit_card'"
               class="text-900 mb-1">{{'amex_credit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.payment != null &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentMethodId == 'amex' &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentTypeId == 'debit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'amex' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'debit_card'"
               class="text-900 mb-1">{{'amex_debit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.payment != null &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentMethodId == 'visa' &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentTypeId == 'credit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'visa' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'credit_card'"
               class="text-900 mb-1">{{'visa_credit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.payment != null &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentMethodId == 'visa' &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentTypeId == 'debit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'visa' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'debit_card'"
               class="text-900 mb-1">{{'visa_debit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.payment != null &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentMethodId == 'mastercard' &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentTypeId == 'credit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'master' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'credit_card'"
               class="text-900 mb-1">{{'mastercard_credit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.payment != null &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentMethodId == 'visa' &&
-                customerVehicleBookingSuccessUIDTO.payment.paymentTypeId == 'mastercard'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'visa' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'master'"
               class="text-900 mb-1">{{'mastercard_debit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.payment != null" class="text-900 font-medium">
-              {{ customerVehicleBookingSuccessUIDTO.payment.card.firstSixDigits.slice(0, 4) }}
-              {{ customerVehicleBookingSuccessUIDTO.payment.card.firstSixDigits.slice(4, 6) }}** ****
-              {{ customerVehicleBookingSuccessUIDTO.payment.card.lastFourDigits }}
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.card != null" class="text-900 font-medium">
+              {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.card.firstSixDigits.slice(0, 4) }}
+              {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.card.firstSixDigits.slice(4, 6) }}** ****
+              {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.card.lastFourDigits }}
             </span>
           </div>
 
         </div>
       </div>
+
       <div class="w-full lg:w-6 pl-3 lg:pl-0 lg:pr-3 flex align-items-end mt-5 lg:mt-0">
         <ul class="list-none p-0 m-0 w-full">
-          <li class="mb-3"><span class="font-medium text-900">{{'summary_CustomerVehicleBookingSuccess' |
-              translate}}</span></li>
+
+          <li class="mb-3">
+            <span class="font-medium text-900">
+              {{'summary_CustomerVehicleBookingSuccess' | translate}}
+            </span>
+          </li>
+
           <li class="flex justify-content-between mb-3">
             <span class="text-900">{{'subtotal_CustomerVehicleBookingSuccess' | translate}}
             </span>
             <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null"
               class="text-900 font-medium text-lg">
-              R$ {{
-              decimalPipe.formatR$(customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerVehicle.dailyRate)
-              }} x {{ customerVehicleBookingSuccessUIDTO.days }} {{ 'days_Cart_Checkout' | translate }}
+              {{'currency_brl_Generic' | translate}} 
+              {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}} x {{ customerVehicleBookingSuccessUIDTO.days }} {{ 'days_Cart_Checkout' | translate }}
             </span>
           </li>
-          <!--
-            <li class="flex justify-content-between mb-3"><span class="text-900">Shipping</span><span
-                class="text-900 font-medium text-lg">$5.00</span></li>
-            <li class="flex justify-content-between mb-3"><span class="text-900">Tax</span><span
-                class="text-900 font-medium text-lg">$4.00</span>
-            </li>
-            -->
+
           <li class="flex justify-content-between border-top-1 surface-border py-3">
             <span class="text-900 font-medium">{{'total_CustomerVehicleBookingSuccess' | translate}}
             </span>
             <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null"
               class="text-900 font-bold text-lg">
-              R$ {{decimalPipe.formatR$(customerVehicleBookingSuccessUIDTO.customerVehicleBooking.totalBookingValue)}}
+              {{'currency_brl_Generic' | translate}} {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.totalBookingValue | number:'1.2-2'}}
             </span>
           </li>
+
         </ul>
       </div>
     </div>

@@ -1,6 +1,7 @@
+import { TranslateSeverityDTO } from "src/app/core/translate/dto/translate-severity-dto.dto";
 import { CustomerVehicleBooking } from "../../../entity/customer-vehicle-booking.entity";
 
-export class CustomerVehicleBookingSuccessUIDTO {
+export class CustomerVehicleBookingSuccessUIDTO extends TranslateSeverityDTO {
 
   // Parâmetros Da URL
   collectionId: string | null = null;
@@ -15,15 +16,9 @@ export class CustomerVehicleBookingSuccessUIDTO {
   processingMode: string | null = null;
   merchantAccountId: string | null = null;
 
-  customerVehicleBooking: CustomerVehicleBooking;
+  // 
   days: any;
-
-  payment: any;
-  paymentMetadata: any;
-
-  preference: any;
-  preferenceMetadata: any;
-
-  // Messages
-  error_message_service_Generic: string;
+  
+  customerVehicleBooking: CustomerVehicleBooking;
+  customerVehicleFilePhoto: any;
 }
