@@ -1,9 +1,12 @@
+import { VehicleCategory } from "../../vehicle-category/entity/vehicle-category.entity";
+import { Vehicle } from "../../vehicle/entity/vehicle.entity";
+
 export interface VehicleModel {
   
   vehicleModelId: string;
   vehicleModelName: string;
-  vehicleId: string;
-  vehicleCategoriesId: string;
+  vehicle: Vehicle;
+  vehicleCategory: VehicleCategory;
   createdDate: Date;
   modifiedDate: Date;
   enabled: boolean;

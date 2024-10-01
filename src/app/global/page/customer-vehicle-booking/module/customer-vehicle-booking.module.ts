@@ -23,6 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { RatingModule } from 'primeng/rating';
 
     // PrimeNG
     ButtonModule,
+    ConfirmDialogModule,
     DataViewModule,
     DividerModule,
     DropdownModule,

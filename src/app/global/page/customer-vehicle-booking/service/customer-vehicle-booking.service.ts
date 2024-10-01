@@ -123,6 +123,15 @@ export class CustomerVehicleBookingService {
     );
   }
 
+  cancelBooking(customerVehicleBooking: CustomerVehicleBooking): Observable<HttpResponse<CustomerVehicleBooking>> {
+    const url = `${this.apiUrl}/cancel-booking/${customerVehicleBooking.customerVehicleBookingId}`;
+    return this.httpClient.put<CustomerVehicleBooking>(url, customerVehicleBooking, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleBooking>) => {
+        return response;
+      })
+    );
+  }
+
   delete(customerVehicleBookingId: string): Observable<HttpResponse<void> | null> {
     const url = `${this.apiUrl}/${customerVehicleBookingId}`;
     return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(

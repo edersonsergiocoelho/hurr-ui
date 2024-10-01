@@ -50,7 +50,7 @@ export class VehicleModelService {
   }
 
   updateVehicleModel(vehicle: VehicleModel): Observable<HttpResponse<VehicleModel>> {
-    const url = `${this.apiUrl}/${vehicle.vehicleId}`;
+    const url = `${this.apiUrl}/${vehicle.vehicle.vehicleId}`;
     return this.http.put<VehicleModel>(url, vehicle, { observe: 'response' }).pipe(
       map((response: HttpResponse<VehicleModel>) => {
         return response;

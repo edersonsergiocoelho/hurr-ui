@@ -1,6 +1,7 @@
 {
   "message_message_service_Generic": "Tem Certeza De Que Deseja Excluir O Item Selecionado?",
   "message_all_message_service_Generic": "Tem Certeza De Que Deseja Excluir Os Itens Selecionados?",
+  "message_cancel_booking_message_service_Generic": "Tem Certeza De Que Deseja Cancelar A Reserva?",
   "header_message_service_Generic": "Confirmação",
 
   "accept_label_message_service_Generic": "Sim",

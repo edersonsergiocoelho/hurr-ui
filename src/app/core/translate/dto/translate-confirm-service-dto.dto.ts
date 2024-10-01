@@ -13,6 +13,7 @@ export class TranslateConfirmServiceDTO {
   delete_all_success_message_service_Generic: string;
 
   message_message_service_Generic: string;
+  message_cancel_booking_message_service_Generic: string;
   message_all_message_service_Generic: string;
   header_message_service_Generic: string;
 

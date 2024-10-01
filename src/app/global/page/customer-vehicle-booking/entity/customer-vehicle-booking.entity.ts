@@ -26,4 +26,7 @@ export class CustomerVehicleBooking {
   totalBookingValue: number; // Valor total da reserva
   mercadoPagoPaymentId: number; // Identificador do pagamento
   mercadoPagoPaymentData?: any; // Dados de pagamento em JSON (equivalente ao campo JSONB em Java)
+  createdDate: string;
+  modifiedDate?: string;
+  enabled: boolean;
 }
