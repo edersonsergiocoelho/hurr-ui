@@ -13,11 +13,17 @@
 
   <div class="card">
 
-    <p-dataView [value]="customerVehicleBookingSearchUIDTO.customerVehicleBookings"
+    <p-dataView 
+      [value]="customerVehicleBookingSearchUIDTO.customerVehicleBookings"
+      [totalRecords]="customerVehicleBookingSearchUIDTO.totalRecords" 
       [sortField]="customerVehicleBookingSearchUIDTO.sortField"
       [sortOrder]="customerVehicleBookingSearchUIDTO.sortOrder"
-      [totalRecords]="customerVehicleBookingSearchUIDTO.totalRecords" [rows]="5" [showCurrentPageReport]="true"
-      [paginator]="true" lazy="true" (onLazyLoad)="search($event)">
+      [rows]="5" 
+      [showCurrentPageReport]="true"
+      [paginator]="true" 
+      currentPageReportTemplate="{{'table_current_page_report_template_showing_Generic' | translate}} {first} {{'table_current_page_report_template_to_Generic' | translate}} {last} {{'table_current_page_report_template_of_Generic' | translate}} {totalRecords} {{'table_current_page_report_template_records_Generic' | translate}}"
+      lazy="true"
+      (onLazyLoad)="search($event)">
 
       <ng-template pTemplate="header">
         <div class="flex flex-column md:flex-row md:justify-content-between">
@@ -146,8 +152,8 @@
                       <i class="pi pi-check"></i>
                     </span>
                     <span class="text-green-600">
-                      {{'label_booking_delivery_date_CustomerVehicleBookingSearch' | translate}}
-                      {{item.bookingDeliveryDate | date:'dd/MM/yyyy HH:mm:ss'}}
+                      {{'label_reservation_start_date_CustomerVehicleBookingSearch' | translate}}
+                      {{item.reservationStartDate | date:'dd/MM/yyyy' }} {{ item.reservationStartTime }}
                     </span>
                   </div>
                   

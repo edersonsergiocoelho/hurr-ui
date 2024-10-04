@@ -1,0 +1,16 @@
+{
+  "title_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Check-In",
+  "label_booking_start_date_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Data Início Da Reserva: ",
+  "label_booking_end_date_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Data Final Da Reserva: ",
+  "label_daily_rate_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Preço Da Diária: ",
+  "label_total_booking_value_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Total Da Reserva:",
+  "label_unlimited_mileage_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Tipo De Reserva: Ilimitado",
+  "label_limited_mileage_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Tipo De Reserva: Limitado",
+  "label_limited_mileage_included_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Quilometragem Limitada Incluída:",
+  "label_limited_mileage_value_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Valor Da Quilometragem Adicional:",
+  "label_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Quilometragem Inicial",
+  "placeholder_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Informe A Quilometragem Inicial Do Veículo",
+
+  "check_in_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Check-In Efetuado Com Sucesso.",
+  "check_in_detail_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Check-In Efetuado Com Sucesso. As Informações Do Veículo E Da Reserva Foram Processadas Corretamente E Já Estão Disponíveis."
+}

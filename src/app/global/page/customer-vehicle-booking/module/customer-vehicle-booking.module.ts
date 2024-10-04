@@ -17,13 +17,14 @@ import { CustomerVehicleBookingSuccessComponent } from '../ui/customer-vehicle-b
 import { CustomerVehicleBookingCustomerVehicleComponent } from '../ui/customer-vehicle-booking-customer-vehicle/customer-vehicle-booking-customer-vehicle.component';
 import { CustomerVehicleBookingCustomerVehicleSearchComponent } from '../ui/customer-vehicle-booking-customer-vehicle-search/customer-vehicle-booking-customer-vehicle-search.component';
 import { DialogService } from 'primeng/dynamicdialog';
-import { CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog.component';
-import { CustomerVehicleBookingCustomerVehicleDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-dynamic-dialog/customer-vehicle-booking-customer-vehicle-dynamic-dialog.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog.component';
+import { CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     CustomerVehicleBookingSearchComponent,
     CustomerVehicleBookingSuccessComponent,
     CustomerVehicleBookingCustomerVehicleComponent,
-    CustomerVehicleBookingCustomerVehicleDynamicDialogComponent,
-    CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent,
+    CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent,
+    CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent,
     CustomerVehicleBookingCustomerVehicleSearchComponent,
-    CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,17 +55,17 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     DropdownModule,
     InputTextModule,
     OverlayPanelModule,
+    SelectButtonModule,
     RatingModule
   ], 
   exports: [
     CustomerVehicleBookingComponent,
     CustomerVehicleBookingSearchComponent,
-    CustomerVehicleBookingCustomerVehicleDynamicDialogComponent,
-    CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent,
+    CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent,
+    CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent,
     CustomerVehicleBookingSuccessComponent,
     CustomerVehicleBookingCustomerVehicleComponent,
-    CustomerVehicleBookingCustomerVehicleSearchComponent,
-    CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialogComponent,
+    CustomerVehicleBookingCustomerVehicleSearchComponent
   ],
   providers: [
     DialogService

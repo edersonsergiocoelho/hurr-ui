@@ -8,7 +8,7 @@
   "label_created_date_option_1_CustomerVehicleBookingSearch": "Ordernar Por Data De Reserva Menor Para Maior",
   "label_created_date_option_2_CustomerVehicleBookingSearch": "Ordernar Por Data De Reserva Maior Para Menor",
   "label_booking_cancellation_date_CustomerVehicleBookingSearch": "Data De Cancelamento: ",
-  "label_booking_delivery_date_CustomerVehicleBookingSearch": "Data De Entrega: ",
+  "label_reservation_start_date_CustomerVehicleBookingSearch": "Data Do Check-In: ",
   "placeholder_review_CustomerVehicleBookingSearch": "Informe Uma Crítica Para O Dono Do Carro",
   "save_cancel_booking_message_service_CustomerVehicleBookingSearch": "Reserva Cancelada Com Sucesso",
   "save_success_write_a_review_message_service_CustomerVehicleBookingSearch": "Crítica Salva Com Sucesso"
