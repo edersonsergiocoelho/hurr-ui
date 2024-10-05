@@ -1,7 +1,7 @@
 import { CustomerVehicle } from "src/app/global/page/customer-vehicle/entity/customer-vehicle.entity";
 import { Customer } from "src/app/global/page/customer/entity/customer.entity";
 
-export class CheckoutMercadoPagoUIDTO {
+export class CheckOutMPUIDTO {
 
     customer: Customer;
     customerVehicle: CustomerVehicle;

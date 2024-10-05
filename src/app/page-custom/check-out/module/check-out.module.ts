@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CheckoutRoutingModule } from './checkout-routing.module';
+import { CheckOutRoutingModule } from './check-out-routing.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Component
-import { CheckoutComponent } from '../ui/checkout/checkout.component';
+import { CheckOutComponent } from '../ui/check-out/check-out.component';
 
 // Module
 import { TranslateModule } from '@ngx-translate/core';
@@ -15,12 +15,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { CheckoutMercadoPagoModule } from '../../checkout-mercado-pago/module/checkout-mercado-pago.module';
 import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
+import { CheckOutMPModule } from '../../check-out-mp/module/check-out-mp.module';
 
 @NgModule({
   declarations: [
-    CheckoutComponent
+    CheckOutComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +28,8 @@ import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CheckoutRoutingModule,
-    CheckoutMercadoPagoModule,
+    CheckOutRoutingModule,
+    CheckOutMPModule,
 
     TranslateModule,
 
@@ -39,10 +39,10 @@ import { RateUtilsService } from 'src/app/utils/service/rate-utils-service';
     InputNumberModule
   ],
   exports: [
-    CheckoutComponent
+    CheckOutComponent
   ],
   providers: [
     RateUtilsService
   ]
 })
-export class CheckoutModule { }
+export class CheckOutModule { }

@@ -4,7 +4,7 @@ import { CustomerAddress } from "src/app/global/page/customer-address/entity/cus
 import { CustomerVehicle } from "src/app/global/page/customer-vehicle/entity/customer-vehicle.entity";
 import { Customer } from "src/app/global/page/customer/entity/customer.entity";
 
-export class CheckoutUIDTO extends TranslateSeverityDTO {
+export class CheckOutUIDTO extends TranslateSeverityDTO {
 
   customer: Customer;
   customerVehicle: any;
@@ -37,5 +37,5 @@ export class CheckoutUIDTO extends TranslateSeverityDTO {
   selectedHourEnd?: string = '10:00';
 
   // Messages
-  header_Address_Checkout: string;
+  header_Address_CheckOut: string;
 }

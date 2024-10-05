@@ -25,6 +25,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog.component';
 import { CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog.component';
+import { CheckOutMPPaymentAdditionalModule } from 'src/app/page-custom/check-out-mp-payment-additional/module/check-out-mp-payment-additional.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent } fr
 
     // NgxTranslate
     TranslateModule,
+
+    CheckOutMPPaymentAdditionalModule,
 
     // PrimeNG
     ButtonModule,

@@ -8,7 +8,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 
 // DTO's
-import { CheckoutUIDTO } from './dto/checkout-ui-dto.dto';
+import { CheckOutUIDTO } from './dto/check-out-ui-dto.dto';
 
 // Component's
 import { AddressRegisterDynamicDialogComponent } from 'src/app/global/page/address/ui/address-register-dynamic-dialog/address-register-dynamic-dialog.component';
@@ -31,15 +31,15 @@ import { MomentUtilsService } from 'src/app/utils/service/moment-utils-service';
 
 @Component({
   selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css'],
+  templateUrl: './check-out.component.html',
+  styleUrls: ['./check-out.component.css'],
   providers: [
     DialogService
   ]
 })
-export class CheckoutComponent implements OnInit {
+export class CheckOutComponent implements OnInit {
 
-  checkoutUIDTO: CheckoutUIDTO;
+  checkoutUIDTO: CheckOutUIDTO;
 
   constructor(
     private customerAddressService: CustomerAddressService,
@@ -63,7 +63,7 @@ export class CheckoutComponent implements OnInit {
 
   resetForm() {
 
-    this.checkoutUIDTO = new CheckoutUIDTO();
+    this.checkoutUIDTO = new CheckOutUIDTO();
 
     const state = this.location.getState() as any;
     
@@ -100,7 +100,7 @@ export class CheckoutComponent implements OnInit {
         this.checkoutUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
         this.checkoutUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
         this.checkoutUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
-        this.checkoutUIDTO.header_Address_Checkout = translations['header_Address_Checkout'];
+        this.checkoutUIDTO.header_Address_CheckOut = translations['header_Address_CheckOut'];
 
         // Agora, faça as chamadas assíncronas simultaneamente com Promise.all
         const currentUser = this.sessionStorageService.getUser();
@@ -152,7 +152,7 @@ export class CheckoutComponent implements OnInit {
       'error_message_service_Generic',
       'info_message_service_Generic',
       'success_message_service_Generic',
-      'header_Address_Checkout'
+      'header_Address_CheckOut'
     ];
     return keys;
   }
@@ -243,7 +243,7 @@ export class CheckoutComponent implements OnInit {
 
   newAddressRegisterDynamicDialog(): void {
     const ref = this.dialogService.open(AddressRegisterDynamicDialogComponent, {
-      header: '' + this.checkoutUIDTO.header_Address_Checkout,
+      header: '' + this.checkoutUIDTO.header_Address_CheckOut,
       width: '70%',
       contentStyle: { 'max-height': '500px', 'overflow-y': 'auto' },
       baseZIndex: 10000,
@@ -261,7 +261,7 @@ export class CheckoutComponent implements OnInit {
 
   editAddressRegisterDynamicDialog(customerAddress: CustomerAddress): void {
     const ref = this.dialogService.open(AddressRegisterDynamicDialogComponent, {
-      header: '' + this.checkoutUIDTO.header_Address_Checkout,
+      header: '' + this.checkoutUIDTO.header_Address_CheckOut,
       width: '70%',
       contentStyle: { 'max-height': '500px', 'overflow-y': 'auto' },
       baseZIndex: 10000,

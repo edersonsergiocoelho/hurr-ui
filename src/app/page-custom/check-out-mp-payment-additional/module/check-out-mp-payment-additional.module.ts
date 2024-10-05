@@ -3,13 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { CheckoutMercadoPagoRoutingModule } from './checkout-mercado-pago-routing.module';
-import { CheckoutMercadoPagoComponent } from '../ui/checkout-mercado-pago/checkout-mercado-pago.component';
+import { CheckOutMPPaymentAdditionalComponent } from '../ui/checkout-mp-payment-additional/check-out-mp-payment-additional.component';
+import { CheckOutMPPaymentAdditionalRoutingModule } from './check-out-mp-payment-additional-routing.module';
 
 @NgModule({
   declarations: [
-    CheckoutMercadoPagoComponent
+    CheckOutMPPaymentAdditionalComponent
   ],
   imports: [
     BrowserModule,
@@ -17,10 +16,10 @@ import { CheckoutMercadoPagoComponent } from '../ui/checkout-mercado-pago/checko
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CheckoutMercadoPagoRoutingModule
+    CheckOutMPPaymentAdditionalRoutingModule
   ],
   exports: [
-    CheckoutMercadoPagoComponent
+    CheckOutMPPaymentAdditionalComponent
   ]
 })
-export class CheckoutMercadoPagoModule { }
+export class CheckOutMPPaymentAdditionalModule { }

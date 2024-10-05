@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { environment } from 'src/environments/environment';
-import { CheckoutMercadoPagoUIDTO } from './dto/checkout-mercado-pago-ui-dto.dto';
+
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,19 +11,20 @@ import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/ser
 import { CustomerAddress } from 'src/app/global/page/customer-address/entity/customer-address.entity';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerService } from 'src/app/global/page/customer/service/customer.service';
+import { CheckOutMPUIDTO } from './dto/check-out-mp-ui-dto.dto';
 
 export type MetadataMap = { [key: string]: any };
 
 declare const MercadoPago: any;
 
 @Component({
-  selector: 'app-checkout-mercado-pago',
-  templateUrl: './checkout-mercado-pago.component.html',
-  styleUrls: ['./checkout-mercado-pago.component.css']
+  selector: 'app-check-out-mp',
+  templateUrl: './check-out-mp.component.html',
+  styleUrls: ['./check-out-mp.component.css']
 })
-export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
+export class CheckOutMPComponent implements OnInit, OnChanges {
 
-  checkoutMercadoPagoUIDTO: CheckoutMercadoPagoUIDTO;
+  checkOutMPUIDTO: CheckOutMPUIDTO;
   
   @Input() customerId: string;
 
@@ -73,18 +74,18 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
 
   resetForm() {
 
-    this.checkoutMercadoPagoUIDTO = new CheckoutMercadoPagoUIDTO();
+    this.checkOutMPUIDTO = new CheckOutMPUIDTO();
 
     const state = this.location.getState() as any;
    
     if (state != null) {
 
-      this.checkoutMercadoPagoUIDTO.customerVehicleId = state.customerVehicleId;
+      this.checkOutMPUIDTO.customerVehicleId = state.customerVehicleId;
 
-      this.checkoutMercadoPagoUIDTO.dateInit = state.dateInit;
-      this.checkoutMercadoPagoUIDTO.selectedHourInit = state.selectedHourInit;
-      this.checkoutMercadoPagoUIDTO.dateEnd = state.dateEnd;
-      this.checkoutMercadoPagoUIDTO.selectedHourEnd = state.selectedHourEnd;
+      this.checkOutMPUIDTO.dateInit = state.dateInit;
+      this.checkOutMPUIDTO.selectedHourInit = state.selectedHourInit;
+      this.checkOutMPUIDTO.dateEnd = state.dateEnd;
+      this.checkOutMPUIDTO.selectedHourEnd = state.selectedHourEnd;
     }
 
     this.asyncCallFunctions();
@@ -104,26 +105,26 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.checkoutMercadoPagoUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.checkoutMercadoPagoUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.checkoutMercadoPagoUIDTO.select_customer_address_Address_Checkout = translations['select_customer_address_Address_Checkout'];
+      this.checkOutMPUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.checkOutMPUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.checkOutMPUIDTO.select_customer_address_Address_Checkout = translations['select_customer_address_Address_Checkout'];
 
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.checkoutMercadoPagoUIDTO.error_message_service_Generic,
+        summary: this.checkOutMPUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
 
     try {
 
-      const resultCustomerVehicleServiceFindById = await firstValueFrom(this.customerVehicleService.findById(this.checkoutMercadoPagoUIDTO.customerVehicleId).pipe(first()));
+      const resultCustomerVehicleServiceFindById = await firstValueFrom(this.customerVehicleService.findById(this.checkOutMPUIDTO.customerVehicleId).pipe(first()));
 
       if (resultCustomerVehicleServiceFindById.status == 200) {
 
         if (resultCustomerVehicleServiceFindById.body != null) {
-          this.checkoutMercadoPagoUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
+          this.checkOutMPUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
         }
       }
       
@@ -132,14 +133,14 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
       if (resultCustomerFindByEmail.status == 200) {
 
         if (resultCustomerFindByEmail.body != null) {
-          this.checkoutMercadoPagoUIDTO.customer = resultCustomerFindByEmail.body;
+          this.checkOutMPUIDTO.customer = resultCustomerFindByEmail.body;
         }
       }
 
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR, 
-        summary: this.checkoutMercadoPagoUIDTO.error_message_service_Generic,
+        summary: this.checkOutMPUIDTO.error_message_service_Generic,
         detail: error.toString() 
       });
     }
@@ -207,15 +208,15 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
 
               this.messageService.add({
                 severity: SeverityConstants.WARN,
-                summary: '' + this.checkoutMercadoPagoUIDTO.warn_message_service_Generic,
-                detail: '' + this.checkoutMercadoPagoUIDTO.select_customer_address_Address_Checkout
+                summary: '' + this.checkOutMPUIDTO.warn_message_service_Generic,
+                detail: '' + this.checkOutMPUIDTO.select_customer_address_Address_Checkout
               });
 
               return;
             }
 
             const metadataMap = new Map<string, any>();
-            metadataMap.set('customerVehicleId', this.checkoutMercadoPagoUIDTO.customerVehicleId);
+            metadataMap.set('customerVehicleId', this.checkOutMPUIDTO.customerVehicleId);
             metadataMap.set('customerId', this.customerId);
 
             if (this.selectCustomerAddressDelivery != null) {
@@ -229,10 +230,10 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
             }
 
             metadataMap.set('customerAddressId', this.selectCustomerAddress.customerAddressId);
-            metadataMap.set('bookingStartDate', this.checkoutMercadoPagoUIDTO.dateInit);
-            metadataMap.set('bookingStartTime', this.checkoutMercadoPagoUIDTO.selectedHourInit);
-            metadataMap.set('bookingEndDate', this.checkoutMercadoPagoUIDTO.dateEnd);
-            metadataMap.set('bookingEndTime', this.checkoutMercadoPagoUIDTO.selectedHourEnd);
+            metadataMap.set('bookingStartDate', this.checkOutMPUIDTO.dateInit);
+            metadataMap.set('bookingStartTime', this.checkOutMPUIDTO.selectedHourInit);
+            metadataMap.set('bookingEndDate', this.checkOutMPUIDTO.dateEnd);
+            metadataMap.set('bookingEndTime', this.checkOutMPUIDTO.selectedHourEnd);
             metadataMap.set('totalBookingValue', this.totalBookingValue);
             
             const metadataObject = Object.fromEntries(metadataMap);
@@ -240,15 +241,15 @@ export class CheckoutMercadoPagoComponent implements OnInit, OnChanges {
             const preferenceRequest = {
               items: [
                 {
-                  title: this.checkoutMercadoPagoUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + this.checkoutMercadoPagoUIDTO.customerVehicle.vehicle.vehicleName + ' ' + this.checkoutMercadoPagoUIDTO.customerVehicle.yearOfTheCar,
+                  title: this.checkOutMPUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + this.checkOutMPUIDTO.customerVehicle.vehicle.vehicleName + ' ' + this.checkOutMPUIDTO.customerVehicle.yearOfTheCar,
                   quantity: 1,
                   unitPrice: this.totalBookingValue,
                 },
               ],
               payer: {
-                name: this.checkoutMercadoPagoUIDTO.customer.firstName,
-                surname: this.checkoutMercadoPagoUIDTO.customer.lastName,
-                email: this.checkoutMercadoPagoUIDTO.customer.email,
+                name: this.checkOutMPUIDTO.customer.firstName,
+                surname: this.checkOutMPUIDTO.customer.lastName,
+                email: this.checkOutMPUIDTO.customer.email,
                 address: {
                   streetName: this.selectCustomerAddress.address.streetAddress,
                   streetNumber: this.selectCustomerAddress.address.number,

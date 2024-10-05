@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerValidationModule } from '../customer-validation/module/customer-validation.module';
-import { CheckoutModule } from '../checkout/module/checkout.module';
-import { CheckoutMercadoPagoModule } from '../checkout-mercado-pago/module/checkout-mercado-pago.module';
+import { CheckOutModule } from '../check-out/module/check-out.module';
+import { CheckOutMPModule } from '../check-out-mp/module/check-out-mp.module';
+import { CheckOutMPPaymentAdditionalModule } from '../check-out-mp-payment-additional/module/check-out-mp-payment-additional.module';
 import { EarningsModule } from '../earnings/module/earnings.module';
 
 @NgModule({
@@ -11,14 +12,16 @@ import { EarningsModule } from '../earnings/module/earnings.module';
     CommonModule,
 
     // Modules - PageCustomModule
-    CheckoutModule,
-    CheckoutMercadoPagoModule,
+    CheckOutModule,
+    CheckOutMPModule,
+    CheckOutMPPaymentAdditionalModule,
     CustomerValidationModule,
     EarningsModule
   ], 
   exports: [
-    CheckoutModule,
-    CheckoutMercadoPagoModule,
+    CheckOutModule,
+    CheckOutMPModule,
+    CheckOutMPPaymentAdditionalModule,
     CustomerValidationModule,
     EarningsModule
   ]
