@@ -265,7 +265,7 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
 
             return new Promise((resolve, reject) => {
 
-              fetch(`${environment.api}/mercado-pago/preference`, {
+              fetch(`${environment.api}/mp/preference`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

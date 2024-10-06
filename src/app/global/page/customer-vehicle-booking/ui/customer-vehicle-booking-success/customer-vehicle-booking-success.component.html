@@ -112,56 +112,56 @@
         <span class="font-medium text-900">{{'payment_CustomerVehicleBookingSuccess' | translate}}
         </span>
 
-        <div *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData &&
-            (customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'credit_card' || 
-            customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'debit_card')"
+        <div *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment &&
+            (customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentTypeId == 'credit_card' || 
+            customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentTypeId == 'debit_card')"
           class="flex align-items-center mt-3">
 
-          <img *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'amex'"
+          <img *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentMethodId == 'amex'"
             src="assets/images/credit-card/amex.png" class="w-6rem mr-3">
 
-          <img *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'master'"
+          <img *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentMethodId == 'master'"
             src="assets/images/credit-card/mastercard.png" class="w-6rem mr-3">
 
-          <img *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'visa'"
+          <img *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentMethodId == 'visa'"
             src="assets/images/credit-card/visa.png" class="w-6rem mr-3">
 
           <div class="flex flex-column">
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'amex' &&
-                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'credit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentMethodId == 'amex' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentTypeId == 'credit_card'"
               class="text-900 mb-1">{{'amex_credit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'amex' &&
-                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'debit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentMethodId == 'amex' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentTypeId == 'debit_card'"
               class="text-900 mb-1">{{'amex_debit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'visa' &&
-                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'credit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentMethodId == 'visa' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentTypeId == 'credit_card'"
               class="text-900 mb-1">{{'visa_credit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'visa' &&
-                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'debit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentMethodId == 'visa' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentTypeId == 'debit_card'"
               class="text-900 mb-1">{{'visa_debit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'master' &&
-                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'credit_card'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentMethodId == 'master' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentTypeId == 'credit_card'"
               class="text-900 mb-1">{{'mastercard_credit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentMethodId == 'visa' &&
-                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.paymentTypeId == 'master'"
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentMethodId == 'visa' &&
+                customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.paymentTypeId == 'master'"
               class="text-900 mb-1">{{'mastercard_debit_card_CustomerVehicleBookingSuccess' | translate}}
             </span>
 
-            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.card != null" class="text-900 font-medium">
-              {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.card.firstSixDigits.slice(0, 4) }}
-              {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.card.firstSixDigits.slice(4, 6) }}** ****
-              {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mercadoPagoPaymentData.card.lastFourDigits }}
+            <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.card != null" class="text-900 font-medium">
+              {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.card.firstSixDigits.slice(0, 4) }}
+              {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.card.firstSixDigits.slice(4, 6) }}** ****
+              {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.card.lastFourDigits }}
             </span>
           </div>
 

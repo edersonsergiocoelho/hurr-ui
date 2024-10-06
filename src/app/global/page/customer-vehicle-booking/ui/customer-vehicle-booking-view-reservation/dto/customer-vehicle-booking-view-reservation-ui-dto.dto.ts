@@ -1,7 +1,7 @@
 import { TranslateSeverityDTO } from "src/app/core/translate/dto/translate-severity-dto.dto";
 import { CustomerVehicleBooking } from "../../../entity/customer-vehicle-booking.entity";
 
-export class CustomerVehicleBookingViewInvoiceUIDTO extends TranslateSeverityDTO {
+export class CustomerVehicleBookingViewReservationUIDTO extends TranslateSeverityDTO {
 
   // Parâmetros Da URL
   collectionId: string | null = null;

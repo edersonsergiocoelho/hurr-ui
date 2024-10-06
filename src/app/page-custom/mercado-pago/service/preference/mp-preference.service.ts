@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MpPreferenceService {
 
-  private readonly apiUrl = `${environment.api}/mercado-pago/preference`;
+  private readonly apiUrl = `${environment.api}/mp/preference`;
 
   constructor(private readonly httpClient: HttpClient) {}
 

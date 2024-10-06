@@ -14,6 +14,7 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
 import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-vehicle-booking-search',
@@ -36,6 +37,7 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     private customerVehicleReviewService: CustomerVehicleReviewService,
     private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
     private confirmationService: ConfirmationService,
+    private router: Router,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
     private translateService: TranslateService,
@@ -270,6 +272,14 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
         }
       }
     });
+  }
+
+  clickRouterNavigateToViewReservation(customerVehicleBooking: any) {
+    this.router.navigate(['/customer-vehicle-booking/view-reservation/' + customerVehicleBooking.customerVehicleBookingId]);
+  }
+
+  clickRouterNavigateToViewInvoice(customerVehicleBooking: any) {
+    this.router.navigate(['/customer-vehicle-booking/view-invoice/' + customerVehicleBooking.customerVehicleBookingId]);
   }
 
   clickOverlayPanelWriteAReview(event: any, customerVehicleBooking: any) {

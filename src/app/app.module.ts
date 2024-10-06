@@ -69,12 +69,19 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/customer-vehicle-approved/customer-vehicle-approved-detail/',
 
   // CustomerVehicleBooking
+
+  // CustomerVehicleBooking - CustomerVehicle
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-search/',
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-view-invoice/',
+  
+  // CustomerVehicleBooking - Customer
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-search/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-success/',
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-view-invoice/',
 
+  //
   '/assets/i18n/customer-withdrawal-request/customer-withdrawal-request-approval/',
 
   // Earnings

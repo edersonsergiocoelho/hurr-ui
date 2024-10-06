@@ -204,27 +204,35 @@
               </div>
 
               <div class="col-12 p-0 flex border-top-1 surface-border">
+
                 <a tabindex="0"
                   class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-                  style="border-bottom-left-radius: 6px;">
-                  <i class="pi pi-folder mr-2 mb-2 md:mb-0"></i>
-                  Archive Order
-                </a>
-                <a tabindex="0"
-                  class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full">
+                  style="border-radius: 6px;">
                   <i class="pi pi-refresh mr-2 mb-2 md:mb-0"></i>
-                  Return
-                </a>
-                <a tabindex="0"
-                  class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full">
-                  <i class="pi pi-file mr-2 mb-2 md:mb-0"></i>
-                  View Invoice
+                  {{'span_button_label_to_go_back_Generic' | translate}}
                 </a>
 
                 <a tabindex="0"
                   class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-                  [ngStyle]="item.bookingEndDate == null ? {'pointer-events': 'none', 'opacity': '0.5'} : {}"
-                  (click)="clickOverlayPanelWriteAReview($event, item)" style="border-bottom-right-radius: 6px;">
+                  style="border-radius: 6px;"
+                  (click)="clickRouterNavigateToViewReservation(item)">
+                  <i class="pi pi-file mr-2 mb-2 md:mb-0"></i>
+                  {{'span_button_label_view_reservation_Generic' | translate}}
+                </a>
+
+                <a tabindex="0"
+                  class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
+                  style="border-radius: 6px;"
+                  (click)="clickRouterNavigateToViewInvoice(item)">
+                  <i class="pi pi-file mr-2 mb-2 md:mb-0"></i>
+                  {{'span_button_label_view_invoice_Generic' | translate}}
+                </a>
+
+                <a *ngIf="item.bookingEndDate != null"
+                  tabindex="0"
+                  class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
+                  style="border-radius: 6px;"
+                  (click)="clickOverlayPanelWriteAReview($event, item)">
                   <i class="pi pi-comment mr-2 mb-2 md:mb-0"></i>
                   {{'span_button_label_write_a_review_Generic' | translate}}
                 </a>

@@ -24,7 +24,7 @@ export class CustomerVehicleBookingService {
   }
 
   findByPaymentId(paymentId: number): Observable<HttpResponse<CustomerVehicleBooking>> {
-    const url = `${this.apiUrl}/mercado-pago/payment/${paymentId}`;
+    const url = `${this.apiUrl}/mp/payment/${paymentId}`;
     return this.httpClient.get<CustomerVehicleBooking>(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleBooking>) => {
         return response;

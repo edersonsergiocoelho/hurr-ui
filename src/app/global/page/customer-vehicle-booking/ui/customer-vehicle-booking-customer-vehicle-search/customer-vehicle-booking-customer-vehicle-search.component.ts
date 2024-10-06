@@ -16,6 +16,7 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { CustomerVehicleReview } from '../../../customer-vehicle-review/entity/customer-vehicle-review.entity';
 import { CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent } from '../customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog.component';
 import { CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent } from '../customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-vehicle-booking-customer-vehicle-search',
@@ -38,6 +39,7 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
     private sessionStorageService: SessionStorageService,
+    private router: Router,
     private translateService: TranslateService,
   ) { }
   
@@ -197,6 +199,10 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
         ref.close();
       }
     });
+  }
+
+  clickRouterNavigateToViewInvoice(customerVehicleBooking: any) {
+    this.router.navigate(['/customer-vehicle-booking/customer-vehicle/view-invoice/' + customerVehicleBooking.customerVehicleBookingId]);
   }
 
   clickOverlayPanelWriteAReview(event: any, customerVehicleBooking: any) {

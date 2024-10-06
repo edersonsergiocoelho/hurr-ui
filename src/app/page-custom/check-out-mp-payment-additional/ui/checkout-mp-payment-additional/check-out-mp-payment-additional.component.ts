@@ -11,6 +11,8 @@ import { CustomerVehicleService } from 'src/app/global/page/customer-vehicle/ser
 import { CustomerAddress } from 'src/app/global/page/customer-address/entity/customer-address.entity';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerService } from 'src/app/global/page/customer/service/customer.service';
+import { ActivatedRoute } from '@angular/router';
+import { CustomerVehicleBookingService } from 'src/app/global/page/customer-vehicle-booking/service/customer-vehicle-booking.service';
 
 export type MetadataMap = { [key: string]: any };
 
@@ -21,12 +23,12 @@ declare const MercadoPago: any;
   templateUrl: './check-out-mp-payment-additional.component.html',
   styleUrls: ['./check-out-mp-payment-additional.component.css']
 })
-export class CheckOutMPPaymentAdditionalComponent implements OnInit, OnChanges {
+export class CheckOutMPPaymentAdditionalComponent implements OnInit {
 
   checkOutMPPaymentAdditionalUIDTO: CheckOutMPPaymentAdditionalUIDTO;
   
   @Input() customerId: string;
-  @Input() customerVehicleBookingId: string;
+  @Input() customerVehicleBookingId: string | null;
 
   @Input() selectCustomerAddressDelivery: CustomerAddress | null;
   @Input() customerAddressDeliveryValue: number | null;
@@ -39,20 +41,27 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit, OnChanges {
   @Input() totalBookingValue: number;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private customerService: CustomerService,
     private customerVehicleService: CustomerVehicleService,
+    private customerVehicleBookingService: CustomerVehicleBookingService,
     private location: Location,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
     private sessionStorageService: SessionStorageService,
     private translateService: TranslateService
-  ) {}
+  ) {
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.customerVehicleBookingId = params.get('customerVehicleBookingId');
+    });
+  }
 
   ngOnInit(): void {
     this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
+  /*
   ngOnChanges(simpleChanges: SimpleChanges): void {
 
     if (simpleChanges['selectCustomerAddressDelivery']) {
@@ -71,22 +80,11 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit, OnChanges {
       this.totalBookingValue = simpleChanges['totalBookingValue'].currentValue;
     }
   }
+  */
 
   resetForm() {
 
     this.checkOutMPPaymentAdditionalUIDTO = new CheckOutMPPaymentAdditionalUIDTO();
-
-    const state = this.location.getState() as any;
-   
-    if (state != null) {
-
-      this.checkOutMPPaymentAdditionalUIDTO.customerVehicleId = state.customerVehicleId;
-
-      this.checkOutMPPaymentAdditionalUIDTO.dateInit = state.dateInit;
-      this.checkOutMPPaymentAdditionalUIDTO.selectedHourInit = state.selectedHourInit;
-      this.checkOutMPPaymentAdditionalUIDTO.dateEnd = state.dateEnd;
-      this.checkOutMPPaymentAdditionalUIDTO.selectedHourEnd = state.selectedHourEnd;
-    }
 
     this.asyncCallFunctions();
   }
@@ -107,7 +105,6 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit, OnChanges {
 
       this.checkOutMPPaymentAdditionalUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
       this.checkOutMPPaymentAdditionalUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.checkOutMPPaymentAdditionalUIDTO.select_customer_address_Address_Checkout = translations['select_customer_address_Address_Checkout'];
 
     } catch (error: any) {
       this.messageService.add({
@@ -119,21 +116,15 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit, OnChanges {
 
     try {
 
-      const resultCustomerVehicleServiceFindById = await firstValueFrom(this.customerVehicleService.findById(this.checkOutMPPaymentAdditionalUIDTO.customerVehicleId).pipe(first()));
+      if (this.customerVehicleBookingId != null) {
 
-      if (resultCustomerVehicleServiceFindById.status == 200) {
-
-        if (resultCustomerVehicleServiceFindById.body != null) {
-          this.checkOutMPPaymentAdditionalUIDTO.customerVehicle = resultCustomerVehicleServiceFindById.body;
-        }
-      }
-      
-      const resultCustomerFindByEmail = await firstValueFrom(this.customerService.findById(this.customerId).pipe(first()));
-
-      if (resultCustomerFindByEmail.status == 200) {
-
-        if (resultCustomerFindByEmail.body != null) {
-          this.checkOutMPPaymentAdditionalUIDTO.customer = resultCustomerFindByEmail.body;
+        const resultCustomerVehicleServiceFindById = await firstValueFrom(this.customerVehicleBookingService.findById(this.customerVehicleBookingId).pipe(first()));
+  
+        if (resultCustomerVehicleServiceFindById.status == 200) {
+  
+          if (resultCustomerVehicleServiceFindById.body != null) {
+            this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking = resultCustomerVehicleServiceFindById.body;
+          }
         }
       }
 
@@ -204,19 +195,8 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit, OnChanges {
             at this time of submit, you must create the preference
             */
 
-            if (this.selectCustomerAddress == null) {
-
-              this.messageService.add({
-                severity: SeverityConstants.WARN,
-                summary: '' + this.checkOutMPPaymentAdditionalUIDTO.warn_message_service_Generic,
-                detail: '' + this.checkOutMPPaymentAdditionalUIDTO.select_customer_address_Address_Checkout
-              });
-
-              return;
-            }
-
             const metadataMap = new Map<string, any>();
-            metadataMap.set('customerVehicleId', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleId);
+            metadataMap.set('customerVehicleId', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerVehicle.customerVehicleId);
             metadataMap.set('customerId', this.customerId);
 
             if (this.selectCustomerAddressDelivery != null) {
@@ -229,11 +209,11 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit, OnChanges {
               metadataMap.set('customerAddressPickUpValue', this.selectCustomerAddressPickUp.customerAddressId);
             }
 
-            metadataMap.set('customerAddressId', this.selectCustomerAddress.customerAddressId);
-            metadataMap.set('bookingStartDate', this.checkOutMPPaymentAdditionalUIDTO.dateInit);
-            metadataMap.set('bookingStartTime', this.checkOutMPPaymentAdditionalUIDTO.selectedHourInit);
-            metadataMap.set('bookingEndDate', this.checkOutMPPaymentAdditionalUIDTO.dateEnd);
-            metadataMap.set('bookingEndTime', this.checkOutMPPaymentAdditionalUIDTO.selectedHourEnd);
+            metadataMap.set('customerAddressId', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerAddressBilling?.customerAddressId);
+            metadataMap.set('reservationStartDate', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.reservationStartDate);
+            metadataMap.set('reservationStartTime', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.reservationStartTime);
+            metadataMap.set('reservationEndDate', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.reservationEndDate);
+            metadataMap.set('reservationEndTime', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.reservationEndTime);
             metadataMap.set('totalBookingValue', this.totalBookingValue);
             
             const metadataObject = Object.fromEntries(metadataMap);
@@ -241,19 +221,19 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit, OnChanges {
             const preferenceRequest = {
               items: [
                 {
-                  title: this.checkOutMPPaymentAdditionalUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + this.checkOutMPPaymentAdditionalUIDTO.customerVehicle.vehicle.vehicleName + ' ' + this.checkOutMPPaymentAdditionalUIDTO.customerVehicle.yearOfTheCar,
+                  title: this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerVehicle.vehicle.vehicleName + ' ' + this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerVehicle.yearOfTheCar,
                   quantity: 1,
                   unitPrice: this.totalBookingValue,
                 },
               ],
               payer: {
-                name: this.checkOutMPPaymentAdditionalUIDTO.customer.firstName,
-                surname: this.checkOutMPPaymentAdditionalUIDTO.customer.lastName,
-                email: this.checkOutMPPaymentAdditionalUIDTO.customer.email,
+                name: this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customer.firstName,
+                surname: this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customer.lastName,
+                email: this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customer.email,
                 address: {
-                  streetName: this.selectCustomerAddress.address.streetAddress,
-                  streetNumber: this.selectCustomerAddress.address.number,
-                  zipCode: this.selectCustomerAddress.address.zipCode.replace(".", "").replace("-", ""),
+                  streetName: this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerAddressBilling?.address.streetAddress,
+                  streetNumber: this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerAddressBilling?.address.number,
+                  zipCode: this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerAddressBilling?.address.zipCode.replace(".", "").replace("-", ""),
                 },
               },
               notificationUrl: `${environment.apiMercadoPago}`,
@@ -265,7 +245,7 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit, OnChanges {
 
             return new Promise((resolve, reject) => {
 
-              fetch(`${environment.api}/mercado-pago/preference`, {
+              fetch(`${environment.api}/mp/preference`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

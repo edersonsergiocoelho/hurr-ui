@@ -24,8 +24,11 @@ export class CustomerVehicleBooking {
   bookingCancellationDate?: Date; // Data e hora de cancelamento da reserva
   withdrawableBookingValue: number; // Valor disponível para retirada
   totalBookingValue: number; // Valor total da reserva
-  mercadoPagoPaymentId: number; // Identificador do pagamento
-  mercadoPagoPaymentData?: any; // Dados de pagamento em JSON (equivalente ao campo JSONB em Java)
+  mpPaymentId: number; // Identificador do pagamento
+  mpPayment?: any; // Dados de pagamento em JSON (equivalente ao campo JSONB em Java)
+  mpPaymentRefund?: any; // Dados de pagamento em JSON (equivalente ao campo JSONB em Java)
+  mpPaymentAdditionalId?: any; // Identificador do estorno
+  mpPaymentAdditional?: any; // Dados de pagamento em JSON (equivalente ao campo JSONB em Java)
   createdDate: string;
   modifiedDate?: string;
   enabled: boolean;

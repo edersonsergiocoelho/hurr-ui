@@ -1,0 +1,16 @@
+{
+  "title_CustomerVehicleBookingViewInvoice": "Fatura",
+  "booking_CustomerVehicleBookingViewInvoice": "Número Da Reserva:",
+  "billing_address_CustomerVehicleBookingViewInvoice": "Endereço De Cobrança",
+  "payment_CustomerVehicleBookingViewInvoice": "Pagamento",
+  "amex_credit_card_CustomerVehicleBookingViewInvoice": "Amex Cartão De Crédito",
+  "amex_debit_card_CustomerVehicleBookingViewInvoice": "Amex Cartão De Débito",
+  "mastercard_credit_card_CustomerVehicleBookingViewInvoice": "Mastercard Cartão De Crédito",
+  "mastercard_debit_card_CustomerVehicleBookingViewInvoice": "Mastercard Cartão De Débito",
+  "visa_credit_card_CustomerVehicleBookingViewInvoice": "Visa Cartão De Crédito",
+  "visa_debit_card_CustomerVehicleBookingViewInvoice": "Visa Cartão De Débito",
+  "days_CustomerVehicleBookingViewInvoice": "Dias",
+  "summary_CustomerVehicleBookingViewInvoice": "Resumo",
+  "subtotal_CustomerVehicleBookingViewInvoice": "Subtotal",
+  "total_CustomerVehicleBookingViewInvoice": "Total"
+}

@@ -26,16 +26,23 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog.component';
 import { CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent } from '../ui/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog.component';
 import { CheckOutMPPaymentAdditionalModule } from 'src/app/page-custom/check-out-mp-payment-additional/module/check-out-mp-payment-additional.module';
+import { CustomerVehicleBookingCustomerVehicleViewInvoiceComponent } from '../ui/customer-vehicle-booking-customer-vehicle-view-invoice/customer-vehicle-booking-customer-vehicle-view-invoice.component';
+import { CustomerVehicleBookingViewReservationComponent } from '../ui/customer-vehicle-booking-view-reservation/customer-vehicle-booking-view-reservation.component';
+import { CustomerVehicleBookingViewInvoiceComponent } from '../ui/customer-vehicle-booking-view-invoice/customer-vehicle-booking-view-invoice.component';
 
 @NgModule({
   declarations: [
     CustomerVehicleBookingComponent,
     CustomerVehicleBookingSearchComponent,
     CustomerVehicleBookingSuccessComponent,
+    CustomerVehicleBookingViewInvoiceComponent,
+    CustomerVehicleBookingViewReservationComponent,
+
     CustomerVehicleBookingCustomerVehicleComponent,
     CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent,
     CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent,
     CustomerVehicleBookingCustomerVehicleSearchComponent,
+    CustomerVehicleBookingCustomerVehicleViewInvoiceComponent
   ],
   imports: [
     BrowserModule,
@@ -64,11 +71,15 @@ import { CheckOutMPPaymentAdditionalModule } from 'src/app/page-custom/check-out
   exports: [
     CustomerVehicleBookingComponent,
     CustomerVehicleBookingSearchComponent,
+    CustomerVehicleBookingSuccessComponent,
+    CustomerVehicleBookingViewInvoiceComponent,
+    CustomerVehicleBookingViewReservationComponent,
+
     CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent,
     CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent,
-    CustomerVehicleBookingSuccessComponent,
     CustomerVehicleBookingCustomerVehicleComponent,
-    CustomerVehicleBookingCustomerVehicleSearchComponent
+    CustomerVehicleBookingCustomerVehicleSearchComponent,
+    CustomerVehicleBookingCustomerVehicleViewInvoiceComponent
   ],
   providers: [
     DialogService
