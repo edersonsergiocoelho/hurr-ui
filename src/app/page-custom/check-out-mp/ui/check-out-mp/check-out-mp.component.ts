@@ -216,6 +216,7 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
             }
 
             const metadataMap = new Map<string, any>();
+            metadataMap.set('webhookAction', 'CUSTOMER_VEHICLE_BOOKING_PAYMENT');
             metadataMap.set('customerVehicleId', this.checkOutMPUIDTO.customerVehicleId);
             metadataMap.set('customerId', this.customerId);
 
@@ -230,10 +231,10 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
             }
 
             metadataMap.set('customerAddressId', this.selectCustomerAddress.customerAddressId);
-            metadataMap.set('bookingStartDate', this.checkOutMPUIDTO.dateInit);
-            metadataMap.set('bookingStartTime', this.checkOutMPUIDTO.selectedHourInit);
-            metadataMap.set('bookingEndDate', this.checkOutMPUIDTO.dateEnd);
-            metadataMap.set('bookingEndTime', this.checkOutMPUIDTO.selectedHourEnd);
+            metadataMap.set('reservationStartDate', this.checkOutMPUIDTO.dateInit);
+            metadataMap.set('reservationStartTime', this.checkOutMPUIDTO.selectedHourInit);
+            metadataMap.set('reservationEndDate', this.checkOutMPUIDTO.dateEnd);
+            metadataMap.set('reservationEndTime', this.checkOutMPUIDTO.selectedHourEnd);
             metadataMap.set('totalBookingValue', this.totalBookingValue);
             
             const metadataObject = Object.fromEntries(metadataMap);

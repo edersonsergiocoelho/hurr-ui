@@ -27,25 +27,13 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit {
 
   checkOutMPPaymentAdditionalUIDTO: CheckOutMPPaymentAdditionalUIDTO;
   
-  @Input() customerId: string;
   @Input() customerVehicleBookingId: string | null;
-
-  @Input() selectCustomerAddressDelivery: CustomerAddress | null;
-  @Input() customerAddressDeliveryValue: number | null;
-
-  @Input() selectCustomerAddressPickUp: CustomerAddress | null;
-  @Input() customerAddressPickUpValue: number | null;
-  
   @Input() selectCustomerAddress: CustomerAddress | null;
-
-  @Input() totalBookingValue: number;
+  @Input() totalAdditionalValue: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private customerService: CustomerService,
-    private customerVehicleService: CustomerVehicleService,
     private customerVehicleBookingService: CustomerVehicleBookingService,
-    private location: Location,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
     private sessionStorageService: SessionStorageService,
@@ -60,27 +48,6 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit {
     this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
-
-  /*
-  ngOnChanges(simpleChanges: SimpleChanges): void {
-
-    if (simpleChanges['selectCustomerAddressDelivery']) {
-      this.selectCustomerAddressDelivery = simpleChanges['selectCustomerAddressDelivery'].currentValue;
-    }
-
-    if (simpleChanges['selectCustomerAddressPickUp']) {
-      this.selectCustomerAddressPickUp = simpleChanges['selectCustomerAddressPickUp'].currentValue;
-    }
-
-    if (simpleChanges['selectCustomerAddress']) {
-      this.selectCustomerAddress = simpleChanges['selectCustomerAddress'].currentValue;
-    }
-
-    if (simpleChanges['totalBookingValue']) {
-      this.totalBookingValue = simpleChanges['totalBookingValue'].currentValue;
-    }
-  }
-  */
 
   resetForm() {
 
@@ -196,25 +163,14 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit {
             */
 
             const metadataMap = new Map<string, any>();
-            metadataMap.set('customerVehicleId', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerVehicle.customerVehicleId);
-            metadataMap.set('customerId', this.customerId);
-
-            if (this.selectCustomerAddressDelivery != null) {
-              metadataMap.set('customerAddressDeliveryId', this.selectCustomerAddressDelivery.customerAddressId);
-              metadataMap.set('customerAddressDeliveryValue', this.selectCustomerAddressDelivery.customerAddressId);
-            }
-
-            if (this.selectCustomerAddressPickUp != null) {
-              metadataMap.set('customerAddressPickUpId', this.selectCustomerAddressPickUp.customerAddressId);
-              metadataMap.set('customerAddressPickUpValue', this.selectCustomerAddressPickUp.customerAddressId);
-            }
-
+            metadataMap.set('webhookAction', 'CUSTOMER_VEHICLE_BOOKING_PAYMENT_ADDITIONAL');
+            metadataMap.set('customerVehicleBookingId', this.customerVehicleBookingId);
             metadataMap.set('customerAddressId', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerAddressBilling?.customerAddressId);
             metadataMap.set('reservationStartDate', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.reservationStartDate);
             metadataMap.set('reservationStartTime', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.reservationStartTime);
             metadataMap.set('reservationEndDate', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.reservationEndDate);
             metadataMap.set('reservationEndTime', this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.reservationEndTime);
-            metadataMap.set('totalBookingValue', this.totalBookingValue);
+            metadataMap.set('totalAdditionalValue', this.totalAdditionalValue);
             
             const metadataObject = Object.fromEntries(metadataMap);
 
@@ -223,7 +179,7 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit {
                 {
                   title: this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerVehicle.vehicle.vehicleBrand.vehicleBrandName + ' ' + this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerVehicle.vehicle.vehicleName + ' ' + this.checkOutMPPaymentAdditionalUIDTO.customerVehicleBooking.customerVehicle.yearOfTheCar,
                   quantity: 1,
-                  unitPrice: this.totalBookingValue,
+                  unitPrice: this.totalAdditionalValue,
                 },
               ],
               payer: {

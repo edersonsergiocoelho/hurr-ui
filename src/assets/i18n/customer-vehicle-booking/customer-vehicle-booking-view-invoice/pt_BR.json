@@ -3,14 +3,22 @@
   "booking_CustomerVehicleBookingViewInvoice": "Número Da Reserva:",
   "billing_address_CustomerVehicleBookingViewInvoice": "Endereço De Cobrança",
   "payment_CustomerVehicleBookingViewInvoice": "Pagamento",
+  "payment_additional_CustomerVehicleBookingViewInvoice": "Pagamento Adicional",
   "amex_credit_card_CustomerVehicleBookingViewInvoice": "Amex Cartão De Crédito",
   "amex_debit_card_CustomerVehicleBookingViewInvoice": "Amex Cartão De Débito",
   "mastercard_credit_card_CustomerVehicleBookingViewInvoice": "Mastercard Cartão De Crédito",
   "mastercard_debit_card_CustomerVehicleBookingViewInvoice": "Mastercard Cartão De Débito",
   "visa_credit_card_CustomerVehicleBookingViewInvoice": "Visa Cartão De Crédito",
   "visa_debit_card_CustomerVehicleBookingViewInvoice": "Visa Cartão De Débito",
+  "installments_CustomerVehicleBookingViewInvoice": "Quantidade De Parcelas: ",
+  "transaction_amount_CustomerVehicleBookingViewInvoice": "Valor Da Transação: ",
+  "installment_amount_CustomerVehicleBookingViewInvoice": "Valor Da Parcela: ",
+  "total_paid_amount_CustomerVehicleBookingViewInvoice": "Valor Total Pago: ",
+  
   "days_CustomerVehicleBookingViewInvoice": "Dias",
   "summary_CustomerVehicleBookingViewInvoice": "Resumo",
-  "subtotal_CustomerVehicleBookingViewInvoice": "Subtotal",
+  "daily_rate_CustomerVehicleBookingViewInvoice": "Valor Total Da Diária",
+  "total_booking_value_CustomerVehicleBookingViewInvoice": "Total Reserva",
+  "total_additional_value_CustomerVehicleBookingViewInvoice": "Total Valor Adicional",
   "total_CustomerVehicleBookingViewInvoice": "Total"
 }

@@ -11,7 +11,6 @@ export class CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO ext
   cleaningFeeOptions: any[] = [{label: 'Sim', value: 'YES'}, {label: 'Não', value: 'NO'}];
   cleaningFeeValue: string = 'NO';
 
-  finalValue: number;
 
   // Messages - Translate
   check_out_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog: string;

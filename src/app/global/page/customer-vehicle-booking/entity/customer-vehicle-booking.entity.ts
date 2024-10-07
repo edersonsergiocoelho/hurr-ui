@@ -3,7 +3,7 @@ import { CustomerVehicle } from "../../customer-vehicle/entity/customer-vehicle.
 import { Customer } from "../../customer/entity/customer.entity";
 
 export class CustomerVehicleBooking {
-  
+
   customerVehicleBookingId: string; // UUID em Java, string em TS
   customerVehicle: CustomerVehicle; // Entidade CustomerVehicle
   customer: Customer; // Entidade Customer
@@ -20,16 +20,21 @@ export class CustomerVehicleBooking {
   bookingStartKM: number; // Leitura do KM inicial
   bookingEndKM: number; // Leitura do KM final
   bookingStartDate?: Date; // Data e hora de início da reserva
+  checkInNotes?: string; // Notas de check-in
   bookingEndDate?: Date; // Data e hora de término da reserva
+  checkOutNotes?: string; // Notas de check-out
   bookingCancellationDate?: Date; // Data e hora de cancelamento da reserva
   withdrawableBookingValue: number; // Valor disponível para retirada
   totalBookingValue: number; // Valor total da reserva
+  totalAdditionalValue?: number; // Valor total dos serviços adicionais
+  totalFinalBookingValue: number; // Valor total final da reserva
+  bookingStatus: string; // Status da reserva (pode ser um enum)
   mpPaymentId: number; // Identificador do pagamento
   mpPayment?: any; // Dados de pagamento em JSON (equivalente ao campo JSONB em Java)
-  mpPaymentRefund?: any; // Dados de pagamento em JSON (equivalente ao campo JSONB em Java)
-  mpPaymentAdditionalId?: any; // Identificador do estorno
-  mpPaymentAdditional?: any; // Dados de pagamento em JSON (equivalente ao campo JSONB em Java)
-  createdDate: string;
-  modifiedDate?: string;
-  enabled: boolean;
+  mpPaymentRefund?: any; // Dados de estorno de pagamento em JSON
+  mpPaymentAdditionalId?: number; // Identificador de estorno adicional
+  mpPaymentAdditional?: any; // Dados de pagamento adicionais em JSON
+  createdDate: string; // Data de criação
+  modifiedDate?: string; // Data de modificação
+  enabled: boolean; // Indicador se está habilitado
 }

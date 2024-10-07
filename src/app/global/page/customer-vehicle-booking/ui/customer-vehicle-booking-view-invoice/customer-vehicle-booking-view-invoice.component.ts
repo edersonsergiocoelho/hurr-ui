@@ -78,6 +78,7 @@ export class CustomerVehicleBookingViewInvoiceComponent implements OnInit {
           if (resultCustomerVehicleBookingServiceFindById.body != null) {
             // Se a reserva for encontrada, armazena os dados no DTO.
             this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking = resultCustomerVehicleBookingServiceFindById.body;
+            console.log(this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking);
             // Calcula a diferença de dias entre a data de início e fim da reserva.
             this.customerVehicleBookingViewInvoiceUIDTO.days = this.momentUtilsService.diffDays(this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.reservationStartDate, this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.reservationEndDate);
           }

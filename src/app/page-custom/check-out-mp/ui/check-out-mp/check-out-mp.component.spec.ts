@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CheckOutMPComponent } from './checkout-mp.component';
+import { CheckOutMPComponent } from './check-out-mp.component';
 
 describe('CheckOutMPComponent', () => {
   let component: CheckOutMPComponent;

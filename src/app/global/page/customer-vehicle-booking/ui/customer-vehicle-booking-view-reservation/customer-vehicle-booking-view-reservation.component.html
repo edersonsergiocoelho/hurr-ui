@@ -199,13 +199,6 @@
         </ul>
       </div>
 
-      <ng-container *ngIf="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking != null">
-        <app-check-out-mp-payment-additional [customerId]="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customer.customerId"
-          [selectCustomerAddress]="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerAddressBilling || null"
-          [totalBookingValue]="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.totalBookingValue">
-        </app-check-out-mp-payment-additional>
-      </ng-container>
-
     </div>
   </div>
 </div>

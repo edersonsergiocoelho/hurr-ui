@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CheckOutMPComponent } from '../ui/check-out-mp/checkout-mp.component';
+import { CheckOutMPComponent } from '../ui/check-out-mp/check-out-mp.component';
 import { CheckOutMPRoutingModule } from './check-out-mp-routing.module';
 
 

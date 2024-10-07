@@ -63,6 +63,9 @@ export class CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent
       this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
       this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
 
+      this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.check_out_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog = translations['check_out_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog'];
+      this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.check_out_detail_message_service_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog = translations['check_out_detail_message_service_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog'];
+
     } catch (error: any) {
       // Exibe uma mensagem de erro, caso a chamada falhe
       this.messageService.add({
@@ -90,7 +93,7 @@ export class CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent
   // Método para alterar a taxa de limpeza e recalcular o valor final
   onChangeCleaningFee(event: any) {
     this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.cleaningFeeValue = event.value;
-    this.calculateFinalValue(); // Recalcula o valor final
+    this.calculateTotalFinalBookingValue(); // Recalcula o valor final
   }
 
   // Método que ajusta os valores de KM ao final do booking
@@ -105,22 +108,24 @@ export class CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent
       this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.limitedMileageTotalValue = 0;
     }
 
-    this.calculateFinalValue(); // Recalcula o valor final
+    this.calculateTotalFinalBookingValue(); // Recalcula o valor final
   }
 
   // Método para calcular o valor final do booking
-  calculateFinalValue() {
+  calculateTotalFinalBookingValue() {
     const baseValue = this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalBookingValue || 0;
     const kmExtraValue = this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.limitedMileageTotalValue || 0;
     let cleaningFee = 0;
 
-    // Se a opção de taxa de limpeza for igual a SIM, some o valor da taxa de limpeza
     if (this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.cleaningFeeValue === 'YES') {
       cleaningFee = this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.cleaningFee || 0;
     }
 
-    // Soma dos valores
-    this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.finalValue = baseValue + kmExtraValue + cleaningFee;
+    // Calcula o valor adicional (km adicional + taxa de limpeza)
+    this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalAdditionalValue = kmExtraValue + cleaningFee;
+
+    // Calcula o valor final da reserva (valor total da reserva + valor adicional)
+    this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalFinalBookingValue = baseValue + this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalAdditionalValue;
   }
 
   // Método para finalizar o booking
@@ -128,11 +133,6 @@ export class CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent
     this.ngxSpinnerService.show(); // Exibe o spinner de carregamento
 
     try {
-      // Verifica se o valor final foi atualizado
-      if (this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.finalValue != null && 
-          this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.finalValue > this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalBookingValue) {
-        this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalBookingValue = this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.finalValue;
-      }
 
       // Chama o serviço para finalizar o booking
       const data = await firstValueFrom(this.customerVehicleBookingService.checkOut(this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking).pipe(first()));
