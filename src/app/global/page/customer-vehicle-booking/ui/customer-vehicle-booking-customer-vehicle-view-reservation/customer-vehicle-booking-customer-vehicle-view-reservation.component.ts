@@ -4,22 +4,23 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
 import { first, firstValueFrom } from 'rxjs';
-import { CustomerVehicleBookingCustomerVehicleViewInvoiceUIDTO } from './dto/customer-vehicle-booking-customer-vehicle-view-invoice-ui-dto.dto';
+
 import { CustomerVehicleBookingService } from '../../service/customer-vehicle-booking.service';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
 import { MomentUtilsService } from 'src/app/utils/service/moment-utils-service';
+import { CustomerVehicleBookingCustomerVehicleViewReservationUIDTO } from './dto/customer-vehicle-booking-customer-vehicle-view-reservation-ui-dto.dto';
 
 @Component({
-  selector: 'app-customer-vehicle-booking-customer-vehicle-view-invoice',
-  templateUrl: './customer-vehicle-booking-customer-vehicle-view-invoice.component.html',
-  styleUrls: ['./customer-vehicle-booking-customer-vehicle-view-invoice.component.css']
+  selector: 'app-customer-vehicle-booking-customer-vehicle-view-reservation',
+  templateUrl: './customer-vehicle-booking-customer-vehicle-view-reservation.component.html',
+  styleUrls: ['./customer-vehicle-booking-customer-vehicle-view-reservation.component.css']
 })
-export class CustomerVehicleBookingCustomerVehicleViewInvoiceComponent implements OnInit {
+export class customerVehicleBookingCustomerVehicleViewReservationComponent implements OnInit {
 
   // DTO que contém os dados do sucesso do agendamento do veículo do cliente.
   customerVehicleBookingId: string | null;
-  customerVehicleBookingCustomerVehicleViewInvoiceUIDTO: CustomerVehicleBookingCustomerVehicleViewInvoiceUIDTO;
+  customerVehicleBookingCustomerVehicleViewInvoiceUIDTO: CustomerVehicleBookingCustomerVehicleViewReservationUIDTO;
 
   constructor(
     // Injeção dos serviços necessários.
@@ -32,7 +33,7 @@ export class CustomerVehicleBookingCustomerVehicleViewInvoiceComponent implement
     private route: ActivatedRoute,
     private translateService: TranslateService
   ) { 
-    
+
     this.activatedRoute.paramMap.subscribe(params => {
       this.customerVehicleBookingId = params.get('customerVehicleBookingId');
     });
@@ -50,7 +51,7 @@ export class CustomerVehicleBookingCustomerVehicleViewInvoiceComponent implement
   resetForm() {
 
     // Cria uma nova instância do DTO para armazenar os dados.
-    this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO = new CustomerVehicleBookingCustomerVehicleViewInvoiceUIDTO();
+    this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO = new CustomerVehicleBookingCustomerVehicleViewReservationUIDTO();
 
     // Chama o método assíncrono para carregar os dados e realizar as operações.
     this.asyncCallFunctions();

@@ -18,10 +18,12 @@ import { MomentUtilsService } from 'src/app/utils/service/moment-utils-service';
 export class CustomerVehicleBookingViewReservationComponent implements OnInit {
 
   // DTO que contém os dados do sucesso do agendamento do veículo do cliente.
+  customerVehicleBookingId: string | null;
   customerVehicleBookingViewReservationUIDTO: CustomerVehicleBookingViewReservationUIDTO;
 
   constructor(
     // Injeção dos serviços necessários.
+    private activatedRoute: ActivatedRoute,
     private customerVehicleBookingService: CustomerVehicleBookingService,
     private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
     private messageService: MessageService,
@@ -29,7 +31,12 @@ export class CustomerVehicleBookingViewReservationComponent implements OnInit {
     private ngxSpinnerService: NgxSpinnerService,
     private route: ActivatedRoute,
     private translateService: TranslateService
-  ) { }
+  ) { 
+
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.customerVehicleBookingId = params.get('customerVehicleBookingId');
+    });
+  }
 
   // Método que é executado quando o componente é inicializado.
   ngOnInit() {
@@ -44,21 +51,6 @@ export class CustomerVehicleBookingViewReservationComponent implements OnInit {
 
     // Cria uma nova instância do DTO para armazenar os dados.
     this.customerVehicleBookingViewReservationUIDTO = new CustomerVehicleBookingViewReservationUIDTO();
-
-    // Obtém os parâmetros da URL (query params) e os armazena no DTO.
-    this.route.queryParams.subscribe(params => {
-      this.customerVehicleBookingViewReservationUIDTO.collectionId = params['collection_id'];
-      this.customerVehicleBookingViewReservationUIDTO.collectionStatus = params['collection_status'];
-      this.customerVehicleBookingViewReservationUIDTO.paymentId = params['payment_id'];
-      this.customerVehicleBookingViewReservationUIDTO.status = params['status'];
-      this.customerVehicleBookingViewReservationUIDTO.externalReference = params['external_reference'];
-      this.customerVehicleBookingViewReservationUIDTO.paymentType = params['payment_type'];
-      this.customerVehicleBookingViewReservationUIDTO.merchantOrderId = params['merchant_order_id'];
-      this.customerVehicleBookingViewReservationUIDTO.preferenceId = params['preference_id'];
-      this.customerVehicleBookingViewReservationUIDTO.siteId = params['site_id'];
-      this.customerVehicleBookingViewReservationUIDTO.processingMode = params['processing_mode'];
-      this.customerVehicleBookingViewReservationUIDTO.merchantAccountId = params['merchant_account_id'];
-    });
 
     // Chama o método assíncrono para carregar os dados e realizar as operações.
     this.asyncCallFunctions();
@@ -80,14 +72,17 @@ export class CustomerVehicleBookingViewReservationComponent implements OnInit {
       this.customerVehicleBookingViewReservationUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
 
       // Segunda operação: busca os dados da reserva de veículo do cliente pelo paymentId.
-      const resultCustomerVehicleBookingServiceFindById = await firstValueFrom(this.customerVehicleBookingService.findByPaymentId(this.customerVehicleBookingViewReservationUIDTO.paymentId).pipe(first()));
+      if (this.customerVehicleBookingId != null) {
 
-      if (resultCustomerVehicleBookingServiceFindById.status == 200) {
-        if (resultCustomerVehicleBookingServiceFindById.body != null) {
-          // Se a reserva for encontrada, armazena os dados no DTO.
-          this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking = resultCustomerVehicleBookingServiceFindById.body;
-          // Calcula a diferença de dias entre a data de início e fim da reserva.
-          this.customerVehicleBookingViewReservationUIDTO.days = this.momentUtilsService.diffDays(this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.reservationStartDate, this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.reservationEndDate);
+        const resultCustomerVehicleBookingServiceFindById = await firstValueFrom(this.customerVehicleBookingService.findById(this.customerVehicleBookingId).pipe(first()));
+
+        if (resultCustomerVehicleBookingServiceFindById.status == 200) {
+          if (resultCustomerVehicleBookingServiceFindById.body != null) {
+            // Se a reserva for encontrada, armazena os dados no DTO.
+            this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking = resultCustomerVehicleBookingServiceFindById.body;
+            // Calcula a diferença de dias entre a data de início e fim da reserva.
+            this.customerVehicleBookingViewReservationUIDTO.days = this.momentUtilsService.diffDays(this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.reservationStartDate, this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.reservationEndDate);
+          }
         }
       }
 
