@@ -2,6 +2,7 @@ import { SelectItem } from "primeng/api";
 import { CustomerVehicleBookingSearchDTO } from "../../../dto/customer-vehicle-booking-search-dto.dto";
 import { CustomerVehicleReview } from "src/app/global/page/customer-vehicle-review/entity/customer-vehicle-review.entity";
 import { TranslateConfirmServiceDTO } from "src/app/core/translate/dto/translate-confirm-service-dto.dto";
+import { CustomerVehicleBooking } from "../../../entity/customer-vehicle-booking.entity";
 
 export class CustomerVehicleBookingSearchUIDTO extends TranslateConfirmServiceDTO {
 
@@ -20,7 +21,8 @@ export class CustomerVehicleBookingSearchUIDTO extends TranslateConfirmServiceDT
   customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO;
   customerVehicleBookings: Array<any>;
 
-  customerVehicleReview: CustomerVehicleReview;
+  selectedCustomerVehicleBooking: CustomerVehicleBooking;
+  selectedCustomerVehicleReview: CustomerVehicleReview;
 
   // Messages
   label_created_date_option_1_CustomerVehicleBookingSearch: string;

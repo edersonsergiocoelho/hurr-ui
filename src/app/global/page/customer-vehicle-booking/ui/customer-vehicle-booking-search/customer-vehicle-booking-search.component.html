@@ -11,6 +11,29 @@
     </div>
   </div>
 
+  <p-overlayPanel #overlayPanelWriteAReview>
+    <div class="flex flex-column gap-3 w-25rem">
+      <div>
+        <textarea rows="10" cols="50" pInputTextarea name="review"
+          [(ngModel)]="customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.review"
+          placeholder="{{'placeholder_review_CustomerVehicleBookingCustomerVehicleSearch' | translate}}">
+        </textarea>
+      </div>
+
+      <div>
+        <p-rating [(ngModel)]="customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.rating"
+          [stars]="5" [cancel]="false" />
+      </div>
+
+      <div>
+        <div class="flex">
+          <p-button label="{{'span_button_label_save_Generic' | translate}}" icon="pi pi-save"
+            (onClick)="onClickWriteAReview(customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview)" />
+        </div>
+      </div>
+    </div>
+  </p-overlayPanel>
+
   <div class="card">
 
     <p-dataView 
@@ -192,36 +215,13 @@
                   {{'span_button_label_view_invoice_Generic' | translate}}
                 </a>
 
-                <a *ngIf="item.bookingEndDate != null"
-                  tabindex="0"
+                <a tabindex="0"
                   class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-                  style="border-radius: 6px;"
-                  (click)="clickOverlayPanelWriteAReview($event, item)">
+                  [ngStyle]="item.bookingEndDate == null ? {'pointer-events': 'none', 'opacity': '0.5'} : {}"
+                  (click)="clickOverlayPanelWriteAReview($event, item)" style="border-bottom-right-radius: 6px;">
                   <i class="pi pi-comment mr-2 mb-2 md:mb-0"></i>
                   {{'span_button_label_write_a_review_Generic' | translate}}
                 </a>
-
-                <p-overlayPanel #overlayPanelWriteAReview>
-                  <div class="flex flex-column gap-3 w-25rem">
-                    <div>
-                      <textarea rows="10" cols="50" pInputTextarea name="review" [(ngModel)]="item.review"
-                        placeholder="{{'placeholder_review_CustomerVehicleBookingSearch' | translate}}">
-                      </textarea>
-                    </div>
-
-                    <div (click)="$event.stopPropagation()">
-                      <p-rating [(ngModel)]="item.rating" [stars]="5" [cancel]="false"
-                        (click)="$event.stopPropagation()" />
-                    </div>
-
-                    <div>
-                      <div class="flex">
-                        <p-button label="{{'span_button_label_save_Generic' | translate}}" icon="pi pi-save"
-                          (onClick)="onClickWriteAReview(item)" />
-                      </div>
-                    </div>
-                  </div>
-                </p-overlayPanel>
 
               </div>
             </div>

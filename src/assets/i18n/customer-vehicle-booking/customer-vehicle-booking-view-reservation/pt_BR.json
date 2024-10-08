@@ -2,11 +2,11 @@
   "thanks_CustomerVehicleBookingViewReservation": "Obrigado!",
   "successful_order_CustomerVehicleBookingViewReservation": "Pedido Efetuado Com Sucesso",
   "thanks_successful_order_CustomerVehicleBookingViewReservation": "Muito Obrigado Por Escolher A HURR.",
-  "title_CustomerVehicleBookingViewReservation": "Fatura",
+
+  "title_CustomerVehicleBookingViewReservation": "Reserva",
   "booking_CustomerVehicleBookingViewReservation": "Número Da Reserva:",
   "billing_address_CustomerVehicleBookingViewReservation": "Endereço De Cobrança",
   "payment_CustomerVehicleBookingViewReservation": "Pagamento",
-  "payment_additional_CustomerVehicleBookingViewReservation": "Pagamento Adicional",
   "amex_credit_card_CustomerVehicleBookingViewReservation": "Amex Cartão De Crédito",
   "amex_debit_card_CustomerVehicleBookingViewReservation": "Amex Cartão De Débito",
   "mastercard_credit_card_CustomerVehicleBookingViewReservation": "Mastercard Cartão De Crédito",

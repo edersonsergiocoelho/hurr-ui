@@ -26,9 +26,6 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
   // DTO's
   customerVehicleBookingSearchUIDTO: CustomerVehicleBookingSearchUIDTO;
 
-  // Utils
-  decimalPipe: DecimalPipeService;
-
   // Componentes
   @ViewChild('overlayPanelWriteAReview') overlayPanelWriteAReview: OverlayPanel;
 
@@ -55,7 +52,7 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     this.customerVehicleBookingSearchUIDTO.customerVehicleBookings = new Array<CustomerVehicleBooking>;
     this.customerVehicleBookingSearchUIDTO.customerVehicleBookingSearchDTO = new CustomerVehicleBookingSearchDTO();
 
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview = new CustomerVehicleReview();
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview = new CustomerVehicleReview();
 
     this.asyncCallFunctions();
   }
@@ -90,7 +87,6 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
       this.customerVehicleBookingSearchUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
       this.customerVehicleBookingSearchUIDTO.save_cancel_booking_message_service_CustomerVehicleBookingSearch = translations['save_cancel_booking_message_service_CustomerVehicleBookingSearch'];
       this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch = translations['save_success_write_a_review_message_service_CustomerVehicleBookingSearch'];
-
 
     this.customerVehicleBookingSearchUIDTO.sortOptions = [
       { label: '' + this.customerVehicleBookingSearchUIDTO.label_created_date_option_1_CustomerVehicleBookingSearch, value: '!createdDate' },
@@ -284,33 +280,28 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
 
   clickOverlayPanelWriteAReview(event: any, customerVehicleBooking: any) {
 
-    this.customerVehicleReviewService.findByCustomerVehicleIdAndCustomerId(customerVehicleBooking.customerVehicle.customerVehicleId, customerVehicleBooking.customer.customerId).pipe(first()).subscribe({
+    this.ngxSpinnerService.show();
+
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleBooking = new CustomerVehicleBooking;
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview = new CustomerVehicleReview;
+
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleBooking = customerVehicleBooking;
+
+    this.customerVehicleReviewService.findByCustomerVehicleBookingIdAndCustomerId(customerVehicleBooking.customerVehicleBookingId, customerVehicleBooking.customer.customerId).pipe(first()).subscribe({
       next: (data: any) => {
 
         if (data.status == 200 && data.body != null) {
+          this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview = data.body;
+        }
 
-          customerVehicleBooking.customerVehicleReviewId = data.body.customerVehicleReviewId;
-          customerVehicleBooking.review = data.body.review;
-          customerVehicleBooking.rating = data.body.rating;
-
-          if (this.overlayPanelWriteAReview.overlayVisible) {
-            this.overlayPanelWriteAReview.hide();
-          } else {
-            this.overlayPanelWriteAReview.show(event);
-          }
+        if (this.overlayPanelWriteAReview.overlayVisible) {
+          this.overlayPanelWriteAReview.hide();
+        } else {
+          this.overlayPanelWriteAReview.show(event);
         }
 
       },
       error: (error) => {
-
-        if (error.status == 404) {
-
-          if (this.overlayPanelWriteAReview.overlayVisible) {
-            this.overlayPanelWriteAReview.hide();
-          } else {
-            this.overlayPanelWriteAReview.show(event);
-          }
-        }
 
         if (error.status == 500) {
 
@@ -329,20 +320,18 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     });
   }
 
-  onClickWriteAReview(customerVehicleBooking: any) {
+  onClickWriteAReview(customerVehicleReview: any) {
 
     this.ngxSpinnerService.show();
 
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview.customerVehicleBooking = customerVehicleBooking;
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview.customer = customerVehicleBooking.customer;
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview.review = customerVehicleBooking.review;
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview.rating = customerVehicleBooking.rating;
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.customerVehicleBooking = this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleBooking;
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.customer = this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleBooking.customer;
 
-    if (customerVehicleBooking.customerVehicleReviewId == null) {
+    if (this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.customerVehicleReviewId == null) {
 
-      this.customerVehicleReviewService.save(this.customerVehicleBookingSearchUIDTO.customerVehicleReview).pipe(first()).subscribe({
+      this.customerVehicleReviewService.save(this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview).pipe(first()).subscribe({
         next: (data: any) => {
-  
+
           if (data.status == 201) {
   
             this.messageService.add({ 
@@ -377,9 +366,9 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
 
     } else {
 
-      this.customerVehicleBookingSearchUIDTO.customerVehicleReview.customerVehicleReviewId = customerVehicleBooking.customerVehicleReviewId;
+      this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.customerVehicleReviewId = customerVehicleReview.customerVehicleReviewId;
 
-      this.customerVehicleReviewService.update(this.customerVehicleBookingSearchUIDTO.customerVehicleReview).pipe(first()).subscribe({
+      this.customerVehicleReviewService.update(this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview).pipe(first()).subscribe({
         next: (data: any) => {
 
           if (data.status == 200) {

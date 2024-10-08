@@ -1,7 +1,7 @@
 <div class="block-content">
-  <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+  <div class="surface-section px-4 py-2 md:px-6 lg:px-8">
 
-    <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleBookingViewInvoice' | translate}}</h1>
+    <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleBookingViewReservation' | translate}}</h1>
 
     <span class="text-700 text-xl">
       {{'thanks_CustomerVehicleBookingViewReservation' | translate}}
@@ -26,6 +26,18 @@
       </div>
 
       <div>
+        <button pbutton="" pripple=""
+          label="Print" icon="pi pi-arrow-circle-left"
+          (click)="navigateToCustomerVehicleBooking()"
+          class="p-element p-ripple p-button-outlined p-button-secondary p-button p-component">
+          <span class="p-button-icon p-button-icon-left pi pi-arrow-circle-left" 
+            aria-hidden="true">
+          </span>
+          <span class="p-button-label">
+            {{'span_button_label_to_go_back_Generic' | translate}}
+          </span>
+          <span class="p-ink"></span>
+        </button>
         <button pbutton="" pripple=""
           label="Print" icon="pi pi-print"
           (click)="printPage()"
@@ -175,24 +187,24 @@
             <br>
             
             <span class="text-900 mb-1">
-              {{'installments_CustomerVehicleBookingViewInvoice' | translate}}
+              {{'installments_CustomerVehicleBookingViewReservation' | translate}}
               {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.mpPayment.installments }}
             </span>
             
             <span class="text-900 mb-1">
-              {{'transaction_amount_CustomerVehicleBookingViewInvoice' | translate}}
+              {{'transaction_amount_CustomerVehicleBookingViewReservation' | translate}}
               {{'currency_brl_Generic' | translate}} 
               {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.mpPayment.transactionAmount | number:'1.2-2' }}
             </span>
             
             <span class="text-900 mb-1">
-              {{'installment_amount_CustomerVehicleBookingViewInvoice' | translate}}
+              {{'installment_amount_CustomerVehicleBookingViewReservation' | translate}}
               {{'currency_brl_Generic' | translate}} 
               {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.mpPayment.transactionDetails.installmentAmount | number:'1.2-2' }}
             </span>
             
             <span class="text-900 mb-1">
-              {{'total_paid_amount_CustomerVehicleBookingViewInvoice' | translate}}
+              {{'total_paid_amount_CustomerVehicleBookingViewReservation' | translate}}
               {{'currency_brl_Generic' | translate}} 
               {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.mpPayment.transactionDetails.totalPaidAmount | number:'1.2-2' }}
             </span>
@@ -214,9 +226,9 @@
 
           <li *ngIf="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking != null" class="flex justify-content-between mb-3">
             <span class="text-900">
-              {{'daily_rate_CustomerVehicleBookingViewInvoice' | translate}}
+              {{'daily_rate_CustomerVehicleBookingViewReservation' | translate}}
               {{'currency_brl_Generic' | translate}} 
-              {{customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}} x {{ customerVehicleBookingViewReservationUIDTO.days }} {{ 'days_CustomerVehicleBookingViewInvoice' | translate }}
+              {{customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}} x {{ customerVehicleBookingViewReservationUIDTO.days }} {{ 'days_CustomerVehicleBookingViewReservation' | translate }}
             </span>
             <span class="text-900 font-medium text-lg">
               {{'currency_brl_Generic' | translate}} 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
@@ -29,7 +29,7 @@ export class CustomerVehicleBookingViewReservationComponent implements OnInit {
     private messageService: MessageService,
     private momentUtilsService: MomentUtilsService,
     private ngxSpinnerService: NgxSpinnerService,
-    private route: ActivatedRoute,
+    private router: Router,
     private translateService: TranslateService
   ) { 
 
@@ -123,6 +123,11 @@ export class CustomerVehicleBookingViewReservationComponent implements OnInit {
       'success_message_service_Generic'
     ];
     return keys;
+  }
+
+  // Método para imprimir a página.
+  navigateToCustomerVehicleBooking() {
+    this.router.navigate(['customer-vehicle-booking']);
   }
 
   // Método para imprimir a página.

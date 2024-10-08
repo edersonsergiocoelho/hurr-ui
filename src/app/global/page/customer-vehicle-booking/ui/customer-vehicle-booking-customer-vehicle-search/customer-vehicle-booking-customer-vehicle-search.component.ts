@@ -209,7 +209,7 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
 
     this.customerVehicleBookingCustomerVehicleSearchUIDTO.selectedCustomerVehicleBooking = customerVehicleBooking;
 
-    this.customerVehicleReviewService.findByCustomerVehicleIdAndCustomerId(customerVehicleBooking.customerVehicle.customerVehicleId, customerVehicleBooking.customerVehicle.customer.customerId).pipe(first()).subscribe({
+    this.customerVehicleReviewService.findByCustomerVehicleBookingIdAndCustomerId(customerVehicleBooking.customerVehicle.customerVehicleId, customerVehicleBooking.customerVehicle.customer.customerId).pipe(first()).subscribe({
       next: (data: any) => {
 
         if (data.status == 200 && data.body != null) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
@@ -29,7 +29,8 @@ export class CustomerVehicleBookingViewInvoiceComponent implements OnInit {
     private messageService: MessageService,
     private momentUtilsService: MomentUtilsService,
     private ngxSpinnerService: NgxSpinnerService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private router: Router
   ) { 
 
     this.activatedRoute.paramMap.subscribe(params => {
@@ -78,7 +79,7 @@ export class CustomerVehicleBookingViewInvoiceComponent implements OnInit {
           if (resultCustomerVehicleBookingServiceFindById.body != null) {
             // Se a reserva for encontrada, armazena os dados no DTO.
             this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking = resultCustomerVehicleBookingServiceFindById.body;
-            console.log(this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking);
+            
             // Calcula a diferença de dias entre a data de início e fim da reserva.
             this.customerVehicleBookingViewInvoiceUIDTO.days = this.momentUtilsService.diffDays(this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.reservationStartDate, this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.reservationEndDate);
           }
@@ -122,6 +123,10 @@ export class CustomerVehicleBookingViewInvoiceComponent implements OnInit {
       'success_message_service_Generic'
     ];
     return keys;
+  }
+
+  navigateToCustomerVehicleBooking() {
+    this.router.navigate(['customer-vehicle-booking']);
   }
 
   // Método para imprimir a página.
