@@ -65,7 +65,7 @@ export class EarningsResumeComponent {
 
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: this.earningsResumeUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -81,7 +81,7 @@ export class EarningsResumeComponent {
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: this.earningsResumeUIDTO.error_message_service_Generic,
         detail: error.toString() 
       });
     }

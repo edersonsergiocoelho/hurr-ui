@@ -19,6 +19,5 @@ export class CustomerVehicleBookingViewInvoiceUIDTO extends TranslateSeverityDTO
   // 
   days: any;
   
-  customerVehicleBooking: CustomerVehicleBooking;
-  customerVehicleFilePhoto: any;
+  customerVehicleBooking: any;
 }

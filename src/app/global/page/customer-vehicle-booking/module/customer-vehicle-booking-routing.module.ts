@@ -6,7 +6,6 @@ import { CustomerVehicleBookingCustomerVehicleComponent } from '../ui/customer-v
 import { CustomerVehicleBookingCustomerVehicleViewInvoiceComponent } from '../ui/customer-vehicle-booking-customer-vehicle-view-invoice/customer-vehicle-booking-customer-vehicle-view-invoice.component';
 import { CustomerVehicleBookingViewReservationComponent } from '../ui/customer-vehicle-booking-view-reservation/customer-vehicle-booking-view-reservation.component';
 import { CustomerVehicleBookingViewInvoiceComponent } from '../ui/customer-vehicle-booking-view-invoice/customer-vehicle-booking-view-invoice.component';
-import { customerVehicleBookingCustomerVehicleViewReservationComponent } from '../ui/customer-vehicle-booking-customer-vehicle-view-reservation/customer-vehicle-booking-customer-vehicle-view-reservation.component';
 
 const routes: Routes = [
   // Customer
@@ -18,7 +17,6 @@ const routes: Routes = [
   // CustomerVehicle
   {path: 'customer-vehicle-booking/customer-vehicle', component: CustomerVehicleBookingCustomerVehicleComponent},
   {path: 'customer-vehicle-booking/customer-vehicle/view-invoice/:customerVehicleBookingId', component: CustomerVehicleBookingCustomerVehicleViewInvoiceComponent},
-  {path: 'customer-vehicle-booking/customer-vehicle/view-reservation/:customerVehicleBookingId', component: customerVehicleBookingCustomerVehicleViewReservationComponent},
 ];
 
 @NgModule({

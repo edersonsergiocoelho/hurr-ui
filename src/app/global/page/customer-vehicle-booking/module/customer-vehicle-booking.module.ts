@@ -29,7 +29,6 @@ import { CheckOutMPPaymentAdditionalModule } from 'src/app/page-custom/check-out
 import { CustomerVehicleBookingCustomerVehicleViewInvoiceComponent } from '../ui/customer-vehicle-booking-customer-vehicle-view-invoice/customer-vehicle-booking-customer-vehicle-view-invoice.component';
 import { CustomerVehicleBookingViewReservationComponent } from '../ui/customer-vehicle-booking-view-reservation/customer-vehicle-booking-view-reservation.component';
 import { CustomerVehicleBookingViewInvoiceComponent } from '../ui/customer-vehicle-booking-view-invoice/customer-vehicle-booking-view-invoice.component';
-import { customerVehicleBookingCustomerVehicleViewReservationComponent } from '../ui/customer-vehicle-booking-customer-vehicle-view-reservation/customer-vehicle-booking-customer-vehicle-view-reservation.component';
 
 @NgModule({
   declarations: [
@@ -43,9 +42,7 @@ import { customerVehicleBookingCustomerVehicleViewReservationComponent } from '.
     CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent,
     CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent,
     CustomerVehicleBookingCustomerVehicleSearchComponent,
-    CustomerVehicleBookingCustomerVehicleViewInvoiceComponent,
-    customerVehicleBookingCustomerVehicleViewReservationComponent
-  ],
+    CustomerVehicleBookingCustomerVehicleViewInvoiceComponent  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -81,8 +78,7 @@ import { customerVehicleBookingCustomerVehicleViewReservationComponent } from '.
     CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent,
     CustomerVehicleBookingCustomerVehicleComponent,
     CustomerVehicleBookingCustomerVehicleSearchComponent,
-    CustomerVehicleBookingCustomerVehicleViewInvoiceComponent,
-    customerVehicleBookingCustomerVehicleViewReservationComponent
+    CustomerVehicleBookingCustomerVehicleViewInvoiceComponent
   ],
   providers: [
     DialogService

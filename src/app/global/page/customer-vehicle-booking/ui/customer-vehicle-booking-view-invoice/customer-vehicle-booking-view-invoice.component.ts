@@ -94,8 +94,8 @@ export class CustomerVehicleBookingViewInvoiceComponent implements OnInit {
         if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status == 200) {
           if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
             // Se a foto for encontrada, armazena no DTO e gera o URI de base64 para exibição.
-            this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleFilePhoto = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
-            this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleFilePhoto.dataURI = `data:${this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleFilePhoto.contentType};base64,${this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleFilePhoto.dataAsByteArray}`;
+            this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.customerVehicleFilePhoto = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
+            this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.dataURI = `data:${this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.customerVehicleFilePhoto.contentType};base64,${this.customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.customerVehicleFilePhoto.dataAsByteArray}`;
           }
         }
       }
@@ -129,8 +129,19 @@ export class CustomerVehicleBookingViewInvoiceComponent implements OnInit {
     this.router.navigate(['customer-vehicle-booking']);
   }
 
-  // Método para imprimir a página.
-  printPage() {
-    window.print();
+  getVehicleColorStyle(vehicleColorName: string): string {
+    switch(vehicleColorName.toLowerCase()) {
+      case 'preto': return '#000000';
+      case 'branco': return '#FFFFFF';
+      case 'prata': return '#C0C0C0';
+      case 'cinza': return '#808080';
+      case 'vermelho': return '#FF0000';
+      case 'azul': return '#0000FF';
+      case 'amarelo': return '#FFFF00';
+      case 'verde': return '#008000';
+      case 'marrom': return '#A52A2A';
+      case 'bege': return '#F5F5DC';
+      default: return '#D3D3D3';  // Cor padrão para cores não mapeadas
+    }
   }
 }

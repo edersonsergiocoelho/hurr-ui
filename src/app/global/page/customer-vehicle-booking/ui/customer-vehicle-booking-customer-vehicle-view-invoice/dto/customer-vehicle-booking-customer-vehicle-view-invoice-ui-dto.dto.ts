@@ -19,6 +19,5 @@ export class CustomerVehicleBookingCustomerVehicleViewInvoiceUIDTO extends Trans
   // 
   days: any;
   
-  customerVehicleBooking: CustomerVehicleBooking;
-  customerVehicleFilePhoto: any;
+  customerVehicleBooking: any;
 }

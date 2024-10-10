@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
@@ -29,9 +29,10 @@ export class CustomerVehicleBookingCustomerVehicleViewInvoiceComponent implement
     private messageService: MessageService,
     private momentUtilsService: MomentUtilsService,
     private ngxSpinnerService: NgxSpinnerService,
-    private route: ActivatedRoute,
+    private router: Router,
     private translateService: TranslateService
-  ) { 
+  ) {
+
     this.activatedRoute.paramMap.subscribe(params => {
       this.customerVehicleBookingId = params.get('customerVehicleBookingId');
     });
@@ -94,8 +95,8 @@ export class CustomerVehicleBookingCustomerVehicleViewInvoiceComponent implement
         if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status == 200) {
           if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
             // Se a foto for encontrada, armazena no DTO e gera o URI de base64 para exibição.
-            this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleFilePhoto = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
-            this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleFilePhoto.dataURI = `data:${this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleFilePhoto.contentType};base64,${this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleFilePhoto.dataAsByteArray}`;
+            this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.customerVehicleFilePhoto = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
+            this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.dataURI = `data:${this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.customerVehicleFilePhoto.contentType};base64,${this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.customerVehicleFilePhoto.dataAsByteArray}`;
           }
         }
       }
@@ -125,8 +126,23 @@ export class CustomerVehicleBookingCustomerVehicleViewInvoiceComponent implement
     return keys;
   }
 
-  // Método para imprimir a página.
-  printPage() {
-    window.print();
+  getVehicleColorStyle(vehicleColorName: string): string {
+    switch(vehicleColorName.toLowerCase()) {
+      case 'preto': return '#000000';
+      case 'branco': return '#FFFFFF';
+      case 'prata': return '#C0C0C0';
+      case 'cinza': return '#808080';
+      case 'vermelho': return '#FF0000';
+      case 'azul': return '#0000FF';
+      case 'amarelo': return '#FFFF00';
+      case 'verde': return '#008000';
+      case 'marrom': return '#A52A2A';
+      case 'bege': return '#F5F5DC';
+      default: return '#D3D3D3';  // Cor padrão para cores não mapeadas
+    }
+  }
+
+  clickNavigateToCustomerVehicleBookingCustomerVehicle() {
+    this.router.navigate(['customer-vehicle-booking/customer-vehicle']);
   }
 }

@@ -15,7 +15,7 @@ export class CustomerVehicleSearchUIDTO {
   sortDir: string = '';
   sortBy: string | string[];
 
-  customerVehicles: Array<CustomerVehicle>;
+  customerVehicles: Array<any>;
 
   // DTO's
   customerVehicleSearchDTO: CustomerVehicleSearchDTO;

@@ -11,7 +11,6 @@ import { CustomerVehicleBookingSearchDTO } from '../../dto/customer-vehicle-book
 import { CustomerVehicleReviewService } from '../../../customer-vehicle-review/service/customer-vehicle-review.service';
 import { CustomerVehicleReview } from '../../../customer-vehicle-review/entity/customer-vehicle-review.entity';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
 import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { Router } from '@angular/router';
@@ -141,6 +140,22 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     }
   }
 
+  getVehicleColorStyle(vehicleColorName: string): string {
+    switch(vehicleColorName.toLowerCase()) {
+      case 'preto': return '#000000';
+      case 'branco': return '#FFFFFF';
+      case 'prata': return '#C0C0C0';
+      case 'cinza': return '#808080';
+      case 'vermelho': return '#FF0000';
+      case 'azul': return '#0000FF';
+      case 'amarelo': return '#FFFF00';
+      case 'verde': return '#008000';
+      case 'marrom': return '#A52A2A';
+      case 'bege': return '#F5F5DC';
+      default: return '#D3D3D3';  // Cor padrão para cores não mapeadas
+    }
+  }
+
   // Função assíncrona que realiza a busca de reservas de veículos com base no evento de carregamento.
   async search(event: DataViewLazyLoadEvent | null) {
 
@@ -183,8 +198,8 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
       // Trata erros específicos e exibe mensagens de erro.
       if (error.status === 500) {
         this.messageService.add({ 
-          severity: 'error', 
-          summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
+          severity: SeverityConstants.ERROR, 
+          summary: this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
           detail: error.error.message 
         });
       }
@@ -208,13 +223,13 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     try {
       // Solicita a foto de capa associada ao veículo de cliente.
       const customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto = await firstValueFrom(this.customerVehicleFilePhotoService.findByCustomerVehicleAndCoverPhoto(customerVehicleBooking.customerVehicle.customerVehicleId).pipe(first()));
-        
+
       if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status == 200 &&
         customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
           
         // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI ao veículo.
         customerVehicleBooking.customerVehicle.file = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
-        customerVehicleBooking.customerVehicle.dataURI = `data:${customerVehicleBooking.file.contentType};base64,${customerVehicleBooking.file.dataAsByteArray}`;
+        customerVehicleBooking.customerVehicle.dataURI = `data:${customerVehicleBooking.customerVehicle.file.contentType};base64,${customerVehicleBooking.customerVehicle.file.dataAsByteArray}`;
       }
 
     } catch (error: any) {
@@ -306,8 +321,8 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
         if (error.status == 500) {
 
           this.messageService.add({ 
-            severity: 'error', 
-            summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
+            severity: SeverityConstants.ERROR, 
+            summary: this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
             detail: error.error.message 
           });
         }
@@ -335,9 +350,9 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
           if (data.status == 201) {
   
             this.messageService.add({ 
-              severity: 'success', 
-              summary: '' + this.customerVehicleBookingSearchUIDTO.save_message_service_Generic, 
-              detail: '' +  this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
+              severity: SeverityConstants.SUCCESS, 
+              summary: this.customerVehicleBookingSearchUIDTO.save_message_service_Generic, 
+              detail: this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
             });
   
             this.overlayPanelWriteAReview.hide();
@@ -349,8 +364,8 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
           if (error.status == 500) {
   
             this.messageService.add({ 
-              severity: 'error', 
-              summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
+              severity: SeverityConstants.ERROR, 
+              summary: this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
               detail: error.error.message 
             });
           }
@@ -374,9 +389,9 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
           if (data.status == 200) {
 
             this.messageService.add({ 
-              severity: 'success', 
-              summary: '' + this.customerVehicleBookingSearchUIDTO.save_message_service_Generic, 
-              detail: '' +  this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
+              severity: SeverityConstants.SUCCESS, 
+              summary: this.customerVehicleBookingSearchUIDTO.save_message_service_Generic, 
+              detail: this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
             });
 
             this.overlayPanelWriteAReview.hide();
@@ -388,8 +403,8 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
           if (error.status == 500) {
 
             this.messageService.add({ 
-              severity: 'error', 
-              summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
+              severity: SeverityConstants.ERROR, 
+              summary: this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
               detail: error.error.message 
             });
           }

@@ -28,7 +28,7 @@
         <div class="col-12">
           <div style="padding-top: 20px;">
 
-            <li *ngIf="item.paymentStatus.paymentStatusName == 'PAID'"
+            <li *ngIf="item?.paymentStatus != null && item?.paymentStatus?.paymentStatusName == 'PAID'"
               class="flex flex-column md:flex-row md:align-items-center md:justify-content-between p-3 border-1 mb-3 bg-green-50 border-green-500"
               style="border-radius: 10px;">
               <div>
@@ -60,7 +60,7 @@
               </div>
             </li>
 
-            <li *ngIf="item.paymentStatus.paymentStatusName == 'PENDING'"
+            <li *ngIf="item?.paymentStatus != null && item?.paymentStatus?.paymentStatusName == 'PENDING'"
               class="flex flex-column md:flex-row md:align-items-center md:justify-content-between p-3 border-1 mb-3 bg-yellow-50 border-yellow-500"
               style="border-radius: 10px;">
               <div>
@@ -92,7 +92,7 @@
               </div>
             </li>
 
-            <li *ngIf="item.paymentStatus.paymentStatusName == 'UNPAID'"
+            <li *ngIf="item?.paymentStatus != null && item?.paymentStatus?.paymentStatusName == 'UNPAID'"
               class="flex flex-column md:flex-row md:align-items-center md:justify-content-between p-3 border-1 mb-3 bg-pink-50 border-pink-500"
               style="border-radius: 10px;">
               <div>

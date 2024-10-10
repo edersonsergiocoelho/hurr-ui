@@ -1,18 +1,24 @@
 {
-  "thanks_CustomerVehicleBookingCustomerVehicleViewInvoice": "Obrigado!",
-  "successful_order_CustomerVehicleBookingCustomerVehicleViewInvoice": "Pedido Efetuado Com Sucesso",
-  "thanks_successful_order_CustomerVehicleBookingCustomerVehicleViewInvoice": "Muito Obrigado Por Escolher A HURR.",
+  "title_CustomerVehicleBookingCustomerVehicleViewInvoice": "Fatura",
   "booking_CustomerVehicleBookingCustomerVehicleViewInvoice": "Número Da Reserva:",
   "billing_address_CustomerVehicleBookingCustomerVehicleViewInvoice": "Endereço De Cobrança",
   "payment_CustomerVehicleBookingCustomerVehicleViewInvoice": "Pagamento",
+  "payment_additional_CustomerVehicleBookingCustomerVehicleViewInvoice": "Pagamento Adicional",
   "amex_credit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Amex Cartão De Crédito",
   "amex_debit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Amex Cartão De Débito",
   "mastercard_credit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Mastercard Cartão De Crédito",
   "mastercard_debit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Mastercard Cartão De Débito",
   "visa_credit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Visa Cartão De Crédito",
   "visa_debit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Visa Cartão De Débito",
+  "installments_CustomerVehicleBookingCustomerVehicleViewInvoice": "Quantidade De Parcelas: ",
+  "transaction_amount_CustomerVehicleBookingCustomerVehicleViewInvoice": "Valor Da Transação: ",
+  "installment_amount_CustomerVehicleBookingCustomerVehicleViewInvoice": "Valor Da Parcela: ",
+  "total_paid_amount_CustomerVehicleBookingCustomerVehicleViewInvoice": "Valor Total Pago: ",
+  
   "days_CustomerVehicleBookingCustomerVehicleViewInvoice": "Dias",
   "summary_CustomerVehicleBookingCustomerVehicleViewInvoice": "Resumo",
-  "subtotal_CustomerVehicleBookingCustomerVehicleViewInvoice": "Subtotal",
+  "daily_rate_CustomerVehicleBookingCustomerVehicleViewInvoice": "Valor Total Da Diária",
+  "total_booking_value_CustomerVehicleBookingCustomerVehicleViewInvoice": "Total Reserva",
+  "total_additional_value_CustomerVehicleBookingCustomerVehicleViewInvoice": "Total Valor Adicional",
   "total_CustomerVehicleBookingCustomerVehicleViewInvoice": "Total"
 }

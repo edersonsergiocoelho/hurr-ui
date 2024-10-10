@@ -1,5 +1,7 @@
 export class CustomerVehicleSearchDTO {
 
+  customerId?: string;
+
   vehicleId?: string;
   vehicleModelId?: string;
   vehicleCategoryId: string;

@@ -95,6 +95,22 @@ export class CustomerVehicleSearchComponent implements OnInit {
     }
   }
 
+  getVehicleColorStyle(vehicleColorName: string): string {
+    switch(vehicleColorName.toLowerCase()) {
+      case 'preto': return '#000000';
+      case 'branco': return '#FFFFFF';
+      case 'prata': return '#C0C0C0';
+      case 'cinza': return '#808080';
+      case 'vermelho': return '#FF0000';
+      case 'azul': return '#0000FF';
+      case 'amarelo': return '#FFFF00';
+      case 'verde': return '#008000';
+      case 'marrom': return '#A52A2A';
+      case 'bege': return '#F5F5DC';
+      default: return '#D3D3D3';  // Cor padrão para cores não mapeadas
+    }
+  }
+
   async search(event: DataViewLazyLoadEvent | null) {
 
     this.paginate(event);
@@ -109,8 +125,8 @@ export class CustomerVehicleSearchComponent implements OnInit {
         this.customerVehicleSearchUIDTO.sortDir = "ASC";
       }
     }
-  
-    this.customerVehicleService.searchPage(this.customerVehicleSearchUIDTO.customerVehicleSearchDTO, this.customerVehicleSearchUIDTO.page, this.customerVehicleSearchUIDTO.size, this.customerVehicleSearchUIDTO.sortDir, this.customerVehicleSearchUIDTO.sortBy).pipe(first()).subscribe({
+
+    this.customerVehicleService.customerSearchPage(this.customerVehicleSearchUIDTO.customerVehicleSearchDTO, this.customerVehicleSearchUIDTO.page, this.customerVehicleSearchUIDTO.size, this.customerVehicleSearchUIDTO.sortDir, this.customerVehicleSearchUIDTO.sortBy).pipe(first()).subscribe({
       next: (data: any) => {
         this.customerVehicleSearchUIDTO.customerVehicles = data.body.content;
         this.customerVehicleSearchUIDTO.totalRecords = data.body.totalElements;
