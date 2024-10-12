@@ -1,0 +1,65 @@
+<!-- Tela Componetizada -->
+<div class="ui-fluid">
+  <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_PaymentMethod' | translate}}</h1>
+
+  <div class="grid" style="padding-top: 10px;">
+
+    <!-- Tela De Pesquisa -->
+    <div class="md:col-6 mb-2" [ngClass]="{'hidden': sidebarSearchVisible}">
+      <div class="card no-margin bordered-card">
+        <!-- Usando flexbox para alinhar o botão à direita -->
+        <div class="flex justify-content-end">
+          <button pButton pRipple 
+            type="button"
+            (click)="toggleSidebarSearch()">
+            <i class="pi pi-window-maximize"></i>
+          </button>
+        </div>
+        <app-payment-method-search (editRow)="onRowSelectEdit($event)" (deleteRow)="delete($event)"></app-payment-method-search>
+      </div>
+    </div>
+
+    <!-- Tela De Registro -->
+    <div class="md:col-6 mb-2" [ngClass]="{'hidden': sidebarRegisterVisible}">
+      <div class="card no-margin bordered-card">
+        <!-- Usando flexbox para alinhar o botão à direita -->
+        <div class="flex justify-content-end">
+          <button pButton pRipple 
+            type="button"
+            (click)="toggleSidebarRegister()">
+            <i class="pi pi-window-maximize"></i>
+          </button>
+        </div>
+        <app-payment-method-register (rowModified)="search()"></app-payment-method-register>
+      </div>
+    </div>
+  </div>
+
+  <p-sidebar [(visible)]="sidebarSearchVisible" [fullScreen]="true" [baseZIndex]="10000">
+    <button pButton pRipple 
+      class="p-button-rounded p-button-contrast md:w-12rem"
+      type="button"
+      (click)="toggleSidebarSearch()">
+      <i class="pi pi pi-times"></i>
+      <span class="p-button-label">
+        {{'span_button_label_close' | translate}}
+      </span>
+    </button>
+    <!-- Conteúdo do Sidebar -->
+    <app-payment-method-search (rowModified)="search()"></app-payment-method-search>
+  </p-sidebar>
+
+  <p-sidebar [(visible)]="sidebarRegisterVisible" [fullScreen]="true" [baseZIndex]="10000">
+    <button pButton pRipple 
+      class="p-button-rounded p-button-contrast md:w-12rem"
+      type="button"
+      (click)="toggleSidebarRegister()">
+      <i class="pi pi pi-times"></i>
+      <span class="p-button-label">
+        {{'span_button_label_close' | translate}}
+      </span>
+    </button>
+    <!-- Conteúdo do Sidebar -->
+    <app-payment-method-register (rowModified)="search()"></app-payment-method-register>
+  </p-sidebar>
+</div>

@@ -98,6 +98,11 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/home/home-search-cars/',
   '/assets/i18n/home/home-search-cars-detail/',
 
+  // PaymentMethod
+  '/assets/i18n/payment-method/payment-method/',
+  '/assets/i18n/payment-method/payment-method-search/',
+  '/assets/i18n/payment-method/payment-method-register/',
+
   // PaymentStatus
   '/assets/i18n/payment-status/payment-status/',
   '/assets/i18n/payment-status/payment-status-search/',

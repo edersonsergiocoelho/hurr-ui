@@ -1,13 +1,12 @@
 export class CustomerVehicleEditPhotosUIDTO {
   
-  // FileUpload
-  uploadedFiles: any;
-
   // Galleria
   displayCustom: boolean;
   activeIndex: number = 0;
   selectedCoverImage: any;
-
+  
+  // FileUpload
+  uploadedFiles: any;
   customerVehicleFilePhotos: Array<any>;
 
   // Messages

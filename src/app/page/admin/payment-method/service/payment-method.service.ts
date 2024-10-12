@@ -23,6 +23,15 @@ export class PaymentMethodService {
     );
   }
 
+  findByPaymentMethodName(paymentMethodName: string): Observable<HttpResponse<PaymentMethod>> {
+    const url = `${this.apiUrl}/by/payment-method-name/${paymentMethodName}`;
+    return this.httpClient.get<PaymentMethod>(url, { observe: 'response' }).pipe(
+      map((response: HttpResponse<PaymentMethod>) => {
+        return response;
+      })
+    );
+  }
+
   findAll(): Observable<HttpResponse<PaymentMethod[]>> {
     return this.httpClient.get<PaymentMethod[]>(this.apiUrl, { observe: 'response' }).pipe(
       map((response: HttpResponse<PaymentMethod[]>) => {
@@ -56,15 +65,6 @@ export class PaymentMethodService {
     );
   }
 
-  finalizeBooking(paymentMethod: PaymentMethod): Observable<HttpResponse<PaymentMethod>> {
-    const url = `${this.apiUrl}/finalize-booking/${paymentMethod.paymentMethodId}`;
-    return this.httpClient.put<PaymentMethod>(url, paymentMethod, { observe: 'response' }).pipe(
-      map((response: HttpResponse<PaymentMethod>) => {
-        return response;
-      })
-    );
-  }
-
   update(paymentMethod: PaymentMethod): Observable<HttpResponse<PaymentMethod>> {
     const url = `${this.apiUrl}/${paymentMethod.paymentMethodId}`;
     return this.httpClient.put<PaymentMethod>(url, paymentMethod, { observe: 'response' }).pipe(
@@ -77,6 +77,23 @@ export class PaymentMethodService {
   delete(paymentMethodId: string): Observable<HttpResponse<void> | null> {
     const url = `${this.apiUrl}/${paymentMethodId}`;
     return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(
+      catchError((error: any) => {
+        if (error.status === 404) {
+          return of(null);
+        } else {
+          throw error;
+        }
+      })
+    );
+  }
+
+  // Novo método para deletar múltiplos registros
+  deleteAll(paymentMethodIds: string[]): Observable<HttpResponse<void> | null> {
+    const url = `${this.apiUrl}/all`;
+    return this.httpClient.delete<void>(url, {
+      body: paymentMethodIds,
+      observe: 'response'
+    }).pipe(
       catchError((error: any) => {
         if (error.status === 404) {
           return of(null);

@@ -35,7 +35,6 @@ import { CustomerVehicleRegisterStep5Component } from '../ui/customer-vehicle-re
 import { CustomerVehicleRegisterStep6Component } from '../ui/customer-vehicle-register-step6/customer-vehicle-register-step6.component';
 import { CustomerVehicleRegisterStep7Component } from '../ui/customer-vehicle-register-step7/customer-vehicle-register-step7.component';
 import { ConfirmationService } from 'primeng/api';
-import { CustomerVehicleEditComponent } from '../ui/customer-vehicle-edit/customer-vehicle-edit.component';
 import { CustomerVehicleEditPhotosComponent } from '../ui/customer-vehicle-edit-photos/customer-vehicle-edit-photos.component';
 import { CustomerVehicleEditPriceDiscountComponent } from '../ui/customer-vehicle-edit-price-discount/customer-vehicle-edit-price-discount.component';
 import { CustomerVehicleEditAdvertisementStatusComponent } from '../ui/customer-vehicle-edit-advertisement-status/customer-vehicle-edit-advertisement-status.component';
@@ -54,7 +53,6 @@ import { InputSwitchModule } from 'primeng/inputswitch';
   declarations: [
     CustomerVehicleComponent,
     CustomerVehicleDetailComponent,
-    CustomerVehicleEditComponent,
     CustomerVehicleEditAddressesComponent,
     CustomerVehicleEditAddressesRegisterComponent,
     CustomerVehicleEditAddressesSearchComponent,
@@ -108,7 +106,6 @@ import { InputSwitchModule } from 'primeng/inputswitch';
   exports: [
     CustomerVehicleComponent,
     CustomerVehicleDetailComponent,
-    CustomerVehicleEditComponent,
     CustomerVehicleEditAddressesComponent,
     CustomerVehicleEditAddressesRegisterComponent,
     CustomerVehicleEditAddressesSearchComponent,

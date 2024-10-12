@@ -195,6 +195,7 @@
 
     </div>
 
+    <!-- MENU_SIDE_CUSTOMER_VEHICLE_EDIT -->
     <div class="flex relative lg:static p-5 flex-auto">
 
       <div *ngIf="isCustomerVehicleEdit()"
@@ -216,6 +217,20 @@
           <label *ngIf="homeUIDTO.customerVehicle != null" class="text-sm" style="text-align: center;">
             {{ homeUIDTO.customerVehicle.vehicleModel.vehicleModelName }}
           </label>
+
+          <div style="padding-top: 10px; align-items: center; text-align: center;">
+            <button pbutton="" pripple="" icon="pi pi-arrow-circle-left" label="Voltar"
+              class="p-element p-ripple m-0 p-button p-component mr-3 md:w-12rem"
+              (click)="clickRouterNavigateCustomerVehicle()">
+              <span
+                class="p-button-icon p-button-icon-left pi pi-arrow-circle-left" aria-hidden="true">
+              </span>
+              <span
+                class="p-button-label">{{'span_button_label_to_go_back_Generic' | translate}}
+              </span>
+              <span class="p-ink"></span>
+            </button>
+          </div>
 
           <p-divider align="center" layout="horizontal" styleclass="h-full mx-0 lg:mx-3" class="p-element">
           </p-divider>
@@ -267,6 +282,72 @@
             <a pripple=""
               class="p-ripple p-element cursor-pointer inline-flex align-items-center justify-content-center bg-pink-500 text-white border-2 border-pink-600 hover:bg-pink-600 text-600 transition-colors transition-duration-150 border-circle"
               style="width: 40px; height: 40px;"><i class="pi pi-sign-out text-xl"></i><span class="p-ink"></span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MENU_SIDE -->
+      <div *ngIf="isVisibleMenuSide()"
+        class="surface-card hidden lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-1 select-none shadow-2"
+        style="width: 280px; border-radius: 12px;">
+        <div class="flex flex-column h-full">
+
+          <p-divider align="center" layout="horizontal" styleclass="h-full mx-0 lg:mx-3" class="p-element">
+          </p-divider>
+
+          <div class="overflow-y-auto">
+            <div class="p-3">
+              <div class="p-input-icon-left w-full">
+                <i class="pi pi-search"></i>
+                <input type="text" pInputText="" placeholder="{{'placeholder_search_Home'| translate}}"
+                  class="p-inputtext-lg p-component p-element border-1 surface-border w-full" style="border-radius: 30px;"
+                  [(ngModel)]="searchQuery">
+              </div>
+            </div>
+            <ul class="list-none px-3 pb-3 pt-0 m-0">
+              <ng-template #recursiveMenu let-menus>
+                <li *ngFor="let menu of filterMenuSideCustomerVehicleEdit(homeUIDTO.menuSides)">
+                  <a pripple=""
+                    class="p-ripple p-element flex align-items-center cursor-pointer p-3 text-700 hover:surface-100 transition-duration-150 transition-colors border-right-2 border-transparent"
+                    (click)="toggleMenuSide(menu)" 
+                    [routerLink]="menu.url">
+                    <i [class]="menu.icon + ' mr-2'"></i>
+                    <span class="font-medium">{{ menu.name }}</span>
+                    <i *ngIf="menu.subMenus && menu.subMenus.length > 0" class="pi pi-chevron-down ml-auto"></i>
+                    <span class="p-ink"></span>
+                  </a>
+                  <ul *ngIf="menu.showSubMenu && menu.subMenus && menu.subMenus.length > 0"
+                    class="list-none py-0 pl-3 pr-0 m-0 overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                    <ng-container
+                      *ngTemplateOutlet="recursiveMenu; context: { $implicit: menu.subMenus }"></ng-container>
+                  </ul>
+                </li>
+              </ng-template>
+
+              <!-- Chamando o template recursivo com o menu principal -->
+              <ng-container
+                *ngTemplateOutlet="recursiveMenu; context: { $implicit: homeUIDTO.menuSides }"></ng-container>
+            </ul>
+          </div>
+          <div class="mt-auto border-top-1 surface-border p-3 flex justify-content-between">
+            <a pripple=""
+              class="p-ripple p-element cursor-pointer inline-flex align-items-center justify-content-center border-2 surface-border hover:surface-100 text-600 transition-colors transition-duration-150 border-circle"
+              style="width: 40px; height: 40px;"><i class="pi pi-file text-xl"></i><span class="p-ink"></span></a>
+            <a pripple=""
+              class="p-ripple p-element cursor-pointer inline-flex align-items-center justify-content-center border-2 surface-border hover:surface-100 text-600 transition-colors transition-duration-150 border-circle"
+              style="width: 40px; height: 40px;"><i class="pi pi-star text-xl"></i><span class="p-ink"></span></a>
+            <a pripple=""
+              class="p-ripple p-element cursor-pointer inline-flex align-items-center justify-content-center border-2 surface-border hover:surface-100 text-600 transition-colors transition-duration-150 border-circle"
+              style="width: 40px; height: 40px;"><i class="pi pi-cog text-xl"></i><span class="p-ink"></span></a>
+            
+            <a pripple=""
+              class="p-ripple p-element cursor-pointer inline-flex align-items-center justify-content-center bg-pink-500 text-white border-2 border-pink-600 hover:bg-pink-600 text-600 transition-colors transition-duration-150 border-circle"
+              style="width: 40px; height: 40px;"
+              (click)="signOut()">
+              <i class="pi pi-sign-out text-xl"></i>
+              <span class="p-ink"></span>
+            </a>
+
           </div>
         </div>
       </div>

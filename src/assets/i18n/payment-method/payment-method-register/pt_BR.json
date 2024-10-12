@@ -1,0 +1,16 @@
+{
+  "title_PaymentMethodRegister": "Cadastro De Método De Pagamento",
+  "label_payment_status_id_PaymentMethodRegister": "ID Do Método De Pagamento",
+  "placeholder_payment_status_id_PaymentMethodRegister": "Informe O ID Do Método De Pagamento",
+  "label_payment_status_name_PaymentMethodRegister": "Nome Do Método De Pagamento",
+  "placeholder_payment_status_name_PaymentMethodRegister": "Informe O Nome Do Método De Pagamento",
+  "label_created_date_PaymentMethodRegister": "Data de Criação",
+  "placeholder_created_date_PaymentMethodRegister": "Selecione A Data De Criação",
+  "label_modified_date_PaymentMethodRegister": "Data de Modificação",
+  "placeholder_modified_date_PaymentMethodRegister": "Selecione A Data De Modificação",
+  "label_enabled_PaymentMethodRegister": "Ativo",
+
+  "save_success_message_service_PaymentMethodRegister": "Método De Pagamento Cadastrado  Com Sucesso",
+  "update_success_message_service_PaymentMethodRegister": "Método De Pagamento Atualizado Com Sucesso",
+  "delete_success_message_service_PaymentMethodRegister": "Método De Pagamento Removido Com Sucesso"
+}

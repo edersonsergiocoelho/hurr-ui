@@ -109,11 +109,12 @@ export class HomeComponent implements OnInit {
 
     try {
       // Realiza chamadas assíncronas para carregar dados de arquivos e menus
-      const [fileData, menuHeaders, menuHeaderIcons, menuHeaderDropdowns, menuSideCustomerVehicleEdits] = await Promise.all([
+      const [fileData, menuHeaders, menuHeaderIcons, menuHeaderDropdowns, menuSides, menuSideCustomerVehicleEdits] = await Promise.all([
         this.loadUserFile(), // Carrega o arquivo de foto do usuário
         this.loadMenus('MENU_HEADER'), // Carrega os cabeçalhos de menu
         this.loadMenus('MENU_HEADER_ICON'), // Carrega ícones de cabeçalhos de menu
         this.loadMenus('MENU_HEADER_DROPDOWN'), // Carrega menus suspensos dos cabeçalhos
+        this.loadMenus('MENU_SIDE'),
         this.loadMenus('MENU_SIDE_CUSTOMER_VEHICLE_EDIT')
       ]);
 
@@ -133,6 +134,10 @@ export class HomeComponent implements OnInit {
       }
       if (menuHeaderDropdowns) {
         this.homeUIDTO.menuHeaderDropdowns = menuHeaderDropdowns;
+      }
+
+      if (menuSides) {
+        this.homeUIDTO.menuSides = menuSides;
       }
 
       if (menuSideCustomerVehicleEdits) {
@@ -322,6 +327,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  toggleMenuSide(menu: Menu): void {
+    // Alterna a visibilidade dos submenus
+    menu.showSubMenu = !menu.showSubMenu;
+
+    // Atualiza o breadcrumb com base no menu clicado
+    this.updateBreadcrumb(menu, this.homeUIDTO.menuSides);
+  }
+
   toggleMenuSideCustomerVehicleEdit(menu: Menu): void {
     // Alterna a visibilidade dos submenus
     menu.showSubMenu = !menu.showSubMenu;
@@ -352,5 +365,21 @@ export class HomeComponent implements OnInit {
     const currentUrl = this.router.url;
     // Verifica se a URL contém o caminho base seguido por um ID
     return currentUrl.includes('/customer-vehicle/edit/') && currentUrl.split('/').length == 5;
+  }
+
+  isVisibleMenuSide(): boolean {
+    const currentUrl = this.router.url;
+  
+    // Verifica se existe um array de menus carregados e percorre para verificar se a URL atual está presente
+    if (this.homeUIDTO.menuSides && this.homeUIDTO.menuSides.length > 0) {
+      return this.homeUIDTO.menuSides.some((menuSide: any) => currentUrl.includes(menuSide.url));
+    }
+  
+    // Retorna falso se não houver menus ou a URL não corresponder a nenhuma
+    return false;
+  }
+
+  clickRouterNavigateCustomerVehicle() {
+    this.router.navigate(['customer-vehicle']);
   }
 }
