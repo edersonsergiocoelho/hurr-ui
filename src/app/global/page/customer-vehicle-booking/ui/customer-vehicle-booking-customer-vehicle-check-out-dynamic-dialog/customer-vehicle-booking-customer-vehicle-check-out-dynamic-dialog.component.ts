@@ -126,6 +126,8 @@ export class CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialogComponent
 
     // Calcula o valor final da reserva (valor total da reserva + valor adicional)
     this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalFinalBookingValue = baseValue + this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalAdditionalValue;
+  
+    this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.withdrawableBookingValue = this.customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalFinalBookingValue - 15;
   }
 
   // Método para finalizar o booking

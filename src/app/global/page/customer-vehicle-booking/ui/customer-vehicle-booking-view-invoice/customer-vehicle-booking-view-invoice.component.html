@@ -83,7 +83,7 @@
                 </ng-template>
               </div>
 
-              <div style="margin-left: auto; display: flex; align-items: center; padding-right: 164px;">
+              <div style="display: flex; align-items: center;" class="px-4">
                 <ng-container *ngIf="customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking?.customerVehicle?.vehicleColor?.vehicleColorName; else noColor">
                   <div [ngStyle]="{'background-color': getVehicleColorStyle(customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.vehicleColor.vehicleColorName)}"
                     class="border-round w-full h-full md:w-2rem md:h-2rem"
@@ -134,7 +134,7 @@
                 </ng-template>
               </div>
 
-              <div style="margin-left: auto; display: flex; align-items: center;" class="px-8">
+              <div style="display: flex; align-items: center;" class="px-4">
                 <ng-container *ngIf="customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking?.vehicleTransmission?.dataURI; else noTransmission">
                   <img [src]="customerVehicleBookingViewInvoiceUIDTO.customerVehicleBooking.vehicleTransmission?.dataURI" alt="Icon Vehicle Transmission"
                     class="border-round w-full h-full md:w-2rem md:h-2rem">

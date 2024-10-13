@@ -1,7 +1,6 @@
 
 import { TranslateSeverityDTO } from "src/app/core/translate/dto/translate-severity-dto.dto";
 import { CustomerAddress } from "src/app/global/page/customer-address/entity/customer-address.entity";
-import { CustomerVehicle } from "src/app/global/page/customer-vehicle/entity/customer-vehicle.entity";
 import { Customer } from "src/app/global/page/customer/entity/customer.entity";
 
 export class CheckOutUIDTO extends TranslateSeverityDTO {
@@ -15,8 +14,8 @@ export class CheckOutUIDTO extends TranslateSeverityDTO {
   customersAddressPickups: Array<CustomerAddress>;
   selectedCustomerAddressPickUp: CustomerAddress | null;
 
-  customersAddresses: Array<CustomerAddress>;
-  selectedCustomerAddress: CustomerAddress | null;
+  customersAddressesBilling: Array<CustomerAddress>;
+  selectedCustomerAddressBilling: CustomerAddress | null;
 
   //
   days: number;

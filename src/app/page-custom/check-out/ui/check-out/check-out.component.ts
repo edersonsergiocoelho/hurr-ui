@@ -166,7 +166,7 @@ export class CheckOutComponent implements OnInit {
         const customerAddressServiceFindByCustomerIdAndAddressTypeName = await firstValueFrom(this.customerAddressService.findByCustomerIdAndAddressTypeName(this.checkoutUIDTO.customer.customerId, AddressType.CUSTOMER).pipe(first()));
         
         if (customerAddressServiceFindByCustomerIdAndAddressTypeName.status == 200 && customerAddressServiceFindByCustomerIdAndAddressTypeName.body != null) {
-          this.checkoutUIDTO.customersAddresses = customerAddressServiceFindByCustomerIdAndAddressTypeName.body;
+          this.checkoutUIDTO.customersAddressesBilling = customerAddressServiceFindByCustomerIdAndAddressTypeName.body;
         }
         
       } catch (error: any) {
@@ -283,10 +283,10 @@ export class CheckOutComponent implements OnInit {
 
   selectedCustomerAddress(customerAddress: CustomerAddress) {
 
-    if (this.checkoutUIDTO.selectedCustomerAddress === customerAddress) {
-      this.checkoutUIDTO.selectedCustomerAddress = null;
+    if (this.checkoutUIDTO.selectedCustomerAddressBilling === customerAddress) {
+      this.checkoutUIDTO.selectedCustomerAddressBilling = null;
     } else {
-      this.checkoutUIDTO.selectedCustomerAddress = customerAddress;
+      this.checkoutUIDTO.selectedCustomerAddressBilling = customerAddress;
     }
   }
 

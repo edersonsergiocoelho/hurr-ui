@@ -83,7 +83,7 @@
                 </ng-template>
               </div>
 
-              <div style="margin-left: auto; display: flex; align-items: center; padding-right: 164px;">
+              <div style="display: flex; align-items: center;" class="px-4">
                 <ng-container *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking?.customerVehicle?.vehicleColor?.vehicleColorName; else noColor">
                   <div [ngStyle]="{'background-color': getVehicleColorStyle(customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.vehicleColor.vehicleColorName)}"
                     class="border-round w-full h-full md:w-2rem md:h-2rem"
@@ -134,7 +134,7 @@
                 </ng-template>
               </div>
 
-              <div style="margin-left: auto; display: flex; align-items: center;" class="px-8">
+              <div style="display: flex; align-items: center;" class="px-4">
                 <ng-container *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking?.vehicleTransmission?.dataURI; else noTransmission">
                   <img [src]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.vehicleTransmission?.dataURI" alt="Icon Vehicle Transmission"
                     class="border-round w-full h-full md:w-2rem md:h-2rem">
@@ -424,14 +424,6 @@
               {{customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.totalAdditionalValue | number:'1.2-2'}}
             </span>
           </li>
-
-          <ng-container *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking != null &&
-                               customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.bookingStatus === 'PENDING_ADDITIONAL_PAYMENT'">
-            <app-check-out-mp-payment-additional [customerVehicleBookingId]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicleBookingId"
-              [selectCustomerAddress]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerAddressBilling || null"
-              [totalAdditionalValue]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.totalAdditionalValue || 0">
-            </app-check-out-mp-payment-additional>
-          </ng-container>
 
           <li *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking != null" class="flex justify-content-between border-top-1 surface-border py-3">
             <span class="text-900 font-bold text-lg">

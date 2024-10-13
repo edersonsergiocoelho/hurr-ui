@@ -19,6 +19,5 @@ export class CustomerVehicleBookingViewReservationUIDTO extends TranslateSeverit
   // 
   days: any;
   
-  customerVehicleBooking: CustomerVehicleBooking;
-  customerVehicleFilePhoto: any;
+  customerVehicleBooking: any;
 }

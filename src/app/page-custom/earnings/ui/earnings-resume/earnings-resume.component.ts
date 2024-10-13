@@ -7,11 +7,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { first, firstValueFrom } from 'rxjs';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerVehicleBookingSearchDTO } from 'src/app/global/page/customer-vehicle-booking/dto/customer-vehicle-booking-search-dto.dto';
-import { CustomerBankAccountService } from 'src/app/page/customer-bank-account/service/customer-bank-account.service';
+import { CustomerVehicleBankAccountService } from 'src/app/page/customer-vehicle-bank-account/service/customer-vehicle-bank-account.service';
 import { PaymentMethodService } from 'src/app/page/admin/payment-method/service/payment-method.service';
-import { CustomerWithdrawalRequestService } from 'src/app/global/page/customer-withdrawal-request/service/customer-withdrawal-request.service';
-import { CustomerWithdrawalRequest } from 'src/app/global/page/customer-withdrawal-request/entity/customer-withdrawal-request.entity';
 import { PaymentStatusService } from 'src/app/page/admin/payment-status/service/payment-status.service';
+import { CustomerVehicleWithdrawalRequestService } from 'src/app/global/page/customer-vehicle-withdrawal-request/service/customer-vehicle-withdrawal-request.service';
+import { CustomerVehicleWithdrawalRequest } from 'src/app/global/page/customer-vehicle-withdrawal-request/entity/customer-vehicle-withdrawal-request.entity';
 
 @Component({
   selector: 'app-earnings-resume',
@@ -23,9 +23,9 @@ export class EarningsResumeComponent {
   earningsResumeUIDTO: EarningsResumeUIDTO;
 
   constructor(
-    private customerBankAccountService: CustomerBankAccountService,
+    private customerVehicleBankAccountService: CustomerVehicleBankAccountService,
     private customerVehicleBookingService: CustomerVehicleBookingService,
-    private customerWithdrawalRequestService: CustomerWithdrawalRequestService,
+    private customerVehicleWithdrawalRequestService: CustomerVehicleWithdrawalRequestService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
     private paymentMethodService: PaymentMethodService,
@@ -157,10 +157,10 @@ export class EarningsResumeComponent {
 
     try {
         
-      const customerBankAccountServiceFindAll = await firstValueFrom(this.customerBankAccountService.findAll().pipe(first()));
+      const customerVehicleBankAccountServiceFindAll = await firstValueFrom(this.customerVehicleBankAccountService.findAll().pipe(first()));
       
-      if (customerBankAccountServiceFindAll.status == 200 && customerBankAccountServiceFindAll.body != null) {
-        this.earningsResumeUIDTO.customerBankAccounts = customerBankAccountServiceFindAll.body;
+      if (customerVehicleBankAccountServiceFindAll.status == 200 && customerVehicleBankAccountServiceFindAll.body != null) {
+        this.earningsResumeUIDTO.customerBankAccounts = customerVehicleBankAccountServiceFindAll.body;
       }
       
     } catch (error: any) {
@@ -232,22 +232,22 @@ export class EarningsResumeComponent {
 
     this.ngxSpinnerService.show();
 
-    let customerWithdrawalRequests: Array<CustomerWithdrawalRequest> = new Array<CustomerWithdrawalRequest>;
+    let customerVehicleWithdrawalRequests: Array<CustomerVehicleWithdrawalRequest> = new Array<CustomerVehicleWithdrawalRequest>;
 
     this.earningsResumeUIDTO.customerVehicleBookings.forEach((customerVehicleBooking: any) => {
 
-      let customerWithdrawalRequest: CustomerWithdrawalRequest = new CustomerWithdrawalRequest();
+      let customerVehicleWithdrawalRequest: CustomerVehicleWithdrawalRequest = new CustomerVehicleWithdrawalRequest();
       
-      customerWithdrawalRequest.customer = this.earningsResumeUIDTO.selectedCustomerBankAccount.customer;
-      customerWithdrawalRequest.customerBankAccount = this.earningsResumeUIDTO.selectedCustomerBankAccount;
-      customerWithdrawalRequest.paymentMethod = this.earningsResumeUIDTO.selectedPaymentMethod;
-      customerWithdrawalRequest.paymentStatus = this.earningsResumeUIDTO.paymentStatus;
-      customerWithdrawalRequest.customerVehicleBooking = customerVehicleBooking;
+      customerVehicleWithdrawalRequest.customer = this.earningsResumeUIDTO.selectedCustomerVehicleBankAccount.customer;
+      customerVehicleWithdrawalRequest.customerVehicleBankAccount = this.earningsResumeUIDTO.selectedCustomerVehicleBankAccount;
+      customerVehicleWithdrawalRequest.paymentMethod = this.earningsResumeUIDTO.selectedPaymentMethod;
+      customerVehicleWithdrawalRequest.paymentStatus = this.earningsResumeUIDTO.paymentStatus;
+      customerVehicleWithdrawalRequest.customerVehicleBooking = customerVehicleBooking;
 
-      customerWithdrawalRequests.push(customerWithdrawalRequest);
+      customerVehicleWithdrawalRequests.push(customerVehicleWithdrawalRequest);
     });
 
-    this.customerWithdrawalRequestService.saveAll(customerWithdrawalRequests).pipe(first()).subscribe({
+    this.customerVehicleWithdrawalRequestService.saveAll(customerVehicleWithdrawalRequests).pipe(first()).subscribe({
       next: (data: any) => {
         if (data.status == 201) {
           this.messageService.add({

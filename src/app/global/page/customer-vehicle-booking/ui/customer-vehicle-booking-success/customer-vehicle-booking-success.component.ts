@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
@@ -27,7 +27,8 @@ export class CustomerVehicleBookingSuccessComponent implements OnInit {
     private messageService: MessageService,
     private momentUtilsService: MomentUtilsService,
     private ngxSpinnerService: NgxSpinnerService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private translateService: TranslateService
   ) { }
 
@@ -46,7 +47,7 @@ export class CustomerVehicleBookingSuccessComponent implements OnInit {
     this.customerVehicleBookingSuccessUIDTO = new CustomerVehicleBookingSuccessUIDTO();
 
     // Obtém os parâmetros da URL (query params) e os armazena no DTO.
-    this.route.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       this.customerVehicleBookingSuccessUIDTO.collectionId = params['collection_id'];
       this.customerVehicleBookingSuccessUIDTO.collectionStatus = params['collection_status'];
       this.customerVehicleBookingSuccessUIDTO.paymentId = params['payment_id'];
@@ -128,6 +129,27 @@ export class CustomerVehicleBookingSuccessComponent implements OnInit {
       'success_message_service_Generic'
     ];
     return keys;
+  }
+
+  getVehicleColorStyle(vehicleColorName: string): string {
+    switch(vehicleColorName.toLowerCase()) {
+      case 'preto': return '#000000';
+      case 'branco': return '#FFFFFF';
+      case 'prata': return '#C0C0C0';
+      case 'cinza': return '#808080';
+      case 'vermelho': return '#FF0000';
+      case 'azul': return '#0000FF';
+      case 'amarelo': return '#FFFF00';
+      case 'verde': return '#008000';
+      case 'marrom': return '#A52A2A';
+      case 'bege': return '#F5F5DC';
+      default: return '#D3D3D3';  // Cor padrão para cores não mapeadas
+    }
+  }
+
+  // Método para imprimir a página.
+  navigateToCustomerVehicleBooking() {
+    this.router.navigate(['customer-vehicle-booking']);
   }
 
   // Método para imprimir a página.

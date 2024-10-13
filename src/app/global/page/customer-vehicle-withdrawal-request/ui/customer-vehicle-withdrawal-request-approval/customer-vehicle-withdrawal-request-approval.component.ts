@@ -1,0 +1,236 @@
+import { Component, OnInit } from '@angular/core';
+import { CustomerVehicleWithdrawalRequestApprovalUIDTO } from './dto/customer-vehicle-withdrawal-request-approval-ui.dto';
+import { NgForm } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { MessageService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
+import { first, firstValueFrom } from 'rxjs';
+import { TableLazyLoadEvent } from 'primeng/table';
+import { CustomerVehicleWithdrawalRequestService } from '../../service/customer-vehicle-withdrawal-request.service';
+import { CustomerVehicleWithdrawalRequestSearchDTO } from '../../dto/customer-vehicle-withdrawal-request-search-dto.dto';
+import { PaymentStatusService } from 'src/app/page/admin/payment-status/service/payment-status.service';
+import { PaymentMethodService } from 'src/app/page/admin/payment-method/service/payment-method.service';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
+
+@Component({
+  selector: 'app-customer-vehicle-withdrawal-request-approval',
+  templateUrl: './customer-vehicle-withdrawal-request-approval.component.html',
+  styleUrls: ['./customer-vehicle-withdrawal-request-approval.component.css']
+})
+export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit {
+
+  customerVehicleWithdrawalRequestApprovalUIDTO: CustomerVehicleWithdrawalRequestApprovalUIDTO;
+  customerVehicleWithdrawalRequestApprovalForm: NgForm;
+
+  constructor(
+    private customerVehicleWithdrawalRequestService: CustomerVehicleWithdrawalRequestService,
+    private ngxSpinnerService: NgxSpinnerService,
+    private messageService: MessageService,
+    private translateService: TranslateService,
+    private paymentStatusService: PaymentStatusService,
+    private paymentMethodService: PaymentMethodService
+  ) { }
+
+  ngOnInit(): void {
+    this.translateService.setDefaultLang('pt_BR');
+    this.resetSearchForm();
+  }
+
+  resetSearchForm() {
+
+    this.customerVehicleWithdrawalRequestApprovalUIDTO = new CustomerVehicleWithdrawalRequestApprovalUIDTO();
+
+    this.customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequestSearchDTO = new CustomerVehicleWithdrawalRequestSearchDTO();
+    
+    this.asyncCallFunctions();
+  }
+
+  async asyncCallFunctions() {
+
+    this.ngxSpinnerService.show();
+
+    try {
+
+      const keys = [
+        'error_message_service_Generic', 
+        'warn_message_service_Generic',
+        'success_message_service_Generic',
+        "success_approval_message_service_CustomerVehicleWithdrawalRequestApproval",
+        'table_header_first_name_CustomerVehicleWithdrawalRequestApproval',
+        'table_header_last_name_CustomerVehicleWithdrawalRequestApproval',
+        'table_header_bank_name_CustomerVehicleWithdrawalRequestApproval',
+        'table_header_payment_method_name_CustomerVehicleWithdrawalRequestApproval',
+        'table_header_payment_status_name_CustomerVehicleWithdrawalRequestApproval',
+        'table_header_withdrawable_booking_value_CustomerVehicleWithdrawalRequestApproval',
+        'table_header_created_date_CustomerVehicleWithdrawalRequestApproval',
+        'table_header_enabled_CustomerVehicleWithdrawalRequestApproval',
+        'table_header_action_CustomerVehicleWithdrawalRequestApproval'
+      ];
+
+      const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
+
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.success_approval_message_service_CustomerVehicleWithdrawalRequestApproval = translations['success_approval_message_service_CustomerVehicleWithdrawalRequestApproval'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_first_name_CustomerVehicleWithdrawalRequestApproval = translations['table_header_first_name_CustomerVehicleWithdrawalRequestApproval'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_last_name_CustomerVehicleWithdrawalRequestApproval = translations['table_header_last_name_CustomerVehicleWithdrawalRequestApproval'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_bank_name_CustomerVehicleWithdrawalRequestApproval = translations['table_header_bank_name_CustomerVehicleWithdrawalRequestApproval'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_payment_method_name_CustomerVehicleWithdrawalRequestApproval = translations['table_header_payment_method_name_CustomerVehicleWithdrawalRequestApproval'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_payment_status_name_CustomerVehicleWithdrawalRequestApproval = translations['table_header_payment_status_name_CustomerVehicleWithdrawalRequestApproval'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_withdrawable_booking_value_CustomerVehicleWithdrawalRequestApproval = translations['table_header_withdrawable_booking_value_CustomerVehicleWithdrawalRequestApproval'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_created_date_CustomerVehicleWithdrawalRequestApproval = translations['table_header_created_date_CustomerVehicleWithdrawalRequestApproval'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_enabled_CustomerVehicleWithdrawalRequestApproval = translations['table_header_enabled_CustomerVehicleWithdrawalRequestApproval'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_action_CustomerVehicleWithdrawalRequestApproval = translations['table_header_action_CustomerVehicleWithdrawalRequestApproval'];
+
+    } catch (error: any) {
+      this.messageService.add({
+        severity: 'error',
+        summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
+        detail: error.toString()
+      });
+    }
+
+    try {
+
+      const paymentMethodServiceFindAll = await firstValueFrom(this.paymentMethodService.findAll().pipe(first()));
+
+      if (paymentMethodServiceFindAll.status == 200) {
+
+        if (paymentMethodServiceFindAll.body != null && paymentMethodServiceFindAll.body.length > 0) {
+          this.customerVehicleWithdrawalRequestApprovalUIDTO.paymentMethods = paymentMethodServiceFindAll.body;
+        }
+      }
+
+    } catch (error: any) {
+      this.messageService.add({
+        severity: 'error',
+        summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
+        detail: error.toString()
+      });
+    }
+
+    try {
+
+      const paymentStatusServiceFindAll = await firstValueFrom(this.paymentStatusService.findAll().pipe(first()));
+
+      if (paymentStatusServiceFindAll.status == 200) {
+
+        if (paymentStatusServiceFindAll.body != null && paymentStatusServiceFindAll.body.length > 0) {
+          this.customerVehicleWithdrawalRequestApprovalUIDTO.paymentStatuses = paymentStatusServiceFindAll.body;
+        }
+      }
+
+    } catch (error: any) {
+      this.messageService.add({
+        severity: 'error',
+        summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
+        detail: error.toString()
+      });
+    }
+
+    this.customerVehicleWithdrawalRequestApprovalUIDTO.columns = [
+      { field: 'customer.firstName', sortField: 'customer.firstName', header: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_first_name_CustomerVehicleWithdrawalRequestApproval },
+      { field: 'customer.lastName', sortField: 'customer.lastName', header: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_last_name_CustomerVehicleWithdrawalRequestApproval },
+      { field: 'customerBankAccount.bank.bankName', sortField: 'customerBankAccount.bank.bankName', header: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_bank_name_CustomerVehicleWithdrawalRequestApproval },
+      { field: 'paymentMethod.paymentMethodName', sortField: 'paymentMethod.paymentMethodName', header: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_payment_method_name_CustomerVehicleWithdrawalRequestApproval },
+      { field: 'paymentStatus.paymentStatusName', sortField: 'paymentStatus.paymentStatusName', header: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_payment_status_name_CustomerVehicleWithdrawalRequestApproval },
+      { field: 'customerVehicleBooking.withdrawableBookingValue', sortField: 'customerVehicleBooking.withdrawableBookingValue', header: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_withdrawable_booking_value_CustomerVehicleWithdrawalRequestApproval },
+      { field: 'createdDate', sortField: 'createdDate', header: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_created_date_CustomerVehicleWithdrawalRequestApproval },
+      { field: 'enabled', sortField: 'enabled', header: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_enabled_CustomerVehicleWithdrawalRequestApproval },
+      { header: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_action_CustomerVehicleWithdrawalRequestApproval },
+    ];
+
+    this.ngxSpinnerService.hide();
+  }
+
+  clickClean() {
+    this.resetSearchForm();
+    this.search(null);
+  }
+
+  search(event: TableLazyLoadEvent | null) {
+
+    if (event && event.sortField) {
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.sortBy = event.sortField;
+    }
+    if (event && event.sortOrder) {
+      if(event.sortOrder == 1) {
+        this.customerVehicleWithdrawalRequestApprovalUIDTO.sortDir = "DESC";
+      } else if(event.sortOrder == -1) {
+        this.customerVehicleWithdrawalRequestApprovalUIDTO.sortDir = "ASC";
+      }
+    }
+
+    if (this.customerVehicleWithdrawalRequestApprovalUIDTO.selectedPaymentMethod != null) {
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequestSearchDTO.paymentMethodId = this.customerVehicleWithdrawalRequestApprovalUIDTO.selectedPaymentMethod.paymentMethodId;
+    } else {
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequestSearchDTO.paymentMethodId = null;
+    }
+
+    if (this.customerVehicleWithdrawalRequestApprovalUIDTO.selectedPaymentStatus != null) {
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequestSearchDTO.paymentStatusId = this.customerVehicleWithdrawalRequestApprovalUIDTO.selectedPaymentStatus.paymentStatusId;
+    } else {
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequestSearchDTO.paymentStatusId = null;
+    }
+  
+    this.customerVehicleWithdrawalRequestService.searchPage(this.customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequestSearchDTO, this.customerVehicleWithdrawalRequestApprovalUIDTO.page, this.customerVehicleWithdrawalRequestApprovalUIDTO.size, this.customerVehicleWithdrawalRequestApprovalUIDTO.sortDir, this.customerVehicleWithdrawalRequestApprovalUIDTO.sortBy).pipe(first()).subscribe({
+      next: (data: any) => {
+
+        this.customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequests = data.body.content;
+        this.customerVehicleWithdrawalRequestApprovalUIDTO.totalRecords = data.body.totalElements;
+      },
+      error: (error) => {
+
+        if (error.status == 500) {
+          this.messageService.add({ severity: 'error', summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, detail: error.error.message });
+        }
+
+        this.ngxSpinnerService.hide();
+      },
+      complete: () => {
+        this.ngxSpinnerService.hide();
+      }
+    });
+  }
+
+  paginate(event: any) {
+    this.customerVehicleWithdrawalRequestApprovalUIDTO.size = event.rows;
+    this.customerVehicleWithdrawalRequestApprovalUIDTO.page = event.first / event.rows;
+  }
+
+  clickApproval(rowData) {
+
+    this.ngxSpinnerService.show();
+
+    this.customerVehicleWithdrawalRequestService.approval(rowData.customerVehicleWithdrawalRequestId).pipe(first()).subscribe({
+      next: (data: any) => {
+
+        if (data.status == 200) {
+          this.messageService.add({ 
+            severity: SeverityConstants.SUCCESS, 
+            summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.success_message_service_Generic, 
+            detail: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.success_approval_message_service_CustomerVehicleWithdrawalRequestApproval 
+          });
+        }
+      },
+      error: (error) => {
+
+        if (error.status == 500) {
+          this.messageService.add({ 
+            severity: 'error', 
+            summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, 
+            detail: error.error.message 
+          });
+        }
+
+        this.ngxSpinnerService.hide();
+      },
+      complete: () => {
+        this.ngxSpinnerService.hide();
+        this.resetSearchForm();
+        this.search(null);
+      }
+    });
+  }
+}

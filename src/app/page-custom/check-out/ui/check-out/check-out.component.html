@@ -76,8 +76,8 @@
                   translate}}</span>
               </div>
               <div class="grid flex-column lg:flex-row">
-                <div *ngFor="let customerAddress of checkoutUIDTO.customersAddresses" class="col p-3"
-                  [ngClass]="{ 'selected': checkoutUIDTO.selectedCustomerAddress?.customerAddressId === customerAddress.customerAddressId }"
+                <div *ngFor="let customerAddress of checkoutUIDTO.customersAddressesBilling" class="col p-3"
+                  [ngClass]="{ 'selected': checkoutUIDTO.selectedCustomerAddressBilling?.customerAddressId === customerAddress.customerAddressId }"
                   (click)="selectedCustomerAddress(customerAddress)">
                   <div
                     class="flex flex-column border-round border-1 surface-border p-4 cursor-pointer hover:border-primary transition-duration-150 border-primary">
@@ -319,9 +319,9 @@
 
           <ng-container *ngIf="checkoutUIDTO.customer && checkoutUIDTO.customer.customerId">
             <app-check-out-mp [customerId]="checkoutUIDTO.customer.customerId"
-              [selectCustomerAddressDelivery]="checkoutUIDTO.selectedCustomerAddressDelivery || null"
-              [selectCustomerAddressPickUp]="checkoutUIDTO.selectedCustomerAddressPickUp || null"
-              [selectCustomerAddress]="checkoutUIDTO.selectedCustomerAddress || null"
+              [selectedCustomerAddressDelivery]="checkoutUIDTO.selectedCustomerAddressDelivery || null"
+              [selectedCustomerAddressPickUp]="checkoutUIDTO.selectedCustomerAddressPickUp || null"
+              [selectedCustomerAddressBilling]="checkoutUIDTO.selectedCustomerAddressBilling || null"
               [totalBookingValue]="checkoutUIDTO.totalBookingValue">
             </app-check-out-mp>
           </ng-container>

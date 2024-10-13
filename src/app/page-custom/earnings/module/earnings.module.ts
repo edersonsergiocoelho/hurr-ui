@@ -17,14 +17,14 @@ import { ButtonModule } from 'primeng/button';
 
 import { EarningsComponent } from '../ui/earnings/earnings.component';
 import { EarningsResumeComponent } from '../ui/earnings-resume/earnings-resume.component';
-import { EarningsCustomerWithdrawalRequestComponent } from '../ui/earnings-customer-withdrawal-request/earnings-customer-withdrawal-request.component';
+import { EarningsCustomerVehicleWithdrawalRequestComponent } from '../ui/earnings-customer-vehicle-withdrawal-request/earnings-customer-vehicle-withdrawal-request.component';
 import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
     EarningsComponent,
     EarningsResumeComponent,
-    EarningsCustomerWithdrawalRequestComponent
+    EarningsCustomerVehicleWithdrawalRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +46,7 @@ import { CheckboxModule } from 'primeng/checkbox';
   exports: [
     EarningsComponent,
     EarningsResumeComponent,
-    EarningsCustomerWithdrawalRequestComponent
+    EarningsCustomerVehicleWithdrawalRequestComponent
   ]
 })
 export class EarningsModule { }

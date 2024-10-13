@@ -1,0 +1,21 @@
+{
+  "title_CustomerVehicleWithdrawalRequestApproval": "Aprovação De Solicitação De Retirada Do Cliente",
+  "label_payment_method_CustomerVehicleWithdrawalRequestApproval": "Método De Pagamento",
+  "placeholder_payment_method_CustomerVehicleWithdrawalRequestApproval": "Informe O Método De Pagamento",
+  "label_payment_status_CustomerVehicleWithdrawalRequestApproval": "Status De Pagamento",
+  "placeholder_payment_status_CustomerVehicleWithdrawalRequestApproval": "Informe O Status De Pagamento",
+  "label_cpf_CustomerVehicleWithdrawalRequestApproval": "CPF",
+  "placeholder_cpf_CustomerVehicleWithdrawalRequestApproval": "Informe O CPF",
+
+  "success_approval_message_service_CustomerVehicleWithdrawalRequestApproval": "Aprovação De Solicitação De Retirada Do Cliente Concluída Com Sucesso.",
+
+  "table_header_first_name_CustomerVehicleWithdrawalRequestApproval": "Nome",
+  "table_header_last_name_CustomerVehicleWithdrawalRequestApproval": "Sobrenome",
+  "table_header_bank_name_CustomerVehicleWithdrawalRequestApproval": "Banco",
+  "table_header_payment_method_name_CustomerVehicleWithdrawalRequestApproval": "Método",
+  "table_header_payment_status_name_CustomerVehicleWithdrawalRequestApproval": "Status",
+  "table_header_withdrawable_booking_value_CustomerVehicleWithdrawalRequestApproval": "Valor",
+  "table_header_created_date_CustomerVehicleWithdrawalRequestApproval": "Data De Criação",
+  "table_header_enabled_CustomerVehicleWithdrawalRequestApproval": "Habilitado?",
+  "table_header_action_CustomerVehicleWithdrawalRequestApproval": "Aprovação"
+}

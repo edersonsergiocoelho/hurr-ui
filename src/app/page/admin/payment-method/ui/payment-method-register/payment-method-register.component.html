@@ -67,7 +67,7 @@
       <div *ngIf="paymentMethodRegisterUIDTO?.paymentMethodDTO?.paymentMethodId" class="md:col-3 mt-4 pt-1 field" >
         <button pButton pRipple 
           type="button"
-          class="p-ripple p-element p-button p-component p-button-contrast p-button-rounded"
+          class="p-ripple p-element p-button p-component p-button-contrast p-button-rounded md:w-10rem"
           (click)="resetRegisterForm()">
           <i class="pi pi-file"></i>
           <span class="p-button-label">
@@ -79,7 +79,7 @@
       <div *ngIf="paymentMethodRegisterUIDTO?.paymentMethodDTO?.paymentMethodId == null" class="md:col-3 mt-4 pt-1 field">
         <button pButton pRipple 
           type="submit" 
-          class="p-button-rounded p-button-success md:w-12rem"
+          class="p-button-rounded p-button-success md:w-10rem"
           [disabled]="paymentMethodRegisterForm.invalid">
           <i class="pi pi-save"></i>
           <span class="p-button-label">
@@ -90,7 +90,7 @@
 
       <div *ngIf="paymentMethodRegisterUIDTO?.paymentMethodDTO?.paymentMethodId != null" class="md:col-3 mt-4 pt-1 field">
         <button pButton pRipple 
-          class="p-button-rounded p-button-info md:w-12rem"
+          class="p-button-rounded p-button-info md:w-10rem"
           type="button"
           (click)="update()"
           [disabled]="paymentMethodRegisterForm.invalid">
@@ -103,7 +103,7 @@
 
       <div *ngIf="paymentMethodRegisterUIDTO?.paymentMethodDTO?.paymentMethodId != null" class="md:col-3 mt-4 pt-1 field">
         <button pButton pRipple 
-          class="p-button-rounded p-button-danger md:w-12rem"
+          class="p-button-rounded p-button-danger md:w-10rem"
           type="button"
           (click)="delete(null)"
           [disabled]="paymentMethodRegisterForm.invalid">

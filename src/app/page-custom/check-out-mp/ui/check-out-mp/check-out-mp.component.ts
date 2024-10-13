@@ -28,13 +28,14 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
   
   @Input() customerId: string;
 
-  @Input() selectCustomerAddressDelivery: CustomerAddress | null;
+  @Input() selectedCustomerAddressBilling: CustomerAddress | null;
+
+  @Input() selectedCustomerAddressDelivery: CustomerAddress | null;
   @Input() customerAddressDeliveryValue: number | null;
 
-  @Input() selectCustomerAddressPickUp: CustomerAddress | null;
+  @Input() selectedCustomerAddressPickUp: CustomerAddress | null;
   @Input() customerAddressPickUpValue: number | null;
   
-  @Input() selectCustomerAddress: CustomerAddress | null;
 
   @Input() totalBookingValue: number;
 
@@ -55,16 +56,16 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
 
   ngOnChanges(simpleChanges: SimpleChanges): void {
 
-    if (simpleChanges['selectCustomerAddressDelivery']) {
-      this.selectCustomerAddressDelivery = simpleChanges['selectCustomerAddressDelivery'].currentValue;
+    if (simpleChanges['selectedCustomerAddressDelivery']) {
+      this.selectedCustomerAddressDelivery = simpleChanges['selectedCustomerAddressDelivery'].currentValue;
     }
 
     if (simpleChanges['selectCustomerAddressPickUp']) {
-      this.selectCustomerAddressPickUp = simpleChanges['selectCustomerAddressPickUp'].currentValue;
+      this.selectedCustomerAddressPickUp = simpleChanges['selectedCustomerAddressPickUp'].currentValue;
     }
 
-    if (simpleChanges['selectCustomerAddress']) {
-      this.selectCustomerAddress = simpleChanges['selectCustomerAddress'].currentValue;
+    if (simpleChanges['selectedCustomerAddressBilling']) {
+      this.selectedCustomerAddressBilling = simpleChanges['selectedCustomerAddressBilling'].currentValue;
     }
 
     if (simpleChanges['totalBookingValue']) {
@@ -204,7 +205,7 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
             at this time of submit, you must create the preference
             */
 
-            if (this.selectCustomerAddress == null) {
+            if (this.selectedCustomerAddressBilling == null) {
 
               this.messageService.add({
                 severity: SeverityConstants.WARN,
@@ -219,18 +220,18 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
             metadataMap.set('webhookAction', 'CUSTOMER_VEHICLE_BOOKING_PAYMENT');
             metadataMap.set('customerVehicleId', this.checkOutMPUIDTO.customerVehicleId);
             metadataMap.set('customerId', this.customerId);
+            metadataMap.set('customerAddressBillingId', this.selectedCustomerAddressBilling.customerAddressId);
 
-            if (this.selectCustomerAddressDelivery != null) {
-              metadataMap.set('customerAddressDeliveryId', this.selectCustomerAddressDelivery.customerAddressId);
-              metadataMap.set('customerAddressDeliveryValue', this.selectCustomerAddressDelivery.customerAddressId);
+            if (this.selectedCustomerAddressDelivery != null) {
+              metadataMap.set('customerAddressDeliveryId', this.selectedCustomerAddressDelivery.customerAddressId);
+              metadataMap.set('customerAddressDeliveryValue', this.customerAddressDeliveryValue);
             }
 
-            if (this.selectCustomerAddressPickUp != null) {
-              metadataMap.set('customerAddressPickUpId', this.selectCustomerAddressPickUp.customerAddressId);
-              metadataMap.set('customerAddressPickUpValue', this.selectCustomerAddressPickUp.customerAddressId);
+            if (this.selectedCustomerAddressPickUp != null) {
+              metadataMap.set('customerAddressPickUpId', this.selectedCustomerAddressPickUp.customerAddressId);
+              metadataMap.set('customerAddressPickUpValue', this.customerAddressPickUpValue);
             }
 
-            metadataMap.set('customerAddressId', this.selectCustomerAddress.customerAddressId);
             metadataMap.set('reservationStartDate', this.checkOutMPUIDTO.dateInit);
             metadataMap.set('reservationStartTime', this.checkOutMPUIDTO.selectedHourInit);
             metadataMap.set('reservationEndDate', this.checkOutMPUIDTO.dateEnd);
@@ -252,9 +253,9 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
                 surname: this.checkOutMPUIDTO.customer.lastName,
                 email: this.checkOutMPUIDTO.customer.email,
                 address: {
-                  streetName: this.selectCustomerAddress.address.streetAddress,
-                  streetNumber: this.selectCustomerAddress.address.number,
-                  zipCode: this.selectCustomerAddress.address.zipCode.replace(".", "").replace("-", ""),
+                  streetName: this.selectedCustomerAddressBilling.address.streetAddress,
+                  streetNumber: this.selectedCustomerAddressBilling.address.number,
+                  zipCode: this.selectedCustomerAddressBilling.address.zipCode.replace(".", "").replace("-", ""),
                 },
               },
               notificationUrl: `${environment.apiMercadoPago}`,

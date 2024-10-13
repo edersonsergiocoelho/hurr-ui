@@ -68,6 +68,17 @@
         [(ngModel)]="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.bookingStartKM" name="bookingStartKM" required="true" />
     </div>
 
+    <div class="col-12 md:col-12 field">
+      <label for="checkInNotes" class="font-medium text-2xl">{{'label_check_in_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog' | translate}}</label>
+      <div class="col-12 md:col-12 field">
+        <textarea rows="10" pInputTextarea name="checkInNotes" 
+          [(ngModel)]="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.checkInNotes"
+          placeholder="{{'placeholder_check_in_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog' | translate}}" 
+          style="width: 100%;">
+        </textarea>
+      </div>
+    </div>
+
   </div>
 
   <div class="col-12 flex flex-row justify-content-left py-0">

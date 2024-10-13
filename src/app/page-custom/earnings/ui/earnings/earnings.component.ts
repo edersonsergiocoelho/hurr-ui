@@ -5,8 +5,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { TranslateService } from '@ngx-translate/core';
 import { first, firstValueFrom } from 'rxjs';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
-import { CustomerVehicleBookingService } from 'src/app/global/page/customer-vehicle-booking/service/customer-vehicle-booking.service';
-import { CustomerVehicleBookingSearchDTO } from 'src/app/global/page/customer-vehicle-booking/dto/customer-vehicle-booking-search-dto.dto';
 
 @Component({
   selector: 'app-earnings',
