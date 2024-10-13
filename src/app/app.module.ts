@@ -40,6 +40,12 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/generic/tooltip/',
 
   '/assets/i18n/address/',
+
+  // Bank
+  '/assets/i18n/bank/bank/',
+  '/assets/i18n/bank/bank-search/',
+  '/assets/i18n/bank/bank-register/',
+
   '/assets/i18n/checkout/',
   '/assets/i18n/customer-validation/',
   
@@ -69,13 +75,11 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/customer-vehicle-approved/customer-vehicle-approved-detail/',
 
   // CustomerVehicleBooking
-
   // CustomerVehicleBooking - CustomerVehicle
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-search/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-view-invoice/',
-  
   
   // CustomerVehicleBooking - Customer
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-search/',

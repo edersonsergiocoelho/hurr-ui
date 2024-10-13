@@ -5,16 +5,16 @@
   <div class="p-fluid p-formgrid grid">
 
     <div class="col-12 md:col-6 field" [ngClass]="inputSize">
-      <label for="paymentMethodId" [ngClass]="labelSize">{{'label_payment_status_id_PaymentMethodRegister' | translate}}</label>
+      <label for="paymentMethodId" [ngClass]="labelSize">{{'label_payment_method_id_PaymentMethodRegister' | translate}}</label>
       <input id="paymentMethodId" type="text" pInputText 
-        placeholder="{{'placeholder_payment_status_id_PaymentMethodRegister' | translate}}" 
+        placeholder="{{'placeholder_payment_method_id_PaymentMethodRegister' | translate}}" 
         [(ngModel)]="paymentMethodRegisterUIDTO.paymentMethodDTO.paymentMethodId" name="paymentMethodId" autocomplete="off" disabled />
     </div>
 
     <div class="col-12 md:col-6 field" [ngClass]="inputSize">
-      <label for="name" [ngClass]="labelSize">{{'label_payment_status_name_PaymentMethodRegister' | translate}}</label>
+      <label for="name" [ngClass]="labelSize">{{'label_payment_method_name_PaymentMethodRegister' | translate}}</label>
       <input id="name" type="text" pInputText 
-        placeholder="{{'placeholder_payment_status_name_PaymentMethodRegister' | translate}}"
+        placeholder="{{'placeholder_payment_method_name_PaymentMethodRegister' | translate}}"
         [(ngModel)]="paymentMethodRegisterUIDTO.paymentMethodDTO.paymentMethodName" name="paymentMethodName" autocomplete="off" required />
     </div>
 

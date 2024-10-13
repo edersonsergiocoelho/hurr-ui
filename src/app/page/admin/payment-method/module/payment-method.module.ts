@@ -5,28 +5,32 @@ import { PaymentMethodRoutingModule } from './payment-method-routing.module';
 import { PaymentMethodComponent } from '../ui/payment-method/payment-method.component';
 import { PaymentMethodSearchComponent } from '../ui/payment-method-search/payment-method-search.component';
 import { PaymentMethodRegisterComponent } from '../ui/payment-method-register/payment-method-register.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { CalendarModule } from 'primeng/calendar';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputSwitchModule } from 'primeng/inputswitch';
-import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
+// Módulos do PrimeNG
 import { ButtonModule } from 'primeng/button';
-import { TooltipModule } from 'primeng/tooltip';
-import { SidebarModule } from 'primeng/sidebar';
+import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputTextModule } from 'primeng/inputtext';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { SidebarModule } from 'primeng/sidebar';
+import { TableModule } from 'primeng/table';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TooltipModule } from 'primeng/tooltip';
+
+// Outros Módulos
+import { TranslateModule } from '@ngx-translate/core';
+import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
 
 @NgModule({
   declarations: [
     PaymentMethodComponent,
-    PaymentMethodSearchComponent,
-    PaymentMethodRegisterComponent
+    PaymentMethodRegisterComponent,
+    PaymentMethodSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -36,22 +40,22 @@ import { FileUploadModule } from 'primeng/fileupload';
     ReactiveFormsModule,
     PaymentMethodRoutingModule,
 
-    UtilsPipeModule,
-
-    TranslateModule,
-
-    // PrimeNG
+    // Módulos do PrimeNG
     ButtonModule,
     CalendarModule,
     ConfirmDialogModule,
     FileUploadModule,
-    TableModule, 
-    SelectButtonModule,
-    InputTextModule,
     InputSwitchModule,
+    InputTextModule,
+    SelectButtonModule,
     SidebarModule,
+    TableModule,
     ToolbarModule,
-    TooltipModule
+    TooltipModule,
+
+    // Outros Módulos
+    TranslateModule,
+    UtilsPipeModule
   ]
 })
 export class PaymentMethodModule { }

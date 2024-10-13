@@ -4,13 +4,11 @@ import { PaymentMethodService } from '../../service/payment-method.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Table, TableLazyLoadEvent } from 'primeng/table';
 import { first, firstValueFrom } from 'rxjs';
-import { PaymentMethodRegisterComponent } from '../payment-method-register/payment-method-register.component';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PaymentMethodSearchDTO } from '../../dto/payment-method-search-dto.dto';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
-import { PaymentMethod } from '../../entity/payment-method.entity';
 
 @Component({
   selector: 'app-payment-method-search',

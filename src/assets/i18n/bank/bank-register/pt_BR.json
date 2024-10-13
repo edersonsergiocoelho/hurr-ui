@@ -1,0 +1,18 @@
+{
+  "title_BankRegister": "Cadastro De Banco",
+  "label_bank_id_BankRegister": "ID Do Banco",
+  "placeholder_bank_id_BankRegister": "Informe O ID Do Banco",
+  "label_bank_code_BankRegister": "Código Do Banco",
+  "placeholder_bank_code_BankRegister": "Informe O Código Do Banco",
+  "label_bank_name_BankRegister": "Nome Do Banco",
+  "placeholder_bank_name_BankRegister": "Informe O Nome Do Banco",
+  "label_created_date_BankRegister": "Data de Criação",
+  "placeholder_created_date_BankRegister": "Selecione A Data De Criação",
+  "label_modified_date_BankRegister": "Data de Modificação",
+  "placeholder_modified_date_BankRegister": "Selecione A Data De Modificação",
+  "label_enabled_BankRegister": "Ativo",
+
+  "save_success_message_service_BankRegister": "Banco Cadastrado  Com Sucesso",
+  "update_success_message_service_BankRegister": "Banco Atualizado Com Sucesso",
+  "delete_success_message_service_BankRegister": "Banco Removido Com Sucesso"
+}

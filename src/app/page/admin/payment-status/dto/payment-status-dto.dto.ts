@@ -14,7 +14,7 @@ export class PaymentStatusDTO {
     return {
       paymentStatusId: paymentStatusDTO.paymentStatusId,
       paymentStatusName: paymentStatusDTO.paymentStatusName,
-      file: paymentStatusDTO.file ? FileDTO.toEntity(paymentStatusDTO.file) : undefined, // Supondo que FileDTO também tenha um método toEntity
+      file: paymentStatusDTO.file ? FileDTO.toEntity(paymentStatusDTO.file) : undefined,
       createdDate: paymentStatusDTO.createdDate,
       modifiedDate: paymentStatusDTO.modifiedDate,
       enabled: paymentStatusDTO.enabled,

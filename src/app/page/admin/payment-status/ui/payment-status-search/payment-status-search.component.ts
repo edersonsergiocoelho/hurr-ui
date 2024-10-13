@@ -4,13 +4,11 @@ import { PaymentStatusService } from '../../service/payment-status.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Table, TableLazyLoadEvent } from 'primeng/table';
 import { first, firstValueFrom } from 'rxjs';
-import { PaymentStatusRegisterComponent } from '../payment-status-register/payment-status-register.component';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PaymentStatusSearchDTO } from '../../dto/payment-status-search-dto.dto';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
-import { PaymentStatus } from '../../entity/payment-status.entity';
 
 @Component({
   selector: 'app-payment-status-search',
