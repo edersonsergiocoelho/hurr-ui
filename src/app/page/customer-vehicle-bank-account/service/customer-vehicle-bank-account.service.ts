@@ -14,8 +14,17 @@ export class CustomerVehicleBankAccountService {
 
   constructor(private readonly httpClient: HttpClient) {}
 
-  findById(customerBankAccountId: string): Observable<HttpResponse<CustomerVehicleBankAccount>> {
-    const url = `${this.apiUrl}/${customerBankAccountId}`;
+  findById(customerVehicleBankAccountId: string): Observable<HttpResponse<CustomerVehicleBankAccount>> {
+    const url = `${this.apiUrl}/${customerVehicleBankAccountId}`;
+    return this.httpClient.get<CustomerVehicleBankAccount>(url, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleBankAccount>) => {
+        return response;
+      })
+    );
+  }
+
+  findByCustomerVehicleBankAccountName(customerVehicleBankAccountName: string): Observable<HttpResponse<CustomerVehicleBankAccount>> {
+    const url = `${this.apiUrl}/by/customer-vehicle-bank-account-name/${customerVehicleBankAccountName}`;
     return this.httpClient.get<CustomerVehicleBankAccount>(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleBankAccount>) => {
         return response;
@@ -31,7 +40,7 @@ export class CustomerVehicleBankAccountService {
     );
   }
 
-  searchPage(customerBankAccountSearchDTO: CustomerVehicleBankAccountSearchDTO, page: number = 0, size: number = 10, sortDir: string, sortBy: string | string[]): Observable<HttpResponse<any>> {
+  searchPage(customerVehicleBankAccountSearchDTO: CustomerVehicleBankAccountSearchDTO, page: number = 0, size: number = 10, sortDir: string, sortBy: string | string[]): Observable<HttpResponse<any>> {
     const url = `${this.apiUrl}/search/page`;
 
     let params = new HttpParams()
@@ -45,38 +54,46 @@ export class CustomerVehicleBankAccountService {
       params = params.set('sortBy', sortBy.join(','));
     }
 
-    return this.httpClient.post<any>(url, customerBankAccountSearchDTO, { params, observe: 'response' });
+    return this.httpClient.post<any>(url, customerVehicleBankAccountSearchDTO, { params, observe: 'response' });
   }
 
-  save(customerBankAccount: CustomerVehicleBankAccount): Observable<HttpResponse<CustomerVehicleBankAccount>> {
-    return this.httpClient.post<CustomerVehicleBankAccount>(this.apiUrl, customerBankAccount, { observe: 'response' }).pipe(
+  save(customerVehicleBankAccount: CustomerVehicleBankAccount): Observable<HttpResponse<CustomerVehicleBankAccount>> {
+    return this.httpClient.post<CustomerVehicleBankAccount>(this.apiUrl, customerVehicleBankAccount, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleBankAccount>) => {
         return response;
       })
     );
   }
 
-  finalizeBooking(customerBankAccount: CustomerVehicleBankAccount): Observable<HttpResponse<CustomerVehicleBankAccount>> {
-    const url = `${this.apiUrl}/finalize-booking/${customerBankAccount.customerBankAccountId}`;
-    return this.httpClient.put<CustomerVehicleBankAccount>(url, customerBankAccount, { observe: 'response' }).pipe(
+  update(customerVehicleBankAccount: CustomerVehicleBankAccount): Observable<HttpResponse<CustomerVehicleBankAccount>> {
+    const url = `${this.apiUrl}/${customerVehicleBankAccount.customerVehicleBankAccountId}`;
+    return this.httpClient.put<CustomerVehicleBankAccount>(url, customerVehicleBankAccount, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleBankAccount>) => {
         return response;
       })
     );
   }
 
-  update(customerBankAccount: CustomerVehicleBankAccount): Observable<HttpResponse<CustomerVehicleBankAccount>> {
-    const url = `${this.apiUrl}/${customerBankAccount.customerBankAccountId}`;
-    return this.httpClient.put<CustomerVehicleBankAccount>(url, customerBankAccount, { observe: 'response' }).pipe(
-      map((response: HttpResponse<CustomerVehicleBankAccount>) => {
-        return response;
-      })
-    );
-  }
-
-  delete(customerBankAccountId: string): Observable<HttpResponse<void> | null> {
-    const url = `${this.apiUrl}/${customerBankAccountId}`;
+  delete(customerVehicleBankAccountId: string): Observable<HttpResponse<void> | null> {
+    const url = `${this.apiUrl}/${customerVehicleBankAccountId}`;
     return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(
+      catchError((error: any) => {
+        if (error.status === 404) {
+          return of(null);
+        } else {
+          throw error;
+        }
+      })
+    );
+  }
+
+  // Novo método para deletar múltiplos registros
+  deleteAll(customerVehicleBankAccountIds: string[]): Observable<HttpResponse<void> | null> {
+    const url = `${this.apiUrl}/all`;
+    return this.httpClient.delete<void>(url, {
+      body: customerVehicleBankAccountIds,
+      observe: 'response'
+    }).pipe(
       catchError((error: any) => {
         if (error.status === 404) {
           return of(null);

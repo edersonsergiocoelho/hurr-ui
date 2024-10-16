@@ -13,11 +13,10 @@ export class EarningsResumeUIDTO {
   withdrawableCurrentBalance: number;
   withdrawableBalance: number;
 
-
   paymentMethods: Array<PaymentMethod>;
   selectedPaymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
-  customerBankAccounts: Array<CustomerVehicleBankAccount>;
+  customerVehicleBankAccounts: Array<CustomerVehicleBankAccount>;
   selectedCustomerVehicleBankAccount: CustomerVehicleBankAccount;
   customerVehicleBookings: Array<CustomerVehicleBooking>;
   selectedCustomerVehicleBookings: Array<CustomerVehicleBooking>;

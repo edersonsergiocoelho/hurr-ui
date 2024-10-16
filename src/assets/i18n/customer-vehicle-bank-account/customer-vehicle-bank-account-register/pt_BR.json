@@ -1,0 +1,20 @@
+{
+  "title_CustomerVehicleBankAccountRegister": "Cadastro De Conta Bancária",
+  "label_payment_status_id_CustomerVehicleBankAccountRegister": "ID Da Conta Bancária",
+  "placeholder_payment_status_id_CustomerVehicleBankAccountRegister": "Informe O ID Da Conta Bancária",
+  "label_bank_CustomerVehicleBankAccountRegister": "Banco",
+  "placeholder_bank_CustomerVehicleBankAccountRegister": "Informe O Banco",
+  "label_pix_type_CustomerVehicleBankAccountRegister": "Tipo De Chave PIX",
+  "placeholder_pix_type_CustomerVehicleBankAccountRegister": "Informe O Tipo De Chave PIX",
+  "label_pix_key_CustomerVehicleBankAccountRegister": "Chave PIX",
+  "placeholder_pix_key_CustomerVehicleBankAccountRegister": "Informe A Chave PIX",
+  "label_created_date_CustomerVehicleBankAccountRegister": "Data de Criação",
+  "placeholder_created_date_CustomerVehicleBankAccountRegister": "Selecione A Data De Criação",
+  "label_modified_date_CustomerVehicleBankAccountRegister": "Data de Modificação",
+  "placeholder_modified_date_CustomerVehicleBankAccountRegister": "Selecione A Data De Modificação",
+  "label_enabled_CustomerVehicleBankAccountRegister": "Ativo",
+
+  "save_success_message_service_CustomerVehicleBankAccountRegister": "Conta Bancária Cadastrado  Com Sucesso",
+  "update_success_message_service_CustomerVehicleBankAccountRegister": "Conta Bancária Atualizado Com Sucesso",
+  "delete_success_message_service_CustomerVehicleBankAccountRegister": "Conta Bancária Removido Com Sucesso"
+}

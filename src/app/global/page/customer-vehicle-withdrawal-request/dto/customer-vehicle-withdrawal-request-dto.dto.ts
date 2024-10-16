@@ -4,7 +4,7 @@ import { PaymentMethod } from "src/app/page/admin/payment-method/entity/payment-
 import { PaymentStatus } from "src/app/page/admin/payment-status/entity/payment-status.entity";
 import { CustomerVehicleBankAccount } from "src/app/page/customer-vehicle-bank-account/entity/customer-vehicle-bank-account.entity";
 
-export class CustomerVehicleWithdrawalRequest {
+export class CustomerVehicleWithdrawalRequestDTO {
 
   customerVehicleWithdrawalRequestId: string;
   customer: Customer;

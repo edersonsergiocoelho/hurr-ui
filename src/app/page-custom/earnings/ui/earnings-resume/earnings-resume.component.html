@@ -102,12 +102,12 @@
 
             <div
               class="flex justify-content-between w-full align-items-center border-1 p-3 border-round surface-border mb-2 cursor-pointer"
-              *ngFor="let customerBankAccount of earningsResumeUIDTO.customerBankAccounts">
+              *ngFor="let customerVehicleBankAccount of earningsResumeUIDTO.customerVehicleBankAccounts">
               <div>
                 <div class="flex align-items-center mb-3">
 
-                  <ng-container *ngIf="customerBankAccount.bank?.dataURI != null; else noBankImage">
-                    <img [src]="customerBankAccount?.bank?.dataURI" alt="Bank Image"
+                  <ng-container *ngIf="customerVehicleBankAccount.bank?.dataURI != null; else noBankImage">
+                    <img [src]="customerVehicleBankAccount?.bank?.dataURI" alt="Bank Image"
                       class="w-3rem border-1 surface-border border-round mr-2">
                   </ng-container>
 
@@ -115,18 +115,19 @@
                     <div
                       class="w-3rem h-3rem border-1 surface-border border-round mr-2 flex justify-content-center align-items-center">
                       <span style="color: black; font-weight: bold; font-size: 12px; text-align: center;">
-                        {{'span_no_image_Bank' | translate}}
+                        {{'span_no_image_Generic' | translate}}
                       </span>
                     </div>
                   </ng-template>
 
-                  <p class="font-medium text-xl mt-0 mb-0 mr-2 text-900">{{customerBankAccount.bank.bankName}}</p>
+                  <p class="font-medium text-xl mt-0 mb-0 mr-2 text-900">{{customerVehicleBankAccount.bank.bankName}}</p>
                 </div>
-                <p class="font-medium text-base mt-0 mb-0 text-600">{{customerBankAccount.pixKey}}</p>
+                <p class="font-medium text-base mt-0 mb-0 text-600">{{customerVehicleBankAccount.pixType}}</p>
+                <p class="font-medium text-base mt-0 mb-0 text-600">{{customerVehicleBankAccount.pixKey}}</p>
               </div>
 
-              <p-radioButton class="p-element" name="payment" [value]="customerBankAccount"
-                [(ngModel)]="earningsResumeUIDTO.selectedCustomerVehicleBankAccount" inputId="{{customerBankAccount.pixKey}}">
+              <p-radioButton class="p-element" name="payment" [value]="customerVehicleBankAccount"
+                [(ngModel)]="earningsResumeUIDTO.selectedCustomerVehicleBankAccount" inputId="{{customerVehicleBankAccount.pixKey}}">
               </p-radioButton>
 
             </div>

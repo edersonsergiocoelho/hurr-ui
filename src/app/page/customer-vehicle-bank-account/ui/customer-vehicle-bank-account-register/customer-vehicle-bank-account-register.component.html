@@ -1,0 +1,137 @@
+<!-- Formulário De Registro -->
+<form novalidate #customerVehicleBankAccountRegisterForm="ngForm" (ngSubmit)="ngSubmit()">
+  <h2 id="divH2" class="bg-indigo-500 text-white">{{'title_CustomerVehicleBankAccountRegister' | translate}}</h2>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="customerVehicleBankAccountId" [ngClass]="labelSize">{{'label_payment_status_id_CustomerVehicleBankAccountRegister' | translate}}</label>
+      <input id="customerVehicleBankAccountId" type="text" pInputText 
+        placeholder="{{'placeholder_payment_status_id_CustomerVehicleBankAccountRegister' | translate}}" 
+        [(ngModel)]="customerVehicleBankAccountRegisterUIDTO.customerVehicleBankAccountDTO.customerVehicleBankAccountId" name="customerVehicleBankAccountId" autocomplete="off" disabled />
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="bank" [ngClass]="labelSize">{{'label_bank_CustomerVehicleBankAccountRegister' | translate}}</label>
+      <p-dropdown 
+        [options]="customerVehicleBankAccountRegisterUIDTO.banks" 
+        [(ngModel)]="customerVehicleBankAccountRegisterUIDTO.selectedBank" 
+        [filter]="true"
+        filterBy="bankName"
+        [showClear]="true" 
+        name="bank"
+        placeholder="{{ 'placeholder_bank_CustomerVehicleBankAccountRegister' | translate }}"
+        required="true">
+
+        <ng-template let-bank pTemplate="item">
+          {{ bank.bankCode }} - {{ bank.bankName }}
+        </ng-template>
+
+        <ng-template let-selectedBank pTemplate="selectedItem">
+          {{ selectedBank?.bankCode }} - {{ selectedBank?.bankName }}
+        </ng-template>
+      </p-dropdown>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="pixType" [ngClass]="labelSize">{{'label_pix_type_CustomerVehicleBankAccountRegister' | translate}}</label>
+      <p-dropdown 
+        [options]="customerVehicleBankAccountRegisterUIDTO.pixTypes" 
+        [(ngModel)]="customerVehicleBankAccountRegisterUIDTO.selectedPIXType" 
+        [filter]="true"
+        filterBy="name"
+        optionLabel="name" 
+        [showClear]="true" 
+        name="pixType"
+        placeholder="{{ 'placeholder_pix_type_CustomerVehicleBankAccountRegister' | translate }}"
+        required="true">
+      </p-dropdown>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="pixKey" [ngClass]="labelSize">{{'label_pix_key_CustomerVehicleBankAccountRegister' | translate}}</label>
+      <input id="pixKey" type="text" pInputText 
+        placeholder="{{'placeholder_pix_key_CustomerVehicleBankAccountRegister' | translate}}"
+        [(ngModel)]="customerVehicleBankAccountRegisterUIDTO.customerVehicleBankAccountDTO.pixKey" name="pixKey" autocomplete="off" required />
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="createdDate" [ngClass]="labelSize">{{'label_created_date_CustomerVehicleBankAccountRegister' | translate}}</label>
+      <p-calendar [(ngModel)]="customerVehicleBankAccountRegisterUIDTO.customerVehicleBankAccountDTO.createdDate" 
+        placeholder="{{'placeholder_created_date_CustomerVehicleBankAccountRegister' | translate}}"
+        name="createdDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true">
+      </p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="modifiedDate" [ngClass]="labelSize">{{'label_modified_date_CustomerVehicleBankAccountRegister' | translate}}</label>
+      <p-calendar 
+        placeholder="{{'placeholder_modified_date_CustomerVehicleBankAccountRegister' | translate}}"
+        [(ngModel)]="customerVehicleBankAccountRegisterUIDTO.customerVehicleBankAccountDTO.modifiedDate" name="modifiedDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true">
+      </p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize" style="display: flex; flex-direction: column;">
+      <label for="enabled" [ngClass]="labelSize">{{'label_enabled_CustomerVehicleBankAccountRegister' | translate}}</label>
+      <p-inputSwitch [(ngModel)]="customerVehicleBankAccountRegisterUIDTO.customerVehicleBankAccountDTO.enabled" 
+        name="enabled">
+      </p-inputSwitch>
+      <small id="enabled">{{'small_enabled_Generic' | translate}}</small>
+    </div>
+
+    <div class="col-12 flex flex-row justify-content-left py-0">
+
+      <div *ngIf="customerVehicleBankAccountRegisterUIDTO?.customerVehicleBankAccountDTO?.customerVehicleBankAccountId" class="md:col-3 mt-4 pt-1 field" >
+        <button pButton pRipple 
+          type="button"
+          class="p-ripple p-element p-button p-component p-button-contrast p-button-rounded md:w-10rem"
+          (click)="resetRegisterForm()">
+          <i class="pi pi-file"></i>
+          <span class="p-button-label">
+            {{'span_button_label_new_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="customerVehicleBankAccountRegisterUIDTO?.customerVehicleBankAccountDTO?.customerVehicleBankAccountId == null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton pRipple 
+          type="submit" 
+          class="p-button-rounded p-button-success md:w-10rem"
+          [disabled]="customerVehicleBankAccountRegisterForm.invalid">
+          <i class="pi pi-save"></i>
+          <span class="p-button-label">
+            {{'span_button_label_save_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="customerVehicleBankAccountRegisterUIDTO?.customerVehicleBankAccountDTO?.customerVehicleBankAccountId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton pRipple 
+          class="p-button-rounded p-button-info md:w-10rem"
+          type="button"
+          (click)="update()"
+          [disabled]="customerVehicleBankAccountRegisterForm.invalid">
+          <i class="pi pi-file-edit"></i>
+          <span class="p-button-label">
+            {{'span_button_label_update_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="customerVehicleBankAccountRegisterUIDTO?.customerVehicleBankAccountDTO?.customerVehicleBankAccountId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton pRipple 
+          class="p-button-rounded p-button-danger md:w-10rem"
+          type="button"
+          (click)="delete(null)"
+          [disabled]="customerVehicleBankAccountRegisterForm.invalid">
+          <i class="pi pi-times"></i>
+          <span class="p-button-label">
+            {{'span_button_label_delete_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</form>

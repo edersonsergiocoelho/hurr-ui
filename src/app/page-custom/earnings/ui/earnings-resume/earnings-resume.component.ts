@@ -160,7 +160,13 @@ export class EarningsResumeComponent {
       const customerVehicleBankAccountServiceFindAll = await firstValueFrom(this.customerVehicleBankAccountService.findAll().pipe(first()));
       
       if (customerVehicleBankAccountServiceFindAll.status == 200 && customerVehicleBankAccountServiceFindAll.body != null) {
-        this.earningsResumeUIDTO.customerBankAccounts = customerVehicleBankAccountServiceFindAll.body;
+        this.earningsResumeUIDTO.customerVehicleBankAccounts = customerVehicleBankAccountServiceFindAll.body;
+
+        for (let customerVehicleBankAccount of this.earningsResumeUIDTO.customerVehicleBankAccounts) {
+          if (customerVehicleBankAccount.bank.file != null) {
+            customerVehicleBankAccount.bank.dataURI = `data:${customerVehicleBankAccount.bank.file.contentType};base64,${customerVehicleBankAccount.bank.file.dataAsByteArray}`;
+          }
+        }
       }
       
     } catch (error: any) {
@@ -251,7 +257,7 @@ export class EarningsResumeComponent {
       next: (data: any) => {
         if (data.status == 201) {
           this.messageService.add({
-            severity: SeverityConstants.INFO,
+            severity: SeverityConstants.SUCCESS,
             summary: 'Solicitação de retirada concluída',
             detail: 'A solicitação de retirada foi realizada com sucesso.'
           });

@@ -10,7 +10,7 @@ import { CustomerVehicleWithdrawalRequestSearchDTO } from '../dto/customer-vehic
 })
 export class CustomerVehicleWithdrawalRequestService {
 
-  private readonly apiUrl = `${environment.api}/customer-withdrawal-request`;
+  private readonly apiUrl = `${environment.api}/customer-vehicle-withdrawal-request`;
 
   constructor(private readonly httpClient: HttpClient) {}
 

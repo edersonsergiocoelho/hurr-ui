@@ -11,6 +11,8 @@ import { CustomerVehicleWithdrawalRequestSearchDTO } from '../../dto/customer-ve
 import { PaymentStatusService } from 'src/app/page/admin/payment-status/service/payment-status.service';
 import { PaymentMethodService } from 'src/app/page/admin/payment-method/service/payment-method.service';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { CustomerVehicleWithdrawalRequestDTO } from '../../dto/customer-vehicle-withdrawal-request-dto.dto';
+import { CNAN240Service } from 'src/app/utils/service/cnab240-service';
 
 @Component({
   selector: 'app-customer-vehicle-withdrawal-request-approval',
@@ -24,6 +26,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
 
   constructor(
     private customerVehicleWithdrawalRequestService: CustomerVehicleWithdrawalRequestService,
+    private cnab240Service: CNAN240Service,
     private ngxSpinnerService: NgxSpinnerService,
     private messageService: MessageService,
     private translateService: TranslateService,
@@ -233,4 +236,22 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
       }
     });
   }
-}
+
+  downloadCNABFile(): void {
+
+    const cnabFile = this.cnab240Service.generateCNAB240File(this.customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequests);
+
+    // Criar um blob de texto para o arquivo
+    const blob = new Blob([cnabFile], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+  
+    // Criar o link para download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'CI240_001_000001.REM'; // Nome do arquivo conforme layout
+    a.click();
+  
+    // Liberar o URL
+    window.URL.revokeObjectURL(url);
+  }
+}  

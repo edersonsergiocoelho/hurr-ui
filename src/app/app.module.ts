@@ -87,8 +87,13 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-view-invoice/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-view-reservation/',
 
+  // CustomerVehicleBankAccount
+  '/assets/i18n/customer-vehicle-bank-account/customer-vehicle-bank-account/',
+  '/assets/i18n/customer-vehicle-bank-account/customer-vehicle-bank-account-search/',
+  '/assets/i18n/customer-vehicle-bank-account/customer-vehicle-bank-account-register/',
+
   //
-  '/assets/i18n/customer-withdrawal-request/customer-withdrawal-request-approval/',
+  '/assets/i18n/customer-vehicle-withdrawal-request/customer-vehicle-withdrawal-request-approval/',
 
   // Earnings
   '/assets/i18n/earnings/earnings/',

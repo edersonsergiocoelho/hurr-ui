@@ -5,34 +5,34 @@
     <!-- Formulário De Pesquisa -->
     <form #customerVehicleWithdrawalRequestApprovalForm="ngForm" (ngSubmit)="search($event)">
       <!-- Seção De Pesquisa -->
-      <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerWithdrawalRequestApproval' | translate}}</h3>
+      <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerVehicleWithdrawalRequestApproval' | translate}}</h3>
 
       <div class="grid p-fluid form-group">
 
         <div class="col-6 md:col-6 field">
-          <label class="font-medium text-2xl" for="cpf">{{'label_cpf_CustomerWithdrawalRequestApproval' | translate}}</label>
+          <label class="font-medium text-2xl" for="cpf">{{'label_cpf_CustomerVehicleWithdrawalRequestApproval' | translate}}</label>
           <p-inputMask class="p-inputtext-lg" type="text" mask="999.999.999-99"
-            placeholder="{{'placeholder_cpf_CustomerWithdrawalRequestApproval' | translate}}"
+            placeholder="{{'placeholder_cpf_CustomerVehicleWithdrawalRequestApproval' | translate}}"
             [(ngModel)]="customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequestSearchDTO.cpf" name="cpf" autocomplete="off" />
         </div>
 
         <div class="col-6 md:col-6 field">
-          <label class="font-medium text-2xl">{{'label_payment_method_CustomerWithdrawalRequestApproval' | translate}}</label>
+          <label class="font-medium text-2xl">{{'label_payment_method_CustomerVehicleWithdrawalRequestApproval' | translate}}</label>
           <p-dropdown class="p-inputtext-lg" 
             [options]="customerVehicleWithdrawalRequestApprovalUIDTO.paymentMethods" 
             [(ngModel)]="customerVehicleWithdrawalRequestApprovalUIDTO.selectedPaymentMethod" 
             optionLabel="paymentMethodName" [showClear]="true" name="paymentMethods"
-            placeholder="{{ 'placeholder_payment_method_CustomerWithdrawalRequestApproval' | translate }}?">
+            placeholder="{{ 'placeholder_payment_method_CustomerVehicleWithdrawalRequestApproval' | translate }}?">
           </p-dropdown>
         </div>
 
         <div class="col-6 md:col-6 field">
-          <label class="font-medium text-2xl">{{'label_payment_status_CustomerWithdrawalRequestApproval' | translate}}</label>
+          <label class="font-medium text-2xl">{{'label_payment_status_CustomerVehicleWithdrawalRequestApproval' | translate}}</label>
           <p-dropdown class="p-inputtext-lg"
             [options]="customerVehicleWithdrawalRequestApprovalUIDTO.paymentStatuses" 
             [(ngModel)]="customerVehicleWithdrawalRequestApprovalUIDTO.selectedPaymentStatus" 
             optionLabel="paymentStatusName" [showClear]="true" name="paymentStatuses"
-            placeholder="{{'placeholder_payment_status_CustomerWithdrawalRequestApproval' | translate}}?"></p-dropdown>
+            placeholder="{{'placeholder_payment_status_CustomerVehicleWithdrawalRequestApproval' | translate}}?"></p-dropdown>
         </div>
 
       </div>
@@ -50,6 +50,8 @@
             </span>
             <i class="pi pi-eraser"></i>
           </button>
+
+          <button (click)="downloadCNABFile()">Gerar CNAB240</button>
 
           <button type="submit" class="p-element p-button p-component mr-3 md:w-10rem" pButton>
             <span class="p-button-label">
@@ -92,7 +94,7 @@
               </td>
 
               <td class="text-left">
-                {{rowData.customerBankAccount.bank.bankName}}
+                {{rowData.customerVehicleBankAccount.bank.bankName}}
               </td>
 
               <td class="text-left">
