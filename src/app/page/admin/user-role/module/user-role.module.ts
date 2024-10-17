@@ -20,12 +20,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
+import { SidebarModule } from 'primeng/sidebar';
+import { UserRoleEditRoleComponentComponent } from '../ui/user-role-edit-role-component/user-role-edit-role-component.component';
 
 @NgModule({
   declarations: [
     UserRoleComponent,
     UserRoleSearchComponent,
-    UserRoleRegisterComponent
+    UserRoleRegisterComponent,
+    UserRoleEditRoleComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { TableModule } from 'primeng/table';
     InputTextModule,
     InputSwitchModule,
     SelectButtonModule,
+    SidebarModule,
     TableModule
   ]
 })

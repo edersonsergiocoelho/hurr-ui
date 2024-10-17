@@ -5,7 +5,7 @@
     <!-- Formulário De Pesquisa -->
     <form #customerVehicleWithdrawalRequestApprovalForm="ngForm" (ngSubmit)="search($event)">
       <!-- Seção De Pesquisa -->
-      <h3 id="divH3" class="bg-indigo-500 text-white">{{'title_CustomerVehicleWithdrawalRequestApproval' | translate}}</h3>
+      <h3 id="divH2" class="bg-indigo-500 text-white">{{'title_CustomerVehicleWithdrawalRequestApproval' | translate}}</h3>
 
       <div class="grid p-fluid form-group">
 
@@ -120,7 +120,7 @@
               <td class="text-left">
 
                 <button type="button" class="p-element p-button p-component mr-3 md:w-10rem" *ngIf="rowData.paymentStatus.paymentStatusName == 'PENDING'"
-                  (click)="clickApproval(rowData)" pButton>
+                  (click)="clickApprovalPIX(rowData)" pButton>
                   <span class="p-button-label">
                     {{'span_button_label_approve_Generic' | translate}}
                   </span>

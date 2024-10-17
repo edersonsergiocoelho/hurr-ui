@@ -13,6 +13,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
 import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { UtilsPipeModule } from 'src/app/utils/pipe/module/utils-pipe.module';
     ButtonModule,
     DropdownModule,
     InputMaskModule,
+    SidebarModule,
     TableModule
   ],
   exports: [

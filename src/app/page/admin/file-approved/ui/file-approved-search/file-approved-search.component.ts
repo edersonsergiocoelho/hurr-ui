@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { TableLazyLoadEvent } from 'primeng/table';
 import { UserService } from 'src/app/page/user/service/user.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
 
 @Component({
   selector: 'app-file-approved-search',
@@ -85,9 +86,9 @@ export class FileApprovedSearchComponent implements OnInit {
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
-        summary: '' + this.fileApprovedSearchUIDTO.error_message_service_Generic,
-        detail: error.toString()
+        severity: SeverityConstants.ERROR,
+        summary: this.fileApprovedSearchUIDTO.error_message_service_Generic,
+        detail: error.error?.message || error.toString()
       });
     }
 
@@ -105,9 +106,9 @@ export class FileApprovedSearchComponent implements OnInit {
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
-        summary: '' + this.fileApprovedSearchUIDTO.error_message_service_Generic,
-        detail: error.toString()
+        severity: SeverityConstants.ERROR,
+        summary: this.fileApprovedSearchUIDTO.error_message_service_Generic,
+        detail: error.error?.message || error.toString()
       });
     }
 
@@ -176,7 +177,11 @@ export class FileApprovedSearchComponent implements OnInit {
       error: (error) => {
 
         if (error.status == 500) {
-          this.messageService.add({ severity: 'error', summary: '' + this.fileApprovedSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+          this.messageService.add({ 
+            severity: SeverityConstants.ERROR, 
+            summary: this.fileApprovedSearchUIDTO.error_message_service_Generic, 
+            detail: error.error?.message || error.toString()
+          });
         }
 
         this.ngxSpinnerService.hide();

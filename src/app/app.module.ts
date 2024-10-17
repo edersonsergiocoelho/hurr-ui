@@ -92,7 +92,8 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/customer-vehicle-bank-account/customer-vehicle-bank-account-search/',
   '/assets/i18n/customer-vehicle-bank-account/customer-vehicle-bank-account-register/',
 
-  //
+  // CustomerVehicleWithdrawalRequest
+  '/assets/i18n/customer-vehicle-withdrawal-request/customer-vehicle-withdrawal-request/',
   '/assets/i18n/customer-vehicle-withdrawal-request/customer-vehicle-withdrawal-request-approval/',
 
   // Earnings
@@ -119,7 +120,10 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
 
   '/assets/i18n/role/',
   '/assets/i18n/user/',
-  '/assets/i18n/user-role/'
+
+  // UserRole
+  '/assets/i18n/user-role/',
+  '/assets/i18n/user-role/user-role-edit-role/'
   ]);
 }
 

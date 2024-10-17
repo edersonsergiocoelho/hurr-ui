@@ -1,6 +1,6 @@
 <!-- Tela Componetizada -->
 <div class="ui-fluid">
-  <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleWithdrawalRequest' | translate}}</h1>
+  <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_UserRoleEditRole' | translate}}</h1>
 
   <div class="grid" style="padding-top: 10px;">
 
@@ -15,10 +15,19 @@
             <i class="pi pi-window-maximize"></i>
           </button>
         </div>
-        <app-customer-vehicle-withdrawal-request-approval></app-customer-vehicle-withdrawal-request-approval>
+        <div class="text-center" style="padding: 20px;">
+          <p>{{ 'message_become_vehicle_partner_UserRoleEditRole' | translate }}</p>
+
+          <!-- Botão de Confirmação -->
+          <button pButton pRipple 
+            type="button" 
+            class="p-button-success p-button-lg"
+            (click)="ngSubmit()">
+            {{ 'span_button_label_confirm' | translate }}
+          </button>
+        </div>
       </div>
     </div>
-
   </div>
 
   <p-sidebar [(visible)]="sidebarSearchVisible" [fullScreen]="true" [baseZIndex]="10000">
@@ -32,7 +41,8 @@
       </span>
     </button>
     <!-- Conteúdo do Sidebar -->
-    <app-customer-vehicle-withdrawal-request-approval></app-customer-vehicle-withdrawal-request-approval>
+     <!--
+    <app-payment-status-search></app-payment-status-search>
+    -->
   </p-sidebar>
-
 </div>

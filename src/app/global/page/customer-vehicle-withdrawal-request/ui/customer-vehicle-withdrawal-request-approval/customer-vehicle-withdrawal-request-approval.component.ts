@@ -13,6 +13,8 @@ import { PaymentMethodService } from 'src/app/page/admin/payment-method/service/
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { CustomerVehicleWithdrawalRequestDTO } from '../../dto/customer-vehicle-withdrawal-request-dto.dto';
 import { CNAN240Service } from 'src/app/utils/service/cnab240-service';
+import { InterPIXService } from 'src/app/page-custom/inter/service/pix/inter-pix.service';
+import { InterIncluirPIXDTO } from 'src/app/page-custom/inter/dto/inter-incluir-pix-dto.dto';
 
 @Component({
   selector: 'app-customer-vehicle-withdrawal-request-approval',
@@ -26,6 +28,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
 
   constructor(
     private customerVehicleWithdrawalRequestService: CustomerVehicleWithdrawalRequestService,
+    private interPIXService: InterPIXService,
     private cnab240Service: CNAN240Service,
     private ngxSpinnerService: NgxSpinnerService,
     private messageService: MessageService,
@@ -88,8 +91,8 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
-        summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
+        severity: SeverityConstants.ERROR,
+        summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -107,8 +110,8 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
-        summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
+        severity: SeverityConstants.ERROR,
+        summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -126,8 +129,8 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
-        summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
+        severity: SeverityConstants.ERROR,
+        summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -186,7 +189,11 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
       error: (error) => {
 
         if (error.status == 500) {
-          this.messageService.add({ severity: 'error', summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, detail: error.error.message });
+          this.messageService.add({ 
+            severity: SeverityConstants.ERROR, 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, 
+            detail: error.error.message 
+          });
         }
 
         this.ngxSpinnerService.hide();
@@ -202,6 +209,46 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
     this.customerVehicleWithdrawalRequestApprovalUIDTO.page = event.first / event.rows;
   }
 
+  clickApprovalPIX(rowData) {
+
+    this.ngxSpinnerService.show();
+
+    let interIncluirPIXDTO = new InterIncluirPIXDTO();
+    interIncluirPIXDTO.customerVehicleWithdrawalRequestId = rowData.customerVehicleWithdrawalRequestId;
+    interIncluirPIXDTO.chave = rowData.customerVehicleBankAccount.pixKey;
+    interIncluirPIXDTO.valor = rowData.customerVehicleBooking.withdrawableBookingValue;
+
+    this.interPIXService.save(interIncluirPIXDTO).pipe(first()).subscribe({
+      next: (data: any) => {
+
+        if (data.status == 200) {
+          this.messageService.add({ 
+            severity: SeverityConstants.SUCCESS, 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_message_service_Generic, 
+            detail: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_approval_message_service_CustomerVehicleWithdrawalRequestApproval 
+          });
+        }
+      },
+      error: (error) => {
+
+        if (error.status == 500) {
+          this.messageService.add({ 
+            severity: SeverityConstants.ERROR, 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, 
+            detail: error.error.message 
+          });
+        }
+
+        this.ngxSpinnerService.hide();
+      },
+      complete: () => {
+        this.ngxSpinnerService.hide();
+        this.resetSearchForm();
+        this.search(null);
+      }
+    });
+  }
+
   clickApproval(rowData) {
 
     this.ngxSpinnerService.show();
@@ -212,8 +259,8 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
         if (data.status == 200) {
           this.messageService.add({ 
             severity: SeverityConstants.SUCCESS, 
-            summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.success_message_service_Generic, 
-            detail: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.success_approval_message_service_CustomerVehicleWithdrawalRequestApproval 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_message_service_Generic, 
+            detail: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_approval_message_service_CustomerVehicleWithdrawalRequestApproval 
           });
         }
       },
@@ -221,8 +268,8 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
 
         if (error.status == 500) {
           this.messageService.add({ 
-            severity: 'error', 
-            summary: '' + this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, 
+            severity: SeverityConstants.ERROR, 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, 
             detail: error.error.message 
           });
         }
