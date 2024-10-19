@@ -1,0 +1,39 @@
+<!-- Tela Componetizada -->
+<div class="ui-fluid">
+
+  <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_UserProfile' | translate}}</h1>
+
+  <div class="grid" style="padding-top: 10px;">
+
+    <!-- Tela De Pesquisa -->
+    <div class="md:col-12 mb-2" [ngClass]="{'hidden': sidebarContentVisible}">
+      <div class="card no-margin bordered-card">
+        <!-- Usando flexbox para alinhar o botão à direita -->
+        <div class="flex justify-content-end" style="padding-right: 10px;">
+          <button pButton pRipple 
+            type="button"
+            (click)="toggleSidebarContent()">
+            <i class="pi pi-window-maximize"></i>
+          </button>
+        </div>
+        <app-user-profile-content></app-user-profile-content>
+      </div>
+    </div>
+
+  </div>
+
+  <p-sidebar [(visible)]="sidebarContentVisible" [fullScreen]="true" [baseZIndex]="10000">
+    <button pButton pRipple 
+      class="p-button-rounded p-button-contrast md:w-12rem"
+      type="button"
+      (click)="toggleSidebarContent()">
+      <i class="pi pi pi-times"></i>
+      <span class="p-button-label">
+        {{'span_button_label_close' | translate}}
+      </span>
+    </button>
+    <!-- Conteúdo do Sidebar -->
+    <app-user-profile-content></app-user-profile-content>
+  </p-sidebar>
+
+</div>

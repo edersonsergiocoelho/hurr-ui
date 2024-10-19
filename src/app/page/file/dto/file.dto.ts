@@ -1,3 +1,5 @@
+import { File } from "../entity/file.entity";
+
 export class FileDTO {
   
   fileId: string; // UUID em formato string
@@ -8,7 +10,9 @@ export class FileDTO {
   modifiedDate?: Date;
   enabled: boolean;
 
-  public static toEntity(fileDTO: FileDTO): any {
+  dataURI: string;
+
+  public static toEntity(fileDTO: FileDTO): File {
     return {
       fileId: fileDTO.fileId,
       contentType: fileDTO.contentType,
@@ -17,6 +21,7 @@ export class FileDTO {
       createdDate: fileDTO.createdDate,
       modifiedDate: fileDTO.modifiedDate,
       enabled: fileDTO.enabled,
+      dataURI: fileDTO.dataURI
     };
   }
 }

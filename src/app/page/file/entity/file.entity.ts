@@ -10,6 +10,8 @@ export class File {
   modifiedDate?: Date;
   enabled: boolean;
 
+  dataURI: string;
+
   public static toDTO(fileDTO: FileDTO): File {
     return {
       fileId: fileDTO.fileId,
@@ -19,6 +21,7 @@ export class File {
       createdDate: fileDTO.createdDate,
       modifiedDate: fileDTO.modifiedDate,
       enabled: fileDTO.enabled,
+      dataURI: fileDTO.dataURI
     };
   }
 }

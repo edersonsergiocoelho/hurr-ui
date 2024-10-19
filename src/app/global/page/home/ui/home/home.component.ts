@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
     this.homeUIService.customerVehicleId$.subscribe(customerVehicleId => {
       this.customerVehicleId = customerVehicleId;
       this.loadCustomerVehicle();
-      //this.updateMenuWithCustomerVehicleId(id);
     });
   }
 
@@ -109,12 +108,13 @@ export class HomeComponent implements OnInit {
 
     try {
       // Realiza chamadas assíncronas para carregar dados de arquivos e menus
-      const [fileData, menuHeaders, menuHeaderIcons, menuHeaderDropdowns, menuSides, menuSideCustomerVehicleEdits] = await Promise.all([
+      const [fileData, menuHeaders, menuHeaderIcons, menuHeaderDropdowns, menuSides, menuSideSettings, menuSideCustomerVehicleEdits] = await Promise.all([
         this.loadUserFile(), // Carrega o arquivo de foto do usuário
         this.loadMenus('MENU_HEADER'), // Carrega os cabeçalhos de menu
         this.loadMenus('MENU_HEADER_ICON'), // Carrega ícones de cabeçalhos de menu
         this.loadMenus('MENU_HEADER_DROPDOWN'), // Carrega menus suspensos dos cabeçalhos
         this.loadMenus('MENU_SIDE'),
+        this.loadMenus('MENU_SIDE_SETTINGS'),
         this.loadMenus('MENU_SIDE_CUSTOMER_VEHICLE_EDIT')
       ]);
 
@@ -138,6 +138,10 @@ export class HomeComponent implements OnInit {
 
       if (menuSides) {
         this.homeUIDTO.menuSides = menuSides;
+      }
+
+      if (menuSideSettings) {
+        this.homeUIDTO.menuSideSettings = menuSideSettings;
       }
 
       if (menuSideCustomerVehicleEdits) {
@@ -377,6 +381,11 @@ export class HomeComponent implements OnInit {
   
     // Retorna falso se não houver menus ou a URL não corresponder a nenhuma
     return false;
+  }
+
+  isSettings(): boolean {
+    const currentUrl = this.router.url;
+    return currentUrl.includes('/settings/');
   }
 
   clickRouterNavigateCustomerVehicle() {

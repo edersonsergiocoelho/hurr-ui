@@ -20,12 +20,20 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TagModule } from 'primeng/tag';
 import { UserForgotPasswordComponent } from '../ui/user-forgot-password/user-forgot-password.component';
+import { UserProfileComponent } from '../ui/user-profile/user-profile.component';
+import { UserProfileContentComponent } from '../ui/user-profile-content/user-profile-content.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { CalendarModule } from 'primeng/calendar';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
     UserLoginComponent,
     UserRegisterComponent,
-    UserForgotPasswordComponent
+    UserForgotPasswordComponent,
+    UserProfileComponent,
+    UserProfileContentComponent
+
   ],
   imports: [
     BrowserModule,
@@ -39,20 +47,18 @@ import { UserForgotPasswordComponent } from '../ui/user-forgot-password/user-for
     TranslateModule,
 
     // PrimeNG
+    ButtonModule,
     CarouselModule,
+    CalendarModule,
     CheckboxModule,
     DividerModule,
     DropdownModule,
     FileUploadModule,
     InputSwitchModule,
     InputTextModule,
+    SidebarModule,
     OverlayModule,
     TagModule 
-  ],
-  exports: [
-    UserLoginComponent,
-    UserRegisterComponent,
-    UserForgotPasswordComponent
   ]
 })
 export class UserModule { }

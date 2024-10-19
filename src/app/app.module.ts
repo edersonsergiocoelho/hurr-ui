@@ -119,7 +119,11 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/payment-status/payment-status-register/',
 
   '/assets/i18n/role/',
+
+  // User
   '/assets/i18n/user/',
+  '/assets/i18n/user/user-profile/user-profile/',
+  '/assets/i18n/user/user-profile/user-profile-content/',
 
   // UserRole
   '/assets/i18n/user-role/',
