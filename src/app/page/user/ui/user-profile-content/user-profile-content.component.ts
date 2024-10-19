@@ -14,7 +14,7 @@ import { SessionStorageService } from 'src/app/core/session-storage/service/sess
 @Component({
   selector: 'app-user-profile-content',
   templateUrl: './user-profile-content.component.html',
-  styleUrl: './user-profile-content.component.css'
+  styleUrls: ['./user-profile-content.component.css']
 })
 export class UserProfileContentComponent implements OnInit {
 

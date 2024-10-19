@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-role-edit-role-component',
   templateUrl: './user-role-edit-role-component.component.html',
-  styleUrl: './user-role-edit-role-component.component.css'
+  styleUrls: ['./user-role-edit-role-component.component.css']
 })
 export class UserRoleEditRoleComponentComponent implements OnInit {
 

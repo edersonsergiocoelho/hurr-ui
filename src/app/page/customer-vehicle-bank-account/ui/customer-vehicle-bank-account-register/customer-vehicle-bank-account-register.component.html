@@ -21,7 +21,7 @@
         [showClear]="true" 
         name="bank"
         placeholder="{{ 'placeholder_bank_CustomerVehicleBankAccountRegister' | translate }}"
-        required="true">
+        [required]="true">
 
         <ng-template let-bank pTemplate="item">
           {{ bank.bankCode }} - {{ bank.bankName }}
@@ -44,7 +44,7 @@
         [showClear]="true" 
         name="pixType"
         placeholder="{{ 'placeholder_pix_type_CustomerVehicleBankAccountRegister' | translate }}"
-        required="true">
+        [required]="true">
       </p-dropdown>
     </div>
 

@@ -55,7 +55,7 @@
 
     <div class="col-12 md:col-6 field" [ngClass]="inputSize" style="display: flex; flex-direction: column;">
       <label for="enabled" [ngClass]="labelSize">{{'label_enabled_UserProfileContent' | translate}}</label>
-      <p-inputSwitch [(ngModel)]="userProfileContentUIDTO.userDTO.enabled" name="enabled" disabled >
+      <p-inputSwitch [(ngModel)]="userProfileContentUIDTO.userDTO.enabled" name="enabled" [disabled]="true" >
       </p-inputSwitch>
       <small id="enabled">{{'small_enabled_Generic' | translate}}</small>
     </div>

@@ -4,7 +4,7 @@ import { UserProfileContentComponent } from '../user-profile-content/user-profil
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.css'
+  styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent {
 
