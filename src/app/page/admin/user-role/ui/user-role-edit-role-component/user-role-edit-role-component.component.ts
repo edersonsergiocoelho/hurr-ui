@@ -85,14 +85,6 @@ export class UserRoleEditRoleComponentComponent implements OnInit {
     this.sidebarSearchVisible = !this.sidebarSearchVisible;
   }
 
-  confirmVehicleProvider() {
-    // Lógica para confirmar que o usuário quer se tornar um fornecedor
-    console.log('Usuário confirmou que quer se tornar fornecedor de veículo');
-    
-    // Exemplo de exibir um sidebar ou mensagem de feedback
-    this.sidebarSearchVisible = true;
-  }
-
   async ngSubmit(): Promise<void> {
     // Método chamado ao submeter o formulário para salvar um novo status de pagamento.
 
