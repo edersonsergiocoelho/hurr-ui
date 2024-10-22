@@ -106,8 +106,8 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
 
   // FileApproved
   '/assets/i18n/file-approved/file-approved/',
-  '/assets/i18n/file-approved/file-detail/',
-  '/assets/i18n/file-approved/file-search/',
+  '/assets/i18n/file-approved/file-approved-detail/',
+  '/assets/i18n/file-approved/file-approved-search/',
   
   // Home
   '/assets/i18n/home/home/',
@@ -141,8 +141,10 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/user-preference/user-preference/user-preference-content/',
 
   // UserRole
-  '/assets/i18n/user-role/',
-  '/assets/i18n/user-role/user-role-edit-role/'
+  '/assets/i18n/user-role/user-role/',
+  '/assets/i18n/user-role/user-role-edit-role/',
+  '/assets/i18n/user-role/user-role-register/',
+  '/assets/i18n/user-role/user-role-search/'
   ]);
 }
 

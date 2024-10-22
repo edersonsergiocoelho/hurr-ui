@@ -78,32 +78,36 @@ export class UserPreferenceContentComponent implements OnInit {
 
       const currentUser = this.sessionStorageService.getUser();
 
-      // Realiza chamadas assíncronas para carregar dados de arquivos e menus
-      const [userServiceGetCurrentUser] = await Promise.all([
-        firstValueFrom(this.userPreferenceService.findByUserId(currentUser.userId).pipe(first())),
-      ]);
+      if (currentUser != null) {
 
-      if (userServiceGetCurrentUser.status == 200 && userServiceGetCurrentUser.body != null) {
-        this.userPreferenceContentUIDTO.userPreferenceDTO = userServiceGetCurrentUser.body;
-
-        if (this.userPreferenceContentUIDTO.userPreferenceDTO.createdDate != null) {
-          this.userPreferenceContentUIDTO.userPreferenceDTO.createdDate = moment(this.userPreferenceContentUIDTO.userPreferenceDTO.createdDate).toDate();
+        // Realiza chamadas assíncronas para carregar dados de arquivos e menus
+        const [userServiceGetCurrentUser] = await Promise.all([
+          firstValueFrom(this.userPreferenceService.findByUserId(currentUser.userId).pipe(first())),
+        ]);
+  
+        if (userServiceGetCurrentUser.status == 200 && userServiceGetCurrentUser.body != null) {
+          this.userPreferenceContentUIDTO.userPreferenceDTO = userServiceGetCurrentUser.body;
+  
+          if (this.userPreferenceContentUIDTO.userPreferenceDTO.createdDate != null) {
+            this.userPreferenceContentUIDTO.userPreferenceDTO.createdDate = moment(this.userPreferenceContentUIDTO.userPreferenceDTO.createdDate).toDate();
+          }
+          if (this.userPreferenceContentUIDTO.userPreferenceDTO.modifiedDate != null) {
+            this.userPreferenceContentUIDTO.userPreferenceDTO.modifiedDate = moment(this.userPreferenceContentUIDTO.userPreferenceDTO.modifiedDate).toDate();
+          }
+  
+          const currentLanguage = this.userPreferenceContentUIDTO.userPreferenceDTO.language;
+          const selectedCurrentLanguage = this.userPreferenceContentUIDTO.languages.find(language => language.code === currentLanguage);
+          
+          if (selectedCurrentLanguage) {
+            this.userPreferenceContentUIDTO.selectedLanguage = selectedCurrentLanguage;
+          }
+  
+          this.userPreferenceContentUIDTO.selectedTheme = this.userPreferenceContentUIDTO.userPreferenceDTO.theme;
         }
-        if (this.userPreferenceContentUIDTO.userPreferenceDTO.modifiedDate != null) {
-          this.userPreferenceContentUIDTO.userPreferenceDTO.modifiedDate = moment(this.userPreferenceContentUIDTO.userPreferenceDTO.modifiedDate).toDate();
-        }
-
-        const currentLanguage = this.userPreferenceContentUIDTO.userPreferenceDTO.language;
-        const selectedCurrentLanguage = this.userPreferenceContentUIDTO.languages.find(language => language.code === currentLanguage);
-        
-        if (selectedCurrentLanguage) {
-          this.userPreferenceContentUIDTO.selectedLanguage = selectedCurrentLanguage;
-        }
-
-        this.userPreferenceContentUIDTO.selectedTheme = this.userPreferenceContentUIDTO.userPreferenceDTO.theme;
       }
 
     } catch (error: any) {
+      debugger
       // Exibe uma mensagem de erro caso ocorra uma falha ao carregar as traduções.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
