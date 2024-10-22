@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ThemeService } from './global/template/theme/service/theme.service';
-import { Router } from '@angular/router';
 import { SessionStorageService } from './core/session-storage/service/session-storage.service';
 
 @Component({
