@@ -22,13 +22,13 @@ export class CustomerVehicleBookingCustomerVehicleSearchUIDTO {
   selectedCustomerVehicleBooking: any;
   selectedCustomerVehicleReview: CustomerVehicleReview;
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
 
   label_created_date_option_1_CustomerVehicleBookingCustomerVehicleSearch: string;
   label_created_date_option_2_CustomerVehicleBookingCustomerVehicleSearch: string;
 
-  save_message_service_Generic: string;
+  save_summary_message_service_Generic: string;
   save_success_write_a_review_message_service_CustomerVehicleBookingCustomerVehicleSearch: string;
 }

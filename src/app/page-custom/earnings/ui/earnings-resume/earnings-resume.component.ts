@@ -53,18 +53,18 @@ export class EarningsResumeComponent {
     try {
 
       const keys = [
-        'error_message_service_Generic'
+        'error_summary_message_service_Generic'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.earningsResumeUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.earningsResumeUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
 
     } catch (error: any) {
 
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: this.earningsResumeUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -80,7 +80,7 @@ export class EarningsResumeComponent {
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR,
-        summary: this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: this.earningsResumeUIDTO.error_summary_message_service_Generic,
         detail: error.toString() 
       });
     }
@@ -96,7 +96,7 @@ export class EarningsResumeComponent {
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: '' + this.earningsResumeUIDTO.error_summary_message_service_Generic,
         detail: error.toString() 
       });
     }
@@ -112,7 +112,7 @@ export class EarningsResumeComponent {
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: '' + this.earningsResumeUIDTO.error_summary_message_service_Generic,
         detail: error.toString() 
       });
     }
@@ -133,7 +133,7 @@ export class EarningsResumeComponent {
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: '' + this.earningsResumeUIDTO.error_summary_message_service_Generic,
         detail: error.toString() 
       });
     }
@@ -149,7 +149,7 @@ export class EarningsResumeComponent {
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: '' + this.earningsResumeUIDTO.error_summary_message_service_Generic,
         detail: error.toString() 
       });
     }
@@ -171,7 +171,7 @@ export class EarningsResumeComponent {
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: '' + this.earningsResumeUIDTO.error_summary_message_service_Generic,
         detail: error.toString() 
       });
     }
@@ -187,7 +187,7 @@ export class EarningsResumeComponent {
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsResumeUIDTO.error_message_service_Generic,
+        summary: '' + this.earningsResumeUIDTO.error_summary_message_service_Generic,
         detail: error.toString() 
       });
     }

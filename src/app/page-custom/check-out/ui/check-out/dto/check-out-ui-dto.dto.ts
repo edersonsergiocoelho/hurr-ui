@@ -35,6 +35,6 @@ export class CheckOutUIDTO extends TranslateSeverityDTO {
   selectedHourInit?: string = '10:00';
   selectedHourEnd?: string = '10:00';
 
-  // Messages
+  // Messages - Translate
   header_Address_CheckOut: string;
 }

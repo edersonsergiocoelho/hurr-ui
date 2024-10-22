@@ -58,16 +58,16 @@ export class CustomerVehicleBankAccountRegisterComponent implements OnInit {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribui as traduções obtidas aos campos do UIDTO.
-      this.customerVehicleBankAccountRegisterUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleBankAccountRegisterUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleBankAccountRegisterUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.customerVehicleBankAccountRegisterUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleBankAccountRegisterUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleBankAccountRegisterUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleBankAccountRegisterUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.customerVehicleBankAccountRegisterUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
-      this.customerVehicleBankAccountRegisterUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
+      this.customerVehicleBankAccountRegisterUIDTO.save_summary_message_service_Generic = translations['save_summary_message_service_Generic'];
       this.customerVehicleBankAccountRegisterUIDTO.save_success_message_service_CustomerVehicleBankAccountRegister = translations['save_success_message_service_CustomerVehicleBankAccountRegister'];
-      this.customerVehicleBankAccountRegisterUIDTO.update_message_service_Generic = translations['update_message_service_Generic'];
+      this.customerVehicleBankAccountRegisterUIDTO.update_summary_message_service_Generic = translations['update_summary_message_service_Generic'];
       this.customerVehicleBankAccountRegisterUIDTO.update_success_message_service_CustomerVehicleBankAccountRegister = translations['update_success_message_service_CustomerVehicleBankAccountRegister'];
-      this.customerVehicleBankAccountRegisterUIDTO.delete_message_service_Generic = translations['delete_message_service_Generic'];
+      this.customerVehicleBankAccountRegisterUIDTO.delete_summary_message_service_Generic = translations['delete_summary_message_service_Generic'];
       this.customerVehicleBankAccountRegisterUIDTO.delete_success_message_service_CustomerVehicleBankAccountRegister = translations['delete_success_message_service_CustomerVehicleBankAccountRegister'];
 
       this.customerVehicleBankAccountRegisterUIDTO.pixTypes = [
@@ -94,7 +94,7 @@ export class CustomerVehicleBankAccountRegisterComponent implements OnInit {
       // Exibe uma mensagem de erro caso ocorra uma falha ao carregar as traduções.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleBankAccountRegisterUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleBankAccountRegisterUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     } finally {
@@ -106,15 +106,15 @@ export class CustomerVehicleBankAccountRegisterComponent implements OnInit {
   private loadKeys(): string[] {
     // Define as chaves para tradução que serão carregadas.
     return [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic',
-      'save_message_service_Generic',
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic',
+      'save_summary_message_service_Generic',
       'save_success_message_service_CustomerVehicleBankAccountRegister',
       'update_success_message_service_CustomerVehicleBankAccountRegister',
-      'update_message_service_Generic',
-      'delete_message_service_Generic',
+      'update_summary_message_service_Generic',
+      'delete_summary_message_service_Generic',
       'delete_success_message_service_CustomerVehicleBankAccountRegister'
     ];
   }
@@ -163,7 +163,7 @@ export class CustomerVehicleBankAccountRegisterComponent implements OnInit {
         // Exibe mensagem de sucesso se o status da resposta for 201 Created.
         this.messageService.add({ 
           severity: SeverityConstants.SUCCESS, 
-          summary: this.customerVehicleBankAccountRegisterUIDTO.save_message_service_Generic, 
+          summary: this.customerVehicleBankAccountRegisterUIDTO.save_summary_message_service_Generic, 
           detail: this.customerVehicleBankAccountRegisterUIDTO.save_success_message_service_CustomerVehicleBankAccountRegister 
         });
       }
@@ -172,7 +172,7 @@ export class CustomerVehicleBankAccountRegisterComponent implements OnInit {
       // Exibe mensagem de erro em caso de falha.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleBankAccountRegisterUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleBankAccountRegisterUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
 
@@ -202,7 +202,7 @@ export class CustomerVehicleBankAccountRegisterComponent implements OnInit {
         // Exibe mensagem de sucesso se o status da resposta for 200 OK.
         this.messageService.add({ 
           severity: SeverityConstants.SUCCESS, 
-          summary: this.customerVehicleBankAccountRegisterUIDTO.update_message_service_Generic, 
+          summary: this.customerVehicleBankAccountRegisterUIDTO.update_summary_message_service_Generic, 
           detail: this.customerVehicleBankAccountRegisterUIDTO.update_success_message_service_CustomerVehicleBankAccountRegister 
         });
       }
@@ -211,7 +211,7 @@ export class CustomerVehicleBankAccountRegisterComponent implements OnInit {
       // Exibe mensagem de erro em caso de falha.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleBankAccountRegisterUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleBankAccountRegisterUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
 
@@ -244,7 +244,7 @@ export class CustomerVehicleBankAccountRegisterComponent implements OnInit {
         // Exibe mensagem de sucesso se o status da resposta for 204 No Content.
         this.messageService.add({ 
           severity: SeverityConstants.SUCCESS, 
-          summary: this.customerVehicleBankAccountRegisterUIDTO.delete_message_service_Generic, 
+          summary: this.customerVehicleBankAccountRegisterUIDTO.delete_summary_message_service_Generic, 
           detail: this.customerVehicleBankAccountRegisterUIDTO.delete_success_message_service_CustomerVehicleBankAccountRegister 
         });
       }
@@ -253,7 +253,7 @@ export class CustomerVehicleBankAccountRegisterComponent implements OnInit {
       // Exibe mensagem de erro em caso de falha.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleBankAccountRegisterUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleBankAccountRegisterUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
 

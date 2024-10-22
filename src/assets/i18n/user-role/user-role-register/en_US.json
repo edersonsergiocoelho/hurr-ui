@@ -1,0 +1,17 @@
+{
+  "title_UserRoleRegister": "User / Role Registration",
+
+  "label_user_UserRoleRegister": "User ID",
+  "placeholder_user_UserRoleRegister": "Enter User",
+  "label_role_UserRoleRegister": "Role ID",
+  "placeholder_role_UserRoleRegister": "Enter User Role",
+  "label_created_date_UserRoleRegister": "Creation Date",
+  "placeholder_created_date_UserRoleRegister": "Record Creation Date",
+  "label_modified_date_UserRoleRegister": "Modification Date",
+  "placeholder_modified_date_UserRoleRegister": "Record Modification Date",
+  "label_enabled_UserRoleRegister": "Enabled?",
+  
+  "save_success_message_service_UserRoleRegister": "User / Role Record Successfully Saved.",
+  "update_success_message_service_UserRoleRegister": "User / Role Record Successfully Changed.",
+  "delete_success_message_service_UserRoleRegister": "User / Role Record Successfully Deleted."
+}

@@ -1,0 +1,7 @@
+{
+  "title_UserRoleEditRole": "Do You Want To Become A Vehicle Partner?",
+  "message_become_vehicle_partner_UserRoleEditRole": "If you want to become a vehicle partner, click the button below to confirm. You will be logged out of your account and will need to log in again. After the profile change, it will not be possible to go back.",
+ 
+  "become_vehicle_partner_summary_message_service_UserRoleEditRole": "You Have Become A Partner",
+  "become_vehicle_partner_detail_message_service_UserRoleEditRole": "You Have Become A Partner, Congratulations."
+}

@@ -13,8 +13,8 @@ export class CheckOutMPUIDTO {
     selectedHourInit?: string = '10:00';
     selectedHourEnd?: string = '10:00';
 
-    // Messages
-    error_message_service_Generic: string;
-    warn_message_service_Generic: string;
+    // Messages - Translate
+    error_summary_message_service_Generic: string;
+    warn_summary_message_service_Generic: string;
     select_customer_address_Address_Checkout: string;
 }

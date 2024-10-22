@@ -1,0 +1,44 @@
+{
+  "label_hosted_by_CustomerVehicleDetail": "Hosted By",
+  "label_created_date_CustomerVehicleDetail": "Joined On",
+  "label_description_CustomerVehicleDetail": "Description",
+  "day_CustomerVehicleDetail": "Day",
+  "excluding_taxes_and_fees_CustomerVehicleDetail": "Excluding Taxes And Fees",
+  "date_init_CustomerVehicleDetail": "Trip Start",
+  "date_end_CustomerVehicleDetail": "Trip End",
+  "pickup_and_return_location_CustomerVehicleDetail": "Pickup And Return Location",
+  "placeholder_customer_vehicle_address_vehicle_CustomerVehicleDetail": "Select Pickup And Return Location",
+  "item_label_customer_vehicle_address_vehicle_CustomerVehicleDetail": "We Will Send The Exact Address Once Your Trip Is Booked.",
+  "pickup_and_dropoff_location_CustomerVehicleDetail": "Pickup And Return At Your Residence Or Preferred Location",
+  "placeholder_customer_vehicle_address_delivery_CustomerVehicleDetail": "Select Delivery Location",
+  "item_label_customer_vehicle_address_delivery_CustomerVehicleDetail": "We Will Send The Exact Address Once Your Trip Is Booked.",
+  "placeholder_customer_vehicle_address_pickup_CustomerVehicleDetail": "Select Pickup Location",
+  "item_label_customer_vehicle_address_pickup_CustomerVehicleDetail": "We Will Send The Exact Address Once Your Trip Is Booked.",
+  "label_continue_CustomerVehicleDetail": "Continue",
+  "label_free_cancellation_CustomerVehicleDetail": "Free Cancellation",
+  "label_full_refund_before_CustomerVehicleDetail": "Full Refund Before",
+  "label_to_the_CustomerVehicleDetail": "at",
+  "label_mileage_information_CustomerVehicleDetail": "Mileage Information",
+  "label_unlimited_mileage_CustomerVehicleDetail": "Included Distance: Unlimited",
+  "label_limited_mileage_included_CustomerVehicleDetail": "Included Distance: ",
+  "label_limited_mileage_value_CustomerVehicleDetail": "Excess KM Price R$: ",
+  "label_convenience_CustomerVehicleDetail": "Convenience",
+ 
+  "label_delivery_to_ddress_CustomerVehicleDetail": "Delivery To Address",
+  "label_mileage_fee_delivery_CustomerVehicleDetail": "KM Price For Delivery",
+  "label_pickup_at_address_CustomerVehicleDetail": "Pickup At Address",
+  "label_mileage_fee_pickups_CustomerVehicleDetail": "KM Price For Pickup",
+
+  "div_share_your_experience_CustomerVehicleDetail": "Share Your Experience",
+  "p_your_feedback_is_valuable_CustomerVehicleDetail": "Your feedback is valuable to us and to future drivers. Tell us how it was to drive this car and what stood out the most during the rental. Share your discoveries, positives, and even challenges you faced. Your opinion helps the community make informed decisions about their car rental choices.",
+
+  "span_reviews_CustomerVehicleDetail": "Reviews",
+  "div_average_rating_CustomerVehicleDetail": "Average Rating: ",
+ 
+  "button_Address_CustomerVehicleDetail": "Add Address",
+  "header_Address_CustomerVehicleDetail": "Register Your Vehicle Delivery Or Pickup Address...",
+
+  "warn_not_null_customer_vehicle_address_vehicle_CustomerVehicleDetail": "Please Select An Address. No Address Selected.",
+  "warn_customer_not_validated_CustomerVehicleDetail": "Your Account Has Not Been Validated Yet. We Will Redirect You To Submit The Necessary Information For Validation.",
+  "info_user_not_logged_in_CustomerVehicleDetail": "You Are Not Logged In. Please Log In To Continue."
+}

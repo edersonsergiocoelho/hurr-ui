@@ -1,0 +1,31 @@
+{
+  "title_CustomerVehicleEditAddressesRegister": "Address Registration",
+  
+  "label_address_type_CustomerVehicleEditAddressesRegister": "Address Type",
+  "placeholder_address_type_CustomerVehicleEditAddressesRegister": "Enter The Address Type, For Example, When You Want To Register The Same Delivery And Pickup Address",
+  "label_nickname_CustomerVehicleEditAddressesRegister": "Nickname",
+  "placeholder_nickname_CustomerVehicleEditAddressesRegister": "Enter Nickname e.g. Santander Card",
+  "label_country_CustomerVehicleEditAddressesRegister": "Country",
+  "placeholder_country_CustomerVehicleEditAddressesRegister": "Enter The Country",
+  "label_state_CustomerVehicleEditAddressesRegister": "State",
+  "placeholder_state_CustomerVehicleEditAddressesRegister": "Enter The State",
+  "label_city_CustomerVehicleEditAddressesRegister": "City",
+  "placeholder_city_CustomerVehicleEditAddressesRegister": "Enter The City",
+  "label_street_address_CustomerVehicleEditAddressesRegister": "Street",
+  "placeholder_street_address_CustomerVehicleEditAddressesRegister": "Enter Street, Avenue, Etc.",
+  "label_number_CustomerVehicleEditAddressesRegister": "Number",
+  "placeholder_number_CustomerVehicleEditAddressesRegister": "Enter Street, Avenue, Etc. Number",
+  "label_complement_CustomerVehicleEditAddressesRegister": "Complement",
+  "placeholder_complement_CustomerVehicleEditAddressesRegister": "Enter Complement e.g. Apartment 1, Block 1",
+  "label_zip_code_CustomerVehicleEditAddressesRegister": "ZIP Code",
+  "placeholder_zip_code_CustomerVehicleEditAddressesRegister": "Enter ZIP Code Number, e.g. 17.340-000",
+  "label_created_date_CustomerVehicleEditAddressesRegister": "Creation Date",
+  "placeholder_created_date_CustomerVehicleEditAddressesRegister": "Record Creation Date",
+  "label_modified_date_CustomerVehicleEditAddressesRegister": "Modification Date",
+  "placeholder_modified_date_CustomerVehicleEditAddressesRegister": "Record Modification Date",
+  "label_enabled_CustomerVehicleEditAddressesRegister": "Enabled?",
+
+  "save_success_message_service_CustomerVehicleEditAddressesRegister": "Address Successfully Registered.",
+  "update_success_message_service_CustomerVehicleEditAddressesRegister": "Address Successfully Updated.",
+  "delete_success_message_service_CustomerVehicleEditAddressesRegister": "Address Successfully Deleted."
+}

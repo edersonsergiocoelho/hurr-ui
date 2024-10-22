@@ -1,0 +1,10 @@
+{
+  "title_CustomerVehicleRegisterStep2": "Paso 2 - Ingrese El Vehículo A Registrar",
+  
+  "label_vehicle_brand_CustomerVehicleRegisterStep2": "Marca",
+  "placeholder_vehicle_brand_CustomerVehicleRegisterStep2": "Ingrese La Marca",
+  "label_vehicle_CustomerVehicleRegisterStep2": "Vehículo",
+  "placeholder_vehicle_CustomerVehicleRegisterStep2": "Ingrese El Vehículo",
+  "label_vehicle_model_CustomerVehicleRegisterStep2": "Modelo",
+  "placeholder_vehicle_model_CustomerVehicleRegisterStep2": "Ingrese El Modelo Del Vehículo"
+}

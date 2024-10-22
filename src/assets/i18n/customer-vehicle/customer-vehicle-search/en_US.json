@@ -1,0 +1,21 @@
+{
+  "title_my_booking_CustomerVehicleSearch": "My Cars",
+  "subtitle_my_booking_CustomerVehicleSearch": "Check Here My Registered Cars.",
+ 
+  "code_CustomerVehicleSearch": "Car Code",
+  "created_date_CustomerVehicleSearch": "Registration Date",
+  "total_daily_rate_CustomerVehicleSearch": "Daily Rate",
+  "vehicle_model_CustomerVehicleSearch": "Model: ",
+  "vehicle_category_CustomerVehicleSearch": "Category: ",
+  "vehicle_color_CustomerVehicleSearch": "Color: ",
+  "vehicle_fuel_type_CustomerVehicleSearch": "Fuel Type: ",
+  "vehicle_transmission_CustomerVehicleSearch": "Transmission: ",
+  "placeholder_created_date_CustomerVehicleSearch": "Sort By Registration Date",
+  "label_created_date_option_1_CustomerVehicleSearch": "Sort By Registration Date Ascending",
+  "label_created_date_option_2_CustomerVehicleSearch": "Sort By Registration Date Descending",
+  "label_booking_delivery_date_CustomerVehicleSearch": "Delivery Date: ",
+  "placeholder_review_CustomerVehicleSearch": "Enter A Review For The Customer Who Rented The Car",
+  "save_success_write_a_review_message_service_CustomerVehicleSearch": "Review Successfully Saved",
+ 
+  "header_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog_CustomerVehicleSearch": "Finalize Reservation"
+}

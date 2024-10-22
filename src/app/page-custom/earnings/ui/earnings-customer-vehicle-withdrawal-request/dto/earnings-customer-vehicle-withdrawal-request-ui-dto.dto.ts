@@ -19,8 +19,8 @@ export class EarningsCustomerVehicleWithdrawalRequestUIDTO {
 
   customerVehicleWithdrawalRequestSearchDTO: CustomerVehicleWithdrawalRequestSearchDTO;
 
-  // Messages
-  error_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
   label_created_date_option_1_EarningsCustomerVehicleWithdrawalRequest: string;
   label_created_date_option_2_EarningsCustomerVehicleWithdrawalRequest: string;
 }

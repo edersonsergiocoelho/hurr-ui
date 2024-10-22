@@ -63,9 +63,9 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic', 
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic', 
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'message_not_null_message_service_CustomerVehicleApprovedDetail',
         'success_approve_message_service_CustomerVehicleApprovedDetail',
         'success_disapprove_message_service_CustomerVehicleApprovedDetail'
@@ -73,9 +73,9 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleApprovedDetailUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleApprovedDetailUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleApprovedDetailUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleApprovedDetailUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleApprovedDetailUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.customerVehicleApprovedDetailUIDTO.message_not_null_message_service_CustomerVehicleApprovedDetail = translations['message_not_null_message_service_CustomerVehicleApprovedDetail'];
       this.customerVehicleApprovedDetailUIDTO.success_approve_message_service_CustomerVehicleApprovedDetail = translations['success_approve_message_service_CustomerVehicleApprovedDetail'];
       this.customerVehicleApprovedDetailUIDTO.success_disapprove_message_service_CustomerVehicleApprovedDetail = translations['success_disapprove_message_service_CustomerVehicleApprovedDetail'];
@@ -83,7 +83,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -104,7 +104,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -125,7 +125,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -148,7 +148,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -166,7 +166,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -199,8 +199,8 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
-        detail: '' + this.customerVehicleApprovedDetailUIDTO.failed_to_open_new_tab_message_service_Generic
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_summary_message_service_Generic,
+        detail: '' + this.customerVehicleApprovedDetailUIDTO.failed_to_open_new_tab_detail_message_service_Generic
       });
     }
   }
@@ -214,7 +214,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.message == null || this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.message == "") {
       this.messageService.add({
         severity: SeverityConstants.WARN,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.warn_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.warn_summary_message_service_Generic,
         detail: '' + this.customerVehicleApprovedDetailUIDTO.message_not_null_message_service_CustomerVehicleApprovedDetail,
       });
 
@@ -245,7 +245,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
               this.messageService.add({
                 severity: SeverityConstants.SUCCESS,
-                summary: '' + this.customerVehicleApprovedDetailUIDTO.success_message_service_Generic,
+                summary: '' + this.customerVehicleApprovedDetailUIDTO.success_summary_message_service_Generic,
                 detail: '' + this.customerVehicleApprovedDetailUIDTO.success_approve_message_service_CustomerVehicleApprovedDetail,
               });
             }
@@ -256,7 +256,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -267,7 +267,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     if (this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.message == null || this.customerVehicleApprovedDetailUIDTO.customerVehicleApproved.message == "") {
       this.messageService.add({
         severity: SeverityConstants.WARN,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.warn_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.warn_summary_message_service_Generic,
         detail: '' + this.customerVehicleApprovedDetailUIDTO.message_not_null_message_service_CustomerVehicleApprovedDetail,
       });
 
@@ -298,7 +298,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
 
               this.messageService.add({
                 severity: SeverityConstants.SUCCESS,
-                summary: '' + this.customerVehicleApprovedDetailUIDTO.success_message_service_Generic,
+                summary: '' + this.customerVehicleApprovedDetailUIDTO.success_summary_message_service_Generic,
                 detail: '' + this.customerVehicleApprovedDetailUIDTO.success_disapprove_message_service_CustomerVehicleApprovedDetail,
               });
             }
@@ -309,7 +309,7 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }

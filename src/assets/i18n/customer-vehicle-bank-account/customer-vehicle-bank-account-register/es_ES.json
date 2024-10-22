@@ -1,0 +1,21 @@
+{
+  "title_CustomerVehicleBankAccountRegister": "Registro De Cuenta Bancaria",
+  
+  "label_payment_status_id_CustomerVehicleBankAccountRegister": "ID De Cuenta Bancaria",
+  "placeholder_payment_status_id_CustomerVehicleBankAccountRegister": "Ingrese El ID De La Cuenta Bancaria",
+  "label_bank_CustomerVehicleBankAccountRegister": "Banco",
+  "placeholder_bank_CustomerVehicleBankAccountRegister": "Ingrese El Banco",
+  "label_pix_type_CustomerVehicleBankAccountRegister": "Tipo De Clave PIX",
+  "placeholder_pix_type_CustomerVehicleBankAccountRegister": "Ingrese El Tipo De Clave PIX",
+  "label_pix_key_CustomerVehicleBankAccountRegister": "Clave PIX",
+  "placeholder_pix_key_CustomerVehicleBankAccountRegister": "Ingrese La Clave PIX",
+  "label_created_date_CustomerVehicleBankAccountRegister": "Fecha De Creación",
+  "placeholder_created_date_CustomerVehicleBankAccountRegister": "Seleccione La Fecha De Creación",
+  "label_modified_date_CustomerVehicleBankAccountRegister": "Fecha De Modificación",
+  "placeholder_modified_date_CustomerVehicleBankAccountRegister": "Seleccione La Fecha De Modificación",
+  "label_enabled_CustomerVehicleBankAccountRegister": "Habilitado",
+
+  "save_success_message_service_CustomerVehicleBankAccountRegister": "Cuenta Bancaria Registrada Con Éxito",
+  "update_success_message_service_CustomerVehicleBankAccountRegister": "Cuenta Bancaria Actualizada Con Éxito",
+  "delete_success_message_service_CustomerVehicleBankAccountRegister": "Cuenta Bancaria Eliminada Con Éxito"
+}

@@ -1,0 +1,8 @@
+{
+  "title_CustomerVehicleRegisterStep3": "Paso 3 - Ingrese La Transmisión Y El Kilometraje",
+  
+  "label_vehicle_transmission_CustomerVehicleRegisterStep3": "Transmisión",
+  "placeholder_vehicle_transmission_CustomerVehicleRegisterStep3": "Ingrese La Transmisión Del Vehículo",
+  "label_mileage_created_CustomerVehicleRegisterStep3": "Kilometraje",
+  "placeholder_mileage_created_CustomerVehicleRegisterStep3": "Ingrese El Kilometraje Del Vehículo"
+}

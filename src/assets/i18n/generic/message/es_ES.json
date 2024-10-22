@@ -1,0 +1,16 @@
+{
+  "no_connection_to_the_api_detail_message_service_Generic": "¡Ups! Parece Que Estamos Teniendo Problemas De Conexión. Por Favor, Intente Nuevamente Más Tarde.",
+  "failed_to_open_new_tab_detail_message_service_Generic": "Error Al Abrir Una Nueva Pestaña.",
+
+  "warn_summary_message_service_Generic": "Advertencia",
+  "error_summary_message_service_Generic": "Error",
+  "info_summary_message_service_Generic": "Información",
+  "success_summary_message_service_Generic": "Éxito",
+
+  "save_summary_message_service_Generic": "Guardado Con Éxito.",
+  "update_summary_message_service_Generic": "Actualizado Con Éxito.",
+  "delete_summary_message_service_Generic": "Eliminado Con Éxito.",
+
+  "delete_all_success_summary_message_service_Generic": "Elementos Eliminados Con Éxito.",
+  "delete_all_success_detail_message_service_Generic": "Todos Los Elementos Seleccionados Han Sido Eliminados Con Éxito."
+}

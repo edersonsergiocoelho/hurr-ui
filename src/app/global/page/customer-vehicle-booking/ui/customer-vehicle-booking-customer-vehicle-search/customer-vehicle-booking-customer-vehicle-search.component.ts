@@ -69,29 +69,29 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
         'label_created_date_option_1_CustomerVehicleBookingCustomerVehicleSearch',
         'label_created_date_option_2_CustomerVehicleBookingCustomerVehicleSearch',
         'header_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog_CustomerVehicleBookingCustomerVehicleSearch',
-        'save_message_service_Generic',
+        'save_summary_message_service_Generic',
         'save_success_write_a_review_message_service_CustomerVehicleBookingCustomerVehicleSearch'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleBookingCustomerVehicleSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleSearchUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
       this.customerVehicleBookingCustomerVehicleSearchUIDTO.label_created_date_option_1_CustomerVehicleBookingCustomerVehicleSearch = translations['label_created_date_option_1_CustomerVehicleBookingCustomerVehicleSearch'];
       this.customerVehicleBookingCustomerVehicleSearchUIDTO.label_created_date_option_2_CustomerVehicleBookingCustomerVehicleSearch = translations['label_created_date_option_2_CustomerVehicleBookingCustomerVehicleSearch'];
-      this.customerVehicleBookingCustomerVehicleSearchUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleSearchUIDTO.save_summary_message_service_Generic = translations['save_summary_message_service_Generic'];
       this.customerVehicleBookingCustomerVehicleSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingCustomerVehicleSearch = translations['save_success_write_a_review_message_service_CustomerVehicleBookingCustomerVehicleSearch'];
 
     } catch (error: any) {
       
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -163,7 +163,7 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
       error: (error) => {
 
         if (error.status == 500) {
-          this.messageService.add({ severity: 'error', summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+          this.messageService.add({ severity: 'error', summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_summary_message_service_Generic, detail: error.error.message });
         }
 
         this.ngxSpinnerService.hide();
@@ -195,7 +195,7 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
         if (error.status === 500) {
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_message_service_Generic, 
+            summary: this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }
@@ -285,7 +285,7 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
 
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_message_service_Generic, 
+            summary: this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }
@@ -314,7 +314,7 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
   
             this.messageService.add({ 
               severity: 'success', 
-              summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.save_message_service_Generic, 
+              summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.save_summary_message_service_Generic, 
               detail: '' +  this.customerVehicleBookingCustomerVehicleSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingCustomerVehicleSearch, 
             });
   
@@ -328,7 +328,7 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
   
             this.messageService.add({ 
               severity: 'error', 
-              summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_message_service_Generic, 
+              summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_summary_message_service_Generic, 
               detail: error.error.message 
             });
           }
@@ -353,7 +353,7 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
 
             this.messageService.add({ 
               severity: 'success', 
-              summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.save_message_service_Generic, 
+              summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.save_summary_message_service_Generic, 
               detail: '' +  this.customerVehicleBookingCustomerVehicleSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingCustomerVehicleSearch, 
             });
 
@@ -367,7 +367,7 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
 
             this.messageService.add({ 
               severity: 'error', 
-              summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_message_service_Generic, 
+              summary: '' + this.customerVehicleBookingCustomerVehicleSearchUIDTO.error_summary_message_service_Generic, 
               detail: error.error.message 
             });
           }

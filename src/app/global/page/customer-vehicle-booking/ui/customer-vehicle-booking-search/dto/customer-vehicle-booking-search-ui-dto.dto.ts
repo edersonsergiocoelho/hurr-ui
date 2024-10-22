@@ -24,11 +24,11 @@ export class CustomerVehicleBookingSearchUIDTO extends TranslateConfirmServiceDT
   selectedCustomerVehicleBooking: CustomerVehicleBooking;
   selectedCustomerVehicleReview: CustomerVehicleReview;
 
-  // Messages
+  // Messages - Translate
   label_created_date_option_1_CustomerVehicleBookingSearch: string;
   label_created_date_option_2_CustomerVehicleBookingSearch: string;
 
-  save_message_service_Generic: string;
+  save_summary_message_service_Generic: string;
   save_cancel_booking_message_service_CustomerVehicleBookingSearch: string;
   save_success_write_a_review_message_service_CustomerVehicleBookingSearch: string;
 }

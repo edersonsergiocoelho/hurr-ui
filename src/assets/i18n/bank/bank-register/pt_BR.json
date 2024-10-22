@@ -1,5 +1,6 @@
 {
   "title_BankRegister": "Cadastro De Banco",
+  
   "label_bank_id_BankRegister": "ID Do Banco",
   "placeholder_bank_id_BankRegister": "Informe O ID Do Banco",
   "label_bank_code_BankRegister": "Código Do Banco",

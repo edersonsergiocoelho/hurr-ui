@@ -18,9 +18,9 @@ export class CustomerVehicleEditAddressesSearchUIDTO {
   enabledOptions: any[] = [{label: 'Todos', value: 'ALL'}, {label: 'Habilitados', value: 'ON'}, {label: 'Desabilitados', value: 'OFF'}];
   enabledValue: string = 'ALL';
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
 
   // Table
   table_header_customer_vehicle_address_id_CustomerVehicleEditAddressesSearch: string;

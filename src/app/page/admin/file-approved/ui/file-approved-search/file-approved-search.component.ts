@@ -60,8 +60,8 @@ export class FileApprovedSearchComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic', 
-        'warn_message_service_Generic',
+        'error_summary_message_service_Generic', 
+        'warn_summary_message_service_Generic',
         'table_header_file_approved_id_FileApprovedSearch',
         'table_header_file_table_FileApprovedSearch',
         'table_header_file_type_FileApprovedSearch',
@@ -73,8 +73,8 @@ export class FileApprovedSearchComponent implements OnInit {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.fileApprovedSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.fileApprovedSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.fileApprovedSearchUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.fileApprovedSearchUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
       this.fileApprovedSearchUIDTO.table_header_file_approved_id_FileApprovedSearch = translations['table_header_file_approved_id_FileApprovedSearch'];
       this.fileApprovedSearchUIDTO.table_header_file_table_FileApprovedSearch = translations['table_header_file_table_FileApprovedSearch'];
       this.fileApprovedSearchUIDTO.table_header_file_type_FileApprovedSearch = translations['table_header_file_type_FileApprovedSearch'];
@@ -86,7 +86,7 @@ export class FileApprovedSearchComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.fileApprovedSearchUIDTO.error_message_service_Generic,
+        summary: this.fileApprovedSearchUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     }
@@ -106,7 +106,7 @@ export class FileApprovedSearchComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.fileApprovedSearchUIDTO.error_message_service_Generic,
+        summary: this.fileApprovedSearchUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     }
@@ -178,7 +178,7 @@ export class FileApprovedSearchComponent implements OnInit {
         if (error.status == 500) {
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: this.fileApprovedSearchUIDTO.error_message_service_Generic, 
+            summary: this.fileApprovedSearchUIDTO.error_summary_message_service_Generic, 
             detail: error.error?.message || error.toString()
           });
         }

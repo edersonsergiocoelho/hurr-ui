@@ -28,7 +28,6 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   return new MultiTranslateHttpLoader(_httpBackend,
   [
   // Generic's
-  '/assets/i18n/generic/button/',
   '/assets/i18n/generic/confirmation/',
   '/assets/i18n/generic/currency/',
   '/assets/i18n/generic/label/',
@@ -39,6 +38,7 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/generic/table/',
   '/assets/i18n/generic/tooltip/',
 
+  // Address
   '/assets/i18n/address/',
 
   // Bank
@@ -46,8 +46,11 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/bank/bank-search/',
   '/assets/i18n/bank/bank-register/',
 
-  '/assets/i18n/checkout/',
-  '/assets/i18n/customer-validation/',
+  // Checkout
+  '/assets/i18n/checkout/checkout/',
+
+  // CustomerValidation
+  '/assets/i18n/customer-validation/customer-validation/',
   
   // CustomerVehicle
   '/assets/i18n/customer-vehicle/customer-vehicle-detail/',
@@ -101,7 +104,10 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/earnings/earnings-customer-vehicle-withdrawal-request/',
   '/assets/i18n/earnings/earnings-resume/',
 
-  '/assets/i18n/file-approved/',
+  // FileApproved
+  '/assets/i18n/file-approved/file-approved/',
+  '/assets/i18n/file-approved/file-detail/',
+  '/assets/i18n/file-approved/file-search/',
   
   // Home
   '/assets/i18n/home/home/',
@@ -118,12 +124,17 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/payment-status/payment-status-search/',
   '/assets/i18n/payment-status/payment-status-register/',
 
-  '/assets/i18n/role/',
+  // Role
+  '/assets/i18n/role/role/',
+  '/assets/i18n/role/role-register/',
+  '/assets/i18n/role/role-search/',
 
   // User
-  '/assets/i18n/user/',
+  '/assets/i18n/user/user-forgot-password/',
+  '/assets/i18n/user/user-login/',
   '/assets/i18n/user/user-profile/user-profile/',
   '/assets/i18n/user/user-profile/user-profile-content/',
+  '/assets/i18n/user/user-register/',
 
   // UserPreference
   '/assets/i18n/user-preference/user-preference/user-preference/',

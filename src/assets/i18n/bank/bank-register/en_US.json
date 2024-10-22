@@ -1,0 +1,19 @@
+{
+  "title_BankRegister": "Bank Registration",
+  
+  "label_bank_id_BankRegister": "Bank ID",
+  "placeholder_bank_id_BankRegister": "Enter Bank ID",
+  "label_bank_code_BankRegister": "Bank Code",
+  "placeholder_bank_code_BankRegister": "Enter Bank Code",
+  "label_bank_name_BankRegister": "Bank Name",
+  "placeholder_bank_name_BankRegister": "Enter Bank Name",
+  "label_created_date_BankRegister": "Creation Date",
+  "placeholder_created_date_BankRegister": "Select Creation Date",
+  "label_modified_date_BankRegister": "Modification Date",
+  "placeholder_modified_date_BankRegister": "Select Modification Date",
+  "label_enabled_BankRegister": "Enabled",
+  
+  "save_success_message_service_BankRegister": "Bank Successfully Registered",
+  "update_success_message_service_BankRegister": "Bank Successfully Updated",
+  "delete_success_message_service_BankRegister": "Bank Successfully Deleted"
+}

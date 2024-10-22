@@ -46,23 +46,23 @@ export class UserRegisterComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'save_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'save_summary_message_service_Generic',
         'save_success_message_service_UserRegister'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.userRegisterUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userRegisterUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.userRegisterUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
+      this.userRegisterUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userRegisterUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.userRegisterUIDTO.save_summary_message_service_Generic = translations['save_summary_message_service_Generic'];
       this.userRegisterUIDTO.save_success_message_service_UserRegister = translations['save_success_message_service_UserRegister'];
 
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.userRegisterUIDTO.error_message_service_Generic,
+        summary: this.userRegisterUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -81,7 +81,7 @@ export class UserRegisterComponent implements OnInit {
 
           this.messageService.add({ 
             severity: SeverityConstants.SUCCESS, 
-            summary: '' + this.userRegisterUIDTO.save_message_service_Generic, 
+            summary: '' + this.userRegisterUIDTO.save_summary_message_service_Generic, 
             detail: '' + this.userRegisterUIDTO.save_success_message_service_UserRegister 
           });
 
@@ -94,7 +94,7 @@ export class UserRegisterComponent implements OnInit {
         if (error.status == 400) {
           this.messageService.add({
             severity: SeverityConstants.WARN,
-            summary: this.userRegisterUIDTO.warn_message_service_Generic,
+            summary: this.userRegisterUIDTO.warn_summary_message_service_Generic,
             detail: error.error.message,
           });
         }
@@ -102,7 +102,7 @@ export class UserRegisterComponent implements OnInit {
         if (error.status == 500) {
           this.messageService.add({
             severity: SeverityConstants.ERROR,
-            summary: this.userRegisterUIDTO.error_message_service_Generic,
+            summary: this.userRegisterUIDTO.error_summary_message_service_Generic,
             detail: error.error.message,
           });
         }

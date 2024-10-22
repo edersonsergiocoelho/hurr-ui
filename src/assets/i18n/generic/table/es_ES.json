@@ -1,0 +1,8 @@
+{
+  "table_current_page_report_template_showing_Generic": "Mostrando",
+  "table_current_page_report_template_to_Generic": "A",
+  "table_current_page_report_template_of_Generic": "De",
+  "table_current_page_report_template_records_Generic": "Registros",
+  "table_no_records_found_Generic": "No Encontramos Ningún Registro Que Coincida Con Su Búsqueda.",
+  "table_summary_total_items_message": "En Total, Hay {{total}} Artículos."
+}

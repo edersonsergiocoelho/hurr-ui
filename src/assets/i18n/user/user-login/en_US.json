@@ -1,0 +1,16 @@
+{
+  "title_UserLogin": "Login to HURR",
+  "sign_up_UserLogin": "Sign Up",
+
+  "sign_in_with_facebook_UserLogin": "Sign In With Facebook",
+  "sign_in_with_google_UserLogin": "Sign In With Google",
+  "or_UserLogin": "Or",
+
+  "label_email_UserLogin": "Email",
+  "placeholder_email_UserLogin": "Enter Email",
+  "label_password_UserLogin": "Password",
+  "placeholder_password_UserLogin": "Enter Password",
+  
+  "remember_me_UserLogin": "Remember Me",
+  "forgot_password_UserLogin": "Forgot Your Password?"
+}

@@ -1,0 +1,23 @@
+{
+  "title_CustomerVehicleRegisterStep5": "Step 5 - Vehicle Details",
+  
+  "label_license_plate_type_CustomerVehicleRegisterStep5": "License Plate Type",
+  "label_license_plate_type_old_model_CustomerVehicleRegisterStep5": "Old Model",
+  "label_license_plate_type_mercosul_CustomerVehicleRegisterStep5": "Mercosul",
+  "label_license_plate_CustomerVehicleRegisterStep5": "Vehicle License Plate",
+  "placeholder_license_plate_CustomerVehicleRegisterStep5": "Enter Vehicle License Plate",
+  "label_renavam_CustomerVehicleRegisterStep5": "Vehicle Renavam",
+  "placeholder_renavam_CustomerVehicleRegisterStep5": "Enter Vehicle Renavam",
+  "label_chassis_CustomerVehicleRegisterStep5": "Vehicle Chassis",
+  "placeholder_chassis_CustomerVehicleRegisterStep5": "Enter Vehicle Chassis",
+  "label_year_of_manufacture_CustomerVehicleRegisterStep5": "Year Of Manufacture",
+  "placeholder_year_of_manufacture_CustomerVehicleRegisterStep5": "Enter Year Of Manufacture",
+  "label_year_of_the_car_CustomerVehicleRegisterStep5": "Car Year",
+  "placeholder_year_of_the_car_CustomerVehicleRegisterStep5": "Enter Car Year",
+  "label_vehicle_color_CustomerVehicleRegisterStep5": "Color",
+  "placeholder_vehicle_color_CustomerVehicleRegisterStep5": "Enter Vehicle Color",
+  "label_vehicle_fuel_type_CustomerVehicleRegisterStep5": "Fuel Type",
+  "placeholder_vehicle_fuel_type_CustomerVehicleRegisterStep5": "Enter Vehicle Fuel Type",
+  "label_description_CustomerVehicleRegisterStep5": "Description",
+  "placeholder_description_CustomerVehicleRegisterStep5": "Enter Description"
+}

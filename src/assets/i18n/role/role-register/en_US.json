@@ -1,0 +1,13 @@
+{
+  "title_RoleRegister": "Role Registration",
+  
+  "label_role_id_RoleRegister": "Role ID",
+  "placeholder_role_id_RoleRegister": "Enter Role ID",
+  "label_role_name_RoleRegister": "Role",
+  "placeholder_role_name_RoleRegister": "Enter Role Name",
+  "label_created_date_RoleRegister": "Creation Date",
+  "placeholder_created_date_RoleRegister": "Enter Record Creation Date",
+  "label_modified_date_RoleRegister": "Modification Date",
+  "placeholder_modified_date_RoleRegister": "Enter Record Modification Date",
+  "label_enabled_RoleRegister": "Enabled?"
+}

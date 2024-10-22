@@ -1,0 +1,8 @@
+{
+  "table_current_page_report_template_showing_Generic": "Showing",
+  "table_current_page_report_template_to_Generic": "To",
+  "table_current_page_report_template_of_Generic": "Of",
+  "table_current_page_report_template_records_Generic": "Records",
+  "table_no_records_found_Generic": "We Found No Records Matching Your Search.",
+  "table_summary_total_items_message": "In Total, There Are {{total}} Items."
+}

@@ -95,10 +95,10 @@ export class CheckOutComponent implements OnInit {
         // Primeiro, carregue as traduções.
         const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
-        this.checkoutUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-        this.checkoutUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-        this.checkoutUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-        this.checkoutUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+        this.checkoutUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+        this.checkoutUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+        this.checkoutUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+        this.checkoutUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
         this.checkoutUIDTO.header_Address_CheckOut = translations['header_Address_CheckOut'];
 
         // Agora, faça as chamadas assíncronas simultaneamente com Promise.all
@@ -136,7 +136,7 @@ export class CheckOutComponent implements OnInit {
     } catch (error: any) {
         this.messageService.add({
             severity: SeverityConstants.ERROR,
-            summary: this.checkoutUIDTO.error_message_service_Generic,
+            summary: this.checkoutUIDTO.error_summary_message_service_Generic,
             detail: error.toString()
         });
     } finally {
@@ -147,10 +147,10 @@ export class CheckOutComponent implements OnInit {
   private loadKeys(): any {
     // Define as chaves para tradução.
     const keys = [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic',
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic',
       'header_Address_CheckOut'
     ];
     return keys;
@@ -171,7 +171,7 @@ export class CheckOutComponent implements OnInit {
       } catch (error: any) {
         this.messageService.add({ 
           severity: SeverityConstants.ERROR, 
-          summary: '' + this.checkoutUIDTO.error_message_service_Generic,
+          summary: '' + this.checkoutUIDTO.error_summary_message_service_Generic,
           detail: error.toString() 
         });
       }
@@ -202,7 +202,7 @@ export class CheckOutComponent implements OnInit {
       } catch (error: any) {
         this.messageService.add({ 
           severity: SeverityConstants.ERROR, 
-          summary: '' + this.checkoutUIDTO.error_message_service_Generic,
+          summary: '' + this.checkoutUIDTO.error_summary_message_service_Generic,
           detail: error.toString() 
         });
       }
@@ -233,7 +233,7 @@ export class CheckOutComponent implements OnInit {
       } catch (error: any) {
         this.messageService.add({ 
           severity: SeverityConstants.ERROR, 
-          summary: '' + this.checkoutUIDTO.error_message_service_Generic,
+          summary: '' + this.checkoutUIDTO.error_summary_message_service_Generic,
           detail: error.toString() 
         });
       }

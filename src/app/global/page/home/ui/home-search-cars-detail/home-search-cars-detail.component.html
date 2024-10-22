@@ -213,10 +213,11 @@
             <p-dataView [value]="homeSearchCarsDetailUIDTO.customerVehicles"
               [sortField]="homeSearchCarsDetailUIDTO.sortField" 
               [sortOrder]="homeSearchCarsDetailUIDTO.sortOrder"
+              [totalRecords]="homeSearchCarsDetailUIDTO.totalRecords" 
               [rows]="5" 
               [showCurrentPageReport]="true" 
               [paginator]="true"
-              [totalRecords]="homeSearchCarsDetailUIDTO.totalRecords" 
+              currentPageReportTemplate="{{'table_current_page_report_template_showing_Generic' | translate}} {first} {{'table_current_page_report_template_to_Generic' | translate}} {last} {{'table_current_page_report_template_of_Generic' | translate}} {totalRecords} {{'table_current_page_report_template_records_Generic' | translate}}"
               (onLazyLoad)="search($event)">
 
               <ng-template pTemplate="list" let-item>

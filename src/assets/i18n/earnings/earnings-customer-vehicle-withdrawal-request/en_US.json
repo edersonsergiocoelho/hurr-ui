@@ -1,0 +1,9 @@
+{
+  "title_EarningsCustomerVehicleWithdrawalRequest": "Latest Payment Transactions",
+  "subtitle_EarningsCustomerVehicleWithdrawalRequest": "Here You Can View Your Latest Payment Transactions",
+  
+  "placeholder_created_date_EarningsCustomerVehicleWithdrawalRequest": "Request Date",
+  "label_created_date_option_1_EarningsCustomerVehicleWithdrawalRequest": "Sort By Request Date Descending",
+  "label_created_date_option_2_EarningsCustomerVehicleWithdrawalRequest": "Sort By Request Date Ascending",
+  "label_created_date_EarningsCustomerVehicleWithdrawalRequest": "Request Date"
+}

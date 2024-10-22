@@ -72,9 +72,9 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'save_success_message_service_CustomerVehicleEditAddressesRegister',
         'update_success_message_service_CustomerVehicleEditAddressesRegister',
         'delete_success_message_service_CustomerVehicleEditAddressesRegister'
@@ -82,9 +82,9 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleEditAddressesRegisterUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleEditAddressesRegisterUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleEditAddressesRegisterUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleEditAddressesRegisterUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.customerVehicleEditAddressesRegisterUIDTO.save_success_message_service_CustomerVehicleEditAddressesRegister = translations['save_success_message_service_CustomerVehicleEditAddressesRegister'];
       this.customerVehicleEditAddressesRegisterUIDTO.update_success_message_service_CustomerVehicleEditAddressesRegister = translations['update_success_message_service_CustomerVehicleEditAddressesRegister'];
       this.customerVehicleEditAddressesRegisterUIDTO.delete_success_message_service_CustomerVehicleEditAddressesRegister = translations['delete_success_message_service_CustomerVehicleEditAddressesRegister'];
@@ -95,7 +95,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -120,7 +120,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -143,7 +143,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -166,7 +166,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
         this.messageService.add({
           severity: 'error',
-          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -217,7 +217,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -243,7 +243,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -269,7 +269,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -298,7 +298,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
           this.messageService.add({
             severity: SeverityConstants.SUCCESS,
-            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.success_message_service_Generic,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.success_summary_message_service_Generic,
             detail: '' + this.customerVehicleEditAddressesRegisterUIDTO.save_success_message_service_CustomerVehicleEditAddressesRegister
           });
         }
@@ -309,7 +309,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
           this.messageService.add({
             severity: SeverityConstants.ERROR,
-            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
             detail: error.toString()
           });
         }
@@ -344,7 +344,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
           this.messageService.add({
             severity: SeverityConstants.SUCCESS,
-            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.success_message_service_Generic,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.success_summary_message_service_Generic,
             detail: '' + this.customerVehicleEditAddressesRegisterUIDTO.update_success_message_service_CustomerVehicleEditAddressesRegister
           });
         }
@@ -356,7 +356,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
           this.messageService.add({
             severity: SeverityConstants.ERROR,
-            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
             detail: error.toString()
           });
         }
@@ -382,7 +382,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
           this.messageService.add({
             severity: SeverityConstants.SUCCESS,
-            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.success_message_service_Generic,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.success_summary_message_service_Generic,
             detail: '' + this.customerVehicleEditAddressesRegisterUIDTO.delete_success_message_service_CustomerVehicleEditAddressesRegister
           });
         }
@@ -393,7 +393,7 @@ export class CustomerVehicleEditAddressesRegisterComponent implements OnInit {
 
           this.messageService.add({
             severity: SeverityConstants.ERROR,
-            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_message_service_Generic,
+            summary: '' + this.customerVehicleEditAddressesRegisterUIDTO.error_summary_message_service_Generic,
             detail: error.toString()
           });
         }

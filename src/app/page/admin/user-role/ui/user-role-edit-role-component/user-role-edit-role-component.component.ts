@@ -46,10 +46,10 @@ export class UserRoleEditRoleComponentComponent implements OnInit {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribui as traduções obtidas aos campos do UIDTO.
-      this.userRoleEditRoleUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.userRoleEditRoleUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userRoleEditRoleUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.userRoleEditRoleUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.userRoleEditRoleUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.userRoleEditRoleUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userRoleEditRoleUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.userRoleEditRoleUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
       this.userRoleEditRoleUIDTO.become_vehicle_partner_summary_message_service_UserRoleEditRole = translations['become_vehicle_partner_summary_message_service_UserRoleEditRole'];
       this.userRoleEditRoleUIDTO.become_vehicle_partner_detail_message_service_UserRoleEditRole = translations['become_vehicle_partner_detail_message_service_UserRoleEditRole'];
@@ -58,7 +58,7 @@ export class UserRoleEditRoleComponentComponent implements OnInit {
       // Exibe uma mensagem de erro caso ocorra uma falha ao carregar as traduções.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.userRoleEditRoleUIDTO.error_message_service_Generic,
+        summary: this.userRoleEditRoleUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     } finally {
@@ -70,10 +70,10 @@ export class UserRoleEditRoleComponentComponent implements OnInit {
   private loadKeys(): string[] {
     // Define as chaves para tradução que serão carregadas.
     return [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic',
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic',
       'become_vehicle_partner_summary_message_service_UserRoleEditRole',
       'become_vehicle_partner_detail_message_service_UserRoleEditRole'
     ];
@@ -107,7 +107,7 @@ export class UserRoleEditRoleComponentComponent implements OnInit {
       // Exibe mensagem de erro em caso de falha.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.userRoleEditRoleUIDTO.error_message_service_Generic,
+        summary: this.userRoleEditRoleUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
 

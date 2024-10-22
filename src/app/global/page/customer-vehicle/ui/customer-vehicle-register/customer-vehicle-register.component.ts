@@ -100,29 +100,29 @@ export class CustomerVehicleRegisterComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
         'span_button_label_save_Generic',
         'span_button_label_cancel_Generic',
         'header_ConfirmDialog_CustomerVehicleRegister',
         'message_ConfirmDialog_CustomerVehicleRegister',
         'reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister',
         'reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister',
-        'save_message_service_Generic',
+        'save_summary_message_service_Generic',
         'save_success_message_service_CustomerVehicleRegister'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleRegisterUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleRegisterUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleRegisterUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleRegisterUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
       this.customerVehicleRegisterUIDTO.span_button_label_save_Generic = translations['span_button_label_save_Generic'];
       this.customerVehicleRegisterUIDTO.span_button_label_cancel_Generic = translations['span_button_label_cancel_Generic'];
       this.customerVehicleRegisterUIDTO.header_ConfirmDialog_CustomerVehicleRegister = translations['header_ConfirmDialog_CustomerVehicleRegister'];
       this.customerVehicleRegisterUIDTO.message_ConfirmDialog_CustomerVehicleRegister = translations['message_ConfirmDialog_CustomerVehicleRegister'];
       this.customerVehicleRegisterUIDTO.reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister = translations['reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister'];
       this.customerVehicleRegisterUIDTO.reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister = translations['reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister'];
-      this.customerVehicleRegisterUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
+      this.customerVehicleRegisterUIDTO.save_summary_message_service_Generic = translations['save_summary_message_service_Generic'];
       this.customerVehicleRegisterUIDTO.save_success_message_service_CustomerVehicleRegister = translations['save_success_message_service_CustomerVehicleRegister'];
 
     } catch (error: any) {
@@ -131,7 +131,7 @@ export class CustomerVehicleRegisterComponent implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -238,7 +238,7 @@ export class CustomerVehicleRegisterComponent implements OnInit {
 
           this.messageService.add({ 
             severity: 'success', 
-            summary: '' + this.customerVehicleRegisterUIDTO.save_message_service_Generic, 
+            summary: '' + this.customerVehicleRegisterUIDTO.save_summary_message_service_Generic, 
             detail: '' + this.customerVehicleRegisterUIDTO.save_success_message_service_CustomerVehicleRegister 
           });
 
@@ -252,7 +252,7 @@ export class CustomerVehicleRegisterComponent implements OnInit {
 
           this.messageService.add({ 
             severity: 'error', 
-            summary: '' + this.customerVehicleRegisterUIDTO.error_message_service_Generic, 
+            summary: '' + this.customerVehicleRegisterUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }

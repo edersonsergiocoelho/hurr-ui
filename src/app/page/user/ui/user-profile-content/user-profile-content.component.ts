@@ -62,10 +62,10 @@ export class UserProfileContentComponent implements OnInit {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribui as traduções obtidas aos campos do UIDTO.
-      this.userProfileContentUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.userProfileContentUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userProfileContentUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.userProfileContentUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.userProfileContentUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.userProfileContentUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userProfileContentUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.userProfileContentUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
       this.userProfileContentUIDTO.update_profile_summary_message_service_UserProfileContent = translations['update_profile_summary_message_service_UserProfileContent'];
       this.userProfileContentUIDTO.update_profile_detail_message_service_UserProfileContent = translations['update_profile_detail_message_service_UserProfileContent'];
@@ -96,7 +96,7 @@ export class UserProfileContentComponent implements OnInit {
       // Exibe uma mensagem de erro caso ocorra uma falha ao carregar as traduções.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.userProfileContentUIDTO.error_message_service_Generic,
+        summary: this.userProfileContentUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     } finally {
@@ -108,10 +108,10 @@ export class UserProfileContentComponent implements OnInit {
   private loadKeys(): string[] {
     // Define as chaves para tradução que serão carregadas.
     return [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic',
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic',
       'update_profile_summary_message_service_UserProfileContent',
       'update_profile_detail_message_service_UserProfileContent'
     ];
@@ -145,7 +145,7 @@ export class UserProfileContentComponent implements OnInit {
       // Exibe mensagem de erro em caso de falha.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.userProfileContentUIDTO.error_message_service_Generic,
+        summary: this.userProfileContentUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
 

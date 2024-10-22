@@ -25,6 +25,6 @@ export class EarningsResumeUIDTO {
   // DTO's
   customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO;
 
-  // Messages
-  error_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
 }

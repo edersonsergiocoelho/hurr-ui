@@ -1,0 +1,15 @@
+{
+  "title_UserRegister": "Sign Up at HURR",
+  "title_paragraph_UserRegister": "Discover New Destinations with Hurr",
+  
+  "label_display_name_UserRegister": "Name",
+  "placeholder_display_name_UserRegister": "Enter Full Name e.g. João Pinto Coelho",
+  "label_email_UserRegister": "Email",
+  "placeholder_email_UserRegister": "Enter Email e.g. joao@gmail.com",
+  "label_password_UserRegister": "Password",
+  "placeholder_password_UserRegister": "Enter Password",
+  "label_matching_password_UserRegister": "Repeat Password",
+  "placeholder_matching_password_UserRegister": "Repeat Password",
+  
+  "save_success_message_service_UserRegister": "User Successfully Saved."
+}

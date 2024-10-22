@@ -1,0 +1,26 @@
+{
+  "title_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "My Car Bookings",
+  "subtitle_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "Check Here Your Latest My Car Bookings.",
+ 
+  "booking_CustomerVehicleBookingCustomerVehicleSearch": "Booking Number",
+  "created_date_CustomerVehicleBookingCustomerVehicleSearch": "Booking Date",
+  "total_booking_value_CustomerVehicleBookingCustomerVehicleSearch": "Total",
+  "placeholder_created_date_CustomerVehicleBookingCustomerVehicleSearch": "Sort By Booking Date",
+  "label_created_date_option_1_CustomerVehicleBookingCustomerVehicleSearch": "Sort By Booking Date Ascending",
+  "label_created_date_option_2_CustomerVehicleBookingCustomerVehicleSearch": "Sort By Booking Date Descending",
+  "vehicle_model_CustomerVehicleBookingCustomerVehicleSearch": "Model: ",
+  "vehicle_category_CustomerVehicleBookingCustomerVehicleSearch": "Category: ",
+  "vehicle_color_CustomerVehicleBookingCustomerVehicleSearch": "Color: ",
+  "vehicle_fuel_type_CustomerVehicleBookingCustomerVehicleSearch": "Fuel Type: ",
+  "vehicle_transmission_CustomerVehicleBookingCustomerVehicleSearch": "Transmission: ",
+  "label_reservation_start_date_CustomerVehicleBookingCustomerVehicleSearch": "Reservation Start Date: ",
+  "label_reservation_end_date_CustomerVehicleBookingCustomerVehicleSearch": "Reservation End Date: ",
+  "label_booking_start_date_CustomerVehicleBookingCustomerVehicleSearch": "Reservation Check-In: ",
+  "label_booking_end_date_CustomerVehicleBookingCustomerVehicleSearch": "Reservation Check-Out: ",
+  "label_booking_cancellation_date_CustomerVehicleBookingCustomerVehicleSearch": "This Reservation Was Cancelled: ",
+  "placeholder_review_CustomerVehicleBookingCustomerVehicleSearch": "Enter A Review For The Customer Who Rented The Car",
+ 
+  "save_success_write_a_review_message_service_CustomerVehicleBookingCustomerVehicleSearch": "Review Successfully Saved",
+ 
+  "header_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog_CustomerVehicleBookingCustomerVehicleSearch": "Finalize Reservation"
+}

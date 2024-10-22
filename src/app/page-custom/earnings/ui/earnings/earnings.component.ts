@@ -61,18 +61,18 @@ export class EarningsComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic'
+        'error_summary_message_service_Generic'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.earningsUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.earningsUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
 
     } catch (error: any) {
 
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsUIDTO.error_message_service_Generic,
+        summary: '' + this.earningsUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }

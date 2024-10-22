@@ -1,0 +1,8 @@
+{
+  "title_CustomerVehicleRegisterStep4": "Paso 4 - Ingrese El Valor Del Vehículo",
+
+  "label_vehicle_value_CustomerVehicleRegisterStep4": "Valor Del Vehículo",
+  "placeholder_vehicle_value_CustomerVehicleRegisterStep4": "Ingrese El Valor Del Vehículo Según La Tabla FIPE",
+  
+  "message_if_you_dont_know_vehicle_value_CustomerVehicleRegisterStep4": "Si No Sabe El Valor Del Vehículo, Haga Clic En El Enlace A Continuación Para Consultar: "
+}

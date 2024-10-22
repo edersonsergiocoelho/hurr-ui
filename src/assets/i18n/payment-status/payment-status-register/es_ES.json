@@ -1,0 +1,16 @@
+{
+  "title_PaymentStatusRegister": "Registro De Estado De Pago",
+  "label_payment_status_id_PaymentStatusRegister": "ID Del Estado De Pago",
+  "placeholder_payment_status_id_PaymentStatusRegister": "Ingrese El ID Del Estado De Pago",
+  "label_payment_status_name_PaymentStatusRegister": "Nombre Del Estado De Pago",
+  "placeholder_payment_status_name_PaymentStatusRegister": "Ingrese El Nombre Del Estado De Pago",
+  "label_created_date_PaymentStatusRegister": "Fecha De Creación",
+  "placeholder_created_date_PaymentStatusRegister": "Seleccione La Fecha De Creación",
+  "label_modified_date_PaymentStatusRegister": "Fecha De Modificación",
+  "placeholder_modified_date_PaymentStatusRegister": "Seleccione La Fecha De Modificación",
+  "label_enabled_PaymentStatusRegister": "Habilitado",
+  
+  "save_success_message_service_PaymentStatusRegister": "Estado De Pago Registrado Con Éxito",
+  "update_success_message_service_PaymentStatusRegister": "Estado De Pago Actualizado Con Éxito",
+  "delete_success_message_service_PaymentStatusRegister": "Estado De Pago Eliminado Con Éxito"
+}

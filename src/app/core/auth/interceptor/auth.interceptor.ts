@@ -1,11 +1,10 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS, HttpErrorResponse } from "@angular/common/http";
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Observable, first, firstValueFrom, tap } from "rxjs";
 import { SessionStorageService } from "../../session-storage/service/session-storage.service";
 import { MessageService } from "primeng/api";
 import { TranslateService } from "@ngx-translate/core";
 import { AuthInterceptorDTO } from "./dto/auth-interceptor-dto.dto";
-import { NgxSpinnerService } from "ngx-spinner";
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
@@ -50,8 +49,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
             this.messageService.add({ 
               severity: 'warn', 
-              summary: '' + this.authInterceptorDTO.warn_message_service_Generic, 
-              detail: '' + this.authInterceptorDTO.no_connection_to_the_api_message_service_Generic 
+              summary: '' + this.authInterceptorDTO.warn_summary_message_service_Generic, 
+              detail: '' + this.authInterceptorDTO.no_connection_to_the_api_detail_message_service_Generic 
             });
 
             return;
@@ -72,16 +71,16 @@ export class AuthInterceptor implements HttpInterceptor {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'no_connection_to_the_api_message_service_Generic'
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'no_connection_to_the_api_detail_message_service_Generic'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.authInterceptorDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.authInterceptorDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.authInterceptorDTO.no_connection_to_the_api_message_service_Generic = translations['no_connection_to_the_api_message_service_Generic'];
+      this.authInterceptorDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.authInterceptorDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.authInterceptorDTO.no_connection_to_the_api_detail_message_service_Generic = translations['no_connection_to_the_api_detail_message_service_Generic'];
 
     } catch (error: any) {
 
@@ -89,7 +88,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         this.messageService.add({
           severity: 'error',
-          summary: '' + this.authInterceptorDTO.error_message_service_Generic,
+          summary: '' + this.authInterceptorDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
-import { filter, first, firstValueFrom, interval } from 'rxjs';
+import { first, firstValueFrom, interval } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HomeUIService } from '../../service/home-ui/home-ui.service';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
@@ -10,9 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { MenuService } from 'src/app/page/admin/menu/service/menu.service';
 import { Menu } from 'src/app/page/admin/menu/entity/menu.entity';
-import { NavigationEnd, Router } from '@angular/router';
 import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
 import { CustomerVehicleService } from '../../../customer-vehicle/service/customer-vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +40,12 @@ export class HomeComponent implements OnInit {
   ) {
     this.homeUIDTO = new HomeUIDTO(); // Inicializa o DTO (Data Transfer Object) para armazenar dados da UI
 
+    // Inscreve-se para atualizações do usuário atual e reseta o formulário
+    this.homeUIService.currentUser$.subscribe(user => {
+      this.homeUIDTO.currentUser = user;
+      this.resetForm();
+    });
+
     // Inscreva-se para receber atualizações do customerVehicleId
     this.homeUIService.customerVehicleId$.subscribe(customerVehicleId => {
       this.customerVehicleId = customerVehicleId;
@@ -48,16 +54,19 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Inscreve-se para atualizações do usuário atual e reseta o formulário
-    this.homeUIService.currentUser$.subscribe(user => {
-      this.homeUIDTO.currentUser = user;
-      this.resetForm();
-    });
 
     // Se há um token armazenado, carrega o usuário da sessão
     if (this.sessionStorageService.getToken()) {
       this.homeUIDTO.currentUser = this.sessionStorageService.getUser();
       this.homeUIService.setCurrentUser(this.homeUIDTO.currentUser);
+    }
+
+    const currentUserPreference = this.sessionStorageService.getUserPreference();
+
+    if (currentUserPreference != null) {
+      this.translateService.setDefaultLang(currentUserPreference.language);
+    } else {
+      this.translateService.setDefaultLang('pt_BR');
     }
 
     this.resetForm(); // Reseta o formulário após a inicialização
@@ -76,26 +85,26 @@ export class HomeComponent implements OnInit {
     try {
       // Carrega traduções para mensagens de serviço
       const keys = [
-        'warn_message_service_Generic',
-        'error_message_service_Generic',
-        'info_message_service_Generic',
-        'success_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'info_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'label_loading_Generic'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.homeUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.homeUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.homeUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.homeUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.homeUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.homeUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.homeUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.homeUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.homeUIDTO.label_loading_Generic = translations['label_loading_Generic'];
 
     } catch (error: any) {
       // Exibe uma mensagem de erro em caso de falha ao carregar traduções
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.homeUIDTO.error_message_service_Generic,
+        summary: '' + this.homeUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -150,7 +159,7 @@ export class HomeComponent implements OnInit {
       // Exibe uma mensagem de erro em caso de falha ao carregar menus
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.homeUIDTO.error_message_service_Generic,
+        summary: this.homeUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
 
@@ -238,7 +247,7 @@ export class HomeComponent implements OnInit {
 
         this.messageService.add({ 
           severity: SeverityConstants.ERROR, 
-          summary: '' + this.homeUIDTO.error_message_service_Generic,
+          summary: '' + this.homeUIDTO.error_summary_message_service_Generic,
           detail: error.toString() 
         });
       }

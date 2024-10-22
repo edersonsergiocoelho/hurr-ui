@@ -51,10 +51,10 @@ export class HomeSearchCarsComponent implements OnInit {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribuindo valores após as promessas serem resolvidas
-      this.homeSearchCarsUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.homeSearchCarsUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.homeSearchCarsUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.homeSearchCarsUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.homeSearchCarsUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.homeSearchCarsUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.homeSearchCarsUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.homeSearchCarsUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.homeSearchCarsUIDTO.label_where_HomeSearchCars = translations['label_where_HomeSearchCars'];
       this.homeSearchCarsUIDTO.label_from_HomeSearchCars = translations['label_from_HomeSearchCars'];
       this.homeSearchCarsUIDTO.label_until_HomeSearchCars = translations['label_until_HomeSearchCars'];
@@ -70,7 +70,7 @@ export class HomeSearchCarsComponent implements OnInit {
 
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.homeSearchCarsUIDTO.error_message_service_Generic,
+        summary: this.homeSearchCarsUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
 
@@ -83,10 +83,10 @@ export class HomeSearchCarsComponent implements OnInit {
 
   private loadKeys(): any {
     const keys = [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic',
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic',
       'label_where_HomeSearchCars',
       'label_from_HomeSearchCars',
       'label_until_HomeSearchCars',
@@ -171,7 +171,7 @@ export class HomeSearchCarsComponent implements OnInit {
             
             this.messageService.add({ 
               severity: SeverityConstants.WARN,
-              summary: '' + this.homeSearchCarsUIDTO.warn_message_service_Generic, 
+              summary: '' + this.homeSearchCarsUIDTO.warn_summary_message_service_Generic, 
               detail: '' + this.homeSearchCarsUIDTO.warn_error_getting_current_location_HomeSearchCars 
             });
 
@@ -182,7 +182,7 @@ export class HomeSearchCarsComponent implements OnInit {
 
         this.messageService.add({ 
           severity: SeverityConstants.WARN,
-          summary: '' + this.homeSearchCarsUIDTO.warn_message_service_Generic, 
+          summary: '' + this.homeSearchCarsUIDTO.warn_summary_message_service_Generic, 
           detail: '' + this.homeSearchCarsUIDTO.warn_error_accessing_geolocation_HomeSearchCars 
         });
 
@@ -191,7 +191,7 @@ export class HomeSearchCarsComponent implements OnInit {
 
       this.messageService.add({ 
         severity: SeverityConstants.WARN, 
-        summary: '' + this.homeSearchCarsUIDTO.warn_message_service_Generic, 
+        summary: '' + this.homeSearchCarsUIDTO.warn_summary_message_service_Generic, 
         detail: '' + this.homeSearchCarsUIDTO.warn_geolocation_not_supported_by_the_browser_HomeSearchCars 
       });
 

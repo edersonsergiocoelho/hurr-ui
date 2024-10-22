@@ -1,16 +1,16 @@
 export class TranslateConfirmServiceDTO {
 
-  warn_message_service_Generic: string;
-  error_message_service_Generic: string;
-  info_message_service_Generic: string;
-  success_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
+  error_summary_message_service_Generic: string;
+  info_summary_message_service_Generic: string;
+  success_summary_message_service_Generic: string;
 
   span_button_label_active_Generic: string;
   span_button_label_inactive_Generic: string;
   span_button_label_all_Generic: string;
 
-  delete_all_message_service_Generic: string;
-  delete_all_success_message_service_Generic: string;
+  delete_all_success_summary_message_service_Generic: string;
+  delete_all_success_detail_message_service_Generic: string;
 
   message_message_service_Generic: string;
   message_cancel_booking_message_service_Generic: string;

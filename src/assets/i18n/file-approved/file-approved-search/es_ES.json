@@ -1,0 +1,19 @@
+{
+  "title_FileApprovedSearch": "Búsqueda De Archivo Aprobado",
+  "label_file_table_FileApprovedSearch": "Tabla De Archivos",
+  "placeholder_file_table_FileApprovedSearch": "Ingrese La Tabla De Archivos",
+  "label_file_type_FileApprovedSearch": "Tipo De Archivo",
+  "placeholder_file_type_FileApprovedSearch": "Ingrese El Tipo De Archivo",
+  "label_approved_by_user_FileApprovedSearch": "Aprobado Por El Usuario",
+  "placeholder_approved_by_user_FileApprovedSearch": "Ingrese El Usuario Que Aprobó El Proceso",
+  "label_reproved_by_user_FileApprovedSearch": "Reprobado Por El Usuario",
+  "placeholder_reproved_by_user_FileApprovedSearch": "Ingrese El Usuario Que Reprobó El Proceso",
+ 
+  "table_header_file_approved_id_FileApprovedSearch": "ID De Archivo Aprobado",
+  "table_header_file_table_FileApprovedSearch": "Tabla De Archivos",
+  "table_header_file_type_FileApprovedSearch": "Tipo De Archivo",
+  "table_header_customer_user_FileApprovedSearch": "Cliente / Usuario",
+  "table_header_created_date_FileApprovedSearch": "Fecha De Creación",
+  "table_header_enabled_FileApprovedSearch": "¿Habilitado?",
+  "table_header_action_FileApprovedSearch": "Aprobación"
+}

@@ -59,8 +59,8 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic', 
-        'warn_message_service_Generic',
+        'error_summary_message_service_Generic', 
+        'warn_summary_message_service_Generic',
         'table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch',
         'table_header_vehicle_brand_CustomerVehicleApprovedSearch',
         'table_header_vehicle_CustomerVehicleApprovedSearch',
@@ -75,8 +75,8 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleApprovedSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleApprovedSearchUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleApprovedSearchUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
       this.customerVehicleApprovedSearchUIDTO.table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch = translations['table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch'];
       this.customerVehicleApprovedSearchUIDTO.table_header_vehicle_brand_CustomerVehicleApprovedSearch = translations['table_header_vehicle_brand_CustomerVehicleApprovedSearch'];
       this.customerVehicleApprovedSearchUIDTO.table_header_vehicle_CustomerVehicleApprovedSearch = translations['table_header_vehicle_CustomerVehicleApprovedSearch'];
@@ -91,7 +91,7 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleApprovedSearchUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -112,7 +112,7 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleApprovedSearchUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -179,7 +179,7 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
 
           this.messageService.add({
             severity: SeverityConstants.ERROR,
-            summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
+            summary: '' + this.customerVehicleApprovedSearchUIDTO.error_summary_message_service_Generic,
             detail: error.toString()
           });
         }
@@ -221,7 +221,7 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleApprovedSearchUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -250,7 +250,7 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleApprovedSearchUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleApprovedSearchUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

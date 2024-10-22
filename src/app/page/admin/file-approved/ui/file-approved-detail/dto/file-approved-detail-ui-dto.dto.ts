@@ -15,10 +15,10 @@ export class FileApprovedDetailUIDTO {
   customer: Customer;
   user: User;
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
-  success_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
+  success_summary_message_service_Generic: string;
 
   message_not_null_message_service_FileApprovedDetail: string;
   success_approve_message_service_FileApprovedDetail: string;

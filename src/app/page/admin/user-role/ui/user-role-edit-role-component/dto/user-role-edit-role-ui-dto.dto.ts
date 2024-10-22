@@ -2,7 +2,7 @@ import { TranslateSeverityDTO } from "src/app/core/translate/dto/translate-sever
 
 export class UserRoleEditRoleUIDTO extends TranslateSeverityDTO {
 
-  // Messages
+  // Messages - Translate
   become_vehicle_partner_summary_message_service_UserRoleEditRole: string;
   become_vehicle_partner_detail_message_service_UserRoleEditRole: string;
 }

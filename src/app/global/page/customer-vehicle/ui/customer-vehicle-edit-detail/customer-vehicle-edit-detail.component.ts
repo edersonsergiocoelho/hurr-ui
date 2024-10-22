@@ -68,17 +68,17 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'save_success_message_service_CustomerVehicleEditDetail'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleEditDetailUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleEditDetailUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleEditDetailUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleEditDetailUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleEditDetailUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.customerVehicleEditDetailUIDTO.save_success_message_service_CustomerVehicleEditDetail = translations['save_success_message_service_CustomerVehicleEditDetail'];
 
     } catch (error: any) {
@@ -87,7 +87,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -114,7 +114,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -156,7 +156,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -181,7 +181,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -206,7 +206,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -231,7 +231,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -256,7 +256,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -295,7 +295,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -326,7 +326,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -363,7 +363,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.SUCCESS,
-          summary: '' + this.customerVehicleEditDetailUIDTO.success_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.success_summary_message_service_Generic,
           detail: '' + this.customerVehicleEditDetailUIDTO.save_success_message_service_CustomerVehicleEditDetail,
         });
       }
@@ -374,7 +374,7 @@ export class CustomerVehicleEditDetailComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditDetailUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

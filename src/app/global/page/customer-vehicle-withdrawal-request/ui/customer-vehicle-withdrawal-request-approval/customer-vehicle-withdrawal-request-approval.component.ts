@@ -57,9 +57,9 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
     try {
 
       const keys = [
-        'error_message_service_Generic', 
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic', 
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         "success_approval_message_service_CustomerVehicleWithdrawalRequestApproval",
         'table_header_first_name_CustomerVehicleWithdrawalRequestApproval',
         'table_header_last_name_CustomerVehicleWithdrawalRequestApproval',
@@ -74,9 +74,9 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleWithdrawalRequestApprovalUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleWithdrawalRequestApprovalUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleWithdrawalRequestApprovalUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.customerVehicleWithdrawalRequestApprovalUIDTO.success_approval_message_service_CustomerVehicleWithdrawalRequestApproval = translations['success_approval_message_service_CustomerVehicleWithdrawalRequestApproval'];
       this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_first_name_CustomerVehicleWithdrawalRequestApproval = translations['table_header_first_name_CustomerVehicleWithdrawalRequestApproval'];
       this.customerVehicleWithdrawalRequestApprovalUIDTO.table_header_last_name_CustomerVehicleWithdrawalRequestApproval = translations['table_header_last_name_CustomerVehicleWithdrawalRequestApproval'];
@@ -91,7 +91,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -110,7 +110,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -129,7 +129,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -190,7 +190,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
         if (error.status == 500) {
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }
@@ -223,7 +223,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
         if (data.status == 200) {
           this.messageService.add({ 
             severity: SeverityConstants.SUCCESS, 
-            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_message_service_Generic, 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_summary_message_service_Generic, 
             detail: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_approval_message_service_CustomerVehicleWithdrawalRequestApproval 
           });
         }
@@ -233,7 +233,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
         if (error.status == 500) {
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }
@@ -258,7 +258,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
         if (data.status == 200) {
           this.messageService.add({ 
             severity: SeverityConstants.SUCCESS, 
-            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_message_service_Generic, 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_summary_message_service_Generic, 
             detail: this.customerVehicleWithdrawalRequestApprovalUIDTO.success_approval_message_service_CustomerVehicleWithdrawalRequestApproval 
           });
         }
@@ -268,7 +268,7 @@ export class CustomerVehicleWithdrawalRequestApprovalComponent implements OnInit
         if (error.status == 500) {
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_message_service_Generic, 
+            summary: this.customerVehicleWithdrawalRequestApprovalUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }

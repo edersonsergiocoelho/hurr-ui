@@ -45,14 +45,14 @@ export class EarningsCustomerVehicleWithdrawalRequestComponent implements OnInit
     try {
 
       const keys = [
-        'error_message_service_Generic',
+        'error_summary_message_service_Generic',
         'label_created_date_option_1_EarningsCustomerVehicleWithdrawalRequest',
         'label_created_date_option_2_EarningsCustomerVehicleWithdrawalRequest'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.earningsCustomerVehicleWithdrawalRequestUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.earningsCustomerVehicleWithdrawalRequestUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
       this.earningsCustomerVehicleWithdrawalRequestUIDTO.label_created_date_option_1_EarningsCustomerVehicleWithdrawalRequest = translations['label_created_date_option_1_EarningsCustomerVehicleWithdrawalRequest'];
       this.earningsCustomerVehicleWithdrawalRequestUIDTO.label_created_date_option_2_EarningsCustomerVehicleWithdrawalRequest = translations['label_created_date_option_2_EarningsCustomerVehicleWithdrawalRequest'];
 
@@ -60,7 +60,7 @@ export class EarningsCustomerVehicleWithdrawalRequestComponent implements OnInit
 
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.earningsCustomerVehicleWithdrawalRequestUIDTO.error_message_service_Generic,
+        summary: '' + this.earningsCustomerVehicleWithdrawalRequestUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -100,7 +100,7 @@ export class EarningsCustomerVehicleWithdrawalRequestComponent implements OnInit
 
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: '' + this.earningsCustomerVehicleWithdrawalRequestUIDTO.error_message_service_Generic, 
+            summary: '' + this.earningsCustomerVehicleWithdrawalRequestUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }

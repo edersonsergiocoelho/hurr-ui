@@ -75,16 +75,16 @@ export class CustomerVehicleRegisterStep7Component implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'failed_to_open_new_tab_message_service_Generic'
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'failed_to_open_new_tab_detail_message_service_Generic'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleRegisterStep7UIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleRegisterStep7UIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleRegisterStep7UIDTO.failed_to_open_new_tab_message_service_Generic = translations['failed_to_open_new_tab_message_service_Generic'];
+      this.customerVehicleRegisterStep7UIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleRegisterStep7UIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleRegisterStep7UIDTO.failed_to_open_new_tab_detail_message_service_Generic = translations['failed_to_open_new_tab_detail_message_service_Generic'];
 
     } catch (error: any) {
 
@@ -92,7 +92,7 @@ export class CustomerVehicleRegisterStep7Component implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep7UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep7UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -152,8 +152,8 @@ export class CustomerVehicleRegisterStep7Component implements OnInit {
 
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleRegisterStep7UIDTO.error_message_service_Generic,
-        detail: '' + this.customerVehicleRegisterStep7UIDTO.failed_to_open_new_tab_message_service_Generic
+        summary: '' + this.customerVehicleRegisterStep7UIDTO.error_summary_message_service_Generic,
+        detail: '' + this.customerVehicleRegisterStep7UIDTO.failed_to_open_new_tab_detail_message_service_Generic
       });
     }
   }

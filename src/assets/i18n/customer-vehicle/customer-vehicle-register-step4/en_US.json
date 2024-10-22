@@ -1,0 +1,8 @@
+{
+  "title_CustomerVehicleRegisterStep4": "Step 4 - Enter The Vehicle Value",
+  
+  "label_vehicle_value_CustomerVehicleRegisterStep4": "Vehicle Value",
+  "placeholder_vehicle_value_CustomerVehicleRegisterStep4": "Enter The Vehicle Value According To FIPE Table",
+
+  "message_if_you_dont_know_vehicle_value_CustomerVehicleRegisterStep4": "If You Don't Know The Vehicle Value, Click The Link Below To Consult: "
+}

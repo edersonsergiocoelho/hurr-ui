@@ -58,8 +58,8 @@ export class CustomerVehicleEditAddressesSearchComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
         'table_header_customer_vehicle_address_id_CustomerVehicleEditAddressesSearch',
         'table_header_street_address_CustomerVehicleEditAddressesSearch',
         'table_header_nickname_CustomerVehicleEditAddressesSearch',
@@ -68,8 +68,8 @@ export class CustomerVehicleEditAddressesSearchComponent implements OnInit {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleEditAddressesSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleEditAddressesSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleEditAddressesSearchUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleEditAddressesSearchUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
       this.customerVehicleEditAddressesSearchUIDTO.table_header_customer_vehicle_address_id_CustomerVehicleEditAddressesSearch = translations['table_header_customer_vehicle_address_id_CustomerVehicleEditAddressesSearch'];
       this.customerVehicleEditAddressesSearchUIDTO.table_header_street_address_CustomerVehicleEditAddressesSearch = translations['table_header_street_address_CustomerVehicleEditAddressesSearch'];
       this.customerVehicleEditAddressesSearchUIDTO.table_header_nickname_CustomerVehicleEditAddressesSearch = translations['table_header_nickname_CustomerVehicleEditAddressesSearch'];
@@ -81,7 +81,7 @@ export class CustomerVehicleEditAddressesSearchComponent implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAddressesSearchUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAddressesSearchUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -141,7 +141,7 @@ export class CustomerVehicleEditAddressesSearchComponent implements OnInit {
 
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: '' + this.customerVehicleEditAddressesSearchUIDTO.error_message_service_Generic, 
+            summary: '' + this.customerVehicleEditAddressesSearchUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }

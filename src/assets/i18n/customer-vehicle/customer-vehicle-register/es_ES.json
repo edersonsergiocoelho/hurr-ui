@@ -1,0 +1,7 @@
+{
+  "header_ConfirmDialog_CustomerVehicleRegister": "Guardar Registro Del Vehículo",
+  "message_ConfirmDialog_CustomerVehicleRegister": "¿Estás Seguro De Que Quieres Continuar Y Guardar El Registro Del Vehículo? Para Continuar, El Registro Del Coche Necesita Ser Aprobado En Un Plazo De Hasta 3 Días, Solo Después De Eso Puede Ajustar Los Precios Y Otras Configuraciones Y Activar Su Anuncio En La Plataforma.",
+  "reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister": "Cancelado",
+  "reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister": "Cancelado. Puedes Seguir Editando La Información.",
+  "save_success_message_service_CustomerVehicleRegister": "Vehículo Registrado Con Éxito."
+}

@@ -23,8 +23,8 @@ export class UserRoleSearchUIDTO {
   enabledOptions: any[] = [{label: 'Todos', value: 'ALL'}, {label: 'Habilitados', value: 'ON'}, {label: 'Desabilitados', value: 'OFF'}];
   enabledValue: string = 'ALL';
 
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
   table_header_display_name_UserRoleSearch: string;
   table_header_email_UserRoleSearch: string;
   table_header_role_name_UserRoleSearch: string;

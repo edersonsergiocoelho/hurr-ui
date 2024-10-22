@@ -1,0 +1,16 @@
+{
+  "title_UserLogin": "Iniciar Sesión En HURR",
+  "sign_up_UserLogin": "Registrarse",
+
+  "sign_in_with_facebook_UserLogin": "Iniciar Sesión Con Facebook",
+  "sign_in_with_google_UserLogin": "Iniciar Sesión Con Google",
+  "or_UserLogin": "O",
+
+  "label_email_UserLogin": "Correo Electrónico",
+  "placeholder_email_UserLogin": "Ingrese El Correo Electrónico",
+  "label_password_UserLogin": "Contraseña",
+  "placeholder_password_UserLogin": "Ingrese La Contraseña",
+  
+  "remember_me_UserLogin": "Recuérdame",
+  "forgot_password_UserLogin": "¿Olvidó Su Contraseña?"
+}

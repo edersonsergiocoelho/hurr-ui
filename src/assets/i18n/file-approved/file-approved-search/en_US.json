@@ -1,0 +1,19 @@
+{
+  "title_FileApprovedSearch": "File Approved Search",
+  "label_file_table_FileApprovedSearch": "File Table",
+  "placeholder_file_table_FileApprovedSearch": "Enter File Table",
+  "label_file_type_FileApprovedSearch": "File Type",
+  "placeholder_file_type_FileApprovedSearch": "Enter File Type",
+  "label_approved_by_user_FileApprovedSearch": "Approved By User",
+  "placeholder_approved_by_user_FileApprovedSearch": "Enter The User Who Approved The Process",
+  "label_reproved_by_user_FileApprovedSearch": "Reproved By User",
+  "placeholder_reproved_by_user_FileApprovedSearch": "Enter The User Who Reproved The Process",
+ 
+  "table_header_file_approved_id_FileApprovedSearch": "File Approved ID",
+  "table_header_file_table_FileApprovedSearch": "File Table",
+  "table_header_file_type_FileApprovedSearch": "File Type",
+  "table_header_customer_user_FileApprovedSearch": "Customer / User",
+  "table_header_created_date_FileApprovedSearch": "Creation Date",
+  "table_header_enabled_FileApprovedSearch": "Enabled?",
+  "table_header_action_FileApprovedSearch": "Approval"
+}

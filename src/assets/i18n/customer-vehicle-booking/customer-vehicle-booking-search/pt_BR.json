@@ -1,6 +1,7 @@
 {
   "title_my_booking_CustomerVehicleBookingSearch": "Minhas Reservas",
   "subtitle_my_booking_CustomerVehicleBookingSearch": "Verifique Aqui As Suas Últimas Reservas.",
+ 
   "booking_CustomerVehicleBookingSearch": "Número Da Reserva",
   "created_date_CustomerVehicleBookingSearch": "Data Da Reserva",
   "total_booking_value_CustomerVehicleBookingSearch": "Total",
@@ -10,6 +11,7 @@
   "label_booking_cancellation_date_CustomerVehicleBookingSearch": "Data De Cancelamento: ",
   "label_reservation_start_date_CustomerVehicleBookingSearch": "Data Do Check-In: ",
   "placeholder_review_CustomerVehicleBookingSearch": "Informe Uma Crítica Para O Dono Do Carro",
+ 
   "save_cancel_booking_message_service_CustomerVehicleBookingSearch": "Reserva Cancelada Com Sucesso",
   "save_success_write_a_review_message_service_CustomerVehicleBookingSearch": "Crítica Salva Com Sucesso"
 }

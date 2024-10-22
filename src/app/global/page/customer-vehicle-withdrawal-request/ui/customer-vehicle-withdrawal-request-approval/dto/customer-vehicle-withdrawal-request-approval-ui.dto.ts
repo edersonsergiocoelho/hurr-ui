@@ -26,9 +26,9 @@ export class CustomerVehicleWithdrawalRequestApprovalUIDTO {
   customerVehicleWithdrawalRequestSearchDTO: CustomerVehicleWithdrawalRequestSearchDTO;
 
   // Message
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
-  success_message_service_Generic: string;
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
+  success_summary_message_service_Generic: string;
   success_approval_message_service_CustomerVehicleWithdrawalRequestApproval: string;
 
   // Message - Table

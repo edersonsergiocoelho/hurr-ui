@@ -34,8 +34,8 @@ export class FileApprovedSearchUIDTO {
   filterValue: string = 'ALL';
 
   // Message
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
   table_header_file_approved_id_FileApprovedSearch: string;
   table_header_file_table_FileApprovedSearch: string;
   table_header_file_type_FileApprovedSearch: string;

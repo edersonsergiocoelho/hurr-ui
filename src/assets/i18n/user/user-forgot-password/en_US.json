@@ -1,0 +1,22 @@
+{
+  "title_UserForgotPassword": "Forgot Your Password at HURR",
+
+  "title_paragraph_UserForgotPassword": "Let's Unlock Your Password Quickly and Easily.",
+
+  "label_email_UserForgotPassword": "Email",
+  "placeholder_email_UserForgotPassword": "Enter Email e.g. joao@gmail.com",
+  "label_password_verification_code_UserRegister": "Password - Verification Code",
+  "placeholder_password_verification_code_UserRegister": "Enter Password Verification Code",
+  "label_password_UserForgotPassword": "Password",
+  "placeholder_password_UserForgotPassword": "Enter Password",
+  "label_matching_password_UserForgotPassword": "Repeat Password",
+  "placeholder_matching_password_UserForgotPassword": "Repeat Password",
+  
+  "forgot_password_verification_code_summary_message_service_UserForgotPassword": "Verification Email Sent",
+  "forgot_password_verification_code_detail_message_service_UserForgotPassword": "An Email With A Verification Code Has Been Sent To Your Registered Email Address.",
+  "forgot_password_validated_code_summary_message_service_UserForgotPassword": "Code Successfully Validated",
+  "forgot_password_validated_code_detail_message_service_UserForgotPassword": "The Provided Verification Code Has Been Successfully Validated. You Can Proceed With Safely Resetting Your Password.",
+  
+  "update_forgot_password_summary_message_service_UserForgotPassword": "Password Successfully Updated",
+  "update_forgot_password_detail_message_service_UserForgotPassword": "Your Password Has Been Successfully Updated. You Can Now Log In With Your New Password."
+}

@@ -98,21 +98,21 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
         'select_customer_address_Address_Checkout'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.checkOutMPUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.checkOutMPUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.checkOutMPUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.checkOutMPUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
       this.checkOutMPUIDTO.select_customer_address_Address_Checkout = translations['select_customer_address_Address_Checkout'];
 
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.checkOutMPUIDTO.error_message_service_Generic,
+        summary: this.checkOutMPUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -140,7 +140,7 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
     } catch (error: any) {
       this.messageService.add({ 
         severity: SeverityConstants.ERROR, 
-        summary: this.checkOutMPUIDTO.error_message_service_Generic,
+        summary: this.checkOutMPUIDTO.error_summary_message_service_Generic,
         detail: error.toString() 
       });
     }
@@ -208,7 +208,7 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
 
               this.messageService.add({
                 severity: SeverityConstants.WARN,
-                summary: '' + this.checkOutMPUIDTO.warn_message_service_Generic,
+                summary: '' + this.checkOutMPUIDTO.warn_summary_message_service_Generic,
                 detail: '' + this.checkOutMPUIDTO.select_customer_address_Address_Checkout
               });
 

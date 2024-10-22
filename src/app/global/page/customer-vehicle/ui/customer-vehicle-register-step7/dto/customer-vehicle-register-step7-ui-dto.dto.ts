@@ -35,8 +35,8 @@ export class CustomerVehicleRegisterStep7UIDTO {
 
   customerVehicleFileInsurances: Array<CustomerVehicleFileInsurance>;
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
-  failed_to_open_new_tab_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
+  failed_to_open_new_tab_detail_message_service_Generic: string;
 }

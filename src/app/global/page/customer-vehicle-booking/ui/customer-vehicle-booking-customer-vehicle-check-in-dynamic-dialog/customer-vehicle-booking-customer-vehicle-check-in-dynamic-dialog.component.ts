@@ -56,10 +56,10 @@ export class CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent 
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribui as traduções obtidas aos campos do UIDTO
-      this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
       this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.check_in_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog = translations['check_in_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog'];
       this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.check_in_detail_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog = translations['check_in_detail_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog'];
@@ -68,7 +68,7 @@ export class CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent 
       // Exibe uma mensagem de erro, caso a chamada falhe
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     } finally {
@@ -79,10 +79,10 @@ export class CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent 
   // Método para carregar as chaves de tradução que serão utilizadas
   private loadKeys(): string[] {
     return [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic',
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic',
       'check_in_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog',
       'check_in_detail_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog'
     ];
@@ -116,7 +116,7 @@ export class CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent 
       // Exibe uma mensagem de erro caso ocorra um problema na atualização
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.error_message_service_Generic, // Mensagem de erro
+        summary: this.customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.error_summary_message_service_Generic, // Mensagem de erro
         detail: error.error?.message || error.toString() // Detalhes do erro
       });
   

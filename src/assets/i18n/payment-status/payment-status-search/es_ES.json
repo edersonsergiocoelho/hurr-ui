@@ -1,0 +1,10 @@
+{
+  "title_PaymentStatusSearch": "Buscar Estado De Pago",
+  "label_payment_status_name_PaymentStatusSearch": "Nombre Del Estado De Pago",
+  "placeholder_payment_status_name_PaymentStatusSearch": "Ingrese El Nombre Del Estado De Pago",
+  
+  "table_caption_title_PaymentStatusSearch": "Estado De Pago",
+  "table_header_payment_status_id_PaymentStatusSearch": "ID",
+  "table_header_payment_status_name_PaymentStatusSearch": "Nombre",
+  "table_header_enabled_PaymentStatusSearch": "¿Habilitado?"
+}

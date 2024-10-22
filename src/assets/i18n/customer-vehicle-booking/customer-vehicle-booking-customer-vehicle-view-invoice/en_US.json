@@ -1,0 +1,25 @@
+{
+  "title_CustomerVehicleBookingCustomerVehicleViewInvoice": "Invoice",
+
+  "booking_CustomerVehicleBookingCustomerVehicleViewInvoice": "Booking Number:",
+  "billing_address_CustomerVehicleBookingCustomerVehicleViewInvoice": "Billing Address",
+  "payment_CustomerVehicleBookingCustomerVehicleViewInvoice": "Payment",
+  "payment_additional_CustomerVehicleBookingCustomerVehicleViewInvoice": "Additional Payment",
+  "amex_credit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Amex Credit Card",
+  "amex_debit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Amex Debit Card",
+  "mastercard_credit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Mastercard Credit Card",
+  "mastercard_debit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Mastercard Debit Card",
+  "visa_credit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Visa Credit Card",
+  "visa_debit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Visa Debit Card",
+  "installments_CustomerVehicleBookingCustomerVehicleViewInvoice": "Installment Quantity: ",
+  "transaction_amount_CustomerVehicleBookingCustomerVehicleViewInvoice": "Transaction Amount: ",
+  "installment_amount_CustomerVehicleBookingCustomerVehicleViewInvoice": "Installment Amount: ",
+  "total_paid_amount_CustomerVehicleBookingCustomerVehicleViewInvoice": "Total Paid Amount: ",
+
+  "days_CustomerVehicleBookingCustomerVehicleViewInvoice": "Days",
+  "summary_CustomerVehicleBookingCustomerVehicleViewInvoice": "Summary",
+  "daily_rate_CustomerVehicleBookingCustomerVehicleViewInvoice": "Total Daily Rate",
+  "total_booking_value_CustomerVehicleBookingCustomerVehicleViewInvoice": "Total Booking Value",
+  "total_additional_value_CustomerVehicleBookingCustomerVehicleViewInvoice": "Total Additional Value",
+  "total_CustomerVehicleBookingCustomerVehicleViewInvoice": "Total"
+}

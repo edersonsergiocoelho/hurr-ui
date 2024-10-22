@@ -58,10 +58,10 @@ export class UserPreferenceContentComponent implements OnInit {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribui as traduções obtidas aos campos do UIDTO.
-      this.userPreferenceContentUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.userPreferenceContentUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userPreferenceContentUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.userPreferenceContentUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.userPreferenceContentUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.userPreferenceContentUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userPreferenceContentUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.userPreferenceContentUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
       this.userPreferenceContentUIDTO.update_preference_summary_message_service_UserPreferenceContent = translations['update_preference_summary_message_service_UserPreferenceContent'];
       this.userPreferenceContentUIDTO.update_preference_detail_message_service_UserPreferenceContent = translations['update_preference_detail_message_service_UserPreferenceContent'];
@@ -107,7 +107,7 @@ export class UserPreferenceContentComponent implements OnInit {
       // Exibe uma mensagem de erro caso ocorra uma falha ao carregar as traduções.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.userPreferenceContentUIDTO.error_message_service_Generic,
+        summary: this.userPreferenceContentUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     } finally {
@@ -119,10 +119,10 @@ export class UserPreferenceContentComponent implements OnInit {
   private loadKeys(): string[] {
     // Define as chaves para tradução que serão carregadas.
     return [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic',
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic',
       'save_preference_summary_message_service_UserPreferenceContent',
       'save_preference_detail_message_service_UserPreferenceContent',
       'update_preference_summary_message_service_UserPreferenceContent',
@@ -187,7 +187,7 @@ export class UserPreferenceContentComponent implements OnInit {
       // Exibe mensagem de erro em caso de falha.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.userPreferenceContentUIDTO.error_message_service_Generic,
+        summary: this.userPreferenceContentUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
 

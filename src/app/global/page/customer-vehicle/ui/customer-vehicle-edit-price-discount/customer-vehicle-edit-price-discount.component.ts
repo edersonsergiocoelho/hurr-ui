@@ -53,17 +53,17 @@ export class CustomerVehicleEditPriceDiscountComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'save_success_message_service_CustomerVehicleEditPriceDiscount'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleEditPriceDiscountUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleEditPriceDiscountUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleEditPriceDiscountUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleEditPriceDiscountUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleEditPriceDiscountUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleEditPriceDiscountUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.customerVehicleEditPriceDiscountUIDTO.save_success_message_service_CustomerVehicleEditPriceDiscount = translations['save_success_message_service_CustomerVehicleEditPriceDiscount'];
 
     } catch (error: any) {
@@ -72,7 +72,7 @@ export class CustomerVehicleEditPriceDiscountComponent implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditPriceDiscountUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditPriceDiscountUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -97,7 +97,7 @@ export class CustomerVehicleEditPriceDiscountComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditPriceDiscountUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditPriceDiscountUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -118,7 +118,7 @@ export class CustomerVehicleEditPriceDiscountComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.SUCCESS,
-          summary: '' + this.customerVehicleEditPriceDiscountUIDTO.success_message_service_Generic,
+          summary: '' + this.customerVehicleEditPriceDiscountUIDTO.success_summary_message_service_Generic,
           detail: '' + this.customerVehicleEditPriceDiscountUIDTO.save_success_message_service_CustomerVehicleEditPriceDiscount,
         });
       }
@@ -129,7 +129,7 @@ export class CustomerVehicleEditPriceDiscountComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditPriceDiscountUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditPriceDiscountUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

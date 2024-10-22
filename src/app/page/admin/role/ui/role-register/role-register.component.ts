@@ -69,7 +69,7 @@ export class RoleRegisterComponent implements OnInit {
         //this.roleSearchUIDTO.totalRecords = data.body.totalElements;
       },
       error: (error) => {
-        //this.messageService.add({ severity: 'error', summary: '' + this.broadcastSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+        //this.messageService.add({ severity: 'error', summary: '' + this.broadcastSearchUIDTO.error_summary_message_service_Generic, detail: error.error.message });
 
         this.ngxSpinnerService.hide();
       },
@@ -92,7 +92,7 @@ export class RoleRegisterComponent implements OnInit {
         //this.roleSearchUIDTO.totalRecords = data.body.totalElements;
       },
       error: (error) => {
-        //this.messageService.add({ severity: 'error', summary: '' + this.broadcastSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+        //this.messageService.add({ severity: 'error', summary: '' + this.broadcastSearchUIDTO.error_summary_message_service_Generic, detail: error.error.message });
 
         this.ngxSpinnerService.hide();
       },
@@ -115,7 +115,7 @@ export class RoleRegisterComponent implements OnInit {
         //this.roleSearchUIDTO.totalRecords = data.body.totalElements;
       },
       error: (error) => {
-        //this.messageService.add({ severity: 'error', summary: '' + this.broadcastSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+        //this.messageService.add({ severity: 'error', summary: '' + this.broadcastSearchUIDTO.error_summary_message_service_Generic, detail: error.error.message });
 
         this.ngxSpinnerService.hide();
       },

@@ -56,10 +56,10 @@ export class PaymentMethodSearchComponent implements OnInit {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribui as traduções obtidas aos campos do UIDTO.
-      this.paymentMethodSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.paymentMethodSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.paymentMethodSearchUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.paymentMethodSearchUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.paymentMethodSearchUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.paymentMethodSearchUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.paymentMethodSearchUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.paymentMethodSearchUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
       this.paymentMethodSearchUIDTO.span_button_label_active_Generic = translations['span_button_label_active_Generic'];
       this.paymentMethodSearchUIDTO.span_button_label_inactive_Generic = translations['span_button_label_inactive_Generic'];
@@ -71,8 +71,8 @@ export class PaymentMethodSearchComponent implements OnInit {
       this.paymentMethodSearchUIDTO.accept_label_message_service_Generic = translations['accept_label_message_service_Generic'];
       this.paymentMethodSearchUIDTO.reject_label_message_service_Generic = translations['reject_label_message_service_Generic'];
 
-      this.paymentMethodSearchUIDTO.delete_all_message_service_Generic = translations['delete_all_message_service_Generic'];
-      this.paymentMethodSearchUIDTO.delete_all_success_message_service_Generic = translations['delete_all_success_message_service_Generic'];
+      this.paymentMethodSearchUIDTO.delete_all_success_summary_message_service_Generic = translations['delete_all_success_summary_message_service_Generic'];
+      this.paymentMethodSearchUIDTO.delete_all_success_detail_message_service_Generic = translations['delete_all_success_detail_message_service_Generic'];
 
       // Traduções para os cabeçalhos das colunas da tabela de busca.
       this.paymentMethodSearchUIDTO.table_header_payment_status_id_PaymentMethodSearch = translations['table_header_payment_status_id_PaymentMethodSearch'];
@@ -98,7 +98,7 @@ export class PaymentMethodSearchComponent implements OnInit {
       // Exibe uma mensagem de erro caso ocorra uma falha.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.paymentMethodSearchUIDTO.error_message_service_Generic,
+        summary: this.paymentMethodSearchUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     } finally {
@@ -110,10 +110,10 @@ export class PaymentMethodSearchComponent implements OnInit {
   private loadKeys(): any {
     // Define as chaves para tradução que serão carregadas.
     const keys = [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic',
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic',
       'span_button_label_active_Generic',
       'span_button_label_inactive_Generic',
       'span_button_label_all_Generic',
@@ -122,8 +122,8 @@ export class PaymentMethodSearchComponent implements OnInit {
       'header_message_service_Generic',
       'accept_label_message_service_Generic',
       'reject_label_message_service_Generic',
-      'delete_all_message_service_Generic',
-      'delete_all_success_message_service_Generic',
+      'delete_all_success_summary_message_service_Generic',
+      'delete_all_success_detail_message_service_Generic',
       'table_header_payment_status_id_PaymentMethodSearch',
       'table_header_payment_status_name_PaymentMethodSearch',
       'table_header_enabled_PaymentMethodSearch'
@@ -185,8 +185,8 @@ export class PaymentMethodSearchComponent implements OnInit {
             // Exibe uma mensagem de sucesso
             this.messageService.add({ 
               severity: SeverityConstants.SUCCESS, 
-              summary: this.paymentMethodSearchUIDTO.delete_all_message_service_Generic, // Mensagem de resumo
-              detail: this.paymentMethodSearchUIDTO.delete_all_success_message_service_Generic // Detalhes da mensagem
+              summary: this.paymentMethodSearchUIDTO.delete_all_success_summary_message_service_Generic, // Mensagem de resumo
+              detail: this.paymentMethodSearchUIDTO.delete_all_success_detail_message_service_Generic // Detalhes da mensagem
             });
           }
 
@@ -194,7 +194,7 @@ export class PaymentMethodSearchComponent implements OnInit {
           // Captura e exibe mensagens de erro, se houver
           this.messageService.add({
             severity: SeverityConstants.ERROR,
-            summary: this.paymentMethodSearchUIDTO.error_message_service_Generic, // Mensagem de erro
+            summary: this.paymentMethodSearchUIDTO.error_summary_message_service_Generic, // Mensagem de erro
             detail: error.error?.message || error.toString() // Detalhes do erro
           });
 
@@ -256,7 +256,7 @@ export class PaymentMethodSearchComponent implements OnInit {
       // Exibe mensagem de erro caso ocorra uma falha durante a busca.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.paymentMethodSearchUIDTO.error_message_service_Generic,
+        summary: this.paymentMethodSearchUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
 

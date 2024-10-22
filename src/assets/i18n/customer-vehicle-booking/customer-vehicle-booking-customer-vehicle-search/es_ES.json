@@ -1,0 +1,26 @@
+{
+  "title_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "Reservas De Mis Coches",
+  "subtitle_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "Verifique Aquí Sus Últimas Reservas De Mis Coches.",
+ 
+  "booking_CustomerVehicleBookingCustomerVehicleSearch": "Número De Reserva",
+  "created_date_CustomerVehicleBookingCustomerVehicleSearch": "Fecha De Reserva",
+  "total_booking_value_CustomerVehicleBookingCustomerVehicleSearch": "Total",
+  "placeholder_created_date_CustomerVehicleBookingCustomerVehicleSearch": "Ordenar Por Fecha De Reserva",
+  "label_created_date_option_1_CustomerVehicleBookingCustomerVehicleSearch": "Ordenar Por Fecha De Reserva Ascendente",
+  "label_created_date_option_2_CustomerVehicleBookingCustomerVehicleSearch": "Ordenar Por Fecha De Reserva Descendente",
+  "vehicle_model_CustomerVehicleBookingCustomerVehicleSearch": "Modelo: ",
+  "vehicle_category_CustomerVehicleBookingCustomerVehicleSearch": "Categoría: ",
+  "vehicle_color_CustomerVehicleBookingCustomerVehicleSearch": "Color: ",
+  "vehicle_fuel_type_CustomerVehicleBookingCustomerVehicleSearch": "Tipo De Combustible: ",
+  "vehicle_transmission_CustomerVehicleBookingCustomerVehicleSearch": "Transmisión: ",
+  "label_reservation_start_date_CustomerVehicleBookingCustomerVehicleSearch": "Fecha De Inicio De Reserva: ",
+  "label_reservation_end_date_CustomerVehicleBookingCustomerVehicleSearch": "Fecha De Finalización De Reserva: ",
+  "label_booking_start_date_CustomerVehicleBookingCustomerVehicleSearch": "Check-In De Reserva: ",
+  "label_booking_end_date_CustomerVehicleBookingCustomerVehicleSearch": "Check-Out De Reserva: ",
+  "label_booking_cancellation_date_CustomerVehicleBookingCustomerVehicleSearch": "Esta Reserva Fue Cancelada: ",
+  "placeholder_review_CustomerVehicleBookingCustomerVehicleSearch": "Ingrese Una Reseña Para El Cliente Que Alquiló El Coche",
+ 
+  "save_success_write_a_review_message_service_CustomerVehicleBookingCustomerVehicleSearch": "Reseña Guardada Con Éxito",
+ 
+  "header_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog_CustomerVehicleBookingCustomerVehicleSearch": "Finalizar Reserva"
+}

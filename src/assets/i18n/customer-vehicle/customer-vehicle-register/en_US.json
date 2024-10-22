@@ -1,0 +1,7 @@
+{
+  "header_ConfirmDialog_CustomerVehicleRegister": "Save Vehicle Registration",
+  "message_ConfirmDialog_CustomerVehicleRegister": "Are You Sure You Want To Continue And Save The Vehicle Registration? To Continue, The Car Registration Needs To Be Approved Within 3 Days, Only After That Can You Adjust Prices And Other Settings And Activate Your Listing On The Platform.",
+  "reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister": "Cancelled",
+  "reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister": "Cancelled You Can Continue Editing The Information.",
+  "save_success_message_service_CustomerVehicleRegister": "Vehicle Successfully Registered."
+}

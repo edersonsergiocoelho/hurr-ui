@@ -1,0 +1,16 @@
+{
+  "no_connection_to_the_api_detail_message_service_Generic": "Oops! It Seems We Are Having Connection Issues. Please Try Again Later.",
+  "failed_to_open_new_tab_detail_message_service_Generic": "Failed To Open New Tab.",
+
+  "warn_summary_message_service_Generic": "Warning",
+  "error_summary_message_service_Generic": "Error",
+  "info_summary_message_service_Generic": "Information",
+  "success_summary_message_service_Generic": "Success",
+
+  "save_summary_message_service_Generic": "Successfully Saved.",
+  "update_summary_message_service_Generic": "Successfully Updated.",
+  "delete_summary_message_service_Generic": "Successfully Deleted.",
+
+  "delete_all_success_summary_message_service_Generic": "Items Successfully Deleted.",
+  "delete_all_success_detail_message_service_Generic": "All Selected Items Have Been Successfully Deleted."
+}

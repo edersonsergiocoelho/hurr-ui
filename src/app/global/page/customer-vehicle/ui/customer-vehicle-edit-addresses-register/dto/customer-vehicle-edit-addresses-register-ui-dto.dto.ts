@@ -27,11 +27,11 @@ export class CustomerVehicleEditAddressesRegisterUIDTO {
   cities: Array<City>;
   selectedCity: City;
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
 
-  success_message_service_Generic: string;
+  success_summary_message_service_Generic: string;
   save_success_message_service_CustomerVehicleEditAddressesRegister: string;
   update_success_message_service_CustomerVehicleEditAddressesRegister: string;
   delete_success_message_service_CustomerVehicleEditAddressesRegister: string;

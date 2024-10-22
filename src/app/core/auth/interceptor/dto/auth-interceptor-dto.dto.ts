@@ -1,7 +1,7 @@
-export class AuthInterceptorDTO {
+import { TranslateSeverityDTO } from "src/app/core/translate/dto/translate-severity-dto.dto";
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
-  no_connection_to_the_api_message_service_Generic: string;
+export class AuthInterceptorDTO extends TranslateSeverityDTO {
+
+  // Messages - Translate
+  no_connection_to_the_api_detail_message_service_Generic: string;
 }

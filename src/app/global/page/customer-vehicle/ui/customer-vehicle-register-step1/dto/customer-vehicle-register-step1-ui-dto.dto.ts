@@ -21,9 +21,9 @@ export class CustomerVehicleRegisterStep1UIDTO {
   complement: string;
   zipCode: string;
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
 
   city_service_not_available_message_service_CustomerVehicleRegisterStep1: string;
 }

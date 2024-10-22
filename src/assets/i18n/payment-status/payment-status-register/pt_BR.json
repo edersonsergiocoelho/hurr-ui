@@ -10,7 +10,7 @@
   "placeholder_modified_date_PaymentStatusRegister": "Selecione A Data De Modificação",
   "label_enabled_PaymentStatusRegister": "Ativo",
 
-  "save_success_message_service_PaymentStatusRegister": "Status De Pagamento Cadastrado  Com Sucesso",
+  "save_success_message_service_PaymentStatusRegister": "Status De Pagamento Cadastrado Com Sucesso",
   "update_success_message_service_PaymentStatusRegister": "Status De Pagamento Atualizado Com Sucesso",
   "delete_success_message_service_PaymentStatusRegister": "Status De Pagamento Removido Com Sucesso"
 }

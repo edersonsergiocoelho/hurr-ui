@@ -73,10 +73,10 @@ export class CustomerVehicleBookingSuccessComponent implements OnInit {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Armazena as traduções no DTO.
-      this.customerVehicleBookingSuccessUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleBookingSuccessUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleBookingSuccessUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.customerVehicleBookingSuccessUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleBookingSuccessUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleBookingSuccessUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleBookingSuccessUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.customerVehicleBookingSuccessUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
       // Segunda operação: busca os dados da reserva de veículo do cliente pelo paymentId.
       const resultCustomerVehicleBookingServiceFindById = await firstValueFrom(this.customerVehicleBookingService.findByPaymentId(this.customerVehicleBookingSuccessUIDTO.paymentId).pipe(first()));
@@ -108,7 +108,7 @@ export class CustomerVehicleBookingSuccessComponent implements OnInit {
       // Se ocorrer um erro, exibe a mensagem de erro usando o serviço de mensagens.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleBookingSuccessUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleBookingSuccessUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     } finally {
@@ -121,10 +121,10 @@ export class CustomerVehicleBookingSuccessComponent implements OnInit {
   private loadKeys(): any {
     // Define as chaves para tradução.
     const keys = [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic'
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic'
     ];
     return keys;
   }

@@ -52,17 +52,17 @@ export class CustomerVehicleEditLimitedMileageComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'save_success_message_service_CustomerVehicleEditLimitedMileage'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleEditLimitedMileageUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleEditLimitedMileageUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleEditLimitedMileageUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleEditLimitedMileageUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleEditLimitedMileageUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleEditLimitedMileageUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.customerVehicleEditLimitedMileageUIDTO.save_success_message_service_CustomerVehicleEditLimitedMileage = translations['save_success_message_service_CustomerVehicleEditLimitedMileage'];
 
     } catch (error: any) {
@@ -71,7 +71,7 @@ export class CustomerVehicleEditLimitedMileageComponent implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditLimitedMileageUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditLimitedMileageUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -106,7 +106,7 @@ export class CustomerVehicleEditLimitedMileageComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditLimitedMileageUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditLimitedMileageUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -149,7 +149,7 @@ export class CustomerVehicleEditLimitedMileageComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.SUCCESS,
-          summary: '' + this.customerVehicleEditLimitedMileageUIDTO.success_message_service_Generic,
+          summary: '' + this.customerVehicleEditLimitedMileageUIDTO.success_summary_message_service_Generic,
           detail: '' + this.customerVehicleEditLimitedMileageUIDTO.save_success_message_service_CustomerVehicleEditLimitedMileage,
         });
       }
@@ -160,7 +160,7 @@ export class CustomerVehicleEditLimitedMileageComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditLimitedMileageUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditLimitedMileageUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

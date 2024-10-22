@@ -1,0 +1,23 @@
+{
+  "title_UserProfileContent": "Profile",
+  
+  "label_user_id_UserProfileContent": "User ID",
+  "placeholder_user_id_UserProfileContent": "Enter User ID",
+  "label_provider_user_id_UserProfileContent": "Provider User ID",
+  "placeholder_provider_user_id_UserProfileContent": "Enter Provider User ID",
+  "label_email_UserProfileContent": "Email",
+  "placeholder_email_UserProfileContent": "Enter Email",
+  "label_display_name_UserProfileContent": "User Name",
+  "placeholder_display_name_UserProfileContent": "Enter User Name",
+  "label_provider_UserProfileContent": "Provider",
+  "placeholder_provider_UserProfileContent": "Enter Provider",
+  "label_created_date_UserProfileContent": "Creation Date",
+  "placeholder_created_date_UserProfileContent": "Select Creation Date",
+  "label_modified_date_UserProfileContent": "Modification Date",
+  "placeholder_modified_date_UserProfileContent": "Select Modification Date",
+  "label_enabled_UserProfileContent": "Enabled",
+  "label_avatar_UserProfileContent": "Avatar",
+
+  "update_profile_summary_message_service_UserProfileContent": "Profile Successfully Updated",
+  "update_profile_detail_message_service_UserProfileContent": "Your Profile Has Been Successfully Updated!"
+}

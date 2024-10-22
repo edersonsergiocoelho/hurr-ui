@@ -1,0 +1,22 @@
+{
+  "title_CheckOut": "Cart",
+  "title_delivery_Address_CheckOut": "Delivery Address",
+  "title_pickup_Address_CheckOut": "Pickup Address",
+ 
+  "title_Address_CheckOut": "Billing Address",
+  "button_Address_CheckOut": "Add New Address",
+  "header_Address_CheckOut": "Add New Address",
+  "select_customer_address_Address_CheckOut": "Select Billing Address",
+ 
+  "title_Cart_CheckOut": "Cart",
+  "price_Cart_CheckOut": "Price",
+  "days_Cart_CheckOut": "Days",
+ 
+  "title_OrderSummary_CheckOut": "Order Summary",
+  "date_init_OrderSummary_CheckOut": "Trip Start",
+  "date_end_OrderSummary_CheckOut": "Trip End",
+  "price_OrderSummary_CheckOut": "Price",
+  "delivery_OrderSummary_CheckOut": "Delivery",
+  "pickup_OrderSummary_CheckOut": "Pickup",
+  "total_OrderSummary_CheckOut": "Total"
+}

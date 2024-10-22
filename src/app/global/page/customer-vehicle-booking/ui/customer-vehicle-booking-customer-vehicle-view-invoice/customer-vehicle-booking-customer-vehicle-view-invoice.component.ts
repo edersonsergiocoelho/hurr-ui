@@ -64,10 +64,10 @@ export class CustomerVehicleBookingCustomerVehicleViewInvoiceComponent implement
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Armazena as traduções no DTO.
-      this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
       // Segunda operação: busca os dados da reserva de veículo do cliente pelo paymentId.
       if (this.customerVehicleBookingId != null) {
@@ -103,7 +103,7 @@ export class CustomerVehicleBookingCustomerVehicleViewInvoiceComponent implement
       // Se ocorrer um erro, exibe a mensagem de erro usando o serviço de mensagens.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.error_message_service_Generic,
+        summary: this.customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
     } finally {
@@ -116,10 +116,10 @@ export class CustomerVehicleBookingCustomerVehicleViewInvoiceComponent implement
   private loadKeys(): any {
     // Define as chaves para tradução.
     const keys = [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic'
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic'
     ];
     return keys;
   }

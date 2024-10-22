@@ -1,0 +1,44 @@
+{
+  "label_hosted_by_CustomerVehicleDetail": "Hospedado Por",
+  "label_created_date_CustomerVehicleDetail": "Unido En",
+  "label_description_CustomerVehicleDetail": "Descripción",
+  "day_CustomerVehicleDetail": "Día",
+  "excluding_taxes_and_fees_CustomerVehicleDetail": "Excluyendo Impuestos Y Tasas",
+  "date_init_CustomerVehicleDetail": "Inicio Del Viaje",
+  "date_end_CustomerVehicleDetail": "Fin Del Viaje",
+  "pickup_and_return_location_CustomerVehicleDetail": "Lugar De Recogida Y Devolución",
+  "placeholder_customer_vehicle_address_vehicle_CustomerVehicleDetail": "Seleccione El Lugar De Recogida Y Devolución",
+  "item_label_customer_vehicle_address_vehicle_CustomerVehicleDetail": "Enviaremos La Dirección Exacta Una Vez Que Su Viaje Esté Reservado.",
+  "pickup_and_dropoff_location_CustomerVehicleDetail": "Lugar De Recogida Y Devolución En Su Residencia O Lugar De Su Preferencia",
+  "placeholder_customer_vehicle_address_delivery_CustomerVehicleDetail": "Seleccione El Lugar De Entrega",
+  "item_label_customer_vehicle_address_delivery_CustomerVehicleDetail": "Enviaremos La Dirección Exacta Una Vez Que Su Viaje Esté Reservado.",
+  "placeholder_customer_vehicle_address_pickup_CustomerVehicleDetail": "Seleccione El Lugar De Recogida",
+  "item_label_customer_vehicle_address_pickup_CustomerVehicleDetail": "Enviaremos La Dirección Exacta Una Vez Que Su Viaje Esté Reservado.",
+  "label_continue_CustomerVehicleDetail": "Continuar",
+  "label_free_cancellation_CustomerVehicleDetail": "Cancelación Gratis",
+  "label_full_refund_before_CustomerVehicleDetail": "Reembolso Completo Antes De",
+  "label_to_the_CustomerVehicleDetail": "a las",
+  "label_mileage_information_CustomerVehicleDetail": "Información De Kilometraje",
+  "label_unlimited_mileage_CustomerVehicleDetail": "Distancia Incluida: Ilimitada",
+  "label_limited_mileage_included_CustomerVehicleDetail": "Distancia Incluida: ",
+  "label_limited_mileage_value_CustomerVehicleDetail": "Precio Del KM Excedente R$: ",
+  "label_convenience_CustomerVehicleDetail": "Comodidad",
+ 
+  "label_delivery_to_ddress_CustomerVehicleDetail": "Entrega En La Dirección",
+  "label_mileage_fee_delivery_CustomerVehicleDetail": "Precio Del KM Para Entrega",
+  "label_pickup_at_address_CustomerVehicleDetail": "Recogida En La Dirección",
+  "label_mileage_fee_pickups_CustomerVehicleDetail": "Precio Del KM Para Recogida",
+ 
+  "div_share_your_experience_CustomerVehicleDetail": "Comparte Tu Experiencia",
+  "p_your_feedback_is_valuable_CustomerVehicleDetail": "Su Comentario Es Valioso Para Nosotros Y Para Futuros Conductores. Cuéntenos Cómo Fue Conducir Este Coche Y Qué Le Llamó La Atención Durante El Alquiler. Comparta Sus Descubrimientos, Positivos Y Desafíos Que Enfrentó. Su Opinión Ayuda A La Comunidad A Tomar Decisiones Informadas Sobre Sus Opciones De Alquiler De Coches.",
+ 
+  "span_reviews_CustomerVehicleDetail": "Reseñas",
+  "div_average_rating_CustomerVehicleDetail": "Calificación Promedio: ",
+ 
+  "button_Address_CustomerVehicleDetail": "Agregar Dirección",
+  "header_Address_CustomerVehicleDetail": "Registre Su Dirección De Recogida O Entrega Del Vehículo...",
+ 
+  "warn_not_null_customer_vehicle_address_vehicle_CustomerVehicleDetail": "Por Favor, Seleccione Una Dirección. Ninguna Dirección Seleccionada.",
+  "warn_customer_not_validated_CustomerVehicleDetail": "Su Cuenta No Ha Sido Validada. Le Redirigiremos Para Enviar La Información Necesaria Para La Validación.",
+  "info_user_not_logged_in_CustomerVehicleDetail": "No Ha Iniciado Sesión. Inicie Sesión Para Continuar."
+}

@@ -95,17 +95,17 @@ export class UserLoginComponent {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribui as traduções aos campos correspondentes.
-      this.userLoginUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.userLoginUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userLoginUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.userLoginUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.userLoginUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.userLoginUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userLoginUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.userLoginUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
     } catch (error: any) {
 
       // Trata os erros de carregamento e exibe uma mensagem de erro.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.userLoginUIDTO.error_message_service_Generic,
+        summary: this.userLoginUIDTO.error_summary_message_service_Generic,
         detail: error.error?.message || error.toString()
       });
 
@@ -118,10 +118,10 @@ export class UserLoginComponent {
   private loadKeys(): string[] {
     // Define as chaves para tradução que serão carregadas.
     return [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic'
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic'
     ];
   }
 
@@ -162,7 +162,7 @@ export class UserLoginComponent {
       error: (error) => {
         this.messageService.add({ 
           severity: SeverityConstants.ERROR, 
-          summary: this.userLoginUIDTO.error_message_service_Generic, 
+          summary: this.userLoginUIDTO.error_summary_message_service_Generic, 
           detail: error.error?.message || error.toString() 
         });
       },
@@ -197,7 +197,7 @@ export class UserLoginComponent {
           
           this.messageService.add({ 
             severity: SeverityConstants.WARN, 
-            summary: this.userLoginUIDTO.warn_message_service_Generic, 
+            summary: this.userLoginUIDTO.warn_summary_message_service_Generic, 
             detail: error.error?.message || error.toString()
           });
         }
@@ -206,7 +206,7 @@ export class UserLoginComponent {
 
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: this.userLoginUIDTO.error_message_service_Generic, 
+            summary: this.userLoginUIDTO.error_summary_message_service_Generic, 
             detail: error.error?.message || error.toString()
           });
         }

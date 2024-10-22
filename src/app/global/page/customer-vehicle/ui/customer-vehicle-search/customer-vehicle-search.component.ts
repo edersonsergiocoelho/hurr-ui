@@ -53,21 +53,21 @@ export class CustomerVehicleSearchComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
+        'error_summary_message_service_Generic',
         'label_created_date_option_1_CustomerVehicleSearch',
         'label_created_date_option_2_CustomerVehicleSearch'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.customerVehicleSearchUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
       this.customerVehicleSearchUIDTO.label_created_date_option_1_CustomerVehicleSearch = translations['label_created_date_option_1_CustomerVehicleSearch'];
       this.customerVehicleSearchUIDTO.label_created_date_option_2_CustomerVehicleSearch = translations['label_created_date_option_2_CustomerVehicleSearch'];
 
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleSearchUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -140,7 +140,7 @@ export class CustomerVehicleSearchComponent implements OnInit {
 
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic, 
+            summary: '' + this.customerVehicleSearchUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }
@@ -173,7 +173,7 @@ export class CustomerVehicleSearchComponent implements OnInit {
 
         this.messageService.add({ 
           severity: SeverityConstants.ERROR, 
-          summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleSearchUIDTO.error_summary_message_service_Generic,
           detail: error.toString() 
         });
       }
