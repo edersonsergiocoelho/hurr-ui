@@ -1,15 +1,15 @@
 <!-- Tela Componetizada -->
-<div class="ui-fluid">
+<div class="ui-fluid pr-4 pl-4">
 
   <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_UserProfile' | translate}}</h1>
 
-  <div class="grid" style="padding-top: 10px;">
+  <div class="grid pr-4 pl-4">
 
     <!-- Tela De Pesquisa -->
     <div class="md:col-12 mb-2" [ngClass]="{'hidden': sidebarContentVisible}">
       <div class="card no-margin bordered-card">
         <!-- Usando flexbox para alinhar o botão à direita -->
-        <div class="flex justify-content-end" style="padding-right: 10px;">
+        <div class="flex justify-content-end">
           <button pButton pRipple 
             type="button"
             (click)="toggleSidebarContent()">

@@ -39,7 +39,6 @@ export class CustomerVehicleEditAddressesSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetSearchForm();
   }
 

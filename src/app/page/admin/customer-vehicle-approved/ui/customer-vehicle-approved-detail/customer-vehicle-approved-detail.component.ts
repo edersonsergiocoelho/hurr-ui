@@ -44,7 +44,6 @@ export class CustomerVehicleApprovedDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetDetailForm();
   }
 

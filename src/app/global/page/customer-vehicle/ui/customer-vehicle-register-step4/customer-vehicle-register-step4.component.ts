@@ -26,7 +26,6 @@ export class CustomerVehicleRegisterStep4Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 

@@ -125,6 +125,10 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/user/user-profile/user-profile/',
   '/assets/i18n/user/user-profile/user-profile-content/',
 
+  // UserPreference
+  '/assets/i18n/user-preference/user-preference/user-preference/',
+  '/assets/i18n/user-preference/user-preference/user-preference-content/',
+
   // UserRole
   '/assets/i18n/user-role/',
   '/assets/i18n/user-role/user-role-edit-role/'

@@ -31,8 +31,6 @@ export class CustomerVehicleBookingCustomerVehicleCheckInDynamicDialogComponent 
   ) { }
 
   ngOnInit() {
-    // Define o idioma padrão para traduções como português do Brasil
-    this.translateService.setDefaultLang('pt_BR');
     // Reseta o formulário inicializando os dados
     this.resetForm();
   }

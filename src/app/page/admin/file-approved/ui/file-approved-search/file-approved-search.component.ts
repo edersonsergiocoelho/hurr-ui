@@ -30,7 +30,6 @@ export class FileApprovedSearchComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetSearchForm();
   }
 

@@ -24,7 +24,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
     this.authInterceptorDTO = new AuthInterceptorDTO();
 
-    this.translateService.setDefaultLang('pt_BR');
+    const currentUserPreference = this.sessionStorageService.getUserPreference();
+
+    if (currentUserPreference != null) {
+      this.translateService.setDefaultLang(currentUserPreference.language);
+    } else {
+      this.translateService.setDefaultLang('pt_BR');
+    }
 
     this.getTranslation();
 

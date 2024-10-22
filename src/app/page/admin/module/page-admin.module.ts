@@ -8,6 +8,7 @@ import { CustomerVehicleApprovedModule } from '../customer-vehicle-approved/modu
 import { PaymentStatusModule } from '../payment-status/module/payment-status.module';
 import { PaymentMethodModule } from '../payment-method/module/payment-method.module';
 import { BankModule } from '../bank/module/bank.module';
+import { UserPreferenceModule } from '../user-preference/module/user-preference.module';
 
 @NgModule({
   declarations: [],
@@ -31,6 +32,7 @@ import { BankModule } from '../bank/module/bank.module';
     FileApprovedModule,
     RoleModule,
     UserRoleModule,
+    UserPreferenceModule,
     VehicleBrandModule
   ]
 })

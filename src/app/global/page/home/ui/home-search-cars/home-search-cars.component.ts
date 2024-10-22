@@ -27,7 +27,6 @@ export class HomeSearchCarsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetSearchForm();
   }
 

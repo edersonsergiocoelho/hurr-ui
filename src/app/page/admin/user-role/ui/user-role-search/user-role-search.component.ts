@@ -32,7 +32,6 @@ export class UserRoleSearchComponent implements OnInit {
               private userRoleService: UserRoleService) { }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetSearchForm();
   }
 

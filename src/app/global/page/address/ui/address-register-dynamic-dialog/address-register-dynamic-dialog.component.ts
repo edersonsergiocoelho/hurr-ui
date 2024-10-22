@@ -57,7 +57,6 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
   ) {}
 
   ngOnInit (): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetRegisterForm();
   }
 

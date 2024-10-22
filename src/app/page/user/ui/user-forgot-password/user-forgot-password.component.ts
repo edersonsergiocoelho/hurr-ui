@@ -27,7 +27,6 @@ export class UserForgotPasswordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForgPassword();
   }
 

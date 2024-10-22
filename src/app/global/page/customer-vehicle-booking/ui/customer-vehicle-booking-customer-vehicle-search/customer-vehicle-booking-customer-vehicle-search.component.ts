@@ -47,7 +47,6 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
   ) { }
   
   ngOnInit() {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 

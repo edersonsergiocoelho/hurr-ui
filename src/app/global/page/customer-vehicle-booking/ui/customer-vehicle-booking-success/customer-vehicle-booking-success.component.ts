@@ -34,8 +34,6 @@ export class CustomerVehicleBookingSuccessComponent implements OnInit {
 
   // Método que é executado quando o componente é inicializado.
   ngOnInit() {
-    // Define o idioma padrão como 'pt_BR'.
-    this.translateService.setDefaultLang('pt_BR');
     // Reseta o formulário e carrega os parâmetros da rota.
     this.resetForm();
   }

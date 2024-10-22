@@ -50,7 +50,6 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 

@@ -10,6 +10,7 @@ import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { FileUpload } from 'primeng/fileupload';
 import { UserDTO } from '../../dto/user-dto.dto';
 import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-profile-content',
@@ -78,17 +79,18 @@ export class UserProfileContentComponent implements OnInit {
 
       if (userServiceGetCurrentUser.status == 200 && userServiceGetCurrentUser.body != null) {
         this.userProfileContentUIDTO.userDTO = userServiceGetCurrentUser.body;
-        this.userProfileContentUIDTO.userDTO.file.dataURI = `data:${this.userProfileContentUIDTO.userDTO.file.contentType};base64,${this.userProfileContentUIDTO.userDTO.file.dataAsByteArray}`;
-      }
 
-      /*
-      this.userProfileContentUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
-      this.userProfileContentUIDTO.save_success_message_service_PaymentMethodRegister = translations['save_success_message_service_PaymentMethodRegister'];
-      this.userProfileContentUIDTO.update_message_service_Generic = translations['update_message_service_Generic'];
-      this.userProfileContentUIDTO.update_success_message_service_PaymentMethodRegister = translations['update_success_message_service_PaymentMethodRegister'];
-      this.userProfileContentUIDTO.delete_message_service_Generic = translations['delete_message_service_Generic'];
-      this.userProfileContentUIDTO.delete_success_message_service_PaymentMethodRegister = translations['delete_success_message_service_PaymentMethodRegister'];
-      */
+        if (this.userProfileContentUIDTO.userDTO.createdDate != null) {
+          this.userProfileContentUIDTO.userDTO.createdDate = moment(this.userProfileContentUIDTO.userDTO.createdDate).toDate();
+        }
+        if (this.userProfileContentUIDTO.userDTO.modifiedDate != null) {
+          this.userProfileContentUIDTO.userDTO.modifiedDate = moment(this.userProfileContentUIDTO.userDTO.modifiedDate).toDate();
+        }
+
+        if (this.userProfileContentUIDTO.userDTO.file != null) {
+          this.userProfileContentUIDTO.userDTO.file.dataURI = `data:${this.userProfileContentUIDTO.userDTO.file.contentType};base64,${this.userProfileContentUIDTO.userDTO.file.dataAsByteArray}`;
+        }
+      }
 
     } catch (error: any) {
       // Exibe uma mensagem de erro caso ocorra uma falha ao carregar as traduções.
@@ -131,7 +133,6 @@ export class UserProfileContentComponent implements OnInit {
       const data = await firstValueFrom(this.userService.update(user).pipe(first()));
 
       if (data.status === 200) {
-        debugger
         // Exibe mensagem de sucesso se o status da resposta for 201 Created.
         this.messageService.add({ 
           severity: SeverityConstants.SUCCESS, 
@@ -141,7 +142,6 @@ export class UserProfileContentComponent implements OnInit {
       }
   
     } catch (error: any) {
-      debugger
       // Exibe mensagem de erro em caso de falha.
       this.messageService.add({
         severity: SeverityConstants.ERROR,

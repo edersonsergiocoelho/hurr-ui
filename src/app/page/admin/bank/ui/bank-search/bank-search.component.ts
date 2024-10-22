@@ -35,7 +35,6 @@ export class BankSearchComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR'); // Define o idioma padrão para o serviço de tradução.
     this.resetSearchForm(); // Reseta o formulário de busca ao inicializar o componente.
   }
 

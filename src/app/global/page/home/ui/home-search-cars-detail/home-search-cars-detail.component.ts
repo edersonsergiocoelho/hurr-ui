@@ -72,7 +72,6 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR'); // Define o idioma padrão para traduções.
     this.resetRegisterForm(); // Chama o método para inicializar o formulário.
   }
 

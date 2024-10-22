@@ -48,9 +48,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Define o idioma padrão como português do Brasil
-    this.translateService.setDefaultLang('pt_BR');
-
     // Inscreve-se para atualizações do usuário atual e reseta o formulário
     this.homeUIService.currentUser$.subscribe(user => {
       this.homeUIDTO.currentUser = user;

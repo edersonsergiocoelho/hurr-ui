@@ -45,7 +45,6 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 

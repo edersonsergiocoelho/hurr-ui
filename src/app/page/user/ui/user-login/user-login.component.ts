@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthSignInDTO } from 'src/app/core/auth/dto/auth-sign-in-dto.dto';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { UserPreferenceService } from 'src/app/page/admin/user-preference/service/user-preference.service';
 
 @Component({
   selector: 'app-user-login',
@@ -40,13 +41,12 @@ export class UserLoginComponent {
     private sessionStorageService: SessionStorageService,
     private translateService: TranslateService,
     private userService: UserService,
+    private userPreferenceService: UserPreferenceService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
-
-    this.translateService.setDefaultLang('pt_BR');
 
     this.resetForm();
 
@@ -139,6 +139,7 @@ export class UserLoginComponent {
     );
   }
 
+  /*
   login(user: any): void {
     this.sessionStorageService.saveUser(user);
     this.isLoginFailed = false;
@@ -146,6 +147,33 @@ export class UserLoginComponent {
     this.currentUser = this.sessionStorageService.getUser();
     this.homeUIService.setCurrentUser(this.currentUser);
     this.router.navigate(['']);
+  }
+  */
+
+  login(user: any): void {
+    this.sessionStorageService.saveUser(user);
+
+    // Chama o serviço para buscar as preferências do usuário
+    this.userPreferenceService.findByUserId(user.userId).pipe(first()).subscribe({
+      next: (userPreferences: any) => {
+        // Salva as preferências do usuário no sessionStorage
+        this.sessionStorageService.saveUserPreference(userPreferences.body);
+      },
+      error: (error) => {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: this.userLoginUIDTO.error_message_service_Generic, 
+          detail: error.error?.message || error.toString() 
+        });
+      },
+      complete: () => {
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.currentUser = this.sessionStorageService.getUser();
+        this.homeUIService.setCurrentUser(this.currentUser);
+        this.router.navigate(['']);
+      }
+    });
   }
 
   loginGoogle() {

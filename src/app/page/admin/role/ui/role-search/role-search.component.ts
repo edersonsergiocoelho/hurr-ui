@@ -29,7 +29,6 @@ export class RoleSearchComponent implements OnInit {
               private roleService: RoleService) { }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetSearchForm();
   }
 

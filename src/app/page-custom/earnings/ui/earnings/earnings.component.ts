@@ -44,7 +44,6 @@ export class EarningsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
