@@ -23,7 +23,7 @@
     <div class="col-6 md:col-6 field">
       <label class="font-medium text-2xl">{{'label_daily_rate_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
       <label class="font-medium text-2xl" style="margin-left: 8px;">
-        {{'currency_brl_Generic' | translate}}
+        {{'currency_Generic' | translate}}
         {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2' }}
       </label>
     </div>
@@ -31,7 +31,7 @@
     <div class="col-6 md:col-6 field">
       <label class="font-medium text-2xl">{{'label_total_booking_value_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
       <label class="font-medium text-2xl" style="margin-left: 8px;">
-        {{'currency_brl_Generic' | translate}}
+        {{'currency_Generic' | translate}}
         {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.totalBookingValue | number:'1.2-2' }}
       </label>
     </div>
@@ -54,7 +54,7 @@
     <div *ngIf="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileage == true" class="col-6 md:col-6 field">
       <label class="font-medium text-2xl">{{'label_limited_mileage_value_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
       <label class="font-medium text-2xl">
-        {{'currency_brl_Generic' | translate}}
+        {{'currency_Generic' | translate}}
         {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileageValue | number:'1.2-2' }}
       </label>
     </div>

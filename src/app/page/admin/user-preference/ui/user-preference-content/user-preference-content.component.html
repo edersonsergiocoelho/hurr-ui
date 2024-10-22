@@ -14,10 +14,15 @@
       <label for="providerUserId" [ngClass]="labelSize">
         {{'label_language_UserPreferenceContent' | translate}}
       </label>
-      <p-dropdown [ngClass]="inputSize" 
+      <p-dropdown 
+        [ngClass]="inputSize" 
         [options]="userPreferenceContentUIDTO.languages" 
         [(ngModel)]="userPreferenceContentUIDTO.selectedLanguage" 
-        optionLabel="name" [showClear]="true" name="language"
+        [showClear]="true" 
+        name="language"
+        [filter]="true"
+        filterBy="theme" 
+        optionLabel="name" 
         placeholder="{{ 'placeholder_language_UserPreferenceContent' | translate }}">
       </p-dropdown>
     </div>
@@ -26,60 +31,25 @@
       <label for="providerUserId" [ngClass]="labelSize">
         {{ 'label_theme_UserPreferenceContent' | translate }}
       </label>
-      <p-dropdown [ngClass]="inputSize" 
-                  [options]="userPreferenceContentUIDTO.themes" 
-                  [(ngModel)]="userPreferenceContentUIDTO.selectedTheme" 
-                  [showClear]="true" 
-                  name="theme"
-                  [group]="true"
-                  placeholder="{{ 'placeholder_theme_UserPreferenceContent' | translate }}">
+      <p-dropdown 
+        [ngClass]="inputSize" 
+        [options]="userPreferenceContentUIDTO.themes" 
+        [(ngModel)]="userPreferenceContentUIDTO.selectedTheme" 
+        [showClear]="true" 
+        name="theme"
+        [filter]="true"
+        filterBy="theme" 
+        [group]="true"
+        placeholder="{{ 'placeholder_theme_UserPreferenceContent' | translate }}">
 
-                  <ng-template let-group pTemplate="group">
-                    <div class="flex align-items-center">
-                      <!--
-                      <img 
-                            src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                            [class]="'mr-2 flag flag-' + group.value" 
-                            style="width: 20px" />
-                            -->  
-                        <span>{{ group.value }}</span>
-                        <span>{{ group.label }}</span>
-                    </div>
-                </ng-template>
+        <ng-template let-group pTemplate="group">
+          <div class="flex align-items-center">
+            <span>{{ group.value }}</span>
+            <span>{{ group.label }}</span>
+          </div>
+        </ng-template>
       </p-dropdown>
     </div>
-
-    <!--
-    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
-      <label for="providerUserId" [ngClass]="labelSize">
-        {{'label_provider_user_id_UserPreferenceContent' | translate}}
-      </label>
-      <input id="providerUserId" type="text" pInputText
-        placeholder="{{'placeholder_provider_user_id_UserPreferenceContent' | translate}}"
-        [(ngModel)]="userPreferenceContentUIDTO.userPreferenceDTO.providerUserId" name="providerUserId" autocomplete="off"
-        disabled />
-    </div>
-
-    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
-      <label for="email" [ngClass]="labelSize">{{'label_email_UserPreferenceContent' | translate}}</label>
-      <input id="email" type="text" pInputText placeholder="{{'placeholder_email_UserPreferenceContent' | translate}}"
-        [(ngModel)]="userPreferenceContentUIDTO.userPreferenceDTO.email" name="email" autocomplete="off" required />
-    </div>
-
-    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
-      <label for="displayName" [ngClass]="labelSize">{{'label_display_name_UserPreferenceContent' | translate}}</label>
-      <input id="displayName" type="text" pInputText
-        placeholder="{{'placeholder_display_name_UserPreferenceContent' | translate}}"
-        [(ngModel)]="userPreferenceContentUIDTO.userPreferenceDTO.displayName" name="displayName" autocomplete="off" required />
-    </div>
-
-    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
-      <label for="provider" [ngClass]="labelSize">{{'label_provider_UserPreferenceContent' | translate}}</label>
-      <input id="provider" type="text" pInputText
-        placeholder="{{'placeholder_provider_UserPreferenceContent' | translate}}"
-        [(ngModel)]="userPreferenceContentUIDTO.userPreferenceDTO.provider" name="provider" autocomplete="off" disabled />
-    </div>
-    -->
 
     <div class="col-12 md:col-6 field" [ngClass]="inputSize">
       <label for="createdDate" [ngClass]="labelSize">{{'label_created_date_UserPreferenceContent' | translate}}</label>

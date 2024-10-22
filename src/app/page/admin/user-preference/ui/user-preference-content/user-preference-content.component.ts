@@ -93,11 +93,11 @@ export class UserPreferenceContentComponent implements OnInit {
           this.userPreferenceContentUIDTO.userPreferenceDTO.modifiedDate = moment(this.userPreferenceContentUIDTO.userPreferenceDTO.modifiedDate).toDate();
         }
 
-        const language = this.userPreferenceContentUIDTO.userPreferenceDTO.language;
-        const currentLanguage = this.userPreferenceContentUIDTO.languages.find(languages => language === language);
-
-        if (currentLanguage) {
-          this.userPreferenceContentUIDTO.selectedLanguage = currentLanguage;
+        const currentLanguage = this.userPreferenceContentUIDTO.userPreferenceDTO.language;
+        const selectedCurrentLanguage = this.userPreferenceContentUIDTO.languages.find(language => language.code === currentLanguage);
+        
+        if (selectedCurrentLanguage) {
+          this.userPreferenceContentUIDTO.selectedLanguage = selectedCurrentLanguage;
         }
 
         this.userPreferenceContentUIDTO.selectedTheme = this.userPreferenceContentUIDTO.userPreferenceDTO.theme;

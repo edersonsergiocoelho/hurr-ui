@@ -105,7 +105,7 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
       this.homeSearchCarsDetailUIDTO.error_message_service_Generic = translations['error_message_service_Generic']; // Define a mensagem de erro no DTO.
       this.homeSearchCarsDetailUIDTO.info_message_service_Generic = translations['info_message_service_Generic']; // Define a mensagem de informação no DTO.
       this.homeSearchCarsDetailUIDTO.success_message_service_Generic = translations['success_message_service_Generic']; // Define a mensagem de sucesso no DTO.
-      this.homeSearchCarsDetailUIDTO.currency_brl_Generic = translations['currency_brl_Generic']; // Define o símbolo da moeda no DTO.
+      this.homeSearchCarsDetailUIDTO.currency_Generic = translations['currency_Generic']; // Define o símbolo da moeda no DTO.
       this.homeSearchCarsDetailUIDTO.daily_rate_HomeSearchCarsDetail = translations['daily_rate_HomeSearchCarsDetail']; // Define a taxa diária no DTO.
       this.homeSearchCarsDetailUIDTO.excluding_taxes_and_fees_HomeSearchCarsDetail = translations['excluding_taxes_and_fees_HomeSearchCarsDetail']; // Define a mensagem de exclusão de impostos e taxas no DTO.
       this.homeSearchCarsDetailUIDTO.span_no_image_Generic = translations['span_no_image_Generic']; // Define a mensagem de sem imagem no DTO.
@@ -152,7 +152,7 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
       'error_message_service_Generic',
       'info_message_service_Generic',
       'success_message_service_Generic',
-      'currency_brl_Generic',
+      'currency_Generic',
       'daily_rate_HomeSearchCarsDetail',
       'excluding_taxes_and_fees_HomeSearchCarsDetail',
       'span_no_image_Generic'
@@ -674,7 +674,7 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
           }
   
           // Formata o valor diário do veículo.
-          const price = `${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${customerVehicle.dailyRate}`;
+          const price = `${this.homeSearchCarsDetailUIDTO.currency_Generic} ${customerVehicle.dailyRate}`;
           const formattedDailyRate = customerVehicle.dailyRate.toFixed(2);
   
           // Cria e configura o marcador no mapa.
@@ -717,8 +717,8 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
             </p>
           </div>
           <strong style="font-size: 1.00em;">${this.homeSearchCarsDetailUIDTO.daily_rate_HomeSearchCarsDetail}</strong> 
-          <strong style="font-size: 1.00em; text-align: right;">${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${formattedDailyRate}</strong><br>
-          <strong style="font-size: 0.80em; text-decoration: underline;">${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${formattedDailyRate} / ${this.homeSearchCarsDetailUIDTO.excluding_taxes_and_fees_HomeSearchCarsDetail}</strong>`;
+          <strong style="font-size: 1.00em; text-align: right;">${this.homeSearchCarsDetailUIDTO.currency_Generic} ${formattedDailyRate}</strong><br>
+          <strong style="font-size: 0.80em; text-decoration: underline;">${this.homeSearchCarsDetailUIDTO.currency_Generic} ${formattedDailyRate} / ${this.homeSearchCarsDetailUIDTO.excluding_taxes_and_fees_HomeSearchCarsDetail}</strong>`;
   
           // Cria e adiciona uma janela de informações ao marcador.
           const infoWindow = new google.maps.InfoWindow({
@@ -764,7 +764,7 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
   exibirMapa(customerVehicle) {
     // Atualiza o ícone do marcador do veículo selecionado para o ícone destacado.
     const customerVehicleId = customerVehicle.customerVehicleId;
-    const price = `${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${customerVehicle.dailyRate}`;
+    const price = `${this.homeSearchCarsDetailUIDTO.currency_Generic} ${customerVehicle.dailyRate}`;
 
     this.homeSearchCarsDetailUIDTO.markers.forEach((marker: google.maps.marker.AdvancedMarkerElement) => {
       const markerCustomerId = (marker.element as HTMLElement).dataset['customerVehicleId'];
@@ -777,7 +777,7 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
   desibirMapa(customerVehicle) {
     // Restaura o ícone do marcador do veículo selecionado para o ícone padrão.
     const customerVehicleId = customerVehicle.customerVehicleId;
-    const price = `${this.homeSearchCarsDetailUIDTO.currency_brl_Generic} ${customerVehicle.dailyRate}`;
+    const price = `${this.homeSearchCarsDetailUIDTO.currency_Generic} ${customerVehicle.dailyRate}`;
 
     this.homeSearchCarsDetailUIDTO.markers.forEach((marker: google.maps.marker.AdvancedMarkerElement) => {
       const markerCustomerId = (marker.element as HTMLElement).dataset['customerVehicleId'];

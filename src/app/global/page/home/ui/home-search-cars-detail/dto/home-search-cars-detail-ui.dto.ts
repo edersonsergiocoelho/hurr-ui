@@ -53,7 +53,7 @@ export class HomeSearchCarsDetailUIDTO extends TranslateSeverityDTO {
   selectedVehicleCategory: any;
 
   // Messages
-  currency_brl_Generic: string;
+  currency_Generic: string;
   daily_rate_HomeSearchCarsDetail: string;
   excluding_taxes_and_fees_HomeSearchCarsDetail: string;
   span_no_image_Generic: string;

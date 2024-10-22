@@ -1,0 +1,9 @@
+{
+  "message_message_service_Generic": "¿Está Seguro De Que Desea Eliminar El Elemento Seleccionado?",
+  "message_all_message_service_Generic": "¿Está Seguro De Que Desea Eliminar Los Elementos Seleccionados?",
+  "message_cancel_booking_message_service_Generic": "¿Está Seguro De Que Desea Cancelar La Reserva?",
+  "header_message_service_Generic": "Confirmación",
+
+  "accept_label_message_service_Generic": "Sí",
+  "reject_label_message_service_Generic": "No"
+}

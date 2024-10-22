@@ -1,0 +1,20 @@
+{
+  "title_UserPreferenceContent": "Preferences",
+
+  "label_user_preference_id_UserPreferenceContent": "User Preference ID",
+  "placeholder_user_preference_id_UserPreferenceContent": "Enter User Preference ID",
+  "label_language_UserPreferenceContent": "Language",
+  "placeholder_language_UserPreferenceContent": "Enter Language",
+  "label_theme_UserPreferenceContent": "Theme",
+  "placeholder_theme_UserPreferenceContent": "Enter Theme",
+  "label_created_date_UserPreferenceContent": "Creation Date",
+  "placeholder_created_date_UserPreferenceContent": "Select Creation Date",
+  "label_modified_date_UserPreferenceContent": "Modified Date",
+  "placeholder_modified_date_UserPreferenceContent": "Select Modified Date",
+  "label_enabled_UserPreferenceContent": "Enabled",
+
+  "save_preference_summary_message_service_UserPreferenceContent": "Preferences Saved Successfully",
+  "save_preference_detail_message_service_UserPreferenceContent": "Your Preferences Were Saved Successfully!",
+  "update_preference_summary_message_service_UserPreferenceContent": "Preferences Updated Successfully",
+  "update_preference_detail_message_service_UserPreferenceContent": "Your Preferences Were Updated Successfully!"
+}

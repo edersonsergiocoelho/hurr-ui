@@ -172,7 +172,7 @@
 
           <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null"
             class="text-900 font-medium text-lg ml-auto">
-            {{'currency_brl_Generic' | translate}} {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}}
+            {{'currency_Generic' | translate}} {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}}
           </span>
         </li>
       </ul>
@@ -266,19 +266,19 @@
             
             <span class="text-900 mb-1">
               {{'transaction_amount_CustomerVehicleBookingViewReservation' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.transactionAmount | number:'1.2-2' }}
             </span>
             
             <span class="text-900 mb-1">
               {{'installment_amount_CustomerVehicleBookingViewReservation' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.transactionDetails.installmentAmount | number:'1.2-2' }}
             </span>
             
             <span class="text-900 mb-1">
               {{'total_paid_amount_CustomerVehicleBookingViewReservation' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleBookingSuccessUIDTO.customerVehicleBooking.mpPayment.transactionDetails.totalPaidAmount | number:'1.2-2' }}
             </span>
 
@@ -301,7 +301,7 @@
             </span>
             <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null"
               class="text-900 font-medium text-lg">
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}} x {{ customerVehicleBookingSuccessUIDTO.days }} {{ 'days_Cart_Checkout' | translate }}
             </span>
           </li>
@@ -311,7 +311,7 @@
             </span>
             <span *ngIf="customerVehicleBookingSuccessUIDTO.customerVehicleBooking != null"
               class="text-900 font-bold text-lg">
-              {{'currency_brl_Generic' | translate}} {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.totalBookingValue | number:'1.2-2'}}
+              {{'currency_Generic' | translate}} {{customerVehicleBookingSuccessUIDTO.customerVehicleBooking.totalBookingValue | number:'1.2-2'}}
             </span>
           </li>
 

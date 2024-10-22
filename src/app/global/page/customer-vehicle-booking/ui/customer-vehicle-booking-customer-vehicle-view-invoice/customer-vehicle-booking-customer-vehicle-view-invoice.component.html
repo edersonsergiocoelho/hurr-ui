@@ -162,7 +162,7 @@
 
           <span *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking != null"
             class="text-900 font-medium text-lg ml-auto">
-            {{'currency_brl_Generic' | translate}} {{customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}}
+            {{'currency_Generic' | translate}} {{customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}}
           </span>
         </li>
       </ul>
@@ -266,19 +266,19 @@
 
             <span class="text-900 mb-1">
               {{'transaction_amount_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.mpPayment.transactionAmount | number:'1.2-2' }}
             </span>
 
             <span class="text-900 mb-1">
               {{'installment_amount_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.mpPayment.transactionDetails.installmentAmount | number:'1.2-2' }}
             </span>
 
             <span class="text-900 mb-1">
               {{'total_paid_amount_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.mpPayment.transactionDetails.totalPaidAmount | number:'1.2-2' }}
             </span>
 
@@ -354,19 +354,19 @@
 
             <span class="text-900 mb-1">
               {{'transaction_amount_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.mpPaymentAdditional.transactionAmount | number:'1.2-2' }}
             </span>
 
             <span class="text-900 mb-1">
               {{'installment_amount_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.mpPaymentAdditional.transactionDetails.installmentAmount | number:'1.2-2' }}
             </span>
 
             <span class="text-900 mb-1">
               {{'total_paid_amount_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.mpPaymentAdditional.transactionDetails.totalPaidAmount | number:'1.2-2' }}
             </span>
 
@@ -389,11 +389,11 @@
           <li *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking != null" class="flex justify-content-between mb-3">
             <span class="text-900">
               {{'daily_rate_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2'}} x {{ customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.days }} {{ 'days_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate }}
             </span>
             <span class="text-900 font-medium text-lg">
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ (customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.dailyRate * customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.days) | number:'1.2-2' }} 
             </span>
           </li>
@@ -404,7 +404,7 @@
               {{'total_booking_value_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate}}
             </span>
             <span class="text-900 font-medium text-lg">
-              {{'currency_brl_Generic' | translate}} {{customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.totalBookingValue | number:'1.2-2'}}
+              {{'currency_Generic' | translate}} {{customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.totalBookingValue | number:'1.2-2'}}
             </span>
           </li>
 
@@ -420,7 +420,7 @@
                     'text-red-500 font-medium text-lg': customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.bookingStatus === 'PENDING_ADDITIONAL_PAYMENT',
                     'text-900 font-medium text-lg': customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.bookingStatus === 'COMPLETED'
                   }">
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.totalAdditionalValue | number:'1.2-2'}}
             </span>
           </li>
@@ -430,7 +430,7 @@
               {{'total_CustomerVehicleBookingCustomerVehicleViewInvoice' | translate}}
             </span>
             <span class="text-900 font-bold text-lg">
-              {{'currency_brl_Generic' | translate}} {{customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.totalFinalBookingValue | number:'1.2-2'}}
+              {{'currency_Generic' | translate}} {{customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.totalFinalBookingValue | number:'1.2-2'}}
             </span>
           </li>
 

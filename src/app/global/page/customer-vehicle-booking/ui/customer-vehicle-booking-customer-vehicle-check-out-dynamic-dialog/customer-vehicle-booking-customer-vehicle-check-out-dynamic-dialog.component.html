@@ -23,7 +23,7 @@
     <div class="col-6 md:col-6 field">
       <label class="font-medium text-2xl">{{'label_daily_rate_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog' | translate}}</label>
       <label class="font-medium text-2xl" style="margin-left: 8px;">
-        {{'currency_brl_Generic' | translate}}
+        {{'currency_Generic' | translate}}
         {{ customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2' }}
       </label>
     </div>
@@ -31,7 +31,7 @@
     <div class="col-6 md:col-6 field">
       <label class="font-medium text-2xl">{{'label_total_booking_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog' | translate}}</label>
       <label class="font-medium text-2xl" style="margin-left: 8px;">
-        {{'currency_brl_Generic' | translate}}
+        {{'currency_Generic' | translate}}
         {{ customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalBookingValue | number:'1.2-2' }}
       </label>
     </div>
@@ -54,7 +54,7 @@
     <div *ngIf="customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileage == true" class="col-6 md:col-6 field">
       <label class="font-medium text-2xl">{{'label_limited_mileage_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog' | translate}}</label>
       <label class="font-medium text-2xl">
-        {{'currency_brl_Generic' | translate}}
+        {{'currency_Generic' | translate}}
         {{ customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileageValue | number:'1.2-2' }}
       </label>
     </div>
@@ -100,7 +100,7 @@
       {{'label_cleaning_fee_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog' | translate}}
     </label>
     <label class="font-medium text-2xl ml-2 p-4">
-      {{'currency_brl_Generic' | translate}} {{ customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.cleaningFee | number:'1.2-2' }}
+      {{'currency_Generic' | translate}} {{ customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.cleaningFee | number:'1.2-2' }}
     </label>
     <div class="flex justify-content-center">
       <p-selectButton 
@@ -144,7 +144,7 @@
   <div class="col-6 md:col-6 field">
     <label class="font-medium text-2xl">{{ 'label_total_booking_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog' | translate }}</label>
     <label class="font-medium text-2xl" style="margin-left: 8px;">
-      {{ 'currency_brl_Generic' | translate }}
+      {{ 'currency_Generic' | translate }}
       {{ (customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalFinalBookingValue || customerVehicleBookingCustomerVehicleCheckOutDynamicDialogUIDTO.customerVehicleBooking.totalBookingValue) | number:'1.2-2' }}
     </label>
   </div>
