@@ -75,14 +75,14 @@ export class PaymentMethodSearchComponent implements OnInit {
       this.paymentMethodSearchUIDTO.delete_all_success_detail_message_service_Generic = translations['delete_all_success_detail_message_service_Generic'];
 
       // Traduções para os cabeçalhos das colunas da tabela de busca.
-      this.paymentMethodSearchUIDTO.table_header_payment_status_id_PaymentMethodSearch = translations['table_header_payment_status_id_PaymentMethodSearch'];
-      this.paymentMethodSearchUIDTO.table_header_payment_status_name_PaymentMethodSearch = translations['table_header_payment_status_name_PaymentMethodSearch'];
+      this.paymentMethodSearchUIDTO.table_header_payment_method_id_PaymentMethodSearch = translations['table_header_payment_method_id_PaymentMethodSearch'];
+      this.paymentMethodSearchUIDTO.table_header_payment_method_name_PaymentMethodSearch = translations['table_header_payment_method_name_PaymentMethodSearch'];
       this.paymentMethodSearchUIDTO.table_header_enabled_PaymentMethodSearch = translations['table_header_enabled_PaymentMethodSearch'];
 
       // Configura as colunas da tabela de resultados da busca.
       this.paymentMethodSearchUIDTO.columns = [
-        { field: 'paymentMethodId', header: this.paymentMethodSearchUIDTO.table_header_payment_status_id_PaymentMethodSearch },
-        { field: 'paymentMethodName', sortField: 'paymentMethodName', header: this.paymentMethodSearchUIDTO.table_header_payment_status_name_PaymentMethodSearch },
+        { field: 'paymentMethodId', header: this.paymentMethodSearchUIDTO.table_header_payment_method_id_PaymentMethodSearch },
+        { field: 'paymentMethodName', sortField: 'paymentMethodName', header: this.paymentMethodSearchUIDTO.table_header_payment_method_name_PaymentMethodSearch },
         { field: 'enabled', sortField: 'enabled', header: this.paymentMethodSearchUIDTO.table_header_enabled_PaymentMethodSearch },
         { header: '' },
       ];
@@ -124,8 +124,8 @@ export class PaymentMethodSearchComponent implements OnInit {
       'reject_label_message_service_Generic',
       'delete_all_success_summary_message_service_Generic',
       'delete_all_success_detail_message_service_Generic',
-      'table_header_payment_status_id_PaymentMethodSearch',
-      'table_header_payment_status_name_PaymentMethodSearch',
+      'table_header_payment_method_id_PaymentMethodSearch',
+      'table_header_payment_method_name_PaymentMethodSearch',
       'table_header_enabled_PaymentMethodSearch'
     ];
     return keys;

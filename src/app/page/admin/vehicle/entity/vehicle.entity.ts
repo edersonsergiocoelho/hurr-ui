@@ -1,6 +1,6 @@
 import { VehicleBrand } from "../../vehicle-brand/entity/vehicle-brand.entity";
 
-export interface Vehicle {
+export class Vehicle {
 
   vehicleId: string;
   vehicleName: string;

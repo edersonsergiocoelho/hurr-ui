@@ -35,8 +35,8 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
 
   @Input() selectedCustomerAddressPickUp: CustomerAddress | null;
   @Input() customerAddressPickUpValue: number | null;
-  
 
+  @Input() daysReservation: number;
   @Input() totalBookingValue: number;
 
   constructor(
@@ -65,6 +65,10 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
 
     if (simpleChanges['selectedCustomerAddressBilling']) {
       this.selectedCustomerAddressBilling = simpleChanges['selectedCustomerAddressBilling'].currentValue;
+    }
+
+    if (simpleChanges['daysReservation']) {
+      this.daysReservation = simpleChanges['daysReservation'].currentValue;
     }
 
     if (simpleChanges['totalBookingValue']) {
@@ -217,8 +221,8 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
 
             const metadataMap = new Map<string, any>();
             metadataMap.set('webhookAction', 'CUSTOMER_VEHICLE_BOOKING_PAYMENT');
-            metadataMap.set('customerVehicleId', this.checkOutMPUIDTO.customerVehicleId);
             metadataMap.set('customerId', this.customerId);
+            metadataMap.set('customerVehicleId', this.checkOutMPUIDTO.customerVehicleId);
             metadataMap.set('customerAddressBillingId', this.selectedCustomerAddressBilling.customerAddressId);
 
             if (this.selectedCustomerAddressDelivery != null) {
@@ -235,6 +239,8 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
             metadataMap.set('reservationStartTime', this.checkOutMPUIDTO.selectedHourInit);
             metadataMap.set('reservationEndDate', this.checkOutMPUIDTO.dateEnd);
             metadataMap.set('reservationEndTime', this.checkOutMPUIDTO.selectedHourEnd);
+            metadataMap.set('daysReservation', this.daysReservation);
+            metadataMap.set('dailyRate', this.checkOutMPUIDTO.customerVehicle.dailyRate);
             metadataMap.set('totalBookingValue', this.totalBookingValue);
             
             const metadataObject = Object.fromEntries(metadataMap);

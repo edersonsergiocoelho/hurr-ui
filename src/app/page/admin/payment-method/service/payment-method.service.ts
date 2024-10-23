@@ -87,7 +87,6 @@ export class PaymentMethodService {
     );
   }
 
-  // Novo método para deletar múltiplos registros
   deleteAll(paymentMethodIds: string[]): Observable<HttpResponse<void> | null> {
     const url = `${this.apiUrl}/all`;
     return this.httpClient.delete<void>(url, {

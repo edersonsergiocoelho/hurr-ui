@@ -113,14 +113,22 @@
 
           <ng-template pTemplate="selectedItem">
             <div class="flex align-items-center gap-2" *ngIf="homeSearchCarsDetailUIDTO.selectedVehicleBrand">
-              <img [src]="homeSearchCarsDetailUIDTO.selectedVehicleBrand.dataURI" style="width: 18px"/>
-              <div>{{ homeSearchCarsDetailUIDTO.selectedVehicleBrand.vehicleBrandName }}</div>
+              <img *ngIf="homeSearchCarsDetailUIDTO.selectedVehicleBrand.file != null" 
+                [src]="homeSearchCarsDetailUIDTO.selectedVehicleBrand.file.dataURI" 
+                style="width: 30px"/>
+              <div>
+                {{ homeSearchCarsDetailUIDTO.selectedVehicleBrand.vehicleBrandName }}
+              </div>
             </div>
           </ng-template>
           <ng-template let-vehicleBrand pTemplate="item">
             <div class="flex align-items-center gap-2">
-              <img [src]="vehicleBrand.dataURI" style="width: 18px"/>
-              <div>{{ vehicleBrand.vehicleBrandName }}</div>
+              <img *ngIf="vehicleBrand.file != null" 
+                [src]="vehicleBrand.file.dataURI" 
+                style="width: 30px"/>
+              <div>
+                {{ vehicleBrand.vehicleBrandName }}
+              </div>
             </div>
           </ng-template>
 
@@ -258,9 +266,9 @@
                       {{'limited_mileage_HomeSearchCarsDetail' | translate}}
                     </p>
 
-                    <ng-container *ngIf="item?.vehicle?.vehicleBrand?.dataURI; else noBrandImage">
-                      <img [src]="item.vehicle.vehicleBrand.dataURI" alt="Vehicle Brand Image"
-                        class="absolute border-round-lg mt-0 mb-0 px-2 py-1 md:w-5rem md:h-4rem" style="top: -320%; left: 80%;">
+                    <ng-container *ngIf="item?.vehicle?.vehicleBrand?.file?.dataURI; else noBrandImage">
+                      <img [src]="item.vehicle.vehicleBrand.file.dataURI" alt="Vehicle Brand Image"
+                        class="absolute border-round-lg mt-0 mb-0 px-2 py-1 md:w-5rem md:h-4rem" style="top: 0; right: 0;">
                     </ng-container>
                     
                     <ng-template #noBrandImage>

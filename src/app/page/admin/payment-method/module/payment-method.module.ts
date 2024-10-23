@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { PaymentMethodRoutingModule } from './payment-method-routing.module';
+// Componentes
 import { PaymentMethodComponent } from '../ui/payment-method/payment-method.component';
 import { PaymentMethodSearchComponent } from '../ui/payment-method-search/payment-method-search.component';
 import { PaymentMethodRegisterComponent } from '../ui/payment-method-register/payment-method-register.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// Roteamento
+import { PaymentMethodRoutingModule } from './payment-method-routing.module';
 
 // Módulos do PrimeNG
 import { ButtonModule } from 'primeng/button';

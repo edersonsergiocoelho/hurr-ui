@@ -1,0 +1,10 @@
+{
+  "title_VehicleBrandSearch": "Search Vehicle Brand",
+  "label_vehicle_brand_name_VehicleBrandSearch": "Vehicle Brand Name",
+  "placeholder_vehicle_brand_name_VehicleBrandSearch": "Enter Vehicle Brand Name",
+
+  "table_caption_title_VehicleBrandSearch": "Vehicle Brand",
+  "table_header_vehicle_brand_id_VehicleBrandSearch": "ID",
+  "table_header_vehicle_brand_name_VehicleBrandSearch": "Name",
+  "table_header_enabled_VehicleBrandSearch": "Enabled?"
+}

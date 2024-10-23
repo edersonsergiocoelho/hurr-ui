@@ -23,7 +23,7 @@ export class PaymentMethodSearchUIDTO extends TranslateConfirmServiceDTO {
   enabledValue: string = 'ALL';
 
   // Mensagens - Tradução
-  table_header_payment_status_id_PaymentMethodSearch: string;
-  table_header_payment_status_name_PaymentMethodSearch: string;
+  table_header_payment_method_id_PaymentMethodSearch: string;
+  table_header_payment_method_name_PaymentMethodSearch: string;
   table_header_enabled_PaymentMethodSearch: string;
 }

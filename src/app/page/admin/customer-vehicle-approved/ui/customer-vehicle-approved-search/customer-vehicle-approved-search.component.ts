@@ -98,7 +98,7 @@ export class CustomerVehicleApprovedSearchComponent implements OnInit {
 
     try {
 
-      const vehicleBrandServiceFindAll = await firstValueFrom(this.vehicleBrandService.getAllVehicleBrands().pipe(first()));
+      const vehicleBrandServiceFindAll = await firstValueFrom(this.vehicleBrandService.findAll().pipe(first()));
 
       if (vehicleBrandServiceFindAll.status == 200) {
         if (vehicleBrandServiceFindAll.body != null && vehicleBrandServiceFindAll.body.length > 0) {

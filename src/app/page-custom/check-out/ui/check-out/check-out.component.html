@@ -283,7 +283,7 @@
               </span>
               <span class="text-900">
                 {{'currency_Generic' | translate}} 
-                {{ checkoutUIDTO.customerVehicle.dailyRate | number:'1.2-2' }} x {{ checkoutUIDTO.days }} 
+                {{ checkoutUIDTO.customerVehicle.dailyRate | number:'1.2-2' }} x {{ checkoutUIDTO.daysReservation }} 
                 {{'days_Cart_CheckOut' | translate }}
               </span>
             </div>
@@ -322,6 +322,7 @@
               [selectedCustomerAddressDelivery]="checkoutUIDTO.selectedCustomerAddressDelivery || null"
               [selectedCustomerAddressPickUp]="checkoutUIDTO.selectedCustomerAddressPickUp || null"
               [selectedCustomerAddressBilling]="checkoutUIDTO.selectedCustomerAddressBilling || null"
+              [daysReservation]="checkoutUIDTO.daysReservation"
               [totalBookingValue]="checkoutUIDTO.totalBookingValue">
             </app-check-out-mp>
           </ng-container>

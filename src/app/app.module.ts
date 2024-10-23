@@ -144,7 +144,12 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/user-role/user-role/',
   '/assets/i18n/user-role/user-role-edit-role/',
   '/assets/i18n/user-role/user-role-register/',
-  '/assets/i18n/user-role/user-role-search/'
+  '/assets/i18n/user-role/user-role-search/',
+
+  // VehicleBrand
+  '/assets/i18n/vehicle-brand/vehicle-brand/',
+  '/assets/i18n/vehicle-brand/vehicle-brand-register/',
+  '/assets/i18n/vehicle-brand/vehicle-brand-search/',
   ]);
 }
 

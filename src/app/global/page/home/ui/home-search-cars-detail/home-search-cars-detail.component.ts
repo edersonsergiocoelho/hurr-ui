@@ -116,14 +116,18 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
       this.loadHoursInit();
 
       const [vehicleBrandServiceFindAll, vehicleCategoryServiceFindAll] = await Promise.all([
-        firstValueFrom(this.vehicleBrandService.getAllVehicleBrands().pipe(first())), // Obtém todas as marcas de veículos.
+        firstValueFrom(this.vehicleBrandService.findAll().pipe(first())), // Obtém todas as marcas de veículos.
         firstValueFrom(this.vehicleCategoryService.getAllVehicleCategories().pipe(first())) // Obtém todas as categorias de veículos.
       ]);
 
       if (vehicleBrandServiceFindAll.status == 200 && vehicleBrandServiceFindAll.body != null) {
         this.homeSearchCarsDetailUIDTO.vehicleBrands = vehicleBrandServiceFindAll.body; // Define as marcas de veículos no DTO.
 
-        await Promise.all(this.homeSearchCarsDetailUIDTO.vehicleBrands.map(vehicle => this.getFile(vehicle))); // Obtém a foto para cada marca de veículo.
+        for (const vehicleBrand of this.homeSearchCarsDetailUIDTO.vehicleBrands) {
+          if (vehicleBrand.file != null) {
+            vehicleBrand.file.dataURI = `data:${vehicleBrand.file.contentType};base64,${vehicleBrand.file.dataAsByteArray}`; // Define o URI dos dados para a foto
+          }
+        }
       }
   
       if (vehicleCategoryServiceFindAll.status == 200 && vehicleCategoryServiceFindAll.body != null) {
@@ -289,35 +293,6 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
             // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI ao veículo.
             vehicleBrand.file = fileServiceFindById.body;
             vehicleBrand.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
-        }
-      }
-
-    } catch (error: any) {
-      // Se ocorrer um erro, exibe uma mensagem de erro.
-      if (error.status === 500) {
-        this.messageService.add({ 
-          severity: SeverityConstants.ERROR, 
-          summary: '' + this.homeSearchCarsDetailUIDTO.error_summary_message_service_Generic, 
-          detail: error.error.message 
-        });
-      }
-    }
-  }
-
-  // Função assíncrona que busca o arquivo associado a uma marca de veículo em um veículo de cliente.
-  async getFileVehicleBrandFromCustomerVehicle(customerVehicle: any) {
-
-    try {
-      // Verifica se o veículo de cliente tem um ID de arquivo para a marca do veículo.
-      if (customerVehicle.vehicle.vehicleBrand.fileId != null) {
-        // Solicita ao serviço o arquivo com base no ID.
-        const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicle.vehicle.vehicleBrand.fileId).pipe(first()));
-        
-        if (fileServiceFindById.status == 200 &&
-          fileServiceFindById.body != null) {
-          // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI à marca do veículo do cliente.
-          customerVehicle.vehicle.vehicleBrand.file = fileServiceFindById.body;
-          customerVehicle.vehicle.vehicleBrand.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
         }
       }
 
@@ -527,7 +502,11 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
       await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getReview(customerVehicle)));
 
       // Busca e processa os arquivos associados à marca dos veículos.
-      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleBrandFromCustomerVehicle(customerVehicle)));
+      for (const customerVehicle of this.homeSearchCarsDetailUIDTO.customerVehicles) {
+        if (customerVehicle.vehicle.vehicleBrand.file != null) {
+          customerVehicle.vehicle.vehicleBrand.file.dataURI = `data:${customerVehicle.vehicle.vehicleBrand.file.contentType};base64,${customerVehicle.vehicle.vehicleBrand.file.dataAsByteArray}`; // Define o URI dos dados para a foto
+        }
+      }
 
       // Busca e processa os arquivos associados à categoria dos veículos.
       await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleCategoryFromCustomerVehicle(customerVehicle)));

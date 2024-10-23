@@ -18,14 +18,10 @@ export class CheckOutUIDTO extends TranslateSeverityDTO {
   selectedCustomerAddressBilling: CustomerAddress | null;
 
   //
-  days: number;
-  //dailyRateFormat: string;
+  daysReservation: number;
   deliveryCost: number | null;
-  //deliveryCostFormat: string | null;
   pickUpCost: number | null;
-  //pickUpCostFormat: string | null;
   totalBookingValue: number;
-  //totalBookingValueFormat: string;
 
   // State
   customerVehicleId: string;

@@ -118,7 +118,7 @@ export class CheckOutComponent implements OnInit {
             this.checkoutUIDTO.customerVehicle = customerVehicleServiceFindById.body;
 
             this.checkoutUIDTO.totalBookingValue = this.rateUtilsService.calculateTotalRate(this.checkoutUIDTO.dateInit, this.checkoutUIDTO.dateEnd, this.checkoutUIDTO.customerVehicle.dailyRate);
-            this.checkoutUIDTO.days = this.momentUtilsService.diffDays(this.checkoutUIDTO.dateInit, this.checkoutUIDTO.dateEnd);
+            this.checkoutUIDTO.daysReservation = this.momentUtilsService.diffDays(this.checkoutUIDTO.dateInit, this.checkoutUIDTO.dateEnd);
         }
 
         if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status === 200 && customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
