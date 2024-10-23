@@ -13,6 +13,7 @@ import { Menu } from 'src/app/page/admin/menu/entity/menu.entity';
 import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
 import { CustomerVehicleService } from '../../../customer-vehicle/service/customer-vehicle.service';
 import { Router } from '@angular/router';
+import { ThemeService } from 'src/app/global/template/theme/service/theme.service';
 
 @Component({
   selector: 'app-home',
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
     private ngxSpinnerService: NgxSpinnerService, // Serviço para exibir um spinner de carregamento
     private sessionStorageService: SessionStorageService, // Serviço para manipular a sessão de armazenamento
     private translateService: TranslateService, // Serviço para manipular traduções
+    private themeService: ThemeService,
     private router: Router
   ) {
     this.homeUIDTO = new HomeUIDTO(); // Inicializa o DTO (Data Transfer Object) para armazenar dados da UI
@@ -64,9 +66,16 @@ export class HomeComponent implements OnInit {
     const currentUserPreference = this.sessionStorageService.getUserPreference();
 
     if (currentUserPreference != null) {
-      this.translateService.setDefaultLang(currentUserPreference.language);
+      if (currentUserPreference.language != null) {
+        this.translateService.setDefaultLang(currentUserPreference.language);
+      }
+
+      if (currentUserPreference.theme != null) {
+        this.themeService.switchTheme(currentUserPreference.theme);
+      }
     } else {
       this.translateService.setDefaultLang('pt_BR');
+      this.themeService.switchTheme("lara-light-purple");
     }
 
     this.resetForm(); // Reseta o formulário após a inicialização

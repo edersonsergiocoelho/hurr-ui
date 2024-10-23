@@ -106,8 +106,7 @@ export class UserPreferenceContentComponent implements OnInit {
         }
       }
 
-    } catch (error: any) {
-      debugger
+    } catch (error: any) {    
       // Exibe uma mensagem de erro caso ocorra uma falha ao carregar as traduções.
       this.messageService.add({
         severity: SeverityConstants.ERROR,

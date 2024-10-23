@@ -13,6 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthSignInDTO } from 'src/app/core/auth/dto/auth-sign-in-dto.dto';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
 import { UserPreferenceService } from 'src/app/page/admin/user-preference/service/user-preference.service';
+import { ThemeService } from 'src/app/global/template/theme/service/theme.service';
 
 @Component({
   selector: 'app-user-login',
@@ -40,6 +41,7 @@ export class UserLoginComponent {
     private router: Router,
     private sessionStorageService: SessionStorageService,
     private translateService: TranslateService,
+    private themeService: ThemeService,
     private userService: UserService,
     private userPreferenceService: UserPreferenceService,
     private messageService: MessageService,
@@ -158,6 +160,22 @@ export class UserLoginComponent {
       next: (userPreferences: any) => {
         // Salva as preferências do usuário no sessionStorage
         this.sessionStorageService.saveUserPreference(userPreferences.body);
+
+        const currentUserPreference = this.sessionStorageService.getUserPreference();
+
+        if (currentUserPreference != null) {
+          if (currentUserPreference.language != null) {
+            this.translateService.setDefaultLang(currentUserPreference.language);
+          }
+    
+          if (currentUserPreference.theme != null) {
+            this.themeService.switchTheme(currentUserPreference.theme);
+          }
+        } else {
+          this.translateService.setDefaultLang('pt_BR');
+          this.themeService.switchTheme("lara-light-purple");
+        }
+
       },
       error: (error) => {
         this.messageService.add({ 
