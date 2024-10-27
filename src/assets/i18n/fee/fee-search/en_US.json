@@ -1,0 +1,10 @@
+{
+  "title_FeeSearch": "Search Fees",
+  "label_payment_status_name_FeeSearch": "Fee Name",
+  "placeholder_payment_status_name_FeeSearch": "Enter Fee Name",
+  
+  "table_caption_title_FeeSearch": "Fees",
+  "table_header_payment_status_id_FeeSearch": "ID",
+  "table_header_payment_status_name_FeeSearch": "Name",
+  "table_header_enabled_FeeSearch": "Enabled?"
+}

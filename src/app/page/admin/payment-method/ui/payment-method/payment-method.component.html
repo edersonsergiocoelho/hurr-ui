@@ -1,11 +1,11 @@
 <!-- Tela Componetizada -->
 <div class="ui-fluid">
-  <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_PaymentMethod' | translate}}</h1>
+  <h1 id="divH1" class="bg-indigo-500 text-white mr-2 ml-2">{{'title_PaymentMethod' | translate}}</h1>
 
-  <div class="grid" style="padding-top: 10px;">
+  <div class="grid mr-2 ml-2">
 
     <!-- Tela De Pesquisa -->
-    <div class="md:col-6 mb-2" [ngClass]="{'hidden': sidebarSearchVisible}">
+    <div class="md:col-6" [ngClass]="{'hidden': sidebarSearchVisible}">
       <div class="card no-margin bordered-card">
         <!-- Usando flexbox para alinhar o botão à direita -->
         <div class="flex justify-content-end">
@@ -20,7 +20,7 @@
     </div>
 
     <!-- Tela De Registro -->
-    <div class="md:col-6 mb-2" [ngClass]="{'hidden': sidebarRegisterVisible}">
+    <div class="md:col-6" [ngClass]="{'hidden': sidebarRegisterVisible}">
       <div class="card no-margin bordered-card">
         <!-- Usando flexbox para alinhar o botão à direita -->
         <div class="flex justify-content-end">

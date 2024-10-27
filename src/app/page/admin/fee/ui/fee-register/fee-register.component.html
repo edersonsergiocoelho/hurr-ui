@@ -1,0 +1,133 @@
+<!-- Formulário De Registro -->
+<form novalidate #feeRegisterForm="ngForm" (ngSubmit)="ngSubmit()">
+  <h2 id="divH2" class="bg-indigo-500 text-white">{{'title_FeeRegister' | translate}}</h2>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="feeId" [ngClass]="labelSize">{{'label_payment_status_id_FeeRegister' | translate}}</label>
+      <input id="feeId" type="text" pInputText 
+        placeholder="{{'placeholder_payment_status_id_FeeRegister' | translate}}" 
+        [(ngModel)]="feeRegisterUIDTO.feeDTO.feeId" name="feeId" autocomplete="off" disabled />
+    </div>
+
+    <div class="col-6 md:col-6 field" [ngClass]="inputSize">
+      <label for="providerUserId" [ngClass]="labelSize">
+        {{'label_fee_type_FeeRegister' | translate}}
+      </label>
+      <p-dropdown 
+        [ngClass]="inputSize" 
+        [options]="feeRegisterUIDTO.feeTypes" 
+        [(ngModel)]="feeRegisterUIDTO.selectedFeeType" 
+        [showClear]="true" 
+        name="feeType"
+        [filter]="true"
+        filterBy="name" 
+        optionLabel="name" 
+        placeholder="{{ 'placeholder_fee_type_FeeRegister' | translate }}">
+      </p-dropdown>
+    </div>
+
+    <div class="col-6 md:col-6 field" [ngClass]="inputSize">
+      <label for="amount" [ngClass]="labelSize">{{'label_amount_FeeRegister' | translate}}
+      </label>
+      <p-inputNumber type="text" 
+        placeholder="{{'placeholder_amount_FeeRegister' | translate}}"
+        [(ngModel)]="feeRegisterUIDTO.feeDTO.amount" name="amount"
+        autocomplete="off" mode="decimal" [minFractionDigits]="2" />
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="startDate" [ngClass]="labelSize">{{'label_start_date_FeeRegister' | translate}}</label>
+      <p-calendar [(ngModel)]="feeRegisterUIDTO.feeDTO.startDate" 
+        placeholder="{{'placeholder_start_date_FeeRegister' | translate}}"
+        name="startDate" dateFormat="dd/mm/yy" [required]="true">
+      </p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="endDate" [ngClass]="labelSize">{{'label_end_date_FeeRegister' | translate}}</label>
+      <p-calendar 
+        placeholder="{{'placeholder_end_date_FeeRegister' | translate}}"
+        [(ngModel)]="feeRegisterUIDTO.feeDTO.endDate" name="endDate" dateFormat="dd/mm/yy" [required]="true">
+      </p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="createdDate" [ngClass]="labelSize">{{'label_created_date_FeeRegister' | translate}}</label>
+      <p-calendar [(ngModel)]="feeRegisterUIDTO.feeDTO.createdDate" 
+        placeholder="{{'placeholder_created_date_FeeRegister' | translate}}"
+        name="createdDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="modifiedDate" [ngClass]="labelSize">{{'label_modified_date_FeeRegister' | translate}}</label>
+      <p-calendar 
+        placeholder="{{'placeholder_modified_date_FeeRegister' | translate}}"
+        [(ngModel)]="feeRegisterUIDTO.feeDTO.modifiedDate" name="modifiedDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize" style="display: flex; flex-direction: column;">
+      <label for="enabled" [ngClass]="labelSize">{{'label_enabled_FeeRegister' | translate}}</label>
+      <p-inputSwitch [(ngModel)]="feeRegisterUIDTO.feeDTO.enabled" 
+        name="enabled">
+      </p-inputSwitch>
+      <small id="enabled">{{'small_enabled_Generic' | translate}}</small>
+    </div>
+
+    <div class="col-12 flex flex-row justify-content-left py-0">
+
+      <div *ngIf="feeRegisterUIDTO?.feeDTO?.feeId" class="md:col-3 mt-4 pt-1 field" >
+        <button pButton pRipple 
+          type="button"
+          class="p-ripple p-element p-button p-component p-button-contrast p-button-rounded md:w-10rem"
+          (click)="resetRegisterForm()">
+          <i class="pi pi-file"></i>
+          <span class="p-button-label">
+            {{'span_button_label_new_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="feeRegisterUIDTO?.feeDTO?.feeId == null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton pRipple 
+          type="submit" 
+          class="p-button-rounded p-button-success md:w-10rem"
+          [disabled]="feeRegisterForm.invalid">
+          <i class="pi pi-save"></i>
+          <span class="p-button-label">
+            {{'span_button_label_save_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="feeRegisterUIDTO?.feeDTO?.feeId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton pRipple 
+          class="p-button-rounded p-button-info md:w-10rem"
+          type="button"
+          (click)="update()"
+          [disabled]="feeRegisterForm.invalid">
+          <i class="pi pi-file-edit"></i>
+          <span class="p-button-label">
+            {{'span_button_label_update_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="feeRegisterUIDTO?.feeDTO?.feeId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton pRipple 
+          class="p-button-rounded p-button-danger md:w-10rem"
+          type="button"
+          (click)="delete(null)"
+          [disabled]="feeRegisterForm.invalid">
+          <i class="pi pi-times"></i>
+          <span class="p-button-label">
+            {{'span_button_label_delete_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</form>

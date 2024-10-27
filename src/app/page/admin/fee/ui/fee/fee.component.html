@@ -1,6 +1,6 @@
 <!-- Tela Componetizada -->
 <div class="ui-fluid">
-  <h1 id="divH1" class="bg-indigo-500 text-white mr-2 ml-2">{{'title_PaymentStatus' | translate}}</h1>
+  <h1 id="divH1" class="bg-indigo-500 text-white mr-2 ml-2">{{'title_Fee' | translate}}</h1>
 
   <div class="grid mr-2 ml-2">
 
@@ -15,7 +15,7 @@
             <i class="pi pi-window-maximize"></i>
           </button>
         </div>
-        <app-payment-status-search (editRow)="onRowSelectEdit($event)" (deleteRow)="delete($event)"></app-payment-status-search>
+        <app-fee-search (editRow)="onRowSelectEdit($event)" (deleteRow)="delete($event)"></app-fee-search>
       </div>
     </div>
 
@@ -30,7 +30,7 @@
             <i class="pi pi-window-maximize"></i>
           </button>
         </div>
-        <app-payment-status-register (rowModified)="search()"></app-payment-status-register>
+        <app-fee-register (rowModified)="search()"></app-fee-register>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@
       </span>
     </button>
     <!-- Conteúdo do Sidebar -->
-    <app-payment-status-search (rowModified)="search()"></app-payment-status-search>
+    <app-fee-search (rowModified)="search()"></app-fee-search>
   </p-sidebar>
 
   <p-sidebar [(visible)]="sidebarRegisterVisible" [fullScreen]="true" [baseZIndex]="10000">
@@ -60,6 +60,6 @@
       </span>
     </button>
     <!-- Conteúdo do Sidebar -->
-    <app-payment-status-register (rowModified)="search()"></app-payment-status-register>
+    <app-fee-register (rowModified)="search()"></app-fee-register>
   </p-sidebar>
 </div>

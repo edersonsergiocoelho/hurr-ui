@@ -1,26 +1,35 @@
 <!-- Formulário De Pesquisa -->
-<form #bankSearchForm="ngForm" (ngSubmit)="search($event)">
+<form #feeSearchForm="ngForm" (ngSubmit)="search($event)">
   <!-- Seção De Pesquisa -->
-  <h2 id="divH2" class="bg-indigo-500 text-white">{{'title_BankSearch' | translate}}</h2>
+  <h2 id="divH2" class="bg-indigo-500 text-white">{{'title_FeeSearch' | translate}}</h2>
 
   <div class="grid p-fluid form-group">
 
-    <!-- Campo Nome -->
-    <div class="col-12 md:col-12 field" [ngClass]="inputSize">
-      <label for="bankName" [ngClass]="labelSize">{{'label_bank_name_BankSearch' | translate}}</label>
-      <input type="text" pInputText
-        placeholder="{{'placeholder_bank_name_BankSearch' | translate}}"
-        [(ngModel)]="bankSearchUIDTO.bankSearchDTO.bankName" 
-        name="bankName"/>
+    <!-- Campo Tipo De Taxa -->
+    <div class="col-6 md:col-6 field" [ngClass]="inputSize">
+      <label for="providerUserId" [ngClass]="labelSize">
+        {{'label_fee_type_FeeRegister' | translate}}
+      </label>
+      <p-dropdown 
+        [ngClass]="inputSize" 
+        [options]="feeSearchUIDTO.feeTypes" 
+        [(ngModel)]="feeSearchUIDTO.selectedFeeType" 
+        [showClear]="true" 
+        name="feeType"
+        [filter]="true"
+        filterBy="name" 
+        optionLabel="name" 
+        placeholder="{{ 'placeholder_fee_type_FeeRegister' | translate }}">
+      </p-dropdown>
     </div>
 
-        <!-- Campo Enabled -->
+    <!-- Campo Enabled -->
     <div class="col-12 md:col-12 field">
       <div class="card flex justify-content-end" [ngClass]="inputSize">
-        <p-selectButton [options]="bankSearchUIDTO.enabledOptions" 
+        <p-selectButton [options]="feeSearchUIDTO.enabledOptions" 
           class="p-button-rounded mr-3 md:w-10rem" 
           (onChange)="onChangeEnabled($event)" 
-          [(ngModel)]="bankSearchUIDTO.enabledValue" 
+          [(ngModel)]="feeSearchUIDTO.enabledValue" 
           optionLabel="label" 
           optionValue="value"
           name="enabled">
@@ -69,7 +78,7 @@
           icon="pi pi-trash" 
           class="p-button-danger p-button-rounded mr-3" 
           (click)="deleteSelectedRows()" 
-          [disabled]="!bankSearchUIDTO.selectedBank || !bankSearchUIDTO.selectedBank.length">
+          [disabled]="!feeSearchUIDTO.selectedFee || !feeSearchUIDTO.selectedFee.length">
         </button>
         <button pButton pRipple 
           label="{{'span_button_label_export_Generic' | translate}}" 
@@ -90,7 +99,7 @@
           <i class="pi pi-search"></i>
           <input pInputText 
             type="text" 
-            [(ngModel)]="bankSearchUIDTO.globalFilter" 
+            [(ngModel)]="feeSearchUIDTO.globalFilter" 
             name="globalFilter" 
             (input)="dt.filterGlobal(getInputValueWithWildcards($event), 'contains')" 
             placeholder="{{'placeholder_global_filter_Generic' | translate}}"
@@ -101,24 +110,24 @@
 
     <p-table 
       #dt
-      [columns]="bankSearchUIDTO.columns" 
-      [value]="bankSearchUIDTO.bankes"
-      [(selection)]="bankSearchUIDTO.selectedBank"
-      dataKey="bankId" 
+      [columns]="feeSearchUIDTO.columns" 
+      [value]="feeSearchUIDTO.feees"
+      [(selection)]="feeSearchUIDTO.selectedFee"
+      dataKey="feeId" 
       [style]="{'margin-bottom':'20px'}"
       [responsive]="true"
       [resizableColumns]="true" columnResizeMode="expand" 
-      sortField="bankName" [sortOrder]="-1"
+      sortField="feeType" [sortOrder]="-1"
       [rows]="10" [showCurrentPageReport]="true" 
       [paginator]="true" [scrollable]="true"
-      [totalRecords]="bankSearchUIDTO.totalRecords" [lazy]="true" 
+      [totalRecords]="feeSearchUIDTO.totalRecords" [lazy]="true" 
       currentPageReportTemplate="{{'table_current_page_report_template_showing_Generic' | translate}} {first} {{'table_current_page_report_template_to_Generic' | translate}} {last} {{'table_current_page_report_template_of_Generic' | translate}} {totalRecords} {{'table_current_page_report_template_records_Generic' | translate}}"
       [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
       (onLazyLoad)="search($event)" 
       (onPage)="paginate($event)">
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
-          <h3 class="m-0">{{'table_caption_title_BankSearch' | translate}}</h3>
+          <h3 class="m-0">{{'table_caption_title_FeeSearch' | translate}}</h3>
         </div>
       </ng-template>
       <ng-template pTemplate="header" let-columns>
@@ -126,7 +135,7 @@
           <th style="width: 4rem">
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
-          <th *ngFor="let column of bankSearchUIDTO.columns" pResizableColumn [pSortableColumn]="column.sortField" [ngStyle]="{'width': column.width, 'text-align': 'left'}">
+          <th *ngFor="let column of feeSearchUIDTO.columns" pResizableColumn [pSortableColumn]="column.sortField" [ngStyle]="{'width': column.width, 'text-align': 'left'}">
             {{column.header}}
             <p-sortIcon *ngIf="column.sortField" [field]="column.sortField"></p-sortIcon>
           </th>
@@ -138,13 +147,13 @@
             <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
           </td>
           <td class="text-left">
-            {{rowData.bankId}}
+            {{rowData.feeId}}
           </td>
           <td class="text-left">
-            {{rowData.bankName}}
+            {{rowData.feeType}}
           </td>
           <td class="text-left">
-            {{rowData.enabled | boolean | async}}
+            {{rowData.enabled | boolean | async }}
           </td>
           <td>
             <button pButton pRipple 
@@ -169,7 +178,7 @@
       </ng-template>
       <ng-template pTemplate="summary">
         <div class="flex align-items-center justify-content-between">
-            {{ 'table_summary_total_items_message' | translate:{ total: bankSearchUIDTO.bankes ? bankSearchUIDTO.bankes.length : 0 } }}
+            {{ 'table_summary_total_items_message' | translate:{ total: feeSearchUIDTO.feees ? feeSearchUIDTO.feees.length : 0 } }}
         </div>
       </ng-template>
     </p-table>

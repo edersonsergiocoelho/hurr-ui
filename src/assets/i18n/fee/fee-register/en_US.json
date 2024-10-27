@@ -1,0 +1,22 @@
+{
+  "title_FeeRegister": "Fee Registration",
+  "label_payment_status_id_FeeRegister": "Fee ID",
+  "placeholder_payment_status_id_FeeRegister": "Enter Fee ID",
+  "label_fee_type_FeeRegister": "Fee Type",
+  "placeholder_fee_type_FeeRegister": "Enter Fee Type",
+  "label_amount_FeeRegister": "Fee Amount",
+  "placeholder_amount_FeeRegister": "Enter Fee Amount",
+  "label_start_date_FeeRegister": "Start Date",
+  "placeholder_start_date_FeeRegister": "Select Start Date",
+  "label_end_date_FeeRegister": "End Date",
+  "placeholder_end_date_FeeRegister": "Select End Date",
+  "label_created_date_FeeRegister": "Creation Date",
+  "placeholder_created_date_FeeRegister": "Select Creation Date",
+  "label_modified_date_FeeRegister": "Modification Date",
+  "placeholder_modified_date_FeeRegister": "Select Modification Date",
+  "label_enabled_FeeRegister": "Enabled",
+
+  "save_success_message_service_FeeRegister": "Fee Successfully Registered",
+  "update_success_message_service_FeeRegister": "Fee Successfully Updated",
+  "delete_success_message_service_FeeRegister": "Fee Successfully Removed"
+}

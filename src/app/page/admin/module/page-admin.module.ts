@@ -9,6 +9,7 @@ import { PaymentStatusModule } from '../payment-status/module/payment-status.mod
 import { PaymentMethodModule } from '../payment-method/module/payment-method.module';
 import { BankModule } from '../bank/module/bank.module';
 import { UserPreferenceModule } from '../user-preference/module/user-preference.module';
+import { FeeModule } from '../fee/module/fee.module';
 
 @NgModule({
   declarations: [],
@@ -17,9 +18,10 @@ import { UserPreferenceModule } from '../user-preference/module/user-preference.
 
     BankModule,
     CustomerVehicleApprovedModule,
+    FeeModule,
+    FileApprovedModule,
     PaymentMethodModule,
     PaymentStatusModule,
-    FileApprovedModule,
     RoleModule,
     UserRoleModule,
     VehicleBrandModule
@@ -27,9 +29,10 @@ import { UserPreferenceModule } from '../user-preference/module/user-preference.
   exports: [
     BankModule,
     CustomerVehicleApprovedModule,
+    FeeModule,
+    FileApprovedModule,
     PaymentMethodModule,
     PaymentStatusModule,
-    FileApprovedModule,
     RoleModule,
     UserRoleModule,
     UserPreferenceModule,

@@ -63,6 +63,7 @@ export class HomeComponent implements OnInit {
       this.homeUIService.setCurrentUser(this.homeUIDTO.currentUser);
     }
 
+    /*
     const currentUserPreference = this.sessionStorageService.getUserPreference();
 
     if (currentUserPreference != null) {
@@ -77,6 +78,7 @@ export class HomeComponent implements OnInit {
       this.translateService.setDefaultLang('pt_BR');
       this.themeService.switchTheme("lara-light-purple");
     }
+    */
 
     this.resetForm(); // Reseta o formulário após a inicialização
   }

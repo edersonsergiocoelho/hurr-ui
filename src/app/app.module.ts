@@ -104,6 +104,11 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/earnings/earnings-customer-vehicle-withdrawal-request/',
   '/assets/i18n/earnings/earnings-resume/',
 
+  // Fee
+  '/assets/i18n/fee/fee/',
+  '/assets/i18n/fee/fee-search/',
+  '/assets/i18n/fee/fee-register/',
+
   // FileApproved
   '/assets/i18n/file-approved/file-approved/',
   '/assets/i18n/file-approved/file-approved-detail/',

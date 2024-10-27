@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { PaymentStatusDTO } from '../../dto/payment-status-dto.dto';
 import { PaymentStatusSearchComponent } from '../payment-status-search/payment-status-search.component';
 import { PaymentStatusRegisterComponent } from '../payment-status-register/payment-status-register.component';
 
