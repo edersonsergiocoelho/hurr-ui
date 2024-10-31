@@ -132,6 +132,16 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
   
       if (vehicleCategoryServiceFindAll.status == 200 && vehicleCategoryServiceFindAll.body != null) {
         this.homeSearchCarsDetailUIDTO.vehicleCategorys = vehicleCategoryServiceFindAll.body; // Define as categorias de veículos no DTO.
+
+        // Processa cada registro para preencher o campo dataURI.
+          this.homeSearchCarsDetailUIDTO.vehicleCategorys.forEach((vehicleCategory: any) => {
+
+            if (vehicleCategory.file != null) {
+
+              vehicleCategory.file.dataURI = 
+              `data:${vehicleCategory.file.contentType};base64,${vehicleCategory.file.dataAsByteArray}`;
+            }
+        });
       }
 
       await this.search(null);
@@ -239,6 +249,22 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
             date1.getDate() === date2.getDate();
   }
 
+  getVehicleColorStyle(vehicleColorName: string): string {
+    switch(vehicleColorName.toLowerCase()) {
+      case 'preto': return '#000000';
+      case 'branco': return '#FFFFFF';
+      case 'prata': return '#C0C0C0';
+      case 'cinza': return '#808080';
+      case 'vermelho': return '#FF0000';
+      case 'azul': return '#0000FF';
+      case 'amarelo': return '#FFFF00';
+      case 'verde': return '#008000';
+      case 'marrom': return '#A52A2A';
+      case 'bege': return '#F5F5DC';
+      default: return '#D3D3D3';  // Cor padrão para cores não mapeadas
+    }
+  }
+
   initializeMap() {
     // Inicializa o mapa com o zoom e centro definidos no DTO.
     this.homeSearchCarsDetailUIDTO.map = new google.maps.Map(document.getElementById('map') as HTMLElement,  {
@@ -308,93 +334,6 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
     }
   }
 
-  // Função assíncrona que busca o arquivo associado a uma categoria de veículo em um veículo de cliente.
-  async getFileVehicleCategoryFromCustomerVehicle(customerVehicle: any) {
-
-    try {
-      // Verifica se o veículo de cliente tem um ID de arquivo para a categoria do veículo.
-      if (customerVehicle.vehicleModel.vehicleCategory.fileId != null) {
-        // Solicita ao serviço o arquivo com base no ID.
-        const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicle.vehicleModel.vehicleCategory.fileId).pipe(first()));
-        
-        if (fileServiceFindById.status == 200 &&
-          fileServiceFindById.body != null) {
-          // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI à categoria do veículo do cliente.
-          customerVehicle.vehicleModel.vehicleCategory.file = fileServiceFindById.body;
-          customerVehicle.vehicleModel.vehicleCategory.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
-        }
-      }
-
-    } catch (error: any) {
-      // Se ocorrer um erro, exibe uma mensagem de erro.
-      if (error.status === 500) {
-        this.messageService.add({ 
-          severity: SeverityConstants.ERROR, 
-          summary: '' + this.homeSearchCarsDetailUIDTO.error_summary_message_service_Generic, 
-          detail: error.error.message 
-        });
-      }
-    }
-  }
-
-  // Função assíncrona que busca o arquivo associado a um tipo de combustível de veículo em um veículo de cliente.
-  async getFileVehicleFuelTypeFromCustomerVehicle(customerVehicle: any) {
-
-    try {
-      // Verifica se o veículo de cliente tem um ID de arquivo para o tipo de combustível.
-      if (customerVehicle.vehicleFuelType.fileId != null) {
-        // Solicita ao serviço o arquivo com base no ID.
-        const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicle.vehicleFuelType.fileId).pipe(first()));
-        
-        if (fileServiceFindById.status == 200 &&
-          fileServiceFindById.body != null) {
-          // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI ao tipo de combustível do veículo do cliente.
-          customerVehicle.vehicleFuelType.file = fileServiceFindById.body;
-          customerVehicle.vehicleFuelType.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
-        }
-      }
-
-    } catch (error: any) {
-      // Se ocorrer um erro, exibe uma mensagem de erro.
-      if (error.status === 500) {
-        this.messageService.add({ 
-          severity: SeverityConstants.ERROR, 
-          summary: '' + this.homeSearchCarsDetailUIDTO.error_summary_message_service_Generic, 
-          detail: error.error.message 
-        });
-      }
-    }
-  }
-
-  // Função assíncrona que busca o arquivo associado a uma transmissão de veículo em um veículo de cliente.
-  async getFileVehicleTransmissionFromCustomerVehicle(customerVehicle: any) {
-
-    try {
-      // Verifica se o veículo de cliente tem um ID de arquivo para a transmissão do veículo.
-      if (customerVehicle.vehicleTransmission.fileId != null) {
-        // Solicita ao serviço o arquivo com base no ID.
-        const fileServiceFindById = await firstValueFrom(this.fileService.findById(customerVehicle.vehicleTransmission.fileId).pipe(first()));
-        
-        if (fileServiceFindById.status == 200 &&
-          fileServiceFindById.body != null) {
-          // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI à transmissão do veículo do cliente.
-          customerVehicle.vehicleTransmission.file = fileServiceFindById.body;
-          customerVehicle.vehicleTransmission.dataURI = `data:${fileServiceFindById.body.contentType};base64,${fileServiceFindById.body.dataAsByteArray}`;
-        }
-      }
-
-    } catch (error: any) {
-      // Se ocorrer um erro, exibe uma mensagem de erro.
-      if (error.status === 500) {
-        this.messageService.add({ 
-          severity: SeverityConstants.ERROR, 
-          summary: '' + this.homeSearchCarsDetailUIDTO.error_summary_message_service_Generic, 
-          detail: error.error.message 
-        });
-      }
-    }
-  }
-
   // Função assíncrona que é chamada quando um veículo é alterado.
   async onChangeVehicle(vehicle: Vehicle) {
 
@@ -440,6 +379,17 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
 
     // Cria um DTO de busca de veículos de cliente.
     let searchCustomerVehicle: CustomerVehicleSearchDTO = new CustomerVehicleSearchDTO();
+
+    searchCustomerVehicle.reservationStartDate = this.homeSearchCarsDetailUIDTO.dateInit;
+    searchCustomerVehicle.reservationEndDate = this.homeSearchCarsDetailUIDTO.dateEnd;
+
+    if (this.homeSearchCarsDetailUIDTO.selectedHourInit != null) {
+      searchCustomerVehicle.reservationStartTime = this.homeSearchCarsDetailUIDTO.selectedHourInit;
+    }
+
+    if (this.homeSearchCarsDetailUIDTO.selectedHourEnd != null) {
+      searchCustomerVehicle.reservationEndTime = this.homeSearchCarsDetailUIDTO.selectedHourEnd;
+    }
 
     // Define os parâmetros de busca com base na seleção atual.
     if (this.homeSearchCarsDetailUIDTO.selectedVehicle != null) {
@@ -501,21 +451,21 @@ export class HomeSearchCarsDetailComponent implements OnInit  {
       // Busca e processa as avaliações dos veículos.
       await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getReview(customerVehicle)));
 
-      // Busca e processa os arquivos associados à marca dos veículos.
-      for (const customerVehicle of this.homeSearchCarsDetailUIDTO.customerVehicles) {
-        if (customerVehicle.vehicle.vehicleBrand.file != null) {
-          customerVehicle.vehicle.vehicleBrand.file.dataURI = `data:${customerVehicle.vehicle.vehicleBrand.file.contentType};base64,${customerVehicle.vehicle.vehicleBrand.file.dataAsByteArray}`; // Define o URI dos dados para a foto
-        }
-      }
+      // Processa cada registro para preencher o campo dataURI.
+      this.homeSearchCarsDetailUIDTO.customerVehicles.forEach((customerVehicle: any) => {
 
-      // Busca e processa os arquivos associados à categoria dos veículos.
-      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleCategoryFromCustomerVehicle(customerVehicle)));
+        customerVehicle.vehicle.vehicleBrand.file.dataURI = 
+        `data:${customerVehicle.vehicle.vehicleBrand.file.contentType};base64,${customerVehicle.vehicle.vehicleBrand.file.dataAsByteArray}`;
 
-      // Busca e processa os arquivos associados ao tipo de combustível dos veículos.
-      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleFuelTypeFromCustomerVehicle(customerVehicle)));
+        customerVehicle.vehicleModel.vehicleCategory.file.dataURI = 
+          `data:${customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
 
-      // Busca e processa os arquivos associados à transmissão dos veículos.
-      await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(customerVehicle => this.getFileVehicleTransmissionFromCustomerVehicle(customerVehicle)));
+          customerVehicle.vehicleFuelType.file.dataURI = 
+          `data:${customerVehicle.vehicleFuelType.file.contentType};base64,${customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+
+          customerVehicle.vehicleTransmission.file.dataURI = 
+          `data:${customerVehicle.vehicleTransmission.file.contentType};base64,${customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+      });
   
       // Realiza a geocodificação dos endereços dos veículos.
       await Promise.all(this.homeSearchCarsDetailUIDTO.customerVehicles.map(vehicle => {

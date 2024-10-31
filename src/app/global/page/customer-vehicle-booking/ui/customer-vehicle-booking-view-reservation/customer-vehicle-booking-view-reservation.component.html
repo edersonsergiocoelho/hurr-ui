@@ -81,13 +81,13 @@
             </span>
 
             <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
-              <div style="display: flex; align-items: center;">
-                <ng-container *ngIf="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleModel?.vehicleCategory?.dataURI; else noCategory">
-                  <img [src]="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.dataURI" alt="Icon Vehicle Category"
+              <div style="display: flex; align-items: center; width: 200px;">
+                <ng-container *ngIf="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleModel?.vehicleCategory?.file?.dataURI; else noCategory">
+                  <img [src]="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleModel?.vehicleCategory?.file?.dataURI" alt="Icon Vehicle Category"
                     class="border-round w-full h-full md:w-2rem md:h-2rem">
                   <p style="margin: 0; margin-left: 5px;">
                     {{ 'vehicle_category_CustomerVehicleSearch' | translate }}
-                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.vehicleCategoryName }}
+                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleModel?.vehicleCategory?.vehicleCategoryName }}
                   </p>
                 </ng-container>
                 <ng-template #noCategory>
@@ -99,19 +99,19 @@
                   </div>
                   <p style="margin: 0; margin-left: 5px;">
                     {{ 'vehicle_category_CustomerVehicleSearch' | translate }}
-                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.vehicleCategoryName }}
+                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleModel?.vehicleCategory?.vehicleCategoryName }}
                   </p>
                 </ng-template>
               </div>
 
               <div style="display: flex; align-items: center;" class="px-4">
                 <ng-container *ngIf="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleColor?.vehicleColorName; else noColor">
-                  <div [ngStyle]="{'background-color': getVehicleColorStyle(customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleColor.vehicleColorName)}"
+                  <div [ngStyle]="{'background-color': getVehicleColorStyle(customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleColor?.vehicleColorName)}"
                     class="border-round w-full h-full md:w-2rem md:h-2rem"
                     style="border: 1px solid #000; width: 2rem; height: 2rem;">
                   </div>
                   <p style="margin: 0; margin-left: 10px;">
-                    {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleColor.vehicleColorName }}
+                    {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleColor?.vehicleColorName }}
                   </p>
                 </ng-container>
                 <ng-template #noColor>
@@ -122,7 +122,7 @@
                     </span>
                   </div>
                   <p style="margin: 0; margin-left: 10px;">
-                    {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleColor.vehicleColorName }}
+                    {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleColor?.vehicleColorName }}
                   </p>
                 </ng-template>
               </div>
@@ -132,13 +132,13 @@
             <br>
                       
             <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
-              <div style="display: flex; align-items: center;">
-                <ng-container *ngIf="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleFuelType?.dataURI; else noFuelType">
-                  <img [src]="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.dataURI" alt="Icon Vehicle Fuel Type"
+              <div style="display: flex; align-items: center; width: 200px;">
+                <ng-container *ngIf="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleFuelType?.file?.dataURI; else noFuelType">
+                  <img [src]="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file?.dataURI" alt="Icon Vehicle Fuel Type"
                     class="border-round w-full h-full md:w-2rem md:h-2rem">
                   <p style="margin: 0; margin-left: 5px;">
                     {{ 'vehicle_fuel_type_CustomerVehicleSearch' | translate }}
-                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType?.vehicleFuelTypeName }}
+                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleFuelType?.vehicleFuelTypeName }}
                   </p>
                 </ng-container>
                 <ng-template #noFuelType>
@@ -150,18 +150,18 @@
                   </div>
                   <p style="margin: 0; margin-left: 5px;">
                     {{ 'vehicle_fuel_type_CustomerVehicleSearch' | translate }}
-                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.vehicleFuelTypeName }}
+                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleFuelType?.vehicleFuelTypeName }}
                   </p>
                 </ng-template>
               </div>
 
               <div style="display: flex; align-items: center;" class="px-4">
-                <ng-container *ngIf="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.vehicleTransmission?.dataURI; else noTransmission">
-                  <img [src]="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.vehicleTransmission?.dataURI" alt="Icon Vehicle Transmission"
+                <ng-container *ngIf="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleTransmission?.file?.dataURI; else noTransmission">
+                  <img [src]="customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleTransmission?.file?.dataURI" alt="Icon Vehicle Transmission"
                     class="border-round w-full h-full md:w-2rem md:h-2rem">
                   <p style="margin: 0; margin-left: 5px;">
                     {{ 'vehicle_transmission_CustomerVehicleSearch' | translate }}
-                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.vehicleTransmissionName }}
+                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleTransmission?.vehicleTransmissionName }}
                   </p>
                 </ng-container>
                 <ng-template #noTransmission>
@@ -173,7 +173,7 @@
                   </div>
                   <p style="margin: 0; margin-left: 5px;">
                     {{ 'vehicle_transmission_CustomerVehicleSearch' | translate }}
-                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.vehicleTransmissionName }}
+                    {{ customerVehicleBookingViewReservationUIDTO.customerVehicleBooking?.customerVehicle?.vehicleTransmission?.vehicleTransmissionName }}
                   </p>
                 </ng-template>
               </div>

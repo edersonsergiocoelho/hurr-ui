@@ -155,6 +155,18 @@ export class CustomerVehicleBookingCustomerVehicleSearchComponent implements OnI
         this.customerVehicleBookingCustomerVehicleSearchUIDTO.customerVehicleBookings = data.body.content;
         this.customerVehicleBookingCustomerVehicleSearchUIDTO.totalRecords = data.body.totalElements;
 
+        // Processa cada registro para preencher o campo dataURI.
+        this.customerVehicleBookingCustomerVehicleSearchUIDTO.customerVehicleBookings.forEach((booking: any) => {
+          booking.customerVehicle.vehicleModel.vehicleCategory.file.dataURI = 
+            `data:${booking.customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${booking.customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
+
+          booking.customerVehicle.vehicleFuelType.file.dataURI = 
+            `data:${booking.customerVehicle.vehicleFuelType.file.contentType};base64,${booking.customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+
+          booking.customerVehicle.vehicleTransmission.file.dataURI = 
+            `data:${booking.customerVehicle.vehicleTransmission.file.contentType};base64,${booking.customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+        });
+
         // Busca e processa as fotos de capa dos veículos.
         await Promise.all(this.customerVehicleBookingCustomerVehicleSearchUIDTO.customerVehicleBookings.map(customerVehicleBooking => 
           this.getCoverPhoto(customerVehicleBooking)

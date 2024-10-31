@@ -112,13 +112,13 @@
                       </span>
 
                       <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
-                        <div style="display: flex; align-items: center; width: 300px;">
-                          <ng-container *ngIf="item.vehicleModel.vehicleCategory?.dataURI; else noCategory">
-                            <img [src]="item.vehicleModel.vehicleCategory?.dataURI" alt="Icon Vehicle Category"
+                        <div style="display: flex; align-items: center; width: 200px;">
+                          <ng-container *ngIf="item.vehicleModel?.vehicleCategory?.file?.dataURI; else noCategory">
+                            <img [src]="item.vehicleModel?.vehicleCategory?.file?.dataURI" alt="Icon Vehicle Category"
                               class="border-round w-full h-full md:w-2rem md:h-2rem">
                             <p style="margin: 0; margin-left: 5px;">
                               {{ 'vehicle_category_CustomerVehicleSearch' | translate }}
-                              {{ item.vehicleModel.vehicleCategory.vehicleCategoryName }}
+                              {{ item.vehicleModel?.vehicleCategory?.vehicleCategoryName }}
                             </p>
                           </ng-container>
                           <ng-template #noCategory>
@@ -130,30 +130,30 @@
                             </div>
                             <p style="margin: 0; margin-left: 5px;">
                               {{ 'vehicle_category_CustomerVehicleSearch' | translate }}
-                              {{ item.vehicleModel.vehicleCategory.vehicleCategoryName }}
+                              {{ item.vehicleModel?.vehicleCategory?.vehicleCategoryName }}
                             </p>
                           </ng-template>
                         </div>
 
                         <div style="display: flex; align-items: center;" class="px-4">
-                          <ng-container *ngIf="item?.vehicleColor?.vehicleColorName; else noColor">
-                            <div [ngStyle]="{'background-color': getVehicleColorStyle(item.vehicleColor.vehicleColorName)}"
-                                 class="border-round w-full h-full md:w-2rem md:h-2rem"
-                                 style="border: 1px solid #000; width: 2rem; height: 2rem;">
+                          <ng-container *ngIf="item.vehicleColor?.vehicleColorName; else noColor">
+                            <div [ngStyle]="{'background-color': getVehicleColorStyle(item.vehicleColor?.vehicleColorName)}"
+                              class="border-round w-full h-full md:w-2rem md:h-2rem"
+                              style="border: 1px solid #000; width: 2rem; height: 2rem;">
                             </div>
                             <p style="margin: 0; margin-left: 5px;">
-                              {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ item.vehicleColor.vehicleColorName }}
+                              {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ item.vehicleColor?.vehicleColorName }}
                             </p>
                           </ng-container>
                           <ng-template #noColor>
                             <div class="border-round w-full h-full md:w-2rem md:h-2rem"
-                                 style="border: 1px solid #000; width: 2rem; height: 2rem;">
+                              style="border: 1px solid #000; width: 2rem; height: 2rem;">
                               <span style="transform: translate(-50%, -50%); color: black; font-size: 8px; text-align: center;">
                                 {{'span_no_image_Generic'| translate}}
                               </span>
                             </div>
                             <p style="margin: 0; margin-left: 5px;">
-                              {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ item.vehicleColor.vehicleColorName }}
+                              {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ item.vehicleColor?.vehicleColorName }}
                             </p>
                           </ng-template>
                         </div>
@@ -163,9 +163,9 @@
                       <br>
                       
                       <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
-                        <div style="display: flex; align-items: center; width: 300px;">
-                          <ng-container *ngIf="item?.vehicleFuelType?.dataURI; else noFuelType">
-                            <img [src]="item?.vehicleFuelType?.dataURI" alt="Icon Vehicle Fuel Type"
+                        <div style="display: flex; align-items: center; width: 200px;">
+                          <ng-container *ngIf="item.vehicleFuelType?.file?.dataURI; else noFuelType">
+                            <img [src]="item.vehicleFuelType?.file?.dataURI" alt="Icon Vehicle Fuel Type"
                               class="border-round w-full h-full md:w-2rem md:h-2rem">
                             <p style="margin: 0; margin-left: 5px;">
                               {{ 'vehicle_fuel_type_CustomerVehicleSearch' | translate }}
@@ -187,12 +187,12 @@
                         </div>
 
                         <div style="display: flex; align-items: center;" class="px-4">
-                          <ng-container *ngIf="item?.vehicleTransmission?.dataURI; else noTransmission">
-                            <img [src]="item?.vehicleTransmission?.dataURI" alt="Icon Vehicle Transmission"
+                          <ng-container *ngIf="item.vehicleTransmission?.file?.dataURI; else noTransmission">
+                            <img [src]="item.vehicleTransmission?.file?.dataURI" alt="Icon Vehicle Transmission"
                               class="border-round w-full h-full md:w-2rem md:h-2rem">
                             <p style="margin: 0; margin-left: 5px;">
                               {{ 'vehicle_transmission_CustomerVehicleSearch' | translate }}
-                              {{ item?.vehicleTransmission?.vehicleTransmissionName }}
+                              {{ item.vehicleTransmission?.vehicleTransmissionName }}
                             </p>
                           </ng-container>
                           <ng-template #noTransmission>
@@ -204,7 +204,7 @@
                             </div>
                             <p style="margin: 0; margin-left: 5px;">
                               {{ 'vehicle_transmission_CustomerVehicleSearch' | translate }}
-                              {{ item?.vehicleTransmission?.vehicleTransmissionName }}
+                              {{ item.vehicleTransmission?.vehicleTransmissionName }}
                             </p>
                           </ng-template>
                         </div>

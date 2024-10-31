@@ -130,6 +130,22 @@ export class CustomerVehicleSearchComponent implements OnInit {
         this.customerVehicleSearchUIDTO.customerVehicles = data.body.content;
         this.customerVehicleSearchUIDTO.totalRecords = data.body.totalElements;
 
+        // Processa cada registro para preencher o campo dataURI.
+        this.customerVehicleSearchUIDTO.customerVehicles.forEach((customerVehicle: any) => {
+
+          customerVehicle.vehicle.vehicleBrand.file.dataURI = 
+          `data:${customerVehicle.vehicle.vehicleBrand.file.contentType};base64,${customerVehicle.vehicle.vehicleBrand.file.dataAsByteArray}`;
+
+          customerVehicle.vehicleModel.vehicleCategory.file.dataURI = 
+            `data:${customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
+
+            customerVehicle.vehicleFuelType.file.dataURI = 
+            `data:${customerVehicle.vehicleFuelType.file.contentType};base64,${customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+
+            customerVehicle.vehicleTransmission.file.dataURI = 
+            `data:${customerVehicle.vehicleTransmission.file.contentType};base64,${customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+        });
+
         this.customerVehicleSearchUIDTO.customerVehicles.forEach(vehicle => {
           this.getFile(vehicle);
         });

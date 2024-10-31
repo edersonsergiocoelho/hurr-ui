@@ -104,14 +104,14 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
       const keys = [
         'error_summary_message_service_Generic',
         'warn_summary_message_service_Generic',
-        'select_customer_address_Address_Checkout'
+        'select_customer_address_Address_CheckOut'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
       this.checkOutMPUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
       this.checkOutMPUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
-      this.checkOutMPUIDTO.select_customer_address_Address_Checkout = translations['select_customer_address_Address_Checkout'];
+      this.checkOutMPUIDTO.select_customer_address_Address_CheckOut = translations['select_customer_address_Address_CheckOut'];
 
     } catch (error: any) {
       this.messageService.add({
@@ -213,7 +213,7 @@ export class CheckOutMPComponent implements OnInit, OnChanges {
               this.messageService.add({
                 severity: SeverityConstants.WARN,
                 summary: '' + this.checkOutMPUIDTO.warn_summary_message_service_Generic,
-                detail: '' + this.checkOutMPUIDTO.select_customer_address_Address_Checkout
+                detail: '' + this.checkOutMPUIDTO.select_customer_address_Address_CheckOut
               });
 
               return;

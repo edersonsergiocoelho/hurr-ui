@@ -80,6 +80,11 @@ export class CustomerVehicleBookingViewReservationComponent implements OnInit {
             this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking = resultCustomerVehicleBookingServiceFindById.body;
             // Calcula a diferença de dias entre a data de início e fim da reserva.
             this.customerVehicleBookingViewReservationUIDTO.days = this.momentUtilsService.diffDays(this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.reservationStartDate, this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.reservationEndDate);
+
+            debugger
+            this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file.dataURI = `data:${this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
+            this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file.dataURI = `data:${this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file.contentType};base64,${this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+            this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.file.dataURI = `data:${this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.file.contentType};base64,${this.customerVehicleBookingViewReservationUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
           }
         }
       }

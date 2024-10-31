@@ -188,6 +188,22 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
       this.customerVehicleBookingSearchUIDTO.customerVehicleBookings = customerVehicleBookingServiceSearchPage.body.content;
       this.customerVehicleBookingSearchUIDTO.totalRecords = customerVehicleBookingServiceSearchPage.body.totalElements;
 
+      // Processa cada registro para preencher o campo dataURI.
+      this.customerVehicleBookingSearchUIDTO.customerVehicleBookings.forEach((booking: any) => {
+        booking.customerVehicle.vehicleModel.vehicleCategory.file.dataURI = 
+          `data:${booking.customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${booking.customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
+
+        booking.customerVehicle.vehicleFuelType.file.dataURI = 
+          `data:${booking.customerVehicle.vehicleFuelType.file.contentType};base64,${booking.customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+
+        booking.customerVehicle.vehicleTransmission.file.dataURI = 
+          `data:${booking.customerVehicle.vehicleTransmission.file.contentType};base64,${booking.customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+      });
+
+      //this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file.dataURI = `data:${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
+      //this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file.dataURI = `data:${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file.contentType};base64,${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+      //this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.file.dataURI = `data:${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.file.contentType};base64,${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+
       // Busca e processa as fotos de capa dos veículos.
       await Promise.all(this.customerVehicleBookingSearchUIDTO.customerVehicleBookings.map(customerVehicleBooking => 
         this.getCoverPhoto(customerVehicleBooking)

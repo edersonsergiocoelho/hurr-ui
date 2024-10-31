@@ -16,5 +16,5 @@ export class CheckOutMPUIDTO {
     // Messages - Translate
     error_summary_message_service_Generic: string;
     warn_summary_message_service_Generic: string;
-    select_customer_address_Address_Checkout: string;
+    select_customer_address_Address_CheckOut: string;
 }

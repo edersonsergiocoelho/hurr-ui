@@ -429,6 +429,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
   }
 
   async onClickContinue() {
+
     // Verifica se nenhum endereço foi selecionado
     if (!this.customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle &&
         !this.customerVehicleDetailUIDTO.selectedCustomerAddressDelivery &&
@@ -496,12 +497,19 @@ export class CustomerVehicleDetailComponent implements OnInit {
           });
         }
       }
-    } catch (error: any) {
-      // Lida com erros diferentes baseados no status do erro
-      if (error.status === 404) {
-        this.router.navigate(['customer/customer-validation'], navigationExtras); // Navega para a página de validação do cliente se o erro for 404
-      } 
-      
+
+      if (resultCustomerFindByEmail.status === 204) {
+
+          // Se alguma validação estiver ausente, exibe uma mensagem de aviso
+          this.messageService.add({
+            severity: SeverityConstants.WARN,
+            summary: this.customerVehicleDetailUIDTO.warn_summary_message_service_Generic,
+            detail: this.customerVehicleDetailUIDTO.warn_customer_not_validated_CustomerVehicleDetail
+          });
+
+          this.router.navigate(['customer/customer-validation'], navigationExtras); // Navega para a página de validação do cliente se o erro for 404
+      }
+    } catch (error: any) {     
       if (error.status === 500) {
         this.messageService.add({
           severity: SeverityConstants.ERROR,

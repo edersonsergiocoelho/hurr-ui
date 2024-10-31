@@ -64,7 +64,7 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit {
       const keys = [
         'error_summary_message_service_Generic',
         'warn_summary_message_service_Generic',
-        'select_customer_address_Address_Checkout'
+        'select_customer_address_Address_CheckOut'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));

@@ -60,9 +60,9 @@
             </span>
 
             <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
-              <div style="display: flex; align-items: center;">
-                <ng-container *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking?.customerVehicle?.vehicleModel?.vehicleCategory?.dataURI; else noCategory">
-                  <img [src]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.dataURI" alt="Icon Vehicle Category"
+              <div style="display: flex; align-items: center; width: 200px;">
+                <ng-container *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking?.customerVehicle?.vehicleModel?.vehicleCategory?.file?.dataURI; else noCategory">
+                  <img [src]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file?.dataURI" alt="Icon Vehicle Category"
                     class="border-round w-full h-full md:w-2rem md:h-2rem">
                   <p style="margin: 0; margin-left: 5px;">
                     {{ 'vehicle_category_CustomerVehicleSearch' | translate }}
@@ -111,9 +111,9 @@
             <br>
                       
             <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
-              <div style="display: flex; align-items: center;">
-                <ng-container *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking?.customerVehicle?.vehicleFuelType?.dataURI; else noFuelType">
-                  <img [src]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.dataURI" alt="Icon Vehicle Fuel Type"
+              <div style="display: flex; align-items: center; width: 200px;">
+                <ng-container *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking?.customerVehicle?.vehicleFuelType?.file?.dataURI; else noFuelType">
+                  <img [src]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file?.dataURI" alt="Icon Vehicle Fuel Type"
                     class="border-round w-full h-full md:w-2rem md:h-2rem">
                   <p style="margin: 0; margin-left: 5px;">
                     {{ 'vehicle_fuel_type_CustomerVehicleSearch' | translate }}
@@ -135,8 +135,8 @@
               </div>
 
               <div style="display: flex; align-items: center;" class="px-4">
-                <ng-container *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking?.vehicleTransmission?.dataURI; else noTransmission">
-                  <img [src]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.vehicleTransmission?.dataURI" alt="Icon Vehicle Transmission"
+                <ng-container *ngIf="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking?.customerVehicle?.vehicleTransmission?.file?.dataURI; else noTransmission">
+                  <img [src]="customerVehicleBookingCustomerVehicleViewInvoiceUIDTO.customerVehicleBooking.customerVehicle?.vehicleTransmission?.file?.dataURI" alt="Icon Vehicle Transmission"
                     class="border-round w-full h-full md:w-2rem md:h-2rem">
                   <p style="margin: 0; margin-left: 5px;">
                     {{ 'vehicle_transmission_CustomerVehicleSearch' | translate }}
