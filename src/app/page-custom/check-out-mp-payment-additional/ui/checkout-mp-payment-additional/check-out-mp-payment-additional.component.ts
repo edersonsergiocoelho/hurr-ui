@@ -193,7 +193,7 @@ export class CheckOutMPPaymentAdditionalComponent implements OnInit {
               },
               notificationUrl: `${environment.apiMercadoPago}`,
               backUrls: {
-                success: `${environment.apiUI}/customer-vehicle-booking/success`
+                success: `${environment.apiUI}/customer-vehicle-booking/view-invoice/` + this.customerVehicleBookingId
               },
               metadata: metadataObject
             };
