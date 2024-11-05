@@ -1,0 +1,10 @@
+{
+  "title_CustomerVehicleEditPriceDiscount": "Precios Y Descuentos",
+ 
+  "label_daily_rate_CustomerVehicleEditPriceDiscount": "Tarifa Diaria",
+  "placeholder_daily_rate_CustomerVehicleEditPriceDiscount": "Ingrese La Tarifa Diaria Del Vehículo.",
+  "label_cleaning_fee_CustomerVehicleEditPriceDiscount": "Tarifa De Limpieza",
+  "placeholder_cleaning_fee_CustomerVehicleEditPriceDiscount": "Ingrese La Tarifa De Limpieza Para Cobrar A Su Cliente.",
+ 
+  "save_success_message_service_CustomerVehicleEditPriceDiscount": "Precios Y Descuentos Actualizados Con Éxito."
+}

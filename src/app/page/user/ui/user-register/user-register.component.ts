@@ -3,11 +3,11 @@ import { UserRegisterUIDTO } from './dto/user-register-ui-dto.dto';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { first, firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthSignUpDTO } from 'src/app/core/auth/dto/auth-sign-up-dto.dto';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
 
 @Component({
   selector: 'app-user-register',
@@ -27,7 +27,6 @@ export class UserRegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetCustomerValidationForm();
   }
 
@@ -47,23 +46,23 @@ export class UserRegisterComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'save_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'save_summary_message_service_Generic',
         'save_success_message_service_UserRegister'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.userRegisterUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userRegisterUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.userRegisterUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
+      this.userRegisterUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userRegisterUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.userRegisterUIDTO.save_summary_message_service_Generic = translations['save_summary_message_service_Generic'];
       this.userRegisterUIDTO.save_success_message_service_UserRegister = translations['save_success_message_service_UserRegister'];
 
     } catch (error: any) {
       this.messageService.add({
-        severity: 'error',
-        summary: '' + this.userRegisterUIDTO.error_message_service_Generic,
+        severity: SeverityConstants.ERROR,
+        summary: this.userRegisterUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -81,8 +80,8 @@ export class UserRegisterComponent implements OnInit {
         if (data.status == 200) {
 
           this.messageService.add({ 
-            severity: 'success', 
-            summary: '' + this.userRegisterUIDTO.save_message_service_Generic, 
+            severity: SeverityConstants.SUCCESS, 
+            summary: '' + this.userRegisterUIDTO.save_summary_message_service_Generic, 
             detail: '' + this.userRegisterUIDTO.save_success_message_service_UserRegister 
           });
 
@@ -94,17 +93,17 @@ export class UserRegisterComponent implements OnInit {
 
         if (error.status == 400) {
           this.messageService.add({
-            severity: 'warn',
-            summary: '' + this.userRegisterUIDTO.error_message_service_Generic,
-            detail: '' + error.error.message,
+            severity: SeverityConstants.WARN,
+            summary: this.userRegisterUIDTO.warn_summary_message_service_Generic,
+            detail: error.error.message,
           });
         }
 
         if (error.status == 500) {
           this.messageService.add({
-            severity: 'error',
-            summary: '' + this.userRegisterUIDTO.error_message_service_Generic,
-            detail: '' + error.error.message,
+            severity: SeverityConstants.ERROR,
+            summary: this.userRegisterUIDTO.error_summary_message_service_Generic,
+            detail: error.error.message,
           });
         }
 

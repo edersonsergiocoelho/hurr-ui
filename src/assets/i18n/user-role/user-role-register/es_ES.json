@@ -1,0 +1,17 @@
+{
+  "title_UserRoleRegister": "Registro De Usuario / Rol",
+  
+  "label_user_UserRoleRegister": "ID De Usuario",
+  "placeholder_user_UserRoleRegister": "Ingrese El Usuario",
+  "label_role_UserRoleRegister": "ID Del Rol",
+  "placeholder_role_UserRoleRegister": "Ingrese El Rol Del Usuario",
+  "label_created_date_UserRoleRegister": "Fecha De Creación",
+  "placeholder_created_date_UserRoleRegister": "Fecha De Creación Del Registro",
+  "label_modified_date_UserRoleRegister": "Fecha De Modificación",
+  "placeholder_modified_date_UserRoleRegister": "Fecha De Modificación Del Registro",
+  "label_enabled_UserRoleRegister": "¿Habilitado?",
+
+  "save_success_message_service_UserRoleRegister": "Registro De Usuario / Rol Guardado Con Éxito.",
+  "update_success_message_service_UserRoleRegister": "Registro De Usuario / Rol Cambiado Con Éxito.",
+  "delete_success_message_service_UserRoleRegister": "Registro De Usuario / Rol Eliminado Con Éxito."
+}

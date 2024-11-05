@@ -1,5 +1,6 @@
 {
   "title_CustomerVehicleRegisterStep1": "Etapa 1 - Verifique Se O Serviço Está Disponível Na Sua Região",
+  
   "label_country_CustomerVehicleRegisterStep1": "País",
   "placeholder_country_CustomerVehicleRegisterStep1": "Informe O País",
   "label_state_CustomerVehicleRegisterStep1": "Estado",

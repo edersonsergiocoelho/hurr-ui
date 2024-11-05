@@ -14,15 +14,15 @@ export class CustomerVehicleRegisterUIDTO {
 
   currentStepIndex: number = 0;
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
   span_button_label_save_Generic: string;
   span_button_label_cancel_Generic: string;
   header_ConfirmDialog_CustomerVehicleRegister: string;
   message_ConfirmDialog_CustomerVehicleRegister: string;
   reject_summary_message_service_ConfirmDialog_CustomerVehicleRegister: string;
   reject_detail_message_service_ConfirmDialog_CustomerVehicleRegister: string;
-  save_message_service_Generic: string;
+  save_summary_message_service_Generic: string;
   save_success_message_service_CustomerVehicleRegister: string;
 }

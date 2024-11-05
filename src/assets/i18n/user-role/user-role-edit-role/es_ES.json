@@ -1,0 +1,7 @@
+{
+  "title_UserRoleEditRole": "¿Desea Convertirse En Un Socio De Vehículos?",
+  "message_become_vehicle_partner_UserRoleEditRole": "Si desea convertirse en un socio de vehículos, haga clic en el botón a continuación para confirmar. Será desconectado de su cuenta y deberá iniciar sesión nuevamente. Después del cambio de perfil, no será posible retroceder.",
+ 
+  "become_vehicle_partner_summary_message_service_UserRoleEditRole": "Te Has Convertido En Socio",
+  "become_vehicle_partner_detail_message_service_UserRoleEditRole": "Te Has Convertido En Socio, Felicitaciones."
+}

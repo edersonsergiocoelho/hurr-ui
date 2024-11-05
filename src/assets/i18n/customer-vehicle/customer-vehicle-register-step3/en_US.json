@@ -1,0 +1,8 @@
+{
+  "title_CustomerVehicleRegisterStep3": "Step 3 - Enter The Transmission And Mileage",
+  
+  "label_vehicle_transmission_CustomerVehicleRegisterStep3": "Transmission",
+  "placeholder_vehicle_transmission_CustomerVehicleRegisterStep3": "Enter The Vehicle Transmission",
+  "label_mileage_created_CustomerVehicleRegisterStep3": "Mileage",
+  "placeholder_mileage_created_CustomerVehicleRegisterStep3": "Enter The Vehicle Mileage"
+}

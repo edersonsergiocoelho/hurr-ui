@@ -1,0 +1,8 @@
+{
+  "title_CustomerVehicleEditAdvertisementStatus": "Advertisement Status",
+  
+  "label_advertisement_status_CustomerVehicleEditAdvertisementStatus": "Advertisement Status",
+  "placeholder_advertisement_status_CustomerVehicleEditAdvertisementStatus": "Enter The Vehicle Advertisement Status.",
+
+  "save_success_message_service_CustomerVehicleEditAdvertisementStatus": "Advertisement Status Successfully Updated."
+}

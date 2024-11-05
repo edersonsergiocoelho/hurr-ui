@@ -29,7 +29,6 @@ export class RoleSearchComponent implements OnInit {
               private roleService: RoleService) { }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetSearchForm();
   }
 
@@ -53,12 +52,12 @@ export class RoleSearchComponent implements OnInit {
 
     try {
 
-      this.roleSearchUIDTO.error_message_service_Generic = await firstValueFrom(this.translateService.get('error_message_service_Generic').pipe(first()));
+      this.roleSearchUIDTO.error_summary_message_service_Generic = await firstValueFrom(this.translateService.get('error_summary_message_service_Generic').pipe(first()));
 
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.roleSearchUIDTO.error_message_service_Generic,
+        summary: '' + this.roleSearchUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -104,7 +103,7 @@ export class RoleSearchComponent implements OnInit {
         this.roleSearchUIDTO.totalRecords = data.body.totalElements;
       },
       error: (error) => {
-        this.messageService.add({ severity: 'error', summary: '' + this.roleSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+        this.messageService.add({ severity: 'error', summary: '' + this.roleSearchUIDTO.error_summary_message_service_Generic, detail: error.error.message });
 
         this.ngxSpinnerService.hide();
       },

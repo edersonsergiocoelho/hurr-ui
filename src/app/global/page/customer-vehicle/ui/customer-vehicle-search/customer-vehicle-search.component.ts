@@ -33,7 +33,6 @@ export class CustomerVehicleSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
@@ -54,21 +53,21 @@ export class CustomerVehicleSearchComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
+        'error_summary_message_service_Generic',
         'label_created_date_option_1_CustomerVehicleSearch',
         'label_created_date_option_2_CustomerVehicleSearch'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
+      this.customerVehicleSearchUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
       this.customerVehicleSearchUIDTO.label_created_date_option_1_CustomerVehicleSearch = translations['label_created_date_option_1_CustomerVehicleSearch'];
       this.customerVehicleSearchUIDTO.label_created_date_option_2_CustomerVehicleSearch = translations['label_created_date_option_2_CustomerVehicleSearch'];
 
     } catch (error: any) {
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleSearchUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -95,6 +94,22 @@ export class CustomerVehicleSearchComponent implements OnInit {
     }
   }
 
+  getVehicleColorStyle(vehicleColorName: string): string {
+    switch(vehicleColorName.toLowerCase()) {
+      case 'preto': return '#000000';
+      case 'branco': return '#FFFFFF';
+      case 'prata': return '#C0C0C0';
+      case 'cinza': return '#808080';
+      case 'vermelho': return '#FF0000';
+      case 'azul': return '#0000FF';
+      case 'amarelo': return '#FFFF00';
+      case 'verde': return '#008000';
+      case 'marrom': return '#A52A2A';
+      case 'bege': return '#F5F5DC';
+      default: return '#D3D3D3';  // Cor padrão para cores não mapeadas
+    }
+  }
+
   async search(event: DataViewLazyLoadEvent | null) {
 
     this.paginate(event);
@@ -109,11 +124,27 @@ export class CustomerVehicleSearchComponent implements OnInit {
         this.customerVehicleSearchUIDTO.sortDir = "ASC";
       }
     }
-  
-    this.customerVehicleService.searchPage(this.customerVehicleSearchUIDTO.customerVehicleSearchDTO, this.customerVehicleSearchUIDTO.page, this.customerVehicleSearchUIDTO.size, this.customerVehicleSearchUIDTO.sortDir, this.customerVehicleSearchUIDTO.sortBy).pipe(first()).subscribe({
+
+    this.customerVehicleService.customerSearchPage(this.customerVehicleSearchUIDTO.customerVehicleSearchDTO, this.customerVehicleSearchUIDTO.page, this.customerVehicleSearchUIDTO.size, this.customerVehicleSearchUIDTO.sortDir, this.customerVehicleSearchUIDTO.sortBy).pipe(first()).subscribe({
       next: (data: any) => {
         this.customerVehicleSearchUIDTO.customerVehicles = data.body.content;
         this.customerVehicleSearchUIDTO.totalRecords = data.body.totalElements;
+
+        // Processa cada registro para preencher o campo dataURI.
+        this.customerVehicleSearchUIDTO.customerVehicles.forEach((customerVehicle: any) => {
+
+          customerVehicle.vehicle.vehicleBrand.file.dataURI = 
+          `data:${customerVehicle.vehicle.vehicleBrand.file.contentType};base64,${customerVehicle.vehicle.vehicleBrand.file.dataAsByteArray}`;
+
+          customerVehicle.vehicleModel.vehicleCategory.file.dataURI = 
+            `data:${customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
+
+            customerVehicle.vehicleFuelType.file.dataURI = 
+            `data:${customerVehicle.vehicleFuelType.file.contentType};base64,${customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+
+            customerVehicle.vehicleTransmission.file.dataURI = 
+            `data:${customerVehicle.vehicleTransmission.file.contentType};base64,${customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+        });
 
         this.customerVehicleSearchUIDTO.customerVehicles.forEach(vehicle => {
           this.getFile(vehicle);
@@ -125,7 +156,7 @@ export class CustomerVehicleSearchComponent implements OnInit {
 
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic, 
+            summary: '' + this.customerVehicleSearchUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }
@@ -158,7 +189,7 @@ export class CustomerVehicleSearchComponent implements OnInit {
 
         this.messageService.add({ 
           severity: SeverityConstants.ERROR, 
-          summary: '' + this.customerVehicleSearchUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleSearchUIDTO.error_summary_message_service_Generic,
           detail: error.toString() 
         });
       }

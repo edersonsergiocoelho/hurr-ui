@@ -1,0 +1,17 @@
+{
+  "title_my_booking_CustomerVehicleBookingSearch": "Mis Reservas",
+  "subtitle_my_booking_CustomerVehicleBookingSearch": "Verifique Aquí Sus Últimas Reservas.",
+ 
+  "booking_CustomerVehicleBookingSearch": "Número De Reserva",
+  "created_date_CustomerVehicleBookingSearch": "Fecha De Reserva",
+  "total_booking_value_CustomerVehicleBookingSearch": "Total",
+  "placeholder_created_date_CustomerVehicleBookingSearch": "Ordenar Por Fecha De Reserva",
+  "label_created_date_option_1_CustomerVehicleBookingSearch": "Ordenar Por Fecha De Reserva Ascendente",
+  "label_created_date_option_2_CustomerVehicleBookingSearch": "Ordenar Por Fecha De Reserva Descendente",
+  "label_booking_cancellation_date_CustomerVehicleBookingSearch": "Fecha De Cancelación: ",
+  "label_reservation_start_date_CustomerVehicleBookingSearch": "Fecha De Check-In: ",
+  "placeholder_review_CustomerVehicleBookingSearch": "Ingrese Una Reseña Para El Propietario Del Coche",
+ 
+  "save_cancel_booking_message_service_CustomerVehicleBookingSearch": "Reserva Cancelada Con Éxito",
+  "save_success_write_a_review_message_service_CustomerVehicleBookingSearch": "Reseña Guardada Con Éxito"
+}

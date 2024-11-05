@@ -33,7 +33,6 @@ export class CustomerVehicleEditAdvertisementStatusComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
@@ -59,17 +58,17 @@ export class CustomerVehicleEditAdvertisementStatusComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'save_success_message_service_CustomerVehicleEditAdvertisementStatus'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleEditAdvertisementStatusUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleEditAdvertisementStatusUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleEditAdvertisementStatusUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleEditAdvertisementStatusUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleEditAdvertisementStatusUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleEditAdvertisementStatusUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.customerVehicleEditAdvertisementStatusUIDTO.save_success_message_service_CustomerVehicleEditAdvertisementStatus = translations['save_success_message_service_CustomerVehicleEditAdvertisementStatus'];
 
     } catch (error: any) {
@@ -78,7 +77,7 @@ export class CustomerVehicleEditAdvertisementStatusComponent implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAdvertisementStatusUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAdvertisementStatusUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -110,7 +109,7 @@ export class CustomerVehicleEditAdvertisementStatusComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAdvertisementStatusUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAdvertisementStatusUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -133,7 +132,7 @@ export class CustomerVehicleEditAdvertisementStatusComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.SUCCESS,
-          summary: '' + this.customerVehicleEditAdvertisementStatusUIDTO.success_message_service_Generic,
+          summary: '' + this.customerVehicleEditAdvertisementStatusUIDTO.success_summary_message_service_Generic,
           detail: '' + this.customerVehicleEditAdvertisementStatusUIDTO.save_success_message_service_CustomerVehicleEditAdvertisementStatus,
         });
       }
@@ -144,7 +143,7 @@ export class CustomerVehicleEditAdvertisementStatusComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditAdvertisementStatusUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditAdvertisementStatusUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

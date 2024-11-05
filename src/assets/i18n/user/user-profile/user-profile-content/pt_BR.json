@@ -1,0 +1,23 @@
+{
+  "title_UserProfileContent": "Perfil",
+
+  "label_user_id_UserProfileContent": "ID Do Usuário",
+  "placeholder_user_id_UserProfileContent": "Informe O ID Do Usuário",
+  "label_provider_user_id_UserProfileContent": "ID Do Provider Do Usuário",
+  "placeholder_provider_user_id_UserProfileContent": "Informe O ID Do Provider Do Usuário",
+  "label_email_UserProfileContent": "Email",
+  "placeholder_email_UserProfileContent": "Informe O Email",
+  "label_display_name_UserProfileContent": "Nome Do Usuário",
+  "placeholder_display_name_UserProfileContent": "Informe O Nome Do Usuário",
+  "label_provider_UserProfileContent": "Provider",
+  "placeholder_provider_UserProfileContent": "Informe O Provider",
+  "label_created_date_UserProfileContent": "Data de Criação",
+  "placeholder_created_date_UserProfileContent": "Selecione A Data De Criação",
+  "label_modified_date_UserProfileContent": "Data de Modificação",
+  "placeholder_modified_date_UserProfileContent": "Selecione A Data De Modificação",
+  "label_enabled_UserProfileContent": "Ativo",
+  "label_avatar_UserProfileContent": "Avatar",
+
+  "update_profile_summary_message_service_UserProfileContent": "Perfil Atualizado Com Sucesso",
+  "update_profile_detail_message_service_UserProfileContent": "Seu Perfil Foi Atualizado Com Sucesso!"
+}

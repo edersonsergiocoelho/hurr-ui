@@ -1,0 +1,25 @@
+{
+  "title_CustomerVehicleBookingCustomerVehicleViewInvoice": "Factura",
+ 
+  "booking_CustomerVehicleBookingCustomerVehicleViewInvoice": "Número De Reserva:",
+  "billing_address_CustomerVehicleBookingCustomerVehicleViewInvoice": "Dirección De Facturación",
+  "payment_CustomerVehicleBookingCustomerVehicleViewInvoice": "Pago",
+  "payment_additional_CustomerVehicleBookingCustomerVehicleViewInvoice": "Pago Adicional",
+  "amex_credit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Amex Tarjeta De Crédito",
+  "amex_debit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Amex Tarjeta De Débito",
+  "mastercard_credit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Mastercard Tarjeta De Crédito",
+  "mastercard_debit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Mastercard Tarjeta De Débito",
+  "visa_credit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Visa Tarjeta De Crédito",
+  "visa_debit_card_CustomerVehicleBookingCustomerVehicleViewInvoice": "Visa Tarjeta De Débito",
+  "installments_CustomerVehicleBookingCustomerVehicleViewInvoice": "Cantidad De Cuotas: ",
+  "transaction_amount_CustomerVehicleBookingCustomerVehicleViewInvoice": "Monto De La Transacción: ",
+  "installment_amount_CustomerVehicleBookingCustomerVehicleViewInvoice": "Monto De La Cuota: ",
+  "total_paid_amount_CustomerVehicleBookingCustomerVehicleViewInvoice": "Monto Total Pagado: ",
+ 
+  "days_CustomerVehicleBookingCustomerVehicleViewInvoice": "Días",
+  "summary_CustomerVehicleBookingCustomerVehicleViewInvoice": "Resumen",
+  "daily_rate_CustomerVehicleBookingCustomerVehicleViewInvoice": "Tarifa Diaria Total",
+  "total_booking_value_CustomerVehicleBookingCustomerVehicleViewInvoice": "Valor Total De La Reserva",
+  "total_additional_value_CustomerVehicleBookingCustomerVehicleViewInvoice": "Valor Total Adicional",
+  "total_CustomerVehicleBookingCustomerVehicleViewInvoice": "Total"
+}

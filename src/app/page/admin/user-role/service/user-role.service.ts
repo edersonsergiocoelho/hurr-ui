@@ -65,6 +65,15 @@ export class UserRoleService {
     );
   }
 
+  becomeVehiclePartner(): Observable<HttpResponse<void>> {
+    const url = `${this.apiUrl}/become-vehicle-partner`;
+    return this.httpClient.put<void>(url, {}, { observe: 'response' }).pipe(
+      map((response: HttpResponse<void>) => {
+        return response;
+      })
+    );
+  }
+
   delete(userId: string, roleId: string): Observable<HttpResponse<void> | null> {
     const url = `${this.apiUrl}/${userId}/${roleId}`;
     return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(

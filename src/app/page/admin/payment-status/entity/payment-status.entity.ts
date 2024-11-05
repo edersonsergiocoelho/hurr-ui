@@ -5,7 +5,7 @@ export class PaymentStatus {
 
   paymentStatusId: string;
   paymentStatusName: string;
-  file?: File; // Supondo que File seja a entidade correspondente a FileDTO
+  file?: File;
   createdDate: Date;
   modifiedDate?: Date;
   enabled: boolean;
@@ -14,7 +14,7 @@ export class PaymentStatus {
     return {
       paymentStatusId: paymentStatus.paymentStatusId,
       paymentStatusName: paymentStatus.paymentStatusName,
-      file: paymentStatus.file ? File.toDTO(paymentStatus.file) : undefined, // Supondo que File tenha um método toDTO
+      file: paymentStatus.file ? File.toDTO(paymentStatus.file) : undefined,
       createdDate: paymentStatus.createdDate,
       modifiedDate: paymentStatus.modifiedDate,
       enabled: paymentStatus.enabled,

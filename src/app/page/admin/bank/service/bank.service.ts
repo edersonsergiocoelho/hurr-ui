@@ -23,6 +23,15 @@ export class BankService {
     );
   }
 
+  findByBankName(bankName: string): Observable<HttpResponse<Bank>> {
+    const url = `${this.apiUrl}/by/bank-name/${bankName}`;
+    return this.httpClient.get<Bank>(url, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Bank>) => {
+        return response;
+      })
+    );
+  }
+
   findAll(): Observable<HttpResponse<Bank[]>> {
     return this.httpClient.get<Bank[]>(this.apiUrl, { observe: 'response' }).pipe(
       map((response: HttpResponse<Bank[]>) => {
@@ -68,6 +77,23 @@ export class BankService {
   delete(bankId: string): Observable<HttpResponse<void> | null> {
     const url = `${this.apiUrl}/${bankId}`;
     return this.httpClient.delete<void>(url, { observe: 'response' }).pipe(
+      catchError((error: any) => {
+        if (error.status === 404) {
+          return of(null);
+        } else {
+          throw error;
+        }
+      })
+    );
+  }
+
+  // Novo método para deletar múltiplos registros
+  deleteAll(bankIds: string[]): Observable<HttpResponse<void> | null> {
+    const url = `${this.apiUrl}/all`;
+    return this.httpClient.delete<void>(url, {
+      body: bankIds,
+      observe: 'response'
+    }).pipe(
       catchError((error: any) => {
         if (error.status === 404) {
           return of(null);

@@ -1,0 +1,10 @@
+{
+  "title_CustomerVehicleBankAccountSearch": "Search Bank Account",
+  "label_pix_key_CustomerVehicleBankAccountSearch": "Bank Account Key",
+  "placeholder_pix_key_CustomerVehicleBankAccountSearch": "Enter Bank Account Key",
+  
+  "table_caption_title_CustomerVehicleBankAccountSearch": "Bank Account",
+  "table_header_payment_status_id_CustomerVehicleBankAccountSearch": "ID",
+  "table_header_pix_key_CustomerVehicleBankAccountSearch": "PIX Key",
+  "table_header_enabled_CustomerVehicleBankAccountSearch": "Enabled?"
+}

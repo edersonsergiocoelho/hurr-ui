@@ -1,0 +1,22 @@
+{
+  "title_CustomerVehicleRegisterStep1": "Step 1 - Check If The Service Is Available In Your Region",
+
+  "label_country_CustomerVehicleRegisterStep1": "Country",
+  "placeholder_country_CustomerVehicleRegisterStep1": "Enter Country",
+  "label_state_CustomerVehicleRegisterStep1": "State",
+  "placeholder_state_CustomerVehicleRegisterStep1": "Enter State",
+  "label_city_CustomerVehicleRegisterStep1": "City",
+  "placeholder_city_CustomerVehicleRegisterStep1": "Enter City",
+  "label_nickname_CustomerVehicleRegisterStep1": "Nickname",
+  "placeholder_nickname_CustomerVehicleRegisterStep1": "Enter Nickname e.g. Santander Card",
+  "label_street_address_CustomerVehicleRegisterStep1": "Street",
+  "placeholder_street_address_CustomerVehicleRegisterStep1": "Enter Street, Avenue, Etc.",
+  "label_number_CustomerVehicleRegisterStep1": "Number",
+  "placeholder_number_CustomerVehicleRegisterStep1": "Enter Street, Avenue, Etc. Number",
+  "label_complement_CustomerVehicleRegisterStep1": "Complement",
+  "placeholder_complement_CustomerVehicleRegisterStep1": "Enter Complement e.g. Apartment 1, Block 1",
+  "label_zip_code_CustomerVehicleRegisterStep1": "ZIP Code",
+  "placeholder_zip_code_CustomerVehicleRegisterStep1": "Enter ZIP Code Number, e.g. 17.340-000",
+  
+  "city_service_not_available_message_service_CustomerVehicleRegisterStep1": "The Service Is Not Yet Available In Your Region, We Are Working To Expand Services."
+}

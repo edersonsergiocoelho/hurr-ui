@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserForgotPasswordUIDTO } from './dto/user-forgot-password-ui-dto.dto';
-import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
@@ -27,7 +26,6 @@ export class UserForgotPasswordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForgPassword();
   }
 
@@ -47,8 +45,8 @@ export class UserForgotPasswordComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
         'forgot_password_verification_code_summary_message_service_UserForgotPassword',
         'forgot_password_verification_code_detail_message_service_UserForgotPassword',
         'forgot_password_validated_code_summary_message_service_UserForgotPassword',
@@ -59,8 +57,8 @@ export class UserForgotPasswordComponent implements OnInit {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.userForgotPasswordUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userForgotPasswordUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.userForgotPasswordUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userForgotPasswordUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
       this.userForgotPasswordUIDTO.forgot_password_verification_code_summary_message_service_UserForgotPassword = translations['forgot_password_verification_code_summary_message_service_UserForgotPassword'];
       this.userForgotPasswordUIDTO.forgot_password_verification_code_detail_message_service_UserForgotPassword = translations['forgot_password_verification_code_detail_message_service_UserForgotPassword'];
       this.userForgotPasswordUIDTO.forgot_password_validated_code_summary_message_service_UserForgotPassword = translations['forgot_password_validated_code_summary_message_service_UserForgotPassword'];
@@ -71,7 +69,7 @@ export class UserForgotPasswordComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.userForgotPasswordUIDTO.error_message_service_Generic,
+        summary: '' + this.userForgotPasswordUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -104,7 +102,7 @@ export class UserForgotPasswordComponent implements OnInit {
         if (error.status == 400) {
           this.messageService.add({
             severity: 'warn',
-            summary: '' + this.userForgotPasswordUIDTO.warn_message_service_Generic,
+            summary: '' + this.userForgotPasswordUIDTO.warn_summary_message_service_Generic,
             detail: '' + error.error.message,
           });
         }
@@ -112,7 +110,7 @@ export class UserForgotPasswordComponent implements OnInit {
         if (error.status == 500) {
           this.messageService.add({
             severity: 'error',
-            summary: '' + this.userForgotPasswordUIDTO.error_message_service_Generic,
+            summary: '' + this.userForgotPasswordUIDTO.error_summary_message_service_Generic,
             detail: '' + error.error.message,
           });
         }
@@ -150,7 +148,7 @@ export class UserForgotPasswordComponent implements OnInit {
         if (error.status == 400) {
           this.messageService.add({
             severity: 'warn',
-            summary: '' + this.userForgotPasswordUIDTO.warn_message_service_Generic,
+            summary: '' + this.userForgotPasswordUIDTO.warn_summary_message_service_Generic,
             detail: '' + error.error.message,
           });
         }
@@ -158,7 +156,7 @@ export class UserForgotPasswordComponent implements OnInit {
         if (error.status == 500) {
           this.messageService.add({
             severity: 'error',
-            summary: '' + this.userForgotPasswordUIDTO.error_message_service_Generic,
+            summary: '' + this.userForgotPasswordUIDTO.error_summary_message_service_Generic,
             detail: '' + error.error.message,
           });
         }
@@ -193,7 +191,7 @@ export class UserForgotPasswordComponent implements OnInit {
         if (error.status == 400) {
           this.messageService.add({
             severity: 'warn',
-            summary: '' + this.userForgotPasswordUIDTO.warn_message_service_Generic,
+            summary: '' + this.userForgotPasswordUIDTO.warn_summary_message_service_Generic,
             detail: '' + error.error.message,
           });
         }
@@ -201,7 +199,7 @@ export class UserForgotPasswordComponent implements OnInit {
         if (error.status == 500) {
           this.messageService.add({
             severity: 'error',
-            summary: '' + this.userForgotPasswordUIDTO.error_message_service_Generic,
+            summary: '' + this.userForgotPasswordUIDTO.error_summary_message_service_Generic,
             detail: '' + error.error.message,
           });
         }

@@ -1,0 +1,22 @@
+{
+  "title_FeeRegister": "Registro De Tarifas",
+  "label_payment_status_id_FeeRegister": "ID De La Tarifa",
+  "placeholder_payment_status_id_FeeRegister": "Ingrese El ID De La Tarifa",
+  "label_fee_type_FeeRegister": "Tipo De Tarifa",
+  "placeholder_fee_type_FeeRegister": "Ingrese El Tipo De Tarifa",
+  "label_amount_FeeRegister": "Monto De La Tarifa",
+  "placeholder_amount_FeeRegister": "Ingrese El Monto De La Tarifa",
+  "label_start_date_FeeRegister": "Fecha De Inicio",
+  "placeholder_start_date_FeeRegister": "Seleccione La Fecha De Inicio",
+  "label_end_date_FeeRegister": "Fecha Final",
+  "placeholder_end_date_FeeRegister": "Seleccione La Fecha Final",
+  "label_created_date_FeeRegister": "Fecha De Creación",
+  "placeholder_created_date_FeeRegister": "Seleccione La Fecha De Creación",
+  "label_modified_date_FeeRegister": "Fecha De Modificación",
+  "placeholder_modified_date_FeeRegister": "Seleccione La Fecha De Modificación",
+  "label_enabled_FeeRegister": "¿Habilitado?",
+  
+  "save_success_message_service_FeeRegister": "Tarifa Registrada Con Éxito",
+  "update_success_message_service_FeeRegister": "Tarifa Actualizada Con Éxito",
+  "delete_success_message_service_FeeRegister": "Tarifa Eliminada Con Éxito"
+}

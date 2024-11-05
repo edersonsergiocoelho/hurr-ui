@@ -28,19 +28,29 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   return new MultiTranslateHttpLoader(_httpBackend,
   [
   // Generic's
-  '/assets/i18n/generic/button/',
   '/assets/i18n/generic/confirmation/',
   '/assets/i18n/generic/currency/',
   '/assets/i18n/generic/label/',
   '/assets/i18n/generic/message/',
   '/assets/i18n/generic/placeholder/',
   '/assets/i18n/generic/small/',
+  '/assets/i18n/generic/span/',
   '/assets/i18n/generic/table/',
   '/assets/i18n/generic/tooltip/',
 
+  // Address
   '/assets/i18n/address/',
-  '/assets/i18n/checkout/',
-  '/assets/i18n/customer-validation/',
+
+  // Bank
+  '/assets/i18n/bank/bank/',
+  '/assets/i18n/bank/bank-search/',
+  '/assets/i18n/bank/bank-register/',
+
+  // Checkout
+  '/assets/i18n/checkout/checkout/',
+
+  // CustomerValidation
+  '/assets/i18n/customer-validation/customer-validation/',
   
   // CustomerVehicle
   '/assets/i18n/customer-vehicle/customer-vehicle-detail/',
@@ -68,33 +78,83 @@ export function HttpLoaderFactory(_httpBackend: HttpBackend) {
   '/assets/i18n/customer-vehicle-approved/customer-vehicle-approved-detail/',
 
   // CustomerVehicleBooking
-  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-finalize-booking-dynamic-dialog/',
+  // CustomerVehicleBooking - CustomerVehicle
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-check-in-dynamic-dialog/',
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-check-out-dynamic-dialog/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-search/',
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-customer-vehicle-view-invoice/',
+  
+  // CustomerVehicleBooking - Customer
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-search/',
   '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-success/',
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-view-invoice/',
+  '/assets/i18n/customer-vehicle-booking/customer-vehicle-booking-view-reservation/',
 
-  '/assets/i18n/customer-withdrawal-request/customer-withdrawal-request-approval/',
+  // CustomerVehicleBankAccount
+  '/assets/i18n/customer-vehicle-bank-account/customer-vehicle-bank-account/',
+  '/assets/i18n/customer-vehicle-bank-account/customer-vehicle-bank-account-search/',
+  '/assets/i18n/customer-vehicle-bank-account/customer-vehicle-bank-account-register/',
+
+  // CustomerVehicleWithdrawalRequest
+  '/assets/i18n/customer-vehicle-withdrawal-request/customer-vehicle-withdrawal-request/',
+  '/assets/i18n/customer-vehicle-withdrawal-request/customer-vehicle-withdrawal-request-approval/',
 
   // Earnings
   '/assets/i18n/earnings/earnings/',
-  '/assets/i18n/earnings/earnings-customer-withdrawal-request/',
+  '/assets/i18n/earnings/earnings-customer-vehicle-withdrawal-request/',
   '/assets/i18n/earnings/earnings-resume/',
 
-  '/assets/i18n/file-approved/',
+  // Fee
+  '/assets/i18n/fee/fee/',
+  '/assets/i18n/fee/fee-search/',
+  '/assets/i18n/fee/fee-register/',
+
+  // FileApproved
+  '/assets/i18n/file-approved/file-approved/',
+  '/assets/i18n/file-approved/file-approved-detail/',
+  '/assets/i18n/file-approved/file-approved-search/',
   
   // Home
   '/assets/i18n/home/home/',
   '/assets/i18n/home/home-search-cars/',
   '/assets/i18n/home/home-search-cars-detail/',
 
+  // PaymentMethod
+  '/assets/i18n/payment-method/payment-method/',
+  '/assets/i18n/payment-method/payment-method-search/',
+  '/assets/i18n/payment-method/payment-method-register/',
+
   // PaymentStatus
   '/assets/i18n/payment-status/payment-status/',
   '/assets/i18n/payment-status/payment-status-search/',
   '/assets/i18n/payment-status/payment-status-register/',
 
-  '/assets/i18n/role/',
-  '/assets/i18n/user/',
-  '/assets/i18n/user-role/'
+  // Role
+  '/assets/i18n/role/role/',
+  '/assets/i18n/role/role-register/',
+  '/assets/i18n/role/role-search/',
+
+  // User
+  '/assets/i18n/user/user-forgot-password/',
+  '/assets/i18n/user/user-login/',
+  '/assets/i18n/user/user-profile/user-profile/',
+  '/assets/i18n/user/user-profile/user-profile-content/',
+  '/assets/i18n/user/user-register/',
+
+  // UserPreference
+  '/assets/i18n/user-preference/user-preference/user-preference/',
+  '/assets/i18n/user-preference/user-preference/user-preference-content/',
+
+  // UserRole
+  '/assets/i18n/user-role/user-role/',
+  '/assets/i18n/user-role/user-role-edit-role/',
+  '/assets/i18n/user-role/user-role-register/',
+  '/assets/i18n/user-role/user-role-search/',
+
+  // VehicleBrand
+  '/assets/i18n/vehicle-brand/vehicle-brand/',
+  '/assets/i18n/vehicle-brand/vehicle-brand-register/',
+  '/assets/i18n/vehicle-brand/vehicle-brand-search/',
   ]);
 }
 

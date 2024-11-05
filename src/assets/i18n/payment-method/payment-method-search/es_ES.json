@@ -1,0 +1,10 @@
+{
+  "title_PaymentMethodSearch": "Buscar Método De Pago",
+  "label_payment_method_name_PaymentMethodSearch": "Nombre Del Método De Pago",
+  "placeholder_payment_method_name_PaymentMethodSearch": "Ingrese El Nombre Del Método De Pago",
+  
+  "table_caption_title_PaymentMethodSearch": "Método De Pago",
+  "table_header_payment_method_id_PaymentMethodSearch": "ID",
+  "table_header_payment_method_name_PaymentMethodSearch": "Nombre",
+  "table_header_enabled_PaymentMethodSearch": "¿Habilitado?"
+}

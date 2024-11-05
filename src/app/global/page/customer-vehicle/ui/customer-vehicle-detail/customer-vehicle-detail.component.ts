@@ -94,16 +94,17 @@ export class CustomerVehicleDetailComponent implements OnInit {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribui as traduções aos campos correspondentes.
-      this.customerVehicleDetailUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleDetailUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleDetailUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.customerVehicleDetailUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleDetailUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleDetailUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleDetailUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.customerVehicleDetailUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.customerVehicleDetailUIDTO.header_Address_CustomerVehicleDetail = translations['header_Address_CustomerVehicleDetail'];
       this.customerVehicleDetailUIDTO.warn_not_null_customer_vehicle_address_vehicle_CustomerVehicleDetail = translations['warn_not_null_customer_vehicle_address_vehicle_CustomerVehicleDetail'];
       this.customerVehicleDetailUIDTO.warn_customer_not_validated_CustomerVehicleDetail = translations['warn_customer_not_validated_CustomerVehicleDetail'];
       this.customerVehicleDetailUIDTO.info_user_not_logged_in_CustomerVehicleDetail = translations['info_user_not_logged_in_CustomerVehicleDetail'];
 
       // Carrega as horas de início e verifica o usuário logado.
+      this.loadDateInit();
       this.loadHoursInit();
 
       const currentUser = this.sessionStorageService.getUser();
@@ -192,7 +193,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
       // Trata os erros de carregamento e exibe uma mensagem de erro.
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.customerVehicleDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.customerVehicleDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     } finally {
@@ -204,16 +205,29 @@ export class CustomerVehicleDetailComponent implements OnInit {
   private loadKeys(): any {
     // Define as chaves para tradução.
     const keys = [
-      'warn_message_service_Generic', // Mensagem de aviso genérica
-      'error_message_service_Generic', // Mensagem de erro genérica
-      'info_message_service_Generic', // Mensagem de informação genérica
-      'success_message_service_Generic', // Mensagem de sucesso genérica
+      'warn_summary_message_service_Generic', // Mensagem de aviso genérica
+      'error_summary_message_service_Generic', // Mensagem de erro genérica
+      'info_summary_message_service_Generic', // Mensagem de informação genérica
+      'success_summary_message_service_Generic', // Mensagem de sucesso genérica
       'header_Address_CustomerVehicleDetail', // Cabeçalho para detalhes do endereço do veículo do cliente
       'warn_not_null_customer_vehicle_address_vehicle_CustomerVehicleDetail', // Aviso: endereço do veículo do cliente não pode ser nulo
       'warn_customer_not_validated_CustomerVehicleDetail', // Aviso: cliente não validado
       'info_user_not_logged_in_CustomerVehicleDetail' // Informação: usuário não está logado
     ];
     return keys;
+  }
+
+  loadDateInit() {
+
+    const today = moment().toDate();
+  
+    // Defina `today` como a data mínima
+    this.customerVehicleDetailUIDTO.today = today;
+  
+    // Inicialize `dateInit` com a data de hoje se estiver nulo ou for anterior à data mínima
+    if (!this.customerVehicleDetailUIDTO.dateInit || moment(this.customerVehicleDetailUIDTO.dateInit).isBefore(today)) {
+      this.customerVehicleDetailUIDTO.dateInit = today;
+    }
   }
 
   loadHoursInit() {
@@ -249,6 +263,11 @@ export class CustomerVehicleDetailComponent implements OnInit {
         return hourStr;
       }
     }).filter(hour => hour !== ''); // Filtra as horas vazias
+
+    if (this.customerVehicleDetailUIDTO.hoursInit != null && this.customerVehicleDetailUIDTO.hoursInit.length > 0) {
+      this.customerVehicleDetailUIDTO.dateInit = this.customerVehicleDetailUIDTO.dateInit;
+      this.customerVehicleDetailUIDTO.selectedHourInit = this.customerVehicleDetailUIDTO.hoursInit[0];
+    }
 
     this.ngModelChangeDateInit(); // Atualiza os modelos relacionados
   }
@@ -384,7 +403,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
       // Se o usuário não estiver logado, exibe uma mensagem de informação
       this.messageService.add({ 
         severity: SeverityConstants.INFO, 
-        summary: this.customerVehicleDetailUIDTO.info_message_service_Generic,
+        summary: this.customerVehicleDetailUIDTO.info_summary_message_service_Generic,
         detail: this.customerVehicleDetailUIDTO.info_user_not_logged_in_CustomerVehicleDetail
       });
       return;
@@ -400,7 +419,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
       // Se o usuário não estiver logado, exibe uma mensagem de informação
       this.messageService.add({ 
         severity: SeverityConstants.INFO, 
-        summary: this.customerVehicleDetailUIDTO.info_message_service_Generic,
+        summary: this.customerVehicleDetailUIDTO.info_summary_message_service_Generic,
         detail: this.customerVehicleDetailUIDTO.info_user_not_logged_in_CustomerVehicleDetail
       });
       return;
@@ -410,6 +429,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
   }
 
   async onClickContinue() {
+
     // Verifica se nenhum endereço foi selecionado
     if (!this.customerVehicleDetailUIDTO.selectedCustomerVehicleAddressVehicle &&
         !this.customerVehicleDetailUIDTO.selectedCustomerAddressDelivery &&
@@ -418,7 +438,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
       // Exibe uma mensagem de aviso se nenhum endereço for selecionado
       this.messageService.add({
         severity: SeverityConstants.WARN,
-        summary: this.customerVehicleDetailUIDTO.warn_message_service_Generic,
+        summary: this.customerVehicleDetailUIDTO.warn_summary_message_service_Generic,
         detail: this.customerVehicleDetailUIDTO.warn_not_null_customer_vehicle_address_vehicle_CustomerVehicleDetail
       });
 
@@ -444,7 +464,7 @@ export class CustomerVehicleDetailComponent implements OnInit {
     if (!currentUser) {
       this.messageService.add({
         severity: SeverityConstants.INFO,
-        summary: this.customerVehicleDetailUIDTO.info_message_service_Generic,
+        summary: this.customerVehicleDetailUIDTO.info_summary_message_service_Generic,
         detail: this.customerVehicleDetailUIDTO.info_user_not_logged_in_CustomerVehicleDetail
       });
 
@@ -472,21 +492,28 @@ export class CustomerVehicleDetailComponent implements OnInit {
           // Se alguma validação estiver ausente, exibe uma mensagem de aviso
           this.messageService.add({
             severity: SeverityConstants.WARN,
-            summary: this.customerVehicleDetailUIDTO.warn_message_service_Generic,
+            summary: this.customerVehicleDetailUIDTO.warn_summary_message_service_Generic,
             detail: this.customerVehicleDetailUIDTO.warn_customer_not_validated_CustomerVehicleDetail
           });
         }
       }
-    } catch (error: any) {
-      // Lida com erros diferentes baseados no status do erro
-      if (error.status === 404) {
-        this.router.navigate(['customer/customer-validation'], navigationExtras); // Navega para a página de validação do cliente se o erro for 404
-      } 
-      
+
+      if (resultCustomerFindByEmail.status === 204) {
+
+          // Se alguma validação estiver ausente, exibe uma mensagem de aviso
+          this.messageService.add({
+            severity: SeverityConstants.WARN,
+            summary: this.customerVehicleDetailUIDTO.warn_summary_message_service_Generic,
+            detail: this.customerVehicleDetailUIDTO.warn_customer_not_validated_CustomerVehicleDetail
+          });
+
+          this.router.navigate(['customer/customer-validation'], navigationExtras); // Navega para a página de validação do cliente se o erro for 404
+      }
+    } catch (error: any) {     
       if (error.status === 500) {
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: this.customerVehicleDetailUIDTO.error_message_service_Generic,
+          summary: this.customerVehicleDetailUIDTO.error_summary_message_service_Generic,
           detail: error.toString() // Exibe a mensagem de erro se o erro for 500
         });
       }

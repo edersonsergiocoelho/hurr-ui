@@ -1,0 +1,23 @@
+{
+  "title_CustomerVehicleRegisterStep5": "Paso 5 - Detalles Del Vehículo",
+  
+  "label_license_plate_type_CustomerVehicleRegisterStep5": "Tipo De Placa",
+  "label_license_plate_type_old_model_CustomerVehicleRegisterStep5": "Modelo Antiguo",
+  "label_license_plate_type_mercosul_CustomerVehicleRegisterStep5": "Mercosur",
+  "label_license_plate_CustomerVehicleRegisterStep5": "Placa Del Vehículo",
+  "placeholder_license_plate_CustomerVehicleRegisterStep5": "Ingrese La Placa Del Vehículo",
+  "label_renavam_CustomerVehicleRegisterStep5": "Renavam Del Vehículo",
+  "placeholder_renavam_CustomerVehicleRegisterStep5": "Ingrese El Renavam Del Vehículo",
+  "label_chassis_CustomerVehicleRegisterStep5": "Chasis Del Vehículo",
+  "placeholder_chassis_CustomerVehicleRegisterStep5": "Ingrese El Chasis Del Vehículo",
+  "label_year_of_manufacture_CustomerVehicleRegisterStep5": "Año De Fabricación",
+  "placeholder_year_of_manufacture_CustomerVehicleRegisterStep5": "Ingrese El Año De Fabricación",
+  "label_year_of_the_car_CustomerVehicleRegisterStep5": "Año Del Coche",
+  "placeholder_year_of_the_car_CustomerVehicleRegisterStep5": "Ingrese El Año Del Coche",
+  "label_vehicle_color_CustomerVehicleRegisterStep5": "Color",
+  "placeholder_vehicle_color_CustomerVehicleRegisterStep5": "Ingrese El Color Del Vehículo",
+  "label_vehicle_fuel_type_CustomerVehicleRegisterStep5": "Tipo De Combustible",
+  "placeholder_vehicle_fuel_type_CustomerVehicleRegisterStep5": "Ingrese El Combustible Del Vehículo",
+  "label_description_CustomerVehicleRegisterStep5": "Descripción",
+  "placeholder_description_CustomerVehicleRegisterStep5": "Ingrese La Descripción"
+}

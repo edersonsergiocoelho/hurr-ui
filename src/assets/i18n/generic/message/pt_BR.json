@@ -1,16 +1,16 @@
 {
-  "no_connection_to_the_api_message_service_Generic": "Ops! Parece Que Estamos Com Dificuldades De Conexão. Por favor, Tente Novamente Mais Tarde.",
-  "failed_to_open_new_tab_message_service_Generic": "Falha Ao Abrir Nova Guia.",
+  "no_connection_to_the_api_detail_message_service_Generic": "Ops! Parece Que Estamos Com Dificuldades De Conexão. Por favor, Tente Novamente Mais Tarde.",
+  "failed_to_open_new_tab_detail_message_service_Generic": "Falha Ao Abrir Nova Guia.",
 
-  "warn_message_service_Generic": "Alerta",
-  "error_message_service_Generic": "Erro",
-  "info_message_service_Generic": "Informação",
-  "success_message_service_Generic": "Sucesso",
+  "warn_summary_message_service_Generic": "Alerta",
+  "error_summary_message_service_Generic": "Erro",
+  "info_summary_message_service_Generic": "Informação",
+  "success_summary_message_service_Generic": "Sucesso",
 
-  "save_message_service_Generic": "Salvo Com Sucesso.",
-  "update_message_service_Generic": "Alterado Com Sucesso.",
-  "delete_message_service_Generic": "Deletado Com Sucesso.",
+  "save_summary_message_service_Generic": "Salvo Com Sucesso.",
+  "update_summary_message_service_Generic": "Alterado Com Sucesso.",
+  "delete_summary_message_service_Generic": "Deletado Com Sucesso.",
 
-  "delete_all_message_service_Generic": "Itens Deletados Com Sucesso.",
-  "delete_all_success_message_service_Generic": "Todos Os Itens Selecionados Foram Deletados Com Sucesso."
+  "delete_all_success_summary_message_service_Generic": "Itens Deletados Com Sucesso.",
+  "delete_all_success_detail_message_service_Generic": "Todos Os Itens Selecionados Foram Deletados Com Sucesso."
 }

@@ -1,0 +1,13 @@
+{
+  "title_EarningsResume": "Earnings",
+  "subtitle_EarningsResume": "Here You Can View Your Accumulated Earnings And Withdraw Your Money.",
+  
+  "total_earnings_EarningsResume": "Total Earnings",
+  "withdrawable_current_balance_EarningsResume": "Current Balance",
+  "withdrawable_balance_EarningsResume": "Withdrawable Balance",
+  "withdraw_money_EarningsResume": "Withdraw Money",
+  "title_payment_method_EarningsResume": "Select The Payment Method",
+  "title_customer_bank_account_EarningsResume": "Select The Bank Account",
+  "title_customer_vehicle_booking_EarningsResume": "Select The Bookings To Receive",
+  "select_all_customer_vehicle_booking_EarningsResume": "Select All"
+}

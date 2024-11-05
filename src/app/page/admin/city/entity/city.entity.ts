@@ -1,7 +1,6 @@
-import { Country } from "../../country/entity/country.entity";
 import { State } from "../../state/entity/state.entity";
 
-export interface City {
+export class City {
 
   cityId: string;
   cityName: string;

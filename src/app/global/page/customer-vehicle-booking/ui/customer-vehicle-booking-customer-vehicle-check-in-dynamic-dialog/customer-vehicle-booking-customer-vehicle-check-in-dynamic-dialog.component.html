@@ -1,0 +1,98 @@
+<form novalidate #customerVehicleBookingCustomerVehicleCheckInDynamicDialogForm="ngForm" (ngSubmit)="checkIn()">
+
+  <h1 id="divH1" class="bg-indigo-500 text-white">{{'title_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</h1>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-6 md:col-6 field">
+      <label class="font-medium text-2xl">{{'label_booking_start_date_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
+      <label class="font-medium text-2xl" style="margin-left: 8px;">
+        {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.reservationStartDate | date:' dd/MM/yyyy' }}
+        {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.reservationStartTime }}
+      </label>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label class="font-medium text-2xl">{{'label_booking_end_date_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
+      <label class="font-medium text-2xl" style="margin-left: 8px;">
+        {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.reservationEndDate | date:'dd/MM/yyyy' }}
+        {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.reservationEndTime }}
+      </label>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label class="font-medium text-2xl">{{'label_daily_rate_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
+      <label class="font-medium text-2xl" style="margin-left: 8px;">
+        {{'currency_Generic' | translate}}
+        {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.dailyRate | number:'1.2-2' }}
+      </label>
+    </div>
+
+    <div class="col-6 md:col-6 field">
+      <label class="font-medium text-2xl">{{'label_total_booking_value_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
+      <label class="font-medium text-2xl" style="margin-left: 8px;">
+        {{'currency_Generic' | translate}}
+        {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.totalBookingValue | number:'1.2-2' }}
+      </label>
+    </div>
+
+    <div *ngIf="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.unlimitedMileage == true" class="col-6 md:col-6 field">
+      <label class="font-medium text-2xl">{{'label_unlimited_mileage_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
+    </div>
+
+    <div *ngIf="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileage == true" class="col-6 md:col-6 field">
+      <label class="font-medium text-2xl">{{'label_limited_mileage_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
+    </div>
+
+    <div *ngIf="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileageIncluded != null" class="col-6 md:col-6 field">
+      <label class="font-medium text-2xl">{{'label_limited_mileage_included_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
+      <label class="font-medium text-2xl">
+        {{customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileageIncluded}}
+      </label>
+    </div>
+
+    <div *ngIf="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileage == true" class="col-6 md:col-6 field">
+      <label class="font-medium text-2xl">{{'label_limited_mileage_value_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
+      <label class="font-medium text-2xl">
+        {{'currency_Generic' | translate}}
+        {{ customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileageValue | number:'1.2-2' }}
+      </label>
+    </div>
+
+    <div class="col-6 md:col-6 field"></div>
+
+    <div *ngIf="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.customerVehicle.limitedMileage == true" class="col-6 md:col-6 field">
+      <label for="bookingStartKM" class="font-medium text-2xl">{{'label_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}</label>
+      <input pInputText type="text" class="p-inputtext-lg"
+        placeholder="{{'placeholder_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog' | translate}}"
+        [(ngModel)]="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.bookingStartKM" name="bookingStartKM" required="true" />
+    </div>
+
+    <div class="col-12 md:col-12 field">
+      <label for="checkInNotes" class="font-medium text-2xl">{{'label_check_in_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog' | translate}}</label>
+      <div class="col-12 md:col-12 field">
+        <textarea rows="10" pInputTextarea name="checkInNotes" 
+          [(ngModel)]="customerVehicleBookingCustomerVehicleCheckInDynamicDialogUIDTO.customerVehicleBooking.checkInNotes"
+          placeholder="{{'placeholder_check_in_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog' | translate}}" 
+          style="width: 100%;">
+        </textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-12 flex flex-row justify-content-left py-0">
+
+    <div class="md:col-3 mt-4 pt-1 field">
+      <button pButton class="p-ripple p-element w-auto p-button p-component md:w-14rem"
+        type="submit">
+        <i class="pi pi-check-circle"></i>
+        <span class="p-button-label">
+          {{'span_button_label_check_in_Generic' | translate}}
+        </span>
+      </button>
+    </div>
+
+  </div>
+
+</form>

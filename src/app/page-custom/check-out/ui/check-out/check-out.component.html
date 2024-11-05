@@ -1,0 +1,334 @@
+<div class="block-content">
+  <div class="surface-50 px-4 py-8 md:px-6 lg:px-8">
+    <div class="text-900 font-medium text-6xl mb-5">{{'title_CheckOut' | translate}}</div>
+    <div class="grid -mr-3 -ml-3">
+      <div class="col-12 lg:col-9 p-3">
+        <div class="px-0 py-4 lg:px-4 surface-card border-round shadow-2">
+
+          <!-- Carrinho -->
+          <div class="flex">
+            <div class="flex flex-column align-items-center ml-3" style="width: 2rem;">
+              <span
+                class="bg-green-500 text-0 flex align-items-center justify-content-center border-circle"
+                style="min-width: 3rem; min-height: 3rem;">
+                <i class="pi pi-shopping-cart text-xl"></i>
+              </span>
+              <div class="h-full border-dashed border-1 border-green-500" style="min-height: 12rem;"></div>
+            </div>
+            <div class="ml-0 lg:ml-5 p-2 flex-auto">
+              <div class="mb-3"><span class="text-900 text-xl block ml-2">{{'title_Cart_CheckOut' | translate}}</span>
+              </div>
+              <div class="p-2 flex flex-column lg:flex-row flex-wrap lg:align-items-center">
+
+                <ng-container *ngIf="checkoutUIDTO.customerVehicle?.dataURI; else noCustomerVehicleImage">
+                  <img [src]="checkoutUIDTO.customerVehicle.dataURI" alt="Customer Vehicle Image"
+                    class="w-16rem h-10rem mb-3 lg:mb-0 flex-shrink-0">
+                </ng-container>
+                
+                <ng-template #noCustomerVehicleImage>
+                  <div class="w-16rem h-10rem mb-3 lg:mb-0 flex-shrink-0" style="position: relative;">
+                    <span
+                      style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">
+                      {{'span_no_image_Generic' | translate}}
+                    </span>
+                  </div>
+                </ng-template>
+
+                <div class="flex-auto lg:ml-3">
+                  <div *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.customer != null"
+                    class="text-900 text-sm mb-3">
+                    {{ checkoutUIDTO.customerVehicle.customer.firstName }}
+                  </div>
+                  <div
+                    *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.vehicle != null && checkoutUIDTO.customerVehicle.vehicle.vehicleBrand != null"
+                    class="flex align-items-center justify-content-between mb-3">
+                    <span class="text-900 font-medium">{{
+                      checkoutUIDTO.customerVehicle.vehicle.vehicleBrand.vehicleBrandName }}
+                    </span>
+                  </div>
+                  <div *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.vehicle"
+                    class="text-900 text-sm mb-3">
+                    {{ checkoutUIDTO.customerVehicle.vehicle.vehicleName + ' ' +
+                    checkoutUIDTO.customerVehicle.yearOfTheCar }}
+                  </div>
+                  <div
+                    *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.vehicleColor != null"
+                    class="text-900 text-sm mb-3">
+                    {{ checkoutUIDTO.customerVehicle.vehicleColor.vehicleColorName }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Endereço De Cobrança -->
+          <div class="flex">
+            <div class="flex flex-column align-items-center ml-3" style="width: 2rem;">
+              <span class="bg-green-500 text-0 flex align-items-center justify-content-center border-circle"
+                style="min-width: 3rem; min-height: 3rem;">
+                <i class="pi pi-money-bill text-xl"></i>
+              </span>
+              <div class="h-full border-dashed border-1 border-green-500" style="min-height: 12rem;">
+              </div>
+            </div>
+            <div class="ml-0 lg:ml-5 p-2 flex-auto">
+              <div class="mb-3"><span class="text-900 text-xl block ml-2">{{'title_Address_CheckOut' |
+                  translate}}</span>
+              </div>
+              <div class="grid flex-column lg:flex-row">
+                <div *ngFor="let customerAddress of checkoutUIDTO.customersAddressesBilling" class="col p-3"
+                  [ngClass]="{ 'selected': checkoutUIDTO.selectedCustomerAddressBilling?.customerAddressId === customerAddress.customerAddressId }"
+                  (click)="selectedCustomerAddress(customerAddress)">
+                  <div
+                    class="flex flex-column border-round border-1 surface-border p-4 cursor-pointer hover:border-primary transition-duration-150 border-primary">
+                    <div class="flex justify-content-between mb-3">
+                      <span class="text-900 text-xl font-medium">{{customerAddress.address.nickname}}
+                      </span>
+                      <span class="text-600 font-medium" (click)="editAddressRegisterDynamicDialog(customerAddress)">
+                        <i class="pi pi-pencil mr-2">
+                        </i>
+                        {{'span_button_label_update_Generic' | translate}}
+                      </span>
+                    </div>
+                    <span *ngIf="customerAddress.address.complement == null" class="inline-block text-600 mb-3">{{
+                      customerAddress.address.streetAddress + ', ' + customerAddress.address.number + ', ' +
+                      customerAddress.address.state.stateName + ', ' + customerAddress.address.city.cityName + ', ' +
+                      customerAddress.address.country.countryName }}
+                    </span>
+
+                    <span *ngIf="customerAddress.address.complement != null" class="inline-block text-600 mb-3">{{
+                      customerAddress.address.streetAddress + ', ' + customerAddress.address.number + ', ' +
+                      customerAddress.address.complement + ', ' + customerAddress.address.state.stateName + ', ' +
+                      customerAddress.address.city.cityName + ', ' + customerAddress.address.country.countryName }}
+                    </span>
+
+                  </div>
+                </div>
+
+                <div class="col p-3" style="min-height: 10rem; min-width: 10rem;"
+                  (click)="newAddressRegisterDynamicDialog()">
+                  <div
+                    class="flex h-full flex-column justify-content-center align-items-center py-5 lg:py-0 border-round border-1 surface-border surface-100 cursor-pointer hover:border-primary transition-duration-150">
+                    <span
+                      class="text-600 border-circle border-2 w-2rem h-2rem flex align-items-center justify-content-center">
+                      <i class="pi pi-fw pi-plus"></i>
+                    </span>
+                    <span class="text-600 mt-3">{{'button_Address_CheckOut' | translate}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Endereço De Entrega -->
+          <div *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.deliverToAddress" class="flex">
+
+            <div class="flex flex-column align-items-center ml-3" style="width: 2rem;">
+              <span class="bg-green-500 text-0 flex align-items-center justify-content-center border-circle"
+                style="min-width: 3rem; min-height: 3rem;">
+                <i>
+                  <img src="assets/images/icon/delivery.png" style="width: 36px; filter: invert(100%);">
+                </i>
+              </span>
+              <div class="h-full border-dashed border-1 border-green-500" style="min-height: 12rem;">
+              </div>
+            </div>
+
+            <div class="ml-0 lg:ml-5 p-2 flex-auto">
+              <div class="mb-3"><span class="text-900 text-xl block ml-2">{{'title_delivery_Address_CheckOut' |
+                  translate}}</span>
+              </div>
+              <div class="grid flex-column lg:flex-row">
+                <div *ngFor="let customerAddress of checkoutUIDTO.customerAddressDeliverys" class="col p-3"
+                  [ngClass]="{ 'selected': checkoutUIDTO.selectedCustomerAddressDelivery?.customerAddressId === customerAddress.customerAddressId }"
+                  (click)="selectedCustomerAddressDelivery(customerAddress)">
+                  <div
+                    class="flex flex-column border-round border-1 surface-border p-4 cursor-pointer hover:border-primary transition-duration-150 border-primary">
+                    <div class="flex justify-content-between mb-3">
+                      <span class="text-900 text-xl font-medium">{{customerAddress.address.nickname}}
+                      </span>
+                      <span class="text-600 font-medium" (click)="editAddressRegisterDynamicDialog(customerAddress)">
+                        <i class="pi pi-pencil mr-2">
+                        </i>
+                        {{'span_button_label_update_Generic' | translate}}
+                      </span>
+                    </div>
+                    <span *ngIf="customerAddress.address.complement == null" class="inline-block text-600 mb-3">{{
+                      customerAddress.address.streetAddress + ', ' + customerAddress.address.number + ', ' +
+                      customerAddress.address.state.stateName + ', ' + customerAddress.address.city.cityName + ', ' +
+                      customerAddress.address.country.countryName }}
+                    </span>
+
+                    <span *ngIf="customerAddress.address.complement != null" class="inline-block text-600 mb-3">{{
+                      customerAddress.address.streetAddress + ', ' + customerAddress.address.number + ', ' +
+                      customerAddress.address.complement + ', ' + customerAddress.address.state.stateName + ', ' +
+                      customerAddress.address.city.cityName + ', ' + customerAddress.address.country.countryName }}
+                    </span>
+
+                  </div>
+                </div>
+
+                <div class="col p-3" style="min-height: 10rem; min-width: 10rem;"
+                  (click)="newAddressRegisterDynamicDialog()">
+                  <div
+                    class="flex h-full flex-column justify-content-center align-items-center py-5 lg:py-0 border-round border-1 surface-border surface-100 cursor-pointer hover:border-primary transition-duration-150">
+                    <span
+                      class="text-600 border-circle border-2 w-2rem h-2rem flex align-items-center justify-content-center">
+                      <i class="pi pi-fw pi-plus"></i>
+                    </span>
+                    <span class="text-600 mt-3">{{'button_Address_CheckOut' | translate}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Endereço De Retirada -->
+          <div *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.pickUpAtAddress" class="flex">
+            <div class="flex flex-column align-items-center ml-3" style="width: 2rem;">
+              <span class="bg-green-500 text-0 flex align-items-center justify-content-center border-circle"
+                style="min-width: 3rem; min-height: 3rem;">
+                <i>
+                  <img src="assets/images/icon/pickup.png" style="width: 36px; filter: invert(100%);">
+                </i>
+              </span>
+              <div class="h-full border-dashed border-1 border-green-500" style="min-height: 12rem;">
+              </div>
+            </div>
+            <div class="ml-0 lg:ml-5 p-2 flex-auto">
+              <div class="mb-3"><span class="text-900 text-xl block ml-2">{{'title_pickup_Address_CheckOut' |
+                  translate}}</span>
+              </div>
+              <div class="grid flex-column lg:flex-row">
+                <div *ngFor="let customerAddress of checkoutUIDTO.customersAddressPickups" class="col p-3"
+                  [ngClass]="{ 'selected': checkoutUIDTO.selectedCustomerAddressPickUp?.customerAddressId === customerAddress.customerAddressId }"
+                  (click)="selectedCustomerAddressPickUp(customerAddress)">
+                  <div
+                    class="flex flex-column border-round border-1 surface-border p-4 cursor-pointer hover:border-primary transition-duration-150 border-primary">
+                    <div class="flex justify-content-between mb-3">
+                      <span class="text-900 text-xl font-medium">{{customerAddress.address.nickname}}
+                      </span>
+                      <span class="text-600 font-medium" (click)="editAddressRegisterDynamicDialog(customerAddress)">
+                        <i class="pi pi-pencil mr-2">
+                        </i>
+                        {{'span_button_label_update_Generic' | translate}}
+                      </span>
+                    </div>
+                    <span *ngIf="customerAddress.address.complement == null" class="inline-block text-600 mb-3">{{
+                      customerAddress.address.streetAddress + ', ' + customerAddress.address.number + ', ' +
+                      customerAddress.address.state.stateName + ', ' + customerAddress.address.city.cityName + ', ' +
+                      customerAddress.address.country.countryName }}
+                    </span>
+
+                    <span *ngIf="customerAddress.address.complement != null" class="inline-block text-600 mb-3">{{
+                      customerAddress.address.streetAddress + ', ' + customerAddress.address.number + ', ' +
+                      customerAddress.address.complement + ', ' + customerAddress.address.state.stateName + ', ' +
+                      customerAddress.address.city.cityName + ', ' + customerAddress.address.country.countryName }}
+                    </span>
+
+                  </div>
+                </div>
+
+                <div class="col p-3" style="min-height: 10rem; min-width: 10rem;"
+                  (click)="newAddressRegisterDynamicDialog()">
+                  <div
+                    class="flex h-full flex-column justify-content-center align-items-center py-5 lg:py-0 border-round border-1 surface-border surface-100 cursor-pointer hover:border-primary transition-duration-150">
+                    <span
+                      class="text-600 border-circle border-2 w-2rem h-2rem flex align-items-center justify-content-center">
+                      <i class="pi pi-fw pi-plus"></i>
+                    </span>
+                    <span class="text-600 mt-3">{{'button_Address_CheckOut' | translate}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+      <div class="col-12 lg:col-3 p-3">
+        <div class="surface-card p-4 border-round shadow-2">
+          <div class="border-bottom-1 surface-border pb-4">
+            <span class="text-900 text-xl block">{{ 'title_OrderSummary_CheckOut' | translate }}
+            </span>
+          </div>
+
+          <div class="border-bottom-1 surface-border my-3 py-2">
+
+            <div class="flex justify-content-between mb-3">
+              <span class="text-900">{{ 'date_init_OrderSummary_CheckOut' | translate }}
+              </span>
+              <span class="text-900">
+                {{ checkoutUIDTO.dateInit | date:'dd/MM/yyyy' }} - 
+                {{ checkoutUIDTO.selectedHourInit }}
+              </span>
+            </div>
+
+            <div class="flex justify-content-between mb-3">
+              <span class="text-900">{{ 'date_end_OrderSummary_CheckOut' | translate }}
+              </span>
+              <span class="text-900">
+                {{ checkoutUIDTO.dateEnd | date:'dd/MM/yyyy' }} - 
+                {{ checkoutUIDTO.selectedHourEnd }}
+              </span>
+            </div>
+
+          </div>
+
+          <div *ngIf="checkoutUIDTO.customerVehicle != null" class="border-bottom-1 surface-border my-3 py-2">
+
+            <div class="flex justify-content-between mb-3">
+              <span class="text-900">{{ 'price_OrderSummary_CheckOut' | translate }}
+              </span>
+              <span class="text-900">
+                {{'currency_Generic' | translate}} 
+                {{ checkoutUIDTO.customerVehicle.dailyRate | number:'1.2-2' }} x {{ checkoutUIDTO.daysReservation }} 
+                {{'days_Cart_CheckOut' | translate }}
+              </span>
+            </div>
+
+            <div
+              *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.deliverToAddress && checkoutUIDTO.deliveryCost != null"
+              class="flex justify-content-between mb-3">
+              <span class="text-900">{{ 'delivery_OrderSummary_CheckOut' | translate }}
+              </span>
+              <span class="text-900">{{ 'currency_Generic' | translate }} {{ checkoutUIDTO.deliveryCost | number:'1.2-2' }}
+              </span>
+            </div>
+
+            <div
+              *ngIf="checkoutUIDTO.customerVehicle != null && checkoutUIDTO.customerVehicle.pickUpAtAddress && checkoutUIDTO.pickUpCost != null"
+              class="flex justify-content-between mb-3">
+              <span class="text-900">{{ 'pickup_OrderSummary_CheckOut' | translate }}
+              </span>
+              <span class="text-900">{{ 'currency_Generic' | translate }} {{ checkoutUIDTO.pickUpCost | number:'1.2-2' }}
+              </span>
+            </div>
+
+          </div>
+
+          <div class="border-bottom-1 surface-border my-3 py-2">
+            <div class="flex justify-content-between mb-3">
+              <span class="text-900 font-medium">{{ 'total_OrderSummary_CheckOut' | translate }}
+              </span>
+              <span class="text-900 font-bold">{{'currency_Generic' | translate}} {{ checkoutUIDTO.totalBookingValue | number:'1.2-2' }}
+              </span>
+            </div>
+          </div>
+
+          <ng-container *ngIf="checkoutUIDTO.customer && checkoutUIDTO.customer.customerId">
+            <app-check-out-mp [customerId]="checkoutUIDTO.customer.customerId"
+              [selectedCustomerAddressDelivery]="checkoutUIDTO.selectedCustomerAddressDelivery || null"
+              [selectedCustomerAddressPickUp]="checkoutUIDTO.selectedCustomerAddressPickUp || null"
+              [selectedCustomerAddressBilling]="checkoutUIDTO.selectedCustomerAddressBilling || null"
+              [daysReservation]="checkoutUIDTO.daysReservation"
+              [totalBookingValue]="checkoutUIDTO.totalBookingValue">
+            </app-check-out-mp>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+{
+"title_CustomerVehicleBankAccountSearch": "Pesquisar Conta Bancária",
+"label_pix_key_CustomerVehicleBankAccountSearch": "Chave Da Conta Bancária",
+"placeholder_pix_key_CustomerVehicleBankAccountSearch": "Informe A Chave Da Conta Bancária",
+
+"table_caption_title_CustomerVehicleBankAccountSearch": "Conta Bancária",
+"table_header_payment_status_id_CustomerVehicleBankAccountSearch": "ID",
+"table_header_pix_key_CustomerVehicleBankAccountSearch": "Chave PIX",
+"table_header_enabled_CustomerVehicleBankAccountSearch": "Ativo?"
+}

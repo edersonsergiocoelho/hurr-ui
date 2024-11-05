@@ -1,0 +1,30 @@
+{
+  "title_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Check-Out",
+  "label_booking_start_date_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Data Início Da Reserva: ",
+  "label_booking_end_date_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Data Final Da Reserva: ",
+  "label_daily_rate_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Preço Da Diária: ",
+  "label_total_booking_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Total Da Reserva:",
+  "label_unlimited_mileage_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Tipo De Reserva: Ilimitado",
+  "label_limited_mileage_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Tipo De Reserva: Limitado",
+  "label_limited_mileage_included_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Quilometragem Limitada Incluída:",
+  "label_limited_mileage_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Valor Da Quilometragem Adicional:",
+  "label_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Quilometragem Inicial",
+  "placeholder_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Informe A Quilometragem Inicial Do Veículo",
+  "label_booking_end_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Quilometragem Final",
+  "placeholder_booking_end_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Informe A Quilometragem Final Do Veículo",
+  "label_limited_mileage_total_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Total Da Quilometragem Adicional",
+  "placeholder_limited_mileage_total_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Informe O Total Da Quilometragem Adicional",
+  "label_limited_mileage_total_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Valor Total A Pagar Da Quilometragem Adicional",
+  "placeholder_limited_mileage_total_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Informe O Valor Total A Pagar Da Quilometragem Adicional",
+  
+  "title_additional_charges_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Cobranças Adicionais",
+  "label_cleaning_fee_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Taxa De Limpeza?",
+
+  "label_check_in_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Anotações - Check-In",
+  "placeholder_check_in_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Informe As Anotações Do Check-In Por Exemplo Algum Detalhe Do Carro Que Já Tinha Por Ex.",
+  "label_check_out_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Anotações - Check-Out",
+  "placeholder_check_out_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Informe As Anotações Do Check-Out Por Exemplo Algum Detalhe Que O Cliente Fez E Vai Ser Cobrado.",
+
+  "check_out_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Check-Out Efetuado Com Sucesso.",
+  "check_out_detail_message_service_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Check-Out Efetuado Com Sucesso. As Informações Do Veículo E Da Reserva Foram Processadas Corretamente E Já Estão Disponíveis."
+}

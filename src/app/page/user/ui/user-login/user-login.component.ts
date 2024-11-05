@@ -12,6 +12,8 @@ import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthSignInDTO } from 'src/app/core/auth/dto/auth-sign-in-dto.dto';
 import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { UserPreferenceService } from 'src/app/page/admin/user-preference/service/user-preference.service';
+import { ThemeService } from 'src/app/global/template/theme/service/theme.service';
 
 @Component({
   selector: 'app-user-login',
@@ -39,14 +41,14 @@ export class UserLoginComponent {
     private router: Router,
     private sessionStorageService: SessionStorageService,
     private translateService: TranslateService,
+    private themeService: ThemeService,
     private userService: UserService,
+    private userPreferenceService: UserPreferenceService,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
-
-    this.translateService.setDefaultLang('pt_BR');
 
     this.resetForm();
 
@@ -95,18 +97,18 @@ export class UserLoginComponent {
       const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
       // Atribui as traduções aos campos correspondentes.
-      this.userLoginUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.userLoginUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userLoginUIDTO.info_message_service_Generic = translations['info_message_service_Generic'];
-      this.userLoginUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.userLoginUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.userLoginUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userLoginUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.userLoginUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
     } catch (error: any) {
 
       // Trata os erros de carregamento e exibe uma mensagem de erro.
       this.messageService.add({
         severity: SeverityConstants.ERROR,
-        summary: this.userLoginUIDTO.error_message_service_Generic,
-        detail: error.error.message
+        summary: this.userLoginUIDTO.error_summary_message_service_Generic,
+        detail: error.error?.message || error.toString()
       });
 
     } finally {
@@ -118,10 +120,10 @@ export class UserLoginComponent {
   private loadKeys(): string[] {
     // Define as chaves para tradução que serão carregadas.
     return [
-      'warn_message_service_Generic',
-      'error_message_service_Generic',
-      'info_message_service_Generic',
-      'success_message_service_Generic'
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic'
     ];
   }
 
@@ -139,6 +141,7 @@ export class UserLoginComponent {
     );
   }
 
+  /*
   login(user: any): void {
     this.sessionStorageService.saveUser(user);
     this.isLoginFailed = false;
@@ -146,6 +149,49 @@ export class UserLoginComponent {
     this.currentUser = this.sessionStorageService.getUser();
     this.homeUIService.setCurrentUser(this.currentUser);
     this.router.navigate(['']);
+  }
+  */
+
+  login(user: any): void {
+    this.sessionStorageService.saveUser(user);
+
+    // Chama o serviço para buscar as preferências do usuário
+    this.userPreferenceService.findByUserId(user.userId).pipe(first()).subscribe({
+      next: (userPreferences: any) => {
+        // Salva as preferências do usuário no sessionStorage
+        this.sessionStorageService.saveUserPreference(userPreferences.body);
+
+        const currentUserPreference = this.sessionStorageService.getUserPreference();
+
+        if (currentUserPreference != null) {
+          if (currentUserPreference.language != null) {
+            this.translateService.setDefaultLang(currentUserPreference.language);
+          }
+    
+          if (currentUserPreference.theme != null) {
+            this.themeService.switchTheme(currentUserPreference.theme);
+          }
+        } else {
+          this.translateService.setDefaultLang('pt_BR');
+          this.themeService.switchTheme("lara-light-purple");
+        }
+
+      },
+      error: (error) => {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: this.userLoginUIDTO.error_summary_message_service_Generic, 
+          detail: error.error?.message || error.toString() 
+        });
+      },
+      complete: () => {
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.currentUser = this.sessionStorageService.getUser();
+        this.homeUIService.setCurrentUser(this.currentUser);
+        this.router.navigate(['']);
+      }
+    });
   }
 
   loginGoogle() {
@@ -169,8 +215,8 @@ export class UserLoginComponent {
           
           this.messageService.add({ 
             severity: SeverityConstants.WARN, 
-            summary: this.userLoginUIDTO.warn_message_service_Generic, 
-            detail: error.error.message
+            summary: this.userLoginUIDTO.warn_summary_message_service_Generic, 
+            detail: error.error?.message || error.toString()
           });
         }
 
@@ -178,8 +224,8 @@ export class UserLoginComponent {
 
           this.messageService.add({ 
             severity: SeverityConstants.ERROR, 
-            summary: this.userLoginUIDTO.error_message_service_Generic, 
-            detail: error.error.message
+            summary: this.userLoginUIDTO.error_summary_message_service_Generic, 
+            detail: error.error?.message || error.toString()
           });
         }
 

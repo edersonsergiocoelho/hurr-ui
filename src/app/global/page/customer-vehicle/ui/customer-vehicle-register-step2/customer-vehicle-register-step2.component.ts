@@ -35,7 +35,6 @@ export class CustomerVehicleRegisterStep2Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
@@ -69,14 +68,14 @@ export class CustomerVehicleRegisterStep2Component implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic'
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleRegisterStep2UIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleRegisterStep2UIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleRegisterStep2UIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleRegisterStep2UIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
 
     } catch (error: any) {
 
@@ -84,7 +83,7 @@ export class CustomerVehicleRegisterStep2Component implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep2UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep2UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -92,7 +91,7 @@ export class CustomerVehicleRegisterStep2Component implements OnInit {
 
     try {
 
-      const vehicleBrandServiceFindAll = await firstValueFrom(this.vehicleBrandService.getAllVehicleBrands().pipe(first()));
+      const vehicleBrandServiceFindAll = await firstValueFrom(this.vehicleBrandService.findAll().pipe(first()));
 
       if (vehicleBrandServiceFindAll.status == 200) {
         if (vehicleBrandServiceFindAll.body != null && vehicleBrandServiceFindAll.body.length > 0) {
@@ -106,7 +105,7 @@ export class CustomerVehicleRegisterStep2Component implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep2UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep2UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -135,7 +134,7 @@ export class CustomerVehicleRegisterStep2Component implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep2UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep2UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -164,7 +163,7 @@ export class CustomerVehicleRegisterStep2Component implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep2UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep2UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

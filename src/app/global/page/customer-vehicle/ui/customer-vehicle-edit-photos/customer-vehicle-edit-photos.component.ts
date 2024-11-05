@@ -36,7 +36,6 @@ export class CustomerVehicleEditPhotosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
@@ -54,17 +53,17 @@ export class CustomerVehicleEditPhotosComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'save_success_message_service_CustomerVehicleEditPhotos'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleEditPhotosUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleEditPhotosUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.customerVehicleEditPhotosUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.customerVehicleEditPhotosUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleEditPhotosUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleEditPhotosUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.customerVehicleEditPhotosUIDTO.save_success_message_service_CustomerVehicleEditPhotos = translations['save_success_message_service_CustomerVehicleEditPhotos'];
 
     } catch (error: any) {
@@ -73,7 +72,7 @@ export class CustomerVehicleEditPhotosComponent implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditPhotosUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditPhotosUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -103,7 +102,7 @@ export class CustomerVehicleEditPhotosComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditPhotosUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditPhotosUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -194,7 +193,7 @@ export class CustomerVehicleEditPhotosComponent implements OnInit {
 
           this.messageService.add({
             severity: SeverityConstants.SUCCESS,
-            summary: '' + this.customerVehicleEditPhotosUIDTO.success_message_service_Generic,
+            summary: '' + this.customerVehicleEditPhotosUIDTO.success_summary_message_service_Generic,
             detail: '' + this.customerVehicleEditPhotosUIDTO.save_success_message_service_CustomerVehicleEditPhotos,
           });
         }
@@ -206,7 +205,7 @@ export class CustomerVehicleEditPhotosComponent implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleEditPhotosUIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleEditPhotosUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

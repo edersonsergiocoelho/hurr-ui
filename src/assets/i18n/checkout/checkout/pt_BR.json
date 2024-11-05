@@ -1,0 +1,22 @@
+{
+  "title_CheckOut": "Carrinho",
+
+  "title_delivery_Address_CheckOut": "Endereço De Entrega",
+  "title_pickup_Address_CheckOut": "Endereço De Retirada",
+  "title_Address_CheckOut": "Endereço De Cobrança",
+  "button_Address_CheckOut": "Adicionar Novo Endereço",
+  "header_Address_CheckOut": "Adicionar Novo Endereço",
+  "select_customer_address_Address_CheckOut": "Selecione O Endereço De Cobrança",
+
+  "title_Cart_CheckOut": "Carrinho",
+  "price_Cart_CheckOut": "Preço",
+  "days_Cart_CheckOut": "Dias",
+
+  "title_OrderSummary_CheckOut": "Resumo Do Pedido",
+  "date_init_OrderSummary_CheckOut": "Início Da Viagem",
+  "date_end_OrderSummary_CheckOut": "Fim Da Viagem",
+  "price_OrderSummary_CheckOut": "Preço",
+  "delivery_OrderSummary_CheckOut": "Entrega",
+  "pickup_OrderSummary_CheckOut": "Retirada",
+  "total_OrderSummary_CheckOut": "Total"
+}

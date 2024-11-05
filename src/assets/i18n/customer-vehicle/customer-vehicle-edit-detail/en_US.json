@@ -1,0 +1,39 @@
+{
+  "title_CustomerVehicleEditDetail": "Details",
+
+  "label_vehicle_brand_CustomerVehicleEditDetail": "Brand",
+  "placeholder_vehicle_brand_CustomerVehicleEditDetail": "Enter Brand",
+  "label_vehicle_CustomerVehicleEditDetail": "Vehicle",
+  "placeholder_vehicle_CustomerVehicleEditDetail": "Enter Vehicle",
+  "label_vehicle_model_CustomerVehicleEditDetail": "Model",
+  "placeholder_vehicle_model_CustomerVehicleEditDetail": "Enter Vehicle Model",
+
+  "label_vehicle_transmission_CustomerVehicleEditDetail": "Transmission",
+  "placeholder_vehicle_transmission_CustomerVehicleEditDetail": "Enter The Vehicle Transmission",
+  "label_mileage_created_CustomerVehicleEditDetail": "Mileage",
+  "placeholder_mileage_created_CustomerVehicleEditDetail": "Enter The Vehicle Mileage",
+  
+  "label_license_plate_type_CustomerVehicleEditDetail": "License Plate Type",
+  "label_license_plate_type_old_model_CustomerVehicleEditDetail": "Old Model",
+  "label_license_plate_type_mercosul_CustomerVehicleEditDetail": "Mercosul",
+  "label_license_plate_CustomerVehicleEditDetail": "Vehicle License Plate",
+  "placeholder_license_plate_CustomerVehicleEditDetail": "Enter Vehicle License Plate",
+  "label_renavam_CustomerVehicleEditDetail": "Vehicle Renavam",
+  "placeholder_renavam_CustomerVehicleEditDetail": "Enter Vehicle Renavam",
+  "label_state_CustomerVehicleEditDetail": "State",
+  "placeholder_state_CustomerVehicleEditDetail": "Enter The State",
+  "label_chassis_CustomerVehicleEditDetail": "Vehicle Chassis",
+  "placeholder_chassis_CustomerVehicleEditDetail": "Enter Vehicle Chassis",
+  "label_year_of_manufacture_CustomerVehicleEditDetail": "Year Of Manufacture",
+  "placeholder_year_of_manufacture_CustomerVehicleEditDetail": "Enter Year Of Manufacture",
+  "label_year_of_the_car_CustomerVehicleEditDetail": "Car Year",
+  "placeholder_year_of_the_car_CustomerVehicleEditDetail": "Enter Car Year",
+  "label_vehicle_color_CustomerVehicleEditDetail": "Color",
+  "placeholder_vehicle_color_CustomerVehicleEditDetail": "Enter Vehicle Color",
+  "label_vehicle_fuel_type_CustomerVehicleEditDetail": "Fuel Type",
+  "placeholder_vehicle_fuel_type_CustomerVehicleEditDetail": "Enter Vehicle Fuel Type",
+  "label_description_CustomerVehicleEditDetail": "Description",
+  "placeholder_description_CustomerVehicleEditDetail": "Enter Description",
+
+  "save_success_message_service_CustomerVehicleEditDetail": "Vehicle Details Successfully Updated."
+}

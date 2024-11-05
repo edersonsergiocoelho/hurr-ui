@@ -1,0 +1,30 @@
+{
+  "title_AddressRegisterDynamicDialog": "Address Registration",
+  
+  "label_address_type_AddressRegisterDynamicDialog": "Address Type",
+  "placeholder_address_type_AddressRegisterDynamicDialog": "Enter The Address Type, For Example, When You Want To Register The Same Delivery And Pickup Address",
+  "label_nickname_AddressRegisterDynamicDialog": "Nickname",
+  "placeholder_nickname_AddressRegisterDynamicDialog": "Enter The Nickname e.g. Santander Card",
+  "label_country_AddressRegisterDynamicDialog": "Country",
+  "placeholder_country_AddressRegisterDynamicDialog": "Enter The Country",
+  "label_state_AddressRegisterDynamicDialog": "State",
+  "placeholder_state_AddressRegisterDynamicDialog": "Enter The State",
+  "label_city_AddressRegisterDynamicDialog": "City",
+  "placeholder_city_AddressRegisterDynamicDialog": "Enter The City",
+  "label_street_address_AddressRegisterDynamicDialog": "Street",
+  "placeholder_street_address_AddressRegisterDynamicDialog": "Enter The Street, Avenue, Etc.",
+  "label_number_AddressRegisterDynamicDialog": "Number",
+  "placeholder_number_AddressRegisterDynamicDialog": "Enter The Street, Avenue, Etc. Number",
+  "label_complement_AddressRegisterDynamicDialog": "Complement",
+  "placeholder_complement_AddressRegisterDynamicDialog": "Enter Complement e.g. Apartment 1, Block 1",
+  "label_zip_code_AddressRegisterDynamicDialog": "ZIP Code",
+  "placeholder_zip_code_AddressRegisterDynamicDialog": "Enter The ZIP Code Number, e.g. 17.340-000",
+  "label_created_date_AddressRegisterDynamicDialog": "Creation Date",
+  "placeholder_created_date_AddressRegisterDynamicDialog": "Record Creation Date",
+  "label_modified_date_AddressRegisterDynamicDialog": "Modification Date",
+  "placeholder_modified_date_AddressRegisterDynamicDialog": "Record Modification Date",
+  "label_enabled_AddressRegisterDynamicDialog": "Enabled?",
+ 
+  "save_success_message_service_AddressRegisterDynamicDialog": "Billing Address Successfully Registered.",
+  "update_success_message_service_AddressRegisterDynamicDialog": "Billing Address Successfully Updated."
+}

@@ -32,7 +32,6 @@ export class UserRoleSearchComponent implements OnInit {
               private userRoleService: UserRoleService) { }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetSearchForm();
   }
 
@@ -54,8 +53,8 @@ export class UserRoleSearchComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic', 
-        'warn_message_service_Generic',
+        'error_summary_message_service_Generic', 
+        'warn_summary_message_service_Generic',
         'table_header_display_name_UserRoleSearch',
         'table_header_email_UserRoleSearch',
         'table_header_role_name_UserRoleSearch',
@@ -64,8 +63,8 @@ export class UserRoleSearchComponent implements OnInit {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.userRoleSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userRoleSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.userRoleSearchUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userRoleSearchUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
       this.userRoleSearchUIDTO.table_header_display_name_UserRoleSearch = translations['table_header_display_name_UserRoleSearch'];
       this.userRoleSearchUIDTO.table_header_email_UserRoleSearch = translations['table_header_email_UserRoleSearch'];
       this.userRoleSearchUIDTO.table_header_role_name_UserRoleSearch = translations['table_header_role_name_UserRoleSearch'];
@@ -74,7 +73,7 @@ export class UserRoleSearchComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.userRoleSearchUIDTO.error_message_service_Generic,
+        summary: '' + this.userRoleSearchUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -93,7 +92,7 @@ export class UserRoleSearchComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.userRoleSearchUIDTO.error_message_service_Generic,
+        summary: '' + this.userRoleSearchUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -146,7 +145,7 @@ export class UserRoleSearchComponent implements OnInit {
       error: (error) => {
 
         if (error.status == 500) {
-          this.messageService.add({ severity: 'error', summary: '' + this.userRoleSearchUIDTO.error_message_service_Generic, detail: error.error.message });
+          this.messageService.add({ severity: 'error', summary: '' + this.userRoleSearchUIDTO.error_summary_message_service_Generic, detail: error.error.message });
         }
 
         this.ngxSpinnerService.hide();

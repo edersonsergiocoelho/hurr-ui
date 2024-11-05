@@ -13,6 +13,8 @@ export class HomeUIDTO extends TranslateSeverityDTO {
   menuHeaders: Menu[] = [];
   menuHeaderIcons: Menu[] = [];
   menuHeaderDropdowns: Menu[] = [];
+  menuSides: Menu[] = [];
+  menuSideSettings: Menu[] = [];
   menuSideCustomerVehicleEdits: Menu[] = [];
 
   menuHeaderDropDownShowMenu: boolean;

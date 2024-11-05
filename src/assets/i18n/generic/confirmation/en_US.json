@@ -1,0 +1,9 @@
+{
+  "message_message_service_Generic": "Are You Sure You Want To Delete The Selected Item?",
+  "message_all_message_service_Generic": "Are You Sure You Want To Delete The Selected Items?",
+  "message_cancel_booking_message_service_Generic": "Are You Sure You Want To Cancel The Booking?",
+  "header_message_service_Generic": "Confirmation",
+
+  "accept_label_message_service_Generic": "Yes",
+  "reject_label_message_service_Generic": "No"
+}

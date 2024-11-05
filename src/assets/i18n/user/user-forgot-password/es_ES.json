@@ -1,0 +1,22 @@
+{
+  "title_UserForgotPassword": "Olvidó Su Contraseña En HURR",
+  
+  "title_paragraph_UserForgotPassword": "Vamos A Desbloquear Su Contraseña Rápida Y Fácilmente.",
+  
+  "label_email_UserForgotPassword": "Correo Electrónico",
+  "placeholder_email_UserForgotPassword": "Ingrese El Correo Electrónico Ej. joao@gmail.com",
+  "label_password_verification_code_UserRegister": "Contraseña - Código De Verificación",
+  "placeholder_password_verification_code_UserRegister": "Ingrese El Código De Verificación De La Contraseña",
+  "label_password_UserForgotPassword": "Contraseña",
+  "placeholder_password_UserForgotPassword": "Ingrese La Contraseña",
+  "label_matching_password_UserForgotPassword": "Repetir Contraseña",
+  "placeholder_matching_password_UserForgotPassword": "Repita La Contraseña",
+  
+  "forgot_password_verification_code_summary_message_service_UserForgotPassword": "Correo Electrónico De Verificación Enviado",
+  "forgot_password_verification_code_detail_message_service_UserForgotPassword": "Se Ha Enviado Un Correo Electrónico Con Un Código De Verificación A Su Dirección De Correo Electrónico Registrada.",
+  "forgot_password_validated_code_summary_message_service_UserForgotPassword": "Código Validado Con Éxito",
+  "forgot_password_validated_code_detail_message_service_UserForgotPassword": "El Código De Verificación Proporcionado Ha Sido Validado Con Éxito. Puede Proceder Con Restablecer Su Contraseña De Manera Segura.",
+  
+  "update_forgot_password_summary_message_service_UserForgotPassword": "Contraseña Actualizada Con Éxito",
+  "update_forgot_password_detail_message_service_UserForgotPassword": "Su Contraseña Ha Sido Actualizada Con Éxito. Ahora Puede Iniciar Sesión Con Su Nueva Contraseña."
+}

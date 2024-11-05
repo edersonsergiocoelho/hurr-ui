@@ -1,0 +1,10 @@
+{
+  "title_VehicleBrandSearch": "Pesquisar Marca De Veículo",
+  "label_vehicle_brand_name_VehicleBrandSearch": "Nome Da Marca De Veículo",
+  "placeholder_vehicle_brand_name_VehicleBrandSearch": "Informe O Nome Da Marca De Veículo",
+
+  "table_caption_title_VehicleBrandSearch": "Marca De Veículo",
+  "table_header_vehicle_brand_id_VehicleBrandSearch": "ID",
+  "table_header_vehicle_brand_name_VehicleBrandSearch": "Nome",
+  "table_header_enabled_VehicleBrandSearch": "Ativo?"
+}

@@ -1,0 +1,21 @@
+{
+  "title_my_booking_CustomerVehicleSearch": "Mis Coches",
+  "subtitle_my_booking_CustomerVehicleSearch": "Verifique Aquí Mis Coches Registrados.",
+ 
+  "code_CustomerVehicleSearch": "Código Del Coche",
+  "created_date_CustomerVehicleSearch": "Fecha De Registro",
+  "total_daily_rate_CustomerVehicleSearch": "Tarifa Diaria",
+  "vehicle_model_CustomerVehicleSearch": "Modelo: ",
+  "vehicle_category_CustomerVehicleSearch": "Categoría: ",
+  "vehicle_color_CustomerVehicleSearch": "Color: ",
+  "vehicle_fuel_type_CustomerVehicleSearch": "Tipo De Combustible: ",
+  "vehicle_transmission_CustomerVehicleSearch": "Transmisión: ",
+  "placeholder_created_date_CustomerVehicleSearch": "Ordenar Por Fecha De Registro",
+  "label_created_date_option_1_CustomerVehicleSearch": "Ordenar Por Fecha De Registro Ascendente",
+  "label_created_date_option_2_CustomerVehicleSearch": "Ordenar Por Fecha De Registro Descendente",
+  "label_booking_delivery_date_CustomerVehicleSearch": "Fecha De Entrega: ",
+  "placeholder_review_CustomerVehicleSearch": "Ingrese Una Reseña Para El Cliente Que Alquiló El Coche",
+  "save_success_write_a_review_message_service_CustomerVehicleSearch": "Reseña Guardada Con Éxito",
+ 
+  "header_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog_CustomerVehicleSearch": "Finalizar Reserva"
+}

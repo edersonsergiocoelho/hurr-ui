@@ -1,0 +1,17 @@
+{
+  "title_UserRoleRegister": "Cadastro De User / Role",
+  
+  "label_user_UserRoleRegister": "User ID",
+  "placeholder_user_UserRoleRegister": "Informe O Usuário",
+  "label_role_UserRoleRegister": "Role ID",
+  "placeholder_role_UserRoleRegister": "Informe A Role Do Usuário",
+  "label_created_date_UserRoleRegister": "Data De Criação",
+  "placeholder_created_date_UserRoleRegister": "Data De Criação Do Registro",
+  "label_modified_date_UserRoleRegister": "Data De Modificação",
+  "placeholder_modified_date_UserRoleRegister": "Data De Modificação Do Registro",
+  "label_enabled_UserRoleRegister": "Habilitado?",
+
+  "save_success_message_service_UserRoleRegister": "Registro User / Role Salvo Com Sucesso.",
+  "update_success_message_service_UserRoleRegister": "Registro User / Role Alterado Com Sucesso.",
+  "delete_success_message_service_UserRoleRegister": "Registro User / Role Deletado Com Sucesso."
+}

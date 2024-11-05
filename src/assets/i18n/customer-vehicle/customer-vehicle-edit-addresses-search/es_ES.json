@@ -1,0 +1,11 @@
+{
+  "title_CustomerVehicleEditAddressesSearch": "Consulta De Dirección",
+  
+  "label_nickname_CustomerVehicleEditAddressesSearch": "Apodo",
+  "placeholder_nickname_CustomerVehicleEditAddressesSearch": "Ingrese El Apodo De La Dirección",
+
+  "table_header_customer_vehicle_address_id_CustomerVehicleEditAddressesSearch": "ID",
+  "table_header_street_address_CustomerVehicleEditAddressesSearch": "Calle",
+  "table_header_nickname_CustomerVehicleEditAddressesSearch": "Apodo",
+  "table_header_enabled_CustomerVehicleEditAddressesSearch": "¿Habilitado?"
+}

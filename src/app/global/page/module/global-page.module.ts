@@ -5,7 +5,7 @@ import { CustomerVehicleModule } from '../customer-vehicle/module/customer-vehic
 import { AddressModule } from '../address/module/address.module';
 import { CustomerAddressModule } from '../customer-address/module/customer-address.module';
 import { CustomerVehicleBookingModule } from '../customer-vehicle-booking/module/customer-vehicle-booking.module';
-import { CustomerWithdrawalRequestModule } from '../customer-withdrawal-request/module/customer-withdrawal-request.module';
+import { CustomerVehicleWithdrawalRequestModule } from '../customer-vehicle-withdrawal-request/module/customer-vehicle-withdrawal-request.module';
 
 @NgModule({
   declarations: [],
@@ -16,7 +16,7 @@ import { CustomerWithdrawalRequestModule } from '../customer-withdrawal-request/
     CustomerAddressModule,
     CustomerVehicleModule,
     CustomerVehicleBookingModule,
-    CustomerWithdrawalRequestModule,
+    CustomerVehicleWithdrawalRequestModule,
     HomeModule
   ],
   exports: [
@@ -24,7 +24,7 @@ import { CustomerWithdrawalRequestModule } from '../customer-withdrawal-request/
     CustomerAddressModule,
     CustomerVehicleModule,
     CustomerVehicleBookingModule,
-    CustomerWithdrawalRequestModule,
+    CustomerVehicleWithdrawalRequestModule,
     HomeModule
   ]
 })

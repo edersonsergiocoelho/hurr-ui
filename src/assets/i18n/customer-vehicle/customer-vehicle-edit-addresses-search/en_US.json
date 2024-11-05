@@ -1,0 +1,11 @@
+{
+  "title_CustomerVehicleEditAddressesSearch": "Address Lookup",
+
+  "label_nickname_CustomerVehicleEditAddressesSearch": "Nickname",
+  "placeholder_nickname_CustomerVehicleEditAddressesSearch": "Enter Address Nickname",
+  
+  "table_header_customer_vehicle_address_id_CustomerVehicleEditAddressesSearch": "ID",
+  "table_header_street_address_CustomerVehicleEditAddressesSearch": "Street",
+  "table_header_nickname_CustomerVehicleEditAddressesSearch": "Nickname",
+  "table_header_enabled_CustomerVehicleEditAddressesSearch": "Enabled?"
+}

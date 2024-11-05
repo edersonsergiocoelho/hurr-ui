@@ -57,7 +57,6 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
   ) {}
 
   ngOnInit (): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetRegisterForm();
   }
 
@@ -99,18 +98,18 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'save_success_message_service_AddressRegisterDynamicDialog',
         'update_success_message_service_AddressRegisterDynamicDialog'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.addressRegisterDynamicDialogUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.addressRegisterDynamicDialogUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.addressRegisterDynamicDialogUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.addressRegisterDynamicDialogUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.addressRegisterDynamicDialogUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.addressRegisterDynamicDialogUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.addressRegisterDynamicDialogUIDTO.save_success_message_service_AddressRegisterDynamicDialog = translations['save_success_message_service_AddressRegisterDynamicDialog'];
       this.addressRegisterDynamicDialogUIDTO.update_success_message_service_AddressRegisterDynamicDialog = translations['update_success_message_service_AddressRegisterDynamicDialog'];
 
@@ -120,7 +119,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
         this.messageService.add({
           severity: 'error',
-          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_message_service_Generic,
+          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -172,7 +171,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
         this.messageService.add({
           severity: 'error',
-          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_message_service_Generic,
+          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -195,7 +194,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
         this.messageService.add({
           severity: 'error',
-          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_message_service_Generic,
+          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -223,7 +222,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
         this.messageService.add({
           severity: 'error',
-          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_message_service_Generic,
+          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -249,7 +248,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
         this.messageService.add({
           severity: 'error',
-          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_message_service_Generic,
+          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -281,7 +280,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
           this.messageService.add({
             severity: 'success',
-            summary: '' + this.addressRegisterDynamicDialogUIDTO.success_message_service_Generic,
+            summary: '' + this.addressRegisterDynamicDialogUIDTO.success_summary_message_service_Generic,
             detail: '' + this.addressRegisterDynamicDialogUIDTO.save_success_message_service_AddressRegisterDynamicDialog,
           });
 
@@ -316,7 +315,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
             this.messageService.add({
               severity: 'success',
-              summary: '' + this.addressRegisterDynamicDialogUIDTO.success_message_service_Generic,
+              summary: '' + this.addressRegisterDynamicDialogUIDTO.success_summary_message_service_Generic,
               detail: '' + this.addressRegisterDynamicDialogUIDTO.save_success_message_service_AddressRegisterDynamicDialog,
             });
           }
@@ -330,7 +329,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
         this.messageService.add({
           severity: 'error',
-          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_message_service_Generic,
+          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -368,7 +367,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
             this.messageService.add({
               severity: 'success',
-              summary: '' + this.addressRegisterDynamicDialogUIDTO.success_message_service_Generic,
+              summary: '' + this.addressRegisterDynamicDialogUIDTO.success_summary_message_service_Generic,
               detail: '' + this.addressRegisterDynamicDialogUIDTO.update_success_message_service_AddressRegisterDynamicDialog,
             });
           }
@@ -381,7 +380,7 @@ export class AddressRegisterDynamicDialogComponent implements OnInit {
 
         this.messageService.add({
           severity: 'error',
-          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_message_service_Generic,
+          summary: '' + this.addressRegisterDynamicDialogUIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

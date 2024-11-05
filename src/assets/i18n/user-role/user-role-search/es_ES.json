@@ -1,0 +1,15 @@
+{
+  "title_UserRoleSearch": "Búsqueda De Usuario / Rol",
+
+  "label_display_name_UserRoleSearch": "Nombre",
+  "placeholder_display_name_UserRoleSearch": "Ingrese El Nombre Del Usuario",
+  "label_email_UserRoleSearch": "Correo Electrónico",
+  "placeholder_email_UserRoleSearch": "Ingrese El Correo Electrónico Del Usuario",
+  "label_role_UserRoleSearch": "ID Del Rol",
+  "placeholder_role_UserRoleSearch": "Ingrese El Rol",
+  
+  "table_header_display_name_UserRoleSearch": "Nombre",
+  "table_header_email_UserRoleSearch": "Correo Electrónico",
+  "table_header_role_name_UserRoleSearch": "Rol",
+  "table_header_enabled_UserRoleSearch": "¿Habilitado?"
+}

@@ -89,12 +89,12 @@
     <form #customerVehicleDetailForm="ngForm">
       <div class="text-left p-3 border-round-sm h-full font-bold">
         <p *ngIf="customerVehicleDetailUIDTO.customerVehicle">
-          {{'currency_brl_Generic' | translate}}
+          {{'currency_Generic' | translate}}
           {{customerVehicleDetailUIDTO.customerVehicle.dailyRate | number:'1.2-2'}} / 
           {{'day_HomeSearchCarsDetail' | translate}}
         </p>
         <p *ngIf="customerVehicleDetailUIDTO.customerVehicle" style="text-decoration: underline;">
-          {{'currency_brl_Generic' | translate}} 
+          {{'currency_Generic' | translate}} 
           {{rateUtilsService.calculateTotalRate(
             customerVehicleDetailUIDTO.dateInit,
             customerVehicleDetailUIDTO.dateEnd, 
@@ -345,7 +345,7 @@
           <div class="field">
             <label style="font-style: normal; font-weight: normal; font-size: 20px;">
               {{'label_mileage_fee_delivery_CustomerVehicleDetail' | translate}} 
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleDetailUIDTO.customerVehicle.mileageFeeDelivery | number:'1.2-2' }}
             </label>
           </div>
@@ -362,7 +362,7 @@
           <div class="field">
             <label style="font-style: normal; font-weight: normal; font-size: 20px;">
               {{'label_mileage_fee_pickups_CustomerVehicleDetail' | translate}}
-              {{'currency_brl_Generic' | translate}} 
+              {{'currency_Generic' | translate}} 
               {{ customerVehicleDetailUIDTO.customerVehicle.mileageFeePickUp | number:'1.2-2' }}
             </label>
           </div>
@@ -443,7 +443,7 @@
                   style="width: 80px; height: 80px; border-radius: 50%; background-color: white; position: relative;">
                   <span
                     style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-weight: bold; font-size: 12px; text-align: center;">
-                    {{'span_no_image_Home' | translate}}
+                    {{'span_no_image_Generic' | translate}}
                   </span>
                 </div>
               </ng-template>

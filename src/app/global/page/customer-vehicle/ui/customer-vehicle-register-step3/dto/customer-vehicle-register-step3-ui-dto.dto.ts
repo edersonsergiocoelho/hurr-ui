@@ -10,7 +10,7 @@ export class CustomerVehicleRegisterStep3UIDTO {
 
   mileageCreated: number;
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
 }

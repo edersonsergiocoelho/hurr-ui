@@ -1,0 +1,10 @@
+{
+  "title_CustomerVehicleEditPriceDiscount": "Prices And Discounts",
+ 
+  "label_daily_rate_CustomerVehicleEditPriceDiscount": "Daily Rate",
+  "placeholder_daily_rate_CustomerVehicleEditPriceDiscount": "Enter The Vehicle's Daily Rate.",
+  "label_cleaning_fee_CustomerVehicleEditPriceDiscount": "Cleaning Fee",
+  "placeholder_cleaning_fee_CustomerVehicleEditPriceDiscount": "Enter The Cleaning Fee To Charge Your Customer.",
+ 
+  "save_success_message_service_CustomerVehicleEditPriceDiscount": "Prices And Discounts Successfully Updated."
+}

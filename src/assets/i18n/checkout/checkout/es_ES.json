@@ -1,0 +1,22 @@
+{
+  "title_CheckOut": "Carrito",
+  "title_delivery_Address_CheckOut": "Dirección De Entrega",
+  "title_pickup_Address_CheckOut": "Dirección De Recogida",
+ 
+  "title_Address_CheckOut": "Dirección De Facturación",
+  "button_Address_CheckOut": "Agregar Nueva Dirección",
+  "header_Address_CheckOut": "Agregar Nueva Dirección",
+  "select_customer_address_Address_CheckOut": "Seleccionar Dirección De Facturación",
+  
+  "title_Cart_CheckOut": "Carrito",
+  "price_Cart_CheckOut": "Precio",
+  "days_Cart_CheckOut": "Días",
+  
+  "title_OrderSummary_CheckOut": "Resumen Del Pedido",
+  "date_init_OrderSummary_CheckOut": "Inicio Del Viaje",
+  "date_end_OrderSummary_CheckOut": "Fin Del Viaje",
+  "price_OrderSummary_CheckOut": "Precio",
+  "delivery_OrderSummary_CheckOut": "Entrega",
+  "pickup_OrderSummary_CheckOut": "Recogida",
+  "total_OrderSummary_CheckOut": "Total"
+}

@@ -1,34 +1,28 @@
+import { BankDTO } from "../dto/bank-dto.dto";
+import { File } from "src/app/page/file/entity/file.entity";
+
 export class Bank {
   
-  /**
-   * Identificador único do banco.
-   */
   bankId: string;
-
-  /**
-   * Código do banco, por exemplo, "001" para Banco do Brasil.
-   */
   bankCode: string;
-
-  /**
-   * Nome do banco, por exemplo, "Banco do Brasil".
-   */
   bankName: string;
-
-  /**
-   * Data e hora de criação do registro.
-   */
+  file?: File;
   createdDate: Date;
-
-  /**
-   * Data e hora da última modificação do registro.
-   */
   modifiedDate?: Date;
-
-  /**
-   * Indica se o banco está ativo.
-   */
   enabled: boolean;
 
   dataURI: string;
+
+  public static toDTO(bank: Bank): BankDTO {
+    return {
+      bankId: bank.bankId,
+      bankName: bank.bankName,
+      bankCode: bank.bankCode,
+      file: bank.file ? File.toDTO(bank.file) : undefined,
+      createdDate: bank.createdDate,
+      modifiedDate: bank.modifiedDate,
+      enabled: bank.enabled,
+      dataURI: bank.dataURI
+    };
+  }
 }

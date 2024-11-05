@@ -1,0 +1,10 @@
+{
+"title_BankSearch": "Pesquisar Banco",
+"label_bank_name_BankSearch": "Nome De Banco",
+"placeholder_bank_name_BankSearch": "Informe O Nome Do Banco",
+
+"table_caption_title_BankSearch": "Banco",
+"table_header_bank_id_BankSearch": "ID",
+"table_header_bank_name_BankSearch": "Nome",
+"table_header_enabled_BankSearch": "Ativo?"
+}

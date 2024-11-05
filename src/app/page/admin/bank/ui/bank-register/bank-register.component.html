@@ -1,0 +1,127 @@
+<!-- Formulário De Registro -->
+<form novalidate #bankRegisterForm="ngForm" (ngSubmit)="ngSubmit()">
+  <h2 id="divH2" class="bg-indigo-500 text-white">{{'title_BankRegister' | translate}}</h2>
+
+  <div class="p-fluid p-formgrid grid">
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="bankId" [ngClass]="labelSize">{{'label_bank_id_BankRegister' | translate}}</label>
+      <input id="bankId" type="text" pInputText 
+        placeholder="{{'placeholder_bank_id_BankRegister' | translate}}" 
+        [(ngModel)]="bankRegisterUIDTO.bankDTO.bankId" name="bankId" autocomplete="off" disabled />
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="bankCode" [ngClass]="labelSize">{{'label_bank_code_BankRegister' | translate}}</label>
+      <input id="bankCode" type="text" pInputText 
+        placeholder="{{'placeholder_bank_code_BankRegister' | translate}}"
+        [(ngModel)]="bankRegisterUIDTO.bankDTO.bankCode" name="bankCode" autocomplete="off" required />
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="bankName" [ngClass]="labelSize">{{'label_bank_name_BankRegister' | translate}}</label>
+      <input id="bankName" type="text" pInputText 
+        placeholder="{{'placeholder_bank_name_BankRegister' | translate}}"
+        [(ngModel)]="bankRegisterUIDTO.bankDTO.bankName" name="bankName" autocomplete="off" required />
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="createdDate" [ngClass]="labelSize">{{'label_created_date_BankRegister' | translate}}</label>
+      <p-calendar [(ngModel)]="bankRegisterUIDTO.bankDTO.createdDate" 
+        placeholder="{{'placeholder_created_date_BankRegister' | translate}}"
+        name="createdDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize">
+      <label for="modifiedDate" [ngClass]="labelSize">{{'label_modified_date_BankRegister' | translate}}</label>
+      <p-calendar 
+        placeholder="{{'placeholder_modified_date_BankRegister' | translate}}"
+        [(ngModel)]="bankRegisterUIDTO.bankDTO.modifiedDate" name="modifiedDate" [showTime]="true" [showSeconds]="true" dateFormat="dd/mm/yy" [disabled]="true"></p-calendar>
+    </div>
+
+    <div class="col-12 md:col-6 field" [ngClass]="inputSize" style="display: flex; flex-direction: column;">
+      <label for="enabled" [ngClass]="labelSize">{{'label_enabled_BankRegister' | translate}}</label>
+      <p-inputSwitch [(ngModel)]="bankRegisterUIDTO.bankDTO.enabled" 
+        name="enabled">
+      </p-inputSwitch>
+      <small id="enabled">{{'small_enabled_Generic' | translate}}</small>
+    </div>
+
+    <div class="col-12 md:col-12 field">
+      <p-fileUpload #fileUpload name="file" [customUpload]="true"
+        (uploadHandler)="uploadHandlerFile($event)" [multiple]="false" accept="image/*"
+        [maxFileSize]="2000000">
+        <ng-template pTemplate="content">
+          <ul *ngIf="bankRegisterUIDTO.uploadedFiles != null && bankRegisterUIDTO.uploadedFiles.length">
+            <li *ngFor="let file of bankRegisterUIDTO.uploadedFiles">
+              {{ file.name }} - {{ file.size }} bytes
+            </li>
+          </ul>
+        </ng-template>
+      </p-fileUpload>
+    </div>
+
+    <div class="col-12 md:col-12 field">
+      <div class="card">
+        <img *ngIf="bankRegisterUIDTO.bankDTO.file != null" 
+          [src]="bankRegisterUIDTO.bankDTO.dataURI" 
+          style="width: 10%; display: block;" />
+      </div>
+    </div>
+
+    <div class="col-12 flex flex-row justify-content-left py-0">
+
+      <div *ngIf="bankRegisterUIDTO?.bankDTO?.bankId" class="md:col-3 mt-4 pt-1 field" >
+        <button pButton pRipple 
+          type="button"
+          class="p-ripple p-element p-button p-component p-button-contrast p-button-rounded md:w-10rem"
+          (click)="resetRegisterForm()">
+          <i class="pi pi-file"></i>
+          <span class="p-button-label">
+            {{'span_button_label_new_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="bankRegisterUIDTO?.bankDTO?.bankId == null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton pRipple 
+          type="submit" 
+          class="p-button-rounded p-button-success md:w-10rem"
+          [disabled]="bankRegisterForm.invalid">
+          <i class="pi pi-save"></i>
+          <span class="p-button-label">
+            {{'span_button_label_save_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="bankRegisterUIDTO?.bankDTO?.bankId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton pRipple 
+          class="p-button-rounded p-button-info md:w-10rem"
+          type="button"
+          (click)="update()"
+          [disabled]="bankRegisterForm.invalid">
+          <i class="pi pi-file-edit"></i>
+          <span class="p-button-label">
+            {{'span_button_label_update_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+      <div *ngIf="bankRegisterUIDTO?.bankDTO?.bankId != null" class="md:col-3 mt-4 pt-1 field">
+        <button pButton pRipple 
+          class="p-button-rounded p-button-danger md:w-10rem"
+          type="button"
+          (click)="delete(null)"
+          [disabled]="bankRegisterForm.invalid">
+          <i class="pi pi-times"></i>
+          <span class="p-button-label">
+            {{'span_button_label_delete_Generic' | translate}}
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</form>

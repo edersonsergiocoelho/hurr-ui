@@ -1,0 +1,17 @@
+{
+  "title_my_booking_CustomerVehicleBookingSearch": "My Bookings",
+  "subtitle_my_booking_CustomerVehicleBookingSearch": "Check Here Your Latest Bookings.",
+ 
+  "booking_CustomerVehicleBookingSearch": "Booking Number",
+  "created_date_CustomerVehicleBookingSearch": "Booking Date",
+  "total_booking_value_CustomerVehicleBookingSearch": "Total",
+  "placeholder_created_date_CustomerVehicleBookingSearch": "Sort By Booking Date",
+  "label_created_date_option_1_CustomerVehicleBookingSearch": "Sort By Booking Date Ascending",
+  "label_created_date_option_2_CustomerVehicleBookingSearch": "Sort By Booking Date Descending",
+  "label_booking_cancellation_date_CustomerVehicleBookingSearch": "Cancellation Date: ",
+  "label_reservation_start_date_CustomerVehicleBookingSearch": "Check-In Date: ",
+  "placeholder_review_CustomerVehicleBookingSearch": "Enter A Review For The Car Owner",
+ 
+  "save_cancel_booking_message_service_CustomerVehicleBookingSearch": "Booking Successfully Cancelled",
+  "save_success_write_a_review_message_service_CustomerVehicleBookingSearch": "Review Successfully Saved"
+}

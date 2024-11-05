@@ -1,0 +1,144 @@
+<!-- Tela De Pesquisa -->
+<div class="md:col-12 mb-2">
+  <div class="card no-margin bordered-card">
+
+    <!-- Formulário De Pesquisa -->
+    <form #customerVehicleWithdrawalRequestApprovalForm="ngForm" (ngSubmit)="search($event)">
+      <!-- Seção De Pesquisa -->
+      <h3 id="divH2" class="bg-indigo-500 text-white">{{'title_CustomerVehicleWithdrawalRequestApproval' | translate}}</h3>
+
+      <div class="grid p-fluid form-group">
+
+        <div class="col-6 md:col-6 field">
+          <label class="font-medium text-2xl" for="cpf">{{'label_cpf_CustomerVehicleWithdrawalRequestApproval' | translate}}</label>
+          <p-inputMask class="p-inputtext-lg" type="text" mask="999.999.999-99"
+            placeholder="{{'placeholder_cpf_CustomerVehicleWithdrawalRequestApproval' | translate}}"
+            [(ngModel)]="customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequestSearchDTO.cpf" name="cpf" autocomplete="off" />
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label class="font-medium text-2xl">{{'label_payment_method_CustomerVehicleWithdrawalRequestApproval' | translate}}</label>
+          <p-dropdown class="p-inputtext-lg" 
+            [options]="customerVehicleWithdrawalRequestApprovalUIDTO.paymentMethods" 
+            [(ngModel)]="customerVehicleWithdrawalRequestApprovalUIDTO.selectedPaymentMethod" 
+            optionLabel="paymentMethodName" [showClear]="true" name="paymentMethods"
+            placeholder="{{ 'placeholder_payment_method_CustomerVehicleWithdrawalRequestApproval' | translate }}?">
+          </p-dropdown>
+        </div>
+
+        <div class="col-6 md:col-6 field">
+          <label class="font-medium text-2xl">{{'label_payment_status_CustomerVehicleWithdrawalRequestApproval' | translate}}</label>
+          <p-dropdown class="p-inputtext-lg"
+            [options]="customerVehicleWithdrawalRequestApprovalUIDTO.paymentStatuses" 
+            [(ngModel)]="customerVehicleWithdrawalRequestApprovalUIDTO.selectedPaymentStatus" 
+            optionLabel="paymentStatusName" [showClear]="true" name="paymentStatuses"
+            placeholder="{{'placeholder_payment_status_CustomerVehicleWithdrawalRequestApproval' | translate}}?"></p-dropdown>
+        </div>
+
+      </div>
+
+      <div class="col-4 md:col-4 field"></div>
+      <div class="col-4 md:col-4 field"></div>
+
+      <div id="div-button" class="grid p-fluid form-group">
+
+        <div class="col-12 flex flex-row justify-content-end py-0">
+          <button type="button" class="p-button-outlined p-button-secondary mr-3 md:w-10rem"
+            (click)="clickClean()" pButton>
+            <span class="p-button-label">
+              {{'span_button_label_clean_Generic' | translate}}
+            </span>
+            <i class="pi pi-eraser"></i>
+          </button>
+
+          <button (click)="downloadCNABFile()">Gerar CNAB240</button>
+
+          <button type="submit" class="p-element p-button p-component mr-3 md:w-10rem" pButton>
+            <span class="p-button-label">
+              {{'span_button_label_search_Generic' | translate}}
+            </span>
+            <i class="pi pi-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="md:col-12 mb-2"></div>
+
+      <div class="custom-bordered-table">
+        <p-table [columns]="customerVehicleWithdrawalRequestApprovalUIDTO.columns" [value]="customerVehicleWithdrawalRequestApprovalUIDTO.customerVehicleWithdrawalRequests" dataKey="fileApprovedId" [style]="{'margin-bottom':'20px'}"
+          [responsive]="true" 
+          [resizableColumns]="true" sortField="createdDate" [sortOrder]="-1"
+          [rows]="10" [showCurrentPageReport]="true" 
+          [paginator]="true" [scrollable]="true"
+          [totalRecords]="customerVehicleWithdrawalRequestApprovalUIDTO.totalRecords" [lazy]="true" 
+          [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+          (onLazyLoad)="search($event)" 
+          (onPage)="paginate($event)">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let column of customerVehicleWithdrawalRequestApprovalUIDTO.columns" [pSortableColumn]="column.sortField" [ngStyle]="{'width': column.width, 'text-align': 'left'}">
+                {{column.header}}
+                <p-sortIcon *ngIf="column.sortField" [field]="column.sortField"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+
+              <td class="text-left">
+                {{rowData.customer.firstName}}
+              </td>
+
+              <td class="text-left">
+                {{rowData.customer.lastName}}
+              </td>
+
+              <td class="text-left">
+                {{rowData.customerVehicleBankAccount.bank.bankName}}
+              </td>
+
+              <td class="text-left">
+                {{rowData.paymentMethod.paymentMethodName}}
+              </td>
+
+              <td class="text-left">
+                {{rowData.paymentStatus.paymentStatusName}}
+              </td>
+
+              <td class="text-left">
+                {{rowData.customerVehicleBooking.withdrawableBookingValue | number:'1.2-2'}}
+              </td>
+
+              <td class="text-left">
+                {{rowData.createdDate | date:'dd/MM/yyyy hh:mm:ss'}}
+              </td>
+
+              <td class="text-left">
+                {{ rowData.enabled | boolean | async }}
+              </td>
+
+              <td class="text-left">
+
+                <button type="button" class="p-element p-button p-component mr-3 md:w-10rem" *ngIf="rowData.paymentStatus.paymentStatusName == 'PENDING'"
+                  (click)="clickApprovalPIX(rowData)" pButton>
+                  <span class="p-button-label">
+                    {{'span_button_label_approve_Generic' | translate}}
+                  </span>
+                  <i class="pi pi-check"></i>
+                </button>
+
+              </td>
+
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8" class="justify-content-left">{{'table_no_records_found_Generic' | translate}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </form>
+
+  </div>
+</div>

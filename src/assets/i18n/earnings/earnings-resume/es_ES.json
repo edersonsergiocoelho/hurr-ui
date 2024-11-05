@@ -1,0 +1,13 @@
+{
+  "title_EarningsResume": "Ganancias",
+  "subtitle_EarningsResume": "Aquí Puedes Ver Tus Ganancias Acumuladas Y Retirar Tu Dinero.",
+
+  "total_earnings_EarningsResume": "Ganancias Totales",
+  "withdrawable_current_balance_EarningsResume": "Saldo Actual",
+  "withdrawable_balance_EarningsResume": "Saldo Retirable",
+  "withdraw_money_EarningsResume": "Retirar Dinero",
+  "title_payment_method_EarningsResume": "Seleccionar El Método De Pago",
+  "title_customer_bank_account_EarningsResume": "Seleccionar La Cuenta Bancaria",
+  "title_customer_vehicle_booking_EarningsResume": "Seleccionar Las Reservas A Recibir",
+  "select_all_customer_vehicle_booking_EarningsResume": "Seleccionar Todo"
+}

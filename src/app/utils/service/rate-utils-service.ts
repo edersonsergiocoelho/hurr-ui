@@ -1,4 +1,3 @@
-import { DecimalPipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
@@ -7,22 +6,18 @@ import * as moment from 'moment';
 })
 export class RateUtilsService {
 
-  constructor(private decimalPipe: DecimalPipe) {}
+  constructor() {}
 
   calculateTotalRate(startDate: Date, endDate: Date, dailyRate: number): number {
     const start = moment(startDate);
     const end = moment(endDate);
   
-    const difference = end.diff(start, 'days');
+    // Calcula a diferença em dias, incluindo frações de dias
+    const difference = end.diff(start, 'hours') / 24;
   
-    return difference * dailyRate;
-  }
+    // Verifica se houve uma fração de dia (para contabilizar o segundo dia mesmo que não esteja completo)
+    const totalDays = Math.ceil(difference);
 
-  formatDailyRateWithComma(dailyRate: number): string {
-    return this.decimalPipe?.transform(dailyRate, '1.2-2')?.replace('.', ',') ?? '';
-  }
-
-  formatBRL(dailyRate: number): string {
-    return this.decimalPipe?.transform(dailyRate, '1.2-2')?.replace('.', ',') ?? '';
+    return totalDays * dailyRate;
   }
 }

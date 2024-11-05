@@ -1,14 +1,21 @@
 {
   "title_my_booking_CustomerVehicleSearch": "Meus Carros",
   "subtitle_my_booking_CustomerVehicleSearch": "Verifique Aqui Os Meus Carros Cadastrados.",
+
   "code_CustomerVehicleSearch": "Código Do Carro",
   "created_date_CustomerVehicleSearch": "Data De Cadastro",
   "total_daily_rate_CustomerVehicleSearch": "Preço Diário",
+  "vehicle_model_CustomerVehicleSearch": "Modelo: ",
+  "vehicle_category_CustomerVehicleSearch": "Categoria: ",
+  "vehicle_color_CustomerVehicleSearch": "Cor: ",
+  "vehicle_fuel_type_CustomerVehicleSearch": "Combustível: ",
+  "vehicle_transmission_CustomerVehicleSearch": "Transmissão: ",
   "placeholder_created_date_CustomerVehicleSearch": "Ordernar Por Data De Cadastro",
   "label_created_date_option_1_CustomerVehicleSearch": "Ordernar Por Data De Cadastro Menor Para Maior",
   "label_created_date_option_2_CustomerVehicleSearch": "Ordernar Por Data De Cadastro Maior Para Menor",
   "label_booking_delivery_date_CustomerVehicleSearch": "Data De Entrega: ",
   "placeholder_review_CustomerVehicleSearch": "Informe Uma Crítica Para O Cliente Que Alugou O Carro",
   "save_success_write_a_review_message_service_CustomerVehicleSearch": "Crítica Salva Com Sucesso",
+ 
   "header_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog_CustomerVehicleSearch": "Finalização Da Reserva"
 }

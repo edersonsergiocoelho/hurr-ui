@@ -1,0 +1,10 @@
+{
+  "title_CustomerVehicleBankAccountSearch": "Buscar Cuenta Bancaria",
+  "label_pix_key_CustomerVehicleBankAccountSearch": "Clave De Cuenta Bancaria",
+  "placeholder_pix_key_CustomerVehicleBankAccountSearch": "Ingrese La Clave De La Cuenta Bancaria",
+  
+  "table_caption_title_CustomerVehicleBankAccountSearch": "Cuenta Bancaria",
+  "table_header_payment_status_id_CustomerVehicleBankAccountSearch": "ID",
+  "table_header_pix_key_CustomerVehicleBankAccountSearch": "Clave PIX",
+  "table_header_enabled_CustomerVehicleBankAccountSearch": "¿Habilitado?"
+}

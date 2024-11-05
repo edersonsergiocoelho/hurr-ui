@@ -1,5 +1,5 @@
 <div class="surface-section px-4 py-8 md:px-6 lg:px-6">
-  
+
   <div class="flex flex-column md:flex-row justify-content-between align-items-center mb-4">
     <div class="flex flex-column text-center md:text-left">
       <span class="text-900 text-3xl font-medium mb-2">
@@ -11,251 +11,245 @@
     </div>
   </div>
 
-  <p-dataView [value]="customerVehicleSearchUIDTO.customerVehicles"
-    [sortField]="customerVehicleSearchUIDTO.sortField" 
-    [sortOrder]="customerVehicleSearchUIDTO.sortOrder"
-    [rows]="3" 
-    [showCurrentPageReport]="true" 
-    [paginator]="true"
-    [totalRecords]="customerVehicleSearchUIDTO.totalRecords" 
-    [lazy]="true" 
-    (onLazyLoad)="search($event)">
+  <div class="card">
 
-    <ng-template pTemplate="header">
-      <div class="flex flex-column md:flex-row md:justify-content-between">
-                  
-        <p-dropdown 
-          [options]="customerVehicleSearchUIDTO.sortOptions" 
-          [(ngModel)]="customerVehicleSearchUIDTO.sortField" 
-          placeholder="{{'placeholder_created_date_CustomerVehicleSearch' | translate}}"
-          [showClear]="true"
-          (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0">
-        </p-dropdown>
+    <p-dataView [value]="customerVehicleSearchUIDTO.customerVehicles"
+      [totalRecords]="customerVehicleSearchUIDTO.totalRecords" [sortField]="customerVehicleSearchUIDTO.sortField"
+      [sortOrder]="customerVehicleSearchUIDTO.sortOrder" [rows]="5" [showCurrentPageReport]="true" [paginator]="true"
+      currentPageReportTemplate="{{'table_current_page_report_template_showing_Generic' | translate}} {first} {{'table_current_page_report_template_to_Generic' | translate}} {last} {{'table_current_page_report_template_of_Generic' | translate}} {totalRecords} {{'table_current_page_report_template_records_Generic' | translate}}"
+      [lazy]="true" (onLazyLoad)="search($event)">
 
-        <button
-          pbutton="" pripple="" icon="pi pi-plus"
-          class="p-element p-ripple m-0 p-button p-component"
-          (click)="clickRouterNavigateToCustomerVehicleRegister()">
-          <span
-            class="p-button-icon p-button-icon-left pi pi-plus" aria-hidden="true">
-          </span>
-          <span
-            class="p-button-label">{{'span_button_label_new_Generic' | translate}}
-          </span>
-          <span class="p-ink"></span>
-        </button>
-        
-      </div>
-    </ng-template>
+      <ng-template pTemplate="header">
+        <div class="flex flex-column md:flex-row md:justify-content-between">
 
-    <ng-template let-item pTemplate="listItem">
+          <p-dropdown [options]="customerVehicleSearchUIDTO.sortOptions"
+            [(ngModel)]="customerVehicleSearchUIDTO.sortField"
+            placeholder="{{'placeholder_created_date_CustomerVehicleSearch' | translate}}" [showClear]="true"
+            (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0">
+          </p-dropdown>
 
-      <div class="surface-card grid grid-nogutter border-round shadow-2">
-        <div class="col-12 flex p-2 surface-100 border-round-top">
-          
-          <div class="p-2 flex-auto text-center md:text-left">
-            <span class="text-700 block">
-              {{'code_CustomerVehicleSearch' | translate}}
+          <button pbutton="" pripple="" icon="pi pi-plus" class="p-element p-ripple m-0 p-button p-component"
+            (click)="clickRouterNavigateToCustomerVehicleRegister()">
+            <span class="p-button-icon p-button-icon-left pi pi-plus" aria-hidden="true">
             </span>
-            <span
-              class="text-900 font-medium block mt-2">{{item.code}}
+            <span class="p-button-label">{{'span_button_label_new_Generic' | translate}}
             </span>
-          </div>
-
-          <p-divider align="center" layout="vertical" styleclass="h-full mx-0 lg:mx-3" class="p-element">
-          </p-divider>
-
-          <div class="p-2 flex-auto text-center md:text-left">
-            <span class="text-700 block">
-              {{'created_date_CustomerVehicleSearch' | translate}}
-            </span>
-            <span class="text-900 font-medium block mt-2">
-              {{ item.createdDate | date:'dd/MM/yyyy HH:mm:ss' }}
-            </span>
-          </div>
-
-            <p-divider align="center" layout="vertical" styleclass="h-full mx-0 lg:mx-3" class="p-element">
-            </p-divider>
-
-          <div class="p-2 flex-auto text-center md:text-left">
-            <span class="text-700 block">
-              {{'total_daily_rate_CustomerVehicleSearch' | translate}}
-            </span>
-            <span
-              class="text-900 font-medium block mt-2">
-              {{'currency_brl_Generic' | translate}}
-              {{(item.dailyRate | number:'1.2-2')}}
-            </span>
-          </div>
+            <span class="p-ink"></span>
+          </button>
 
         </div>
+      </ng-template>
 
-        <div class="col-12">
+      <ng-template pTemplate="list" let-item>
 
-          <div class="p-2 my-4 flex flex-column lg:flex-row justify-content-between align-items-center">
+        <div class="grid grid-nogutter">
+          <div *ngFor="let item of customerVehicleSearchUIDTO.customerVehicles; let first = first" class="col-12">
 
-            <div class="flex flex-column lg:flex-row justify-content-center align-items-center px-2">
+            <div class="surface-card grid grid-nogutter border-round shadow-2">
+              <div class="col-12 flex p-2 surface-100 border-round-top">
 
-              <img
-                [src]="item.dataURI" alt="Image Car"
-                class="w-22rem h-14rem mr-3 flex-shrink-0">
-
-              <div class="flex flex-column my-auto text-center md:text-left">
-                <span class="text-900 font-medium mb-3 mt-3 lg:mt-0">
-                  {{item.vehicle.vehicleBrand.vehicleBrandName}} - 
-                  {{item.vehicle.vehicleName}} - 
-                  {{item.vehicleModel.vehicleModelName}}
-                </span>
-                <span class="text-600 text-sm mb-3">
-                  {{item.vehicleModel.vehicleCategory.vehicleCategoryName}}
-                </span>
-                <span class="text-600 text-sm mb-3">
-                  {{item.vehicleFuelType.vehicleFuelTypeName}}
-                </span>
-                <span class="text-600 text-sm mb-3">
-                  {{item.vehicleTransmission.vehicleTransmissionName}}
-                </span>
-                <span class="text-600 text-sm mb-3">
-                  {{item.vehicleColor.vehicleColorName}}
-                </span>
-
-                <!--
-                <a *ngIf="item.bookingDeliveryDate == null" pripple="" tabindex="0"
-                  class="p-ripple p-element p-2 cursor-pointer w-14rem mx-auto lg:mx-0 border-round font-medium text-center border-1 border-primary text-primary transition-duration-150"
-                  (click)="clickCustomerVehicleFinalizeBooking(item)"
-                  >
-                  <i class="pi pi-check-circle"></i>
-                  {{'span_button_label_finalize_booking_Generic' | translate}}
-                  <span class="p-ink"></span>
-                </a>
-                -->
-
-              </div>
-            </div>
-
-            <div *ngIf="item.bookingDeliveryDate != null" 
-              class="bg-green-50 mr-0 lg:mr-3 mt-4 lg:mt-0 p-2 flex align-items-center" 
-              style="border-radius: 2.5rem;">
-              <span class="bg-green-500 text-white flex align-items-center justify-content-center border-circle mr-2"
-                style="min-width: 2rem; min-height: 2rem;">
-                <i class="pi pi-check"></i>
-              </span>
-              <span class="text-green-600">
-                {{'label_booking_delivery_date_CustomerVehicleSearch' | translate}}
-                {{item.bookingDeliveryDate | date:'dd/MM/yyyy HH:mm:ss'}}
-              </span>
-            </div>
-
-          </div>
-          <p-divider class="p-element w-full block lg:hidden surface-border">
-            <div role="separator" class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left">
-              <div class="p-divider-content"></div>
-            </div>
-          </p-divider>
-
-          <!--
-          <div class="p-2 my-4 flex flex-column lg:flex-row justify-content-between align-items-center">
-            <div class="flex flex-column lg:flex-row justify-content-center align-items-center px-2"><img
-                src="assets/images/blocks/ecommerce/orderhistory/orderhistory-1-2.png" alt="product"
-                class="w-8rem h-8rem mr-3 flex-shrink-0">
-              <div class="flex flex-column my-auto text-center md:text-left"><span
-                  class="text-900 font-medium mb-3 mt-3 lg:mt-0">Product Name Placeholder A Little Bit Long One</span><span
-                  class="text-600 text-sm mb-3">White | Small</span><a pripple="" tabindex="0"
-                  class="p-ripple p-element p-2 cursor-pointer w-9rem mx-auto lg:mx-0 border-round font-medium text-center border-1 border-primary text-primary transition-duration-150">Buy
-                  Again <span class="font-light">| $12</span><span class="p-ink"></span></a></div>
-            </div>
-            <div class="bg-green-50 mr-0 lg:mr-3 mt-4 lg:mt-0 p-2 flex align-items-center" style="border-radius: 2.5rem;">
-              <span class="bg-green-500 text-white flex align-items-center justify-content-center border-circle mr-2"
-                style="min-width: 2rem; min-height: 2rem;"><i class="pi pi-check"></i></span><span
-                class="text-green-600">Delivered on 7 February 2023</span></div>
-          </div><p-divider class="p-element w-full block lg:hidden surface-border">
-            <div role="separator" class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left">
-              <div class="p-divider-content"></div>
-            </div>
-          </p-divider>
-          <div class="p-2 my-4 flex flex-column lg:flex-row justify-content-between align-items-center">
-            <div class="flex flex-column lg:flex-row justify-content-center align-items-center px-2"><img
-                src="assets/images/blocks/ecommerce/orderhistory/orderhistory-1-3.png" alt="product"
-                class="w-8rem h-8rem mr-3 flex-shrink-0">
-              <div class="flex flex-column my-auto text-center md:text-left"><span
-                  class="text-900 font-medium mb-3 mt-3 lg:mt-0">Product Name Placeholder A Little Bit Long One</span><span
-                  class="text-600 text-sm mb-3">White | Small</span><a pripple="" tabindex="0"
-                  class="p-ripple p-element p-2 cursor-pointer w-9rem mx-auto lg:mx-0 border-round font-medium text-center border-1 border-primary text-primary transition-duration-150">Buy
-                  Again <span class="font-light">| $12</span><span class="p-ink"></span></a></div>
-            </div>
-            <div class="bg-green-50 mr-0 lg:mr-3 mt-4 lg:mt-0 p-2 flex align-items-center" style="border-radius: 2.5rem;">
-              <span class="bg-green-500 text-white flex align-items-center justify-content-center border-circle mr-2"
-                style="min-width: 2rem; min-height: 2rem;"><i class="pi pi-check"></i></span><span
-                class="text-green-600">Delivered on 7 February 2023</span></div>
-          </div>
-          -->
-        </div>
-        
-        <div class="col-12 p-0 flex border-top-1 surface-border">
-          <a tabindex="0"
-            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-            style="border-bottom-left-radius: 6px;">
-            <i class="pi pi-folder mr-2 mb-2 md:mb-0"></i>
-            Archive Order
-          </a>
-          <a
-            tabindex="0"
-            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full">
-            <i class="pi pi-refresh mr-2 mb-2 md:mb-0"></i>
-            Return
-          </a>
-          <a tabindex="0"
-            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-            (click)="clickRouterNavigateToCustomerVehicleEdit(item)">
-            <i class="pi pi-file mr-2 mb-2 md:mb-0"></i>
-            Editar
-          </a>
-          <!--
-          <a tabindex="0"
-            class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
-            [ngStyle]="item.bookingDeliveryDate == null ? {'pointer-events': 'none', 'opacity': '0.5'} : {}"
-            (click)="clickOverlayPanelWriteAReview($event, item)"
-            style="border-bottom-right-radius: 6px;">
-            <i class="pi pi-comment mr-2 mb-2 md:mb-0"></i>
-            {{'span_button_label_write_a_review_Generic' | translate}}
-          </a>
-
-          <p-overlayPanel #overlayPanelWriteAReview>
-            <div class="flex flex-column gap-3 w-25rem">
-              <div>
-                <textarea 
-                    rows="10"
-                    cols="50" 
-                    pInputTextarea 
-                    name="review"
-                    [(ngModel)]="item.review"
-                    placeholder="{{'placeholder_review_CustomerVehicleSearch' | translate}}">
-                </textarea>
-              </div>
-
-              <div (click)="$event.stopPropagation()">
-                <p-rating 
-                  [(ngModel)]="item.rating" 
-                  [stars]="5"
-                  [cancel]="false"
-                  (click)="$event.stopPropagation()" />
-              </div>
-
-              <div>
-                <div class="flex">
-                  <p-button label="{{'span_button_label_save_Generic' | translate}}" icon="pi pi-save" (onClick)="onClickWriteAReview(item)"/>
+                <div class="p-2 flex-auto text-center md:text-left">
+                  <span class="text-700 block">
+                    {{'code_CustomerVehicleSearch' | translate}}
+                  </span>
+                  <span class="text-900 font-medium block mt-2">{{item.code}}
+                  </span>
                 </div>
+
+                <p-divider align="center" layout="vertical" styleclass="h-full mx-0 lg:mx-3" class="p-element">
+                </p-divider>
+
+                <div class="p-2 flex-auto text-center md:text-left">
+                  <span class="text-700 block">
+                    {{'created_date_CustomerVehicleSearch' | translate}}
+                  </span>
+                  <span class="text-900 font-medium block mt-2">
+                    {{ item.createdDate | date:'dd/MM/yyyy HH:mm:ss' }}
+                  </span>
+                </div>
+
+                <p-divider align="center" layout="vertical" styleclass="h-full mx-0 lg:mx-3" class="p-element">
+                </p-divider>
+
+                <div class="p-2 flex-auto text-center md:text-left">
+                  <span class="text-700 block">
+                    {{'total_daily_rate_CustomerVehicleSearch' | translate}}
+                  </span>
+                  <span class="text-900 font-medium block mt-2">
+                    {{'currency_Generic' | translate}}
+                    {{(item.dailyRate | number:'1.2-2')}}
+                  </span>
+                </div>
+
+              </div>
+
+              <div class="col-12">
+
+                <div class="p-2 my-4 flex flex-column lg:flex-row justify-content-between align-items-center">
+
+                  <div class="flex flex-column lg:flex-row justify-content-center align-items-center px-2">
+
+                    <ng-container *ngIf="item.dataURI != null; else noCustomerVehicleImage">
+                      <img [src]="item.dataURI" alt="Customer Vehicle Image" class="w-22rem h-14rem mr-3 flex-shrink-0">
+                    </ng-container>
+
+                    <ng-template #noCustomerVehicleImage>
+                      <div class="w-22rem h-14rem mr-3 flex justify-content-center align-items-center">
+                        <span style="color: black; font-weight: bold; font-size: 12px; text-align: center;">
+                          {{'span_no_image_Generic'| translate}}
+                        </span>
+                      </div>
+                    </ng-template>
+
+                    <div class="flex flex-column my-auto text-center md:text-left">
+
+                      <span class="font-semibold text-2xl mb-3 mt-3 lg:mt-0">
+                        {{item?.vehicle?.vehicleName + ' ' + item?.yearOfTheCar}}
+                      </span>
+                      <span class="font-semibold text-1xl mb-3">
+                        {{ 'vehicle_model_CustomerVehicleSearch' | translate }}
+                        {{ item.vehicleModel?.vehicleModelName }}
+                      </span>
+
+                      <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
+                        <div style="display: flex; align-items: center; width: 200px;">
+                          <ng-container *ngIf="item.vehicleModel?.vehicleCategory?.file?.dataURI; else noCategory">
+                            <img [src]="item.vehicleModel?.vehicleCategory?.file?.dataURI" alt="Icon Vehicle Category"
+                              class="border-round w-full h-full md:w-2rem md:h-2rem">
+                            <p style="margin: 0; margin-left: 5px;">
+                              {{ 'vehicle_category_CustomerVehicleSearch' | translate }}
+                              {{ item.vehicleModel?.vehicleCategory?.vehicleCategoryName }}
+                            </p>
+                          </ng-container>
+                          <ng-template #noCategory>
+                            <div class="border-round w-full h-full md:w-2rem md:h-2rem">
+                              <span
+                                style="transform: translate(-50%, -50%); color: black; font-size: 8px; text-align: center;">
+                                {{'span_no_image_Generic'| translate}}
+                              </span>
+                            </div>
+                            <p style="margin: 0; margin-left: 5px;">
+                              {{ 'vehicle_category_CustomerVehicleSearch' | translate }}
+                              {{ item.vehicleModel?.vehicleCategory?.vehicleCategoryName }}
+                            </p>
+                          </ng-template>
+                        </div>
+
+                        <div style="display: flex; align-items: center;" class="px-4">
+                          <ng-container *ngIf="item.vehicleColor?.vehicleColorName; else noColor">
+                            <div [ngStyle]="{'background-color': getVehicleColorStyle(item.vehicleColor?.vehicleColorName)}"
+                              class="border-round w-full h-full md:w-2rem md:h-2rem"
+                              style="border: 1px solid #000; width: 2rem; height: 2rem;">
+                            </div>
+                            <p style="margin: 0; margin-left: 5px;">
+                              {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ item.vehicleColor?.vehicleColorName }}
+                            </p>
+                          </ng-container>
+                          <ng-template #noColor>
+                            <div class="border-round w-full h-full md:w-2rem md:h-2rem"
+                              style="border: 1px solid #000; width: 2rem; height: 2rem;">
+                              <span style="transform: translate(-50%, -50%); color: black; font-size: 8px; text-align: center;">
+                                {{'span_no_image_Generic'| translate}}
+                              </span>
+                            </div>
+                            <p style="margin: 0; margin-left: 5px;">
+                              {{ 'vehicle_color_CustomerVehicleSearch' | translate }} {{ item.vehicleColor?.vehicleColorName }}
+                            </p>
+                          </ng-template>
+                        </div>
+
+                      </div>
+
+                      <br>
+                      
+                      <div class="font-normal text-sm mt-0 mb-0" style="display: flex; align-items: center;">
+                        <div style="display: flex; align-items: center; width: 200px;">
+                          <ng-container *ngIf="item.vehicleFuelType?.file?.dataURI; else noFuelType">
+                            <img [src]="item.vehicleFuelType?.file?.dataURI" alt="Icon Vehicle Fuel Type"
+                              class="border-round w-full h-full md:w-2rem md:h-2rem">
+                            <p style="margin: 0; margin-left: 5px;">
+                              {{ 'vehicle_fuel_type_CustomerVehicleSearch' | translate }}
+                              {{ item.vehicleFuelType?.vehicleFuelTypeName }}
+                            </p>
+                          </ng-container>
+                          <ng-template #noFuelType>
+                            <div class="border-round w-full h-full md:w-2rem md:h-2rem">
+                              <span
+                                style="transform: translate(-50%, -50%); color: black; font-size: 8px; text-align: center;">
+                                {{'span_no_image_Generic'| translate}}
+                              </span>
+                            </div>
+                            <p style="margin: 0; margin-left: 5px;">
+                              {{ 'vehicle_fuel_type_CustomerVehicleSearch' | translate }}
+                              {{ item.vehicleFuelType?.vehicleFuelTypeName }}
+                            </p>
+                          </ng-template>
+                        </div>
+
+                        <div style="display: flex; align-items: center;" class="px-4">
+                          <ng-container *ngIf="item.vehicleTransmission?.file?.dataURI; else noTransmission">
+                            <img [src]="item.vehicleTransmission?.file?.dataURI" alt="Icon Vehicle Transmission"
+                              class="border-round w-full h-full md:w-2rem md:h-2rem">
+                            <p style="margin: 0; margin-left: 5px;">
+                              {{ 'vehicle_transmission_CustomerVehicleSearch' | translate }}
+                              {{ item.vehicleTransmission?.vehicleTransmissionName }}
+                            </p>
+                          </ng-container>
+                          <ng-template #noTransmission>
+                            <div class="border-round w-full h-full md:w-2rem md:h-2rem">
+                              <span
+                                style="transform: translate(-50%, -50%); color: black; font-size: 8px; text-align: center;">
+                                {{'span_no_image_Generic'| translate}}
+                              </span>
+                            </div>
+                            <p style="margin: 0; margin-left: 5px;">
+                              {{ 'vehicle_transmission_CustomerVehicleSearch' | translate }}
+                              {{ item.vehicleTransmission?.vehicleTransmissionName }}
+                            </p>
+                          </ng-template>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+                <p-divider class="p-element w-full block lg:hidden surface-border">
+                  <div role="separator"
+                    class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left">
+                    <div class="p-divider-content"></div>
+                  </div>
+                </p-divider>
+
+              </div>
+
+              <div class="col-12 p-0 flex border-top-1 surface-border">
+
+                <a tabindex="0"
+                  class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
+                  style="border-radius: 6px;">
+                  <i class="pi pi-arrow-circle-left mr-2 mb-2 md:mb-0"></i>
+                  {{'span_button_label_to_go_back_Generic' | translate}}
+                </a>
+                
+                <a tabindex="0"
+                  class="cursor-pointer py-4 flex flex-column md:flex-row text-center justify-content-center align-items-center text-primary hover:bg-primary hover:text-0 transition-duration-150 w-full"
+                  (click)="clickRouterNavigateToCustomerVehicleEdit(item)">
+                  <i class="pi pi-file mr-2 mb-2 md:mb-0"></i>
+                  {{'span_button_label_update_Generic'| translate}}
+                </a>
+
               </div>
             </div>
-          </p-overlayPanel>
-          -->
 
+            <br>
+
+          </div>
         </div>
-      </div>
 
-      <br>
-
-    </ng-template>
-  </p-dataView>
+      </ng-template>
+    </p-dataView>
+  </div>
 
 </div>

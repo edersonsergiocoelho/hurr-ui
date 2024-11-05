@@ -23,6 +23,15 @@ export class CustomerVehicleBookingService {
     );
   }
 
+  findByPaymentId(paymentId: number): Observable<HttpResponse<CustomerVehicleBooking>> {
+    const url = `${this.apiUrl}/mp/payment/${paymentId}`;
+    return this.httpClient.get<CustomerVehicleBooking>(url, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleBooking>) => {
+        return response;
+      })
+    );
+  }
+
   findAll(): Observable<HttpResponse<CustomerVehicleBooking[]>> {
     return this.httpClient.get<CustomerVehicleBooking[]>(this.apiUrl, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleBooking[]>) => {
@@ -96,8 +105,8 @@ export class CustomerVehicleBookingService {
     );
   }
 
-  finalizeBooking(customerVehicleBooking: CustomerVehicleBooking): Observable<HttpResponse<CustomerVehicleBooking>> {
-    const url = `${this.apiUrl}/finalize-booking/${customerVehicleBooking.customerVehicleBookingId}`;
+  checkOut(customerVehicleBooking: CustomerVehicleBooking): Observable<HttpResponse<CustomerVehicleBooking>> {
+    const url = `${this.apiUrl}/check-out/${customerVehicleBooking.customerVehicleBookingId}`;
     return this.httpClient.put<CustomerVehicleBooking>(url, customerVehicleBooking, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleBooking>) => {
         return response;
@@ -107,6 +116,24 @@ export class CustomerVehicleBookingService {
 
   update(customerVehicleBooking: CustomerVehicleBooking): Observable<HttpResponse<CustomerVehicleBooking>> {
     const url = `${this.apiUrl}/${customerVehicleBooking.customerVehicleBookingId}`;
+    return this.httpClient.put<CustomerVehicleBooking>(url, customerVehicleBooking, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleBooking>) => {
+        return response;
+      })
+    );
+  }
+
+  checkIn(customerVehicleBooking: CustomerVehicleBooking): Observable<HttpResponse<CustomerVehicleBooking>> {
+    const url = `${this.apiUrl}/check-in/${customerVehicleBooking.customerVehicleBookingId}`;
+    return this.httpClient.put<CustomerVehicleBooking>(url, customerVehicleBooking, { observe: 'response' }).pipe(
+      map((response: HttpResponse<CustomerVehicleBooking>) => {
+        return response;
+      })
+    );
+  }
+
+  cancelBooking(customerVehicleBooking: CustomerVehicleBooking): Observable<HttpResponse<CustomerVehicleBooking>> {
+    const url = `${this.apiUrl}/cancel-booking/${customerVehicleBooking.customerVehicleBookingId}`;
     return this.httpClient.put<CustomerVehicleBooking>(url, customerVehicleBooking, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleBooking>) => {
         return response;

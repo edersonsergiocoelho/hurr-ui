@@ -1,0 +1,189 @@
+<!-- Formulário De Pesquisa -->
+<form #feeSearchForm="ngForm" (ngSubmit)="search($event)">
+  <!-- Seção De Pesquisa -->
+  <h2 id="divH2" class="bg-indigo-500 text-white">{{'title_FeeSearch' | translate}}</h2>
+
+  <div class="grid p-fluid form-group">
+
+    <!-- Campo Tipo De Taxa -->
+    <div class="col-6 md:col-6 field" [ngClass]="inputSize">
+      <label for="providerUserId" [ngClass]="labelSize">
+        {{'label_fee_type_FeeRegister' | translate}}
+      </label>
+      <p-dropdown 
+        [ngClass]="inputSize" 
+        [options]="feeSearchUIDTO.feeTypes" 
+        [(ngModel)]="feeSearchUIDTO.selectedFeeType" 
+        [showClear]="true" 
+        name="feeType"
+        [filter]="true"
+        filterBy="name" 
+        optionLabel="name" 
+        placeholder="{{ 'placeholder_fee_type_FeeRegister' | translate }}">
+      </p-dropdown>
+    </div>
+
+    <!-- Campo Enabled -->
+    <div class="col-12 md:col-12 field">
+      <div class="card flex justify-content-end" [ngClass]="inputSize">
+        <p-selectButton [options]="feeSearchUIDTO.enabledOptions" 
+          class="p-button-rounded mr-3 md:w-10rem" 
+          (onChange)="onChangeEnabled($event)" 
+          [(ngModel)]="feeSearchUIDTO.enabledValue" 
+          optionLabel="label" 
+          optionValue="value"
+          name="enabled">
+        </p-selectButton>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-4 md:col-4 field"></div>
+  <div class="col-4 md:col-4 field"></div>
+
+  <div id="div-button" class="grid p-fluid form-group">
+
+    <div class="col-12 flex flex-row justify-content-end py-0">
+      <button pButton pRipple 
+        type="button" 
+        class="p-button-secondary p-button-rounded mr-3 md:w-10rem" 
+        [ngClass]="buttonSize"
+        (click)="resetSearchForm()" pButton>
+        <i class="pi pi-eraser"></i>
+        <span class="p-button-label">
+          {{'span_button_label_clean_Generic' | translate}}
+        </span>
+      </button>
+
+      <button pButton pRipple 
+        type="submit" 
+        class="p-button-primary p-button-rounded mr-3 md:w-10rem" 
+        [ngClass]="buttonSize">
+        <i class="pi pi-search"></i>
+        <span class="p-button-label">
+          {{'span_button_label_search_Generic' | translate}}
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="md:col-12 mb-2"></div>
+
+  <div class="custom-bordered-table">
+    <p-toolbar styleClass="mb-4 gap-2">
+      <ng-template pTemplate="left">
+        <button pButton pRipple 
+          label="{{'span_button_label_delete_Generic' | translate}}" 
+          icon="pi pi-trash" 
+          class="p-button-danger p-button-rounded mr-3" 
+          (click)="deleteSelectedRows()" 
+          [disabled]="!feeSearchUIDTO.selectedFee || !feeSearchUIDTO.selectedFee.length">
+        </button>
+        <button pButton pRipple 
+          label="{{'span_button_label_export_Generic' | translate}}" 
+          icon="pi pi-upload" 
+          class="p-button-help p-button-rounded mr-3" 
+          (onClick)="dt.exportCSV()">
+        </button>
+      </ng-template>
+
+      <ng-template pTemplate="right">
+        <button pButton pRipple
+          label="{{'span_button_label_clean_Generic' | translate}}" 
+          icon="pi pi-filter-slash" 
+          class="p-button-secondary p-button-rounded mr-3" 
+          (onClick)="clear(dt)">
+        </button>
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText 
+            type="text" 
+            [(ngModel)]="feeSearchUIDTO.globalFilter" 
+            name="globalFilter" 
+            (input)="dt.filterGlobal(getInputValueWithWildcards($event), 'contains')" 
+            placeholder="{{'placeholder_global_filter_Generic' | translate}}"
+            pTooltip="{{'tooltip_global_filter_Generic' | translate}}"/>
+        </span>
+      </ng-template>
+    </p-toolbar>
+
+    <p-table 
+      #dt
+      [columns]="feeSearchUIDTO.columns" 
+      [value]="feeSearchUIDTO.feees"
+      [(selection)]="feeSearchUIDTO.selectedFee"
+      dataKey="feeId" 
+      [style]="{'margin-bottom':'20px'}"
+      [responsive]="true"
+      [resizableColumns]="true" columnResizeMode="expand" 
+      sortField="feeType" [sortOrder]="-1"
+      [rows]="10" [showCurrentPageReport]="true" 
+      [paginator]="true" [scrollable]="true"
+      [totalRecords]="feeSearchUIDTO.totalRecords" [lazy]="true" 
+      currentPageReportTemplate="{{'table_current_page_report_template_showing_Generic' | translate}} {first} {{'table_current_page_report_template_to_Generic' | translate}} {last} {{'table_current_page_report_template_of_Generic' | translate}} {totalRecords} {{'table_current_page_report_template_records_Generic' | translate}}"
+      [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+      (onLazyLoad)="search($event)" 
+      (onPage)="paginate($event)">
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <h3 class="m-0">{{'table_caption_title_FeeSearch' | translate}}</h3>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 4rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th *ngFor="let column of feeSearchUIDTO.columns" pResizableColumn [pSortableColumn]="column.sortField" [ngStyle]="{'width': column.width, 'text-align': 'left'}">
+            {{column.header}}
+            <p-sortIcon *ngIf="column.sortField" [field]="column.sortField"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td>
+            <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+          </td>
+          <td class="text-left">
+            {{rowData.feeId}}
+          </td>
+          <td class="text-left">
+            {{rowData.feeType}}
+          </td>
+          <td class="text-left">
+            {{rowData.enabled | boolean | async }}
+          </td>
+          <td>
+            <button pButton pRipple 
+              icon="pi pi-pencil" 
+              class="p-button-rounded p-button-success mr-3" 
+              type="button" 
+              (click)="onRowSelectEdit(rowData)">
+            </button>
+            <button pButton pRipple 
+              icon="pi pi-trash" 
+              class="p-button-rounded p-button-warning" 
+              type="button" 
+              (click)="delete(rowData)">
+            </button>
+        </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8" class="justify-content-left">{{'table_no_records_found_Generic' | translate}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            {{ 'table_summary_total_items_message' | translate:{ total: feeSearchUIDTO.feees ? feeSearchUIDTO.feees.length : 0 } }}
+        </div>
+      </ng-template>
+    </p-table>
+
+    <p-confirmDialog [style]="{ width: '450px' }" />
+
+  </div>
+</form>

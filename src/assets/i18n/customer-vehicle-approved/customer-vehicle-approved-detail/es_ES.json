@@ -1,0 +1,52 @@
+{
+  "title_CustomerVehicleApprovedDetail": "Detalles De Customer Vehicle Approved",
+  
+  "subtitle_photos_CustomerVehicleApprovedDetail": "Fotos",
+  
+  "subtitle_insurance_CustomerVehicleApprovedDetail": "Contrato",
+  
+  "subtitle_vehicle_CustomerVehicleApprovedDetail": "Vehículo",
+  "label_vehicle_brand_name_CustomerVehicleApprovedDetail": "Marca",
+  "placeholder_vehicle_brand_name_CustomerVehicleApprovedDetail": "Ingrese La Marca",
+  "label_vehicle_name_CustomerVehicleApprovedDetail": "Vehículo",
+  "placeholder_vehicle_name_CustomerVehicleApprovedDetail": "Ingrese El Vehículo",
+  "label_vehicle_model_name_CustomerVehicleApprovedDetail": "Modelo Del Vehículo",
+  "placeholder_vehicle_model_name_CustomerVehicleApprovedDetail": "Ingrese El Modelo Del Vehículo",
+  "subtitle_transmission_and_mileage_CustomerVehicleApprovedDetail": "Transmisión Y Kilometraje",
+  "label_vehicle_transmission_name_CustomerVehicleApprovedDetail": "Transmisión",
+  "placeholder_vehicle_transmission_name_CustomerVehicleApprovedDetail": "Ingrese La Transmisión",
+  "label_mileage_created_CustomerVehicleApprovedDetail": "Kilometraje",
+  "placeholder_mileage_created_CustomerVehicleApprovedDetail": "Ingrese El Kilometraje Del Vehículo",
+  
+  "subtitle_vehicle_value_CustomerVehicleApprovedDetail": "Valor",
+  "label_vehicle_value_CustomerVehicleApprovedDetail": "Valor Del Vehículo - FIPE",
+  "placeholder_vehicle_value_CustomerVehicleApprovedDetail": "Ingrese El Valor Del Vehículo - FIPE",
+  
+  "subtitle_vehicle_details_CustomerVehicleApprovedDetail": "Detalles Del Vehículo",
+  "label_license_plate_CustomerVehicleApprovedDetail": "Placa Del Vehículo",
+  "placeholder_license_plate_CustomerVehicleApprovedDetail": "Ingrese La Placa Del Vehículo",
+  "label_renavam_CustomerVehicleApprovedDetail": "Renavam",
+  "placeholder_renavam_CustomerVehicleApprovedDetail": "Ingrese El Renavam",
+  "label_renavam_state_name_CustomerVehicleApprovedDetail": "Estado De Emisión - Renavam",
+  "placeholder_renavam_state_name_CustomerVehicleApprovedDetail": "Ingrese El Estado De Emisión Del Renavam",
+  "label_chassis_CustomerVehicleApprovedDetail": "Chasis",
+  "placeholder_chassis_CustomerVehicleApprovedDetail": "Ingrese El Chasis Del Vehículo",
+  "label_year_of_manufacture_CustomerVehicleApprovedDetail": "Año De Fabricación",
+  "placeholder_year_of_manufacture_CustomerVehicleApprovedDetail": "Ingrese El Año De Fabricación",
+  "label_year_of_the_car_CustomerVehicleApprovedDetail": "Año Del Coche",
+  "placeholder_year_of_the_car_CustomerVehicleApprovedDetail": "Ingrese El Año Del Coche",
+  "label_vehicle_color_CustomerVehicleApprovedDetail": "Color",
+  "placeholder_vehicle_color_CustomerVehicleApprovedDetail": "Ingrese El Color Del Vehículo",
+  "label_vehicle_fuel_type_CustomerVehicleApprovedDetail": "Tipo De Combustible",
+  "placeholder_vehicle_fuel_type_CustomerVehicleApprovedDetail": "Ingrese El Combustible Del Vehículo",
+  "label_description_CustomerVehicleApprovedDetail": "Descripción",
+  "placeholder_description_CustomerVehicleApprovedDetail": "Ingrese La Descripción",
+ 
+  "subtitle_approve_CustomerVehicleApprovedDetail": "Aprobación",
+  "label_message_CustomerVehicleApprovedDetail": "Mensaje De Aprobación / Rechazo",
+  "placeholder_message_CustomerVehicleApprovedDetail": "Ingrese El Mensaje De Aprobación / Rechazo",
+ 
+  "message_not_null_message_service_CustomerVehicleApprovedDetail": "Ingrese El Mensaje De Aprobación / Rechazo.",
+  "success_approve_message_service_CustomerVehicleApprovedDetail": "Aprobación Completada Con Éxito.",
+  "success_disapprove_message_service_CustomerVehicleApprovedDetail": "Rechazo Completado Con Éxito."
+}

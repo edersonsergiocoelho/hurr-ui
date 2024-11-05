@@ -1,4 +1,4 @@
-export interface VehicleCategory {
+export class VehicleCategory {
   vehicleCategoryId: string;
   vehicleCategoryName: string;
   createdDate: Date;

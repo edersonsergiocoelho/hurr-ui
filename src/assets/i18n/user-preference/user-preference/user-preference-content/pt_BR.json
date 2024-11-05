@@ -1,0 +1,20 @@
+{
+  "title_UserPreferenceContent": "Preferências",
+
+  "label_user_preference_id_UserPreferenceContent": "ID Do Usuário De Preferência",
+  "placeholder_user_preference_id_UserPreferenceContent": "Informe O ID Do Usuário De Preferência",
+  "label_language_UserPreferenceContent": "Linguagem",
+  "placeholder_language_UserPreferenceContent": "Informe A Linguagem",
+  "label_theme_UserPreferenceContent": "Thema",
+  "placeholder_theme_UserPreferenceContent": "Informe O Thema",
+  "label_created_date_UserPreferenceContent": "Data de Criação",
+  "placeholder_created_date_UserPreferenceContent": "Selecione A Data De Criação",
+  "label_modified_date_UserPreferenceContent": "Data de Modificação",
+  "placeholder_modified_date_UserPreferenceContent": "Selecione A Data De Modificação",
+  "label_enabled_UserPreferenceContent": "Ativo",
+
+  "save_preference_summary_message_service_UserPreferenceContent": "Preferências Salva Com Sucesso",
+  "save_preference_detail_message_service_UserPreferenceContent": "Suas Preferências Foi Salva Com Sucesso!",
+  "update_preference_summary_message_service_UserPreferenceContent": "Preferências Atualizada Com Sucesso",
+  "update_preference_detail_message_service_UserPreferenceContent": "Suas Preferências Foi Atualizada Com Sucesso!"
+}

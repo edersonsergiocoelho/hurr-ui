@@ -19,5 +19,5 @@ export class RoleSearchUIDTO {
   enabledOptions: any[] = [{label: 'Todos', value: 'ALL'}, {label: 'Habilitados', value: 'ON'}, {label: 'Desabilitados', value: 'OFF'}];
   enabledValue: string = 'ALL';
 
-  error_message_service_Generic: string;
+  error_summary_message_service_Generic: string;
 }

@@ -2,6 +2,6 @@ import { CustomerVehicleBookingSearchDTO } from "src/app/global/page/customer-ve
 
 export class EarningsUIDTO {
 
-  // Messages
-  error_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
 }

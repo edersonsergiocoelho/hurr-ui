@@ -1,0 +1,31 @@
+{
+ 
+  "title_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Check-Out",
+  "label_booking_start_date_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Booking Start Date: ",
+  "label_booking_end_date_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Booking End Date: ",
+  "label_daily_rate_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Daily Rate: ",
+  "label_total_booking_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Total Booking Value:",
+  "label_unlimited_mileage_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Booking Type: Unlimited",
+  "label_limited_mileage_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Booking Type: Limited",
+  "label_limited_mileage_included_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Included Limited Mileage:",
+  "label_limited_mileage_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Additional Mileage Value:",
+  "label_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Starting Mileage",
+  "placeholder_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Enter Vehicle Starting Mileage",
+  "label_booking_end_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Ending Mileage",
+  "placeholder_booking_end_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Enter Vehicle Ending Mileage",
+  "label_limited_mileage_total_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Total Additional Mileage",
+  "placeholder_limited_mileage_total_km_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Enter Total Additional Mileage",
+  "label_limited_mileage_total_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Total Additional Mileage Cost",
+  "placeholder_limited_mileage_total_value_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Enter Total Additional Mileage Cost",
+
+  "title_additional_charges_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Additional Charges",
+  "label_cleaning_fee_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Cleaning Fee?",
+
+  "label_check_in_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Notes - Check-In",
+  "placeholder_check_in_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Enter Check-In Notes, e.g., Any Pre-Existing Vehicle Detail",
+  "label_check_out_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Notes - Check-Out",
+  "placeholder_check_out_notes_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Enter Check-Out Notes, e.g., Any Detail Customer Caused And Will Be Charged For",
+ 
+  "check_out_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Check-Out Successfully Completed.",
+  "check_out_detail_message_service_CustomerVehicleBookingCustomerVehicleCheckOutDynamicDialog": "Check-Out Successfully Completed. Vehicle and Booking Information Have Been Correctly Processed and Are Now Available."
+}

@@ -1,0 +1,10 @@
+{
+  "title_PaymentStatusSearch": "Search Payment Status",
+  "label_payment_status_name_PaymentStatusSearch": "Payment Status Name",
+  "placeholder_payment_status_name_PaymentStatusSearch": "Enter Payment Status Name",
+  
+  "table_caption_title_PaymentStatusSearch": "Payment Status",
+  "table_header_payment_status_id_PaymentStatusSearch": "ID",
+  "table_header_payment_status_name_PaymentStatusSearch": "Name",
+  "table_header_enabled_PaymentStatusSearch": "Enabled?"
+}

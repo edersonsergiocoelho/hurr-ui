@@ -1,9 +1,10 @@
 import { SelectItem } from "primeng/api";
-import { CustomerVehicleBooking } from "../../../entity/customer-vehicle-booking.entity";
 import { CustomerVehicleBookingSearchDTO } from "../../../dto/customer-vehicle-booking-search-dto.dto";
 import { CustomerVehicleReview } from "src/app/global/page/customer-vehicle-review/entity/customer-vehicle-review.entity";
+import { TranslateConfirmServiceDTO } from "src/app/core/translate/dto/translate-confirm-service-dto.dto";
+import { CustomerVehicleBooking } from "../../../entity/customer-vehicle-booking.entity";
 
-export class CustomerVehicleBookingSearchUIDTO {
+export class CustomerVehicleBookingSearchUIDTO extends TranslateConfirmServiceDTO {
 
   columns: any[] = [];
   totalRecords = 0;
@@ -18,17 +19,16 @@ export class CustomerVehicleBookingSearchUIDTO {
   sortBy: string | string[];
 
   customerVehicleBookingSearchDTO: CustomerVehicleBookingSearchDTO;
-  customerVehicleBookings: Array<CustomerVehicleBooking>;
+  customerVehicleBookings: Array<any>;
 
-  customerVehicleReview: CustomerVehicleReview;
+  selectedCustomerVehicleBooking: CustomerVehicleBooking;
+  selectedCustomerVehicleReview: CustomerVehicleReview;
 
-  // Messages
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
-
+  // Messages - Translate
   label_created_date_option_1_CustomerVehicleBookingSearch: string;
   label_created_date_option_2_CustomerVehicleBookingSearch: string;
 
-  save_message_service_Generic: string;
+  save_summary_message_service_Generic: string;
+  save_cancel_booking_message_service_CustomerVehicleBookingSearch: string;
   save_success_write_a_review_message_service_CustomerVehicleBookingSearch: string;
 }

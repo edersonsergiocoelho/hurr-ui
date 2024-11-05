@@ -1,0 +1,17 @@
+{
+  "thanks_CustomerVehicleBookingSuccess": "¡Gracias!",
+  "successful_order_CustomerVehicleBookingSuccess": "Pedido Realizado Con Éxito",
+  "thanks_successful_order_CustomerVehicleBookingSuccess": "Muchas Gracias Por Elegir HURR.",
+  "booking_CustomerVehicleBookingSuccess": "Número De Reserva:",
+  "billing_address_CustomerVehicleBookingSuccess": "Dirección De Facturación",
+  "payment_CustomerVehicleBookingSuccess": "Pago",
+  "amex_credit_card_CustomerVehicleBookingSuccess": "Amex Tarjeta De Crédito",
+  "amex_debit_card_CustomerVehicleBookingSuccess": "Amex Tarjeta De Débito",
+  "mastercard_credit_card_CustomerVehicleBookingSuccess": "Mastercard Tarjeta De Crédito",
+  "mastercard_debit_card_CustomerVehicleBookingSuccess": "Mastercard Tarjeta De Débito",
+  "visa_credit_card_CustomerVehicleBookingSuccess": "Visa Tarjeta De Crédito",
+  "visa_debit_card_CustomerVehicleBookingSuccess": "Visa Tarjeta De Débito",
+  "summary_CustomerVehicleBookingSuccess": "Resumen",
+  "subtotal_CustomerVehicleBookingSuccess": "Subtotal",
+  "total_CustomerVehicleBookingSuccess": "Total"
+}

@@ -1,0 +1,10 @@
+{
+  "title_FeeSearch": "Buscar Tarifas",
+  "label_payment_status_name_FeeSearch": "Nombre De Tarifas",
+  "placeholder_payment_status_name_FeeSearch": "Ingrese El Nombre De Las Tarifas",
+
+  "table_caption_title_FeeSearch": "Tarifas",
+  "table_header_payment_status_id_FeeSearch": "ID",
+  "table_header_payment_status_name_FeeSearch": "Nombre",
+  "table_header_enabled_FeeSearch": "¿Habilitado?"
+}

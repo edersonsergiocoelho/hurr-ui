@@ -61,10 +61,10 @@ export class UserRoleRegisterComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'save_message_service_Generic',
-        'update_message_service_Generic',
-        'delete_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'save_summary_message_service_Generic',
+        'update_summary_message_service_Generic',
+        'delete_summary_message_service_Generic',
         'save_success_message_service_UserRoleRegister',
         'update_success_message_service_UserRoleRegister',
         'delete_success_message_service_UserRoleRegister'
@@ -72,10 +72,10 @@ export class UserRoleRegisterComponent implements OnInit {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.userRoleRegisterUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.userRoleRegisterUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
-      this.userRoleRegisterUIDTO.update_message_service_Generic = translations['update_message_service_Generic'];
-      this.userRoleRegisterUIDTO.delete_message_service_Generic = translations['delete_message_service_Generic'];
+      this.userRoleRegisterUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.userRoleRegisterUIDTO.save_summary_message_service_Generic = translations['save_summary_message_service_Generic'];
+      this.userRoleRegisterUIDTO.update_summary_message_service_Generic = translations['update_summary_message_service_Generic'];
+      this.userRoleRegisterUIDTO.delete_summary_message_service_Generic = translations['delete_summary_message_service_Generic'];
       this.userRoleRegisterUIDTO.save_success_message_service_UserRoleRegister = translations['save_success_message_service_UserRoleRegister'];
       this.userRoleRegisterUIDTO.update_success_message_service_UserRoleRegister = translations['update_success_message_service_UserRoleRegister'];
       this.userRoleRegisterUIDTO.delete_success_message_service_UserRoleRegister = translations['delete_success_message_service_UserRoleRegister'];
@@ -83,7 +83,7 @@ export class UserRoleRegisterComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.userRoleRegisterUIDTO.error_message_service_Generic,
+        summary: '' + this.userRoleRegisterUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -102,7 +102,7 @@ export class UserRoleRegisterComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.userRoleRegisterUIDTO.error_message_service_Generic,
+        summary: '' + this.userRoleRegisterUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -121,7 +121,7 @@ export class UserRoleRegisterComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.userRoleRegisterUIDTO.error_message_service_Generic,
+        summary: '' + this.userRoleRegisterUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -171,12 +171,12 @@ export class UserRoleRegisterComponent implements OnInit {
 
         this.messageService.add({ 
           severity: 'success', 
-          summary: '' + this.userRoleRegisterUIDTO.save_message_service_Generic, 
+          summary: '' + this.userRoleRegisterUIDTO.save_summary_message_service_Generic, 
           detail: '' + this.userRoleRegisterUIDTO.save_success_message_service_UserRoleRegister });
 
       },
       error: (error) => {
-        this.messageService.add({ severity: 'error', summary: '' + this.userRoleRegisterUIDTO.error_message_service_Generic, detail: error.error.message });
+        this.messageService.add({ severity: 'error', summary: '' + this.userRoleRegisterUIDTO.error_summary_message_service_Generic, detail: error.error.message });
 
         this.ngxSpinnerService.hide();
       },
@@ -202,12 +202,12 @@ export class UserRoleRegisterComponent implements OnInit {
 
         this.messageService.add({ 
           severity: 'success', 
-          summary: '' + this.userRoleRegisterUIDTO.update_message_service_Generic, 
+          summary: '' + this.userRoleRegisterUIDTO.update_summary_message_service_Generic, 
           detail: '' + this.userRoleRegisterUIDTO.update_success_message_service_UserRoleRegister });
 
       },
       error: (error) => {
-        this.messageService.add({ severity: 'error', summary: '' + this.userRoleRegisterUIDTO.error_message_service_Generic, detail: error.error.message });
+        this.messageService.add({ severity: 'error', summary: '' + this.userRoleRegisterUIDTO.error_summary_message_service_Generic, detail: error.error.message });
 
         this.ngxSpinnerService.hide();
       },
@@ -227,12 +227,12 @@ export class UserRoleRegisterComponent implements OnInit {
 
         this.messageService.add({ 
           severity: 'success', 
-          summary: '' + this.userRoleRegisterUIDTO.delete_message_service_Generic, 
+          summary: '' + this.userRoleRegisterUIDTO.delete_summary_message_service_Generic, 
           detail: '' + this.userRoleRegisterUIDTO.delete_success_message_service_UserRoleRegister });
 
       },
       error: (error) => {
-        this.messageService.add({ severity: 'error', summary: '' + this.userRoleRegisterUIDTO.error_message_service_Generic, detail: error.error.message });
+        this.messageService.add({ severity: 'error', summary: '' + this.userRoleRegisterUIDTO.error_summary_message_service_Generic, detail: error.error.message });
 
         this.ngxSpinnerService.hide();
       },

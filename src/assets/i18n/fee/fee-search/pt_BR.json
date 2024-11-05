@@ -1,0 +1,10 @@
+{
+"title_FeeSearch": "Pesquisar Taxa",
+"label_fee_type_FeeSearch": "Tipo De Taxa",
+"placeholder_fee_type_FeeSearch": "Informe O Tipo De Taxa",
+
+"table_caption_title_FeeSearch": "Taxas",
+"table_header_payment_status_id_FeeSearch": "ID",
+"table_header_payment_status_name_FeeSearch": "Nome",
+"table_header_enabled_FeeSearch": "Ativo?"
+}

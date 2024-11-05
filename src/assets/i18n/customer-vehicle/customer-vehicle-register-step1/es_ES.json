@@ -1,0 +1,22 @@
+{
+  "title_CustomerVehicleRegisterStep1": "Paso 1 - Verifique Si El Servicio Está Disponible En Su Región",
+  
+  "label_country_CustomerVehicleRegisterStep1": "País",
+  "placeholder_country_CustomerVehicleRegisterStep1": "Ingrese El País",
+  "label_state_CustomerVehicleRegisterStep1": "Estado",
+  "placeholder_state_CustomerVehicleRegisterStep1": "Ingrese El Estado",
+  "label_city_CustomerVehicleRegisterStep1": "Ciudad",
+  "placeholder_city_CustomerVehicleRegisterStep1": "Ingrese La Ciudad",
+  "label_nickname_CustomerVehicleRegisterStep1": "Apodo",
+  "placeholder_nickname_CustomerVehicleRegisterStep1": "Ingrese El Apodo Ej. Tarjeta Santander",
+  "label_street_address_CustomerVehicleRegisterStep1": "Calle",
+  "placeholder_street_address_CustomerVehicleRegisterStep1": "Ingrese La Calle, Avenida, Etc.",
+  "label_number_CustomerVehicleRegisterStep1": "Número",
+  "placeholder_number_CustomerVehicleRegisterStep1": "Ingrese El Número De Calle, Avenida, Etc.",
+  "label_complement_CustomerVehicleRegisterStep1": "Complemento",
+  "placeholder_complement_CustomerVehicleRegisterStep1": "Ingrese Complemento Ej. Apartamento 1, Bloque 1",
+  "label_zip_code_CustomerVehicleRegisterStep1": "Código Postal",
+  "placeholder_zip_code_CustomerVehicleRegisterStep1": "Ingrese El Número Del Código Postal, Ej: 17.340-000",
+
+  "city_service_not_available_message_service_CustomerVehicleRegisterStep1": "El Servicio Aún No Está Disponible En Su Región, Estamos Trabajando Para Ampliar Los Servicios."
+}

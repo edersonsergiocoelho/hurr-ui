@@ -1,0 +1,17 @@
+{
+  "title_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Check-In",
+  
+  "label_booking_start_date_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Booking Start Date: ",
+  "label_booking_end_date_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Booking End Date: ",
+  "label_daily_rate_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Daily Rate: ",
+  "label_total_booking_value_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Total Booking Value:",
+  "label_unlimited_mileage_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Booking Type: Unlimited",
+  "label_limited_mileage_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Booking Type: Limited",
+  "label_limited_mileage_included_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Included Limited Mileage:",
+  "label_limited_mileage_value_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Additional Mileage Value:",
+  "label_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Starting Mileage",
+  "placeholder_booking_start_km_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Enter Vehicle Starting Mileage",
+
+  "check_in_summary_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Check-In Successfully Completed.",
+  "check_in_detail_message_service_CustomerVehicleBookingCustomerVehicleCheckInDynamicDialog": "Check-In Successfully Completed. Vehicle and Booking Information Have Been Correctly Processed and Are Now Available."
+}

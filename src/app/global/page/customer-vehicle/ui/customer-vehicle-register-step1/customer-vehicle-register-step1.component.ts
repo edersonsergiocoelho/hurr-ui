@@ -36,7 +36,6 @@ export class CustomerVehicleRegisterStep1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
@@ -64,15 +63,15 @@ export class CustomerVehicleRegisterStep1Component implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic',
         'city_service_not_available_message_service_CustomerVehicleRegisterStep1'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleRegisterStep1UIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleRegisterStep1UIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleRegisterStep1UIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleRegisterStep1UIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
       this.customerVehicleRegisterStep1UIDTO.city_service_not_available_message_service_CustomerVehicleRegisterStep1 = translations['city_service_not_available_message_service_CustomerVehicleRegisterStep1'];
 
     } catch (error: any) {
@@ -81,7 +80,7 @@ export class CustomerVehicleRegisterStep1Component implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep1UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep1UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -103,7 +102,7 @@ export class CustomerVehicleRegisterStep1Component implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep1UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep1UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -143,7 +142,7 @@ export class CustomerVehicleRegisterStep1Component implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep1UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep1UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -173,7 +172,7 @@ export class CustomerVehicleRegisterStep1Component implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep1UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep1UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -188,7 +187,7 @@ export class CustomerVehicleRegisterStep1Component implements OnInit {
 
       this.messageService.add({
         severity: SeverityConstants.WARN,
-        summary: '' + this.customerVehicleRegisterStep1UIDTO.warn_message_service_Generic,
+        summary: '' + this.customerVehicleRegisterStep1UIDTO.warn_summary_message_service_Generic,
         detail: '' + this.customerVehicleRegisterStep1UIDTO.city_service_not_available_message_service_CustomerVehicleRegisterStep1
       });
     }

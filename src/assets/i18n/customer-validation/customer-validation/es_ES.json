@@ -1,0 +1,35 @@
+{
+  "label_email_CustomerValidation": "Correo Electrónico",
+  "placeholder_email_CustomerValidation": "Ingrese El Correo Electrónico",
+
+  "label_email_verification_code_CustomerValidation": "Código De Verificación",
+  "placeholder_email_verification_code_CustomerValidation": "Ingrese El Código De Verificación Enviado Por Correo Electrónico",
+
+  "label_first_name_CustomerValidation": "Nombre",
+  "placeholder_first_name_CustomerValidation": "Ingrese El Primer Nombre",
+  "label_last_name_CustomerValidation": "Apellido",
+  "placeholder_last_name_CustomerValidation": "Ingrese El Apellido",
+  "label_cpf_CustomerValidation": "CPF",
+  "placeholder_cpf_CustomerValidation": "Ingrese El Número De CPF",
+  "label_identity_number_CustomerValidation": "Identidad",
+  "placeholder_identity_number_CustomerValidation": "Ingrese El Número De Identidad",
+  "label_identity_number_issuing_body_CustomerValidation": "Órgano Emisor",
+  "placeholder_identity_number_issuing_body_CustomerValidation": "Ingrese El Órgano Emisor",
+  "label_identity_number_issuing_body_uf_CustomerValidation": "UF",
+  "placeholder_identity_number_issuing_body_uf_CustomerValidation": "Ingrese El UF",
+  "label_date_of_birth_CustomerValidation": "Fecha De Nacimiento",
+  "placeholder_date_of_birth_CustomerValidation": "Ingrese La Fecha De Nacimiento",
+  
+  "label_driver_license_registration_number_CustomerValidation": "Número De La Licencia De Conducir",
+  "placeholder_driver_license_registration_number_CustomerValidation": "Ingrese El Número De La Licencia De Conducir",
+  "label_driver_license_category_CustomerValidation": "Categoría De La Licencia De Conducir",
+  "label_driver_license_first_license_date_CustomerValidation": "Fecha De La Primera Licencia",
+  "placeholder_driver_license_first_license_date_CustomerValidation": "Ingrese La Fecha De La Primera Licencia",
+  "placeholder_driver_license_category_CustomerValidation": "Ingrese La Categoría De La Licencia De Conducir",
+  "label_driver_license_expiration_date_CustomerValidation": "Fecha De Expiración De La Licencia De Conducir",
+  "placeholder_driver_license_expiration_date_CustomerValidation": "Ingrese La Fecha De Expiración De La Licencia De Conducir",
+  "label_driver_license_issue_date_CustomerValidation": "Fecha De Emisión De La Licencia De Conducir",
+  "placeholder_driver_license_issue_date_CustomerValidation": "Ingrese La Fecha De Emisión De La Licencia De Conducir",
+  "label_driver_license_issue_uf_CustomerValidation": "UF De Emisión",
+  "placeholder_driver_license_issue_uf_CustomerValidation": "Ingrese El UF De Emisión, Por Ejemplo: SP"
+}

@@ -1,14 +1,26 @@
 {
   "title_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "Reservas Dos Meus Carros",
   "subtitle_my_booking_CustomerVehicleBookingCustomerVehicleSearch": "Verifique Aqui As Suas Últimas Reservas Dos Meus Carros.",
+
   "booking_CustomerVehicleBookingCustomerVehicleSearch": "Número Da Reserva",
   "created_date_CustomerVehicleBookingCustomerVehicleSearch": "Data Da Reserva",
   "total_booking_value_CustomerVehicleBookingCustomerVehicleSearch": "Total",
   "placeholder_created_date_CustomerVehicleBookingCustomerVehicleSearch": "Ordernar Por Data De Reserva",
   "label_created_date_option_1_CustomerVehicleBookingCustomerVehicleSearch": "Ordernar Por Data De Reserva Menor Para Maior",
   "label_created_date_option_2_CustomerVehicleBookingCustomerVehicleSearch": "Ordernar Por Data De Reserva Maior Para Menor",
-  "label_booking_delivery_date_CustomerVehicleBookingCustomerVehicleSearch": "Data De Entrega: ",
+  "vehicle_model_CustomerVehicleBookingCustomerVehicleSearch": "Modelo: ",
+  "vehicle_category_CustomerVehicleBookingCustomerVehicleSearch": "Categoria: ",
+  "vehicle_color_CustomerVehicleBookingCustomerVehicleSearch": "Cor: ",
+  "vehicle_fuel_type_CustomerVehicleBookingCustomerVehicleSearch": "Combustível: ",
+  "vehicle_transmission_CustomerVehicleBookingCustomerVehicleSearch": "Transmissão: ",
+  "label_reservation_start_date_CustomerVehicleBookingCustomerVehicleSearch": "Início Da Reserva: ",
+  "label_reservation_end_date_CustomerVehicleBookingCustomerVehicleSearch": "Fim Da Reserva: ",
+  "label_booking_start_date_CustomerVehicleBookingCustomerVehicleSearch": "Check-In Da Reserva: ",
+  "label_booking_end_date_CustomerVehicleBookingCustomerVehicleSearch": "Check-Out Da Reserva: ",
+  "label_booking_cancellation_date_CustomerVehicleBookingCustomerVehicleSearch": "Essa Reserva Foi Cancelada: ",
   "placeholder_review_CustomerVehicleBookingCustomerVehicleSearch": "Informe Uma Crítica Para O Cliente Que Alugou O Carro",
+
   "save_success_write_a_review_message_service_CustomerVehicleBookingCustomerVehicleSearch": "Crítica Salva Com Sucesso",
+  
   "header_CustomerVehicleBookingCustomerVehicleFinalizeBookingDynamicDialog_CustomerVehicleBookingCustomerVehicleSearch": "Finalização Da Reserva"
 }

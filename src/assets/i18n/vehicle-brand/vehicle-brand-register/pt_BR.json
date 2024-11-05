@@ -1,0 +1,16 @@
+{
+  "title_VehicleBrandRegister": "Cadastro Da Marca De Veículo",
+  "label_vehicle_brand_id_VehicleBrandRegister": "ID Da Marca De Veículo",
+  "placeholder_vehicle_brand_id_VehicleBrandRegister": "Informe O ID Da Marca De Veículo",
+  "label_vehicle_brand_name_VehicleBrandRegister": "Nome Da Marca De Veículo",
+  "placeholder_vehicle_brand_name_VehicleBrandRegister": "Informe O Nome Da Marca De Veículo",
+  "label_created_date_VehicleBrandRegister": "Data de Criação",
+  "placeholder_created_date_VehicleBrandRegister": "Selecione A Data De Criação",
+  "label_modified_date_VehicleBrandRegister": "Data de Modificação",
+  "placeholder_modified_date_VehicleBrandRegister": "Selecione A Data De Modificação",
+  "label_enabled_VehicleBrandRegister": "Ativo",
+
+  "save_success_detail_message_service_VehicleBrandRegister": "Marca De Veículo Cadastrada Com Sucesso",
+  "update_success_detail_message_service_VehicleBrandRegister": "Marca De Veículo Atualizada Com Sucesso",
+  "delete_success_detail_message_service_VehicleBrandRegister": "Marca De Veículo Removida Com Sucesso"
+}

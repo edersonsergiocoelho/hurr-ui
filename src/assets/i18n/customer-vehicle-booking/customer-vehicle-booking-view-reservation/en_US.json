@@ -1,0 +1,27 @@
+{
+  "thanks_CustomerVehicleBookingViewReservation": "Thank You!",
+  "successful_order_CustomerVehicleBookingViewReservation": "Order Successfully Placed",
+  "thanks_successful_order_CustomerVehicleBookingViewReservation": "Thank You Very Much For Choosing HURR.",
+
+  "title_CustomerVehicleBookingViewReservation": "Reservation",
+  "booking_CustomerVehicleBookingViewReservation": "Booking Number:",
+  "billing_address_CustomerVehicleBookingViewReservation": "Billing Address",
+  "payment_CustomerVehicleBookingViewReservation": "Payment",
+  "amex_credit_card_CustomerVehicleBookingViewReservation": "Amex Credit Card",
+  "amex_debit_card_CustomerVehicleBookingViewReservation": "Amex Debit Card",
+  "mastercard_credit_card_CustomerVehicleBookingViewReservation": "Mastercard Credit Card",
+  "mastercard_debit_card_CustomerVehicleBookingViewReservation": "Mastercard Debit Card",
+  "visa_credit_card_CustomerVehicleBookingViewReservation": "Visa Credit Card",
+  "visa_debit_card_CustomerVehicleBookingViewReservation": "Visa Debit Card",
+  "installments_CustomerVehicleBookingViewReservation": "Installment Quantity: ",
+  "transaction_amount_CustomerVehicleBookingViewReservation": "Transaction Amount: ",
+  "installment_amount_CustomerVehicleBookingViewReservation": "Installment Amount: ",
+  "total_paid_amount_CustomerVehicleBookingViewReservation": "Total Paid Amount: ",
+  
+  "days_CustomerVehicleBookingViewReservation": "Days",
+  "summary_CustomerVehicleBookingViewReservation": "Summary",
+  "daily_rate_CustomerVehicleBookingViewReservation": "Total Daily Rate",
+  "total_booking_value_CustomerVehicleBookingViewReservation": "Total Booking Value",
+  "total_additional_value_CustomerVehicleBookingViewReservation": "Total Additional Value",
+  "total_CustomerVehicleBookingViewReservation": "Total"
+}

@@ -45,7 +45,6 @@ export class FileApprovedDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetDetailForm();
   }
 
@@ -67,9 +66,9 @@ export class FileApprovedDetailComponent implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic', 
-        'warn_message_service_Generic',
-        'success_message_service_Generic',
+        'error_summary_message_service_Generic', 
+        'warn_summary_message_service_Generic',
+        'success_summary_message_service_Generic',
         'message_not_null_message_service_FileApprovedDetail',
         'success_approve_message_service_FileApprovedDetail',
         'success_disapprove_message_service_FileApprovedDetail'
@@ -77,9 +76,9 @@ export class FileApprovedDetailComponent implements OnInit {
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.fileApprovedDetailUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.fileApprovedDetailUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
-      this.fileApprovedDetailUIDTO.success_message_service_Generic = translations['success_message_service_Generic'];
+      this.fileApprovedDetailUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.fileApprovedDetailUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.fileApprovedDetailUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
       this.fileApprovedDetailUIDTO.message_not_null_message_service_FileApprovedDetail = translations['message_not_null_message_service_FileApprovedDetail'];
       this.fileApprovedDetailUIDTO.success_approve_message_service_FileApprovedDetail = translations['success_approve_message_service_FileApprovedDetail'];
       this.fileApprovedDetailUIDTO.success_disapprove_message_service_FileApprovedDetail = translations['success_disapprove_message_service_FileApprovedDetail'];
@@ -87,7 +86,7 @@ export class FileApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.fileApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.fileApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -108,7 +107,7 @@ export class FileApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.fileApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.fileApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -159,7 +158,7 @@ export class FileApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.fileApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.fileApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -200,7 +199,7 @@ export class FileApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.fileApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.fileApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -227,7 +226,7 @@ export class FileApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.fileApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.fileApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -257,7 +256,7 @@ export class FileApprovedDetailComponent implements OnInit {
     if (this.fileApprovedDetailUIDTO.fileApproved.message == null || this.fileApprovedDetailUIDTO.fileApproved.message == "") {
       this.messageService.add({
         severity: 'warn',
-        summary: '' + this.fileApprovedDetailUIDTO.warn_message_service_Generic,
+        summary: '' + this.fileApprovedDetailUIDTO.warn_summary_message_service_Generic,
         detail: '' + this.fileApprovedDetailUIDTO.message_not_null_message_service_FileApprovedDetail,
       });
 
@@ -295,7 +294,7 @@ export class FileApprovedDetailComponent implements OnInit {
 
                 this.messageService.add({
                   severity: 'success',
-                  summary: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
+                  summary: '' + this.fileApprovedDetailUIDTO.success_summary_message_service_Generic,
                   detail: '' + this.fileApprovedDetailUIDTO.success_approve_message_service_FileApprovedDetail,
                 });
               }
@@ -316,7 +315,7 @@ export class FileApprovedDetailComponent implements OnInit {
 
                 this.messageService.add({
                   severity: 'success',
-                  summary: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
+                  summary: '' + this.fileApprovedDetailUIDTO.success_summary_message_service_Generic,
                   detail: '' + this.fileApprovedDetailUIDTO.success_approve_message_service_FileApprovedDetail,
                 });
               }
@@ -328,7 +327,7 @@ export class FileApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.fileApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.fileApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }
@@ -339,7 +338,7 @@ export class FileApprovedDetailComponent implements OnInit {
     if (this.fileApprovedDetailUIDTO.fileApproved.message == null || this.fileApprovedDetailUIDTO.fileApproved.message == "") {
       this.messageService.add({
         severity: 'warn',
-        summary: '' + this.fileApprovedDetailUIDTO.warn_message_service_Generic,
+        summary: '' + this.fileApprovedDetailUIDTO.warn_summary_message_service_Generic,
         detail: '' + this.fileApprovedDetailUIDTO.message_not_null_message_service_FileApprovedDetail,
       });
 
@@ -379,7 +378,7 @@ export class FileApprovedDetailComponent implements OnInit {
 
                 this.messageService.add({
                   severity: 'success',
-                  summary: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
+                  summary: '' + this.fileApprovedDetailUIDTO.success_summary_message_service_Generic,
                   detail: '' + this.fileApprovedDetailUIDTO.success_disapprove_message_service_FileApprovedDetail,
                 });
               }
@@ -401,7 +400,7 @@ export class FileApprovedDetailComponent implements OnInit {
 
                 this.messageService.add({
                   severity: 'success',
-                  summary: '' + this.fileApprovedDetailUIDTO.success_message_service_Generic,
+                  summary: '' + this.fileApprovedDetailUIDTO.success_summary_message_service_Generic,
                   detail: '' + this.fileApprovedDetailUIDTO.success_disapprove_message_service_FileApprovedDetail,
                 });
               }
@@ -413,7 +412,7 @@ export class FileApprovedDetailComponent implements OnInit {
     } catch (error: any) {
       this.messageService.add({
         severity: 'error',
-        summary: '' + this.fileApprovedDetailUIDTO.error_message_service_Generic,
+        summary: '' + this.fileApprovedDetailUIDTO.error_summary_message_service_Generic,
         detail: error.toString()
       });
     }

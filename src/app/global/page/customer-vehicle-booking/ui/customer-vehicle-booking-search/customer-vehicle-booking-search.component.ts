@@ -3,17 +3,17 @@ import { CustomerVehicleBookingSearchUIDTO } from './dto/customer-vehicle-bookin
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first, firstValueFrom } from 'rxjs';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { CustomerVehicleBookingService } from '../../service/customer-vehicle-booking.service';
 import { DataViewLazyLoadEvent } from 'primeng/dataview';
 import { CustomerVehicleBooking } from '../../entity/customer-vehicle-booking.entity';
-import { CustomerService } from '../../../customer/service/customer.service';
-import { SessionStorageService } from 'src/app/core/session-storage/service/session-storage.service';
 import { CustomerVehicleBookingSearchDTO } from '../../dto/customer-vehicle-booking-search-dto.dto';
 import { CustomerVehicleReviewService } from '../../../customer-vehicle-review/service/customer-vehicle-review.service';
 import { CustomerVehicleReview } from '../../../customer-vehicle-review/entity/customer-vehicle-review.entity';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { DecimalPipeService } from 'src/app/utils/service/decimal-utils-service';
+import { CustomerVehicleFilePhotoService } from 'src/app/page/customer-vehicle-file-photo/service/customer-vehicle-file-photo.service';
+import { SeverityConstants } from 'src/app/commom/severity.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-vehicle-booking-search',
@@ -25,27 +25,21 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
   // DTO's
   customerVehicleBookingSearchUIDTO: CustomerVehicleBookingSearchUIDTO;
 
-  // Utils
-  decimalPipe: DecimalPipeService;
-
   // Componentes
   @ViewChild('overlayPanelWriteAReview') overlayPanelWriteAReview: OverlayPanel;
 
   constructor(
-    private customerService: CustomerService,
     private customerVehicleBookingService: CustomerVehicleBookingService,
     private customerVehicleReviewService: CustomerVehicleReviewService,
-    private decimalPipeService: DecimalPipeService,
+    private customerVehicleFilePhotoService: CustomerVehicleFilePhotoService,
+    private confirmationService: ConfirmationService,
+    private router: Router,
     private messageService: MessageService,
     private ngxSpinnerService: NgxSpinnerService,
-    private sessionStorageService: SessionStorageService,
     private translateService: TranslateService,
-) {
-    this.decimalPipe = decimalPipeService;
-}
+  ) {}
 
   ngOnInit() {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
@@ -56,49 +50,81 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     this.customerVehicleBookingSearchUIDTO.customerVehicleBookings = new Array<CustomerVehicleBooking>;
     this.customerVehicleBookingSearchUIDTO.customerVehicleBookingSearchDTO = new CustomerVehicleBookingSearchDTO();
 
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview = new CustomerVehicleReview();
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview = new CustomerVehicleReview();
 
     this.asyncCallFunctions();
   }
 
+  // Carrega as traduções e configura as opções da interface de busca.
   async asyncCallFunctions() {
 
-    this.ngxSpinnerService.show();
+    
+    this.ngxSpinnerService.show(); // Exibe o spinner de carregamento.
 
     try {
+      // Carrega as traduções necessárias para os textos da interface.
+      const translations = await firstValueFrom(this.translateService.get(this.loadKeys()).pipe(first()));
 
-      const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic',
-        'label_created_date_option_1_CustomerVehicleBookingSearch',
-        'label_created_date_option_2_CustomerVehicleBookingSearch',
-        'save_message_service_Generic',
-        'save_success_write_a_review_message_service_CustomerVehicleBookingSearch'
-      ];
+      // Atribui as traduções obtidas aos campos do UIDTO.
+      this.customerVehicleBookingSearchUIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
+      this.customerVehicleBookingSearchUIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleBookingSearchUIDTO.info_summary_message_service_Generic = translations['info_summary_message_service_Generic'];
+      this.customerVehicleBookingSearchUIDTO.success_summary_message_service_Generic = translations['success_summary_message_service_Generic'];
 
-      const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
+      this.customerVehicleBookingSearchUIDTO.span_button_label_active_Generic = translations['span_button_label_active_Generic'];
+      this.customerVehicleBookingSearchUIDTO.span_button_label_inactive_Generic = translations['span_button_label_inactive_Generic'];
+      this.customerVehicleBookingSearchUIDTO.span_button_label_all_Generic = translations['span_button_label_all_Generic'];
 
-      this.customerVehicleBookingSearchUIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleBookingSearchUIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleBookingSearchUIDTO.message_message_service_Generic = translations['message_cancel_booking_message_service_Generic'];
+      this.customerVehicleBookingSearchUIDTO.header_message_service_Generic = translations['header_message_service_Generic'];
+      this.customerVehicleBookingSearchUIDTO.accept_label_message_service_Generic = translations['accept_label_message_service_Generic'];
+      this.customerVehicleBookingSearchUIDTO.reject_label_message_service_Generic = translations['reject_label_message_service_Generic'];
+
       this.customerVehicleBookingSearchUIDTO.label_created_date_option_1_CustomerVehicleBookingSearch = translations['label_created_date_option_1_CustomerVehicleBookingSearch'];
       this.customerVehicleBookingSearchUIDTO.label_created_date_option_2_CustomerVehicleBookingSearch = translations['label_created_date_option_2_CustomerVehicleBookingSearch'];
-      this.customerVehicleBookingSearchUIDTO.save_message_service_Generic = translations['save_message_service_Generic'];
+      this.customerVehicleBookingSearchUIDTO.save_summary_message_service_Generic = translations['save_summary_message_service_Generic'];
+      this.customerVehicleBookingSearchUIDTO.save_cancel_booking_message_service_CustomerVehicleBookingSearch = translations['save_cancel_booking_message_service_CustomerVehicleBookingSearch'];
       this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch = translations['save_success_write_a_review_message_service_CustomerVehicleBookingSearch'];
-
-    } catch (error: any) {
-      this.messageService.add({
-        severity: 'error',
-        summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic,
-        detail: error.toString()
-      });
-    }
 
     this.customerVehicleBookingSearchUIDTO.sortOptions = [
       { label: '' + this.customerVehicleBookingSearchUIDTO.label_created_date_option_1_CustomerVehicleBookingSearch, value: '!createdDate' },
       { label: '' + this.customerVehicleBookingSearchUIDTO.label_created_date_option_2_CustomerVehicleBookingSearch, value: 'createdDate' }
     ];
 
-    this.ngxSpinnerService.hide();
+    } catch (error: any) {
+      // Exibe uma mensagem de erro caso ocorra uma falha.
+      this.messageService.add({
+        severity: SeverityConstants.ERROR,
+        summary: this.customerVehicleBookingSearchUIDTO.error_summary_message_service_Generic,
+        detail: error.error?.message || error.toString()
+      });
+    } finally {
+      // Esconde o spinner após carregar os dados.
+      this.ngxSpinnerService.hide();
+    }
+  }
+
+  private loadKeys(): any {
+    // Define as chaves para tradução que serão carregadas.
+    const keys = [
+      'warn_summary_message_service_Generic',
+      'error_summary_message_service_Generic',
+      'info_summary_message_service_Generic',
+      'success_summary_message_service_Generic',
+      'span_button_label_active_Generic',
+      'span_button_label_inactive_Generic',
+      'span_button_label_all_Generic',
+      'message_cancel_booking_message_service_Generic',
+      'header_message_service_Generic',
+      'accept_label_message_service_Generic',
+      'reject_label_message_service_Generic',
+      'label_created_date_option_1_CustomerVehicleBookingSearch',
+      'label_created_date_option_2_CustomerVehicleBookingSearch',
+      'save_summary_message_service_Generic',
+      'save_cancel_booking_message_service_CustomerVehicleBookingSearch',
+      'save_success_write_a_review_message_service_CustomerVehicleBookingSearch'
+    ];
+    return keys;
   }
 
   onSortChange(event: any) {
@@ -113,85 +139,205 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     }
   }
 
-  search(event: DataViewLazyLoadEvent | null) {
+  getVehicleColorStyle(vehicleColorName: string): string {
+    switch(vehicleColorName.toLowerCase()) {
+      case 'preto': return '#000000';
+      case 'branco': return '#FFFFFF';
+      case 'prata': return '#C0C0C0';
+      case 'cinza': return '#808080';
+      case 'vermelho': return '#FF0000';
+      case 'azul': return '#0000FF';
+      case 'amarelo': return '#FFFF00';
+      case 'verde': return '#008000';
+      case 'marrom': return '#A52A2A';
+      case 'bege': return '#F5F5DC';
+      default: return '#D3D3D3';  // Cor padrão para cores não mapeadas
+    }
+  }
 
+  // Função assíncrona que realiza a busca de reservas de veículos com base no evento de carregamento.
+  async search(event: DataViewLazyLoadEvent | null) {
+
+    // Exibe o indicador de carregamento.
     this.ngxSpinnerService.show();
 
-    if (event && event.sortField) {
-      this.customerVehicleBookingSearchUIDTO.sortBy = event.sortField;
+    try {
+      // Configura a ordenação dos resultados com base no evento.
+      if (event && event.sortField) {
+        this.customerVehicleBookingSearchUIDTO.sortBy = event.sortField;
+      }
+      if (event && event.sortOrder) {
+        this.customerVehicleBookingSearchUIDTO.sortDir = event.sortOrder === 1 ? 'DESC' : 'ASC';
+      }
+
+      // Pagina os resultados com base no evento.
+      this.paginate(event);
+
+      // Realiza a busca de reservas de veículos com base nos parâmetros definidos.
+      const customerVehicleBookingServiceSearchPage: any = await firstValueFrom(
+        this.customerVehicleBookingService.searchPage(
+          this.customerVehicleBookingSearchUIDTO.customerVehicleBookingSearchDTO,
+          this.customerVehicleBookingSearchUIDTO.page,
+          this.customerVehicleBookingSearchUIDTO.size,
+          this.customerVehicleBookingSearchUIDTO.sortDir,
+          this.customerVehicleBookingSearchUIDTO.sortBy
+        ).pipe(first())
+      );
+
+      // Atualiza os dados no DTO com base na resposta do serviço.
+      this.customerVehicleBookingSearchUIDTO.customerVehicleBookings = customerVehicleBookingServiceSearchPage.body.content;
+      this.customerVehicleBookingSearchUIDTO.totalRecords = customerVehicleBookingServiceSearchPage.body.totalElements;
+
+      // Processa cada registro para preencher o campo dataURI.
+      this.customerVehicleBookingSearchUIDTO.customerVehicleBookings.forEach((booking: any) => {
+        booking.customerVehicle.vehicleModel.vehicleCategory.file.dataURI = 
+          `data:${booking.customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${booking.customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
+
+        booking.customerVehicle.vehicleFuelType.file.dataURI = 
+          `data:${booking.customerVehicle.vehicleFuelType.file.contentType};base64,${booking.customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+
+        booking.customerVehicle.vehicleTransmission.file.dataURI = 
+          `data:${booking.customerVehicle.vehicleTransmission.file.contentType};base64,${booking.customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+      });
+
+      //this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file.dataURI = `data:${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
+      //this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file.dataURI = `data:${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file.contentType};base64,${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+      //this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.file.dataURI = `data:${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.file.contentType};base64,${this.customerVehicleBookingSearchUIDTO.customerVehicleBooking.customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+
+      // Busca e processa as fotos de capa dos veículos.
+      await Promise.all(this.customerVehicleBookingSearchUIDTO.customerVehicleBookings.map(customerVehicleBooking => 
+        this.getCoverPhoto(customerVehicleBooking)
+      ));
+
+    } catch (error: any) {
+      // Trata erros específicos e exibe mensagens de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: this.customerVehicleBookingSearchUIDTO.error_summary_message_service_Generic, 
+          detail: error.error.message 
+        });
+      }
+    } finally {
+      // Garante que o indicador de carregamento seja ocultado, independentemente do resultado.
+      this.ngxSpinnerService.hide();
     }
-    if (event && event.sortOrder) {
-      if(event.sortOrder == 1) {
-        this.customerVehicleBookingSearchUIDTO.sortDir = "DESC";
-      } else if(event.sortOrder == -1) {
-        this.customerVehicleBookingSearchUIDTO.sortDir = "ASC";
+  }
+
+  async paginate(event: any) {
+    // Atualiza a paginação com base no evento de carregamento de dados.
+    if (event != null) {
+      this.customerVehicleBookingSearchUIDTO.size = event.rows;
+      this.customerVehicleBookingSearchUIDTO.page = event.first / event.rows;
+    }
+  }
+
+  // Função assíncrona que busca a foto de capa de um veículo de cliente.
+  async getCoverPhoto (customerVehicleBooking: any) {
+
+    try {
+      // Solicita a foto de capa associada ao veículo de cliente.
+      const customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto = await firstValueFrom(this.customerVehicleFilePhotoService.findByCustomerVehicleAndCoverPhoto(customerVehicleBooking.customerVehicle.customerVehicleId).pipe(first()));
+
+      if (customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.status == 200 &&
+        customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body != null) {
+          
+        // Se a resposta for bem-sucedida, atribui o arquivo e o Data URI ao veículo.
+        customerVehicleBooking.customerVehicle.file = customerVehicleFilePhotoServiceFindByCustomerVehicleAndCoverPhoto.body;
+        customerVehicleBooking.customerVehicle.dataURI = `data:${customerVehicleBooking.customerVehicle.file.contentType};base64,${customerVehicleBooking.customerVehicle.file.dataAsByteArray}`;
+      }
+
+    } catch (error: any) {
+
+      // Trata erros específicos e exibe mensagens de erro.
+      if (error.status === 500) {
+        this.messageService.add({ 
+          severity: SeverityConstants.ERROR, 
+          summary: this.customerVehicleBookingSearchUIDTO.error_summary_message_service_Generic, 
+          detail: error.error.message 
+        });
       }
     }
-  
-    this.customerVehicleBookingService.searchPage(this.customerVehicleBookingSearchUIDTO.customerVehicleBookingSearchDTO, this.customerVehicleBookingSearchUIDTO.page, this.customerVehicleBookingSearchUIDTO.size, this.customerVehicleBookingSearchUIDTO.sortDir, this.customerVehicleBookingSearchUIDTO.sortBy).pipe(first()).subscribe({
-      next: (data: any) => {
-        this.customerVehicleBookingSearchUIDTO.customerVehicleBookings = data.body.content;
-        this.customerVehicleBookingSearchUIDTO.totalRecords = data.body.totalElements;
-      },
-      error: (error) => {
+  }
 
-        if (error.status == 500) {
+  cancelBooking(rowData: any) {
+    // Abre a caixa de diálogo de confirmação
+    this.confirmationService.confirm({
+      message: this.customerVehicleBookingSearchUIDTO.message_message_service_Generic, // Mensagem de confirmação
+      header: this.customerVehicleBookingSearchUIDTO.header_message_service_Generic,   // Cabeçalho da caixa de diálogo
+      icon: 'pi pi-exclamation-triangle', // Ícone de aviso
+      acceptLabel: this.customerVehicleBookingSearchUIDTO.accept_label_message_service_Generic, // Rótulo do botão de aceitação
+      rejectLabel: this.customerVehicleBookingSearchUIDTO.reject_label_message_service_Generic, // Rótulo do botão de rejeição
+      accept: async () => {
+       
+        try {
 
-          this.messageService.add({ 
-            severity: 'error', 
-            summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
-            detail: error.error.message 
-          });
+          const customerVehicleBookingServiceCancelBooking: any = await firstValueFrom(
+            this.customerVehicleBookingService.cancelBooking(rowData).pipe(first())
+          );
+
+          if (customerVehicleBookingServiceCancelBooking.status == 200 && customerVehicleBookingServiceCancelBooking.body != null) {
+            
+            this.messageService.add({ 
+              severity: SeverityConstants.SUCCESS, 
+              summary: this.customerVehicleBookingSearchUIDTO.success_summary_message_service_Generic, 
+              detail: this.customerVehicleBookingSearchUIDTO.save_cancel_booking_message_service_CustomerVehicleBookingSearch
+            });
+          }
+
+        } catch (error: any) {
+
+          // Trata erros específicos e exibe mensagens de erro.
+          if (error.status === 500) {
+            this.messageService.add({ 
+              severity: SeverityConstants.ERROR, 
+              summary: this.customerVehicleBookingSearchUIDTO.error_summary_message_service_Generic, 
+              detail: error.error.message 
+            });
+          }
         }
-
-        this.ngxSpinnerService.hide();
-      },
-      complete: () => {
-        this.ngxSpinnerService.hide();
       }
     });
   }
 
-  async paginate(event: any) {
-    this.customerVehicleBookingSearchUIDTO.size = event.rows;
-    this.customerVehicleBookingSearchUIDTO.page = event.first / event.rows;
+  clickRouterNavigateToViewReservation(customerVehicleBooking: any) {
+    this.router.navigate(['/customer-vehicle-booking/view-reservation/' + customerVehicleBooking.customerVehicleBookingId]);
+  }
+
+  clickRouterNavigateToViewInvoice(customerVehicleBooking: any) {
+    this.router.navigate(['/customer-vehicle-booking/view-invoice/' + customerVehicleBooking.customerVehicleBookingId]);
   }
 
   clickOverlayPanelWriteAReview(event: any, customerVehicleBooking: any) {
 
-    this.customerVehicleReviewService.findByCustomerVehicleIdAndCustomerId(customerVehicleBooking.customerVehicle.customerVehicleId, customerVehicleBooking.customer.customerId).pipe(first()).subscribe({
+    this.ngxSpinnerService.show();
+
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleBooking = new CustomerVehicleBooking;
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview = new CustomerVehicleReview;
+
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleBooking = customerVehicleBooking;
+
+    this.customerVehicleReviewService.findByCustomerVehicleBookingIdAndCustomerId(customerVehicleBooking.customerVehicleBookingId, customerVehicleBooking.customer.customerId).pipe(first()).subscribe({
       next: (data: any) => {
 
         if (data.status == 200 && data.body != null) {
+          this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview = data.body;
+        }
 
-          customerVehicleBooking.customerVehicleReviewId = data.body.customerVehicleReviewId;
-          customerVehicleBooking.review = data.body.review;
-          customerVehicleBooking.rating = data.body.rating;
-
-          if (this.overlayPanelWriteAReview.overlayVisible) {
-            this.overlayPanelWriteAReview.hide();
-          } else {
-            this.overlayPanelWriteAReview.show(event);
-          }
+        if (this.overlayPanelWriteAReview.overlayVisible) {
+          this.overlayPanelWriteAReview.hide();
+        } else {
+          this.overlayPanelWriteAReview.show(event);
         }
 
       },
       error: (error) => {
 
-        if (error.status == 404) {
-
-          if (this.overlayPanelWriteAReview.overlayVisible) {
-            this.overlayPanelWriteAReview.hide();
-          } else {
-            this.overlayPanelWriteAReview.show(event);
-          }
-        }
-
         if (error.status == 500) {
 
           this.messageService.add({ 
-            severity: 'error', 
-            summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
+            severity: SeverityConstants.ERROR, 
+            summary: this.customerVehicleBookingSearchUIDTO.error_summary_message_service_Generic, 
             detail: error.error.message 
           });
         }
@@ -204,26 +350,24 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
     });
   }
 
-  onClickWriteAReview(customerVehicleBooking: any) {
+  onClickWriteAReview(customerVehicleReview: any) {
 
     this.ngxSpinnerService.show();
 
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview.customerVehicleBooking = customerVehicleBooking;
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview.customer = customerVehicleBooking.customer;
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview.review = customerVehicleBooking.review;
-    this.customerVehicleBookingSearchUIDTO.customerVehicleReview.rating = customerVehicleBooking.rating;
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.customerVehicleBooking = this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleBooking;
+    this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.customer = this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleBooking.customer;
 
-    if (customerVehicleBooking.customerVehicleReviewId == null) {
+    if (this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.customerVehicleReviewId == null) {
 
-      this.customerVehicleReviewService.save(this.customerVehicleBookingSearchUIDTO.customerVehicleReview).pipe(first()).subscribe({
+      this.customerVehicleReviewService.save(this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview).pipe(first()).subscribe({
         next: (data: any) => {
-  
+
           if (data.status == 201) {
   
             this.messageService.add({ 
-              severity: 'success', 
-              summary: '' + this.customerVehicleBookingSearchUIDTO.save_message_service_Generic, 
-              detail: '' +  this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
+              severity: SeverityConstants.SUCCESS, 
+              summary: this.customerVehicleBookingSearchUIDTO.save_summary_message_service_Generic, 
+              detail: this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
             });
   
             this.overlayPanelWriteAReview.hide();
@@ -235,8 +379,8 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
           if (error.status == 500) {
   
             this.messageService.add({ 
-              severity: 'error', 
-              summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
+              severity: SeverityConstants.ERROR, 
+              summary: this.customerVehicleBookingSearchUIDTO.error_summary_message_service_Generic, 
               detail: error.error.message 
             });
           }
@@ -252,17 +396,17 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
 
     } else {
 
-      this.customerVehicleBookingSearchUIDTO.customerVehicleReview.customerVehicleReviewId = customerVehicleBooking.customerVehicleReviewId;
+      this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview.customerVehicleReviewId = customerVehicleReview.customerVehicleReviewId;
 
-      this.customerVehicleReviewService.update(this.customerVehicleBookingSearchUIDTO.customerVehicleReview).pipe(first()).subscribe({
+      this.customerVehicleReviewService.update(this.customerVehicleBookingSearchUIDTO.selectedCustomerVehicleReview).pipe(first()).subscribe({
         next: (data: any) => {
 
           if (data.status == 200) {
 
             this.messageService.add({ 
-              severity: 'success', 
-              summary: '' + this.customerVehicleBookingSearchUIDTO.save_message_service_Generic, 
-              detail: '' +  this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
+              severity: SeverityConstants.SUCCESS, 
+              summary: this.customerVehicleBookingSearchUIDTO.save_summary_message_service_Generic, 
+              detail: this.customerVehicleBookingSearchUIDTO.save_success_write_a_review_message_service_CustomerVehicleBookingSearch, 
             });
 
             this.overlayPanelWriteAReview.hide();
@@ -274,8 +418,8 @@ export class CustomerVehicleBookingSearchComponent implements OnInit {
           if (error.status == 500) {
 
             this.messageService.add({ 
-              severity: 'error', 
-              summary: '' + this.customerVehicleBookingSearchUIDTO.error_message_service_Generic, 
+              severity: SeverityConstants.ERROR, 
+              summary: this.customerVehicleBookingSearchUIDTO.error_summary_message_service_Generic, 
               detail: error.error.message 
             });
           }

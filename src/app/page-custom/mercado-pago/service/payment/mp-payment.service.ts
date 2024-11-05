@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MpPaymentService {
 
-  private readonly apiUrl = `${environment.api}/mercado-pago/payment`;
+  private readonly apiUrl = `${environment.api}/mp/payment`;
 
   constructor(private readonly httpClient: HttpClient) {}
 

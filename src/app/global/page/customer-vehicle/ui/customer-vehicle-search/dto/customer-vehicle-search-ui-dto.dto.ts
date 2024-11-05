@@ -15,13 +15,13 @@ export class CustomerVehicleSearchUIDTO {
   sortDir: string = '';
   sortBy: string | string[];
 
-  customerVehicles: Array<CustomerVehicle>;
+  customerVehicles: Array<any>;
 
   // DTO's
   customerVehicleSearchDTO: CustomerVehicleSearchDTO;
 
-  // Messages
-  error_message_service_Generic: string;
+  // Messages - Translate
+  error_summary_message_service_Generic: string;
 
   label_created_date_option_1_CustomerVehicleSearch: string;
   label_created_date_option_2_CustomerVehicleSearch: string;

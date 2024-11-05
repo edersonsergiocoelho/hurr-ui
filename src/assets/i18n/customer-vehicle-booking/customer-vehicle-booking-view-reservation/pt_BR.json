@@ -1,0 +1,27 @@
+{
+  "thanks_CustomerVehicleBookingViewReservation": "Obrigado!",
+  "successful_order_CustomerVehicleBookingViewReservation": "Pedido Efetuado Com Sucesso",
+  "thanks_successful_order_CustomerVehicleBookingViewReservation": "Muito Obrigado Por Escolher A HURR.",
+
+  "title_CustomerVehicleBookingViewReservation": "Reserva",
+  "booking_CustomerVehicleBookingViewReservation": "Número Da Reserva:",
+  "billing_address_CustomerVehicleBookingViewReservation": "Endereço De Cobrança",
+  "payment_CustomerVehicleBookingViewReservation": "Pagamento",
+  "amex_credit_card_CustomerVehicleBookingViewReservation": "Amex Cartão De Crédito",
+  "amex_debit_card_CustomerVehicleBookingViewReservation": "Amex Cartão De Débito",
+  "mastercard_credit_card_CustomerVehicleBookingViewReservation": "Mastercard Cartão De Crédito",
+  "mastercard_debit_card_CustomerVehicleBookingViewReservation": "Mastercard Cartão De Débito",
+  "visa_credit_card_CustomerVehicleBookingViewReservation": "Visa Cartão De Crédito",
+  "visa_debit_card_CustomerVehicleBookingViewReservation": "Visa Cartão De Débito",
+  "installments_CustomerVehicleBookingViewReservation": "Quantidade De Parcelas: ",
+  "transaction_amount_CustomerVehicleBookingViewReservation": "Valor Da Transação: ",
+  "installment_amount_CustomerVehicleBookingViewReservation": "Valor Da Parcela: ",
+  "total_paid_amount_CustomerVehicleBookingViewReservation": "Valor Total Pago: ",
+  
+  "days_CustomerVehicleBookingViewReservation": "Dias",
+  "summary_CustomerVehicleBookingViewReservation": "Resumo",
+  "daily_rate_CustomerVehicleBookingViewReservation": "Valor Total Da Diária",
+  "total_booking_value_CustomerVehicleBookingViewReservation": "Total Reserva",
+  "total_additional_value_CustomerVehicleBookingViewReservation": "Total Valor Adicional",
+  "total_CustomerVehicleBookingViewReservation": "Total"
+}

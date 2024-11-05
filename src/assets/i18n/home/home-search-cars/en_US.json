@@ -1,0 +1,11 @@
+{
+  "label_where_HomeSearchCars": "Where",
+  "label_from_HomeSearchCars": "From",
+  "label_until_HomeSearchCars": "Until",
+  
+  "search_input_place_placeholder_HomeSearchCars": "City, Airport, Address Or Hotel",
+
+  "warn_error_getting_current_location_HomeSearchCars": "Error Getting Current Location, Please Enter An Address Manually.",
+  "warn_error_accessing_geolocation_HomeSearchCars": "Error Accessing Geolocation.",
+  "warn_geolocation_not_supported_by_the_browser_HomeSearchCars": "Geolocation Not Supported By The Browser, Please Try Another Browser."
+}

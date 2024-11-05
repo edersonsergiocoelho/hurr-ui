@@ -1,0 +1,21 @@
+{
+  "title_CustomerVehicleBankAccountRegister": "Bank Account Registration",
+  
+  "label_payment_status_id_CustomerVehicleBankAccountRegister": "Bank Account ID",
+  "placeholder_payment_status_id_CustomerVehicleBankAccountRegister": "Enter Bank Account ID",
+  "label_bank_CustomerVehicleBankAccountRegister": "Bank",
+  "placeholder_bank_CustomerVehicleBankAccountRegister": "Enter Bank",
+  "label_pix_type_CustomerVehicleBankAccountRegister": "PIX Key Type",
+  "placeholder_pix_type_CustomerVehicleBankAccountRegister": "Enter PIX Key Type",
+  "label_pix_key_CustomerVehicleBankAccountRegister": "PIX Key",
+  "placeholder_pix_key_CustomerVehicleBankAccountRegister": "Enter PIX Key",
+  "label_created_date_CustomerVehicleBankAccountRegister": "Creation Date",
+  "placeholder_created_date_CustomerVehicleBankAccountRegister": "Select Creation Date",
+  "label_modified_date_CustomerVehicleBankAccountRegister": "Modification Date",
+  "placeholder_modified_date_CustomerVehicleBankAccountRegister": "Select Modification Date",
+  "label_enabled_CustomerVehicleBankAccountRegister": "Enabled",
+
+  "save_success_message_service_CustomerVehicleBankAccountRegister": "Bank Account Successfully Registered",
+  "update_success_message_service_CustomerVehicleBankAccountRegister": "Bank Account Successfully Updated",
+  "delete_success_message_service_CustomerVehicleBankAccountRegister": "Bank Account Successfully Deleted"
+}

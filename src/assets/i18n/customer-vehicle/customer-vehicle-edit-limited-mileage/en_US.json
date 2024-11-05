@@ -1,0 +1,13 @@
+{
+  "title_CustomerVehicleEditLimitedMileage": "Unlimited Mileage?",
+
+  "label_limited_mileage_type_CustomerVehicleEditLimitedMileage": "Unlimited Mileage?",
+  "label_limited_mileage_type_limited_mileage_CustomerVehicleEditLimitedMileage": "Limited",
+  "label_limited_mileage_type_unlimited_mileage_CustomerVehicleEditLimitedMileage": "Unlimited",
+  "label_limited_mileage_included_CustomerVehicleEditLimitedMileage": "Included KM",
+  "placeholder_limited_mileage_included_CustomerVehicleEditLimitedMileage": "Enter Included KM",
+  "label_limited_mileage_value_CustomerVehicleEditLimitedMileage": "Excess KM Fee",
+  "placeholder_limited_mileage_value_CustomerVehicleEditLimitedMileage": "Enter Excess KM Fee",
+  
+  "save_success_message_service_CustomerVehicleEditLimitedMileage": "Mileage Information Successfully Updated."
+}

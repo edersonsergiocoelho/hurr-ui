@@ -1,0 +1,10 @@
+{
+  "title_BankSearch": "Search Bank",
+  "label_bank_name_BankSearch": "Bank Name",
+  "placeholder_bank_name_BankSearch": "Enter Bank Name",
+  
+  "table_caption_title_BankSearch": "Bank",
+  "table_header_bank_id_BankSearch": "ID",
+  "table_header_bank_name_BankSearch": "Name",
+  "table_header_enabled_BankSearch": "Enabled?"
+}

@@ -43,7 +43,6 @@ export class CustomerVehicleRegisterStep5Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('pt_BR');
     this.resetForm();
   }
 
@@ -78,14 +77,14 @@ export class CustomerVehicleRegisterStep5Component implements OnInit {
     try {
 
       const keys = [
-        'error_message_service_Generic',
-        'warn_message_service_Generic'
+        'error_summary_message_service_Generic',
+        'warn_summary_message_service_Generic'
       ];
 
       const translations = await firstValueFrom(this.translateService.get(keys).pipe(first()));
 
-      this.customerVehicleRegisterStep5UIDTO.error_message_service_Generic = translations['error_message_service_Generic'];
-      this.customerVehicleRegisterStep5UIDTO.warn_message_service_Generic = translations['warn_message_service_Generic'];
+      this.customerVehicleRegisterStep5UIDTO.error_summary_message_service_Generic = translations['error_summary_message_service_Generic'];
+      this.customerVehicleRegisterStep5UIDTO.warn_summary_message_service_Generic = translations['warn_summary_message_service_Generic'];
 
     } catch (error: any) {
 
@@ -93,7 +92,7 @@ export class CustomerVehicleRegisterStep5Component implements OnInit {
         
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -122,7 +121,7 @@ export class CustomerVehicleRegisterStep5Component implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -144,7 +143,7 @@ export class CustomerVehicleRegisterStep5Component implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }
@@ -166,7 +165,7 @@ export class CustomerVehicleRegisterStep5Component implements OnInit {
 
         this.messageService.add({
           severity: SeverityConstants.ERROR,
-          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_message_service_Generic,
+          summary: '' + this.customerVehicleRegisterStep5UIDTO.error_summary_message_service_Generic,
           detail: error.toString()
         });
       }

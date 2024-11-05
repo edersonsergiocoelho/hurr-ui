@@ -1,0 +1,20 @@
+{
+  "title_UserPreferenceContent": "Preferencias",
+
+  "label_user_preference_id_UserPreferenceContent": "ID De Preferencia De Usuario",
+  "placeholder_user_preference_id_UserPreferenceContent": "Ingrese El ID De Preferencia De Usuario",
+  "label_language_UserPreferenceContent": "Idioma",
+  "placeholder_language_UserPreferenceContent": "Ingrese El Idioma",
+  "label_theme_UserPreferenceContent": "Tema",
+  "placeholder_theme_UserPreferenceContent": "Ingrese El Tema",
+  "label_created_date_UserPreferenceContent": "Fecha De Creación",
+  "placeholder_created_date_UserPreferenceContent": "Seleccione La Fecha De Creación",
+  "label_modified_date_UserPreferenceContent": "Fecha De Modificación",
+  "placeholder_modified_date_UserPreferenceContent": "Seleccione La Fecha De Modificación",
+  "label_enabled_UserPreferenceContent": "Activo",
+
+  "save_preference_summary_message_service_UserPreferenceContent": "Preferencias Guardadas Con Éxito",
+  "save_preference_detail_message_service_UserPreferenceContent": "¡Sus Preferencias Fueron Guardadas Con Éxito!",
+  "update_preference_summary_message_service_UserPreferenceContent": "Preferencias Actualizadas Con Éxito",
+  "update_preference_detail_message_service_UserPreferenceContent": "¡Sus Preferencias Fueron Actualizadas Con Éxito!"
+}

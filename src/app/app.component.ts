@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ThemeService } from './global/template/theme/service/theme.service';
-import { Router } from '@angular/router';
+import { SessionStorageService } from './core/session-storage/service/session-storage.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,18 @@ export class AppComponent {
   
   title = 'hurr-ui';
 
-  constructor (private themeService: ThemeService) {
+  constructor (private sessionStorageService: SessionStorageService,
+               private translateService: TranslateService,
+               private themeService: ThemeService) {
 
-    this.themeService.switchTheme("lara-light-purple");
+    const currentUserPreference = sessionStorageService.getUserPreference();
+
+    if (currentUserPreference != null ) {
+      this.translateService.setDefaultLang(currentUserPreference.language);
+      this.themeService.switchTheme(currentUserPreference.theme);
+    } else {
+      this.translateService.setDefaultLang('pt_BR');
+      this.themeService.switchTheme("lara-light-purple");
+    }
   }
 }

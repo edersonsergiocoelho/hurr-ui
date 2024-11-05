@@ -20,7 +20,7 @@ export class HomeSearchCarsUIDTO extends TranslateSeverityDTO {
     return `${hour.toString().padStart(2, '0')}:${minute}`;
   });
 
-  // Messages
+  // Messages - Translate
   label_where_HomeSearchCars: string;
   label_from_HomeSearchCars: string;
   label_until_HomeSearchCars: string;

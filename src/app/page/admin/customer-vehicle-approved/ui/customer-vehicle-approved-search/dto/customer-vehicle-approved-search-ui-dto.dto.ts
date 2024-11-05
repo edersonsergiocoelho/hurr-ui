@@ -28,8 +28,8 @@ export class CustomerVehicleApprovedSearchUIDTO {
   selectedVehicleModel: VehicleModel;
 
   // Message
-  error_message_service_Generic: string;
-  warn_message_service_Generic: string;
+  error_summary_message_service_Generic: string;
+  warn_summary_message_service_Generic: string;
   table_header_customer_vehicle_approved_id_CustomerVehicleApprovedSearch: string;
   table_header_vehicle_brand_CustomerVehicleApprovedSearch: string;
   table_header_vehicle_CustomerVehicleApprovedSearch: string;

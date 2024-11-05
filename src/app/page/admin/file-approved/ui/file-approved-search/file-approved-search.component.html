@@ -31,11 +31,11 @@
         </div>
 
         <div class="col-12 md:col-6 field">
-          <label for="approved_by_user" class="font-medium text-2xl">{{'label_approved_by_user_FileApprovedRegister' | translate}}</label>
+          <label for="approved_by_user" class="font-medium text-2xl">{{'label_approved_by_user_FileApprovedSearch' | translate}}</label>
           <p-dropdown class="p-inputtext-lg" 
             [options]="fileApprovedSearchUIDTO.approvedByUsers" [(ngModel)]="fileApprovedSearchUIDTO.selectedApprovedByUser" optionLabel="email" 
             [filter]="true" filterBy="email" [showClear]="true" name="user"
-            placeholder="{{'placeholder_approved_by_user_FileApprovedRegister' | translate}}"
+            placeholder="{{'placeholder_approved_by_user_FileApprovedSearch' | translate}}"
             [required]="true">
             <ng-template pTemplate="selectedItem">
               <div class="flex align-items-center gap-2" *ngIf="fileApprovedSearchUIDTO.selectedApprovedByUser">
@@ -51,11 +51,11 @@
         </div>
 
         <div class="col-12 md:col-6 field">
-          <label for="reproved_by_user" class="font-medium text-2xl">{{'label_reproved_by_user_FileApprovedRegister' | translate}}</label>
+          <label for="reproved_by_user" class="font-medium text-2xl">{{'label_reproved_by_user_FileApprovedSearch' | translate}}</label>
           <p-dropdown class="p-inputtext-lg"
             [options]="fileApprovedSearchUIDTO.reprovedByUsers" [(ngModel)]="fileApprovedSearchUIDTO.selectedReprovedByUser" optionLabel="email" 
             [filter]="true" filterBy="email" [showClear]="true" name="user"
-            placeholder="{{'placeholder_reproved_by_user_FileApprovedRegister' | translate}}"
+            placeholder="{{'placeholder_reproved_by_user_FileApprovedSearch' | translate}}"
             [required]="true">
             <ng-template pTemplate="selectedItem">
               <div class="flex align-items-center gap-2" *ngIf="fileApprovedSearchUIDTO.selectedReprovedByUser">

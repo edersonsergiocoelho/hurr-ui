@@ -23,8 +23,8 @@ export class CustomerVehicleReviewService {
     );
   }
 
-  findByCustomerVehicleIdAndCustomerId(customerVehicleId, customerId): Observable<HttpResponse<CustomerVehicleReview[]>> {
-    return this.http.get<CustomerVehicleReview[]>(`${this.apiUrl}/by/customer-vehicle/${customerVehicleId}/customer/${customerId}`, { observe: 'response' }).pipe(
+  findByCustomerVehicleBookingIdAndCustomerId(customerVehicleBookingId, customerId): Observable<HttpResponse<CustomerVehicleReview[]>> {
+    return this.http.get<CustomerVehicleReview[]>(`${this.apiUrl}/by/customer-vehicle-booking/${customerVehicleBookingId}/customer/${customerId}`, { observe: 'response' }).pipe(
       map((response: HttpResponse<CustomerVehicleReview[]>) => {
         return response;
       })

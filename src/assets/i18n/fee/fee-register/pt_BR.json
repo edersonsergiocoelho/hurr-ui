@@ -1,0 +1,22 @@
+{
+  "title_FeeRegister": "Cadastro De Taxa",
+  "label_payment_status_id_FeeRegister": "ID Da Taxa",
+  "placeholder_payment_status_id_FeeRegister": "Informe O ID Da Taxa",
+  "label_fee_type_FeeRegister": "Tipo De Taxa",
+  "placeholder_fee_type_FeeRegister": "Informe O Tipo Da Taxa",
+  "label_amount_FeeRegister": "Valor Da Taxa",
+  "placeholder_amount_FeeRegister": "Informe O Valor Da Taxa",
+  "label_start_date_FeeRegister": "Data De Início",
+  "placeholder_start_date_FeeRegister": "Selecione A Data De Início",
+  "label_end_date_FeeRegister": "Data Final",
+  "placeholder_end_date_FeeRegister": "Selecione A Data Final",
+  "label_created_date_FeeRegister": "Data De Criação",
+  "placeholder_created_date_FeeRegister": "Selecione A Data De Criação",
+  "label_modified_date_FeeRegister": "Data De Modificação",
+  "placeholder_modified_date_FeeRegister": "Selecione A Data De Modificação",
+  "label_enabled_FeeRegister": "Ativo",
+
+  "save_success_message_service_FeeRegister": "Taxa Cadastrada Com Sucesso",
+  "update_success_message_service_FeeRegister": "Taxa Atualizada Com Sucesso",
+  "delete_success_message_service_FeeRegister": "Taxa Removida Com Sucesso"
+}
