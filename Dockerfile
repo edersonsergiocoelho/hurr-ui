@@ -23,7 +23,7 @@ RUN ng build --configuration production
 FROM nginx:alpine
 
 # Copiando os arquivos compilados da aplicação Angular para o diretório de conteúdo do Nginx
-COPY --from=build /usr/src/app/dist/your-app-name /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/hurr-ui /usr/share/nginx/html
 
 # Copiando o arquivo de configuração do Nginx
 COPY nginx.conf /etc/nginx/nginx.conf
