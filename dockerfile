@@ -19,5 +19,5 @@ COPY . .
 # Expondo a porta que a aplicação usa
 EXPOSE 4200
 
-# Comando para iniciar a aplicação Angular em modo de produção
-CMD ["ng", "serve", "--configuration=production", "--host", "0.0.0.0"]
+# Comando para iniciar a aplicação Angular em modo de desenvolvimento
+CMD ["ng", "serve", "--host", "0.0.0.0"]
