@@ -1,5 +1,5 @@
 # Usando a imagem do Node.js 18 como base para a construção do projeto Angular
-FROM node:18 AS build
+FROM node:18
 
 # Definindo o diretório de trabalho dentro do contêiner
 WORKDIR /usr/src/app
