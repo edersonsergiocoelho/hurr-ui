@@ -16,14 +16,14 @@ RUN npm install
 # Copiando todo o código do projeto para o diretório de trabalho
 COPY . .
 
-# Compilando a aplicação Angular para produção
-RUN ng build --prod
+# Compilando a aplicação Angular para produção (substituindo --prod por --configuration production)
+RUN ng build --configuration production
 
 # Usando a imagem do Nginx para servir a aplicação
 FROM nginx:alpine
 
 # Copiando os arquivos compilados da aplicação Angular para o diretório de conteúdo do Nginx
-COPY --from=build /usr/src/app/dist/hurr-ui /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/your-app-name /usr/share/nginx/html
 
 # Copiando o arquivo de configuração do Nginx
 COPY nginx.conf /etc/nginx/nginx.conf
