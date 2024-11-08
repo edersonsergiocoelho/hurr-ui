@@ -4,27 +4,39 @@ FROM node:18 AS build
 # Definindo o diretório de trabalho dentro do contêiner
 WORKDIR /usr/src/app
 
-# Instalando as dependências
+# Instalando o Angular CLI globalmente
+RUN npm install -g @angular/cli
+
+# Copiando o package.json e o package-lock.json para o diretório de trabalho
 COPY package*.json ./
+
+# Instalando as dependências do projeto
 RUN npm install
 
-# Copiando o código para o diretório de trabalho
+# Copiando todo o código do projeto para o diretório de trabalho
 COPY . .
 
 # Compilando a aplicação Angular para produção
-RUN npm run build --configuration production
+RUN ng build --configuration production
 
-# Configuração para rodar o servidor com Node.js e Express
+# Usando a imagem do Node.js para servir o aplicativo
 FROM node:18-alpine
 
+# Definindo o diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copiando o código da aplicação compilada e o servidor para o contêiner final
-COPY --from=build /usr/src/app/dist/hurr-ui /usr/src/app/dist/hurr-ui
+# Instalando dependências do servidor (caso necessário)
+COPY package*.json ./
+RUN npm install
+
+# Copiando os arquivos compilados do Angular para o diretório de trabalho
+COPY --from=build /usr/src/app/dist/hurr-ui ./dist/hurr-ui
+
+# Copiando o servidor Node.js para servir o Angular (index.js)
 COPY index.js .
 
-# Expondo a porta que o Express usará
+# Expondo a porta 8080, que será usada pelo Node.js
 EXPOSE 8080
 
-# Iniciando a aplicação
+# Iniciando o servidor Node.js
 CMD ["node", "index.js"]
