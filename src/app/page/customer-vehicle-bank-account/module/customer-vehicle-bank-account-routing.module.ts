@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomerVehicleBankAccountComponent } from '../ui/customer-vehicle-bank-account/customer-vehicle-bank-account.component';
 
 const routes: Routes = [
-  {path: 'customer-vehicle-bank-account', component: CustomerVehicleBankAccountComponent},
+  {path: 'settings/customer-vehicle-bank-account', component: CustomerVehicleBankAccountComponent},
 ];
 
 @NgModule({
