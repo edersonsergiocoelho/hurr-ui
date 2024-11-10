@@ -133,17 +133,25 @@ export class CustomerVehicleSearchComponent implements OnInit {
         // Processa cada registro para preencher o campo dataURI.
         this.customerVehicleSearchUIDTO.customerVehicles.forEach((customerVehicle: any) => {
 
-          customerVehicle.vehicle.vehicleBrand.file.dataURI = 
-          `data:${customerVehicle.vehicle.vehicleBrand.file.contentType};base64,${customerVehicle.vehicle.vehicleBrand.file.dataAsByteArray}`;
-
-          customerVehicle.vehicleModel.vehicleCategory.file.dataURI = 
-            `data:${customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
-
+          if (customerVehicle.vehicle.vehicleBrand.file) {
+            customerVehicle.vehicle.vehicleBrand.file.dataURI = 
+              `data:${customerVehicle.vehicle.vehicleBrand.file.contentType};base64,${customerVehicle.vehicle.vehicleBrand.file.dataAsByteArray}`;
+          }
+    
+          if (customerVehicle.vehicleModel.vehicleCategory.file) {
+            customerVehicle.vehicleModel.vehicleCategory.file.dataURI = 
+              `data:${customerVehicle.vehicleModel.vehicleCategory.file.contentType};base64,${customerVehicle.vehicleModel.vehicleCategory.file.dataAsByteArray}`;
+          }
+    
+          if (customerVehicle.vehicleFuelType.file) {
             customerVehicle.vehicleFuelType.file.dataURI = 
-            `data:${customerVehicle.vehicleFuelType.file.contentType};base64,${customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
-
+              `data:${customerVehicle.vehicleFuelType.file.contentType};base64,${customerVehicle.vehicleFuelType.file.dataAsByteArray}`;
+          }
+    
+          if (customerVehicle.vehicleTransmission.file) {
             customerVehicle.vehicleTransmission.file.dataURI = 
-            `data:${customerVehicle.vehicleTransmission.file.contentType};base64,${customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+              `data:${customerVehicle.vehicleTransmission.file.contentType};base64,${customerVehicle.vehicleTransmission.file.dataAsByteArray}`;
+          }
         });
 
         this.customerVehicleSearchUIDTO.customerVehicles.forEach(vehicle => {
